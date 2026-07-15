@@ -1,0 +1,15 @@
+\chapter{Materials and Methods}\label{chap:materials-methods}
+
+\section{Research Design}\label{sec:methods-research-design}
+
+This thesis is organized around a reproducible experimental protocol. Each experiment is described by its data-generating source, preprocessing transformation, feature representation, model family, evaluation rule, and recorded outcomes.
+
+\input{dataset_processing_latex}
+
+\section{Reproducible Experimental Protocol}\label{sec:methods-protocol-overview}
+
+The experimental protocol separates data validation, feature construction, model training, evaluation, and reporting. Formally, an experiment can be represented as a tuple $(\mathcal{D},\phi,f,\theta,E)$, where $\mathcal{D}$ is the labeled dataset, $\phi$ is the feature mapping, $f$ is the model family, $\theta$ denotes the relevant hyperparameters, and $E$ is the evaluation functional that maps predictions and labels to performance measures.
+
+\section{Dataset Scope and Provenance}\label{sec:methods-dataset-scope}
+
+The active dataset scope is restricted to source-defined datasets derived from Bhandari et al., CDBProm, CNNProm, and GraphPro. Source provenance is reported separately from feature reference tables to avoid mixing dataset origin with encoding resources.

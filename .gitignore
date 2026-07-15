@@ -233,3 +233,6 @@ __marimo__/
 *.pt
 *.pth
 *.ckpt
+
+# LaTeX thesis build artifacts
+docs/thesis/build*/

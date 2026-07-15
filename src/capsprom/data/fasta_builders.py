@@ -115,7 +115,7 @@ def build_bhandari_fastas(raw_dir: Path, output_dir: Path) -> list[FastaBuildRes
     results: list[FastaBuildResult] = []
     for source in sorted(raw_dir.glob("*.gz")):
         source_name = source.name.replace(".gz", "")
-        karyote = "prokaryotic" if "Yeast" in source_name else "eukaryotic"
+        karyote = "eukaryotic"
         class_name = "prom" if "_promoter" in source_name.lower() or "promoters" in source_name.lower() else "nonprom"
         records = keep_most_common_length(_records_from_gzip_fasta(source))
         length = len(records[0].sequence) if records else 0

@@ -1,0 +1,28 @@
+\chapter{Feature Engineering}\label{chap:feature-engineering}
+
+\section{Overview}\label{sec:features-overview}
+
+DNA sequences must be transformed into numerical inputs before model training.
+This thesis evaluates complementary feature families so that classical models, deep neural networks, and multi-input architectures can be compared under the same experimental protocol.
+
+\section{One-Hot and Nucleotide Index Encodings}\label{sec:features-onehot}
+
+One-hot and index-based encodings preserve the original nucleotide order and are
+especially useful for neural architectures that learn local or hierarchical
+sequence patterns.
+
+\section{K-mer Frequency Features}\label{sec:features-kmer}
+
+K-mer frequency features summarize nucleotide composition patterns. They provide
+compact fixed-length vectors for classical machine learning models and can also
+serve as auxiliary inputs for deep architectures.
+
+\section{Physicochemical Encodings}\label{sec:features-physicochemical}
+
+Dinucleotide and trinucleotide physicochemical properties are represented as lookup functions over adjacent nucleotide tuples. The feature mapping must allow selecting subsets of properties so that experiments can compare individual properties, grouped properties, and full property sets.
+
+\section{Feature Combination Strategies}\label{sec:features-combination}
+
+Feature sets may be combined as a flat vector for classical classifiers or as
+separate inputs for multi-head neural architectures. This design supports direct
+comparison between single-representation and combined-representation models.

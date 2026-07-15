@@ -1,0 +1,62 @@
+\chapter{Introduction}\label{chap:introduction}
+
+\section{Context and Motivation}\label{sec:intro-context}
+
+The rapid expansion of DNA sequencing technologies has increased the demand for
+computational methods capable of transforming raw genomic sequences into
+biologically meaningful annotations. Functional genome annotation includes the
+identification of DNA regions associated with regulatory processes, including
+promoter regions. Promoters are located near the beginning of genes and are
+involved in transcription initiation, making their identification relevant for
+understanding gene regulation.
+
+Promoter prediction can be formulated as a binary classification problem in
+which a DNA sequence window is assigned to either the promoter or non-promoter
+class. This thesis studies this task using machine learning and deep learning
+models, with a particular focus on capsule-based neural architectures and
+feature representations derived from nucleotide composition and physicochemical
+properties.
+
+\section{Research Problem}\label{sec:intro-problem}
+
+Despite several promoter prediction methods reported in the literature,
+accurately identifying promoters across heterogeneous organisms and data sources
+remains challenging. Datasets differ in sequence length, transcription start
+site annotation, organism group, negative-sample construction, and class balance.
+These differences motivate a reproducible experimental protocol in which preprocessing, feature construction, model comparison, and reporting are specified explicitly.
+
+\section{Hypothesis}\label{sec:intro-hypothesis}
+
+The central hypothesis of this thesis is that capsule-based neural networks,
+when evaluated under a reproducible experimental protocol and combined with
+appropriate DNA representations, can capture structured sequence patterns that
+are useful for promoter region prediction.
+
+\section{Objectives}\label{sec:intro-objectives}
+
+The general objective is to develop, evaluate, and document reproducible machine
+learning approaches for promoter prediction in DNA sequences, with emphasis on
+CapsProm-derived architectures.
+
+The specific objectives are:
+
+\begin{enumerate}
+    \item Define a reproducible preprocessing and validation protocol for the active promoter datasets.
+    \item Evaluate multiple DNA sequence representations, including one-hot, k-mer, and physicochemical encodings.
+    \item Reproduce and organize baseline experiments under a unified protocol.
+    \item Develop and evaluate capsule-based architectures for promoter prediction.
+    \item Investigate extensions based on attention mechanisms, uncertainty estimation, and interpretability.
+\end{enumerate}
+
+\section{Thesis Organization}\label{sec:intro-organization}
+
+Chapter~\ref{chap:background} introduces genomic and machine learning concepts
+needed for the thesis. Chapter~\ref{chap:related-work} reviews promoter
+prediction methods and prior work that motivates this research. Chapter~\ref{chap:materials-methods}
+describes the datasets, preprocessing workflow, and reproducible experimental protocol.
+Chapter~\ref{chap:feature-engineering} presents the feature engineering
+strategies. Chapter~\ref{chap:models} describes baseline and proposed models.
+Chapter~\ref{chap:experimental-protocol} defines the evaluation methodology.
+Chapter~\ref{chap:results} reports the experimental results. Chapter~\ref{chap:discussion}
+discusses the findings and limitations. Chapter~\ref{chap:conclusion} concludes
+the thesis and outlines future work.

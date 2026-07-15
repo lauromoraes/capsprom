@@ -10,8 +10,8 @@ Active scope: only final intra-source datasets represented in this directory are
 | fail | bhandari-eukaryotic-Human_promoter-p-49213-n-49213-test.csv | 98426 | 49213 | 49213 | 51 | 0 | 0 | N | 2018,4784,6443,6663,9012 |
 | fail | bhandari-eukaryotic-Plant_promoters-p-255636-n-255636-train.csv | 511272 | 255636 | 255636 | 55 | 0 | 0 | N | 10634,18653,25574,27918,37033 |
 | fail | bhandari-eukaryotic-Plant_promoters-p-63909-n-63909-test.csv | 127818 | 63909 | 63909 | 17 | 0 | 0 | N | 12622,26397,29742,33421,34498 |
-| pass | bhandari-prokaryotic-Yeast_promoter-p-14693-n-14692-train.csv | 29385 | 14693 | 14692 | 0 | 0 | 0 | - | - |
-| pass | bhandari-prokaryotic-Yeast_promoter-p-3673-n-3674-test.csv | 7347 | 3673 | 3674 | 0 | 0 | 0 | - | - |
+| pass | bhandari-eukaryotic-Yeast_promoter-p-14693-n-14692-train.csv | 29385 | 14693 | 14692 | 0 | 0 | 0 | - | - |
+| pass | bhandari-eukaryotic-Yeast_promoter-p-3673-n-3674-test.csv | 7347 | 3673 | 3674 | 0 | 0 | 0 | - | - |
 | pass | cdbprom-prokaryotic-anabaena_sp-p-1510-n-2009-test.csv | 3519 | 1510 | 2009 | 0 | 0 | 0 | - | - |
 | pass | cdbprom-prokaryotic-anabaena_sp-p-6041-n-8035-train.csv | 14076 | 6041 | 8035 | 0 | 0 | 0 | - | - |
 | pass | cdbprom-prokaryotic-bacillus_amyloliquefaciens-p-2541-n-3379-train.csv | 5920 | 2541 | 3379 | 0 | 0 | 0 | - | - |

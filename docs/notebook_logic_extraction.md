@@ -18,8 +18,8 @@ Extracted reusable logic:
   to full dataset names; variable-length records are normalized before writing
   FASTA.
 - Bhandari gzip-compressed FASTA files are decompressed, filtered to the most
-  common sequence length when lengths vary, and tagged as eukaryotic except for
-  yeast.
+  common sequence length when lengths vary, and tagged as eukaryotic for the
+  currently active human, plant, and yeast promoter datasets.
 
 Implemented in:
 

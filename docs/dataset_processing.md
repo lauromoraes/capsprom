@@ -22,6 +22,25 @@ experimental dataset scope.
 
 Total final intra-source CSV files: 58.
 
+
+## Source Provenance
+
+The active source folders contain README files documenting the origin of the raw
+data used to build the final intra-source datasets. These README files identify
+the source publications and repositories for Bhandari et al., CDBProm, CNNProm,
+and GraphPro. A consolidated provenance summary is provided in
+`docs/source_provenance.md`.
+
+The README files also provide methodological context that should be preserved in
+thesis writing and experiment reporting:
+
+| Source | README-derived context relevant to this project |
+| --- | --- |
+| Bhandari et al. | Dataset associated with a cross-species promoter prediction comparison by Bhandari, Khare, Walambe, and Kotecha. |
+| CDBProm | Dataset obtained from the CDBProm website and training-sequence archive described by Martinez et al. |
+| CNNProm | Dataset obtained from CNNPromoterData and Softberry; the README documents distinct upstream resources for promoters and notes that bacterial non-promoters were sampled from opposite-strand coding fragments. |
+| GraphPro | Dataset obtained from the GraphPro repository; the README records eukaryotic human/mouse data and bacterial data for six organisms. |
+
 ## Source Normalization
 
 The active sources originally use heterogeneous formats, including FASTA,

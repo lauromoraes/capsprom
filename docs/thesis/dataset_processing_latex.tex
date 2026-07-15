@@ -1,42 +1,38 @@
 \subsection{Dataset preprocessing and construction}
 
-The active experimental dataset scope in this work is restricted to the final
-intra-source processed datasets located in
-\texttt{data/processed/assembled\_datasets/intra/} and to their strict-DNA
-cleaned copies. These datasets were derived from four source groups: Bhandari et
-al., CDBProm, CNNProm, and GraphPro. Other raw files or exploratory artifacts
-present in the repository were not considered part of the active experimental
-dataset unless represented in this final intra-source directory. The experimental
-unit is one 81 bp sequence window; therefore, each row of a processed CSV file
-corresponds to one independent sequence-level example used for feature encoding
-and classification.
+Let $\mathcal{S}=\{\mathrm{Bhandari},\mathrm{CDBProm},\mathrm{CNNProm},\mathrm{GraphPro}\}$ denote the set of source studies considered in this thesis. For each source $s\in\mathcal{S}$, the experimental data are represented as a finite labeled set $\mathcal{D}_{s}=\{(x_i,y_i)\}_{i=1}^{n_s}$, where $x_i$ is a DNA sequence window and $y_i\in\{0,1\}$ is the binary class label. The positive class, $y_i=1$, denotes a promoter sequence, whereas the negative class, $y_i=0$, denotes a non-promoter sequence. After preprocessing, all sequence windows are elements of $\{A,C,G,T\}^{81}$, so the experimental unit is one fixed-length 81 bp sequence-level example.
 
-The included sources use heterogeneous file formats, including FASTA files,
-gzip-compressed FASTA files, and line-oriented text files. To ensure a uniform
-experimental representation, source records were first converted into a common
-FASTA naming scheme encoding the class, source study, organism type, dataset
-identifier, number of records, and original sequence length. Promoter sequences
-were assigned label $1$, whereas non-promoter sequences were assigned label $0$.
+The four source studies differ in organism coverage, sequence-window definition, and negative-set construction. Table~\ref{tab:active-source-provenance} summarizes the study-level provenance used to define the source set $\mathcal{S}$ before describing the transformations applied to obtain the standardized labeled sets $\mathcal{D}_{s}$.
 
-All model-ready sequences were normalized to a fixed length of 81 bp around the
-transcription start site (TSS). The fixed window contains 60 bp upstream of the
-TSS, the TSS nucleotide itself, and 20 bp downstream. This window definition was
-adopted to maintain compatibility with the promoter-region representation used
-by the GraphPro and CNNProm studies for prokaryotic datasets, while applying the
-same fixed input size to all active sources. Because the original sequence
-windows differ across the included sources, the TSS coordinate used for cropping
-was defined per source dataset. GraphPro sequences of length 81 used TSS
-position 60; CNNProm sequences used position 60 for 81 bp windows and position
-200 for 251 bp windows; CDBProm sequences used position 60 for 100 bp windows
-and position 500 for 1001 bp windows; and Bhandari et al. sequences used
-position 700 for 1000 bp windows.
+\begin{table}[htbp]
+\centering
+\small
+\caption{Study-level provenance of the source datasets used in this thesis. The table identifies the publications or resources from which the promoter and non-promoter sequence sets were derived.}
+\label{tab:active-source-provenance}
+\begin{tabular}{p{0.18\textwidth}p{0.42\textwidth}p{0.30\textwidth}}
+\hline
+Source & Publication or resource & Recorded origin \\
+\hline
+Bhandari et al. & Comparison of machine learning and deep learning techniques in promoter prediction across diverse species & Public data resource associated with the study \\
+CDBProm & CDBProm: the Comprehensive Directory of Bacterial Promoters, Martinez et al., 2024 & CDBProm website and training-sequence archive \\
+CNNProm & Recognition of Prokaryotic and Eukaryotic Promoters Using Convolutional Deep Learning Neural Networks, Umarov and Solovyev, 2016 & CNNPromoterData resource and Softberry website \\
+GraphPro & GraphPro: An interpretable graph neural network-based model for identifying promoters in multiple species, Zhang et al., 2024 & GraphPro public dataset resource \\
+\hline
+\end{tabular}
+\end{table}
+
+The source descriptions also provide methodological context that affects interpretation. For example, CNNProm reports bacterial non-promoter sequences sampled from protein-coding genes on the opposite strand, whereas its promoter sets are linked to resources such as RegulonDB, DBTBS, EPDnew, and DBTSS. GraphPro includes human and mouse eukaryotic datasets and bacterial datasets for six organisms. These differences motivate source-aware evaluation, since the empirical distribution $P_s(X,Y)$ may differ across studies.
+
+Because the source studies provide heterogeneous sequence collections, all records were first mapped into a common labeled representation. Promoter sequences were assigned label $1$, whereas non-promoter sequences were assigned label $0$. For each source $s$, this step defines an initial labeled collection $\mathcal{D}^{0}_{s}=\{(z_i,y_i)\}_{i=1}^{m_s}$, where $z_i$ denotes the original sequence window before length normalization.
+
+A deterministic cropping function $c_s$ was then applied to each original sequence $z_i$ to obtain a standardized sequence $x_i=c_s(z_i)$ with $|x_i|=81$. The target window is defined relative to a source-specific transcription start site (TSS) coordinate and contains 60 bp upstream of the TSS, the TSS nucleotide itself, and 20 bp downstream. This window definition was adopted to maintain compatibility with the promoter-region representation used by the GraphPro and CNNProm studies for prokaryotic datasets, while enforcing a common input length across all sources. Because the original sequence windows differ across studies, the TSS coordinate used by $c_s$ was defined per source and original window length.
 
 Table~\ref{tab:tss-cropping-parameters} summarizes the source-specific TSS
 coordinates used to obtain the standardized 81 bp windows.
 
 \begin{table}[htbp]
 \centering
-\caption{Source-specific cropping parameters used to normalize promoter and non-promoter sequences to 81 bp. The final window contains 60 bp upstream of the transcription start site, the TSS nucleotide, and 20 bp downstream.}
+\caption{Source-specific parameters of the deterministic cropping function $c_s$ used to map promoter and non-promoter sequences to 81 bp windows. The final window contains 60 bp upstream of the transcription start site, the TSS nucleotide, and 20 bp downstream.}
 \label{tab:tss-cropping-parameters}
 \begin{tabular}{lrrr}
 \hline
@@ -52,36 +48,14 @@ Bhandari et al. & 1000 & 700 & 81 \\
 \end{tabular}
 \end{table}
 
-After cropping, promoter and non-promoter FASTA files were paired by source
-study, organism type, and dataset identifier. Each pair was converted into CSV
-files containing two fields: \texttt{sequence}, the 81 bp DNA sequence, and
-\texttt{label}, the binary class label. The final intra-source datasets use a
-filename convention that records the source study, organism type, dataset name,
-positive count, negative count, and partition. The train/test split used in this
-section is the fixed split encoded in the final intra-source CSV files; no
-additional repartitioning is performed during model input preparation.
+After cropping, promoter and non-promoter examples were paired within each source-defined dataset. Each resulting subset is therefore represented as $\mathcal{D}_{s,k}=\mathcal{P}_{s,k}\cup\mathcal{N}_{s,k}$, where $\mathcal{P}_{s,k}=\{(x_i,1)\}$ and $\mathcal{N}_{s,k}=\{(x_i,0)\}$ denote the positive and negative examples for dataset $k$ from source $s$. The train/test partition used in this section follows the predefined partition associated with each source-derived benchmark; no additional repartitioning is introduced during this preprocessing description.
 
 \subsubsection{Quality control and final dataset definition}
 
-A strict DNA cleaning step was then applied to produce the model-ready cleaned
-intra-source directory. This step removed only rows whose sequence contained
-symbols outside the alphabet \{A, C, G, T\}; no original final CSV file was
-overwritten. This policy ensures that all subsequent encodings, including
-one-hot, k-mer, and physicochemical encodings, operate over the same unambiguous
-DNA alphabet. Across the 58 final intra-source CSV files, 338 rows were removed
-from 12 files, corresponding to approximately 0.02\% of the 1,829,262 original
-sequence-level examples. The cleaning step therefore had minimal impact on the
-overall dataset size while removing incompatible ambiguous IUPAC symbols. After
-cleaning, all 58 cleaned CSV files passed validation for 81 bp sequence length,
-binary labels, class-count consistency, and strict DNA alphabet compliance. The
-strict-DNA intra-source directory is the official model-ready data source used
-for the experiments described in this work.
+An alphabet filter was then applied to define the final model-ready sets. Let $\Sigma=\{A,C,G,T\}$ be the accepted DNA alphabet. The filtering operator $q$ retains an example $(x_i,y_i)$ if and only if $x_i\in\Sigma^{81}$ and $y_i\in\{0,1\}$. This policy ensures that all subsequent encodings, including one-hot, k-mer, and physicochemical encodings, operate over the same unambiguous DNA alphabet. Across the source-derived subsets, 338 examples were removed from 12 subsets, corresponding to approximately 0.02\% of the 1,829,262 original sequence-level examples. The filtering step therefore had minimal impact on the overall dataset size while removing incompatible ambiguous IUPAC symbols. After filtering, all 58 subsets satisfied the constraints $x_i\in\Sigma^{81}$, $y_i\in\{0,1\}$, and class-count consistency.
 
-The complete preprocessing workflow is summarized in Figure~\ref{fig:intra-source-preprocessing-workflow}, which shows how the active source files were transformed into validated, model-ready intra-source datasets.
+The complete preprocessing workflow is summarized in Figure~\ref{fig:within-source-preprocessing-workflow}, which shows how heterogeneous source collections were transformed into validated, model-ready labeled sequence sets.
 
-% Required in the thesis preamble:
-% \usepackage{tikz}
-% \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
@@ -91,14 +65,14 @@ The complete preprocessing workflow is summarized in Figure~\ref{fig:intra-sourc
     output/.style={rectangle, draw=black, align=center, minimum width=0.78\textwidth, minimum height=0.82cm, font=\small},
     arrow/.style={-{Latex[length=2.4mm]}, thick}
 ]
-\node[data] (sources) {Active intra-source data\\Bhandari et al., CDBProm, CNNProm, and GraphPro};
-\node[process, below=of sources] (fasta) {Source normalization\\Convert heterogeneous raw files to the common FASTA naming scheme};
+\node[data] (sources) {Source studies $\mathcal{S}$\\Bhandari et al., CDBProm, CNNProm, and GraphPro};
+\node[process, below=of sources] (fasta) {Source normalization\\Map heterogeneous records to labeled sequence sets};
 \node[process, below=of fasta] (crop) {TSS-centered cropping\\Extract 81 bp windows: 60 bp upstream, TSS base, and 20 bp downstream};
-\node[process, below=of crop] (pair) {Intra-source pairing\\Match promoter and non-promoter FASTA files by study, organism type, and dataset};
-\node[process, below=of pair] (csv) {Final CSV construction\\Create train/test files with \texttt{sequence} and \texttt{label} columns};
-\node[process, below=of csv] (clean) {Strict DNA cleaning\\Remove only rows containing symbols outside \{A, C, G, T\}};
-\node[process, below=of clean] (validate) {Biological validation\\Check 81 bp length, binary labels, class counts, and DNA alphabet compliance};
-\node[output, below=of validate] (ready) {Model-ready intra-source datasets\\58 cleaned CSV files for feature encoding and experiments};
+\node[process, below=of crop] (pair) {Within-source pairing\\Form promoter and non-promoter labeled subsets};
+\node[process, below=of pair] (csv) {Partition definition\\Preserve predefined train/test subsets};
+\node[process, below=of csv] (clean) {Alphabet filtering\\Retain only $x_i\in\{A,C,G,T\}^{81}$};
+\node[process, below=of clean] (validate) {Constraint validation\\Check length, labels, class counts, and alphabet};
+\node[output, below=of validate] (ready) {Model-ready labeled sets\\58 validated subsets for feature encoding and experiments};
 
 \draw[arrow] (sources) -- (fasta);
 \draw[arrow] (fasta) -- (crop);
@@ -108,20 +82,20 @@ The complete preprocessing workflow is summarized in Figure~\ref{fig:intra-sourc
 \draw[arrow] (clean) -- (validate);
 \draw[arrow] (validate) -- (ready);
 \end{tikzpicture}
-\caption{Preprocessing workflow used to construct the active intra-source promoter prediction datasets. The diagram summarizes the path from the four included source groups to the final model-ready CSV files: heterogeneous raw records are normalized into a common FASTA representation, cropped to fixed 81 bp windows around the transcription start site, paired into promoter and non-promoter intra-source datasets, cleaned by removing only sequences with non-ACGT symbols, and validated before feature encoding and model training.}
-\label{fig:intra-source-preprocessing-workflow}
+\caption{Preprocessing workflow used to construct the promoter prediction datasets. The diagram summarizes the transformation from heterogeneous source collections to standardized labeled sets: records are mapped to a common binary representation, cropped to 81 bp windows around the transcription start site, paired into promoter and non-promoter subsets, filtered to the alphabet $\{A,C,G,T\}$, and validated before feature encoding and model training.}
+\label{fig:within-source-preprocessing-workflow}
 \end{figure}
 
 
-The final number of strict-DNA samples retained for each source study is summarized in Table~\ref{tab:intra-source-final-summary}. The following study-specific tables then provide the corresponding train/test counts for each dataset: Bhandari et al. in Table~\ref{tab:bhandari-intra-source-final}, CDBProm in Table~\ref{tab:cdbprom-intra-source-final}, CNNProm in Table~\ref{tab:cnnprom-intra-source-final}, and GraphPro in Table~\ref{tab:graphpro-intra-source-final}.
+The final number of unambiguous-DNA examples retained for each source study is summarized in Table~\ref{tab:within-source-final-summary}. The following study-specific tables then provide the corresponding train/test counts for each dataset: Bhandari et al. in Table~\ref{tab:bhandari-within-source-final}, CDBProm in Table~\ref{tab:cdbprom-within-source-final}, CNNProm in Table~\ref{tab:cnnprom-within-source-final}, and GraphPro in Table~\ref{tab:graphpro-within-source-final}.
 
 \begin{table}[htbp]
 \centering
-\caption{Summary of final strict-DNA intra-source datasets after preprocessing and cleaning.}
-\label{tab:intra-source-final-summary}
+\caption{Summary of final unambiguous-DNA within-source datasets after preprocessing and cleaning.}
+\label{tab:within-source-final-summary}
 \begin{tabular}{lrrrr}
 \hline
-Study & Files & Final $P$ & Final $N$ & Final total \\
+Study & Subsets & Final $P$ & Final $N$ & Final total \\
 \hline
 Bhandari et al. & 6 & 583819 & 583819 & 1167638 \\
 CDBProm & 22 & 46959 & 62420 & 109379 \\
@@ -131,12 +105,12 @@ GraphPro & 16 & 47799 & 64480 & 112279 \\
 \end{tabular}
 \end{table}
 
-Class balance after strict DNA cleaning is summarized in Table~\ref{tab:intra-source-class-balance}. This table highlights that Bhandari et al. remains balanced, whereas CDBProm, CNNProm, and GraphPro contain larger non-promoter proportions.
+Class balance after unambiguous DNA cleaning is summarized in Table~\ref{tab:within-source-class-balance}. This table highlights that Bhandari et al. remains balanced, whereas CDBProm, CNNProm, and GraphPro contain larger non-promoter proportions.
 
 \begin{table}[htbp]
 \centering
-\caption{Class balance of the final strict-DNA intra-source datasets by study. Percentages are computed from the final cleaned sequence counts.}
-\label{tab:intra-source-class-balance}
+\caption{Class balance of the final unambiguous-DNA within-source datasets by study. Percentages are computed from the final cleaned sequence counts.}
+\label{tab:within-source-class-balance}
 \begin{tabular}{lrrrr}
 \hline
 Study & Promoter (\%) & Non-promoter (\%) & $P/N$ ratio & Final total \\
@@ -149,13 +123,13 @@ GraphPro & 42.6 & 57.4 & 0.74 & 112279 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:bhandari-intra-source-final} details the final Bhandari et al. train/test partitions after strict DNA cleaning.
+Table~\ref{tab:bhandari-within-source-final} details the final Bhandari et al. train/test partitions after unambiguous DNA cleaning.
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Final strict-DNA Bhandari et al. intra-source datasets after preprocessing and cleaning.}
-\label{tab:bhandari-intra-source-final}
+\caption{Final unambiguous-DNA Bhandari et al. within-source datasets after preprocessing and cleaning.}
+\label{tab:bhandari-within-source-final}
 \begin{tabular}{p{0.40\textwidth}lrrr}
 \hline
 Dataset & Split & Final $P$ & Final $N$ & Final total \\
@@ -164,19 +138,19 @@ eukaryotic Human\_promoter & test & 49188 & 49187 & 98375 \\
 eukaryotic Human\_promoter & train & 196756 & 196757 & 393513 \\
 eukaryotic Plant\_promoters & test & 63900 & 63901 & 127801 \\
 eukaryotic Plant\_promoters & train & 255609 & 255608 & 511217 \\
-prokaryotic Yeast\_promoter & test & 3673 & 3674 & 7347 \\
-prokaryotic Yeast\_promoter & train & 14693 & 14692 & 29385 \\
+eukaryotic Yeast\_promoter & test & 3673 & 3674 & 7347 \\
+eukaryotic Yeast\_promoter & train & 14693 & 14692 & 29385 \\
 \hline
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:cdbprom-intra-source-final} reports the final CDBProm train/test partitions for each prokaryotic dataset.
+Table~\ref{tab:cdbprom-within-source-final} reports the final CDBProm train/test partitions for each prokaryotic dataset.
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Final strict-DNA CDBProm intra-source datasets after preprocessing and cleaning.}
-\label{tab:cdbprom-intra-source-final}
+\caption{Final unambiguous-DNA CDBProm within-source datasets after preprocessing and cleaning.}
+\label{tab:cdbprom-within-source-final}
 \begin{tabular}{p{0.40\textwidth}lrrr}
 \hline
 Dataset & Split & Final $P$ & Final $N$ & Final total \\
@@ -207,13 +181,13 @@ prokaryotic synechocistis & train & 3933 & 5216 & 9149 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:cnnprom-intra-source-final} reports the final CNNProm train/test partitions across eukaryotic and prokaryotic subsets.
+Table~\ref{tab:cnnprom-within-source-final} reports the final CNNProm train/test partitions across eukaryotic and prokaryotic subsets.
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Final strict-DNA CNNProm intra-source datasets after preprocessing and cleaning.}
-\label{tab:cnnprom-intra-source-final}
+\caption{Final unambiguous-DNA CNNProm within-source datasets after preprocessing and cleaning.}
+\label{tab:cnnprom-within-source-final}
 \begin{tabular}{p{0.40\textwidth}lrrr}
 \hline
 Dataset & Split & Final $P$ & Final $N$ & Final total \\
@@ -236,13 +210,13 @@ prokaryotic Ecoli & train & 2013 & 9600 & 11613 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:graphpro-intra-source-final} reports the final GraphPro train/test partitions across eukaryotic and prokaryotic subsets.
+Table~\ref{tab:graphpro-within-source-final} reports the final GraphPro train/test partitions across eukaryotic and prokaryotic subsets.
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Final strict-DNA GraphPro intra-source datasets after preprocessing and cleaning.}
-\label{tab:graphpro-intra-source-final}
+\caption{Final unambiguous-DNA GraphPro within-source datasets after preprocessing and cleaning.}
+\label{tab:graphpro-within-source-final}
 \begin{tabular}{p{0.40\textwidth}lrrr}
 \hline
 Dataset & Split & Final $P$ & Final $N$ & Final total \\
@@ -267,8 +241,8 @@ prokaryotic rhodobacter\_capsulatus & train & 8657 & 10371 & 19028 \\
 \end{tabular}
 \end{table}
 
-These strict-DNA sequence-level datasets provide the input for the feature
-engineering stage. In the subsequent experimental pipeline, each 81 bp sequence
+These unambiguous-DNA sequence-level datasets provide the input for the feature
+engineering stage. In the subsequent experimental protocol, each 81 bp sequence
 can be represented using k-mer frequency vectors, one-hot matrices,
 physicochemical property matrices, DNA-BERT embeddings, or controlled
 combinations of these feature blocks depending on the classifier architecture.

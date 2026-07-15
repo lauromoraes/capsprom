@@ -21,6 +21,20 @@ sequence patterns.
 This hypothesis must be refined into measurable experimental hypotheses before
 full model development begins.
 
+
+## Qualification Thesis Context
+
+This repository builds on the initial doctoral qualification thesis version kept
+at `C:/Users/lauro/OneDrive/Documents/academic/ufop/doc_tese_v1_0/`. A
+repository-local synthesis is maintained in `docs/qualification_context.md` and
+should be used as historical and methodological context for future
+specifications, experiment design, and thesis writing.
+
+The qualification text establishes the project background, prior CapsProm and
+physicochemical-property contributions, baseline evaluation strategy, and planned
+extensions such as a unified workflow, attention-enhanced CapsProm, conformal
+prediction, GraphPro/transformer baselines, and MLflow-managed reproducibility.
+
 ## Data Assumptions
 
 - Datasets are CSV files.

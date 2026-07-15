@@ -22,6 +22,8 @@ Status: planned.
 
 Goals:
 
+- Use `docs/qualification_context.md` to preserve the methodological continuity
+  between the qualification thesis and the current reproducible pipeline.
 - Define the minimum viable experiment pipeline.
 - Specify dataset validation rules.
 - Specify configuration schema.
@@ -69,8 +71,10 @@ Status: planned.
 
 Goals:
 
+- Reproduce the original CapsProm direction under the unified pipeline.
 - Implement CapsProm.
 - Implement SparseCapsProm.
+- Plan the attention-enhanced A-CapsProm extension after baseline reproduction.
 - Add hyperparameter optimization.
 - Compare against baselines using the same pipeline.
 

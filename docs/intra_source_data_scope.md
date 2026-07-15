@@ -16,12 +16,21 @@ The final intra-source CSV files come from four source groups:
 
 | Source prefix | Final CSV files | Scope |
 | --- | ---: | --- |
-| `bhandari` | 6 | Eukaryotic human/plant and prokaryotic yeast promoter datasets |
+| `bhandari` | 6 | Human, plant, and yeast promoter datasets, all represented with biologically consistent eukaryotic filename tags where applicable. |
 | `cdbprom` | 22 | Prokaryotic promoter datasets |
 | `cnnprom` | 14 | Eukaryotic and prokaryotic CNNProm benchmark datasets |
 | `graphpro` | 16 | Eukaryotic and prokaryotic GraphPro benchmark datasets |
 
 Total final intra-source CSV files: 58.
+
+
+## Active Source Provenance
+
+The README files in the active raw source folders document the source
+publications, repositories, and selected methodological notes used to obtain the
+data. The consolidated summary is maintained in `docs/source_provenance.md`.
+These README-derived notes are part of the project context, but they do not
+expand the active data scope beyond the final intra-source CSV files.
 
 ## Excluded Data
 
