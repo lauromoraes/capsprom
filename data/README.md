@@ -1,5 +1,9 @@
 # Data Directory
 
+## Active Intra-Source Scope
+
+Only the data used to create `data/processed/assembled_datasets/intra/` is currently in scope for generated project information, validation summaries, and thesis text. The active source prefixes are `bhandari`, `cdbprom`, `cnnprom`, and `graphpro`. Other folders may remain present for provenance or future work, but they are out of scope until explicitly added to a processed dataset specification.
+
 This directory contains research datasets and intermediate data artifacts for
 CapsProm. Large data files are intentionally ignored by Git; only lightweight
 metadata and documentation should be versioned.

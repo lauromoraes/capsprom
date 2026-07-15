@@ -52,6 +52,18 @@ experimental validation, and thesis-grade documentation.
 
 A local virtual environment is available at `.venv/`. Setup and activation instructions are documented in `docs/development_environment.md`.
 
+## Academic Writing
+
+Thesis-oriented figures, tables, diagrams, and plots must always be introduced and referenced in the surrounding text, with descriptive captions and stable labels. See `specs/academic_writing_spec.md`.
+
+## Feature Encoding
+
+Feature engineering supports named blocks, physicochemical references, concatenated inputs for classical models, and multi-head inputs for deep neural networks. See `specs/feature_architecture.md` and `docs/feature_encoding.md`.
+
+## Active Data Scope
+
+Only data represented in `data/processed/assembled_datasets/intra/` is part of the current experimental dataset scope. See `docs/intra_source_data_scope.md`.
+
 ## Data Processing
 
 The notebook-derived dataset construction logic is available as reusable Python modules under `src/capsprom/data/`. The processing methodology is documented in `docs/dataset_processing.md`, with a thesis-ready LaTeX snippet in `docs/thesis/dataset_processing_latex.tex`.

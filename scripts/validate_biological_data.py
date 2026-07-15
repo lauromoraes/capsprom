@@ -18,7 +18,7 @@ FASTA_EXTENSIONS = {".fa", ".fasta", ".fna"}
 SEQUENCE_CSV_COLUMNS = {"sequence", "label"}
 COUNT_RE = re.compile(r"-p-(?P<p>\d+)-n-(?P<n>\d+)-(?P<partition>[^./]+)\.csv$", re.IGNORECASE)
 LEN_RE = re.compile(r"-(?P<len>\d+)\.(?:fa|fasta|fna)(?:\.gz)?$", re.IGNORECASE)
-IGNORED_PATH_MARKERS = ("raw/Nova pasta/predictions_ecoli",)
+IGNORED_PATH_MARKERS: tuple[str, ...] = ()
 MAX_ISSUES_PER_FILE = 25
 
 
@@ -286,7 +286,7 @@ def validate(root: Path) -> list[FileResult]:
     return results
 
 
-def write_report(results: list[FileResult], out: Path) -> None:
+def write_report(results: list[FileResult], out: Path, root: Path | None = None) -> None:
     by_status = Counter(r.status for r in results)
     by_kind = Counter(r.kind for r in results)
     sequence_kinds = {"fasta", "fasta_txt", "fasta_gzip", "sequence_csv", "line_sequence_txt", "line_sequence_gzip"}
@@ -298,7 +298,10 @@ def write_report(results: list[FileResult], out: Path) -> None:
     lines: list[str] = []
     lines.append("# Biological Data Validation Report")
     lines.append("")
-    lines.append("This report validates sequence-bearing files in `data/` for DNA alphabet constraints, expected 81 bp processed CSV sequences, binary labels, and filename count consistency where available.")
+    if root is not None:
+        lines.append(f"Validated path: `{root.as_posix()}`")
+        lines.append("")
+    lines.append("This report validates sequence-bearing files for DNA alphabet constraints, expected 81 bp processed CSV sequences, binary labels, and filename count consistency where available.")
     lines.append("")
     lines.append("## Summary")
     lines.append("")
@@ -353,7 +356,6 @@ def write_report(results: list[FileResult], out: Path) -> None:
     lines.append("- FASTA, FASTA-like TXT, and gzip-compressed sequence files were checked for DNA alphabet. Fixed length was enforced only when an expected length was encoded in the filename.")
     lines.append("- Raw TXT files with one DNA sequence per line were checked for DNA alphabet, without fixed-length enforcement because raw sources may contain longer windows before cropping.")
     lines.append("- Numeric feature CSVs, TSV physicochemical references, notebooks, scripts, and documentation were classified as not applicable for direct biological sequence validation.")
-    lines.append("- The `predictions_ecoli` folder was explicitly ignored by request and is outside this validation report.")
     lines.append("- ZIP archives were inventoried but not expanded during validation; use extracted, named source directories for experimental inputs.")
     lines.append("")
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -364,7 +366,7 @@ def main(argv: list[str]) -> int:
     root = Path(argv[1]) if len(argv) > 1 else Path("data")
     out = Path(argv[2]) if len(argv) > 2 else Path("docs/data_validation_report.md")
     results = validate(root)
-    write_report(results, out)
+    write_report(results, out, root)
     sequence_kinds = {"fasta", "fasta_txt", "fasta_gzip", "sequence_csv", "line_sequence_txt", "line_sequence_gzip"}
     failed = [r for r in results if r.kind in sequence_kinds and r.status == "fail"]
     review = [r for r in results if r.status == "review"]

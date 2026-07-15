@@ -2,6 +2,8 @@
 
 Scope: `data/processed/assembled_datasets/intra/*.csv`.
 
+Active scope: only final intra-source datasets represented in this directory are considered.
+
 | Status | Dataset | Rows | Positive | Negative | Invalid alphabet rows | Length errors | Label errors | Invalid symbols | Example lines |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |
 | fail | bhandari-eukaryotic-Human_promoter-p-196851-n-196851-train.csv | 393702 | 196851 | 196851 | 189 | 0 | 0 | N | 2077,2235,5699,8013,10298 |

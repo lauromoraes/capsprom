@@ -1,6 +1,8 @@
 # Biological Data Validation Report
 
-This report validates sequence-bearing files in `data/` for DNA alphabet constraints, expected 81 bp processed CSV sequences, binary labels, and filename count consistency where available.
+Validated path: `data/processed/assembled_datasets/intra_strict_dna`
+
+This report validates sequence-bearing files for DNA alphabet constraints, expected 81 bp processed CSV sequences, binary labels, and filename count consistency where available.
 
 ## Summary
 
@@ -36,5 +38,4 @@ No files require manual review.
 - FASTA, FASTA-like TXT, and gzip-compressed sequence files were checked for DNA alphabet. Fixed length was enforced only when an expected length was encoded in the filename.
 - Raw TXT files with one DNA sequence per line were checked for DNA alphabet, without fixed-length enforcement because raw sources may contain longer windows before cropping.
 - Numeric feature CSVs, TSV physicochemical references, notebooks, scripts, and documentation were classified as not applicable for direct biological sequence validation.
-- The `predictions_ecoli` folder was explicitly ignored by request and is outside this validation report.
 - ZIP archives were inventoried but not expanded during validation; use extracted, named source directories for experimental inputs.

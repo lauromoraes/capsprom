@@ -38,12 +38,15 @@ The first implementation should support:
 - 81 bp sequence validation.
 - DNA alphabet validation.
 - One k-mer frequency encoder.
+- Physicochemical encoder loading from the dinucleotide and trinucleotide TSV references.
+- A feature-combination interface that can emit either concatenated vectors or named blocks.
 - One simple baseline model.
 - MLflow parameter and metric logging.
 
 Out of scope for the first implementation:
 
 - DNA-BERT embeddings.
+- Full multi-head deep learning training, beyond defining the input contract.
 - Capsule networks.
 - Sparse routing.
 - Full hyperparameter optimization.

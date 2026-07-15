@@ -8,6 +8,9 @@ evaluation, and thesis-oriented documentation.
 
 ## Dataset Contract
 
+Current active dataset scope is restricted to the final intra-source CSV files in `data/processed/assembled_datasets/intra/` and their strict-DNA cleaned copies. Generated project information must not treat other files under `data/` as active experimental datasets.
+
+
 Datasets must be CSV files with exactly the following required semantic fields:
 
 | Field | Description |
@@ -39,8 +42,21 @@ Supported encodings:
 - Physicochemical property vectors for dinucleotides and trinucleotides.
 - DNA-BERT embeddings.
 
+The normalized physicochemical reference files are canonical inputs for these
+encodings:
+
+- `data/raw/references/normalized-dinuc.tsv` for dinucleotide properties.
+- `data/raw/references/normalized-trinuc.tsv` for trinucleotide properties.
+
+Physicochemical encoders must support selecting all properties or a named
+subset of properties from the relevant reference file.
+
 The implementation should expose encoders through a common interface so that
 models and experiments can switch encodings through YAML configuration.
+Experiments must also support feature combinations. Classical models may
+receive flattened concatenated feature vectors, while deep neural networks must
+be able to receive named feature blocks as independent inputs for multi-head or
+multi-branch architectures before feature fusion.
 
 ## Model Requirements
 
@@ -99,4 +115,6 @@ The repository must provide a CLI that can:
 
 All documentation, code, comments, and configuration files must be in English.
 Scholarly outputs should be prepared as LaTeX snippets with notes indicating
-where they fit in the doctoral thesis.
+where they fit in the doctoral thesis. No figure, table, chart, diagram, or
+visual artifact may be included without a descriptive caption, a stable label,
+and a preceding textual reference in the surrounding text.

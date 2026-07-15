@@ -20,6 +20,8 @@ sequences using capsule networks and reproducible machine learning pipelines.
 - Prefer incremental pipeline development over premature model complexity.
 - Keep thesis relevance explicit when creating reports, plots, tables, or LaTeX
   snippets.
+- Never leave a figure, table, chart, diagram, or other visual artifact without
+  a descriptive caption, a stable label, and a preceding textual reference.
 - Use YAML configuration files for experiments.
 - Use MLflow for experiment tracking.
 
@@ -40,6 +42,8 @@ sequences using capsule networks and reproducible machine learning pipelines.
 - `docs/project_brief.md`: research summary and assumptions.
 - `docs/roadmap.md`: phased development plan.
 - `configs/example_experiment.yaml`: initial experiment configuration shape.
+- `specs/academic_writing_spec.md`: thesis writing rules, including mandatory
+  figure/table introduction and references.
 
 ## Engineering Preferences
 
