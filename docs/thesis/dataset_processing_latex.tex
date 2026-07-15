@@ -1,0 +1,33 @@
+\subsection{Dataset preprocessing and construction}
+
+The promoter prediction datasets used in this work were assembled from multiple
+public sources with heterogeneous file formats, including FASTA files,
+gzip-compressed FASTA files, and line-oriented text files. To ensure a uniform
+experimental representation, all sources were first converted into a common
+FASTA naming scheme encoding the class, source study, organism type, dataset
+identifier, number of records, and original sequence length. Promoter sequences
+were assigned label $1$, whereas non-promoter sequences were assigned label $0$.
+
+All model-ready sequences were normalized to a fixed length of 81 bp around the
+transcription start site (TSS). The fixed window contains 60 bp upstream of the
+TSS, the TSS nucleotide itself, and 20 bp downstream. Because the original
+sequence windows differ across studies, the TSS coordinate used for cropping was
+defined per source dataset. GraphPro sequences of length 81 used TSS position
+60; CNNProm sequences used position 60 for 81 bp windows and position 200 for
+251 bp windows; CDBProm sequences used position 60 for 100 bp windows and
+position 500 for 1001 bp windows; and Bhandari et al. sequences used position
+700 for 1000 bp windows.
+
+After cropping, promoter and non-promoter FASTA files were paired by source
+study, organism type, and dataset identifier. Each pair was converted into CSV
+files containing two fields: \texttt{sequence}, the 81 bp DNA sequence, and
+\texttt{label}, the binary class label. The processed intra-study datasets use a
+filename convention that records the source study, organism type, dataset name,
+positive count, negative count, and partition.
+
+Finally, a strict DNA cleaning step was applied to produce the model-ready
+processed dataset directory. This step removed only rows whose sequence contained
+symbols outside the alphabet \{A, C, G, T\}; no original processed CSV file was
+overwritten. Across 58 processed CSV files, 338 rows were removed from 12 files.
+After this cleaning step, all 58 cleaned CSV files passed validation for 81 bp
+sequence length, binary labels, and strict DNA alphabet compliance.

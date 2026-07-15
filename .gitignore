@@ -216,3 +216,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# CapsProm research artifacts
+/data/raw/
+/data/interim/
+/data/processed/
+/data/*.ipynb
+/mlruns/
+/outputs/runs/
+/outputs/figures/
+/outputs/models/
+/outputs/reports/
+*.parquet
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.ckpt

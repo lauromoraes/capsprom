@@ -1,0 +1,45 @@
+project:
+  name: capsprom
+  language: en
+
+tracking:
+  backend: mlflow
+  tracking_uri: ./mlruns
+  experiment_name: capsprom-mvp
+
+data:
+  train_csv: data/processed/assembled_datasets/intra_strict_dna/bhandari-eukaryotic-Human_promoter-p-196756-n-196757-train.csv
+  validation_csv: null
+  test_csv: data/processed/assembled_datasets/intra_strict_dna/bhandari-eukaryotic-Human_promoter-p-49188-n-49187-test.csv
+  sequence_column: sequence
+  label_column: label
+  sequence_length: 81
+  alphabet: [A, C, G, T]
+
+encoding:
+  name: kmer_frequency
+  k: 3
+  normalize: true
+
+model:
+  family: baseline
+  name: xgboost
+  hyperparameters:
+    n_estimators: 300
+    max_depth: 4
+    learning_rate: 0.05
+    subsample: 0.9
+    colsample_bytree: 0.9
+
+evaluation:
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1
+    - roc_auc
+    - matthews_corrcoef
+
+outputs:
+  artifact_dir: outputs/runs
+  latex_dir: outputs/latex
