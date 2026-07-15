@@ -1,0 +1,19 @@
+\chapter{Experimental Protocol}\label{chap:experimental-protocol}
+
+\section{Experiment Configuration}\label{sec:protocol-configuration}
+
+Each experiment is specified by a tuple $(\mathcal{D},\phi,f,\theta,E,r)$, where $\mathcal{D}$ is the labeled dataset, $\phi$ is the feature mapping, $f$ is the classifier or neural architecture, $\theta$ is the set of training and model parameters, $E$ is the set of evaluation metrics, and $r$ denotes the random seed or replication index.
+
+\section{Evaluation Metrics}\label{sec:protocol-metrics}
+
+The promoter prediction task is evaluated as binary classification. Metrics
+include sensitivity, specificity, accuracy, precision, F1-score, and Matthews
+correlation coefficient. MCC is especially important for imbalanced datasets.
+
+\section{Validation Strategy}\label{sec:protocol-validation}
+
+The validation strategy must be explicit for each experiment. Earlier project work used 5-fold cross-validation; the current protocol preserves this option while also supporting predefined train/test partitions associated with source-derived benchmarks.
+
+\section{Statistical and Reproducibility Controls}\label{sec:protocol-controls}
+
+All experiments should record data provenance, feature definition, model parameters, software environment, random seeds, and performance measures. This supports both statistical comparison and thesis traceability without making the mathematical description depend on a specific implementation tool.

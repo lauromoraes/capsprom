@@ -1,0 +1,248 @@
+\subsection{Dataset preprocessing and construction}
+
+Let $\mathcal{S}=\{\mathrm{Bhandari},\mathrm{CDBProm},\mathrm{CNNProm},\mathrm{GraphPro}\}$ denote the set of source studies considered in this thesis. For each source $s\in\mathcal{S}$, the experimental data are represented as a finite labeled set $\mathcal{D}_{s}=\{(x_i,y_i)\}_{i=1}^{n_s}$, where $x_i$ is a DNA sequence window and $y_i\in\{0,1\}$ is the binary class label. The positive class, $y_i=1$, denotes a promoter sequence, whereas the negative class, $y_i=0$, denotes a non-promoter sequence. After preprocessing, all sequence windows are elements of $\{A,C,G,T\}^{81}$, so the experimental unit is one fixed-length 81 bp sequence-level example.
+
+The four source studies differ in organism coverage, sequence-window definition, and negative-set construction. Table~\ref{tab:active-source-provenance} summarizes the study-level provenance used to define the source set $\mathcal{S}$ before describing the transformations applied to obtain the standardized labeled sets $\mathcal{D}_{s}$.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Study-level provenance of the source datasets used in this thesis. The table identifies the publications or resources from which the promoter and non-promoter sequence sets were derived.}
+\label{tab:active-source-provenance}
+\begin{tabular}{p{0.18\textwidth}p{0.42\textwidth}p{0.30\textwidth}}
+\hline
+Source & Publication or resource & Recorded origin \\
+\hline
+Bhandari et al. & Comparison of machine learning and deep learning techniques in promoter prediction across diverse species & Public data resource associated with the study \\
+CDBProm & CDBProm: the Comprehensive Directory of Bacterial Promoters, Martinez et al., 2024 & CDBProm website and training-sequence archive \\
+CNNProm & Recognition of Prokaryotic and Eukaryotic Promoters Using Convolutional Deep Learning Neural Networks, Umarov and Solovyev, 2016 & CNNPromoterData resource and Softberry website \\
+GraphPro & GraphPro: An interpretable graph neural network-based model for identifying promoters in multiple species, Zhang et al., 2024 & GraphPro public dataset resource \\
+\hline
+\end{tabular}
+\end{table}
+
+The source descriptions also provide methodological context that affects interpretation. For example, CNNProm reports bacterial non-promoter sequences sampled from protein-coding genes on the opposite strand, whereas its promoter sets are linked to resources such as RegulonDB, DBTBS, EPDnew, and DBTSS. GraphPro includes human and mouse eukaryotic datasets and bacterial datasets for six organisms. These differences motivate source-aware evaluation, since the empirical distribution $P_s(X,Y)$ may differ across studies.
+
+Because the source studies provide heterogeneous sequence collections, all records were first mapped into a common labeled representation. Promoter sequences were assigned label $1$, whereas non-promoter sequences were assigned label $0$. For each source $s$, this step defines an initial labeled collection $\mathcal{D}^{0}_{s}=\{(z_i,y_i)\}_{i=1}^{m_s}$, where $z_i$ denotes the original sequence window before length normalization.
+
+A deterministic cropping function $c_s$ was then applied to each original sequence $z_i$ to obtain a standardized sequence $x_i=c_s(z_i)$ with $|x_i|=81$. The target window is defined relative to a source-specific transcription start site (TSS) coordinate and contains 60 bp upstream of the TSS, the TSS nucleotide itself, and 20 bp downstream. This window definition was adopted to maintain compatibility with the promoter-region representation used by the GraphPro and CNNProm studies for prokaryotic datasets, while enforcing a common input length across all sources. Because the original sequence windows differ across studies, the TSS coordinate used by $c_s$ was defined per source and original window length.
+
+Table~\ref{tab:tss-cropping-parameters} summarizes the source-specific TSS
+coordinates used to obtain the standardized 81 bp windows.
+
+\begin{table}[htbp]
+\centering
+\caption{Source-specific parameters of the deterministic cropping function $c_s$ used to map promoter and non-promoter sequences to 81 bp windows. The final window contains 60 bp upstream of the transcription start site, the TSS nucleotide, and 20 bp downstream.}
+\label{tab:tss-cropping-parameters}
+\begin{tabular}{lrrr}
+\hline
+Source & Original length & TSS position & Final length \\
+\hline
+GraphPro & 81 & 60 & 81 \\
+CNNProm & 81 & 60 & 81 \\
+CNNProm & 251 & 200 & 81 \\
+CDBProm & 100 & 60 & 81 \\
+CDBProm & 1001 & 500 & 81 \\
+Bhandari et al. & 1000 & 700 & 81 \\
+\hline
+\end{tabular}
+\end{table}
+
+After cropping, promoter and non-promoter examples were paired within each source-defined dataset. Each resulting subset is therefore represented as $\mathcal{D}_{s,k}=\mathcal{P}_{s,k}\cup\mathcal{N}_{s,k}$, where $\mathcal{P}_{s,k}=\{(x_i,1)\}$ and $\mathcal{N}_{s,k}=\{(x_i,0)\}$ denote the positive and negative examples for dataset $k$ from source $s$. The train/test partition used in this section follows the predefined partition associated with each source-derived benchmark; no additional repartitioning is introduced during this preprocessing description.
+
+\subsubsection{Quality control and final dataset definition}
+
+An alphabet filter was then applied to define the final model-ready sets. Let $\Sigma=\{A,C,G,T\}$ be the accepted DNA alphabet. The filtering operator $q$ retains an example $(x_i,y_i)$ if and only if $x_i\in\Sigma^{81}$ and $y_i\in\{0,1\}$. This policy ensures that all subsequent encodings, including one-hot, k-mer, and physicochemical encodings, operate over the same unambiguous DNA alphabet. Across the source-derived subsets, 338 examples were removed from 12 subsets, corresponding to approximately 0.02\% of the 1,829,262 original sequence-level examples. The filtering step therefore had minimal impact on the overall dataset size while removing incompatible ambiguous IUPAC symbols. After filtering, all 58 subsets satisfied the constraints $x_i\in\Sigma^{81}$, $y_i\in\{0,1\}$, and class-count consistency.
+
+The complete preprocessing workflow is summarized in Figure~\ref{fig:within-source-preprocessing-workflow}, which shows how heterogeneous source collections were transformed into validated, model-ready labeled sequence sets.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=0.85cm,
+    process/.style={rectangle, rounded corners, draw=black, align=center, minimum width=0.78\textwidth, minimum height=0.82cm, font=\small},
+    data/.style={trapezium, trapezium left angle=70, trapezium right angle=110, draw=black, align=center, minimum width=0.74\textwidth, minimum height=0.82cm, font=\small},
+    output/.style={rectangle, draw=black, align=center, minimum width=0.78\textwidth, minimum height=0.82cm, font=\small},
+    arrow/.style={-{Latex[length=2.4mm]}, thick}
+]
+\node[data] (sources) {Source studies $\mathcal{S}$\\Bhandari et al., CDBProm, CNNProm, and GraphPro};
+\node[process, below=of sources] (fasta) {Source normalization\\Map heterogeneous records to labeled sequence sets};
+\node[process, below=of fasta] (crop) {TSS-centered cropping\\Extract 81 bp windows: 60 bp upstream, TSS base, and 20 bp downstream};
+\node[process, below=of crop] (pair) {Within-source pairing\\Form promoter and non-promoter labeled subsets};
+\node[process, below=of pair] (csv) {Partition definition\\Preserve predefined train/test subsets};
+\node[process, below=of csv] (clean) {Alphabet filtering\\Retain only $x_i\in\{A,C,G,T\}^{81}$};
+\node[process, below=of clean] (validate) {Constraint validation\\Check length, labels, class counts, and alphabet};
+\node[output, below=of validate] (ready) {Model-ready labeled sets\\58 validated subsets for feature encoding and experiments};
+
+\draw[arrow] (sources) -- (fasta);
+\draw[arrow] (fasta) -- (crop);
+\draw[arrow] (crop) -- (pair);
+\draw[arrow] (pair) -- (csv);
+\draw[arrow] (csv) -- (clean);
+\draw[arrow] (clean) -- (validate);
+\draw[arrow] (validate) -- (ready);
+\end{tikzpicture}
+\caption{Preprocessing workflow used to construct the promoter prediction datasets. The diagram summarizes the transformation from heterogeneous source collections to standardized labeled sets: records are mapped to a common binary representation, cropped to 81 bp windows around the transcription start site, paired into promoter and non-promoter subsets, filtered to the alphabet $\{A,C,G,T\}$, and validated before feature encoding and model training.}
+\label{fig:within-source-preprocessing-workflow}
+\end{figure}
+
+
+The final number of unambiguous-DNA examples retained for each source study is summarized in Table~\ref{tab:within-source-final-summary}. The following study-specific tables then provide the corresponding train/test counts for each dataset: Bhandari et al. in Table~\ref{tab:bhandari-within-source-final}, CDBProm in Table~\ref{tab:cdbprom-within-source-final}, CNNProm in Table~\ref{tab:cnnprom-within-source-final}, and GraphPro in Table~\ref{tab:graphpro-within-source-final}.
+
+\begin{table}[htbp]
+\centering
+\caption{Summary of final unambiguous-DNA within-source datasets after preprocessing and cleaning.}
+\label{tab:within-source-final-summary}
+\begin{tabular}{lrrrr}
+\hline
+Study & Subsets & Final $P$ & Final $N$ & Final total \\
+\hline
+Bhandari et al. & 6 & 583819 & 583819 & 1167638 \\
+CDBProm & 22 & 46959 & 62420 & 109379 \\
+CNNProm & 14 & 141948 & 297680 & 439628 \\
+GraphPro & 16 & 47799 & 64480 & 112279 \\
+\hline
+\end{tabular}
+\end{table}
+
+Class balance after unambiguous DNA cleaning is summarized in Table~\ref{tab:within-source-class-balance}. This table highlights that Bhandari et al. remains balanced, whereas CDBProm, CNNProm, and GraphPro contain larger non-promoter proportions.
+
+\begin{table}[htbp]
+\centering
+\caption{Class balance of the final unambiguous-DNA within-source datasets by study. Percentages are computed from the final cleaned sequence counts.}
+\label{tab:within-source-class-balance}
+\begin{tabular}{lrrrr}
+\hline
+Study & Promoter (\%) & Non-promoter (\%) & $P/N$ ratio & Final total \\
+\hline
+Bhandari et al. & 50.0 & 50.0 & 1.00 & 1167638 \\
+CDBProm & 42.9 & 57.1 & 0.75 & 109379 \\
+CNNProm & 32.3 & 67.7 & 0.48 & 439628 \\
+GraphPro & 42.6 & 57.4 & 0.74 & 112279 \\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:bhandari-within-source-final} details the final Bhandari et al. train/test partitions after unambiguous DNA cleaning.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Final unambiguous-DNA Bhandari et al. within-source datasets after preprocessing and cleaning.}
+\label{tab:bhandari-within-source-final}
+\begin{tabular}{p{0.40\textwidth}lrrr}
+\hline
+Dataset & Split & Final $P$ & Final $N$ & Final total \\
+\hline
+eukaryotic Human\_promoter & test & 49188 & 49187 & 98375 \\
+eukaryotic Human\_promoter & train & 196756 & 196757 & 393513 \\
+eukaryotic Plant\_promoters & test & 63900 & 63901 & 127801 \\
+eukaryotic Plant\_promoters & train & 255609 & 255608 & 511217 \\
+eukaryotic Yeast\_promoter & test & 3673 & 3674 & 7347 \\
+eukaryotic Yeast\_promoter & train & 14693 & 14692 & 29385 \\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:cdbprom-within-source-final} reports the final CDBProm train/test partitions for each prokaryotic dataset.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Final unambiguous-DNA CDBProm within-source datasets after preprocessing and cleaning.}
+\label{tab:cdbprom-within-source-final}
+\begin{tabular}{p{0.40\textwidth}lrrr}
+\hline
+Dataset & Split & Final $P$ & Final $N$ & Final total \\
+\hline
+prokaryotic anabaena\_sp & test & 1510 & 2009 & 3519 \\
+prokaryotic anabaena\_sp & train & 6041 & 8035 & 14076 \\
+prokaryotic bacillus\_amyloliquefaciens & test & 636 & 845 & 1481 \\
+prokaryotic bacillus\_amyloliquefaciens & train & 2541 & 3379 & 5920 \\
+prokaryotic chlamydophila\_pneumoniae & test & 243 & 323 & 566 \\
+prokaryotic chlamydophila\_pneumoniae & train & 969 & 1293 & 2262 \\
+prokaryotic corynebacterium\_glutamicum & test & 345 & 458 & 803 \\
+prokaryotic corynebacterium\_glutamicum & train & 1380 & 1830 & 3210 \\
+prokaryotic helicobacter\_pylori & test & 429 & 568 & 997 \\
+prokaryotic helicobacter\_pylori & train & 1707 & 2272 & 3979 \\
+prokaryotic klebisiella\_pneumoniae & test & 798 & 1061 & 1859 \\
+prokaryotic klebisiella\_pneumoniae & train & 3189 & 4243 & 7432 \\
+prokaryotic mycrobacterium\_tuberculosis & test & 1063 & 1414 & 2477 \\
+prokaryotic mycrobacterium\_tuberculosis & train & 4253 & 5654 & 9907 \\
+prokaryotic pseudonomas\_aeruginosa & test & 1232 & 1640 & 2872 \\
+prokaryotic pseudonomas\_aeruginosa & train & 4930 & 6556 & 11486 \\
+prokaryotic salmonella\_typhimurium & test & 589 & 779 & 1368 \\
+prokaryotic salmonella\_typhimurium & train & 2354 & 3117 & 5471 \\
+prokaryotic streptomyces\_coelicolor & test & 1567 & 2085 & 3652 \\
+prokaryotic streptomyces\_coelicolor & train & 6266 & 8339 & 14605 \\
+prokaryotic synechocistis & test & 984 & 1304 & 2288 \\
+prokaryotic synechocistis & train & 3933 & 5216 & 9149 \\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:cnnprom-within-source-final} reports the final CNNProm train/test partitions across eukaryotic and prokaryotic subsets.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Final unambiguous-DNA CNNProm within-source datasets after preprocessing and cleaning.}
+\label{tab:cnnprom-within-source-final}
+\begin{tabular}{p{0.40\textwidth}lrrr}
+\hline
+Dataset & Split & Final $P$ & Final $N$ & Final total \\
+\hline
+eukaryotic Arabidopsis\_non\_tata & test & 3543 & 9167 & 12710 \\
+eukaryotic Arabidopsis\_non\_tata & train & 14172 & 36665 & 50837 \\
+eukaryotic Arabidopsis\_tata & test & 898 & 2304 & 3202 \\
+eukaryotic Arabidopsis\_tata & train & 3593 & 9212 & 12805 \\
+eukaryotic Human\_non\_tata & test & 11887 & 22185 & 34072 \\
+eukaryotic Human\_non\_tata & train & 47543 & 88739 & 136282 \\
+eukaryotic Mouse\_non\_tata & test & 9770 & 19858 & 29628 \\
+eukaryotic Mouse\_non\_tata & train & 39079 & 79430 & 118509 \\
+eukaryotic Mouse\_tata & test & 1566 & 2824 & 4390 \\
+eukaryotic Mouse\_tata & train & 6261 & 11296 & 17557 \\
+prokaryotic Bacillus & test & 224 & 800 & 1024 \\
+prokaryotic Bacillus & train & 895 & 3200 & 4095 \\
+prokaryotic Ecoli & test & 504 & 2400 & 2904 \\
+prokaryotic Ecoli & train & 2013 & 9600 & 11613 \\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:graphpro-within-source-final} reports the final GraphPro train/test partitions across eukaryotic and prokaryotic subsets.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Final unambiguous-DNA GraphPro within-source datasets after preprocessing and cleaning.}
+\label{tab:graphpro-within-source-final}
+\begin{tabular}{p{0.40\textwidth}lrrr}
+\hline
+Dataset & Split & Final $P$ & Final $N$ & Final total \\
+\hline
+eukaryotic Human & test & 1404 & 1871 & 3275 \\
+eukaryotic Human & train & 5613 & 7485 & 13098 \\
+eukaryotic Mouse & test & 1108 & 1477 & 2585 \\
+eukaryotic Mouse & train & 4430 & 5907 & 10337 \\
+prokaryotic bacillus\_amyloliquefaciens & test & 557 & 743 & 1300 \\
+prokaryotic bacillus\_amyloliquefaciens & train & 2227 & 2969 & 5196 \\
+prokaryotic campylobacter\_jejuni & test & 808 & 1077 & 1885 \\
+prokaryotic campylobacter\_jejuni & train & 3230 & 4307 & 7537 \\
+prokaryotic clostridium\_phytofermentans & test & 302 & 345 & 647 \\
+prokaryotic clostridium\_phytofermentans & train & 1207 & 1379 & 2586 \\
+prokaryotic escherichia\_coli & test & 1512 & 3099 & 4611 \\
+prokaryotic escherichia\_coli & train & 6045 & 12397 & 18442 \\
+prokaryotic leptospira\_interrogans & test & 1707 & 1693 & 3400 \\
+prokaryotic leptospira\_interrogans & train & 6828 & 6767 & 13595 \\
+prokaryotic rhodobacter\_capsulatus & test & 2164 & 2593 & 4757 \\
+prokaryotic rhodobacter\_capsulatus & train & 8657 & 10371 & 19028 \\
+\hline
+\end{tabular}
+\end{table}
+
+These unambiguous-DNA sequence-level datasets provide the input for the feature
+engineering stage. In the subsequent experimental protocol, each 81 bp sequence
+can be represented using k-mer frequency vectors, one-hot matrices,
+physicochemical property matrices, DNA-BERT embeddings, or controlled
+combinations of these feature blocks depending on the classifier architecture.
