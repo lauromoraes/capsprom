@@ -4,7 +4,7 @@ This document describes the processing workflow for the active CapsProm
 intra-source datasets. The active scope is restricted to the final CSV files in:
 
 ```text
-data/processed/assembled_datasets/intra/
+data/processed/assembled_datasets/intra_strict_dna/
 ```
 
 These files come only from the Bhandari, CDBProm, CNNProm, and GraphPro source
@@ -138,5 +138,5 @@ Reusable implementation:
 Notebook-derived code has been refactored into `src/capsprom/data/`, but active
 project documentation should only describe the subset that produced the final
 intra-source CSV files. Exploratory notebooks, prediction archives, and raw data
-not represented by `data/processed/assembled_datasets/intra/` are out of scope
+not represented by `data/processed/assembled_datasets/intra_strict_dna/` are out of scope
 for the current experiments.

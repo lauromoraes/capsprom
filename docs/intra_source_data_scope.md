@@ -1,14 +1,18 @@
 # Intra-Source Dataset Scope
 
-This project currently considers only the data that was used to create the final
-intra-source processed datasets located in:
+This project currently considers only the data that was used to create the final intra-source processed datasets and their strict-DNA model-ready copies. For current and future EDA, feature engineering, model training, and evaluation, the active model-ready directory is:
+
+```text
+data/processed/assembled_datasets/intra_strict_dna/
+```
+
+The original processed directory is preserved for provenance and preprocessing audit:
 
 ```text
 data/processed/assembled_datasets/intra/
 ```
 
-All dataset processing notes, validation summaries, and thesis-oriented text
-must reflect this scope unless a future experiment explicitly expands it.
+All dataset processing notes, validation summaries, and thesis-oriented text must reflect this scope unless a future experiment explicitly expands it.
 
 ## Included Sources
 
@@ -21,7 +25,7 @@ The final intra-source CSV files come from four source groups:
 | `cnnprom` | 14 | Eukaryotic and prokaryotic CNNProm benchmark datasets |
 | `graphpro` | 16 | Eukaryotic and prokaryotic GraphPro benchmark datasets |
 
-Total final intra-source CSV files: 58.
+Total final strict-DNA intra-source CSV files: 58.
 
 
 ## Active Source Provenance
@@ -30,14 +34,14 @@ The README files in the active raw source folders document the source
 publications, repositories, and selected methodological notes used to obtain the
 data. The consolidated summary is maintained in `docs/source_provenance.md`.
 These README-derived notes are part of the project context, but they do not
-expand the active data scope beyond the final intra-source CSV files.
+expand the active data scope beyond the final strict-DNA intra-source CSV files.
 
 ## Excluded Data
 
 Other files or folders that may exist under `data/` are not part of the current
 intra-source dataset scope. This includes exploratory archives, unrelated raw
-sources, previous prediction outputs, and datasets not represented in
-`data/processed/assembled_datasets/intra/`.
+sources, previous prediction outputs, and datasets not represented in the strict-DNA model-ready copies under
+`data/processed/assembled_datasets/intra_strict_dna/`.
 
 Excluded examples include:
 

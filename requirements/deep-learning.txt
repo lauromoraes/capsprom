@@ -1,0 +1,7 @@
+# Optional deep-learning dependencies.
+# Install only when starting neural model experiments; verify Python and CUDA compatibility first.
+
+torch>=2.6
+transformers>=4.48
+datasets>=3.2
+accelerate>=1.2

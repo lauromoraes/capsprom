@@ -1,6 +1,6 @@
 # Processed Dataset Validation Summary
 
-Scope: `data/processed/assembled_datasets/intra/*.csv`.
+Audit scope: `data/processed/assembled_datasets/intra/*.csv`. Current model-ready validation scope: `data/processed/assembled_datasets/intra_strict_dna/*.csv`.
 
 Active scope: only final intra-source datasets represented in this directory are considered.
 

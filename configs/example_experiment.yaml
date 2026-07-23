@@ -44,6 +44,38 @@ features:
         - Bendability (consensus)
         - Trinucleotide GC Content
         - Nucleosome positioning
+    - name: gc_content_skew
+      encoding: gc_content_skew
+      include_global: true
+      window_size: 27
+      step: 27
+      include_skew: true
+      include_at_skew: false
+    - name: psednc_physicochemical
+      encoding: pseknc
+      k: 2
+      reference_tsv: data/raw/references/normalized-dinuc.tsv
+      properties:
+        - Base stacking
+        - B-DNA twist
+        - Dinucleotide GC Content
+      lambda_value: 3
+      weight: 0.05
+    - name: psetnc_physicochemical
+      encoding: pseknc
+      k: 3
+      reference_tsv: data/raw/references/normalized-trinuc.tsv
+      properties:
+        - Bendability (DNAse)
+        - Trinucleotide GC Content
+      lambda_value: 3
+      weight: 0.05
+    - name: dna_bert_6_embedding
+      encoding: dna_bert
+      model_name: zhihan1996/DNA_bert_6
+      k: 6
+      pooling: mean
+      max_length: 128
 
 model:
   family: baseline
@@ -67,6 +99,12 @@ deep_model_input_example:
       branch_type: capsule_or_convolutional
     - feature_block: trinucleotide_physicochemical
       branch_type: capsule_or_convolutional
+    - feature_block: gc_content_skew
+      branch_type: dense
+    - feature_block: psednc_physicochemical
+      branch_type: dense
+    - feature_block: dna_bert_6_embedding
+      branch_type: dense_or_attention
   fusion: concatenate
 
 evaluation:

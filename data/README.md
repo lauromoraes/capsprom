@@ -2,7 +2,7 @@
 
 ## Active Intra-Source Scope
 
-Only the data used to create `data/processed/assembled_datasets/intra/` is currently in scope for generated project information, validation summaries, and thesis text. The active source prefixes are `bhandari`, `cdbprom`, `cnnprom`, and `graphpro`. Other folders may remain present for provenance or future work, but they are out of scope until explicitly added to a processed dataset specification.
+Only the strict-DNA cleaned intra-source datasets in `data/processed/assembled_datasets/intra_strict_dna/` are active for current and future EDA, feature engineering, model training, evaluation, validation summaries, and thesis text. The original processed files in `data/processed/assembled_datasets/intra/` are preserved for provenance and preprocessing audit. The active source prefixes are `bhandari`, `cdbprom`, `cnnprom`, and `graphpro`. Other folders may remain present for provenance or future work, but they are out of scope until explicitly added to a processed dataset specification.
 
 This directory contains research datasets and intermediate data artifacts for
 CapsProm. Large data files are intentionally ignored by Git; only lightweight
@@ -21,7 +21,7 @@ data/
 
 ## Processed Dataset Contract
 
-The current processed CSV files under `data/processed/assembled_datasets/` match
+The current model-ready CSV files under `data/processed/assembled_datasets/intra_strict_dna/` match
 the project contract used by the MVP pipeline:
 
 - Column `sequence`: DNA sequence.
@@ -34,7 +34,7 @@ the project contract used by the MVP pipeline:
 Example:
 
 ```text
-data/processed/assembled_datasets/intra/bhandari-eukaryotic-Human_promoter-p-196851-n-196851-train.csv
+data/processed/assembled_datasets/intra_strict_dna/bhandari-eukaryotic-Human_promoter-p-196756-n-196757-train.csv
 ```
 
 ## Git Policy

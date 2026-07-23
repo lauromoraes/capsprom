@@ -1,0 +1,12 @@
+# CPU-oriented dependencies for DNA-BERT feature extraction.
+# PyTorch is installed from the official CPU wheel index to avoid CUDA wheels.
+
+--index-url https://download.pytorch.org/whl/cpu
+--extra-index-url https://pypi.org/simple
+
+torch==2.13.0+cpu
+transformers>=4.48
+accelerate>=1.2
+huggingface-hub>=0.27
+tokenizers>=0.21
+safetensors>=0.4

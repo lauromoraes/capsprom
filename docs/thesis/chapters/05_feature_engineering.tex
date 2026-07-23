@@ -2,27 +2,355 @@
 
 \section{Overview}\label{sec:features-overview}
 
-DNA sequences must be transformed into numerical inputs before model training.
-This thesis evaluates complementary feature families so that classical models, deep neural networks, and multi-input architectures can be compared under the same experimental protocol.
+DNA sequences must be transformed into numerical inputs before model training. This thesis evaluates complementary feature families so that classical models, deep neural networks, and multi-input architectures can be compared under the same experimental protocol. Let $\Sigma=\{A,C,G,T\}$ denote the strict DNA alphabet, let $L=81$ be the standardized sequence length, and let $x_i=(x_{i1},\ldots,x_{iL})\in\Sigma^{L}$ denote one sequence from a labeled dataset $\mathcal{D}=\{(x_i,y_i)\}_{i=1}^{n}$, where $y_i\in\{0,1\}$. A feature mapping $\phi_j$ transforms $x_i$ into a numerical vector or tensor $z_{ij}=\phi_j(x_i)$, and a combined representation can be written as $\Phi(x_i)=\left(\phi_1(x_i),\ldots,\phi_J(x_i)\right)$ when multiple feature blocks are used. The notation for mappings, tensors, learned representations, and model inputs follows standard deep-learning conventions whenever applicable~\citep{goodfellow2016deep}.
 
-\section{One-Hot and Nucleotide Index Encodings}\label{sec:features-onehot}
+The feature families considered here represent different assumptions about promoter sequence information. One-hot encodings preserve nucleotide identity and order; k-mer frequencies summarize local compositional patterns; GC content and skew describe coarse nucleotide asymmetry; physicochemical mappings introduce experimentally motivated oligonucleotide properties; pseudo nucleotide composition augments composition with sequence-order correlations; and DNA-BERT embeddings use contextual representations learned from genomic sequences.
 
-One-hot and index-based encodings preserve the original nucleotide order and are
-especially useful for neural architectures that learn local or hierarchical
-sequence patterns.
+The organization of these feature mappings can be understood in three conceptual groups. The first group contains explicit sequence representations, including one-hot matrices, k-mer frequencies, and GC/skew descriptors. These representations are obtained directly from the nucleotide string, without relying on external pretrained models or additional physicochemical tables. They preserve, to different degrees, basic information about nucleotide identity, composition, and strand asymmetry. The second group contains biologically informed representations, including dinucleotide and trinucleotide physicochemical encodings and PseKNC-derived descriptors. These mappings transform the DNA sequence with the support of predefined values associated with structural or physicochemical properties of oligonucleotides, thereby adding prior biological knowledge to the representation. The third group contains learned representations, represented here by DNA-BERT embeddings. These vectors are obtained from pretrained transformer models for DNA language modeling and can capture contextual regularities learned from large genomic corpora, although their direct interpretation is less transparent~\citep{goodfellow2016deep,umarov2017recognition,moraes2022capsprom,leslie2002spectrum,lobry1996asymmetric,moraes2023physicochemical,chen2014pseknc,chen2015psekncgeneral,ji2021dnabert}.
+
+Table~\ref{tab:feature-family-conceptual-summary} summarizes the feature families according to four descriptive columns. The \emph{Feature family} column identifies the representation used in the experimental protocol. The \emph{Conceptual category} column states whether the representation is explicit, biologically informed, or learned. The \emph{Positional information} column indicates whether the representation preserves nucleotide order exactly, only partially, or indirectly through a learned embedding. The \emph{Information represented} column describes the main biological or computational signal encoded by each family.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Conceptual organization of DNA feature families considered in this thesis. The table distinguishes representations derived directly from the nucleotide string, representations supported by external biological or physicochemical knowledge, and contextual representations learned by pretrained models.}
+\label{tab:feature-family-conceptual-summary}
+\begin{tabular}{p{0.22\textwidth}p{0.24\textwidth}p{0.15\textwidth}p{0.30\textwidth}}
+\toprule
+Feature family & Conceptual category & Positional information & Information represented \\
+\midrule
+One-hot & Explicit sequence representation & Yes & Identity of each nucleotide or k-mer token at each sequence position \\
+K-mer frequency & Explicit lexical composition & Not directly & Frequency of nucleotide words of length $k$ \\
+GC content / GC skew / AT skew & Explicit composition and asymmetry & Partial, when windowed & Compositional bias and strand asymmetry \\
+Physicochemical dinucleotide/trinucleotide profiles & Biologically informed local profile & Yes & Structural or physicochemical properties assigned to adjacent oligonucleotides \\
+PseDNC / PseTNC / PseKNC & Biologically informed composition with order terms & Partial & K-mer frequency combined with physicochemical sequence-order correlations \\
+DNA-BERT embeddings & Learned contextual representation & Indirectly & Latent genomic patterns encoded by a pretrained transformer model \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:feature-family-methodological-criteria} complements the conceptual summary by comparing the same feature families according to methodological criteria. The \emph{Interpretability} row describes how directly a feature value can be related to an observable nucleotide, composition, or biological property. The \emph{Computational cost} row gives a qualitative expectation for feature extraction and model input preparation. The \emph{External reference} row indicates whether the representation requires a physicochemical table or pretrained model beyond the input DNA sequence. The \emph{Fine positional order} row records whether the representation preserves base-level order. Finally, the \emph{Controlled ablation potential} row summarizes how naturally the representation supports experiments that remove, isolate, compare, or group meaningful components under a controlled protocol.
+
+In this context, controlled ablation potential refers to the methodological ability to ask whether a representation, parameter choice, or interpretable subset contributes to model performance. A high value means that the feature family can be decomposed into meaningful alternatives, such as different values of $k$, selected k-mer groups, GC/skew windows, individual physicochemical properties, or PseKNC parameter settings. A medium value indicates that ablation is still possible, but less directly tied to biologically named components; for instance, one-hot encodings can be removed or compared across $k$, but ablating individual positions or tokens creates many fine-grained variants, and DNA-BERT embeddings are dense learned vectors whose dimensions are not directly interpretable biological variables.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\caption{Methodological comparison of the feature families. Values are qualitative descriptors intended to guide experimental interpretation rather than fixed performance expectations.}
+\label{tab:feature-family-methodological-criteria}
+\begin{tabular}{p{0.21\textwidth}p{0.105\textwidth}p{0.095\textwidth}p{0.10\textwidth}p{0.13\textwidth}p{0.105\textwidth}p{0.13\textwidth}}
+\toprule
+Criterion & One-hot & K-mer & GC/skew & Physicochem. & PseKNC & DNA-BERT \\
+\midrule
+Interpretability & High & High & High & Medium/high & Medium & Low/medium \\
+Computational cost & Low & Low & Very low & Medium & Medium & High \\
+External reference & No & No & No & Yes & Yes & Pretrained \\
+Fine positional order & Yes & No & No & Yes & Partial & Implicit \\
+Controlled ablation potential & Medium & High & High & High & High & Medium \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Together, Tables~\ref{tab:feature-family-conceptual-summary} and~\ref{tab:feature-family-methodological-criteria} establish the rationale for evaluating multiple representations under the same experimental protocol. The comparison is not intended to rank the feature families a priori. Instead, it clarifies which assumptions each representation introduces before model training and which dimensions should be considered when interpreting downstream results.
+
+The qualitative computational-cost labels in Table~\ref{tab:feature-family-methodological-criteria} must be interpreted under controlled values of $k$. For a fixed 81 bp sequence, let $L_k=L-k+1$ denote the number of overlapping k-mers in $x_i$. K-mer frequency vectors have $4^k$ components, one-hot k-mer matrices have $L_k\times4^k$ components, and PseKNC-style vectors include $4^k$ composition terms plus $\lambda$ sequence-order terms. This exponential growth can increase memory use, training time, and overfitting risk, especially when multiple feature blocks are concatenated. To keep experiments comparable and biologically interpretable, this thesis adopts explicit methodological restrictions: one-hot encoding uses $k=1$ as the primary ordered representation and may use $k=2$ only in controlled ablation experiments; k-mer frequency experiments are restricted to small values of $k$ selected a priori; physicochemical encodings are restricted to the available dinucleotide and trinucleotide reference tables; PseKNC is restricted to PseDNC ($k=2$) and PseTNC ($k=3$); and DNA-BERT uses the six-mer tokenization required by the pretrained model evaluated in this work. These restrictions prevent dimensionality from becoming an uncontrolled confounder in model comparison.
+
+\section{One-Hot Encodings}\label{sec:features-onehot}
+
+One-hot encodings preserve the original nucleotide order and are especially useful for neural architectures that learn local or hierarchical sequence patterns. For the strict alphabet $\Sigma$, the basic one-hot mapping represents each nucleotide position as a four-dimensional indicator vector. Thus, an 81 bp sequence with $k=1$ becomes a matrix in $\{0,1\}^{L\times4}$. The same formulation can be generalized to k-mer tokens. Let $\mathcal{K}_k=\Sigma^k$ be the ordered vocabulary of all possible k-mers and let $u_{it}^{(k)}=(x_{it},\ldots,x_{i,t+k-1})$ denote the $t$-th overlapping k-mer of $x_i$, for $t=1,\ldots,L_k$. The one-hot k-mer representation is
+\begin{equation}
+O_{i,t,a}^{(k)}=
+\begin{cases}
+1, & \text{if } u_{it}^{(k)}=a,\\
+0, & \text{otherwise,}
+\end{cases}
+\quad a\in\mathcal{K}_k,
+\end{equation}
+which produces $O_i^{(k)}\in\{0,1\}^{L_k\times4^k}$. This representation does not impose explicit biochemical assumptions, but it allows convolutional and capsule-based models to learn motif-like filters directly from ordered nucleotide or k-mer input, as used in promoter prediction models such as CNNProm and CapsProm~\citep{umarov2017recognition,moraes2022capsprom}.
+
+This encoding is therefore classified as an explicit sequence representation with full positional resolution. Each input value can be interpreted directly as the presence or absence of a nucleotide or k-mer token at a defined position, which explains its high interpretability. Its computational cost is low for $k=1$ and remains manageable for small k-mer tokens, but it grows exponentially with $k$ because the vocabulary size is $4^k$. Because it requires no external reference table or pretrained model, one-hot encoding also provides a useful baseline for evaluating whether more elaborate biologically informed or learned representations add predictive information beyond the primary sequence itself.
 
 \section{K-mer Frequency Features}\label{sec:features-kmer}
 
-K-mer frequency features summarize nucleotide composition patterns. They provide
-compact fixed-length vectors for classical machine learning models and can also
-serve as auxiliary inputs for deep architectures.
+K-mer frequency features summarize nucleotide composition patterns. For a fixed $k$, the feature vector contains the normalized counts of all words in $\mathcal{K}_k$. For each $a\in\mathcal{K}_k$, the frequency component is defined as
+\begin{equation}
+F_{i,a}^{(k)}=\frac{1}{L_k}\sum_{t=1}^{L_k}\mathbf{1}\left(u_{it}^{(k)}=a\right),
+\end{equation}
+where $\mathbf{1}(\cdot)$ is the indicator function. This produces a compact fixed-length representation $F_i^{(k)}\in[0,1]^{4^k}$, independent of the exact sequence length after normalization by the number of observed k-mers. Such spectrum-style representations are related to string-kernel methods for biological sequence classification, where sequences are compared through their shared subsequence or k-mer composition~\citep{leslie2002spectrum}. In this thesis, k-mer frequencies provide simple and interpretable baselines for classical machine learning models and can also serve as auxiliary inputs for multi-branch neural architectures.
+
+This representation is explicit because every coordinate corresponds to a concrete nucleotide word. However, after aggregation into counts or frequencies, the exact positions of those words are not retained. This loss of fine positional order is the main distinction between k-mer frequency vectors and one-hot matrices in Table~\ref{tab:feature-family-conceptual-summary}. At the same time, the direct mapping between coordinates and k-mers makes the representation highly interpretable, computationally inexpensive, and suitable for controlled ablation studies over different values of $k$ or over selected k-mer groups.
+
+Figure~\ref{fig:onehot-kmer-feature-diagram} illustrates the shared tokenization step behind one-hot k-mer encodings and k-mer frequency vectors. The diagram is a schematic representation of the ordered nucleotide inputs used by neural promoter models such as CNNProm and CapsProm, together with the spectrum-style aggregation used by k-mer methods~\citep{umarov2017recognition,moraes2022capsprom,leslie2002spectrum}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.76, transform shape,
+    nuc/.style={rectangle, draw=black, minimum width=0.52cm, minimum height=0.46cm, align=center, font=\scriptsize},
+    kmer/.style={rectangle, rounded corners, draw=black, fill=blue!8, minimum width=1.22cm, minimum height=0.48cm, align=center, font=\scriptsize},
+    matrixcell/.style={rectangle, draw=black, minimum width=0.36cm, minimum height=0.34cm, align=center, font=\tiny},
+    outbox/.style={rectangle, rounded corners, draw=black, fill=gray!8, align=center, minimum width=2.9cm, minimum height=0.72cm, font=\scriptsize},
+    arrow/.style={-{Latex[length=2.2mm]}, thick}
+]
+\node[nuc, fill=green!22] (n1) at (0,0) {A};
+\node[nuc, fill=cyan!20, right=0cm of n1] (n2) {C};
+\node[nuc, fill=orange!25, right=0cm of n2] (n3) {G};
+\node[nuc, fill=red!18, right=0cm of n3] (n4) {T};
+\node[nuc, fill=green!22, right=0cm of n4] (n5) {A};
+\node[nuc, fill=cyan!20, right=0cm of n5] (n6) {C};
+\node[font=\scriptsize, above=0.12cm of n3] {standardized sequence segment $x_i$};
+
+\node[kmer] (k1) at (0.25,-1.05) {ACG};
+\node[kmer, right=0.18cm of k1] (k2) {CGT};
+\node[kmer, right=0.18cm of k2] (k3) {GTA};
+\node[kmer, right=0.18cm of k3] (k4) {TAC};
+\node[font=\scriptsize, left=0.25cm of k1] {$u_{it}^{(k)}$};
+\draw[arrow] (n3.south) -- (k2.north);
+
+\node[outbox] (onehotlabel) at (-1.15,-2.1) {ordered one-hot\\matrix $O_i^{(k)}$};
+\foreach \r/\tok in {0/ACG,1/CGT,2/GTA}{
+  \node[font=\tiny] at (1.0,-2.0-0.34*\r) {\tok};
+}
+\foreach \c/\lab in {0/ACG,1/CGT,2/GTA,3/TAC}{
+  \node[font=\tiny] at (1.62+0.36*\c,-1.73) {\lab};
+}
+\foreach \r in {0,1,2}{
+  \foreach \c in {0,1,2,3}{
+    \node[matrixcell] at (1.62+0.36*\c,-2.0-0.34*\r) {0};
+  }
+}
+\node[matrixcell, fill=blue!20] at (1.62,-2.0) {1};
+\node[matrixcell, fill=blue!20] at (1.98,-2.34) {1};
+\node[matrixcell, fill=blue!20] at (2.34,-2.68) {1};
+
+\node[outbox] (freqlabel) at (4.35,-2.1) {aggregated k-mer\\frequency vector $F_i^{(k)}$};
+\foreach \c/\lab/\val in {0/ACG/.25,1/CGT/.25,2/GTA/.25,3/TAC/.25}{
+  \node[matrixcell, fill=green!12] at (3.66+0.52*\c,-2.86) {\val};
+  \node[font=\tiny] at (3.66+0.52*\c,-3.22) {\lab};
+}
+\draw[arrow] (k2.south) -- (onehotlabel.north);
+\draw[arrow] (k3.south) -- (freqlabel.north);
+\end{tikzpicture}
+\caption{Illustrative transformation from a DNA sequence to one-hot k-mer and k-mer frequency features. The standardized sequence is decomposed into overlapping k-mers, shown here as colored word tokens. The ordered path keeps each token position as a binary matrix $O_i^{(k)}$, whereas the compositional path aggregates the same tokens into a normalized frequency vector $F_i^{(k)}$. The schematic is inspired by visual explanations of one-hot word encodings and spectrum-style k-mer representations.}
+\label{fig:onehot-kmer-feature-diagram}
+\end{figure}
+
+\section{GC Content and Nucleotide Skew}\label{sec:features-gc-skew}
+
+GC content records the proportion of guanine and cytosine bases in a sequence or local window. Let $N_b(x_i)$ be the number of occurrences of base $b$ in $x_i$. The global descriptors used in this family include
+\begin{align}
+\mathrm{GC}(x_i) &= \frac{N_G(x_i)+N_C(x_i)}{L}, \\
+\mathrm{GCskew}(x_i) &= \frac{N_G(x_i)-N_C(x_i)}{N_G(x_i)+N_C(x_i)}, \\
+\mathrm{ATskew}(x_i) &= \frac{N_A(x_i)-N_T(x_i)}{N_A(x_i)+N_T(x_i)}.
+\end{align}
+The same definitions can be applied to local windows $x_{i,r:r+h-1}$ of width $h$, producing a coarse positional profile. These descriptors are simple, low-dimensional summaries, but they capture compositional biases that have long been used to study bacterial genomic organization and strand asymmetry~\citep{lobry1996asymmetric}. In the promoter prediction setting, these features are treated as auxiliary descriptors rather than complete representations: they may help quantify coarse composition differences between promoter and non-promoter windows while remaining easy to interpret.
+
+The classification of these descriptors as explicit composition and asymmetry features follows from the fact that they are calculated directly from nucleotide counts. They do not require external biological tables and have very low computational cost. Their positional information is limited: global values discard order entirely, whereas windowed values preserve only coarse regional structure. For this reason, Table~\ref{tab:feature-family-conceptual-summary} marks their positional information as partial when windowed, and Table~\ref{tab:feature-family-methodological-criteria} treats them as strong candidates for controlled and interpretable ablation.
 
 \section{Physicochemical Encodings}\label{sec:features-physicochemical}
 
-Dinucleotide and trinucleotide physicochemical properties are represented as lookup functions over adjacent nucleotide tuples. The feature mapping must allow selecting subsets of properties so that experiments can compare individual properties, grouped properties, and full property sets.
+Dinucleotide and trinucleotide physicochemical properties are represented as lookup functions over adjacent nucleotide tuples. Let $\rho^{(k)}:\mathcal{K}_k\rightarrow\mathbb{R}^{m}$ be a normalized reference table mapping each k-mer to $m$ selected physicochemical values. Applying $\rho^{(k)}$ along a sequence yields the position-by-property matrix
+\begin{equation}
+P_{i,t,r}^{(k)}=\rho_r^{(k)}\left(u_{it}^{(k)}\right),
+\quad t=1,\ldots,L_k,\quad r=1,\ldots,m,
+\end{equation}
+so that $P_i^{(k)}\in\mathbb{R}^{L_k\times m}$. This family is motivated by prior promoter classification work showing that dinucleotide and trinucleotide physicochemical properties can be used as real-valued sequence descriptors~\citep{moraes2023physicochemical}. The feature mapping must allow selecting subsets of properties so that experiments can compare individual properties, grouped properties, and full property sets.
+
+Figure~\ref{fig:physicochemical-lookup-diagram} shows how the physicochemical representation converts each adjacent nucleotide tuple into a row of property values. The diagram follows the lookup-table view used in promoter studies based on dinucleotide and trinucleotide physicochemical descriptors~\citep{moraes2023physicochemical}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.76, transform shape,
+    nuc/.style={rectangle, draw=black, minimum width=0.48cm, minimum height=0.42cm, align=center, font=\scriptsize},
+    token/.style={rectangle, rounded corners, draw=black, fill=blue!8, minimum width=0.92cm, minimum height=0.44cm, align=center, font=\scriptsize},
+    cell/.style={rectangle, draw=black, minimum width=0.58cm, minimum height=0.34cm, align=center, font=\tiny},
+    labelbox/.style={rectangle, rounded corners, draw=black, fill=gray!8, align=center, minimum width=2.6cm, minimum height=0.62cm, font=\scriptsize},
+    arrow/.style={-{Latex[length=2.2mm]}, thick}
+]
+\node[nuc, fill=green!22] (a) at (0,0) {A};
+\node[nuc, fill=cyan!20, right=0cm of a] (c) {C};
+\node[nuc, fill=orange!25, right=0cm of c] (g) {G};
+\node[nuc, fill=red!18, right=0cm of g] (t) {T};
+\node[nuc, fill=green!22, right=0cm of t] (a2) {A};
+\node[font=\scriptsize, above=0.12cm of g] {$x_i$};
+\node[token] (u1) at (0.28,-0.95) {AC};
+\node[token, right=0.12cm of u1] (u2) {CG};
+\node[token, right=0.12cm of u2] (u3) {GT};
+\node[token, right=0.12cm of u3] (u4) {TA};
+\draw[arrow] (g.south) -- (u2.north);
+
+\node[labelbox] (ref) at (4.2,-0.45) {normalized reference\\$\rho^{(k)}$};
+\foreach \r/\name in {0/prop. 1,1/prop. 2,2/prop. $m$}{
+  \node[font=\tiny, anchor=east] at (3.15,-1.05-0.34*\r) {\name};
+}
+\foreach \c/\tok in {0/AC,1/CG,2/GT,3/TA}{
+  \node[font=\tiny] at (3.55+0.58*\c,-0.75) {\tok};
+}
+\foreach \r in {0,1,2}{
+  \foreach \c in {0,1,2,3}{
+    \node[cell, fill=yellow!8] at (3.55+0.58*\c,-1.05-0.34*\r) {$v$};
+  }
+}
+
+\node[labelbox] (out) at (7.25,-0.45) {position-by-property\\profile $P_i^{(k)}$};
+\foreach \r/\tok in {0/AC,1/CG,2/GT,3/TA}{
+  \node[font=\tiny, anchor=east] at (6.3,-1.0-0.34*\r) {\tok};
+}
+\foreach \c/\p in {0/$p_1$,1/$p_2$,2/$p_m$}{
+  \node[font=\tiny] at (6.68+0.58*\c,-0.70) {\p};
+}
+\foreach \r in {0,1,2,3}{
+  \foreach \c in {0,1,2}{
+    \node[cell, fill=green!10] at (6.68+0.58*\c,-1.0-0.34*\r) {$v$};
+  }
+}
+\draw[arrow] (u4.east) -- (ref.west);
+\draw[arrow] (ref.east) -- (out.west);
+\end{tikzpicture}
+\caption{Illustrative physicochemical lookup for dinucleotide or trinucleotide profiles. Overlapping k-mers from $x_i$ are used as keys into the normalized property table $\rho^{(k)}$. The selected property values are then arranged by sequence position, producing the matrix $P_i^{(k)}$ consumed by downstream models.}
+\label{fig:physicochemical-lookup-diagram}
+\end{figure}
+
+These encodings are categorized as biologically informed local profiles because their values are not derived only from nucleotide identity, but from an external physicochemical reference associated with each dinucleotide or trinucleotide. Unlike k-mer frequency vectors, they preserve the order of adjacent oligonucleotides along the sequence and therefore retain fine positional structure. Their interpretability is medium to high: individual values correspond to named properties, although the biological meaning of each property may require domain knowledge. This also explains their high controlled ablation potential, since experiments can compare single properties, curated property groups, or complete reference tables.
+
+\section{Pseudo Nucleotide Composition Features}\label{sec:features-pseknc}
+
+Pseudo k-tuple nucleotide composition (PseKNC) extends ordinary k-mer composition by incorporating sequence-order information derived from structural or physicochemical properties of oligonucleotides~\citep{chen2014pseknc,chen2015psekncgeneral}. Using the same k-mer vocabulary $\mathcal{K}_k$ and property mapping $\rho^{(k)}$, the representation used in this thesis combines normalized k-mer frequencies with $\lambda$ sequence-order factors. For each lag $d\in\{1,\ldots,\lambda\}$, the sequence-order correlation term is defined as
+\begin{equation}
+\theta_{i,d}^{(k)}=
+\frac{1}{L_k-d}\sum_{t=1}^{L_k-d}
+\frac{1}{m}\sum_{r=1}^{m}
+\left[
+\rho_r^{(k)}\left(u_{it}^{(k)}\right)-
+\rho_r^{(k)}\left(u_{i,t+d}^{(k)}\right)
+\right]^2.
+\end{equation}
+The PseKNC vector is then written as
+\begin{equation}
+Q_i^{(k,\lambda,w)}=
+\left(
+\frac{F_i^{(k)}}{1+w\sum_{d=1}^{\lambda}\theta_{i,d}^{(k)}},
+\frac{w\theta_{i,1}^{(k)}}{1+w\sum_{d=1}^{\lambda}\theta_{i,d}^{(k)}},
+\ldots,
+\frac{w\theta_{i,\lambda}^{(k)}}{1+w\sum_{d=1}^{\lambda}\theta_{i,d}^{(k)}}
+\right),
+\end{equation}
+where $w$ controls the contribution of sequence-order information relative to k-mer composition. This notation follows the structure of pseudo nucleotide composition methods while keeping the feature definition tied to the selected property subset and reference table.
+
+Figure~\ref{fig:pseknc-feature-diagram} summarizes the two-branch structure of PseKNC: one branch estimates k-mer composition, while the other computes physicochemical sequence-order correlations. This schematic follows the methodological organization of pseudo k-tuple nucleotide composition and its PseDNC/PseTNC variants~\citep{chen2014pseknc,chen2015psekncgeneral,chen2014isspsednc,chen2014itispsetnc}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.76, transform shape,
+    token/.style={rectangle, rounded corners, draw=black, fill=blue!8, minimum width=0.95cm, minimum height=0.42cm, align=center, font=\scriptsize},
+    process/.style={rectangle, rounded corners, draw=black, fill=gray!8, align=center, minimum width=2.55cm, minimum height=0.70cm, font=\scriptsize},
+    component/.style={rectangle, draw=black, fill=green!10, align=center, minimum width=2.55cm, minimum height=0.58cm, font=\scriptsize},
+    outputbox/.style={rectangle, draw=black, fill=yellow!12, align=center, minimum width=3.1cm, minimum height=0.70cm, font=\scriptsize},
+    arrow/.style={-{Latex[length=2.2mm]}, thick}
+]
+\foreach \i/\tok in {0/AC,1/CG,2/GT,3/TA,4/AC}{
+  \node[token] (u\i) at (0.85*\i,0) {\tok};
+}
+\node[font=\scriptsize, above=0.15cm of u2] {overlapping k-mer sequence};
+\node[process] (freq) at (-0.2,-1.25) {composition calculation\\normalized $F_i^{(k)}$};
+\node[process] (prop) at (3.6,-1.25) {property lookup\\$\rho^{(k)}(u_{it}^{(k)})$};
+\node[process] (corr) at (3.6,-2.35) {lagged correlations\\$\theta_{i,d}^{(k)}$, $d=1,\ldots,\lambda$};
+\node[component] (comp) at (-0.2,-3.35) {composition terms};
+\node[component] (order) at (3.6,-3.35) {sequence-order terms};
+\node[outputbox] (q) at (1.7,-4.45) {weighted PseKNC vector\\$Q_i^{(k,\lambda,w)}$};
+\draw[arrow] (u1.south) -- (freq.north);
+\draw[arrow] (u3.south) -- (prop.north);
+\draw[arrow] (prop) -- (corr);
+\draw[arrow] (freq) -- (comp);
+\draw[arrow] (corr) -- (order);
+\draw[arrow] (comp) -- (q);
+\draw[arrow] (order) -- (q);
+\node[font=\tiny, align=center] at (6.3,-2.85) {$w$ scales the contribution\\of order correlations};
+\draw[arrow] (6.0,-3.05) -- (order.east);
+\end{tikzpicture}
+\caption{Illustrative construction of PseKNC features. The k-mer stream contributes ordinary composition terms and, through physicochemical lookup, lagged sequence-order correlations. The final vector $Q_i^{(k,\lambda,w)}$ combines both components, with $\lambda$ defining the number of lags and $w$ controlling the contribution of the correlation terms.}
+\label{fig:pseknc-feature-diagram}
+\end{figure}
+
+The same formulation supports pseudo dinucleotide composition (PseDNC) when $k=2$ and pseudo trinucleotide composition (PseTNC) when $k=3$. PseDNC and PseTNC have been used in prior sequence classification tasks, including splice-site and translation-initiation-site prediction~\citep{chen2014isspsednc,chen2014itispsetnc}. In the present work, these encodings are treated as configurable feature blocks: the experiment definition specifies $k$, the physicochemical reference table, the selected property subset, $\lambda$, and $w$. This keeps the method reproducible and allows controlled ablation studies comparing ordinary composition, selected physicochemical properties, and pseudo-composition terms.
+
+PseKNC is therefore positioned between simple k-mer composition and fully local physicochemical profiles. Its compositional terms remain interpretable as k-mer frequencies, while the sequence-order terms summarize physicochemical relationships across lags rather than preserving every position explicitly. This is why Tables~\ref{tab:feature-family-conceptual-summary} and~\ref{tab:feature-family-methodological-criteria} describe the method as biologically informed, partially positional, and moderately interpretable. The dependence on a reference table, property subset, $\lambda$, and $w$ also makes these parameters part of the biological definition of the representation, not merely implementation details.
+
+\section{DNA-BERT Embeddings}\label{sec:features-dnabert}
+
+DNA-BERT represents genomic sequences using transformer models trained with k-mer tokenization and self-supervised language-modeling objectives. This use of dense learned representations follows the broader deep-learning view in which intermediate vector spaces are learned from data and then reused for prediction tasks~\citep{goodfellow2016deep}. The model family adapts Bidirectional Encoder Representations from Transformers to DNA sequences by treating overlapping k-mers as tokens and learning contextual embeddings from genomic corpora~\citep{ji2021dnabert}. For the pretrained model considered here, the tokenization function $\tau_6$ maps $x_i$ to the ordered six-mer sequence $\tau_6(x_i)=(u_{i1}^{(6)},\ldots,u_{i,L_6}^{(6)})$. If $g_{\mathrm{BERT}}$ denotes the pretrained transformer, the encoder role can be described as
+\begin{equation}
+B_i=\operatorname{pool}\left(g_{\mathrm{BERT}}\left(\tau_6(x_i)\right)\right)\in\mathbb{R}^{d_B},
+\end{equation}
+where $\operatorname{pool}(\cdot)$ may denote mean pooling or another explicitly configured sequence-level pooling rule. In this thesis, DNA-BERT has two distinct methodological roles. First, the pretrained model may be used as a feature encoder that maps each promoter-window sequence to a dense embedding. Second, in the model-comparison stage, DNA-BERT may be fine-tuned directly with a promoter classification head. These roles are kept separate so that representation extraction and end-to-end classifier training can be evaluated independently.
+
+DNA-BERT is classified as a learned contextual representation because its feature values are not manually defined from nucleotide counts or physicochemical tables. Positional information is represented implicitly through token order and transformer attention, but the resulting embedding dimensions do not correspond to directly named biological quantities. This motivates the lower direct interpretability and higher computational cost assigned in Table~\ref{tab:feature-family-methodological-criteria}. Its value in the experimental protocol is complementary: it tests whether pretrained genomic context provides information beyond explicit and biologically informed encodings.
+
+Figure~\ref{fig:dnabert-embedding-diagram} presents only the learned-representation path used when DNA-BERT acts as a feature encoder. The schematic follows the general representation-learning view of deep learning and the DNABERT tokenization strategy based on overlapping six-mers~\citep{goodfellow2016deep,ji2021dnabert}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.82, transform shape,
+    node distance=0.62cm,
+    box/.style={rectangle, rounded corners, draw=black, align=center, minimum width=0.54\textwidth, minimum height=0.76cm, font=\scriptsize},
+    outputbox/.style={rectangle, draw=black, align=center, minimum width=0.54\textwidth, minimum height=0.76cm, font=\scriptsize},
+    arrow/.style={-{Latex[length=2.2mm]}, thick}
+]
+\node[box] (seq) {$x_i\in\Sigma^L$};
+\node[box, below=of seq] (tok) {Overlapping six-mer tokenization\\$\tau_6(x_i)=(u_{i1}^{(6)},\ldots,u_{i,L_6}^{(6)})$};
+\node[box, below=of tok] (bert) {Pretrained transformer encoder\\$g_{\mathrm{BERT}}(\tau_6(x_i))$};
+\node[outputbox, below=of bert] (pool) {Sequence-level embedding\\$B_i=\operatorname{pool}(g_{\mathrm{BERT}}(\tau_6(x_i)))\in\mathbb{R}^{d_B}$};
+\draw[arrow] (seq) -- (tok);
+\draw[arrow] (tok) -- (bert);
+\draw[arrow] (bert) -- (pool);
+\end{tikzpicture}
+\caption{DNA-BERT feature-encoding path. The standardized DNA sequence is converted into overlapping six-mer tokens, processed by a pretrained transformer, and reduced by a pooling operation to a dense sequence-level embedding. The figure isolates DNA-BERT as a learned feature representation, without assigning feature fusion to this specific method.}
+\label{fig:dnabert-embedding-diagram}
+\end{figure}
 
 \section{Feature Combination Strategies}\label{sec:features-combination}
 
-Feature sets may be combined as a flat vector for classical classifiers or as
-separate inputs for multi-head neural architectures. This design supports direct
-comparison between single-representation and combined-representation models.
+Feature sets may be combined as a flat vector for classical classifiers or as separate inputs for multi-head neural architectures. This design supports direct comparison between single-representation and combined-representation models, while keeping the distinction between representation functions, model inputs, and learned parameters consistent with deep-learning notation~\citep{goodfellow2016deep}. For classical models, each feature block is flattened by an operator $\operatorname{vec}(\cdot)$ and concatenated as
+\begin{equation}
+\Phi_{\mathrm{flat}}(x_i)=
+\operatorname{concat}\left(
+\operatorname{vec}(\phi_1(x_i)),\ldots,\operatorname{vec}(\phi_J(x_i))
+\right).
+\end{equation}
+For neural models, feature blocks may remain as named inputs,
+\begin{equation}
+\Phi_{\mathrm{head}}(x_i)=\{\phi_1(x_i),\ldots,\phi_J(x_i)\},
+\end{equation}
+so that each branch can process a representation according to its structure before fusion. This is particularly important when combining ordered matrices, physicochemical profiles, compact composition descriptors, pseudo-composition vectors, and pretrained embeddings in the same experimental framework.
+
+Figure~\ref{fig:multihead-feature-fusion-diagram} summarizes multi-head feature fusion as a general strategy rather than a property of any single feature family. The diagram follows the deep-learning distinction between input representations, branch-specific transformations, learned parameters, and downstream classifier functions~\citep{goodfellow2016deep}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.72, transform shape,
+    node distance=0.62cm and 0.75cm,
+    input/.style={rectangle, rounded corners, draw=black, align=center, minimum width=0.25\textwidth, minimum height=0.72cm, font=\scriptsize},
+    branch/.style={rectangle, rounded corners, draw=black, align=center, minimum width=0.23\textwidth, minimum height=0.72cm, font=\scriptsize},
+    outputbox/.style={rectangle, draw=black, align=center, minimum width=0.30\textwidth, minimum height=0.78cm, font=\scriptsize},
+    arrow/.style={-{Latex[length=2.2mm]}, thick}
+]
+\node[input] (h1) {$\phi_1(x_i)$\\ordered matrix\\for example $O_i^{(k)}$ or $P_i^{(k)}$};
+\node[input, below=of h1] (h2) {$\phi_2(x_i)$\\compact vector\\for example $F_i^{(k)}$ or $Q_i^{(k,\lambda,w)}$};
+\node[input, below=of h2] (h3) {$\phi_J(x_i)$\\learned embedding\\for example $B_i$};
+\node[branch, right=of h1] (b1) {Branch $g_1$\\representation-specific layers};
+\node[branch, right=of h2] (b2) {Branch $g_2$\\representation-specific layers};
+\node[branch, right=of h3] (b3) {Branch $g_J$\\representation-specific layers};
+\node[outputbox, right=1.0cm of b2] (fusion) {Fusion\\$\operatorname{concat}$, attention, or capsule routing};
+\node[outputbox, right=of fusion] (clf) {Classifier\\$\hat{y}_i=f(\cdot)$};
+\draw[arrow] (h1) -- (b1);
+\draw[arrow] (h2) -- (b2);
+\draw[arrow] (h3) -- (b3);
+\draw[arrow] (b1) -- (fusion);
+\draw[arrow] (b2) -- (fusion);
+\draw[arrow] (b3) -- (fusion);
+\draw[arrow] (fusion) -- (clf);
+\end{tikzpicture}
+\caption{General multi-head feature fusion strategy. Different feature mappings are kept as named inputs, processed by representation-specific neural branches, and merged before the final classifier. This design allows ordered matrices, compact compositional vectors, pseudo-composition descriptors, physicochemical profiles, and learned embeddings to be combined without assigning the fusion mechanism to a single feature family.}
+\label{fig:multihead-feature-fusion-diagram}
+\end{figure}

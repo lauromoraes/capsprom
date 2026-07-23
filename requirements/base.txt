@@ -1,0 +1,14 @@
+# Core scientific stack for CapsProm EDA, feature engineering, and classical ML.
+# Keep this file Python-3.13-friendly unless the project environment changes.
+
+numpy>=2.1
+scipy>=1.14
+pandas>=2.2
+matplotlib>=3.9
+seaborn>=0.13
+scikit-learn>=1.6
+biopython>=1.84
+PyYAML>=6.0
+joblib>=1.4
+tqdm>=4.66
+mlflow>=2.17

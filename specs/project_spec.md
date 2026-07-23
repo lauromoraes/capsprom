@@ -8,7 +8,7 @@ evaluation, and thesis-oriented documentation.
 
 ## Dataset Contract
 
-Current active dataset scope is restricted to the final intra-source CSV files in `data/processed/assembled_datasets/intra/` and their strict-DNA cleaned copies. Generated project information must not treat other files under `data/` as active experimental datasets.
+Current active model-ready dataset scope is restricted to the strict-DNA cleaned intra-source CSV files in `data/processed/assembled_datasets/intra_strict_dna/`. The original files in `data/processed/assembled_datasets/intra/` are preserved for provenance and preprocessing audit, but current and future EDA, feature engineering, model training, and evaluation stages should use `intra_strict_dna` unless a specification explicitly states otherwise. Generated project information must not treat other files under `data/` as active experimental datasets.
 
 
 Datasets must be CSV files with exactly the following required semantic fields:

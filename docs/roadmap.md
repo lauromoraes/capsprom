@@ -58,6 +58,8 @@ Status: planned.
 Goals:
 
 - Implement or integrate baseline models in a controlled way.
+- Include fine-tuned DNA-BERT as a classifier baseline, distinct from DNA-BERT
+  embedding features.
 - Track all baseline runs in MLflow.
 - Define fair comparison conditions.
 

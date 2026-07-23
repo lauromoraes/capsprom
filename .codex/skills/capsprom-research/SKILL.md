@@ -22,6 +22,12 @@ sequences using capsule networks and reproducible machine learning pipelines.
   snippets.
 - Never leave a figure, table, chart, diagram, or other visual artifact without
   a descriptive caption, a stable label, and a preceding textual reference.
+- Use explanatory feature diagrams when they materially improve thesis clarity,
+  especially for feature transformations inspired by original articles; always
+  introduce, reference, cite, label, and caption them properly.
+- Preserve mathematical notation from `specs/academic_writing_spec.md` and
+  `specs/feature_architecture.md` before introducing new symbols in thesis or
+  feature-engineering text.
 - Use YAML configuration files for experiments.
 - Use MLflow for experiment tracking.
 

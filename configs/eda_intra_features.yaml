@@ -1,0 +1,25 @@
+data:
+  input_dir: data/processed/assembled_datasets/intra_strict_dna
+  sequence_column: sequence
+  label_column: label
+  sequence_length: 81
+  alphabet: [A, C, G, T]
+  ignore_dirs:
+    - predictions_ecoli
+
+eda:
+  output_dir: outputs/eda/intra_strict_feature_exploration
+  feature_sample_per_label: 1000
+  top_kmers: 25
+  kmer_values: [2, 3, 4]
+  physicochemical:
+    enabled: true
+    dinucleotide_reference: data/raw/references/normalized-dinuc.tsv
+    trinucleotide_reference: data/raw/references/normalized-trinuc.tsv
+    dinucleotide_properties:
+      - Base stacking
+      - B-DNA twist
+      - Dinucleotide GC Content
+    trinucleotide_properties:
+      - Bendability (DNAse)
+      - Trinucleotide GC Content

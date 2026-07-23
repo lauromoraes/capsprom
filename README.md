@@ -62,7 +62,7 @@ Feature engineering supports named blocks, physicochemical references, concatena
 
 ## Active Data Scope
 
-Only data represented in `data/processed/assembled_datasets/intra/` is part of the current experimental dataset scope. See `docs/intra_source_data_scope.md`.
+Only strict-DNA cleaned data represented in `data/processed/assembled_datasets/intra_strict_dna/` is part of the current and future experimental dataset scope. The original `intra/` files are retained for provenance and audit. See `docs/intra_source_data_scope.md`.
 
 ## Data Processing
 

@@ -11,6 +11,7 @@ from typing import Iterable, Sequence
 from .physicochemical import PhysicochemicalTable, load_physicochemical_table
 
 DNA_BASES = ("A", "C", "G", "T")
+DNA_ALPHABET = set(DNA_BASES)
 
 
 @dataclass(frozen=True)
@@ -60,10 +61,20 @@ def kmers_for_k(k: int) -> tuple[str, ...]:
     return tuple("".join(parts) for parts in itertools.product(DNA_BASES, repeat=k))
 
 
-def sliding_kmers(sequence: str, k: int) -> list[str]:
-    """Return overlapping k-mers from a sequence."""
+def validate_dna_sequence(sequence: str) -> str:
+    """Normalize and validate a DNA sequence over the ACGT alphabet."""
 
-    normalized = sequence.upper()
+    normalized = sequence.strip().upper()
+    invalid = sorted(set(normalized) - DNA_ALPHABET)
+    if invalid:
+        raise ValueError(f"sequence contains invalid DNA symbols: {''.join(invalid)}")
+    return normalized
+
+
+def sliding_kmers(sequence: str, k: int) -> list[str]:
+    """Return overlapping k-mers from a strict DNA sequence."""
+
+    normalized = validate_dna_sequence(sequence)
     if len(normalized) < k:
         return []
     return [normalized[index : index + k] for index in range(len(normalized) - k + 1)]

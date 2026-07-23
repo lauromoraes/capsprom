@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#1f2937}.title{font-size:18px;font-weight:700}.axis{font-size:11px}.label{font-size:12px}.small{font-size:10px}</style>
+<text class="title" x="150" y="32">Recurrent discriminative 3-mers</text>
+<text class="axis" x="140" y="71" text-anchor="end">TTT</text>
+<rect x="150" y="58" width="560.0" height="18" fill="#2563eb"/>
+<text class="small" x="715.0" y="71">48</text>
+<text class="axis" x="140" y="96" text-anchor="end">AAA</text>
+<rect x="150" y="83" width="536.7" height="18" fill="#2563eb"/>
+<text class="small" x="691.7" y="96">46</text>
+<text class="axis" x="140" y="121" text-anchor="end">TAA</text>
+<rect x="150" y="108" width="525.0" height="18" fill="#2563eb"/>
+<text class="small" x="680.0" y="121">45</text>
+<text class="axis" x="140" y="146" text-anchor="end">ATA</text>
+<rect x="150" y="133" width="525.0" height="18" fill="#2563eb"/>
+<text class="small" x="680.0" y="146">45</text>
+<text class="axis" x="140" y="171" text-anchor="end">AAT</text>
+<rect x="150" y="158" width="513.3" height="18" fill="#2563eb"/>
+<text class="small" x="668.3" y="171">44</text>
+<text class="axis" x="140" y="196" text-anchor="end">TAT</text>
+<rect x="150" y="183" width="513.3" height="18" fill="#2563eb"/>
+<text class="small" x="668.3" y="196">44</text>
+<text class="axis" x="140" y="221" text-anchor="end">TTA</text>
+<rect x="150" y="208" width="490.0" height="18" fill="#2563eb"/>
+<text class="small" x="645.0" y="221">42</text>
+<text class="axis" x="140" y="246" text-anchor="end">CGC</text>
+<rect x="150" y="233" width="455.0" height="18" fill="#2563eb"/>
+<text class="small" x="610.0" y="246">39</text>
+<text class="axis" x="140" y="271" text-anchor="end">CCG</text>
+<rect x="150" y="258" width="443.3" height="18" fill="#2563eb"/>
+<text class="small" x="598.3" y="271">38</text>
+<text class="axis" x="140" y="296" text-anchor="end">GCC</text>
+<rect x="150" y="283" width="443.3" height="18" fill="#2563eb"/>
+<text class="small" x="598.3" y="296">38</text>
+<text class="axis" x="140" y="321" text-anchor="end">CGG</text>
+<rect x="150" y="308" width="420.0" height="18" fill="#2563eb"/>
+<text class="small" x="575.0" y="321">36</text>
+<text class="axis" x="140" y="346" text-anchor="end">ATT</text>
+<rect x="150" y="333" width="420.0" height="18" fill="#2563eb"/>
+<text class="small" x="575.0" y="346">36</text>
+<text class="axis" x="140" y="371" text-anchor="end">GGC</text>
+<rect x="150" y="358" width="408.3" height="18" fill="#2563eb"/>
+<text class="small" x="563.3" y="371">35</text>
+<text class="axis" x="140" y="396" text-anchor="end">GCG</text>
+<rect x="150" y="383" width="396.7" height="18" fill="#2563eb"/>
+<text class="small" x="551.7" y="396">34</text>
+<text class="axis" x="140" y="421" text-anchor="end">TGT</text>
+<rect x="150" y="408" width="385.0" height="18" fill="#2563eb"/>
+<text class="small" x="540.0" y="421">33</text>
+<text class="axis" x="140" y="446" text-anchor="end">CTG</text>
+<rect x="150" y="433" width="385.0" height="18" fill="#2563eb"/>
+<text class="small" x="540.0" y="446">33</text>
+<text class="axis" x="140" y="471" text-anchor="end">AGC</text>
+<rect x="150" y="458" width="385.0" height="18" fill="#2563eb"/>
+<text class="small" x="540.0" y="471">33</text>
+<text class="axis" x="140" y="496" text-anchor="end">TGG</text>
+<rect x="150" y="483" width="361.7" height="18" fill="#2563eb"/>
+<text class="small" x="516.7" y="496">31</text>
+<line x1="150" y1="468" x2="710" y2="468" stroke="#374151"/>
+<text class="axis" x="430.0" y="498" text-anchor="middle">number of dataset summaries where selected</text>
+</svg>

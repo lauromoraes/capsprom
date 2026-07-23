@@ -1,0 +1,4 @@
+# Optional classical-model dependencies that may download large binary wheels.
+-r base.txt
+
+xgboost>=2.1

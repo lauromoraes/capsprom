@@ -1,7 +1,7 @@
 # Notebook Logic Extraction Summary
 
 This document summarizes only the notebook logic relevant to the final
-intra-source datasets in `data/processed/assembled_datasets/intra/`. The active
+intra-source datasets in `data/processed/assembled_datasets/intra/`, followed by strict-DNA copies in `data/processed/assembled_datasets/intra_strict_dna/`. The active
 sources are Bhandari, CDBProm, CNNProm, and GraphPro. Other notebook fragments or
 raw folders are out of scope unless they are later connected to new final
 processed datasets.
@@ -82,6 +82,6 @@ Implemented in:
 ## Out-of-Scope Notebook Content
 
 Notebook references to data sources not represented in
-`data/processed/assembled_datasets/intra/` are excluded from current generated
+`data/processed/assembled_datasets/intra_strict_dna/` are excluded from current generated
 project information. This includes iPro-MP, EDP, Fuitfly, previous prediction
 archives, and other exploratory files.

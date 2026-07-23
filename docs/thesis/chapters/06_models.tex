@@ -5,7 +5,14 @@
 Baseline models provide reference performance for evaluating proposed
 architectures. Candidate baselines include classical machine learning models,
 CNNProm-style convolutional networks, GraphPro-inspired approaches, and
-transformer-based promoter models where feasible.
+transformer-based promoter models where feasible. Neural-network notation and
+model descriptions follow the distinction between data representations, model
+functions, trainable parameters, and objective functions commonly used in
+deep-learning methodology~\citep{goodfellow2016deep}. In this thesis, DNA-BERT has
+two planned roles: it may provide sequence embeddings for other classifiers, and
+it may also be fine-tuned as an end-to-end promoter classifier with a binary
+classification head. The latter role belongs to the model-development stage and
+is intentionally kept separate from the feature-engineering encoder.
 
 \section{CapsProm}\label{sec:models-capsprom}
 

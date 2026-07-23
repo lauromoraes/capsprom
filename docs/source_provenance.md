@@ -2,7 +2,7 @@
 
 This document summarizes the provenance information recorded in the README files
 of the four active raw data sources used to create the final intra-source CSV
-datasets in `data/processed/assembled_datasets/intra/`.
+datasets in `data/processed/assembled_datasets/intra/` and their strict-DNA model-ready copies in `data/processed/assembled_datasets/intra_strict_dna/`.
 
 ## Scope
 
