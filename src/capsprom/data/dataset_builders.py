@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-from .sequences import SequenceRecord, crop_record, invalid_symbols, is_strict_dna, read_fasta, write_fasta
+from .sequences import crop_record, invalid_symbols, is_strict_dna, read_fasta, write_fasta
 
 FILENAME_RE = re.compile(
     r"^(?P<class_name>prom|nonprom)-(?P<study>[^-]+)-(?P<organism_type>[^-]+)-(?P<dataset>.+)-(?P<count>\d+)-(?P<length>\d+)\.fa$"

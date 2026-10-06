@@ -4,6 +4,11 @@
 
 Only the strict-DNA cleaned intra-source datasets in `data/processed/assembled_datasets/intra_strict_dna/` are active for current and future EDA, feature engineering, model training, evaluation, validation summaries, and thesis text. The original processed files in `data/processed/assembled_datasets/intra/` are preserved for provenance and preprocessing audit. The active source prefixes are `bhandari`, `cdbprom`, `cnnprom`, and `graphpro`. Other folders may remain present for provenance or future work, but they are out of scope until explicitly added to a processed dataset specification.
 
+Exception: Bhandari human experiments must use the leakage-controlled dataset
+in `data/processed/leakage_controlled/bhandari_human_shuffle_v1/`. The legacy
+Bhandari human files under `intra_strict_dna/` are retained only for provenance
+and contaminated-split comparability.
+
 This directory contains research datasets and intermediate data artifacts for
 CapsProm. Large data files are intentionally ignored by Git; only lightweight
 metadata and documentation should be versioned.
@@ -16,6 +21,7 @@ data/
 ├── interim/                     # FASTA conversion, cropped sequences, and feature intermediates
 ├── processed/assembled_datasets # CSV datasets ready for pipeline experiments
 │   └── intra_strict_dna          # Cleaned CSV copies with strict A/C/G/T sequences
+├── processed/leakage_controlled  # Deduplicated, group-split corrective datasets
 └── *.ipynb                      # Legacy or exploratory preparation notebooks
 ```
 

@@ -2,18 +2,133 @@
 
 \section{Experiment Configuration}\label{sec:protocol-configuration}
 
-Each experiment is specified by a tuple $(\mathcal{D},\phi,f,\theta,E,r)$, where $\mathcal{D}$ is the labeled dataset, $\phi$ is the feature mapping, $f$ is the classifier or neural architecture, $\theta$ is the set of training and model parameters, $E$ is the set of evaluation metrics, and $r$ denotes the random seed or replication index.
+Each experiment is specified by a tuple
+$(\mathcal{D},\Phi,f,\theta,E,r)$, where $\mathcal{D}$ is the labeled dataset,
+$\Phi$ is the combined feature representation, $f$ is the classifier or neural
+architecture, $\theta$ is the set of training and model parameters, $E$ is the
+set of evaluation outcomes, and $r$ denotes the random seed or replication
+index. The configuration, dataset hashes, software environment, and resulting
+artifacts are recorded through MLflow so that every reported value is traceable
+to a versioned YAML specification.
 
-\section{Evaluation Metrics}\label{sec:protocol-metrics}
+The protocol distinguishes development from confirmatory evaluation. The
+strict-DNA Bhandari human promoter split is the initial development benchmark.
+Because its test results have already been observed during pipeline development,
+they are reported as fixed-split reference results rather than as blind
+confirmatory evidence. Confirmatory comparisons use all eligible strict-DNA
+within-source dataset pairs, with model specifications and search spaces frozen
+before test predictions are generated. Dataset-level results are the primary
+units of cross-dataset inference, preventing the largest sources from dominating
+the overall conclusion.
 
-The promoter prediction task is evaluated as binary classification. Metrics
-include sensitivity, specificity, accuracy, precision, F1-score, and Matthews
-correlation coefficient. MCC is especially important for imbalanced datasets.
+\section{Data Integrity and Model Selection}\label{sec:protocol-integrity}
 
-\section{Validation Strategy}\label{sec:protocol-validation}
+Each train--test pair is audited for strict DNA compliance, class counts, exact
+duplicates, conflicting labels, normalized partition overlap, and available
+source groups. Fixed benchmark partitions are retained for comparability, while
+duplicate-aware sensitivity analyses quantify possible leakage. When biological
+or source groups are available, resampling preserves those groups.
 
-The validation strategy must be explicit for each experiment. Earlier project work used 5-fold cross-validation; the current protocol preserves this option while also supporting predefined train/test partitions associated with source-derived benchmarks.
+All data-dependent preprocessing and feature selection are fitted only on the
+training partition. Hyperparameters are selected using one fixed five-fold
+stratified training manifest generated with seed 42. Models in a comparison
+receive an explicitly comparable search budget. Test outcomes are not used for
+feature selection, early stopping, threshold selection, calibration, or
+hyperparameter optimization.
 
-\section{Statistical and Reproducibility Controls}\label{sec:protocol-controls}
+\section{Replication and Prediction Contract}\label{sec:protocol-replication}
 
-All experiments should record data provenance, feature definition, model parameters, software environment, random seeds, and performance measures. This supports both statistical comparison and thesis traceability without making the mathematical description depend on a specific implementation tool.
+Stochastic models are trained with ten predeclared seeds. The fixed seed set is
+shown below so that it can be reproduced independently of the implementation:
+\[
+  \{13,29,42,71,101,137,173,211,251,293\}.
+\]
+Every stochastic component receives the run seed. Deterministic models are
+fitted once per locked configuration and are not repeated to create
+pseudo-replicates. Stochastic dataset-level results are summarized primarily by
+their median and interquartile range, with mean and standard deviation retained
+as supplementary descriptors.
+
+Every test record receives a positive-class score and a binary prediction. The
+primary decision threshold is 0.5. A threshold selected exclusively from
+out-of-fold training predictions may be reported as a secondary analysis but is
+frozen before test evaluation. Sigmoid or isotonic calibration is likewise fit
+only from training-derived out-of-fold predictions; raw and calibrated models
+are treated as separate locked conditions.
+
+\section{Evaluation Outcomes}\label{sec:protocol-metrics}
+
+Matthews correlation coefficient (MCC) is the single primary effectiveness
+outcome because it incorporates every confusion-matrix cell and remains
+informative under class imbalance. Table~\ref{tab:protocol-outcomes} summarizes
+the outcome families used to characterize effectiveness, calibration,
+efficiency, and robustness. Secondary metric inference is interpreted as
+exploratory so that multiple correlated measures do not inflate claims of
+superiority.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Predeclared evaluation outcomes for the CapsProm experimental
+  protocol. The table separates the primary confirmatory outcome from secondary
+  measures that characterize discrimination, calibration, computational cost,
+  and robustness without replacing the primary MCC comparison.}
+  \label{tab:protocol-outcomes}
+  \begin{tabular}{p{0.20\textwidth}p{0.70\textwidth}}
+    \toprule
+    Outcome family & Measures \\
+    \midrule
+    Primary effectiveness & Matthews correlation coefficient \\
+    Secondary effectiveness & ROC-AUC, average precision, sensitivity (recall),
+    specificity, balanced accuracy, accuracy, precision, and F1 \\
+    Calibration & Brier score, binary log-loss, expected calibration error with
+    ten equal-frequency bins, and reliability diagrams \\
+    Efficiency & Feature-encoding, training, calibration, and inference time;
+    peak resident memory; hardware and thread settings \\
+    Robustness & Variation across datasets, source domains, class-imbalance
+    ranges, seeds, duplicate-aware sensitivity analyses, and thresholds \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Efficiency timing uses one untimed warm-up followed by three timed executions
+under the same hardware and resource settings. Median and interquartile range
+are reported together with peak resident memory, software versions, processor
+or accelerator identity, thread count, and input size.
+
+\section{Uncertainty and Statistical Comparison}\label{sec:protocol-statistics}
+
+For each dataset and locked run, 95\% confidence intervals are estimated from
+10,000 stratified bootstrap resamples of the test records. The same resampled
+indices are applied to every model in a pair. A group bootstrap replaces
+record-level resampling when defensible biological or source groups are
+available; otherwise, the possible dependence between sequences is stated as a
+limitation.
+
+Within one dataset, the principal effect is the paired difference in MCC. The
+effect estimate is accompanied by its paired-bootstrap interval and a two-sided
+paired randomization test with 10,000 swaps. McNemar's exact test is a secondary
+analysis of discordant classification errors. Across at least ten eligible
+datasets, a two-sided Wilcoxon signed-rank test evaluates dataset-level MCC
+differences, accompanied by the median paired difference and win--tie--loss
+counts.
+
+The family-wise significance level is 0.05. Holm correction is applied across
+confirmatory model-pair hypotheses for the primary outcome. Conclusions
+emphasize effect sizes and uncertainty; statistical significance alone is not
+interpreted as biological importance.
+
+\section{Reproducibility and Reporting}\label{sec:protocol-controls}
+
+Each MLflow run records the protocol version, dataset and fold-manifest hashes,
+feature and model definitions, seed, software and hardware metadata, row-level
+test predictions, effectiveness and calibration outcomes, timing and memory
+measurements, resampling seeds, comparison outputs, and fitted artifacts.
+Prediction files use stable row identifiers without unnecessarily reproducing
+raw sequences.
+
+Reports label analyses as exploratory, developmental, or confirmatory and state
+dataset eligibility, exclusions, failed runs, replication counts, and the
+resampling unit. The complete machine-readable contract is maintained in
+\path{configs/evaluation_protocol.yaml}, while implementation requirements and
+limitations are maintained in
+\path{specs/statistical_evaluation_protocol.md}.

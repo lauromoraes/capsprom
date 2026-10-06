@@ -55,9 +55,34 @@ Out of scope for the first implementation:
 
 ## Review Questions Before Implementation
 
-- Confirm whether the Bhandari human promoter intra-study split should be the first pipeline fixture.
-- Which baseline should be implemented first: XGBoost or a simpler sanity-check
-  classifier?
-- Which metrics are mandatory for the first run?
-- Should the first MLflow backend be local file-based tracking?
-- Which package manager and dependency format should be used for the project?
+The project restart milestone resolves the initial questions as follows:
+
+- The strict-DNA Bhandari human promoter train/test split is the first pipeline
+  fixture.
+- Logistic regression is the first sanity-check classifier. XGBoost follows
+  only after the complete data-to-tracking path is verified.
+- Mandatory MVP metrics are accuracy, precision, recall, F1, ROC-AUC, and
+  Matthews correlation coefficient. Encoding and training time are also
+  recorded.
+- MLflow initially uses the local SQLite store at `./mlflow.db`. MLflow 3.14
+  places the legacy filesystem tracking backend in maintenance mode, so SQLite
+  provides the supported local backend without requiring a tracking server.
+- Dependencies remain in the versioned `requirements/*.txt` files and the
+  project uses the repository-local `.venv` environment.
+- The first run uses a deterministic stratified sample and two inexpensive
+  feature blocks: normalized 3-mer frequency and global GC content/skew.
+
+## Implemented Restart Milestone
+
+The MVP is configured in `configs/mvp_logistic.yaml` and exposes:
+
+```bash
+PYTHONPATH=src python -m capsprom validate-config configs/mvp_logistic.yaml
+PYTHONPATH=src python -m capsprom validate-data configs/mvp_logistic.yaml
+PYTHONPATH=src python -m capsprom run configs/mvp_logistic.yaml
+```
+
+Each run copies the exact YAML configuration and writes a JSON summary under
+`outputs/runs/<run-id>/`. MLflow records the same provenance, metrics, fitted
+scikit-learn model, dataset SHA-256 hashes, feature block names, sample counts,
+and timing measurements.

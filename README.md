@@ -79,6 +79,42 @@ The notebook-derived dataset construction logic is available as reusable Python 
 5. Add CapsProm and SparseCapsProm only after the pipeline is stable.
 6. Add interpretability methods and thesis-oriented LaTeX reporting.
 
+## Executable MVP
+
+The first end-to-end sanity-check experiment uses the strict-DNA Bhandari human
+promoter split, normalized 3-mer frequencies, global GC/skew descriptors,
+logistic regression, and a local SQLite-backed MLflow store. From the repository
+root, run:
+
+```bash
+PYTHONPATH=src .venv/bin/python -m capsprom validate-config configs/mvp_logistic.yaml
+PYTHONPATH=src .venv/bin/python -m capsprom validate-data configs/mvp_logistic.yaml
+PYTHONPATH=src .venv/bin/python -m capsprom run configs/mvp_logistic.yaml
+```
+
+The sampled MVP is deliberately small enough to validate configuration, data,
+feature encoding, training, evaluation, provenance, and artifact logging before
+full-data baselines or capsule models are introduced.
+
+The corresponding full-data reference run is configured separately so that the
+change in experimental scale remains explicit:
+
+```bash
+PYTHONPATH=src .venv/bin/python -m capsprom run configs/full_logistic.yaml
+```
+
+Its first recorded result is documented in
+`docs/full_dataset_logistic_report.md`.
+
+The first nonlinear comparison uses the same full dataset and feature contract:
+
+```bash
+PYTHONPATH=src .venv/bin/python -m capsprom run configs/full_xgboost.yaml
+```
+
+The controlled logistic-regression versus XGBoost comparison is documented in
+`docs/full_xgboost_report.md`.
+
 ## Language Policy
 
 All repository documentation, source code, comments, configuration files, and

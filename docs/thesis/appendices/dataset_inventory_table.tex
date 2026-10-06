@@ -1,0 +1,70 @@
+Table~\ref{tab:appendix-strict-dataset-inventory} provides the complete
+inventory of model-ready within-source datasets used to define the experimental
+scope. In addition to dataset scale, the table exposes the fixed train--test
+partition and the class distribution that must be considered when selecting
+evaluation metrics and comparing results across sources.
+
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{longtable}{@{}lllrrrrr@{}}
+\caption{Complete inventory of the final strict-DNA within-source datasets
+available for the promoter-prediction experiments. All records contain
+81-nucleotide sequences restricted to the alphabet $\Sigma=\{A,C,G,T\}$ and
+binary labels, and each dataset uses the deterministic approximately 80/20
+train--test partition produced by the preprocessing pipeline. ``Positive''
+reports the percentage of promoter sequences in the combined partitions, and
+$N{:}P$ is the ratio of non-promoter to promoter records; values above one
+therefore indicate a majority non-promoter class. Rows are ordered by decreasing
+total number of sequences so that the largest training resources appear first;
+ties, if any, are resolved alphabetically by source and dataset name.}
+\label{tab:appendix-strict-dataset-inventory}\\
+\toprule
+Source & Domain & Dataset & Train & Test & Total & Positive & $N{:}P$ \\
+\midrule
+\endfirsthead
+
+\multicolumn{8}{@{}l}{\tablename\ \thetable\ continued from the previous page}\\
+\toprule
+Source & Domain & Dataset & Train & Test & Total & Positive & $N{:}P$ \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{8}{r@{}}{Continued on the next page}\\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+Bhandari & Eukaryotic & Plant promoters & 511,217 & 127,801 & 639,018 & 50.0\% & 1.00 \\
+Bhandari & Eukaryotic & Human promoter & 393,513 & 98,375 & 491,888 & 50.0\% & 1.00 \\
+CNNProm & Eukaryotic & Human non-TATA & 136,282 & 34,072 & 170,354 & 34.9\% & 1.87 \\
+CNNProm & Eukaryotic & Mouse non-TATA & 118,509 & 29,628 & 148,137 & 33.0\% & 2.03 \\
+CNNProm & Eukaryotic & \textit{Arabidopsis} non-TATA & 50,837 & 12,710 & 63,547 & 27.9\% & 2.59 \\
+Bhandari & Eukaryotic & Yeast promoter & 29,385 & 7,347 & 36,732 & 50.0\% & 1.00 \\
+GraphPro & Prokaryotic & \textit{R. capsulatus} & 19,028 & 4,757 & 23,785 & 45.5\% & 1.20 \\
+GraphPro & Prokaryotic & \textit{E. coli} & 18,442 & 4,611 & 23,053 & 32.8\% & 2.05 \\
+CNNProm & Eukaryotic & Mouse TATA & 17,557 & 4,390 & 21,947 & 35.7\% & 1.80 \\
+CDBProm & Prokaryotic & \textit{S. coelicolor} & 14,605 & 3,652 & 18,257 & 42.9\% & 1.33 \\
+CDBProm & Prokaryotic & \textit{Anabaena} sp. & 14,076 & 3,519 & 17,595 & 42.9\% & 1.33 \\
+GraphPro & Prokaryotic & \textit{L. interrogans} & 13,595 & 3,400 & 16,995 & 50.2\% & 0.99 \\
+GraphPro & Eukaryotic & Human & 13,098 & 3,275 & 16,373 & 42.9\% & 1.33 \\
+CNNProm & Eukaryotic & \textit{Arabidopsis} TATA & 12,805 & 3,202 & 16,007 & 28.1\% & 2.56 \\
+CNNProm & Prokaryotic & \textit{E. coli} & 11,613 & 2,904 & 14,517 & 17.3\% & 4.77 \\
+CDBProm & Prokaryotic & \textit{P. aeruginosa} & 11,486 & 2,872 & 14,358 & 42.9\% & 1.33 \\
+GraphPro & Eukaryotic & Mouse & 10,337 & 2,585 & 12,922 & 42.9\% & 1.33 \\
+CDBProm & Prokaryotic & \textit{M. tuberculosis} & 9,907 & 2,477 & 12,384 & 42.9\% & 1.33 \\
+CDBProm & Prokaryotic & \textit{Synechocystis} & 9,149 & 2,288 & 11,437 & 43.0\% & 1.33 \\
+GraphPro & Prokaryotic & \textit{C. jejuni} & 7,537 & 1,885 & 9,422 & 42.9\% & 1.33 \\
+CDBProm & Prokaryotic & \textit{K. pneumoniae} & 7,432 & 1,859 & 9,291 & 42.9\% & 1.33 \\
+CDBProm & Prokaryotic & \textit{B. amyloliquefaciens} & 5,920 & 1,481 & 7,401 & 42.9\% & 1.33 \\
+CDBProm & Prokaryotic & \textit{S. typhimurium} & 5,471 & 1,368 & 6,839 & 43.0\% & 1.32 \\
+GraphPro & Prokaryotic & \textit{B. amyloliquefaciens} & 5,196 & 1,300 & 6,496 & 42.9\% & 1.33 \\
+CNNProm & Prokaryotic & \textit{Bacillus} & 4,095 & 1,024 & 5,119 & 21.9\% & 3.57 \\
+CDBProm & Prokaryotic & \textit{H. pylori} & 3,979 & 997 & 4,976 & 42.9\% & 1.33 \\
+CDBProm & Prokaryotic & \textit{C. glutamicum} & 3,210 & 803 & 4,013 & 43.0\% & 1.33 \\
+GraphPro & Prokaryotic & \textit{C. phytofermentans} & 2,586 & 647 & 3,233 & 46.7\% & 1.14 \\
+CDBProm & Prokaryotic & \textit{C. pneumoniae} & 2,262 & 566 & 2,828 & 42.9\% & 1.33 \\
+\end{longtable}
+\endgroup

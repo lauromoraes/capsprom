@@ -1,0 +1,53 @@
+project:
+  name: full-human-promoter-logistic
+
+tracking:
+  tracking_uri: sqlite:///mlflow.db
+  experiment_name: capsprom-baselines
+
+data:
+  train_csv: data/processed/assembled_datasets/intra_strict_dna/bhandari-eukaryotic-Human_promoter-p-196756-n-196757-train.csv
+  test_csv: data/processed/assembled_datasets/intra_strict_dna/bhandari-eukaryotic-Human_promoter-p-49188-n-49187-test.csv
+  sequence_column: sequence
+  label_column: label
+  sequence_length: 81
+  alphabet: [A, C, G, T]
+  max_train_samples: null
+  max_test_samples: null
+  random_seed: 42
+
+features:
+  combination_mode: concatenate
+  blocks:
+    - name: kmer_frequency_3
+      encoding: kmer_frequency
+      k: 3
+      normalize: true
+    - name: gc_content_skew
+      encoding: gc_content_skew
+      include_global: true
+      include_skew: true
+
+model:
+  name: logistic_regression
+  hyperparameters:
+    solver: liblinear
+    max_iter: 500
+
+evaluation:
+  metrics:
+    - matthews_corrcoef
+    - roc_auc
+    - average_precision
+    - specificity
+    - balanced_accuracy
+    - accuracy
+    - precision
+    - recall
+    - f1
+    - brier_score
+    - log_loss
+    - expected_calibration_error
+
+outputs:
+  artifact_dir: outputs/runs

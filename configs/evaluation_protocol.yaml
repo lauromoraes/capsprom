@@ -1,0 +1,105 @@
+protocol:
+  name: capsprom-confirmatory-evaluation
+  version: 1.0.0
+  status: specified_not_implemented
+  alpha: 0.05
+
+scope:
+  development_dataset: bhandari-eukaryotic-Human_promoter
+  development_results_are_exploratory: true
+  confirmatory_dataset_glob: data/processed/assembled_datasets/intra_strict_dna/*.csv
+  cross_dataset_unit: dataset
+  require_both_classes: true
+  require_frozen_test_configuration: true
+
+data_audit:
+  exact_duplicates: true
+  conflicting_labels: true
+  normalized_train_test_overlap: true
+  class_counts: true
+  strict_dna: true
+  sequence_length: 81
+  near_duplicate_sensitivity_analysis: true
+
+selection:
+  method: stratified_k_fold
+  folds: 5
+  fold_seed: 42
+  fit_preprocessing_on_training_only: true
+  equal_search_budget: true
+  test_used_for_selection: false
+
+replication:
+  stochastic_seeds: [13, 29, 42, 71, 101, 137, 173, 211, 251, 293]
+  deterministic_models_run_once: true
+  stochastic_summary: [median, interquartile_range, mean, standard_deviation]
+
+prediction:
+  primary_threshold: 0.5
+  training_selected_threshold_is_secondary: true
+  persist_row_predictions: true
+  require_stable_row_id: true
+
+effectiveness:
+  primary_metric: matthews_corrcoef
+  secondary_metrics:
+    - roc_auc
+    - average_precision
+    - specificity
+    - balanced_accuracy
+    - accuracy
+    - precision
+    - recall
+    - f1
+
+calibration:
+  metrics: [brier_score, log_loss, expected_calibration_error]
+  ece_bins: 10
+  ece_binning: equal_frequency
+  methods: [raw, sigmoid, isotonic]
+  fit_source: out_of_fold_training_predictions
+  reliability_diagram: true
+
+efficiency:
+  warmup_runs: 1
+  timed_runs: 3
+  summary: [median, interquartile_range]
+  stages: [feature_encoding, training, calibration, inference]
+  record_peak_resident_memory: true
+  record_hardware_and_threads: true
+
+uncertainty:
+  confidence_level: 0.95
+  bootstrap_resamples: 10000
+  bootstrap: stratified_paired
+  use_group_bootstrap_when_available: true
+  resampling_seed: 20260715
+
+comparison:
+  within_dataset:
+    primary_effect: paired_mcc_difference
+    test: paired_randomization
+    randomization_swaps: 10000
+    secondary_test: exact_mcnemar
+  across_datasets:
+    minimum_datasets: 10
+    test: two_sided_wilcoxon_signed_rank
+    effect: median_paired_difference
+    descriptive: [win_tie_loss]
+  multiplicity:
+    family: primary_metric_model_pairs
+    correction: holm
+
+tracking:
+  backend: mlflow
+  parent_child_runs: true
+  required_artifacts:
+    - protocol_yaml
+    - data_audit_report
+    - fold_manifest
+    - test_predictions
+    - metrics
+    - calibration_report
+    - efficiency_report
+    - comparison_report
+    - fitted_model

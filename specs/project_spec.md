@@ -10,6 +10,15 @@ evaluation, and thesis-oriented documentation.
 
 Current active model-ready dataset scope is restricted to the strict-DNA cleaned intra-source CSV files in `data/processed/assembled_datasets/intra_strict_dna/`. The original files in `data/processed/assembled_datasets/intra/` are preserved for provenance and preprocessing audit, but current and future EDA, feature engineering, model training, and evaluation stages should use `intra_strict_dna` unless a specification explicitly states otherwise. Generated project information must not treat other files under `data/` as active experimental datasets.
 
+The Bhandari human promoter dataset is an explicit exception. Its legacy split
+contains extensive exact-sequence duplication and train/test overlap. Current
+Bhandari human experiments must use
+`data/processed/leakage_controlled/bhandari_human_shuffle_v1/`, whose positive
+windows are deduplicated before one deterministic shuffled negative is generated
+per positive and whose positive--negative groups are assigned wholly to train or
+test. This dataset is a synthetic-negative shuffle control and must be labeled
+accordingly; it does not replace evaluation against genomic non-promoters.
+
 
 Datasets must be CSV files with exactly the following required semantic fields:
 
@@ -82,7 +91,11 @@ Experiments must measure:
 - Robustness.
 - Statistical significance where appropriate.
 
-Required metrics and tests will be specified during the pipeline design phase.
+The confirmatory metric, resampling, calibration, replication, and statistical
+comparison rules are defined in `specs/statistical_evaluation_protocol.md` and
+mirrored in `configs/evaluation_protocol.yaml`. Development runs whose test
+results have already informed project decisions must be labeled exploratory and
+must not be presented as blind confirmatory evidence.
 
 ## Tracking Requirements
 

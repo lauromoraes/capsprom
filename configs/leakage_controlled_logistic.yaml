@@ -1,0 +1,53 @@
+project:
+  name: leakage-controlled-human-promoter-logistic
+
+tracking:
+  tracking_uri: sqlite:///mlflow.db
+  experiment_name: capsprom-leakage-controlled-baselines
+
+data:
+  train_csv: data/processed/leakage_controlled/bhandari_human_shuffle_v1/bhandari-eukaryotic-Human_promoter_deduplicated_shuffle_v1-p-27140-n-27140-train.csv
+  test_csv: data/processed/leakage_controlled/bhandari_human_shuffle_v1/bhandari-eukaryotic-Human_promoter_deduplicated_shuffle_v1-p-6785-n-6785-test.csv
+  sequence_column: sequence
+  label_column: label
+  sequence_length: 81
+  alphabet: [A, C, G, T]
+  max_train_samples: null
+  max_test_samples: null
+  random_seed: 42
+
+features:
+  combination_mode: concatenate
+  blocks:
+    - name: kmer_frequency_3
+      encoding: kmer_frequency
+      k: 3
+      normalize: true
+    - name: gc_content_skew
+      encoding: gc_content_skew
+      include_global: true
+      include_skew: true
+
+model:
+  name: logistic_regression
+  hyperparameters:
+    solver: liblinear
+    max_iter: 500
+
+evaluation:
+  metrics:
+    - matthews_corrcoef
+    - roc_auc
+    - average_precision
+    - specificity
+    - balanced_accuracy
+    - accuracy
+    - precision
+    - recall
+    - f1
+    - brier_score
+    - log_loss
+    - expected_calibration_error
+
+outputs:
+  artifact_dir: outputs/runs

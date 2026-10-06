@@ -2,7 +2,7 @@
 
 ## Phase 0: Project Foundation
 
-Status: in progress.
+Status: complete.
 
 Goals:
 
@@ -16,9 +16,9 @@ Exit criteria:
 - The repository has clear documentation for scope, constraints, and next
   development steps.
 
-## Phase 1: Pipeline Design
+## Phase 1: Pipeline Design and MVP Execution
 
-Status: planned.
+Status: complete.
 
 Goals:
 
@@ -28,15 +28,22 @@ Goals:
 - Specify dataset validation rules.
 - Specify configuration schema.
 - Decide how MLflow run metadata and artifacts will be organized.
+- Provide a strict YAML loader, dataset validation command, and a small
+  end-to-end sanity-check experiment.
 
 Exit criteria:
 
 - A pipeline specification exists before implementation.
 - The user has reviewed the assumptions.
+- The logistic-regression MVP runs from `configs/mvp_logistic.yaml` and records
+  dataset hashes, configuration, metrics, timings, and the fitted model in a
+  local SQLite-backed MLflow store.
+- The same contract runs on the complete Bhandari human promoter split through
+  `configs/full_logistic.yaml`.
 
 ## Phase 2: Data and Encoding Layer
 
-Status: planned.
+Status: in progress.
 
 Goals:
 
@@ -45,15 +52,26 @@ Goals:
 - Implement k-mer frequency encodings.
 - Implement one-hot encodings for k-mer representations.
 - Define interfaces for physicochemical vectors and DNA-BERT embeddings.
+- Implement GC/skew and PseKNC descriptors and feature-oriented EDA.
 
 Exit criteria:
 
 - Encoders are independently testable.
 - Invalid datasets fail with clear errors.
 
+Current state:
+
+- Strict-DNA preprocessing and validation are complete for 58 model-ready
+  files containing 1,828,924 sequences.
+- K-mer frequency, one-hot, physicochemical, GC/skew, PseKNC, and DNA-BERT
+  feature interfaces are implemented.
+- Concatenated classical inputs and named multi-head inputs are supported.
+- Feature and EDA tests are in place; broader data-pipeline regression tests
+  remain to be added.
+
 ## Phase 3: Baselines
 
-Status: planned.
+Status: in progress.
 
 Goals:
 
@@ -66,6 +84,30 @@ Goals:
 Exit criteria:
 
 - Baseline results are reproducible from YAML configuration files.
+
+Entry condition:
+
+- Completed: promote the Phase 1 logistic-regression sanity check to a full-data
+  baseline.
+- Completed: add XGBoost under the same data, feature, metric, and tracking
+  contract.
+- Completed: specify repeated-seed rules, confidence intervals, calibration
+  assessment, paired comparison, multiplicity control, and cross-dataset
+  inference in `specs/statistical_evaluation_protocol.md`.
+- Completed: implement stable row-level prediction artifacts, missing
+  effectiveness and calibration metrics, hashed five-fold manifests, and exact
+  duplicate/overlap audits.
+- Audit finding: 49.87% of Bhandari human test rows belong to exact sequences
+  also present in training, so current baseline metrics are development-only and
+  potentially optimistic.
+- Completed: create and validate a deterministic deduplicated group split with
+  one explicit shuffled negative per unique positive, zero duplicates, and zero
+  train/test overlap.
+- Completed: rerun logistic regression and XGBoost on the corrected
+  shuffle-control dataset with full prediction and calibration artifacts.
+- Next: implement repeated seeds and paired uncertainty for the shuffle-control
+  analysis, while identifying provenance-backed genomic negatives for the
+  primary biological benchmark.
 
 ## Phase 4: CapsProm Models
 
