@@ -101,6 +101,7 @@ def execute_baseline_batch(
     batch_config: Path,
     model: str | None = None,
     dataset: str | None = None,
+    tier: str | None = None,
     max_runs: int | None = None,
 ) -> dict[str, Any]:
     """Execute pending planned runs and persist state after every completion."""
@@ -117,6 +118,7 @@ def execute_baseline_batch(
         if item.key not in completed
         and (model is None or item.model == model)
         and (dataset is None or item.dataset_id == dataset)
+        and (tier is None or item.tier == tier)
     ]
     if max_runs is not None:
         selected = selected[:max_runs]

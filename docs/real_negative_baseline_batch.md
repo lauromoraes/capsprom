@@ -28,7 +28,7 @@ Execution is explicitly enabled and may be filtered or bounded:
 
 ```bash
 PYTHONPATH=src .venv/bin/python scripts/run_real_negative_baselines.py \
-  --execute --model logistic_regression --max-runs 1
+  --execute --tier confirmatory --model logistic_regression --max-runs 1
 ```
 
 State is persisted after every successful run in

@@ -15,10 +15,11 @@ def main() -> None:
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--model", choices=("logistic_regression", "xgboost"))
     parser.add_argument("--dataset")
+    parser.add_argument("--tier", choices=("confirmatory", "exploratory"))
     parser.add_argument("--max-runs", type=int)
     args = parser.parse_args()
     if args.execute:
-        state = execute_baseline_batch(args.config, args.model, args.dataset, args.max_runs)
+        state = execute_baseline_batch(args.config, args.model, args.dataset, args.tier, args.max_runs)
         print(json.dumps({"completed": len(state["completed"]), "planned": state["planned_run_count"]}))
     else:
         plan = materialize_baseline_batch(args.config)

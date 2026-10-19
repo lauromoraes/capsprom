@@ -192,6 +192,36 @@ is an exploratory pipeline check and is excluded from confirmatory inference.
   \end{tabular}
 \end{table}
 
+\subsection{Canonical source-negative fixed-seed sweep}
+
+A frozen seed-42 sweep was completed on the 25 canonical v3 pairs whose test
+outcomes were not observed during the smoke test. Table~\ref{tab:results-real-negative-fixed-seed}
+summarizes the paired dataset-level MCC results. XGBoost produced a higher MCC
+on 21 datasets, logistic regression on four, and no ties occurred. The median
+paired difference was 0.0621 in favor of XGBoost, with a 95\% bootstrap interval
+from 0.0322 to 0.0799 and a two-sided Wilcoxon signed-rank $p$-value of
+$1.23\times10^{-5}$. These fixed-seed values are preliminary because the
+predeclared stochastic-model protocol requires ten XGBoost seeds before final
+confirmatory inference.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Cross-dataset fixed-seed MCC summary for logistic regression and XGBoost on 25 canonical source-negative datasets. The effect is defined as XGBoost minus logistic regression and remains preliminary pending ten-seed XGBoost replication.}
+  \label{tab:results-real-negative-fixed-seed}
+  \begin{tabular}{lr}
+    \toprule
+    Quantity & Result \\
+    \midrule
+    Median logistic-regression MCC & 0.4942 \\
+    Median XGBoost MCC & 0.5532 \\
+    Median paired MCC difference & 0.0621 \\
+    Bootstrap 95\% interval & [0.0322, 0.0799] \\
+    XGBoost wins / ties / logistic wins & 21 / 0 / 4 \\
+    Wilcoxon two-sided $p$-value & 0.00001234 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \section{Feature Engineering Results}\label{sec:results-features}
 
 \pendingresults

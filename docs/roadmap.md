@@ -135,6 +135,11 @@ Entry condition:
   MLflow and fold-manifest provenance.
 - Next: resume the remaining 49 confirmatory runs, then execute the predeclared
   paired and cross-dataset summaries without changing the frozen contract.
+- Completed: finish the 50-run fixed-seed paired sweep over 25 still-blind
+  datasets and compute the cross-dataset MCC summary. XGBoost wins 21 of 25
+  pairs with a median MCC difference of 0.0621 at seed 42.
+- Next: execute the ten-seed XGBoost replication contract and replace the
+  fixed-seed screening effect with seed-aggregated confirmatory estimates.
 
 ## Phase 4: CapsProm Models
 
