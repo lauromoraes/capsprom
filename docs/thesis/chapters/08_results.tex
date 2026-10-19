@@ -222,6 +222,40 @@ confirmatory inference.
   \end{tabular}
 \end{table}
 
+\subsection{Canonical source-negative ten-seed replication}
+
+The predeclared ten-seed XGBoost replication was completed for all 25
+confirmatory datasets. For each dataset, XGBoost was summarized by the median
+MCC over seeds and paired with the single deterministic logistic-regression
+result. Table~\ref{tab:results-real-negative-ten-seed} reports the confirmatory
+cross-dataset outcome. The median paired difference remained positive at 0.0574,
+with a bootstrap 95\% interval from 0.0293 to 0.0777 and a two-sided Wilcoxon
+signed-rank $p$-value of $6.56\times10^{-6}$. XGBoost had the higher result on
+21 datasets and logistic regression on four. The median within-dataset XGBoost
+MCC standard deviation was 0.0124 and the maximum was 0.0353, indicating that
+the direction of the fixed-seed screening result was retained after stochastic
+replication.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Confirmatory cross-dataset MCC summary after ten predeclared XGBoost seeds on 25 canonical source-negative datasets. XGBoost is summarized within each dataset by its median MCC before pairing with deterministic logistic regression.}
+  \label{tab:results-real-negative-ten-seed}
+  \begin{tabular}{lr}
+    \toprule
+    Quantity & Result \\
+    \midrule
+    Median logistic-regression MCC & 0.4942 \\
+    Median seed-aggregated XGBoost MCC & 0.5556 \\
+    Median paired MCC difference & 0.0574 \\
+    Bootstrap 95\% interval & [0.0293, 0.0777] \\
+    Mean paired MCC difference & 0.0575 \\
+    XGBoost wins / ties / logistic wins & 21 / 0 / 4 \\
+    Wilcoxon two-sided $p$-value & 0.00000656 \\
+    Median / maximum within-dataset MCC SD & 0.0124 / 0.0353 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \section{Feature Engineering Results}\label{sec:results-features}
 
 \pendingresults

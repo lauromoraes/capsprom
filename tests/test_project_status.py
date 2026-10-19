@@ -23,5 +23,6 @@ def test_status_reports_checkpoint_and_writes_portable_snapshot(tmp_path: Path):
     written = write_status_snapshot(snapshot_path, root)
 
     assert status["experiments"]["xgboost_replication_v2"]["remaining"] == 9
+    assert status["experiments"]["xgboost_replication_v2"]["summary_available"] is False
     assert written["next_action"] == "make replication-resume"
     assert "repository_root" not in json.loads(snapshot_path.read_text())

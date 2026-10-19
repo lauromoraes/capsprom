@@ -22,16 +22,17 @@
       "state_available": true
     },
     "xgboost_replication_v2": {
-      "completed": 31,
+      "completed": 250,
       "config": "configs/xgboost_ten_seed_replication_v2.yaml",
       "config_sha256": "a8e649b20ac79c1a9e6f0863a4092fa4011701fb1db0e000a399fc7236069d2f",
       "planned": 250,
-      "remaining": 219,
+      "remaining": 0,
       "reused": 25,
       "state": "outputs/reports/xgboost_ten_seed_replication_v2/replication_state.json",
-      "state_available": true
+      "state_available": true,
+      "summary_available": true
     }
   },
-  "generated_at_utc": "2026-10-19T23:00:37.372066+00:00",
-  "next_action": "make replication-resume"
+  "generated_at_utc": "2026-10-19T23:27:46.327627+00:00",
+  "next_action": "begin Phase 4 CapsProm design"
 }

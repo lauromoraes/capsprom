@@ -62,9 +62,14 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
             })
         status["experiments"][name] = entry
     active = status["experiments"]["xgboost_replication_v2"]
-    status["next_action"] = (
-        "make replication-resume" if active.get("remaining", 0) else "make replication-summary"
-    )
+    summary = project_root / "outputs/reports/xgboost_ten_seed_replication_v2/ten_seed_summary.json"
+    active["summary_available"] = summary.is_file()
+    if active.get("remaining", 0):
+        status["next_action"] = "make replication-resume"
+    elif not summary.is_file():
+        status["next_action"] = "make replication-summary"
+    else:
+        status["next_action"] = "begin Phase 4 CapsProm design"
     return status
 
 

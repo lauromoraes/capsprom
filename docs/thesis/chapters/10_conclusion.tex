@@ -5,16 +5,20 @@
 At its current stage, this thesis contributes a reproducible promoter-prediction
 protocol, curated and validated source-defined datasets, feature mappings for
 multiple DNA representations, an explicit audit of exact-sequence leakage, and
-a leakage-controlled Bhandari shuffle-control workflow. Capsule-based model
-evaluation remains part of the planned experimental contribution.
+a leakage-controlled Bhandari shuffle-control workflow. It also establishes a
+ten-seed classical reference across 25 canonical source-negative datasets, with
+a median paired MCC advantage of 0.0574 for XGBoost over logistic regression.
+Capsule-based model evaluation remains part of the planned experimental
+contribution.
 
 \section{Limitations}\label{sec:conclusion-limitations}
 
-Current evidence is limited to development baselines. In particular, Bhandari
+Current evidence is limited to classical baselines. In particular, Bhandari
 provides promoter sequences only, and its synthetic shuffle controls cannot
 replace evaluation against genomic non-promoters. Repeated-seed uncertainty,
-paired statistical comparisons, biological-negative cross-dataset baselines,
-broader homology auditing, and the capsule-model experiments remain incomplete.
+paired statistical comparison, and biological-negative cross-dataset evaluation
+are complete for the canonical classical baseline; broader homology auditing,
+cross-source transfer, and the capsule-model experiments remain incomplete.
 The exact-identity correction and Hamming-distance sensitivity audit are
 complete for all 26 CDBProm, CNNProm, and GraphPro pairs, but these do not by
 themselves exclude longer-range biological homology.

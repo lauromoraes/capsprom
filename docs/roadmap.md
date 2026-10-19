@@ -138,14 +138,17 @@ Entry condition:
 - Completed: finish the 50-run fixed-seed paired sweep over 25 still-blind
   datasets and compute the cross-dataset MCC summary. XGBoost wins 21 of 25
   pairs with a median MCC difference of 0.0621 at seed 42.
-- In progress: execute version 2 of the frozen ten-seed XGBoost replication
+- Completed: execute version 2 of the frozen ten-seed XGBoost replication
   contract over the 25 confirmatory datasets. Version 1 is retained for audit
   after 10 newly executed runs exposed model-serialization overhead. Version 2
   validates all 25 reused seed-42 configurations, records source and target
   hashes separately, writes atomic checkpoints, and omits redundant model
-  serialization while preserving predictions and MLflow provenance. On
-  completion, replace the fixed-seed screening effect with the median XGBoost
-  MCC across seeds and its paired cross-dataset inference.
+  serialization while preserving predictions and MLflow provenance. All 250
+  planned entries are complete. Across 25 datasets, the median paired MCC
+  difference is 0.0574 in favor of XGBoost (bootstrap 95% interval
+  [0.0293, 0.0777]; Wilcoxon two-sided p=0.00000656), with 21 wins and 4 losses.
+- Next: treat this ten-seed result as the classical reference and begin the
+  CapsProm implementation under the same canonical data and evaluation contract.
 
 ## Phase 4: CapsProm Models
 

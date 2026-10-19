@@ -10,6 +10,15 @@ composition and GC descriptors contribute to this controlled discrimination.
 This finding concerns sequence-order disruption and does not establish the
 ability to reject genomic non-promoter regions.
 
+The canonical source-negative comparison addresses this limitation more
+directly. After ten-seed replication, the median paired MCC advantage of
+XGBoost over logistic regression was 0.0574 across 25 datasets, with a bootstrap
+95\% interval excluding zero and 21 dataset-level wins. The median
+within-dataset standard deviation of 0.0124 shows that stochastic variation was
+small relative to the cross-dataset paired effect. This supports XGBoost as the
+classical reference for subsequent CapsProm comparisons, but does not establish
+that either baseline transfers across organisms or source studies.
+
 \section{Comparison With Prior Work}\label{sec:discussion-prior-work}
 
 Results should be compared against the qualification-stage CapsProm and
@@ -23,10 +32,10 @@ Bhandari collections contain promoters only, so their shuffled negatives do not
 represent intergenic regions, coding regions, or other genomic backgrounds that
 may generate false positives in practical use. Claims about biological
 generalization must therefore rely on CDBProm, CNNProm, and GraphPro experiments,
-whose source datasets include non-promoter examples. However, their current
-processed partitions are not yet suitable for that purpose: all 26 audited
-pairs contain exact train--test overlap, covering 98.09\% of the combined test
-rows. This dominant contamination was traced to append-mode writes during
+whose source datasets include non-promoter examples. Their initially processed
+partitions were not suitable for that purpose: all 26 audited pairs contained
+exact train--test overlap, covering 98.09\% of the combined test rows. This
+dominant contamination was traced to append-mode writes during
 legacy cropping rather than to the downloaded record multiplicities. Rebuilding
 with overwrite semantics reduced overlap to 2.17\% and yielded 9 immediately
 eligible pairs before collision treatment. Mandatory bilateral removal of the

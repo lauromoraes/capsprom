@@ -1,15 +1,40 @@
-# Canonical Real-Negative Fixed-Seed Baseline Results
+# Canonical Real-Negative Baseline Results
 
 ## Status
 
-This report summarizes the frozen seed-42 sweep over the 25 canonical v3
+This report records both the frozen seed-42 screening sweep and the completed
+ten-seed confirmatory replication over the 25 canonical v3
 dataset pairs whose test outcomes were not observed during the earlier smoke
 test. Logistic regression and XGBoost use the same feature representation,
-partitions, and fold manifests. The sweep is a complete paired dataset analysis,
-but it is not the final confirmatory result because the stochastic XGBoost
-contract requires ten predeclared seeds.
+partitions, and fold manifests.
 
-## Cross-Dataset Summary
+## Ten-Seed Confirmatory Summary
+
+Table `tab:real-negative-ten-seed-summary` reports the predeclared primary
+comparison. XGBoost is summarized within each dataset by its median MCC over ten
+seeds, then paired with the single deterministic logistic-regression MCC.
+
+| Quantity | Result |
+| --- | ---: |
+| Dataset pairs | 25 |
+| Seeds per XGBoost dataset | 10 |
+| Median logistic-regression MCC | 0.4942 |
+| Median seed-aggregated XGBoost MCC | 0.5556 |
+| Median paired MCC difference, XGBoost minus logistic | 0.0574 |
+| Bootstrap 95% CI for median difference | [0.0293, 0.0777] |
+| Mean paired MCC difference | 0.0575 |
+| XGBoost wins / ties / logistic wins | 21 / 0 / 4 |
+| Two-sided Wilcoxon signed-rank p-value | 0.00000656 |
+| Median within-dataset XGBoost MCC standard deviation | 0.0124 |
+| Maximum within-dataset XGBoost MCC standard deviation | 0.0353 |
+
+The confirmatory estimate remains positive after stochastic replication and is
+slightly smaller than the seed-42 screening estimate. The complete state and
+machine-readable summaries are stored locally under
+`outputs/reports/xgboost_ten_seed_replication_v2/`; the frozen configuration and
+summary code are versioned in the repository.
+
+## Fixed-Seed Screening Summary
 
 Table `tab:real-negative-fixed-seed-summary` reports the paired MCC summary.
 
@@ -24,8 +49,9 @@ Table `tab:real-negative-fixed-seed-summary` reports the paired MCC summary.
 | XGBoost wins / ties / logistic wins | 21 / 0 / 4 |
 | Two-sided Wilcoxon signed-rank p-value | 0.00001234 |
 
-The effect favors XGBoost across this fixed-seed sweep. It must be re-estimated
-from the predeclared ten-seed XGBoost summaries before confirmatory reporting.
+The effect favors XGBoost across this fixed-seed sweep and is retained as the
+predeclared screening analysis. The ten-seed result above supersedes it for
+confirmatory reporting.
 Dataset-specific exact McNemar results are retained as secondary diagnostics in
 the generated paired CSV and are not substituted for the primary MCC effect.
 
