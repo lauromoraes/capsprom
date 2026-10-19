@@ -224,6 +224,7 @@ __marimo__/
 /data/*.ipynb
 /mlruns/
 /mlflow.db
+/mlflow.db-journal
 /outputs/runs/
 /outputs/figures/
 /outputs/models/

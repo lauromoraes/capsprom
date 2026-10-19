@@ -55,6 +55,11 @@ checks and must not be treated as confirmatory model comparisons.
 It excludes the observed smoke-test pair from primary confirmatory inference
 and is materialized or resumed with `scripts/run_real_negative_baselines.py`.
 
+`xgboost_ten_seed_replication.yaml` freezes the confirmatory replication of
+XGBoost over the ten seeds declared in the thesis protocol. It reuses the
+seed-42 run identifiers from the completed baseline batch and plans the
+remaining combinations with `scripts/run_xgboost_replication.py`.
+
 Dataset-pair integrity auditing is independent of a model configuration. Audit
 the canonical strict-DNA CDBProm, CNNProm, and GraphPro pairs with:
 
