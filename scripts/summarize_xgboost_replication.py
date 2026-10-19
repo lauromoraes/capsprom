@@ -10,7 +10,7 @@ import numpy as np
 from scipy.stats import wilcoxon
 
 
-REPLICATION_STATE = Path("outputs/reports/xgboost_ten_seed_replication/replication_state.json")
+REPLICATION_STATE = Path("outputs/reports/xgboost_ten_seed_replication_v2/replication_state.json")
 BASELINE_STATE = Path("outputs/reports/real_negative_baseline_batch/batch_state.json")
 OUTPUT_DIR = REPLICATION_STATE.parent
 

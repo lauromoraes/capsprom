@@ -1,0 +1,37 @@
+{
+  "active_dataset": "data/processed/assembled_datasets/intra_regenerated_v3_strict_dna",
+  "experiments": {
+    "fixed_seed_baseline": {
+      "completed": 50,
+      "config": "configs/real_negative_baseline_batch.yaml",
+      "config_sha256": "634feaa35671fa91db149e21934372f36647ae4526851f56bc07658441c870bf",
+      "planned": 50,
+      "remaining": 0,
+      "reused": 0,
+      "state": "outputs/reports/real_negative_baseline_batch/batch_state.json",
+      "state_available": true
+    },
+    "xgboost_replication_v1": {
+      "completed": 35,
+      "config": "configs/xgboost_ten_seed_replication.yaml",
+      "config_sha256": "0fc7f609ee23cc2f7b3e4d12cee4406d3bd1f3468166231811b0bb6e98da81a3",
+      "planned": 250,
+      "remaining": 215,
+      "reused": 25,
+      "state": "outputs/reports/xgboost_ten_seed_replication/replication_state.json",
+      "state_available": true
+    },
+    "xgboost_replication_v2": {
+      "completed": 31,
+      "config": "configs/xgboost_ten_seed_replication_v2.yaml",
+      "config_sha256": "a8e649b20ac79c1a9e6f0863a4092fa4011701fb1db0e000a399fc7236069d2f",
+      "planned": 250,
+      "remaining": 219,
+      "reused": 25,
+      "state": "outputs/reports/xgboost_ten_seed_replication_v2/replication_state.json",
+      "state_available": true
+    }
+  },
+  "generated_at_utc": "2026-10-19T23:00:37.372066+00:00",
+  "next_action": "make replication-resume"
+}

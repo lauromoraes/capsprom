@@ -75,6 +75,22 @@ def test_config_accepts_xgboost_model(tmp_path):
     assert load_experiment_config(config_path).model.name == "xgboost"
 
 
+def test_config_accepts_disabled_model_logging(tmp_path):
+    train = tmp_path / "train.csv"
+    test = tmp_path / "test.csv"
+    config_path = tmp_path / "experiment.yaml"
+    _write_dataset(train)
+    _write_dataset(test)
+    _write_config(config_path, train, test)
+    text = config_path.read_text(encoding="utf-8").replace(
+        "outputs:\n  artifact_dir: outputs/runs",
+        "outputs:\n  artifact_dir: outputs/runs\n  log_model: false",
+    )
+    config_path.write_text(text, encoding="utf-8")
+
+    assert load_experiment_config(config_path).outputs.log_model is False
+
+
 def test_metric_calculation():
     metrics = calculate_metrics(
         [

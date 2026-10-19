@@ -60,6 +60,12 @@ XGBoost over the ten seeds declared in the thesis protocol. It reuses the
 seed-42 run identifiers from the completed baseline batch and plans the
 remaining combinations with `scripts/run_xgboost_replication.py`.
 
+`xgboost_ten_seed_replication_v2.yaml` is the active execution contract. It
+retains all scientific settings, validates seed-42 reuse against the source
+configuration, uses atomic checkpoints, and skips redundant complete-model
+serialization while preserving predictions and provenance. Version 1 remains
+unchanged for audit.
+
 Dataset-pair integrity auditing is independent of a model configuration. Audit
 the canonical strict-DNA CDBProm, CNNProm, and GraphPro pairs with:
 

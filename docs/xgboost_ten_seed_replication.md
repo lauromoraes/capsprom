@@ -8,7 +8,7 @@ ten-seed estimate on the same 25 confirmatory datasets. The exploratory GraphPro
 `clostridium_phytofermentans` pair remains excluded because its test result was
 observed during pipeline validation.
 
-## Frozen Contract
+## Frozen Contracts
 
 The seeds are `13, 29, 42, 71, 101, 137, 173, 211, 251, 293`, matching the
 thesis protocol. Data, features, XGBoost hyperparameters, prediction threshold,
@@ -17,22 +17,29 @@ existing seed-42 XGBoost runs are reused by run identifier and recorded as such
 in the replication state; the other 225 combinations are executed as new MLflow
 runs. State is persisted after every completed run.
 
+Version 1 logged a complete model for every seed and is retained unchanged for
+audit. Version 2 is the active contract. It uses a new state path, verifies the
+scientific equivalence of every reused seed-42 configuration, preserves source
+and target configuration hashes separately, writes checkpoints atomically, and
+disables repeated model serialization. Configuration, data hashes, dependency
+versions, predictions, fold manifests, parameters, and metrics remain tracked.
+
 Materialize or inspect the plan with:
 
 ```bash
-PYTHONPATH=src .venv/bin/python scripts/run_xgboost_replication.py
+make replication-plan
 ```
 
 Execute or resume it with:
 
 ```bash
-PYTHONPATH=src .venv/bin/python scripts/run_xgboost_replication.py --execute
+make replication-resume
 ```
 
 After all 250 entries are complete, generate the confirmatory summaries with:
 
 ```bash
-PYTHONPATH=src .venv/bin/python scripts/summarize_xgboost_replication.py
+make replication-summary
 ```
 
 The primary dataset-level XGBoost estimate is the median MCC across seeds, with

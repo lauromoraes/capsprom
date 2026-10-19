@@ -31,6 +31,7 @@ For development and validation tools, install:
 
 ```bash
 python -m pip install -r requirements/dev.txt
+python -m pip install --no-deps --no-build-isolation -e .
 ```
 
 XGBoost is kept in a separate optional file because its Linux wheel may download
@@ -73,6 +74,8 @@ source .venv/bin/activate
 ```bash
 python --version
 python -m pip --version
+capsprom status
+make check
 ```
 
 Expected current versions:

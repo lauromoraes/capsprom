@@ -11,7 +11,7 @@ from capsprom.xgboost_replication import execute_xgboost_replication, materializ
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", type=Path, default=Path("configs/xgboost_ten_seed_replication.yaml"))
+    parser.add_argument("--config", type=Path, default=Path("configs/xgboost_ten_seed_replication_v2.yaml"))
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--max-runs", type=int)
     args = parser.parse_args()

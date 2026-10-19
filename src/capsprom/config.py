@@ -39,6 +39,7 @@ class TrackingConfig:
 @dataclass(frozen=True)
 class OutputConfig:
     artifact_dir: Path
+    log_model: bool
 
 
 @dataclass(frozen=True)
@@ -150,7 +151,10 @@ def load_experiment_config(path: Path | str) -> ExperimentConfig:
             tracking_uri=str(tracking.get("tracking_uri", "./mlruns")),
             experiment_name=_non_empty(tracking, "experiment_name"),
         ),
-        outputs=OutputConfig(artifact_dir=_path(outputs, "artifact_dir", base_dir, must_exist=False)),
+        outputs=OutputConfig(
+            artifact_dir=_path(outputs, "artifact_dir", base_dir, must_exist=False),
+            log_model=_boolean(outputs, "log_model", default=True),
+        ),
     )
 
 
@@ -182,6 +186,13 @@ def _optional_positive_int(parent: Mapping[str, Any], key: str) -> int | None:
     if parent.get(key) is None:
         return None
     return _positive_int(parent, key)
+
+
+def _boolean(parent: Mapping[str, Any], key: str, default: bool) -> bool:
+    value = parent.get(key, default)
+    if not isinstance(value, bool):
+        raise ValueError(f"{key} must be a boolean")
+    return value
 
 
 def _path(parent: Mapping[str, Any], key: str, base_dir: Path, must_exist: bool = True) -> Path:

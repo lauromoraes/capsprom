@@ -13,6 +13,7 @@ import yaml
 from .config import load_experiment_config
 from .data.batch_audit import discover_dataset_pairs
 from .experiment import run_experiment
+from .state import write_json_atomic
 
 
 @dataclass(frozen=True)
@@ -42,7 +43,11 @@ def materialize_xgboost_replication(config: Path) -> list[PlannedReplicationRun]
     root = config_path.parent.parent
     dataset_dir = _resolve(root, replication.get("dataset_dir"))
     generated_dir = _resolve(root, replication.get("generated_config_dir"))
-    artifact_dir = _resolve(root, _mapping(raw, "outputs").get("artifact_dir"))
+    outputs = _mapping(raw, "outputs")
+    artifact_dir = _resolve(root, outputs.get("artifact_dir"))
+    log_model = outputs.get("log_model", True)
+    if not isinstance(log_model, bool):
+        raise ValueError("outputs.log_model must be a boolean")
     excluded = {str(value) for value in replication.get("excluded_datasets", [])}
     seeds = [int(value) for value in replication.get("seeds", [])]
     if len(seeds) != 10 or len(set(seeds)) != 10:
@@ -76,7 +81,10 @@ def materialize_xgboost_replication(config: Path) -> list[PlannedReplicationRun]
                 "features": dict(_mapping(raw, "features")),
                 "model": dict(model),
                 "evaluation": dict(_mapping(raw, "evaluation")),
-                "outputs": {"artifact_dir": artifact_dir.as_posix()},
+                "outputs": {
+                    "artifact_dir": artifact_dir.as_posix(),
+                    "log_model": log_model,
+                },
             }
             run_config = generated_dir / f"{key}.yaml"
             content = yaml.safe_dump(derived, sort_keys=False)
@@ -117,7 +125,7 @@ def execute_xgboost_replication(config: Path, max_runs: int | None = None) -> di
             "seed": item.seed,
             "reused": False,
         }
-        state_path.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        write_json_atomic(state_path, state)
     return state
 
 
@@ -132,15 +140,25 @@ def _write_state(root: Path, config: Path, spec: Mapping[str, Any], plan: list[P
     source_state = json.loads(_resolve(root, spec.get("reuse_state_path")).read_text(encoding="utf-8"))
     reuse_seed = int(spec.get("reuse_seed", 42))
     by_key = {item.key: item for item in plan}
+    source_plan = {item["key"]: item for item in source_state.get("plan", [])}
     for source_key, run in source_state["completed"].items():
         if run.get("tier") != "confirmatory" or not source_key.endswith("--xgboost"):
             continue
         dataset = source_key.removesuffix("--xgboost")
         target_key = f"{dataset}--xgboost--seed-{reuse_seed}"
         if target_key in by_key and target_key not in completed:
+            source_item = source_plan.get(source_key)
+            if source_item is None:
+                raise ValueError(f"source plan entry missing for reusable run {source_key}")
+            source_config_path = Path(source_item["config_path"])
+            target_config_path = by_key[target_key].config_path
+            source_config = yaml.safe_load(source_config_path.read_text(encoding="utf-8"))
+            target_config = yaml.safe_load(target_config_path.read_text(encoding="utf-8"))
+            _validate_reusable_config(source_key, source_config, target_config, reuse_seed)
             completed[target_key] = {
                 **run,
-                "config_sha256": by_key[target_key].config_sha256,
+                "source_config_sha256": run["config_sha256"],
+                "replication_config_sha256": by_key[target_key].config_sha256,
                 "seed": reuse_seed,
                 "reused": True,
                 "source_batch_key": source_key,
@@ -153,7 +171,30 @@ def _write_state(root: Path, config: Path, spec: Mapping[str, Any], plan: list[P
         "plan": [{**asdict(item), "config_path": item.config_path.as_posix()} for item in plan],
         "completed": completed,
     }
-    state_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    write_json_atomic(state_path, payload)
+
+
+def _validate_reusable_config(
+    source_key: str,
+    source: Mapping[str, Any],
+    target: Mapping[str, Any],
+    reuse_seed: int,
+) -> None:
+    """Require scientific equivalence before reusing a completed source run."""
+
+    source_data = dict(_mapping(source, "data"))
+    target_data = dict(_mapping(target, "data"))
+    if int(source_data.get("random_seed", -1)) != reuse_seed:
+        raise ValueError(f"reusable run {source_key} does not use seed {reuse_seed}")
+    comparable = {
+        "data": (source_data, target_data),
+        "features": (_mapping(source, "features"), _mapping(target, "features")),
+        "model": (_mapping(source, "model"), _mapping(target, "model")),
+        "evaluation": (_mapping(source, "evaluation"), _mapping(target, "evaluation")),
+    }
+    mismatched = [name for name, (left, right) in comparable.items() if left != right]
+    if mismatched:
+        raise ValueError(f"reusable run {source_key} differs in {mismatched}")
 
 
 def _mapping(parent: Mapping[str, Any], key: str) -> Mapping[str, Any]:

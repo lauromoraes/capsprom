@@ -10,6 +10,7 @@ from typing import Sequence
 from .config import load_experiment_config
 from .data.batch_audit import audit_dataset_directory
 from .experiment import audit_dataset_pair, run_experiment, validate_dataset
+from .project_status import collect_project_status, write_status_snapshot
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -27,9 +28,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         dest="sources",
         help="Source prefix to include; repeat for multiple sources",
     )
+    status_parser = subparsers.add_parser("status")
+    status_parser.add_argument("--write", type=Path, help="Write a compact JSON snapshot")
     args = parser.parse_args(argv)
 
     try:
+        if args.command == "status":
+            report = write_status_snapshot(args.write) if args.write else collect_project_status()
+            print(json.dumps(report, indent=2))
+            return 0
         if args.command == "audit-datasets":
             sources = tuple(args.sources or ("cdbprom", "cnnprom", "graphpro"))
             report = audit_dataset_directory(args.input_dir, args.output_dir, sources=sources)

@@ -1,0 +1,55 @@
+replication:
+  name: canonical-v3-xgboost-ten-seed-replication-v2
+  dataset_dir: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna
+  generated_config_dir: outputs/reports/xgboost_ten_seed_replication_v2/configs
+  state_path: outputs/reports/xgboost_ten_seed_replication_v2/replication_state.json
+  reuse_state_path: outputs/reports/real_negative_baseline_batch/batch_state.json
+  reuse_seed: 42
+  seeds: [13, 29, 42, 71, 101, 137, 173, 211, 251, 293]
+  excluded_datasets:
+    - graphpro-prokaryotic-clostridium_phytofermentans
+
+tracking:
+  tracking_uri: sqlite:///mlflow.db
+  experiment_name: capsprom-xgboost-ten-seed-replication-v2
+
+features:
+  combination_mode: concatenate
+  blocks:
+    - name: kmer_frequency_3
+      encoding: kmer_frequency
+      k: 3
+      normalize: true
+    - name: gc_content_skew
+      encoding: gc_content_skew
+      include_global: true
+      include_skew: true
+
+model:
+  name: xgboost
+  hyperparameters:
+    n_estimators: 300
+    max_depth: 4
+    learning_rate: 0.05
+    subsample: 0.9
+    colsample_bytree: 0.9
+    tree_method: hist
+
+evaluation:
+  metrics:
+    - matthews_corrcoef
+    - roc_auc
+    - average_precision
+    - specificity
+    - balanced_accuracy
+    - accuracy
+    - precision
+    - recall
+    - f1
+    - brier_score
+    - log_loss
+    - expected_calibration_error
+
+outputs:
+  artifact_dir: outputs/runs
+  log_model: false

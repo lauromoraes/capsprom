@@ -201,18 +201,20 @@ def run_experiment(config: ExperimentConfig) -> RunResult:
         mlflow.log_artifact(str(output_dir / "run_summary.json"), artifact_path="reports")
         mlflow.log_artifact(str(predictions_path), artifact_path="predictions")
         mlflow.log_artifact(str(fold_manifest_path), artifact_path="provenance")
-        if config.model.name == "xgboost":
-            mlflow.xgboost.log_model(
-                model,
-                name="model",
-                pip_requirements=pip_requirements,
-            )
-        else:
-            mlflow.sklearn.log_model(
-                model,
-                name="model",
-                pip_requirements=pip_requirements,
-            )
+        mlflow.log_param("log_model", config.outputs.log_model)
+        if config.outputs.log_model:
+            if config.model.name == "xgboost":
+                mlflow.xgboost.log_model(
+                    model,
+                    name="model",
+                    pip_requirements=pip_requirements,
+                )
+            else:
+                mlflow.sklearn.log_model(
+                    model,
+                    name="model",
+                    pip_requirements=pip_requirements,
+                )
 
     return RunResult(run_id, output_dir, metrics, len(train.labels), len(test.labels))
 

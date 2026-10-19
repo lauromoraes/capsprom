@@ -52,6 +52,17 @@ experimental validation, and thesis-grade documentation.
 
 A local virtual environment is available at `.venv/`. Setup and activation instructions are documented in `docs/development_environment.md`.
 
+Install the repository package in editable mode and run the standard checks:
+
+```bash
+make install-dev
+make check
+make status
+```
+
+`make status` provides the active dataset contract, Git state, experiment
+checkpoints, and the next recommended command without loading the ML stack.
+
 ## Academic Writing
 
 Thesis-oriented figures, tables, diagrams, and plots must always be introduced and referenced in the surrounding text, with descriptive captions and stable labels. See `specs/academic_writing_spec.md`.

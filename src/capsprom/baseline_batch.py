@@ -13,6 +13,7 @@ import yaml
 from .config import load_experiment_config
 from .data.batch_audit import discover_dataset_pairs
 from .experiment import run_experiment
+from .state import write_json_atomic
 
 
 @dataclass(frozen=True)
@@ -131,7 +132,7 @@ def execute_baseline_batch(
             "config_sha256": item.config_sha256,
             "tier": item.tier,
         }
-        state_path.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        write_json_atomic(state_path, state)
     return state
 
 
@@ -159,7 +160,7 @@ def _write_plan(state_path: Path, batch_config: Path, plan: list[PlannedBaseline
         "plan": [{**asdict(item), "config_path": item.config_path.as_posix()} for item in plan],
         "completed": existing.get("completed", {}),
     }
-    state_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    write_json_atomic(state_path, payload)
 
 
 def _mapping(parent: Mapping[str, Any], key: str) -> Mapping[str, Any]:
