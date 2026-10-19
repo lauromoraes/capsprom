@@ -2,8 +2,13 @@
 
 \section{Interpretation of Results}\label{sec:discussion-interpretation}
 
-This section will interpret the experimental findings in relation to promoter
-biology, dataset heterogeneity, and representation learning.
+The corrected Bhandari development experiment shows that the baseline models
+can distinguish authentic promoter windows from composition-preserving shuffled
+versions without relying on exact train--test duplication. XGBoost produced the
+stronger fixed-seed result, suggesting that nonlinear interactions among 3-mer
+composition and GC descriptors contribute to this controlled discrimination.
+This finding concerns sequence-order disruption and does not establish the
+ability to reject genomic non-promoter regions.
 
 \section{Comparison With Prior Work}\label{sec:discussion-prior-work}
 
@@ -13,9 +18,58 @@ and GraphPro when reproduced under compatible conditions.
 
 \section{Threats to Validity}\label{sec:discussion-threats}
 
-Potential threats include source-specific negative-set construction, class
-imbalance, organism-specific signals, fixed-window assumptions, and differences
-between original and reproduced baselines.
+The most immediate threat is negative-set construction. The downloaded
+Bhandari collections contain promoters only, so their shuffled negatives do not
+represent intergenic regions, coding regions, or other genomic backgrounds that
+may generate false positives in practical use. Claims about biological
+generalization must therefore rely on CDBProm, CNNProm, and GraphPro experiments,
+whose source datasets include non-promoter examples. However, their current
+processed partitions are not yet suitable for that purpose: all 26 audited
+pairs contain exact train--test overlap, covering 98.09\% of the combined test
+rows. This dominant contamination was traced to append-mode writes during
+legacy cropping rather than to the downloaded record multiplicities. Rebuilding
+with overwrite semantics reduced overlap to 2.17\% and yielded 9 immediately
+eligible pairs before collision treatment. Mandatory bilateral removal of the
+1,348 post-cropping cross-label collisions removed 2,696 rows, eliminated label
+conflicts, and increased the eligible count to 10. Their source-provided class
+definitions remain valuable. The subsequent canonical build removed 301
+positive and 759 negative same-label duplicate rows and assigned unique
+sequence groups deterministically, after which all 26 pairs passed the exact
+duplicate, label-conflict, and train--test-overlap criteria. Near-duplicate and
+homology dependence nevertheless remain to be evaluated before confirmatory
+model comparisons are interpreted.
+
+The Hamming-distance sensitivity audit narrows this residual concern. Only 96
+of 35,991 test sequences have a training neighbor within eight substitutions,
+and every detected neighbor relation is label-consistent. This low prevalence
+does not justify changing the frozen primary v3 split on the basis of test-set
+inspection. Instead, these rows define a secondary sensitivity analysis: model
+conclusions should be recomputed after excluding affected test rows or under a
+separately generated similarity-clustered split. More distant evolutionary or
+functional homology is not captured by Hamming distance and remains a threat to
+external validity.
+
+The concentration of 1,345 collisions in the GraphPro \textit{E. coli}
+dataset is qualitatively different from a cropping-induced collision. Every
+affected raw record is duplicated across the supplied positive and negative
+files with the same sequence and complete FASTA header, including coordinate
+and strand. This evidence locates the contradiction in the distributed source
+classes, although the available files do not establish whether it arose from
+dataset packaging, negative-set construction, or an intentional source-study
+choice. Bilateral exclusion is consequently more defensible than selecting one
+label: relabeling would introduce an unsupported biological judgment, whereas
+retaining both labels would make the supervised target internally inconsistent.
+The removal is substantial---53.39\% of positive and 34.72\% of negative
+records---and must therefore be considered when interpreting comparability with
+the source study.
+
+The legacy Bhandari split also contained extensive exact duplication: 49.87\%
+of its test rows occurred as sequences in training. Although the corrected split
+eliminates exact overlap, near-duplicate or homologous dependence remains a
+possible threat and requires a later sensitivity analysis. Additional threats
+include class imbalance, organism-specific signals, fixed-window assumptions,
+heterogeneous source definitions, and differences between original and
+reproduced baselines.
 
 \section{Interpretability and Uncertainty}\label{sec:discussion-interpretability}
 

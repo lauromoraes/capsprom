@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import random
 import re
 from collections import Counter, defaultdict
@@ -42,6 +43,70 @@ class CsvBuildResult:
     positives: int
     negatives: int
     rows: int
+
+
+@dataclass(frozen=True)
+class CollisionFilterAudit:
+    study: str
+    organism_type: str
+    dataset: str
+    positive_rows_after_crop: int
+    negative_rows_after_crop: int
+    positive_unique_after_crop: int
+    negative_unique_after_crop: int
+    cross_label_collision_sequences: int
+    positive_rows_removed_as_collisions: int
+    negative_rows_removed_as_collisions: int
+    positive_rows_after_collision_filter: int
+    negative_rows_after_collision_filter: int
+    train_positive: int
+    train_negative: int
+    test_positive: int
+    test_negative: int
+
+
+@dataclass(frozen=True)
+class IntraDatasetBuildReport:
+    outputs: tuple[CsvBuildResult, ...]
+    collision_audits: tuple[CollisionFilterAudit, ...]
+
+
+@dataclass(frozen=True)
+class GroupSafeFilterAudit:
+    """Stage counts for one canonical source-negative dataset build."""
+
+    study: str
+    organism_type: str
+    dataset: str
+    positive_rows_after_crop: int
+    negative_rows_after_crop: int
+    positive_unique_after_crop: int
+    negative_unique_after_crop: int
+    cross_label_collision_sequences: int
+    positive_rows_removed_as_collisions: int
+    negative_rows_removed_as_collisions: int
+    positive_rows_after_collision_filter: int
+    negative_rows_after_collision_filter: int
+    positive_duplicate_rows_removed: int
+    negative_duplicate_rows_removed: int
+    positive_rows_after_deduplication: int
+    negative_rows_after_deduplication: int
+    positive_invalid_dna_rows_removed: int
+    negative_invalid_dna_rows_removed: int
+    positive_rows_before_split: int
+    negative_rows_before_split: int
+    train_positive: int
+    train_negative: int
+    test_positive: int
+    test_negative: int
+
+
+@dataclass(frozen=True)
+class GroupSafeDatasetBuildReport:
+    """Outputs and stage audits from the canonical group-safe builder."""
+
+    outputs: tuple[CsvBuildResult, ...]
+    filter_audits: tuple[GroupSafeFilterAudit, ...]
 
 
 @dataclass(frozen=True)
@@ -144,13 +209,34 @@ def build_intra_dataset_csvs(
     random_seed: int = 42,
     strict_dna_only: bool = False,
 ) -> list[CsvBuildResult]:
-    """Build train/test CSVs for each intra-study promoter/non-promoter pair."""
+    """Build CSVs after mandatorily removing post-crop cross-label collisions."""
+
+    return list(
+        build_intra_dataset_csvs_with_audit(
+            cropped_fasta_dir,
+            output_dir,
+            test_fraction=test_fraction,
+            random_seed=random_seed,
+            strict_dna_only=strict_dna_only,
+        ).outputs
+    )
+
+
+def build_intra_dataset_csvs_with_audit(
+    cropped_fasta_dir: Path,
+    output_dir: Path,
+    test_fraction: float = 0.2,
+    random_seed: int = 42,
+    strict_dna_only: bool = False,
+) -> IntraDatasetBuildReport:
+    """Build train/test CSVs and report every post-crop collision removal."""
 
     if not 0 < test_fraction < 1:
         raise ValueError("test_fraction must be between 0 and 1")
     output_dir.mkdir(parents=True, exist_ok=True)
     rng = random.Random(random_seed)
     results: list[CsvBuildResult] = []
+    audits: list[CollisionFilterAudit] = []
 
     pairs = group_promoter_pairs(sorted(cropped_fasta_dir.glob("*.fa")))
     for (study, organism_type, dataset), paths in sorted(pairs.items()):
@@ -158,6 +244,13 @@ def build_intra_dataset_csvs(
             continue
         positive_rows = fasta_to_labeled_rows(paths["p"], 1, strict_dna_only=strict_dna_only)
         negative_rows = fasta_to_labeled_rows(paths["n"], 0, strict_dna_only=strict_dna_only)
+        positive_sequences = Counter(str(row["sequence"]) for row in positive_rows)
+        negative_sequences = Counter(str(row["sequence"]) for row in negative_rows)
+        collisions = set(positive_sequences) & set(negative_sequences)
+        positive_removed = sum(positive_sequences[sequence] for sequence in collisions)
+        negative_removed = sum(negative_sequences[sequence] for sequence in collisions)
+        positive_rows = [row for row in positive_rows if row["sequence"] not in collisions]
+        negative_rows = [row for row in negative_rows if row["sequence"] not in collisions]
         for rows in (positive_rows, negative_rows):
             rng.shuffle(rows)
         p_test = int(round(len(positive_rows) * test_fraction))
@@ -166,6 +259,26 @@ def build_intra_dataset_csvs(
             "train": positive_rows[p_test:] + negative_rows[n_test:],
             "test": positive_rows[:p_test] + negative_rows[:n_test],
         }
+        audits.append(
+            CollisionFilterAudit(
+                study=study,
+                organism_type=organism_type,
+                dataset=dataset,
+                positive_rows_after_crop=sum(positive_sequences.values()),
+                negative_rows_after_crop=sum(negative_sequences.values()),
+                positive_unique_after_crop=len(positive_sequences),
+                negative_unique_after_crop=len(negative_sequences),
+                cross_label_collision_sequences=len(collisions),
+                positive_rows_removed_as_collisions=positive_removed,
+                negative_rows_removed_as_collisions=negative_removed,
+                positive_rows_after_collision_filter=len(positive_rows),
+                negative_rows_after_collision_filter=len(negative_rows),
+                train_positive=len(positive_rows) - p_test,
+                train_negative=len(negative_rows) - n_test,
+                test_positive=p_test,
+                test_negative=n_test,
+            )
+        )
         for partition, rows in partitions.items():
             rng.shuffle(rows)
             positives = sum(1 for row in rows if row["label"] == 1)
@@ -173,7 +286,125 @@ def build_intra_dataset_csvs(
             output = output_dir / f"{study}-{organism_type}-{dataset}-p-{positives}-n-{negatives}-{partition}.csv"
             write_labeled_csv(rows, output)
             results.append(CsvBuildResult(output, positives, negatives, len(rows)))
-    return results
+    return IntraDatasetBuildReport(tuple(results), tuple(audits))
+
+
+def _deduplicate_labeled_rows(rows: list[dict[str, str | int]]) -> tuple[list[dict[str, str | int]], int]:
+    """Keep the first row for each normalized sequence and count removals."""
+
+    unique: dict[str, dict[str, str | int]] = {}
+    for row in rows:
+        unique.setdefault(str(row["sequence"]), row)
+    return list(unique.values()), len(rows) - len(unique)
+
+
+def _dataset_rng(seed: int, study: str, organism_type: str, dataset: str) -> random.Random:
+    """Return an order-independent deterministic RNG for one dataset."""
+
+    identity = f"{seed}:{study}:{organism_type}:{dataset}".encode()
+    derived_seed = int.from_bytes(hashlib.sha256(identity).digest()[:8], "big")
+    return random.Random(derived_seed)
+
+
+def _test_size(row_count: int, test_fraction: float) -> int:
+    """Return a non-empty test size when both partitions can be formed."""
+
+    if row_count < 2:
+        raise ValueError("each class must contain at least two unique strict-DNA sequences")
+    return min(row_count - 1, max(1, int(round(row_count * test_fraction))))
+
+
+def build_group_safe_intra_dataset_csvs_with_audit(
+    cropped_fasta_dir: Path,
+    output_dir: Path,
+    test_fraction: float = 0.2,
+    random_seed: int = 42,
+) -> GroupSafeDatasetBuildReport:
+    """Build canonical exact-sequence-safe train/test datasets.
+
+    The fixed order is collision removal, within-class deduplication, strict-DNA
+    filtering, and deterministic class-stratified assignment of unique sequence
+    groups. Consequently, no exact identity can occur twice or cross the split.
+    """
+
+    if not 0 < test_fraction < 1:
+        raise ValueError("test_fraction must be between 0 and 1")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    results: list[CsvBuildResult] = []
+    audits: list[GroupSafeFilterAudit] = []
+
+    pairs = group_promoter_pairs(sorted(cropped_fasta_dir.glob("*.fa")))
+    for (study, organism_type, dataset), paths in sorted(pairs.items()):
+        if "p" not in paths or "n" not in paths:
+            continue
+        positive_rows = fasta_to_labeled_rows(paths["p"], 1)
+        negative_rows = fasta_to_labeled_rows(paths["n"], 0)
+        positive_sequences = Counter(str(row["sequence"]) for row in positive_rows)
+        negative_sequences = Counter(str(row["sequence"]) for row in negative_rows)
+
+        collisions = set(positive_sequences) & set(negative_sequences)
+        positive_collision_removed = sum(positive_sequences[sequence] for sequence in collisions)
+        negative_collision_removed = sum(negative_sequences[sequence] for sequence in collisions)
+        positive_rows = [row for row in positive_rows if row["sequence"] not in collisions]
+        negative_rows = [row for row in negative_rows if row["sequence"] not in collisions]
+        positive_after_collision = len(positive_rows)
+        negative_after_collision = len(negative_rows)
+
+        positive_rows, positive_duplicates_removed = _deduplicate_labeled_rows(positive_rows)
+        negative_rows, negative_duplicates_removed = _deduplicate_labeled_rows(negative_rows)
+        positive_after_deduplication = len(positive_rows)
+        negative_after_deduplication = len(negative_rows)
+
+        positive_invalid_removed = sum(not is_strict_dna(str(row["sequence"])) for row in positive_rows)
+        negative_invalid_removed = sum(not is_strict_dna(str(row["sequence"])) for row in negative_rows)
+        positive_rows = [row for row in positive_rows if is_strict_dna(str(row["sequence"]))]
+        negative_rows = [row for row in negative_rows if is_strict_dna(str(row["sequence"]))]
+
+        rng = _dataset_rng(random_seed, study, organism_type, dataset)
+        rng.shuffle(positive_rows)
+        rng.shuffle(negative_rows)
+        p_test = _test_size(len(positive_rows), test_fraction)
+        n_test = _test_size(len(negative_rows), test_fraction)
+        partitions = {
+            "train": positive_rows[p_test:] + negative_rows[n_test:],
+            "test": positive_rows[:p_test] + negative_rows[:n_test],
+        }
+        audits.append(
+            GroupSafeFilterAudit(
+                study=study,
+                organism_type=organism_type,
+                dataset=dataset,
+                positive_rows_after_crop=sum(positive_sequences.values()),
+                negative_rows_after_crop=sum(negative_sequences.values()),
+                positive_unique_after_crop=len(positive_sequences),
+                negative_unique_after_crop=len(negative_sequences),
+                cross_label_collision_sequences=len(collisions),
+                positive_rows_removed_as_collisions=positive_collision_removed,
+                negative_rows_removed_as_collisions=negative_collision_removed,
+                positive_rows_after_collision_filter=positive_after_collision,
+                negative_rows_after_collision_filter=negative_after_collision,
+                positive_duplicate_rows_removed=positive_duplicates_removed,
+                negative_duplicate_rows_removed=negative_duplicates_removed,
+                positive_rows_after_deduplication=positive_after_deduplication,
+                negative_rows_after_deduplication=negative_after_deduplication,
+                positive_invalid_dna_rows_removed=positive_invalid_removed,
+                negative_invalid_dna_rows_removed=negative_invalid_removed,
+                positive_rows_before_split=len(positive_rows),
+                negative_rows_before_split=len(negative_rows),
+                train_positive=len(positive_rows) - p_test,
+                train_negative=len(negative_rows) - n_test,
+                test_positive=p_test,
+                test_negative=n_test,
+            )
+        )
+        for partition, rows in partitions.items():
+            rng.shuffle(rows)
+            positives = sum(1 for row in rows if row["label"] == 1)
+            negatives = sum(1 for row in rows if row["label"] == 0)
+            output = output_dir / f"{study}-{organism_type}-{dataset}-p-{positives}-n-{negatives}-{partition}.csv"
+            write_labeled_csv(rows, output)
+            results.append(CsvBuildResult(output, positives, negatives, len(rows)))
+    return GroupSafeDatasetBuildReport(tuple(results), tuple(audits))
 
 
 def cleaned_csv_name(source: Path, positive: int, negative: int) -> str:

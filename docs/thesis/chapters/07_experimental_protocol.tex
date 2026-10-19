@@ -12,22 +12,47 @@ artifacts are recorded through MLflow so that every reported value is traceable
 to a versioned YAML specification.
 
 The protocol distinguishes development from confirmatory evaluation. The
-strict-DNA Bhandari human promoter split is the initial development benchmark.
-Because its test results have already been observed during pipeline development,
-they are reported as fixed-split reference results rather than as blind
-confirmatory evidence. Confirmatory comparisons use all eligible strict-DNA
-within-source dataset pairs, with model specifications and search spaces frozen
-before test predictions are generated. Dataset-level results are the primary
-units of cross-dataset inference, preventing the largest sources from dominating
-the overall conclusion.
+deduplicated Bhandari human shuffle-control split is the initial development
+benchmark. Its negative examples are deterministic mononucleotide shuffles and
+therefore test discrimination of promoter sequence order under controlled base
+composition, not discrimination from genomic non-promoters. Because its test
+results have already been observed during pipeline development, they are
+reported as fixed-split reference results rather than as blind confirmatory
+evidence. The contaminated legacy Bhandari partition is retained only for
+provenance and historical comparability. Confirmatory comparisons use eligible
+strict-DNA datasets from sources that provide non-promoter examples, including
+CDBProm, CNNProm, and GraphPro, with model specifications and search spaces
+frozen before test predictions are generated. Their legacy fixed partitions do
+not satisfy the integrity criteria and are replaced by deduplicated group-safe
+partitions before confirmatory use. Dataset-level results are the
+primary units of cross-dataset inference, preventing the largest sources from
+dominating the overall conclusion.
 
 \section{Data Integrity and Model Selection}\label{sec:protocol-integrity}
 
 Each train--test pair is audited for strict DNA compliance, class counts, exact
 duplicates, conflicting labels, normalized partition overlap, and available
-source groups. Fixed benchmark partitions are retained for comparability, while
-duplicate-aware sensitivity analyses quantify possible leakage. When biological
-or source groups are available, resampling preserves those groups.
+source groups. Immediately after cropping and before partitioning, every
+normalized sequence observed with both labels is removed in full from the
+positive and negative classes. No label is inferred or preferred. Repeated
+same-label identities are collapsed to one row, strict-DNA filtering is applied,
+and unique exact-sequence groups are assigned deterministically to train or
+test. A filtering manifest records, for each dataset, the number of rows
+entering, removed from, and remaining after cropping, collision removal,
+within-class deduplication, strict-DNA filtering, and partitioning. Fixed
+benchmark partitions are retained for comparability when
+they pass the declared integrity criteria. A contaminated partition is retained
+only as a labeled legacy analysis and is replaced by a group-safe split for the
+primary development workflow, as in the Bhandari human correction. When
+biological or source groups are available, resampling preserves those groups.
+
+Eligibility is evaluated after all declared filters. A confirmatory pair must
+contain both classes in both partitions, no same-label exact duplicate rows, no
+cross-label collisions, and no exact sequence shared by training and test.
+Failure of any condition blocks confirmatory use but does not erase the source
+artifact: the original hashes, counts, reason for exclusion, correction policy,
+and corrected hashes remain in the audit trail. Near-duplicate and homology
+analyses are reported separately and do not replace these exact-identity gates.
 
 All data-dependent preprocessing and feature selection are fitted only on the
 training partition. Hyperparameters are selected using one fixed five-fold

@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Sequence
 
 from .config import load_experiment_config
+from .data.batch_audit import audit_dataset_directory
 from .experiment import audit_dataset_pair, run_experiment, validate_dataset
 
 
@@ -17,9 +18,23 @@ def main(argv: Sequence[str] | None = None) -> int:
     for command in ("validate-config", "validate-data", "audit-data", "run"):
         subparser = subparsers.add_parser(command)
         subparser.add_argument("config", type=Path)
+    batch_audit = subparsers.add_parser("audit-datasets")
+    batch_audit.add_argument("input_dir", type=Path)
+    batch_audit.add_argument("output_dir", type=Path)
+    batch_audit.add_argument(
+        "--source",
+        action="append",
+        dest="sources",
+        help="Source prefix to include; repeat for multiple sources",
+    )
     args = parser.parse_args(argv)
 
     try:
+        if args.command == "audit-datasets":
+            sources = tuple(args.sources or ("cdbprom", "cnnprom", "graphpro"))
+            report = audit_dataset_directory(args.input_dir, args.output_dir, sources=sources)
+            print(json.dumps(report, indent=2))
+            return 0
         config = load_experiment_config(args.config)
         if args.command == "validate-config":
             print(f"Valid configuration: {config.path}")

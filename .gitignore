@@ -237,3 +237,12 @@ __marimo__/
 
 # LaTeX thesis build artifacts
 docs/thesis/build*/
+docs/thesis/*.aux
+docs/thesis/*.bbl
+docs/thesis/*.blg
+docs/thesis/*.lof
+docs/thesis/*.lot
+docs/thesis/*.out
+docs/thesis/*.pdf
+docs/thesis/*.synctex.gz
+docs/thesis/*.toc

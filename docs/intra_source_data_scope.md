@@ -1,9 +1,10 @@
 # Intra-Source Dataset Scope
 
-This project currently considers only the data that was used to create the final intra-source processed datasets and their strict-DNA model-ready copies. For current and future EDA, feature engineering, model training, and evaluation, the active model-ready directory is:
+For confirmatory experiments using source-provided non-promoters, the active
+model-ready directory is:
 
 ```text
-data/processed/assembled_datasets/intra_strict_dna/
+data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/
 ```
 
 The original processed directory is preserved for provenance and preprocessing audit:
@@ -12,11 +13,19 @@ The original processed directory is preserved for provenance and preprocessing a
 data/processed/assembled_datasets/intra/
 ```
 
-All dataset processing notes, validation summaries, and thesis-oriented text must reflect this scope unless a future experiment explicitly expands it.
+The legacy strict-DNA directory is also retained for provenance and audit:
+
+```text
+data/processed/assembled_datasets/intra_strict_dna/
+```
+
+Bhandari shuffle controls remain in their separately declared leakage-controlled
+directory. All dataset processing notes, validation summaries, and
+thesis-oriented text must distinguish active and legacy scopes.
 
 ## Included Sources
 
-The final intra-source CSV files come from four source groups:
+The source inventory contains four source groups:
 
 | Source prefix | Final CSV files | Scope |
 | --- | ---: | --- |
@@ -25,7 +34,8 @@ The final intra-source CSV files come from four source groups:
 | `cnnprom` | 14 | Eukaryotic and prokaryotic CNNProm benchmark datasets |
 | `graphpro` | 16 | Eukaryotic and prokaryotic GraphPro benchmark datasets |
 
-Total final strict-DNA intra-source CSV files: 58.
+The canonical source-negative scope contains 52 CSV files representing 26
+train/test pairs. Bhandari datasets are counted separately.
 
 
 ## Active Source Provenance
@@ -34,14 +44,15 @@ The README files in the active raw source folders document the source
 publications, repositories, and selected methodological notes used to obtain the
 data. The consolidated summary is maintained in `docs/source_provenance.md`.
 These README-derived notes are part of the project context, but they do not
-expand the active data scope beyond the final strict-DNA intra-source CSV files.
+expand the active data scope beyond the canonical source-negative and declared
+Bhandari control directories.
 
 ## Excluded Data
 
 Other files or folders that may exist under `data/` are not part of the current
 intra-source dataset scope. This includes exploratory archives, unrelated raw
-sources, previous prediction outputs, and datasets not represented in the strict-DNA model-ready copies under
-`data/processed/assembled_datasets/intra_strict_dna/`.
+sources, previous prediction outputs, and datasets not represented in the
+canonical source-negative or explicitly declared Bhandari control directories.
 
 Excluded examples include:
 

@@ -4,10 +4,166 @@
 
 This section will report the final validation status of the model-ready
 unambiguous-DNA datasets and summarize the effect of cleaning ambiguous symbols.
+The completed Bhandari human audit found 162,863 duplicate training rows and
+25,703 duplicate test rows in the legacy processed split. A total of 49,060 test
+rows, corresponding to 49.87\% of that partition, belonged to exact sequences
+also present in training. No identical sequence carried conflicting labels.
+Consequently, metrics obtained from the legacy split are retained only as
+development and provenance results.
+
+The corrective pipeline produced 33,925 unique strict-DNA promoter windows and
+the same number of deterministic mononucleotide shuffle controls. Its 54,280
+training rows and 13,570 test rows contain neither internal duplicates nor exact
+train--test overlap.
+
+The same audit was then applied to the 26 CDBProm, CNNProm, and GraphPro pairs
+that include source-provided non-promoters. Table~\ref{tab:results-real-negative-integrity}
+summarizes the outcome by source. No pair passed the strict zero-duplicate and
+zero-overlap criterion. Across the three sources, 129,739 of 132,272 test rows
+(98.09\%) belong to exact sequences present in training. Four pairs also contain
+label conflicts, dominated by 1,345 conflicting sequences in the GraphPro
+\textit{E. coli} pair.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Exact-sequence integrity audit of datasets with source-provided non-promoters. ``Test overlap'' is the percentage of test rows whose normalized sequence occurs in training. None of the audited pairs is eligible for confirmatory evaluation without corrective group-safe partitioning.}
+  \label{tab:results-real-negative-integrity}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Source & Pairs & Eligible & Test overlap (\%) & Label conflicts \\
+    \midrule
+    CDBProm & 11 & 0 & 97.86 & 2 \\
+    CNNProm & 7 & 0 & 98.19 & 0 \\
+    GraphPro & 8 & 0 & 97.90 & 1346 \\
+    \midrule
+    Total & 26 & 0 & 98.09 & 1348 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Provenance tracing showed that the legacy cropping notebook opened its outputs
+in append mode. Repeated executions therefore wrote each promoter three times
+and each non-promoter four times before row-level partitioning. After changing
+the output to overwrite mode and regenerating all 26 pairs, test-row overlap
+fell from 98.09\% to 2.17\%, internal duplicate occurrences fell from 379,046
+to 1,614, and 9 pairs satisfied the strict integrity criterion without further
+correction. The 1,348 unique label conflicts were unchanged, demonstrating that
+they are independent of the append defect.
+
+The subsequent mandatory collision filter removed every post-cropping sequence
+observed with both labels from both classes. It removed 1,348 positive and 1,348
+negative rows, reducing the collection from 183,701 cropped rows to 181,005
+rows. Within-class deduplication then removed 301 positive and 759 negative
+rows, and the strict-DNA filter removed a further six positive and two negative
+rows. The resulting 179,937 unique strict-DNA sequences were assigned
+deterministically to train or test as indivisible exact-sequence groups. The
+canonical v3 audit contained zero internal duplicates, zero label conflicts,
+and zero train--test overlap in all 26 pairs. Its deterministic audit identifier
+is \texttt{87371a88ca1c5456db340201de5c19558b1a5773cb441787ffffc0803b66d853}.
+
+Table~\ref{tab:results-filtering-stage-counts} reports the class counts at each
+completed construction stage. Partition assignment does not remove rows.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Aggregate class counts through the corrected CDBProm, CNNProm, and GraphPro construction pipeline. Removed counts are relative to the immediately preceding stage.}
+  \label{tab:results-filtering-stage-counts}
+  \begin{tabular}{lrrrrr}
+    \toprule
+    Stage & Positive & Negative & Total & Removed P & Removed N \\
+    \midrule
+    After cropping & 77,554 & 106,147 & 183,701 & 0 & 0 \\
+    After collision removal & 76,206 & 104,799 & 181,005 & 1,348 & 1,348 \\
+    After within-class deduplication & 75,905 & 104,040 & 179,945 & 301 & 759 \\
+    After strict-DNA filtering & 75,899 & 104,038 & 179,937 & 6 & 2 \\
+    Assigned to training & 60,717 & 83,229 & 143,946 & 0 & 0 \\
+    Assigned to test & 15,182 & 20,809 & 35,991 & 0 & 0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The GraphPro \textit{E. coli} dataset accounts for 1,345 of the 1,348
+cross-label collisions. The original positive and negative files already
+contain 81 bp sequences, and all 1,345 conflicting sequences have identical
+FASTA headers, genomic coordinates, strands, and nucleotide strings in both
+classes. Thus, these collisions precede cropping and are not introduced by the
+CapsProm pipeline. Table~\ref{tab:results-graphpro-ecoli-filtering} shows their
+class-specific effect.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Class-specific effect of mandatory collision removal on the GraphPro \textit{E. coli} dataset. The raw, pre-crop, and post-crop collision sets are identical.}
+  \label{tab:results-graphpro-ecoli-filtering}
+  \begin{tabular}{lrrr}
+    \toprule
+    Class & Raw rows & Collision rows removed & Rows retained \\
+    \midrule
+    Promoter & 2,519 & 1,345 (53.39\%) & 1,174 \\
+    Non-promoter & 3,874 & 1,345 (34.72\%) & 2,529 \\
+    \midrule
+    Total & 6,393 & 2,690 (42.08\%) & 3,703 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Exact-identity correction does not exclude highly similar but non-identical
+sequences. Table~\ref{tab:results-near-duplicate-sensitivity} therefore reports
+the predeclared Hamming-distance sensitivity audit across all 35,991 test
+sequences. The broadest threshold found 96 affected test sequences (0.267\%).
+All 96 have at least one same-label training neighbor, while none has an
+opposite-label neighbor within eight substitutions.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Train/test near-duplicate sensitivity after canonical v3 exact-sequence correction. Counts report test sequences with at least one training neighbor within each cumulative Hamming-distance threshold.}
+  \label{tab:results-near-duplicate-sensitivity}
+  \begin{tabular}{rrrr}
+    \toprule
+    Maximum distance & Minimum identity (\%) & Test sequences & Test share (\%) \\
+    \midrule
+    1 & 98.77 & 17 & 0.047 \\
+    2 & 97.53 & 32 & 0.089 \\
+    4 & 95.06 & 49 & 0.136 \\
+    8 & 90.12 & 96 & 0.267 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \section{Baseline Results}\label{sec:results-baselines}
 
-\pendingresults
+The first leakage-controlled runs compare logistic regression and XGBoost using
+the same 66-dimensional representation: normalized 3-mer frequencies, global
+GC content, and GC skew. Table~\ref{tab:results-bhandari-shuffle-baselines}
+reports the fixed-seed development results. These values characterize the
+Bhandari shuffle-control task and must not be interpreted as performance against
+genomic non-promoters.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Fixed-seed development results on the deduplicated Bhandari human shuffle-control dataset. XGBoost improves all reported effectiveness and calibration measures relative to logistic regression, but the synthetic negative class limits the conclusion to this controlled task.}
+  \label{tab:results-bhandari-shuffle-baselines}
+  \begin{tabular}{lrr}
+    \toprule
+    Metric & Logistic regression & XGBoost \\
+    \midrule
+    Accuracy & 0.7913 & 0.8211 \\
+    Precision & 0.7924 & 0.8291 \\
+    Recall & 0.7894 & 0.8088 \\
+    Specificity & 0.7932 & 0.8333 \\
+    F1 & 0.7909 & 0.8189 \\
+    ROC-AUC & 0.8727 & 0.9049 \\
+    Average precision & 0.8744 & 0.9102 \\
+    MCC & 0.5826 & 0.6423 \\
+    Brier score & 0.1486 & 0.1258 \\
+    Log-loss & 0.4608 & 0.3951 \\
+    Expected calibration error & 0.0572 & 0.0311 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The observed MCC difference is 0.0597 in favor of XGBoost. Because these are
+single-seed development runs and no paired interval or randomization test has
+yet been executed, the difference is descriptive rather than confirmatory.
 
 \section{Feature Engineering Results}\label{sec:results-features}
 

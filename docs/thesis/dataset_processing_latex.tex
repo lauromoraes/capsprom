@@ -1,8 +1,16 @@
+% !TEX root = main.tex
 \subsection{Dataset preprocessing and construction}
 
 Let $\mathcal{S}=\{\mathrm{Bhandari},\mathrm{CDBProm},\mathrm{CNNProm},\mathrm{GraphPro}\}$ denote the set of source studies considered in this thesis. For each source $s\in\mathcal{S}$, the experimental data are represented as a finite labeled set $\mathcal{D}_{s}=\{(x_i,y_i)\}_{i=1}^{n_s}$, where $x_i$ is a DNA sequence window and $y_i\in\{0,1\}$ is the binary class label. The positive class, $y_i=1$, denotes a promoter sequence, whereas the negative class, $y_i=0$, denotes a non-promoter sequence. After preprocessing, all sequence windows are elements of $\{A,C,G,T\}^{81}$, so the experimental unit is one fixed-length 81 bp sequence-level example.
 
-The four source studies differ in organism coverage, sequence-window definition, and negative-set construction. Table~\ref{tab:active-source-provenance} summarizes the study-level provenance used to define the source set $\mathcal{S}$ before describing the transformations applied to obtain the standardized labeled sets $\mathcal{D}_{s}$.
+The four source studies differ in organism coverage, sequence-window definition,
+and negative-set construction. In particular, CDBProm, CNNProm, and GraphPro
+provide both labeled classes, whereas the downloaded Bhandari collections contain
+promoter sequences only. Bhandari experiments therefore require a separately
+declared synthetic negative-generation rule. Table~\ref{tab:active-source-provenance}
+summarizes the study-level provenance used to define the source set $\mathcal{S}$
+before describing the transformations applied to obtain the standardized labeled
+sets $\mathcal{D}_{s}$.
 
 \begin{table}[htbp]
 \centering
@@ -13,7 +21,7 @@ The four source studies differ in organism coverage, sequence-window definition,
 \hline
 Source & Publication or resource & Recorded origin \\
 \hline
-Bhandari et al. & Comparison of machine learning and deep learning techniques in promoter prediction across diverse species & Public data resource associated with the study \\
+Bhandari et al. & Comparison of machine learning and deep learning techniques in promoter prediction across diverse species & Promoter-only public data resource associated with the study \\
 CDBProm & CDBProm: the Comprehensive Directory of Bacterial Promoters, Martinez et al., 2024 & CDBProm website and training-sequence archive \\
 CNNProm & Recognition of Prokaryotic and Eukaryotic Promoters Using Convolutional Deep Learning Neural Networks, Umarov and Solovyev, 2016 & CNNPromoterData resource and Softberry website \\
 GraphPro & GraphPro: An interpretable graph neural network-based model for identifying promoters in multiple species, Zhang et al., 2024 & GraphPro public dataset resource \\
@@ -48,11 +56,92 @@ Bhandari et al. & 1000 & 700 & 81 \\
 \end{tabular}
 \end{table}
 
-After cropping, promoter and non-promoter examples were paired within each source-defined dataset. Each resulting subset is therefore represented as $\mathcal{D}_{s,k}=\mathcal{P}_{s,k}\cup\mathcal{N}_{s,k}$, where $\mathcal{P}_{s,k}=\{(x_i,1)\}$ and $\mathcal{N}_{s,k}=\{(x_i,0)\}$ denote the positive and negative examples for dataset $k$ from source $s$. The train/test partition used in this section follows the predefined partition associated with each source-derived benchmark; no additional repartitioning is introduced during this preprocessing description.
+After cropping, promoter and non-promoter examples from CDBProm, CNNProm, and
+GraphPro were paired within each source-defined dataset. Each resulting subset
+is represented as $\mathcal{D}_{s,k}=\mathcal{P}_{s,k}\cup\mathcal{N}_{s,k}$,
+where $\mathcal{P}_{s,k}=\{(x_i,1)\}$ and
+$\mathcal{N}_{s,k}=\{(x_i,0)\}$ denote the positive and negative examples for
+dataset $k$ from source $s$. Their corrected collections receive deterministic
+train/test assignments, which are then subject to integrity auditing and must
+be replaced by exact-sequence group assignments whenever row-level assignment
+produces partition overlap.
+
+\subsubsection{Exact-sequence identity and correction policies}
+
+All exact-sequence checks use the uppercase nucleotide string as the identity
+key after removal of FASTA line breaks and surrounding whitespace. Four cases
+are distinguished. A \emph{same-label duplicate} is a repeated identity within
+one class; a \emph{cross-label collision} is an identity associated with both
+labels; a \emph{partition overlap} is an identity found in both training and
+test; and a \emph{generation duplicate} is an artificial repetition introduced
+by a preprocessing execution, such as appending to an existing output file.
+These categories are reported separately because they have different causes
+and require different corrections.
+
+Generation duplicates are prevented by overwrite-only output and an
+idempotence test. Cross-label collisions are removed bilaterally as described
+below. Same-label multiplicity is then removed by retaining one occurrence of
+each normalized sequence. After strict-DNA filtering, partitioning is performed
+over unique exact-sequence groups, rather than source rows, so that no identity
+can occur in both training and test. A source-provided fixed split that violates
+either rule is retained only for provenance and is ineligible for confirmatory
+evaluation until rebuilt.
+
+Cropping can map distinct source records to the same 81 bp sequence. Therefore,
+before partitioning, the pipeline identifies the collision set
+$\mathcal{C}_{s,k}=\{x:(x,0)\in\mathcal{D}_{s,k}\land
+(x,1)\in\mathcal{D}_{s,k}\}$. Every occurrence of a sequence in
+$\mathcal{C}_{s,k}$ is removed from both classes. This bilateral policy avoids
+arbitrary relabeling and prevents an identical input from representing opposing
+targets. A filtering manifest records, for every dataset, the row counts before
+and after cropping, collision removal, partitioning, and strict-alphabet
+filtering, including the number removed at each stage.
+
+The Bhandari source follows a distinct control workflow because no genomic
+non-promoter collection was supplied. Exact promoter windows are deduplicated
+before partitioning. For each retained promoter, one deterministic
+mononucleotide shuffle is generated, preserving the counts of A, C, G, and T
+while changing their order. A promoter and its derived shuffle form an
+indivisible group, and groups are assigned to train or test with seed 42. This
+construction prevents exact train--test overlap and preserves a one-to-one
+class balance, but it defines a shuffle-control task rather than a biological
+promoter-versus-genomic-non-promoter benchmark.
+
+Table~\ref{tab:sequence-integrity-policies} fixes the identification and
+resolution rule for each exact-sequence integrity condition. These rules apply
+before any feature representation is fitted.
+
+\begin{table}[htbp]
+\centering
+\caption{Exact-sequence integrity policies applied during dataset construction. Identification uses normalized sequence identity; counts and removals are recorded per class and processing stage.}
+\label{tab:sequence-integrity-policies}
+\begin{tabular}{p{0.20\textwidth}p{0.31\textwidth}p{0.39\textwidth}}
+\toprule
+Condition & Identification & Resolution policy \\
+\midrule
+Generation duplicate & Output grows when the same deterministic step is rerun & Overwrite outputs and verify idempotence \\
+Same-label duplicate & Same sequence occurs more than once with one label & Retain one normalized sequence before partitioning; preserve source counts in provenance records \\
+Cross-label collision & Same sequence occurs with labels 0 and 1 & Remove every occurrence from both classes before partitioning \\
+Partition overlap & Same sequence occurs in training and test & Rebuild using indivisible sequence groups; reject the fixed split meanwhile \\
+Invalid DNA & Length differs from 81 or symbols fall outside $\{A,C,G,T\}$ & Remove before partition assignment and record the affected class \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsubsection{Quality control and final dataset definition}
 
-An alphabet filter was then applied to define the final model-ready sets. Let $\Sigma=\{A,C,G,T\}$ be the accepted DNA alphabet. The filtering operator $q$ retains an example $(x_i,y_i)$ if and only if $x_i\in\Sigma^{81}$ and $y_i\in\{0,1\}$. This policy ensures that all subsequent encodings, including one-hot, k-mer, and physicochemical encodings, operate over the same unambiguous DNA alphabet. Across the source-derived subsets, 338 examples were removed from 12 subsets, corresponding to approximately 0.02\% of the 1,829,262 original sequence-level examples. The filtering step therefore had minimal impact on the overall dataset size while removing incompatible ambiguous IUPAC symbols. After filtering, all 58 subsets satisfied the constraints $x_i\in\Sigma^{81}$, $y_i\in\{0,1\}$, and class-count consistency.
+An alphabet filter was then applied before partitioning to define the final
+model-ready sequence pool. Let $\Sigma=\{A,C,G,T\}$ be the accepted DNA
+alphabet. The filtering operator $q$ retains an example $(x_i,y_i)$ if and only
+if $x_i\in\Sigma^{81}$ and $y_i\in\{0,1\}$. This policy ensures that all
+subsequent encodings, including one-hot, k-mer, and physicochemical encodings,
+operate over the same unambiguous DNA alphabet. In the canonical CDBProm,
+CNNProm, and GraphPro build, this stage removed eight rows from five datasets:
+six positive and two negative examples. The earlier legacy inventory removed
+338 examples from 12 subsets and is retained only for provenance. The active
+stage counts are reported in Table~\ref{tab:results-filtering-stage-counts}, and
+the complete per-dataset ledger is reported in
+Table~\ref{tab:appendix-filtering-stage-counts}.
 
 The complete preprocessing workflow is summarized in Figure~\ref{fig:within-source-preprocessing-workflow}, which shows how heterogeneous source collections were transformed into validated, model-ready labeled sequence sets.
 
@@ -68,30 +157,42 @@ The complete preprocessing workflow is summarized in Figure~\ref{fig:within-sour
 \node[data] (sources) {Source studies $\mathcal{S}$\\Bhandari et al., CDBProm, CNNProm, and GraphPro};
 \node[process, below=of sources] (fasta) {Source normalization\\Map heterogeneous records to labeled sequence sets};
 \node[process, below=of fasta] (crop) {TSS-centered cropping\\Extract 81 bp windows: 60 bp upstream, TSS base, and 20 bp downstream};
-\node[process, below=of crop] (pair) {Within-source pairing\\Form promoter and non-promoter labeled subsets};
-\node[process, below=of pair] (csv) {Partition definition\\Preserve predefined train/test subsets};
-\node[process, below=of csv] (clean) {Alphabet filtering\\Retain only $x_i\in\{A,C,G,T\}^{81}$};
-\node[process, below=of clean] (validate) {Constraint validation\\Check length, labels, class counts, and alphabet};
-\node[output, below=of validate] (ready) {Model-ready labeled sets\\58 validated subsets for feature encoding and experiments};
+\node[process, below=of crop] (pair) {Class construction\\Use source negatives or declared Bhandari shuffles};
+\node[process, below=of pair] (collisions) {Cross-label collision filtering\\Remove every conflicting sequence from both classes};
+\node[process, below=of collisions] (deduplicate) {Within-class deduplication\\Retain one row per normalized sequence and label};
+\node[process, below=of deduplicate] (clean) {Alphabet filtering\\Retain only $x_i\in\{A,C,G,T\}^{81}$};
+\node[process, below=of clean] (csv) {Partition definition\\Assign deterministic splits; keep exact-sequence groups indivisible};
+\node[process, below=of csv] (validate) {Constraint validation\\Check length, labels, class counts, duplicates, and overlap};
+\node[output, below=of validate] (ready) {Audited labeled partitions\\Eligible sets proceed to feature encoding and experiments};
 
 \draw[arrow] (sources) -- (fasta);
 \draw[arrow] (fasta) -- (crop);
 \draw[arrow] (crop) -- (pair);
-\draw[arrow] (pair) -- (csv);
-\draw[arrow] (csv) -- (clean);
-\draw[arrow] (clean) -- (validate);
+\draw[arrow] (pair) -- (collisions);
+\draw[arrow] (collisions) -- (deduplicate);
+\draw[arrow] (deduplicate) -- (clean);
+\draw[arrow] (clean) -- (csv);
+\draw[arrow] (csv) -- (validate);
 \draw[arrow] (validate) -- (ready);
 \end{tikzpicture}
-\caption{Preprocessing workflow used to construct the promoter prediction datasets. The diagram summarizes the transformation from heterogeneous source collections to standardized labeled sets: records are mapped to a common binary representation, cropped to 81 bp windows around the transcription start site, paired into promoter and non-promoter subsets, filtered to the alphabet $\{A,C,G,T\}$, and validated before feature encoding and model training.}
+\caption{Preprocessing workflow used to construct the promoter prediction datasets. The diagram distinguishes source-provided non-promoters from the declared Bhandari shuffle-control path, then summarizes cropping to 81 bp, mandatory bilateral removal of cross-label collisions, within-class deduplication, strict-alphabet filtering, deterministic group-safe partitioning, and validation before feature encoding and model training. Each filtering stage records its input, removed, and remaining row counts in the filtering manifest.}
 \label{fig:within-source-preprocessing-workflow}
 \end{figure}
 
 
-The final number of unambiguous-DNA examples retained for each source study is summarized in Table~\ref{tab:within-source-final-summary}. The following study-specific tables then provide the corresponding train/test counts for each dataset: Bhandari et al. in Table~\ref{tab:bhandari-within-source-final}, CDBProm in Table~\ref{tab:cdbprom-within-source-final}, CNNProm in Table~\ref{tab:cnnprom-within-source-final}, and GraphPro in Table~\ref{tab:graphpro-within-source-final}.
+The legacy strict-DNA inventory is summarized in
+Table~\ref{tab:within-source-final-summary}. Its Bhandari counts are retained for
+provenance only because they include replicated promoters and legacy synthetic
+negatives. The accepted Bhandari human shuffle-control is reported separately
+in Table~\ref{tab:bhandari-leakage-controlled-counts}. The remaining
+study-specific tables provide the source-defined train/test counts for CDBProm
+in Table~\ref{tab:cdbprom-within-source-final}, CNNProm in
+Table~\ref{tab:cnnprom-within-source-final}, and GraphPro in
+Table~\ref{tab:graphpro-within-source-final}.
 
 \begin{table}[htbp]
 \centering
-\caption{Summary of final unambiguous-DNA within-source datasets after preprocessing and cleaning.}
+\caption{Legacy strict-DNA inventory after alphabet cleaning. The Bhandari row contains legacy replicated positives and synthetic negatives and is retained only for preprocessing provenance; it is not the active Bhandari experimental dataset.}
 \label{tab:within-source-final-summary}
 \begin{tabular}{lrrrr}
 \hline
@@ -105,11 +206,15 @@ GraphPro & 16 & 47799 & 64480 & 112279 \\
 \end{tabular}
 \end{table}
 
-Class balance after unambiguous DNA cleaning is summarized in Table~\ref{tab:within-source-class-balance}. This table highlights that Bhandari et al. remains balanced, whereas CDBProm, CNNProm, and GraphPro contain larger non-promoter proportions.
+Class balance in the legacy inventory is summarized in
+Table~\ref{tab:within-source-class-balance}. The apparent 50/50 Bhandari balance
+is a consequence of synthetic negative construction rather than a property of
+the downloaded source. CDBProm, CNNProm, and GraphPro retain their
+source-provided class distributions.
 
 \begin{table}[htbp]
 \centering
-\caption{Class balance of the final unambiguous-DNA within-source datasets by study. Percentages are computed from the final cleaned sequence counts.}
+\caption{Class balance of the legacy strict-DNA inventory by study. Percentages are computed from the cleaned sequence counts; the Bhandari balance reflects synthetic negative construction, whereas the other sources include source-provided non-promoters.}
 \label{tab:within-source-class-balance}
 \begin{tabular}{lrrrr}
 \hline
@@ -123,12 +228,15 @@ GraphPro & 42.6 & 57.4 & 0.74 & 112279 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:bhandari-within-source-final} details the final Bhandari et al. train/test partitions after unambiguous DNA cleaning.
+Table~\ref{tab:bhandari-within-source-final} documents the legacy Bhandari
+partitions for provenance. These files are excluded from current model
+comparisons because exact duplicates occur within partitions and across the
+train--test boundary.
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Final unambiguous-DNA Bhandari et al. within-source datasets after preprocessing and cleaning.}
+\caption{Legacy unambiguous-DNA Bhandari datasets retained for provenance. The rows include synthetic negatives and must not be used as leakage-controlled biological benchmarks.}
 \label{tab:bhandari-within-source-final}
 \begin{tabular}{p{0.40\textwidth}lrrr}
 \hline
@@ -140,6 +248,29 @@ eukaryotic Plant\_promoters & test & 63900 & 63901 & 127801 \\
 eukaryotic Plant\_promoters & train & 255609 & 255608 & 511217 \\
 eukaryotic Yeast\_promoter & test & 3673 & 3674 & 7347 \\
 eukaryotic Yeast\_promoter & train & 14693 & 14692 & 29385 \\
+\hline
+\end{tabular}
+\end{table}
+
+The corrective human workflow starts from 61,546 raw promoter records. It
+retains 61,516 records of the expected 1,000 bp length, removes 30 cropped
+windows containing non-strict symbols, and collapses 27,561 repeated promoter
+occurrences. The resulting 33,925 unique promoters each receive one valid
+shuffle control. Table~\ref{tab:bhandari-leakage-controlled-counts} reports the
+accepted group-level split. Every sequence is unique, no label conflict is
+present, and no exact sequence is shared between train and test.
+
+\begin{table}[htbp]
+\centering
+\caption{Accepted leakage-controlled Bhandari human shuffle-control dataset. Each promoter and its deterministic mononucleotide shuffle remain in the same partition; the negative class is synthetic and does not represent genomic non-promoters.}
+\label{tab:bhandari-leakage-controlled-counts}
+\begin{tabular}{lrrrr}
+\hline
+Partition & Promoter & Synthetic negative & Total & Unique sequences \\
+\hline
+Train & 27140 & 27140 & 54280 & 54280 \\
+Test & 6785 & 6785 & 13570 & 13570 \\
+Total & 33925 & 33925 & 67850 & 67850 \\
 \hline
 \end{tabular}
 \end{table}

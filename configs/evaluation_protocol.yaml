@@ -1,18 +1,23 @@
 protocol:
   name: capsprom-confirmatory-evaluation
   version: 1.0.0
-  status: specified_not_implemented
+  status: partially_implemented
   alpha: 0.05
 
 scope:
-  development_dataset: bhandari-eukaryotic-Human_promoter
+  development_dataset: bhandari_human_shuffle_v1
   development_results_are_exploratory: true
-  confirmatory_dataset_glob: data/processed/assembled_datasets/intra_strict_dna/*.csv
+  confirmatory_dataset_glob: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/*.csv
   cross_dataset_unit: dataset
   require_both_classes: true
   require_frozen_test_configuration: true
 
 data_audit:
+  cross_label_collision_policy: remove_all_occurrences_from_both_classes_after_crop
+  same_label_duplicate_policy: keep_one_normalized_sequence_before_split
+  partition_policy: deterministic_unique_sequence_groups
+  filtering_manifest_required: true
+  filtering_stages: [crop, cross_label_collision_removal, within_class_deduplication, strict_dna, group_safe_split]
   exact_duplicates: true
   conflicting_labels: true
   normalized_train_test_overlap: true
@@ -20,6 +25,9 @@ data_audit:
   strict_dna: true
   sequence_length: 81
   near_duplicate_sensitivity_analysis: true
+  near_duplicate_distance: hamming
+  near_duplicate_thresholds: [1, 2, 4, 8]
+  near_duplicate_action: report_and_run_secondary_sensitivity_analysis
 
 selection:
   method: stratified_k_fold
@@ -96,6 +104,7 @@ tracking:
   required_artifacts:
     - protocol_yaml
     - data_audit_report
+    - filtering_manifest
     - fold_manifest
     - test_predictions
     - metrics

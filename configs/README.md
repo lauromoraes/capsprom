@@ -36,11 +36,24 @@ PYTHONPATH=src python -m capsprom run configs/full_xgboost.yaml
 ```
 
 `evaluation_protocol.yaml` is the machine-readable statistical contract for
-future confirmatory experiments. It is intentionally marked
-`specified_not_implemented`; the current CLI does not yet execute repeated-seed,
-bootstrap, calibration, or cross-dataset comparisons.
+future confirmatory experiments. It is marked `partially_implemented`: the
+current CLI persists predictions, metrics, calibration summaries, data audits,
+and fold manifests, but it does not yet execute repeated-seed orchestration,
+paired resampling, or cross-dataset comparisons.
 
 `leakage_controlled_logistic.yaml` and
 `leakage_controlled_xgboost.yaml` use the deduplicated, group-split Bhandari
 human shuffle-control dataset. They replace the contaminated Bhandari human
 split for current development experiments.
+
+Dataset-pair integrity auditing is independent of a model configuration. Audit
+the canonical strict-DNA CDBProm, CNNProm, and GraphPro pairs with:
+
+```bash
+PYTHONPATH=src python -m capsprom audit-datasets \
+  data/processed/assembled_datasets/intra_regenerated_v3_strict_dna \
+  data/processed/audits/real_negative_regenerated_v3
+```
+
+The command writes JSON, CSV, and Markdown reports with deterministic input
+hashes and strict eligibility classifications.

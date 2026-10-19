@@ -17,11 +17,13 @@ blind confirmatory comparison.
 
 ### Development Tier
 
-The strict-DNA Bhandari human promoter split is the initial development
+The deduplicated Bhandari human shuffle-control split is the initial development
 benchmark. It may be used for pipeline verification, debugging, feature
-ablation design, and computational feasibility. Every use of its test partition
-must be recorded, and no subsequent design choice may be justified as though
-that partition remained unseen.
+ablation design, and computational feasibility. Its negative class consists of
+deterministic mononucleotide shuffles rather than genomic non-promoters. Every
+use of its test partition must be recorded, and no subsequent design choice may
+be justified as though that partition remained unseen. The contaminated legacy
+Bhandari split is retained only for provenance and historical comparability.
 
 ### Confirmatory Tier
 
@@ -34,7 +36,13 @@ must be frozen before test predictions are generated.
 
 Dataset-level results, rather than individual sequences pooled across sources,
 are the primary units for cross-dataset inference. This prevents the largest
-Bhandari datasets from dominating conclusions about general performance.
+source datasets from dominating conclusions about general performance.
+
+The first batch audit found that none of the 26 CDBProm, CNNProm, and GraphPro
+pairs passes the exact-sequence integrity criteria. Their current fixed
+partitions are therefore development/provenance inputs only. Confirmatory use
+requires corrected group-safe partitions that retain the source-provided
+non-promoter examples.
 
 ## Data Integrity and Leakage Controls
 
@@ -196,7 +204,9 @@ The protocol becomes executable in the following order:
 4. Implement repeated-seed orchestration and MLflow parent/child runs.
 5. Implement paired bootstrap, randomization, Holm correction, and
    cross-dataset aggregation.
-6. Add leakage audits, reliability diagrams, and thesis-ready reports.
+6. Complete cross-dataset leakage audits, reliability diagrams, and
+   thesis-ready reports. Exact-sequence auditing and the Bhandari corrective
+   report are implemented; the broader cross-dataset stage remains pending.
 
 No confirmatory model ranking should be published before these gates are
 implemented and validated with synthetic or fixture data.

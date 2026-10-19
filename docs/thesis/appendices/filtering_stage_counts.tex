@@ -1,0 +1,55 @@
+Table~\ref{tab:appendix-filtering-stage-counts} provides the per-dataset
+filtering ledger for the canonical CDBProm, CNNProm, and GraphPro collections.
+It exposes post-cropping class counts, bilateral collision removals,
+within-class duplicate removals, strict-DNA removals, and the final unique
+sequence pool. Partition-level counts and file hashes are retained in the
+machine-readable filtering manifest associated with the dataset build.
+
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{1.7pt}
+\begin{longtable}{@{}llrrrrrrrrr@{}}
+\caption{Per-dataset filtering counts for the canonical source-negative pipeline. $P_c$ and $N_c$ are rows after cropping; $P_x$ and $N_x$ are collision removals; $P_d$ and $N_d$ are same-label duplicate removals; DNA is the total strict-DNA removal; and $P_f$ and $N_f$ are final unique strict-DNA counts before partitioning.}
+\label{tab:appendix-filtering-stage-counts}\\
+\toprule
+Source & Dataset & $P_c$ & $N_c$ & $P_x$ & $N_x$ & $P_d$ & $N_d$ & DNA & $P_f$ & $N_f$ \\
+\midrule
+\endfirsthead
+\multicolumn{11}{@{}l}{\tablename\ \thetable\ continued from the previous page}\\
+\toprule
+Source & Dataset & $P_c$ & $N_c$ & $P_x$ & $N_x$ & $P_d$ & $N_d$ & DNA & $P_f$ & $N_f$ \\
+\midrule
+\endhead
+\midrule
+\multicolumn{11}{r@{}}{Continued on the next page}\\
+\endfoot
+\bottomrule
+\endlastfoot
+CDBProm & anabaena\_sp & 2517 & 2511 & 1 & 1 & 0 & 1 & 0 & 2516 & 2509 \\
+CDBProm & bacillus\_amyloliquefaciens & 1059 & 1056 & 0 & 0 & 0 & 0 & 0 & 1059 & 1056 \\
+CDBProm & chlamydophila\_pneumoniae & 404 & 404 & 0 & 0 & 0 & 0 & 0 & 404 & 404 \\
+CDBProm & corynebacterium\_glutamicum & 575 & 572 & 0 & 0 & 15 & 0 & 0 & 560 & 572 \\
+CDBProm & helicobacter\_pylori & 714 & 710 & 0 & 0 & 9 & 0 & 2 & 703 & 710 \\
+CDBProm & klebisiella\_pneumoniae & 1329 & 1326 & 0 & 0 & 0 & 0 & 0 & 1329 & 1326 \\
+CDBProm & mycrobacterium\_tuberculosis & 1772 & 1767 & 1 & 1 & 8 & 0 & 0 & 1763 & 1766 \\
+CDBProm & pseudonomas\_aeruginosa & 2055 & 2049 & 0 & 0 & 2 & 0 & 1 & 2052 & 2049 \\
+CDBProm & salmonella\_typhimurium & 981 & 974 & 0 & 0 & 0 & 0 & 0 & 981 & 974 \\
+CDBProm & streptomyces\_coelicolor & 2611 & 2606 & 0 & 0 & 197 & 2 & 0 & 2414 & 2604 \\
+CDBProm & synechocistis & 1639 & 1630 & 0 & 0 & 4 & 0 & 0 & 1635 & 1630 \\
+CNNProm & Arabidopsis\_non\_tata & 5905 & 11459 & 0 & 0 & 0 & 7 & 1 & 5905 & 11451 \\
+CNNProm & Arabidopsis\_tata & 1497 & 2879 & 0 & 0 & 0 & 1 & 0 & 1497 & 2878 \\
+CNNProm & Human\_non\_tata & 19811 & 27731 & 0 & 0 & 31 & 712 & 1 & 19779 & 27019 \\
+CNNProm & Mouse\_non\_tata & 16283 & 24822 & 0 & 0 & 20 & 29 & 0 & 16263 & 24793 \\
+CNNProm & Mouse\_tata & 1255 & 3530 & 0 & 0 & 4 & 1 & 0 & 1251 & 3529 \\
+CNNProm & Bacillus & 373 & 1000 & 0 & 0 & 0 & 0 & 0 & 373 & 1000 \\
+CNNProm & Ecoli & 839 & 3000 & 0 & 0 & 0 & 0 & 0 & 839 & 3000 \\
+GraphPro & Human & 2339 & 2339 & 1 & 1 & 7 & 4 & 0 & 2331 & 2334 \\
+GraphPro & Mouse & 1846 & 1846 & 0 & 0 & 3 & 1 & 0 & 1843 & 1845 \\
+GraphPro & bacillus\_amyloliquefaciens & 928 & 928 & 0 & 0 & 0 & 0 & 0 & 928 & 928 \\
+GraphPro & campylobacter\_jejuni & 1346 & 1346 & 0 & 0 & 0 & 1 & 0 & 1346 & 1345 \\
+GraphPro & clostridium\_phytofermentans & 503 & 431 & 0 & 0 & 0 & 0 & 0 & 503 & 431 \\
+GraphPro & escherichia\_coli & 2519 & 3874 & 1345 & 1345 & 0 & 0 & 0 & 1174 & 2529 \\
+GraphPro & leptospira\_interrogans & 2847 & 2116 & 0 & 0 & 1 & 0 & 3 & 2844 & 2115 \\
+GraphPro & rhodobacter\_capsulatus & 3607 & 3241 & 0 & 0 & 0 & 0 & 0 & 3607 & 3241 \\
+\end{longtable}
+\endgroup

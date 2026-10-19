@@ -1,18 +1,21 @@
 Table~\ref{tab:appendix-strict-dataset-inventory} provides the complete
-inventory of model-ready within-source datasets used to define the experimental
+inventory of strict-DNA within-source datasets used to define the experimental
 scope. In addition to dataset scale, the table exposes the fixed train--test
 partition and the class distribution that must be considered when selecting
-evaluation metrics and comparing results across sources.
+evaluation metrics and comparing results across sources. The Bhandari rows are
+explicitly marked as legacy shuffle datasets because their negative examples
+are synthetic. The accepted leakage-controlled Bhandari human dataset is listed
+separately from those provenance-only rows.
 
 \begingroup
 \footnotesize
 \setlength{\tabcolsep}{2.5pt}
 \begin{longtable}{@{}lllrrrrr@{}}
-\caption{Complete inventory of the final strict-DNA within-source datasets
-available for the promoter-prediction experiments. All records contain
+\caption{Inventory of strict-DNA within-source datasets and the corrected Bhandari human shuffle control. All records contain
 81-nucleotide sequences restricted to the alphabet $\Sigma=\{A,C,G,T\}$ and
-binary labels, and each dataset uses the deterministic approximately 80/20
-train--test partition produced by the preprocessing pipeline. ``Positive''
+binary labels. CDBProm, CNNProm, and GraphPro include source-provided
+non-promoters. Bhandari negatives are synthetic, and its legacy rows are
+retained for provenance rather than current model comparison. ``Positive''
 reports the percentage of promoter sequences in the combined partitions, and
 $N{:}P$ is the ratio of non-promoter to promoter records; values above one
 therefore indicate a majority non-promoter class. Rows are ordered by decreasing
@@ -37,12 +40,13 @@ Source & Domain & Dataset & Train & Test & Total & Positive & $N{:}P$ \\
 \bottomrule
 \endlastfoot
 
-Bhandari & Eukaryotic & Plant promoters & 511,217 & 127,801 & 639,018 & 50.0\% & 1.00 \\
-Bhandari & Eukaryotic & Human promoter & 393,513 & 98,375 & 491,888 & 50.0\% & 1.00 \\
+Bhandari & Eukaryotic & Plant promoters (legacy shuffle) & 511,217 & 127,801 & 639,018 & 50.0\% & 1.00 \\
+Bhandari & Eukaryotic & Human promoter (legacy shuffle) & 393,513 & 98,375 & 491,888 & 50.0\% & 1.00 \\
 CNNProm & Eukaryotic & Human non-TATA & 136,282 & 34,072 & 170,354 & 34.9\% & 1.87 \\
 CNNProm & Eukaryotic & Mouse non-TATA & 118,509 & 29,628 & 148,137 & 33.0\% & 2.03 \\
+Bhandari & Eukaryotic & Human promoter (deduplicated shuffle control) & 54,280 & 13,570 & 67,850 & 50.0\% & 1.00 \\
 CNNProm & Eukaryotic & \textit{Arabidopsis} non-TATA & 50,837 & 12,710 & 63,547 & 27.9\% & 2.59 \\
-Bhandari & Eukaryotic & Yeast promoter & 29,385 & 7,347 & 36,732 & 50.0\% & 1.00 \\
+Bhandari & Eukaryotic & Yeast promoter (legacy shuffle) & 29,385 & 7,347 & 36,732 & 50.0\% & 1.00 \\
 GraphPro & Prokaryotic & \textit{R. capsulatus} & 19,028 & 4,757 & 23,785 & 45.5\% & 1.20 \\
 GraphPro & Prokaryotic & \textit{E. coli} & 18,442 & 4,611 & 23,053 & 32.8\% & 2.05 \\
 CNNProm & Eukaryotic & Mouse TATA & 17,557 & 4,390 & 21,947 & 35.7\% & 1.80 \\

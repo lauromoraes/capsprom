@@ -105,9 +105,25 @@ Entry condition:
   train/test overlap.
 - Completed: rerun logistic regression and XGBoost on the corrected
   shuffle-control dataset with full prediction and calibration artifacts.
-- Next: implement repeated seeds and paired uncertainty for the shuffle-control
-  analysis, while identifying provenance-backed genomic negatives for the
-  primary biological benchmark.
+- Completed: audit all 26 CDBProm, CNNProm, and GraphPro train/test pairs for
+  exact duplicates, conflicts, and partition overlap. None passes the strict
+  eligibility rule; 98.09% of test rows belong to sequences present in train.
+- Completed: trace the dominant duplication to append-mode writes in the legacy
+  cropping notebook, switch to overwrite mode, and regenerate the datasets.
+  Test-row overlap falls from 98.09% to 2.17%, and 9 of 26 pairs pass the strict
+  integrity rule without further correction.
+- Completed: make post-crop cross-label removal mandatory, record every filter
+  stage in JSON/CSV manifests, and regenerate v2 with zero label conflicts. Ten
+  of 26 pairs now pass the strict integrity rule.
+- Completed: regenerate all 26 pairs as canonical v3 datasets after bilateral
+  collision removal, within-class deduplication, strict-DNA filtering, and
+  deterministic unique-sequence group splitting. All 26 pairs pass the exact
+  duplicate, label-conflict, and train/test-overlap audit.
+- Completed: audit train/test near duplicates at Hamming distances 1, 2, 4,
+  and 8. At the broadest threshold, 96 of 35,991 test sequences have a
+  same-label training neighbor and none has an opposite-label neighbor.
+- Next: freeze dataset/fold manifests and begin biological-negative baseline
+  runs, retaining the near-duplicate result as a secondary sensitivity analysis.
 
 ## Phase 4: CapsProm Models
 

@@ -8,7 +8,27 @@ evaluation, and thesis-oriented documentation.
 
 ## Dataset Contract
 
-Current active model-ready dataset scope is restricted to the strict-DNA cleaned intra-source CSV files in `data/processed/assembled_datasets/intra_strict_dna/`. The original files in `data/processed/assembled_datasets/intra/` are preserved for provenance and preprocessing audit, but current and future EDA, feature engineering, model training, and evaluation stages should use `intra_strict_dna` unless a specification explicitly states otherwise. Generated project information must not treat other files under `data/` as active experimental datasets.
+Current confirmatory source-negative scope is restricted to the canonical CSV
+files in
+`data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/`. The
+original `intra/`, legacy `intra_strict_dna/`, regenerated v1, and regenerated
+v2 files are preserved for provenance and preprocessing audit. Bhandari remains
+a separately declared shuffle-control workflow. Generated project information
+must not treat legacy files as active confirmatory datasets.
+
+The fixed CDBProm, CNNProm, and GraphPro strict-DNA partitions are development
+inputs only until corrected group-safe versions are generated. The batch audit
+identified internal exact duplicates and train/test overlap in all 26 pairs,
+with label conflicts in four pairs. These sources retain their original
+non-promoter examples; their correction must not introduce synthetic negatives.
+Regeneration after correcting append-mode cropped FASTA writes reduces combined
+test-row overlap from 98.09% to 2.17% and makes 9 pairs strictly eligible. The
+mandatory post-crop collision filter then removes all 1,348 conflicting
+sequences from both classes (2,696 rows), produces zero label conflicts, and
+makes 10 pairs strictly eligible before deduplication. The canonical v3 build
+then removes 301 positive and 759 negative same-label duplicate rows, applies
+the strict-DNA filter, and creates deterministic unique-sequence group splits.
+All 26 pairs pass the final exact-identity audit.
 
 The Bhandari human promoter dataset is an explicit exception. Its legacy split
 contains extensive exact-sequence duplication and train/test overlap. Current
@@ -35,6 +55,12 @@ Validation requirements:
 - Dataset partitions must be explicit in the filename or configuration.
 - Positive and negative counts should be recoverable from the filename when
   the naming convention is used.
+- Same-label exact duplicates must be removed before confirmatory partitioning.
+- Exact sequence groups must not cross the train/test boundary.
+- Identical post-crop sequences with conflicting labels must always be removed
+  from both classes before partitioning.
+- Every filtering stage must record input counts, rows removed by class, output
+  counts, application order, and output hashes in JSON and flat CSV manifests.
 
 Dataset naming convention:
 
