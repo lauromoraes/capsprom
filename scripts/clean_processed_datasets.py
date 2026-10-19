@@ -10,7 +10,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from capsprom.data.dataset_builders import clean_processed_directory
+from capsprom.data.dataset_builders import clean_processed_directory  # noqa: E402
 
 
 def write_manifest(results, output_dir: Path) -> None:

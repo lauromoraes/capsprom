@@ -38,11 +38,14 @@ Dataset-level results, rather than individual sequences pooled across sources,
 are the primary units for cross-dataset inference. This prevents the largest
 source datasets from dominating conclusions about general performance.
 
-The first batch audit found that none of the 26 CDBProm, CNNProm, and GraphPro
-pairs passes the exact-sequence integrity criteria. Their current fixed
-partitions are therefore development/provenance inputs only. Confirmatory use
-requires corrected group-safe partitions that retain the source-provided
-non-promoter examples.
+The first batch audit found that none of the 26 legacy CDBProm, CNNProm, and
+GraphPro pairs passed the exact-sequence integrity criteria. The canonical v3
+build retains source-provided non-promoters while removing cross-label
+collisions and same-label duplicates before deterministic unique-sequence group
+partitioning. All 26 v3 pairs pass the exact-identity criteria. A separate
+Hamming-distance audit found 96 of 35,991 test sequences with a same-label
+training neighbor within eight substitutions and no opposite-label neighbor at
+that threshold; this dependence is handled as a secondary sensitivity analysis.
 
 ## Data Integrity and Leakage Controls
 
@@ -54,7 +57,8 @@ Before confirmatory training, each dataset pair must be audited for:
 - class counts, sequence length, and strict DNA alphabet compliance;
 - source-specific identifiers or groups that could induce dependence;
 - near-duplicate or homologous clusters when a defensible grouping method is
-  available.
+available. The predeclared Hamming thresholds are 1, 2, 4, and 8 substitutions
+over the 81 bp window.
 
 Fixed benchmark partitions are preserved for comparability. If cross-partition
 duplicates or groups are found, the primary report must quantify them and add a

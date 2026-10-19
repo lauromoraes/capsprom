@@ -124,6 +124,11 @@ Entry condition:
   same-label training neighbor and none has an opposite-label neighbor.
 - Next: freeze dataset/fold manifests and begin biological-negative baseline
   runs, retaining the near-duplicate result as a secondary sensitivity analysis.
+- Completed: run exploratory logistic-regression and XGBoost smoke tests on the
+  canonical GraphPro `clostridium_phytofermentans` pair with MLflow provenance,
+  fold manifests, row predictions, and calibration metrics.
+- Next: freeze model search spaces and orchestrate all-dataset biological-negative
+  baselines without using the observed smoke-test pair for design decisions.
 
 ## Phase 4: CapsProm Models
 

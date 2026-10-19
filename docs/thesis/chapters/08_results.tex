@@ -165,6 +165,33 @@ The observed MCC difference is 0.0597 in favor of XGBoost. Because these are
 single-seed development runs and no paired interval or randomization test has
 yet been executed, the difference is descriptive rather than confirmatory.
 
+\subsection{Exploratory biological-negative smoke test}
+
+The canonical v3 integration was verified on the GraphPro
+\textit{C. phytofermentans} pair using the same 66-dimensional representation.
+This test exercised YAML loading, fold-manifest generation, MLflow tracking,
+row-level predictions, effectiveness metrics, and calibration metrics. Because
+the test outcomes have been observed, Table~\ref{tab:results-real-negative-smoke}
+is an exploratory pipeline check and is excluded from confirmatory inference.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Exploratory fixed-seed smoke-test results on the canonical GraphPro \textit{C. phytofermentans} pair. These values validate pipeline integration and must not be used for confirmatory model selection.}
+  \label{tab:results-real-negative-smoke}
+  \begin{tabular}{lrr}
+    \toprule
+    Metric & Logistic regression & XGBoost \\
+    \midrule
+    MCC & 0.1158 & -0.0245 \\
+    ROC-AUC & 0.5748 & 0.5091 \\
+    Average precision & 0.5940 & 0.5759 \\
+    Balanced accuracy & 0.5578 & 0.4880 \\
+    Brier score & 0.2466 & 0.2866 \\
+    Log-loss & 0.6864 & 0.7846 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \section{Feature Engineering Results}\label{sec:results-features}
 
 \pendingresults

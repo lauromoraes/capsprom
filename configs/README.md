@@ -46,6 +46,11 @@ paired resampling, or cross-dataset comparisons.
 human shuffle-control dataset. They replace the contaminated Bhandari human
 split for current development experiments.
 
+`real_negative_smoke_logistic.yaml` and
+`real_negative_smoke_xgboost.yaml` exercise the canonical v3 GraphPro
+`clostridium_phytofermentans` pair. They are explicitly exploratory integration
+checks and must not be treated as confirmatory model comparisons.
+
 Dataset-pair integrity auditing is independent of a model configuration. Audit
 the canonical strict-DNA CDBProm, CNNProm, and GraphPro pairs with:
 
