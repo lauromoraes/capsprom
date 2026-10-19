@@ -51,6 +51,10 @@ split for current development experiments.
 `clostridium_phytofermentans` pair. They are explicitly exploratory integration
 checks and must not be treated as confirmatory model comparisons.
 
+`real_negative_baseline_batch.yaml` freezes the canonical v3 two-model batch.
+It excludes the observed smoke-test pair from primary confirmatory inference
+and is materialized or resumed with `scripts/run_real_negative_baselines.py`.
+
 Dataset-pair integrity auditing is independent of a model configuration. Audit
 the canonical strict-DNA CDBProm, CNNProm, and GraphPro pairs with:
 

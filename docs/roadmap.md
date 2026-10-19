@@ -129,6 +129,12 @@ Entry condition:
   fold manifests, row predictions, and calibration metrics.
 - Next: freeze model search spaces and orchestrate all-dataset biological-negative
   baselines without using the observed smoke-test pair for design decisions.
+- Completed: freeze a resumable 52-run baseline batch: 50 primary confirmatory
+  runs across 25 still-blind datasets and two exploratory runs for the observed
+  smoke-test pair. The first confirmatory logistic-regression run completed with
+  MLflow and fold-manifest provenance.
+- Next: resume the remaining 49 confirmatory runs, then execute the predeclared
+  paired and cross-dataset summaries without changing the frozen contract.
 
 ## Phase 4: CapsProm Models
 
