@@ -1,0 +1,41 @@
+policy:
+  name: capsprom-future-campaign-release-policy-v2
+  status: local_draft_execution_blocked
+  purpose: authorize criteria, not execution
+
+scope:
+  canonical_contract: configs/capsprom_basic_canonical_gpu_execution_v2.yaml
+  previous_30_epoch_folds_reusable: false
+  planned_inner_folds: 1300
+  planned_final_fits: 260
+  remote_state_reverification_required_before_release: true
+
+release_criteria:
+  local_make_check_passed: true
+  status_snapshot_updated: true
+  dataset_dependency_manifest_complete: false
+  statistical_aggregation_fixture_validated: false
+  canonical_data_hashes_reverified_on_execution_host: false
+  explicit_human_authorization_for_bounded_tranche: false
+
+budget:
+  maximum_epochs: 50
+  patience: 15
+  epoch_selection_scope: dataset_model_configuration_seed
+  epoch_selection_rule: lower_median_fold_best_epoch
+  restart_every_fold_from_epoch_one: true
+  scheduling: smallest_dataset_first
+  gpu_workers: 1
+  maximum_attempts_per_fold: 3
+  initial_bounded_tranche:
+    maximum_new_inner_folds: 5
+    final_fits: 0
+    external_evaluations: 0
+    embedding_jobs: 0
+
+execution_gates:
+  remote_campaign_enabled: false
+  inner_folds_enabled: false
+  final_fits_enabled: false
+  external_test_enabled: false
+  embedding_jobs_enabled: false

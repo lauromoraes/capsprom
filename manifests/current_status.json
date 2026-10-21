@@ -33,6 +33,6 @@
       "summary_available": true
     }
   },
-  "generated_at_utc": "2026-10-21T14:42:51.343059+00:00",
-  "next_action": "review epoch-ceiling evidence before authorizing a bounded canonical tranche"
+  "generated_at_utc": "2026-10-21T15:06:59.993570+00:00",
+  "next_action": "review cross-dataset source lineage and freeze dependency clusters"
 }

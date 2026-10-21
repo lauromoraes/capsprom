@@ -466,6 +466,20 @@ trained real models and remain blocked with real execution.
 External-test execution remains blocked until all six gates pass `make check`
 and a versioned status snapshot records the frozen protocol hash.
 
+### Fifty-epoch successor contract
+
+The future canonical campaign uses the separate, unexecuted
+`configs/capsprom_basic_canonical_gpu_execution_v2.yaml` contract. It changes
+the maximum inner-fold budget from 30 to 50 epochs, retains patience 15 and the
+lower-median fold-best-epoch rule, and assigns new protocol, output, and MLflow
+identities. All five folds for every dataset, model, configuration, and seed
+start at epoch one. The ten folds completed under the 30-epoch version remain
+historical diagnostics and are not reused by version 2.
+
+The version-2 contract is locally blocked. Creating it does not authorize a
+plan, remote synchronization, training, final fitting, external evaluation, or
+embedding execution.
+
 ### Production final-fit and external-inference boundary
 
 The production final-fit command accepts only `ready_for_final_fit`. It validates

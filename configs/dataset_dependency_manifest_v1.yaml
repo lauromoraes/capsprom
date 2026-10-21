@@ -1,0 +1,50 @@
+manifest:
+  name: canonical-v3-cross-dataset-dependency-v1
+  status: provisional_requires_source_lineage_review
+  dataset_count: 26
+  exact_overlap_audit:
+    command: python scripts/audit_cross_dataset_dependency.py
+    overlapping_pair_count: 8
+    cluster_rule: connected_components_of_exact_sequence_overlap
+  limitations:
+    - Exact non-overlap does not prove biological or source-pool independence.
+    - Source publications and original accession-level provenance require manual review.
+    - Cluster identifiers are conservative provisional units and are not yet released for confirmatory inference.
+
+datasets:
+  - {dataset_id: cdbprom-prokaryotic-anabaena_sp, source: cdbprom, organism: anabaena_sp, domain: prokaryotic, source_publication: cdbprom_2024, derivation_lineage: cdbprom_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: singleton-cdbprom-anabaena}
+  - {dataset_id: cdbprom-prokaryotic-bacillus_amyloliquefaciens, source: cdbprom, organism: bacillus_amyloliquefaciens, domain: prokaryotic, source_publication: cdbprom_2024, derivation_lineage: cdbprom_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-bacillus-amyloliquefaciens}
+  - {dataset_id: cdbprom-prokaryotic-chlamydophila_pneumoniae, source: cdbprom, organism: chlamydophila_pneumoniae, domain: prokaryotic, source_publication: cdbprom_2024, derivation_lineage: cdbprom_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-chlamydophila-clostridium}
+  - {dataset_id: cdbprom-prokaryotic-corynebacterium_glutamicum, source: cdbprom, organism: corynebacterium_glutamicum, domain: prokaryotic, source_publication: cdbprom_2024, derivation_lineage: cdbprom_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: singleton-cdbprom-corynebacterium}
+  - {dataset_id: cdbprom-prokaryotic-helicobacter_pylori, source: cdbprom, organism: helicobacter_pylori, domain: prokaryotic, source_publication: cdbprom_2024, derivation_lineage: cdbprom_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: singleton-cdbprom-helicobacter}
+  - {dataset_id: cdbprom-prokaryotic-klebisiella_pneumoniae, source: cdbprom, organism: klebisiella_pneumoniae, domain: prokaryotic, source_publication: cdbprom_2024, derivation_lineage: cdbprom_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: singleton-cdbprom-klebisiella}
+  - {dataset_id: cdbprom-prokaryotic-mycrobacterium_tuberculosis, source: cdbprom, organism: mycrobacterium_tuberculosis, domain: prokaryotic, source_publication: cdbprom_2024, derivation_lineage: cdbprom_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: singleton-cdbprom-mycrobacterium}
+  - {dataset_id: cdbprom-prokaryotic-pseudonomas_aeruginosa, source: cdbprom, organism: pseudonomas_aeruginosa, domain: prokaryotic, source_publication: cdbprom_2024, derivation_lineage: cdbprom_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: singleton-cdbprom-pseudonomas}
+  - {dataset_id: cdbprom-prokaryotic-salmonella_typhimurium, source: cdbprom, organism: salmonella_typhimurium, domain: prokaryotic, source_publication: cdbprom_2024, derivation_lineage: cdbprom_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-enteric-cross-source}
+  - {dataset_id: cdbprom-prokaryotic-streptomyces_coelicolor, source: cdbprom, organism: streptomyces_coelicolor, domain: prokaryotic, source_publication: cdbprom_2024, derivation_lineage: cdbprom_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: singleton-cdbprom-streptomyces}
+  - {dataset_id: cdbprom-prokaryotic-synechocistis, source: cdbprom, organism: synechocistis, domain: prokaryotic, source_publication: cdbprom_2024, derivation_lineage: cdbprom_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: singleton-cdbprom-synechocistis}
+  - {dataset_id: cnnprom-eukaryotic-Arabidopsis_non_tata, source: cnnprom, organism: arabidopsis, domain: eukaryotic, source_publication: umarov_solovyev_2017, derivation_lineage: cnnprom_canonical_v3_non_tata, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-cnnprom-arabidopsis}
+  - {dataset_id: cnnprom-eukaryotic-Arabidopsis_tata, source: cnnprom, organism: arabidopsis, domain: eukaryotic, source_publication: umarov_solovyev_2017, derivation_lineage: cnnprom_canonical_v3_tata, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-cnnprom-arabidopsis}
+  - {dataset_id: cnnprom-eukaryotic-Human_non_tata, source: cnnprom, organism: human, domain: eukaryotic, source_publication: umarov_solovyev_2017, derivation_lineage: cnnprom_canonical_v3_non_tata, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-cnnprom-mammal}
+  - {dataset_id: cnnprom-eukaryotic-Mouse_non_tata, source: cnnprom, organism: mouse, domain: eukaryotic, source_publication: umarov_solovyev_2017, derivation_lineage: cnnprom_canonical_v3_non_tata, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-cnnprom-mammal}
+  - {dataset_id: cnnprom-eukaryotic-Mouse_tata, source: cnnprom, organism: mouse, domain: eukaryotic, source_publication: umarov_solovyev_2017, derivation_lineage: cnnprom_canonical_v3_tata, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-cnnprom-mammal}
+  - {dataset_id: cnnprom-prokaryotic-Bacillus, source: cnnprom, organism: bacillus_sp, domain: prokaryotic, source_publication: umarov_solovyev_2017, derivation_lineage: cnnprom_canonical_v3, negative_generation_method: opposite_strand_protein_coding_reported, dependency_cluster_id: singleton-cnnprom-bacillus}
+  - {dataset_id: cnnprom-prokaryotic-Ecoli, source: cnnprom, organism: escherichia_coli, domain: prokaryotic, source_publication: umarov_solovyev_2017, derivation_lineage: cnnprom_canonical_v3, negative_generation_method: opposite_strand_protein_coding_reported, dependency_cluster_id: overlap-enteric-cross-source}
+  - {dataset_id: graphpro-eukaryotic-Human, source: graphpro, organism: human, domain: eukaryotic, source_publication: graphpro_2024, derivation_lineage: graphpro_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-graphpro-mammal}
+  - {dataset_id: graphpro-eukaryotic-Mouse, source: graphpro, organism: mouse, domain: eukaryotic, source_publication: graphpro_2024, derivation_lineage: graphpro_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-graphpro-mammal}
+  - {dataset_id: graphpro-prokaryotic-bacillus_amyloliquefaciens, source: graphpro, organism: bacillus_amyloliquefaciens, domain: prokaryotic, source_publication: graphpro_2024, derivation_lineage: graphpro_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-bacillus-amyloliquefaciens}
+  - {dataset_id: graphpro-prokaryotic-campylobacter_jejuni, source: graphpro, organism: campylobacter_jejuni, domain: prokaryotic, source_publication: graphpro_2024, derivation_lineage: graphpro_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: singleton-graphpro-campylobacter}
+  - {dataset_id: graphpro-prokaryotic-clostridium_phytofermentans, source: graphpro, organism: clostridium_phytofermentans, domain: prokaryotic, source_publication: graphpro_2024, derivation_lineage: graphpro_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-chlamydophila-clostridium}
+  - {dataset_id: graphpro-prokaryotic-escherichia_coli, source: graphpro, organism: escherichia_coli, domain: prokaryotic, source_publication: graphpro_2024, derivation_lineage: graphpro_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: overlap-enteric-cross-source}
+  - {dataset_id: graphpro-prokaryotic-leptospira_interrogans, source: graphpro, organism: leptospira_interrogans, domain: prokaryotic, source_publication: graphpro_2024, derivation_lineage: graphpro_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: singleton-graphpro-leptospira}
+  - {dataset_id: graphpro-prokaryotic-rhodobacter_capsulatus, source: graphpro, organism: rhodobacter_capsulatus, domain: prokaryotic, source_publication: graphpro_2024, derivation_lineage: graphpro_canonical_v3, negative_generation_method: source_provided_unverified, dependency_cluster_id: singleton-graphpro-rhodobacter}
+
+observed_exact_overlaps:
+  - {left: cdbprom-prokaryotic-bacillus_amyloliquefaciens, right: graphpro-prokaryotic-bacillus_amyloliquefaciens, total: 535, same_label: 0, opposite_label: 535}
+  - {left: cdbprom-prokaryotic-chlamydophila_pneumoniae, right: graphpro-prokaryotic-clostridium_phytofermentans, total: 195, same_label: 195, opposite_label: 0}
+  - {left: cdbprom-prokaryotic-salmonella_typhimurium, right: cnnprom-prokaryotic-Ecoli, total: 1, same_label: 1, opposite_label: 0}
+  - {left: cnnprom-eukaryotic-Arabidopsis_non_tata, right: cnnprom-eukaryotic-Arabidopsis_tata, total: 1, same_label: 1, opposite_label: 0}
+  - {left: cnnprom-eukaryotic-Human_non_tata, right: cnnprom-eukaryotic-Mouse_non_tata, total: 25, same_label: 25, opposite_label: 0}
+  - {left: cnnprom-eukaryotic-Mouse_non_tata, right: cnnprom-eukaryotic-Mouse_tata, total: 5, same_label: 5, opposite_label: 0}
+  - {left: cnnprom-prokaryotic-Ecoli, right: graphpro-prokaryotic-escherichia_coli, total: 16, same_label: 1, opposite_label: 15}
+  - {left: graphpro-eukaryotic-Human, right: graphpro-eukaryotic-Mouse, total: 1, same_label: 1, opposite_label: 0}

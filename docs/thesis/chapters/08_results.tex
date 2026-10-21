@@ -61,6 +61,39 @@ canonical v3 audit contained zero internal duplicates, zero label conflicts,
 and zero train--test overlap in all 26 pairs. Its deterministic audit identifier
 is \texttt{87371a88ca1c5456db340201de5c19558b1a5773cb441787ffffc0803b66d853}.
 
+Although every canonical dataset is internally group-safe, a separate audit
+found exact identities shared across dataset boundaries. Table~\ref{tab:results-cross-dataset-dependency}
+reports the eight affected pairs. These overlaps do not reintroduce within-
+dataset train--test leakage, but they prevent all 26 dataset identities from
+being assumed independent in cross-dataset statistical tests. Particularly,
+the two \textit{B. amyloliquefaciens} sets share 535 sequences with opposing
+labels, and CDBProm \textit{C. pneumoniae} shares 195 positive sequences with
+GraphPro \textit{C. phytofermentans}. Source-lineage review is required before
+the provisional dependency clusters are frozen.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Exact sequence sharing across canonical v3 dataset identities. Same-
+  label and opposite-label counts refer to labels assigned by the two source
+  datasets. These pairs form provisional dependency clusters for subsequent
+  cross-dataset inference.}
+  \label{tab:results-cross-dataset-dependency}
+  \begin{tabular}{p{0.29\textwidth}p{0.29\textwidth}rrr}
+    \toprule
+    Left dataset & Right dataset & Shared & Same & Opposite \\
+    \midrule
+    CDBProm \textit{B. amyloliquefaciens} & GraphPro \textit{B. amyloliquefaciens} & 535 & 0 & 535 \\
+    CDBProm \textit{C. pneumoniae} & GraphPro \textit{C. phytofermentans} & 195 & 195 & 0 \\
+    CDBProm \textit{S. typhimurium} & CNNProm \textit{E. coli} & 1 & 1 & 0 \\
+    CNNProm Arabidopsis non-TATA & CNNProm Arabidopsis TATA & 1 & 1 & 0 \\
+    CNNProm human non-TATA & CNNProm mouse non-TATA & 25 & 25 & 0 \\
+    CNNProm mouse non-TATA & CNNProm mouse TATA & 5 & 5 & 0 \\
+    CNNProm \textit{E. coli} & GraphPro \textit{E. coli} & 16 & 1 & 15 \\
+    GraphPro human & GraphPro mouse & 1 & 1 & 0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 Table~\ref{tab:results-filtering-stage-counts} reports the class counts at each
 completed construction stage. Partition assignment does not remove rows.
 

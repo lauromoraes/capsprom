@@ -70,7 +70,7 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
         status["next_action"] = "make replication-summary"
     else:
         status["next_action"] = (
-            "review epoch-ceiling evidence before authorizing a bounded canonical tranche"
+            "review cross-dataset source lineage and freeze dependency clusters"
         )
     return status
 

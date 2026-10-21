@@ -196,6 +196,18 @@ not an execution contract. It freezes the prerequisites for a future bounded
 remote tranche, records the epoch-30 ceiling contact, and keeps remote, final-
 fit, external-test, and embedding gates closed.
 
+`capsprom_basic_canonical_gpu_execution_v2.yaml` is the new, unexecuted
+50-epoch candidate selected for future CapsProm folds. It retains patience 15,
+requires every fold to restart at epoch one, uses new MLflow and output
+identities, and keeps every execution gate closed. The corresponding
+`capsprom_future_campaign_release_policy_v2.yaml` explicitly rejects reuse of
+the earlier 30-epoch folds.
+
+`dataset_dependency_manifest_v1.yaml` covers all 26 canonical identities and
+records provisional dependency clusters derived from the exact cross-dataset
+overlap audit. It remains provisional until the original source pools and
+cross-source label reversals are reviewed.
+
 `capsprom_remote_usage_policy_v2.yaml` is the active local-first access policy.
 It preserves the scientific, recovery, MLflow, and backup rules of the earlier
 remote execution policy while superseding its access-frequency assumptions.

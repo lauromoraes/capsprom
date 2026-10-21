@@ -478,6 +478,19 @@ Current state:
 - Next: construct and review the 26-dataset dependency manifest, then implement
   fixture-tested paired-seed and cluster-level aggregation. Confirmatory model
   ranking remains blocked until both gates pass.
+- Completed: freeze a separate 50-epoch, patience-15 canonical candidate after
+  the budget decision. Version 2 starts every fold at epoch one and cannot reuse
+  the ten historical 30-epoch folds. New protocol, output, and MLflow identities
+  prevent accidental resume; all execution gates remain false.
+- Completed: run the local exact cross-dataset dependency audit and create a
+  provisional 26-dataset manifest. Eight pairs share sequences. The largest
+  findings are 535 opposite-label identities across the two
+  *B. amyloliquefaciens* datasets and 195 shared positives between CDBProm
+  Chlamydophila and GraphPro *C. phytofermentans*. These findings block final
+  dependency clusters pending source-lineage review.
+- Next: resolve source provenance and cross-source label semantics for the eight
+  overlapping pairs, freeze the dependency clusters, and then implement the
+  statistical aggregation fixtures.
 - Next: reverify the remote plan and MLflow identities only after explicit
   authorization, then decide whether to retain the frozen 30-epoch budget or
   create a separate sensitivity contract. The release policy remains locally
