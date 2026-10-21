@@ -92,6 +92,17 @@ pseudo-replicates. For stochastic models, dataset-level tables report the median
 and interquartile range across seeds, with mean and standard deviation retained
 as supplementary descriptors.
 
+The folds and seeds have different inferential roles. Inner folds are used only
+for model selection and are never treated as independent test observations.
+Seeds quantify algorithmic instability conditional on the same dataset and are
+not independent biological or cross-dataset replications. Stochastic models in
+a pair use the same seed identifiers. A deterministic model is fitted once and
+its single locked result is paired with every stochastic seed only to compute
+seed-level effects; those repeated differences do not create additional
+independent observations. A failed technical run is reported and never replaced.
+The primary paired analysis requires all ten predeclared seed pairs; incomplete
+cases are excluded from the primary pair and reported in sensitivity analyses.
+
 ## Prediction and Threshold Contract
 
 Each evaluated record must produce a positive-class score, a probability when
@@ -145,18 +156,35 @@ or source groups are available, a group bootstrap replaces record-level
 resampling. Record-level intervals must be qualified when sequence dependence
 cannot be modeled.
 
-Within a dataset, the primary pairwise comparison is the paired difference in
-MCC. Its effect estimate and 95% paired-bootstrap confidence interval are
-reported. A two-sided paired randomization test with 10,000 swaps provides the
-confirmatory p-value. McNemar's exact test is retained as a secondary analysis
-of discordant classification errors, not as a replacement for the MCC effect
-estimate.
+For models A and B, the seed-level effect in dataset `d` and seed `s` is
+`delta[d,s] = MCC[A,d,s] - MCC[B,d,s]`. The dataset-level effect is the median
+of these ten paired seed differences. It is not computed as a difference
+between independently summarized model medians, except where algebraically
+equivalent for a single deterministic baseline. Paired bootstrap resamples use
+the same test-record or group indices for every model and seed, and recompute
+the complete seed-aggregated effect in every resample.
 
-Across datasets, each dataset contributes one paired summary per model. When at
-least ten eligible datasets are available, the primary cross-dataset comparison
-uses a two-sided Wilcoxon signed-rank test on dataset-level MCC differences and
-reports the median paired difference with a confidence interval. Win/tie/loss
-counts are descriptive supplementary results.
+Within a dataset, the primary output is the paired MCC effect and its 95% paired-
+bootstrap confidence interval. Seed-aggregated within-dataset inference is
+descriptive because seeds share the same test records. A two-sided paired
+randomization test with 10,000 swaps and McNemar's exact test may be reported
+per locked seed as secondary analyses; neither treats folds or seeds as
+independent sample units, and neither replaces the MCC effect estimate.
+
+Before cross-dataset inference, a dependency manifest records dataset source,
+organism, biological domain, source publication, derivation lineage, negative-
+generation method, and a justified dependency-cluster identifier. Alternative
+transformations or partitions derived from the same source pool belong to one
+cluster. Each dataset first contributes one seed-aggregated paired effect; a
+dependency cluster containing multiple related datasets contributes their
+median effect so that related variants cannot inflate the effective sample size.
+
+With at least ten audited independent clusters, a two-sided Wilcoxon signed-rank
+test compares two models and reports the median paired difference with a
+confidence interval. With three or more models, a Friedman omnibus test is
+reported, followed by only the predeclared pairwise Wilcoxon comparisons.
+Win/tie/loss counts remain descriptive. If the audit establishes that every
+dataset is independent, cluster-level and dataset-level analyses coincide.
 
 The family-wise significance level is 0.05. Holm correction is applied across
 all confirmatory model-pair hypotheses for the primary outcome. Secondary
@@ -206,11 +234,16 @@ The protocol becomes executable in the following order:
 2. Add the missing effectiveness and calibration metrics. Implemented.
 3. Generate and hash the five-fold training manifests. Implemented.
 4. Implement repeated-seed orchestration and MLflow parent/child runs.
-5. Implement paired bootstrap, randomization, Holm correction, and
+5. Complete and freeze the cross-dataset dependency manifest.
+6. Implement paired-seed aggregation, paired bootstrap, randomization, Holm correction, and
    cross-dataset aggregation.
-6. Complete cross-dataset leakage audits, reliability diagrams, and
+7. Complete cross-dataset leakage audits, reliability diagrams, and
    thesis-ready reports. Exact-sequence auditing and the Bhandari corrective
    report are implemented; the broader cross-dataset stage remains pending.
 
 No confirmatory model ranking should be published before these gates are
 implemented and validated with synthetic or fixture data.
+
+Version 2 of the machine-readable contract is
+`configs/evaluation_protocol_v2.yaml`. Version 1 remains unchanged for analyses
+already bound to its earlier aggregation contract.

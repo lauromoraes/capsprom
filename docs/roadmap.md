@@ -468,6 +468,16 @@ Current state:
   per-fold inner-validation MCC, not pooled out-of-fold MCC, and no current row
   predictions are available locally for independent recalculation. Seed 13,
   fold 3 selected epoch 30 at the ceiling and is explicitly flagged for review.
+- Completed: adopt statistical-protocol version 2 for future model comparisons.
+  Five folds remain selection-only, ten seeds remain algorithmic-stability
+  replicates, and the dataset effect is now the median of seed-paired MCC
+  differences. Cross-dataset inference uses audited dependency clusters,
+  Wilcoxon for two-model comparisons, Friedman for the multi-model omnibus, and
+  Holm-adjusted predeclared pairwise tests. Version 1 remains unchanged for
+  analyses already bound to it.
+- Next: construct and review the 26-dataset dependency manifest, then implement
+  fixture-tested paired-seed and cluster-level aggregation. Confirmatory model
+  ranking remains blocked until both gates pass.
 - Next: reverify the remote plan and MLflow identities only after explicit
   authorization, then decide whether to retain the frozen 30-epoch budget or
   create a separate sensitivity contract. The release policy remains locally

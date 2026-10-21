@@ -35,11 +35,20 @@ model family and its explicit hyperparameters:
 PYTHONPATH=src python -m capsprom run configs/full_xgboost.yaml
 ```
 
-`evaluation_protocol.yaml` is the machine-readable statistical contract for
-future confirmatory experiments. It is marked `partially_implemented`: the
+`evaluation_protocol.yaml` is the version-1 machine-readable statistical contract
+for confirmatory experiments. It is marked `partially_implemented`: the
 current CLI persists predictions, metrics, calibration summaries, data audits,
 and fold manifests, but it does not yet execute repeated-seed orchestration,
 paired resampling, or cross-dataset comparisons.
+
+`evaluation_protocol_v2.yaml` preserves version 1 for completed analyses and
+locks the thesis-wide hierarchy for future confirmatory comparisons. Five inner
+folds select each dataset--model--configuration--seed fit but are not test
+replicates; ten seeds measure algorithmic stability but are not independent
+datasets. Model effects are paired by seed, summarized within each dataset by
+the median paired MCC difference, and then aggregated by audited dataset-
+dependency cluster. Its confirmatory-ranking gates remain closed pending the
+dependency manifest and fixture validation of the statistical aggregation.
 
 `leakage_controlled_logistic.yaml` and
 `leakage_controlled_xgboost.yaml` use the deduplicated, group-split Bhandari

@@ -74,6 +74,16 @@ pseudo-replicates. Stochastic dataset-level results are summarized primarily by
 their median and interquartile range, with mean and standard deviation retained
 as supplementary descriptors.
 
+The folds and seeds have distinct inferential roles. Inner folds are used only
+for model and epoch selection and are not treated as independent test
+observations. Seeds quantify variation caused by initialization, sampling, and
+training order conditional on the same dataset; consequently, they are not
+independent biological replications. Stochastic models are paired by the same
+seed identifier, while a deterministic model is fitted once and is not repeated
+artificially. These restrictions avoid the optimistic tests that can result
+from treating correlated cross-validation estimates as independent
+observations~\cite{dietterich1998approximate}.
+
 Every test record receives a positive-class score and a binary prediction. The
 primary decision threshold is 0.5. A threshold selected exclusively from
 out-of-fold training predictions may be reported as a secondary analysis but is
@@ -129,13 +139,30 @@ record-level resampling when defensible biological or source groups are
 available; otherwise, the possible dependence between sequences is stated as a
 limitation.
 
-Within one dataset, the principal effect is the paired difference in MCC. The
-effect estimate is accompanied by its paired-bootstrap interval and a two-sided
-paired randomization test with 10,000 swaps. McNemar's exact test is a secondary
-analysis of discordant classification errors. Across at least ten eligible
-datasets, a two-sided Wilcoxon signed-rank test evaluates dataset-level MCC
-differences, accompanied by the median paired difference and win--tie--loss
-counts.
+For models $A$ and $B$, the seed-level effect in dataset $d$ and seed $s$ is
+$\Delta_{d,s}=\mathrm{MCC}_{A,d,s}-\mathrm{MCC}_{B,d,s}$. The dataset-level
+effect is $\Delta_d=\operatorname{median}_s(\Delta_{d,s})$, that is, the median
+of paired seed differences rather than the difference between independently
+aggregated model summaries. A deterministic baseline contributes one locked
+MCC, which is subtracted from every stochastic-seed result without turning
+those repeated differences into independent observations.
+
+Within one dataset, the principal output is the paired MCC effect and its
+paired-bootstrap interval. Each bootstrap resample applies the same record or
+biological-group indices to every model and seed and recomputes the complete
+seed-aggregated effect. Paired randomization and McNemar's exact test may be
+reported per locked seed as secondary analyses of prediction disagreement.
+
+Before cross-dataset inference, a dependency manifest records source,
+organism, biological domain, derivation lineage, negative-generation method,
+and a justified dependency-cluster identifier. Related datasets derived from
+the same source pool contribute one cluster-level median effect, preventing
+dataset variants from inflating the effective sample size. Across at least ten
+audited independent clusters, a two-sided Wilcoxon signed-rank test evaluates
+two-model differences. For three or more models, a Friedman omnibus test is
+followed only by predeclared pairwise Wilcoxon comparisons
+~\cite{demsar2006statistical}. Median effects and win--tie--loss counts accompany
+all tests.
 
 The family-wise significance level is 0.05. Holm correction is applied across
 confirmatory model-pair hypotheses for the primary outcome. Conclusions
@@ -154,6 +181,6 @@ raw sequences.
 Reports label analyses as exploratory, developmental, or confirmatory and state
 dataset eligibility, exclusions, failed runs, replication counts, and the
 resampling unit. The complete machine-readable contract is maintained in
-\path{configs/evaluation_protocol.yaml}, while implementation requirements and
+\path{configs/evaluation_protocol_v2.yaml}, while implementation requirements and
 limitations are maintained in
 \path{specs/statistical_evaluation_protocol.md}.
