@@ -1,0 +1,97 @@
+policy:
+  name: capsprom-remote-usage-policy-v2
+  status: active_local_first
+  scope: remote_access_frequency_and_sync
+  supersedes_for_access_frequency: capsprom-remote-execution-policy-v1
+  preserves:
+    - scientific_execution_gates
+    - atomic_state_and_resume_requirements
+    - mlflow_identity_and_provenance
+    - backup_and_integrity_requirements
+
+default_work_location:
+  host: local
+  activities:
+    - code_development
+    - configuration_drafting
+    - documentation
+    - focused_tests
+    - fixture_tests
+    - code_review
+    - status_snapshots
+  remote_access_required: false
+
+remote_access:
+  default: do_not_access
+  requires_explicit_bounded_authorization: true
+  allowed_when_any:
+    - many_repeated_executions
+    - gpu_is_required
+    - estimated_local_runtime_is_excessive
+    - estimated_local_memory_is_insufficient
+    - remote_specific_behavior_requires_validation
+    - backup_or_restore_audit_is_required_for_an_authorized_remote_campaign
+  objective_guidance:
+    many_repeated_executions_minimum_fits: 20
+    excessive_local_runtime_hours: 2
+    local_memory_headroom_minimum_fraction: 0.25
+  exceptions:
+    - A smaller remote batch may run only when it is an explicitly authorized
+      pilot for a larger heavy campaign.
+    - Emergency recovery may access a remote host only to preserve or inspect
+      already running or failed authorized work.
+
+bioserver03:
+  primary_role: gpu_heavy_or_many_fit_execution
+  permitted:
+    - authorized_gpu_campaigns
+    - authorized_large_cpu_or_gpu_batches
+    - accelerator_specific_reproducibility_checks
+    - resume_or_recovery_of_authorized_remote_jobs
+  not_permitted_by_default:
+    - routine_development
+    - routine_unit_tests
+    - documentation_checks
+    - frequent_repository_sync
+    - remote_status_polling_without_an_active_campaign
+
+bioserver04:
+  primary_role: heavy_cpu_auxiliary_and_remote_backup
+  permitted:
+    - authorized_large_cpu_batches
+    - large_bootstrap_or_summary_workloads
+    - backup_and_restore_verification_for_authorized_remote_campaigns
+    - cpu_work_that_would_materially delay_local_development
+  not_permitted_by_default:
+    - routine_development
+    - routine_unit_tests
+    - repository_mirroring
+    - frequent_repository_sync
+    - opening_the_bioserver03_sqlite_database_directly
+
+synchronization:
+  timing: authorized_campaign_boundaries_only
+  content: minimum_immutable_execution_snapshot
+  include:
+    - required_source_files
+    - versioned_contracts
+    - required_training_data_with_hash_verification
+  exclude_by_default:
+    - unrelated_worktree_changes
+    - test_datasets
+    - generated_reports
+    - local_mlflow_stores
+  routine_remote_updates: false
+
+validation:
+  local_first: true
+  remote_validation_only_when:
+    - the_behavior_depends_on_remote_hardware_or_software
+    - a_heavy_or_many_run_campaign_is_about_to_start
+    - an_authorized_remote_campaign_checkpoint_requires_audit
+
+execution_gates:
+  current_campaign_paused: true
+  final_fits_enabled: false
+  external_test_enabled: false
+  embedding_jobs_enabled: false

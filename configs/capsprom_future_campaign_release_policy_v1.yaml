@@ -1,0 +1,54 @@
+policy:
+  name: capsprom-future-campaign-release-policy-v1
+  status: local_draft_execution_blocked
+  purpose: authorize criteria, not execution
+
+scope:
+  canonical_contract: configs/capsprom_basic_canonical_gpu_execution_v1.yaml
+  completed_inner_folds_documented_locally: 10
+  pending_inner_folds_documented_locally: 1290
+  final_fits_documented_as_blocked: 260
+  remote_state_reverification_required_before_release: true
+
+release_criteria:
+  local_make_check_passed: true
+  status_snapshot_updated: true
+  final_fit_fixture_resume_equivalence_passed: true
+  mlflow_final_fit_identity_reuse_passed: true
+  external_inference_gate_test_passed: true
+  canonical_data_hashes_reverified_on_execution_host: false
+  remote_plan_and_mlflow_reconciled: false
+  explicit_human_authorization_for_bounded_tranche: false
+
+budget:
+  scheduling: smallest_dataset_first
+  gpu_workers: 1
+  maximum_attempts_per_fold: 3
+  initial_bounded_tranche:
+    maximum_new_inner_folds: 5
+    final_fits: 0
+    external_evaluations: 0
+    embedding_jobs: 0
+
+epoch_ceiling_policy:
+  configured_maximum_epochs: 30
+  patience: 15
+  ceiling_contact_definition: best_epoch_equals_configured_maximum_epochs
+  current_documented_contacts:
+    - dataset_id: cdbprom-prokaryotic-chlamydophila_pneumoniae
+      seed: 13
+      fold: 3
+      best_epoch: 30
+  action: require_review_before_next_campaign_tranche
+  permitted_decisions:
+    - retain_the_frozen_contract_and_report_the_contact
+    - create_a_new_versioned_training_budget_sensitivity_contract
+  forbidden_actions:
+    - silently_modify_an_existing_contract
+    - use_external_test_results_to_choose_the_budget
+
+execution_gates:
+  remote_campaign_enabled: false
+  final_fits_enabled: false
+  external_test_enabled: false
+  embedding_jobs_enabled: false

@@ -69,7 +69,9 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
     elif not summary.is_file():
         status["next_action"] = "make replication-summary"
     else:
-        status["next_action"] = "begin Phase 4 CapsProm design"
+        status["next_action"] = (
+            "review epoch-ceiling evidence before authorizing a bounded canonical tranche"
+        )
     return status
 
 

@@ -229,6 +229,11 @@ __marimo__/
 /outputs/figures/
 /outputs/models/
 /outputs/reports/
+/outputs/neural_smoke/
+/outputs/capsprom_basic_canonical_v1/
+/outputs/feasibility/
+/outputs/gpu_resume_equivalence*/
+/outputs/reports/capsprom_basic_feasibility_v1/
 *.parquet
 *.h5
 *.hdf5

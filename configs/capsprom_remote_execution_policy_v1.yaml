@@ -1,0 +1,61 @@
+policy:
+  name: capsprom-remote-execution-policy-v1
+  status: fixture_validated_canonical_execution_blocked
+gpu_training:
+  host: bioserver03
+  device: cuda
+  maximum_concurrent_workers: 1
+  reason: single_gpu_determinism_and_memory_isolation
+  environment: /home/lauro/.conda/envs/capsprom-py313
+  repository: /home/lauro/workspace/capsprom
+  cublas_workspace_config: ":4096:8"
+  scheduling_order: [training_rows_ascending, dataset_id, seed, fold]
+  maximum_attempts_per_fold: 3
+tracking:
+  backend: sqlite
+  topology: host_local_single_writer
+  database: outputs/capsprom_basic_canonical_gpu_execution_v1/mlflow.db
+  artifact_root: outputs/capsprom_basic_canonical_gpu_execution_v1/mlartifacts
+  identity_creation_lock: outputs/capsprom_basic_canonical_gpu_execution_v1/.locks/mlflow-identity.lock
+  network_filesystem_sharing: false
+  backup:
+    database_method: sqlite_online_backup
+    database_frequency: after_each_completed_dataset_seed
+    artifact_method: rsync_checksum_snapshot
+    artifact_frequency: after_each_completed_dataset_seed
+    remote_destination_host: bioserver04
+    source_identity: /home/lauro/.ssh/capsprom_to_bioserver04
+    destination_root: /home/lauro/backups/capsprom
+    require_integrity_check: true
+cpu_auxiliary:
+  host: bioserver04
+  canonical_training_workers: 0
+  allowed_future_roles: [data_audit, summary, bootstrap, report_generation]
+  tracking_policy: independent_local_store_or_tracking_server_only
+recovery:
+  atomic_plan_update: true
+  checkpoint_after_each_epoch: true
+  reuse_child_run_id: true
+  retry_failed_job: true
+  failure_notification:
+    mechanism: atomic_filesystem_outbox
+    path: outputs/capsprom_basic_canonical_gpu_execution_v1/notifications
+    external_delivery: not_configured
+retention:
+  active_fold: [best_checkpoint, latest_checkpoint, state]
+  completed_fold: [best_checkpoint, state, hashes]
+  latest_checkpoint_removal_requires:
+    - child_run_finished
+    - state_completed
+    - database_backup_verified
+    - artifact_snapshot_verified
+  keep_fold_best_for_explainability: true
+  measured_checkpoint_bytes: 10456705
+  projected_all_best_checkpoints_bytes: 16312459800
+  projected_all_best_and_latest_bytes: 32624919600
+  measured_remote_available_bytes: 106335141888
+execution_gates:
+  canonical_jobs_enabled: false
+  final_fits_enabled: false
+  external_test_enabled: false
+  embedding_jobs_enabled: false

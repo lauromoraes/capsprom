@@ -16,9 +16,33 @@ is intentionally kept separate from the feature-engineering encoder.
 
 \section{CapsProm}\label{sec:models-capsprom}
 
-CapsProm is the capsule-network approach developed in the earlier stage of this
-research. In this thesis, CapsProm should be reproduced under the unified
-experimental protocol before architectural extensions are evaluated.
+In this thesis, CapsProm denotes the basic binary capsule architecture with two
+output capsules: one represents the non-promoter class and the other represents
+the promoter class. Primary capsules can consequently distribute their coupling
+between competing class capsules, making routing-by-agreement operational. The
+class prediction is determined by the output capsule with the largest vector
+norm, and the reconstruction branch is conditioned on the true class during
+training and on the predicted class during inference. In the canonical
+implementation, the votes used to update agreement logits in intermediate
+routing iterations are detached from the computational graph, while gradients
+are propagated through the final capsule computation. This policy avoids
+backpropagation through the iterative routing-state updates and is recorded
+explicitly in each versioned experimental configuration.
+
+For reconstruction, the non-selected class capsule is set to zero and the
+complete masked two-capsule tensor is flattened before entering the decoder.
+The auxiliary objective is the mean across samples of the summed squared error
+over nucleotide positions and channels, scaled by (0.0005). This retains the
+class-specific decoder slots and the reconstruction-loss convention of the
+seminal CapsNet rather than treating the selected capsule as an unlabelled
+16-dimensional vector.
+
+The earlier published implementation used a single output capsule. This legacy
+CapsProm-1C model is retained only for historical reproduction under the unified
+protocol and for analysis of the original methodology. Because its routing
+softmax has only one possible destination, every coupling coefficient equals
+one; it is therefore not treated as the basic CapsProm model or as an active
+architecture-development candidate in this thesis.
 
 \section{SparseCapsProm}\label{sec:models-sparsecapsprom}
 

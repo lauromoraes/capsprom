@@ -1,0 +1,39 @@
+project: {name: capsprom-basic-low-lr-seed31-v1}
+data:
+  train_csv: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/graphpro-prokaryotic-clostridium_phytofermentans-p-402-n-345-train.csv
+  sequence_column: sequence
+  label_column: label
+  sequence_length: 81
+  maximum_samples: null
+model:
+  name: capsprom_basic
+  architecture:
+    convolution_filters: 256
+    convolution_kernel: 9
+    primary_channels: 32
+    primary_dim: 8
+    primary_kernel: 9
+    primary_stride: 2
+    output_capsules: 2
+    output_dim: 16
+    routing_iterations: 3
+    routing_mode: dynamic
+    routing_gradient_mode: final_iteration
+    decoder_mode: disabled
+    decoder_hidden: [512, 1024]
+training:
+  contract_version: 5
+  random_seed: 31
+  validation_fraction: 0.2
+  batch_size: 64
+  learning_rate: 0.0001
+  learning_rate_schedule: fixed
+  learning_rate_decay: 1.0
+  maximum_epochs: 30
+  patience: 15
+  reconstruction_weight: 0.0
+  reconstruction_reduction: mean
+tracking: {tracking_uri: sqlite:///mlflow.db, experiment_name: capsprom-phase4-development}
+outputs:
+  checkpoint_path: outputs/neural_smoke/capsprom_basic_low_lr_seed31_v1/best.pt
+  state_path: outputs/neural_smoke/capsprom_basic_low_lr_seed31_v1/state.json

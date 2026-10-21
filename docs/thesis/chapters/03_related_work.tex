@@ -7,8 +7,9 @@ learning baselines used in genomic sequence classification.
 
 \section{CNNProm and Deep Promoter Prediction}\label{sec:rw-cnnprom}
 
-CNNProm is an important baseline for this thesis because the initial CapsProm
-study evaluated capsule networks against CNNProm-style convolutional models.
+CNNProm is an important baseline for this thesis because the earlier published
+CapsProm-1C study evaluated capsule networks against CNNProm-style
+convolutional models.
 
 \section{GraphPro and Multi-Species Promoter Prediction}\label{sec:rw-graphpro}
 
@@ -32,7 +33,9 @@ engineering layer.
 
 \section{CapsProm and Qualification-Stage Contributions}\label{sec:rw-capsprom}
 
-The qualification text presented two prior contributions: the CapsProm capsule
-network for promoter prediction and the physicochemical-property feature study.
-These contributions are treated as the starting point for the reproducible
-experimental protocol and methodological extensions developed in this thesis.
+The qualification text presented two prior contributions: the one-output
+capsule network now designated legacy CapsProm-1C and the
+physicochemical-property feature study. These contributions are treated as the
+starting point for the reproducible protocol. The basic CapsProm model developed
+in this thesis instead uses two output capsules so that routing can distribute
+evidence between the non-promoter and promoter classes.

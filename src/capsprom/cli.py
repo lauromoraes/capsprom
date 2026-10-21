@@ -8,9 +8,18 @@ from pathlib import Path
 from typing import Sequence
 
 from .config import load_experiment_config
+from .canonical_neural import (
+    prepare_canonical_neural_plan,
+    refresh_canonical_final_fit_readiness,
+    run_canonical_external_inference_job,
+    run_canonical_final_fit_job,
+    run_canonical_inner_fold_job,
+)
 from .data.batch_audit import audit_dataset_directory
 from .experiment import audit_dataset_pair, run_experiment, validate_dataset
 from .project_status import collect_project_status, write_status_snapshot
+from .neural_experiment import load_neural_experiment_config, run_tracked_neural_training
+from .feasibility import run_feasibility_suite
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -30,6 +39,33 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     status_parser = subparsers.add_parser("status")
     status_parser.add_argument("--write", type=Path, help="Write a compact JSON snapshot")
+    neural_parser = subparsers.add_parser("train-neural")
+    neural_parser.add_argument("config", type=Path)
+    canonical_parser = subparsers.add_parser("prepare-neural-canonical")
+    canonical_parser.add_argument("config", type=Path)
+    canonical_parser.add_argument("output_dir", type=Path)
+    fold_parser = subparsers.add_parser("run-neural-canonical-fold")
+    fold_parser.add_argument("config", type=Path)
+    fold_parser.add_argument("output_dir", type=Path)
+    fold_parser.add_argument("dataset_id")
+    fold_parser.add_argument("seed", type=int)
+    fold_parser.add_argument("fold", type=int)
+    readiness_parser = subparsers.add_parser("refresh-neural-canonical-readiness")
+    readiness_parser.add_argument("config", type=Path)
+    readiness_parser.add_argument("output_dir", type=Path)
+    final_fit_parser = subparsers.add_parser("run-neural-canonical-final-fit")
+    final_fit_parser.add_argument("config", type=Path)
+    final_fit_parser.add_argument("output_dir", type=Path)
+    final_fit_parser.add_argument("dataset_id")
+    final_fit_parser.add_argument("seed", type=int)
+    external_parser = subparsers.add_parser("run-neural-canonical-external-inference")
+    external_parser.add_argument("config", type=Path)
+    external_parser.add_argument("output_dir", type=Path)
+    external_parser.add_argument("dataset_id")
+    external_parser.add_argument("seed", type=int)
+    external_parser.add_argument("evaluation_csv", type=Path)
+    feasibility_parser = subparsers.add_parser("measure-neural-feasibility")
+    feasibility_parser.add_argument("config", type=Path)
     args = parser.parse_args(argv)
 
     try:
@@ -40,6 +76,64 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "audit-datasets":
             sources = tuple(args.sources or ("cdbprom", "cnnprom", "graphpro"))
             report = audit_dataset_directory(args.input_dir, args.output_dir, sources=sources)
+            print(json.dumps(report, indent=2))
+            return 0
+        if args.command == "train-neural":
+            result = run_tracked_neural_training(load_neural_experiment_config(args.config))
+            print(json.dumps({
+                "run_id": result.run_id,
+                "best_epoch": result.training.best_epoch,
+                "best_inner_validation_mcc": result.training.best_validation_mcc,
+            }, indent=2))
+            return 0
+        if args.command == "prepare-neural-canonical":
+            report = prepare_canonical_neural_plan(args.config, args.output_dir)
+            print(
+                json.dumps(
+                    {
+                        "protocol_sha256": report["protocol_sha256"],
+                        "phase": report["phase"],
+                        "external_test_accessed": report["external_test_accessed"],
+                        "dataset_count": report["dataset_count"],
+                        "seed_count": report["seed_count"],
+                        "fold_count": report["fold_count"],
+                        "total_jobs": report["total_jobs"],
+                        "completed_jobs": report["completed_jobs"],
+                    },
+                    indent=2,
+                )
+            )
+            return 0
+        if args.command == "run-neural-canonical-fold":
+            report = run_canonical_inner_fold_job(
+                args.config, args.output_dir, args.dataset_id, args.seed, args.fold
+            )
+            print(json.dumps(report, indent=2))
+            return 0
+        if args.command == "refresh-neural-canonical-readiness":
+            report = refresh_canonical_final_fit_readiness(
+                args.config, args.output_dir
+            )
+            print(json.dumps(report, indent=2))
+            return 0
+        if args.command == "run-neural-canonical-final-fit":
+            report = run_canonical_final_fit_job(
+                args.config, args.output_dir, args.dataset_id, args.seed
+            )
+            print(json.dumps(report, indent=2))
+            return 0
+        if args.command == "run-neural-canonical-external-inference":
+            report = run_canonical_external_inference_job(
+                args.config,
+                args.output_dir,
+                args.dataset_id,
+                args.seed,
+                args.evaluation_csv,
+            )
+            print(json.dumps(report, indent=2))
+            return 0
+        if args.command == "measure-neural-feasibility":
+            report = run_feasibility_suite(args.config)
             print(json.dumps(report, indent=2))
             return 0
         config = load_experiment_config(args.config)

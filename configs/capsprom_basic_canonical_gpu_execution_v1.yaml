@@ -1,0 +1,83 @@
+protocol:
+  name: capsprom-basic-canonical-gpu-execution-v1
+  status: draft_awaiting_explicit_authorization
+  dataset_root: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna
+  dataset_ids:
+    - cdbprom-prokaryotic-anabaena_sp
+    - cdbprom-prokaryotic-bacillus_amyloliquefaciens
+    - cdbprom-prokaryotic-chlamydophila_pneumoniae
+    - cdbprom-prokaryotic-corynebacterium_glutamicum
+    - cdbprom-prokaryotic-helicobacter_pylori
+    - cdbprom-prokaryotic-klebisiella_pneumoniae
+    - cdbprom-prokaryotic-mycrobacterium_tuberculosis
+    - cdbprom-prokaryotic-pseudonomas_aeruginosa
+    - cdbprom-prokaryotic-salmonella_typhimurium
+    - cdbprom-prokaryotic-streptomyces_coelicolor
+    - cdbprom-prokaryotic-synechocistis
+    - cnnprom-eukaryotic-Arabidopsis_non_tata
+    - cnnprom-eukaryotic-Arabidopsis_tata
+    - cnnprom-eukaryotic-Human_non_tata
+    - cnnprom-eukaryotic-Mouse_non_tata
+    - cnnprom-eukaryotic-Mouse_tata
+    - cnnprom-prokaryotic-Bacillus
+    - cnnprom-prokaryotic-Ecoli
+    - graphpro-eukaryotic-Human
+    - graphpro-eukaryotic-Mouse
+    - graphpro-prokaryotic-bacillus_amyloliquefaciens
+    - graphpro-prokaryotic-campylobacter_jejuni
+    - graphpro-prokaryotic-clostridium_phytofermentans
+    - graphpro-prokaryotic-escherichia_coli
+    - graphpro-prokaryotic-leptospira_interrogans
+    - graphpro-prokaryotic-rhodobacter_capsulatus
+selection:
+  method: five_fold_then_full_refit
+  folds: 5
+  fold_seed: 42
+  epoch_rule: lower_median_fold_best_epoch
+replication:
+  seeds: [13, 29, 42, 71, 101, 137, 173, 211, 251, 293]
+model:
+  name: capsprom_basic
+  input: {encoding: one_hot, k: 1, sequence_length: 81, channels: 4}
+  architecture:
+    convolution_filters: 256
+    convolution_kernel: 9
+    primary_channels: 32
+    primary_dim: 8
+    primary_kernel: 9
+    primary_stride: 2
+    output_capsules: 2
+    output_dim: 16
+    routing_iterations: 3
+    routing_mode: dynamic
+    routing_gradient_mode: final_iteration
+    decoder_mode: disabled
+training:
+  runner_contract_version: 7
+  device: cuda
+  batch_size: 64
+  optimizer: adam
+  learning_rate: 0.0001
+  learning_rate_schedule: fixed
+  maximum_epochs: 30
+  patience: 15
+  reconstruction_weight: 0.0
+prediction:
+  raw_scores: [capsule_0_length, capsule_1_length]
+  positive_score: capsule_1_length_over_length_sum
+  decision: raw_score_argmax
+  exact_tie_class: 0
+tracking:
+  backend: mlflow
+  tracking_uri: sqlite:////home/lauro/workspace/capsprom/outputs/capsprom_basic_canonical_gpu_execution_v1/mlflow.db
+  artifact_location: file:///home/lauro/workspace/capsprom/outputs/capsprom_basic_canonical_gpu_execution_v1/mlartifacts
+  experiment_name: capsprom-basic-canonical-gpu-execution-v1
+  parent_child_runs: true
+execution_gates:
+  external_test_enabled: false
+  require_dataset_hashes: true
+  require_fold_manifest_hashes: true
+  require_fixture_validation: true
+  canonical_jobs_enabled: true
+  final_fits_enabled: false
+  embedding_jobs_enabled: false

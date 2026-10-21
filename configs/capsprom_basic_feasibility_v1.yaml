@@ -1,0 +1,27 @@
+protocol:
+  name: capsprom-basic-feasibility-v1
+  purpose: synthetic_compute_feasibility_only
+  canonical_config: configs/capsprom_basic_canonical_v1.yaml
+  canonical_jobs_enabled: false
+  embedding_jobs_enabled: false
+fixtures:
+  random_seed: 20261020
+  sequence_length: 81
+  alphabet: [A, C, G, T]
+  representation: one_hot_k1_float32
+  class_balance: alternating_binary
+  scenarios:
+    small: 646
+    large: 37438
+training:
+  epochs: 1
+  batch_size: 64
+  validation_fraction: 0.2
+  device: auto
+limits:
+  maximum_wall_seconds_per_scenario: 1800
+  fail_on_out_of_memory: true
+  fail_on_nonzero_exit: true
+reporting:
+  output: outputs/reports/capsprom_basic_feasibility_v1/report.json
+  predictive_interpretation_allowed: false
