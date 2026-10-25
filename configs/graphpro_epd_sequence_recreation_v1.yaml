@@ -1,0 +1,49 @@
+audit:
+  name: graphpro-epd-sequence-recreation-v1
+  version: 1.0.0
+  status: source_sequence_recreation_only
+  identifier_contract: configs/graphpro_epd_identifier_resolution_v1.yaml
+  specification: specs/graphpro_dataset_reconstruction.md
+
+policy:
+  expected_positive_start_relative_to_tss: -80
+  expected_positive_end_relative_to_tss_exclusive: 1
+  expected_negative_start_relative_to_tss: 1000
+  expected_negative_end_relative_to_tss_exclusive: 1081
+  compare_case_insensitive: true
+  released_negative_is_confirmatory_control: false
+  generate_new_dataset: false
+
+organisms:
+  - organism: human
+    assembly: GRCh38/hg38
+    twobit:
+      path: data/raw/references/ucsc/hg38.2bit
+      url: https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.2bit
+      size_bytes: 835393456
+      md5: dcc3ea27079aa6dc3f9deccd7275e0f8
+    primary_bed: data/raw/references/epd_2023/HsNC_EPDnew_001_hg38.bed
+    primary_bed_sha256: 068b2bdd0a19a0a727e1331e86cec89a3726cc438daa710103f7b06371463ce3
+    released_positive: data/raw/GraphPro/human/positive
+    released_positive_sha256: b8af4848899881b5c88908011bb3f63f0517c464b30f149b90cdf01c529dd94a
+    released_negative: data/raw/GraphPro/human/negative
+    released_negative_sha256: aaf856d88f23122cdd6dc585232bda1f79bb556d2f1277e8a901e5d875fd7490
+  - organism: mouse
+    assembly: GRCm38/mm10
+    twobit:
+      path: data/raw/references/ucsc/mm10.2bit
+      url: https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/mm10.2bit
+      size_bytes: 714784109
+      md5: fcfcc276799031793a513e2e9c07adad
+    primary_bed: data/raw/references/epd_2023/MmNC_EPDnew_001_mm10.bed
+    primary_bed_sha256: 3d4caf0f2c8e7d04b8d53cec4e376628d5539a37ccf3d4d611c3d134304cd2da
+    released_positive: data/raw/GraphPro/mouse/positive
+    released_positive_sha256: aa33c8f8a642136397e55740e9fb74ace12a2e930f664b26fc9b218e551e8316
+    released_negative: data/raw/GraphPro/mouse/negative
+    released_negative_sha256: 6d450cdccbb1230f3d9c36fc46fd2a405347bff11f06a1723462b63658c498c6
+
+execution_gates:
+  source_recreation_enabled: true
+  reconstructed_dataset_generation_enabled: false
+  model_training_enabled: false
+  confirmatory_use_enabled: false

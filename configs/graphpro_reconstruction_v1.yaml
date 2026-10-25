@@ -1,0 +1,103 @@
+reconstruction:
+  name: graphpro-reconstructed-v1
+  version: 1.0.0
+  status: bacterial_candidate_sources_verified_negative_parameters_frozen
+  specification: specs/graphpro_dataset_reconstruction.md
+  released_graphpro_commit: f75c42bbe4c255dc0ad915ed58fe7161705f1a48
+  candidate_promotech_commit: 56251ad9b883ef831b4753fc623d5ec970fe65e0
+  original_labels_modified: false
+  output_is_new_derived_dataset: true
+  confirmatory_use_enabled: false
+
+window:
+  upstream: 60
+  include_tss_base: true
+  downstream: 20
+  length: 81
+  orientation: transcription_five_prime_to_three_prime
+
+positive_policy:
+  require_independent_tss_source: true
+  graphpro_directory_is_not_label_evidence: true
+  bacterial_candidate_source: promotech_and_cited_primary_tss_maps
+  eukaryotic_candidate_source: dated_epd_release
+  unresolved_records: exclude_and_count
+
+negative_policy:
+  primary_condition: same_assembly_gc_matched_genomic_control
+  controls_per_positive: 1
+  sampling_seed: 20261021
+  match_positive_strand_distribution: true
+  exclusion_radius_nt: 100
+  exclusion_radius_rationale: covers_the_81_nt_promoter_window_plus_proximal_margin
+  maximum_gc_count_difference: 4
+  absolute_gc_tolerance: 0.04938271604938271
+  gc_tolerance_rationale: smallest_discrete_81_nt_tolerance_feasible_for_all_six_bacterial_sources
+  strict_dna_only: true
+  exclude_known_tss_regions: true
+  exclude_positive_and_selected_negative_identities: true
+  exclude_reverse_complement_identities: true
+  sensitivity_conditions:
+    - cds_derived_controls_separate_version
+  max_attempts_per_positive: 100000
+
+positive_grouping:
+  biological_identity: [contig, zero_based_tss, strand]
+  repeated_source_rows: keep_one_group_and_record_multiplicity
+
+organisms:
+  - dataset_id: graphpro-reconstructed-prokaryotic-bacillus_amyloliquefaciens
+    source_folder: Bamy
+    assembly: CP002927.1
+    state: candidate_tss_and_assembly_available_primary_source_sample_audit_pending
+  - dataset_id: graphpro-reconstructed-prokaryotic-campylobacter_jejuni
+    source_folder: Cje
+    assembly: NC_002163.1
+    state: candidate_tss_and_assembly_available_primary_source_sample_audit_pending
+  - dataset_id: graphpro-reconstructed-prokaryotic-chlamydophila_pneumoniae
+    source_folder: Cpne
+    assembly: NC_000922.1
+    state: candidate_tss_and_assembly_available_primary_source_sample_audit_pending
+  - dataset_id: graphpro-reconstructed-prokaryotic-escherichia_coli
+    source_folder: Ecol
+    assembly: NC_000913.3
+    state: candidate_tss_and_assembly_available_primary_source_sample_audit_pending
+  - dataset_id: graphpro-reconstructed-prokaryotic-leptospira_interrogans
+    source_folder: Lint
+    assembly: NZ_LT962963.1
+    state: candidate_tss_and_assembly_available_primary_source_sample_audit_pending
+  - dataset_id: graphpro-reconstructed-prokaryotic-rhodobacter_capsulatus
+    source_folder: Rcap
+    assembly: NC_014034.1
+    state: candidate_tss_and_assembly_available_primary_source_sample_audit_pending
+  - dataset_id: graphpro-reconstructed-eukaryotic-human
+    source_folder: human
+    assembly: pending_epd_release_resolution
+    state: epd_identifier_and_coordinate_resolution_pending
+  - dataset_id: graphpro-reconstructed-eukaryotic-mouse
+    source_folder: mouse
+    assembly: pending_epd_release_resolution
+    state: epd_identifier_and_coordinate_resolution_pending
+
+required_outputs:
+  - source_manifest
+  - coordinate_manifest
+  - candidate_rejection_ledger
+  - filtering_manifest
+  - group_safe_split_manifest
+  - exact_and_near_duplicate_audits
+  - distribution_report
+  - file_hash_manifest
+
+eligibility_gates:
+  source_files_acquired_and_hashed: false
+  candidate_source_registry_hashed: true
+  candidate_source_integrity_audit_passed: true
+  assembly_versions_verified: false
+  positive_coordinates_independently_verified: false
+  negative_parameters_frozen: true
+  reconstruction_completed: false
+  integrity_audits_passed: false
+  manual_sample_audit_passed: false
+  dependency_manifest_updated: false
+  confirmatory_protocol_updated: false

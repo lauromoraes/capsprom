@@ -1,5 +1,8 @@
 {
+  "active_confirmatory_dataset_count": 18,
   "active_dataset": "data/processed/assembled_datasets/intra_regenerated_v3_strict_dna",
+  "active_dataset_eligibility_manifest": "configs/dataset_eligibility_manifest_v1.yaml",
+  "active_evaluation_protocol": "configs/evaluation_protocol_v3.yaml",
   "experiments": {
     "fixed_seed_baseline": {
       "completed": 50,
@@ -33,6 +36,13 @@
       "summary_available": true
     }
   },
-  "generated_at_utc": "2026-10-21T15:06:59.993570+00:00",
-  "next_action": "review cross-dataset source lineage and freeze dependency clusters"
+  "generated_at_utc": "2026-10-25T15:21:54.677759+00:00",
+  "next_action": "freeze corrected pAA reconstruction and resolve Bacillus TSS source",
+  "remote_jobs": {
+    "available": true,
+    "jobs": [],
+    "pending_count": 0,
+    "registry": "manifests/remote_jobs.json",
+    "updated_at_utc": "2026-10-23T00:00:00+00:00"
+  }
 }

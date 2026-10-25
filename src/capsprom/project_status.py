@@ -21,7 +21,11 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
         "repository_root": project_root.as_posix(),
         "git": _git_status(project_root),
         "active_dataset": "data/processed/assembled_datasets/intra_regenerated_v3_strict_dna",
+        "active_dataset_eligibility_manifest": "configs/dataset_eligibility_manifest_v1.yaml",
+        "active_confirmatory_dataset_count": 18,
+        "active_evaluation_protocol": "configs/evaluation_protocol_v3.yaml",
         "experiments": {},
+        "remote_jobs": _remote_job_status(project_root),
     }
     contracts = {
         "fixed_seed_baseline": (
@@ -70,7 +74,7 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
         status["next_action"] = "make replication-summary"
     else:
         status["next_action"] = (
-            "review cross-dataset source lineage and freeze dependency clusters"
+            "freeze corrected pAA reconstruction and resolve Bacillus TSS source"
         )
     return status
 
@@ -107,3 +111,20 @@ def _git_status(root: Path) -> dict[str, Any]:
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _remote_job_status(root: Path) -> dict[str, Any]:
+    registry_path = root / "manifests/remote_jobs.json"
+    relative = "manifests/remote_jobs.json"
+    if not registry_path.is_file():
+        return {"registry": relative, "available": False, "pending_count": 0, "jobs": []}
+    payload = json.loads(registry_path.read_text(encoding="utf-8"))
+    jobs = payload.get("jobs", [])
+    pending = [job for job in jobs if job.get("status") in {"pending", "running"}]
+    return {
+        "registry": relative,
+        "available": True,
+        "updated_at_utc": payload.get("updated_at_utc"),
+        "pending_count": len(pending),
+        "jobs": pending,
+    }

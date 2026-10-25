@@ -1,0 +1,53 @@
+manifest:
+  name: graphpro-candidate-dependency-v1
+  version: 1.0.0
+  status: reviewed_blocking_findings_require_source_resolution
+  audit_contract: configs/graphpro_candidate_audit_v1.yaml
+  audit_report: outputs/reports/graphpro_candidate_audit_v1/dependency_audit.json
+  audit_report_sha256: 7899b1709250730db6e47536bc0ad0e91aa66bbf733ec39fc5b15cdb8b2eaf5b
+  active_confirmatory_manifest_unchanged: configs/dataset_dependency_manifest_v2.yaml
+  confirmatory_use_enabled: false
+
+candidate_dependencies:
+  - candidate: graphpro-reconstructed-v2-bacillus
+    related_dataset: cdbprom-prokaryotic-bacillus_amyloliquefaciens
+    same_label_positive: 2
+    opposite_label: 0
+    action: group_if_reinstated_and_verify_shared_tss_lineage
+  - candidate: graphpro-reconstructed-v2-cpneumoniae
+    related_dataset: cdbprom-prokaryotic-chlamydophila_pneumoniae
+    same_label_positive: 404
+    opposite_label: 0
+    action: same_dependency_cluster_if_reinstated_and_document_source_pool_overlap
+  - candidate: graphpro-reconstructed-v2-ecoli
+    related_dataset: cnnprom-prokaryotic-Ecoli
+    same_label_positive: 0
+    opposite_label: 6
+    direction: cnnprom_negative_matches_reconstructed_positive
+    action: block_reinstatement_until_source_lineage_and_label_semantics_are_resolved
+  - candidate: graphpro-released-integrity-v1-mouse
+    related_dataset: cnnprom-eukaryotic-Mouse_non_tata
+    same_label_positive: 0
+    opposite_label: 1
+    direction: cnnprom_positive_matches_released_integrity_negative
+    action: retain_exploratory_only_pending_epd_reconstruction
+  - candidate: graphpro-released-integrity-v1-human
+    related_dataset: graphpro-released-integrity-v1-mouse
+    same_label_positive: 1
+    opposite_label: 0
+    action: shared_mammalian_dependency_if_ever_reconstructed
+
+candidate_without_observed_exact_or_reverse_complement_cross_dataset_overlap:
+  - graphpro-reconstructed-v2-cjejuni_2
+  - graphpro-reconstructed-v2-linterrogans
+  - graphpro-reconstructed-v2-rhodobacter_1
+
+limitations:
+  - Exact non-overlap does not prove biological independence.
+  - The Human and Mouse integrity views are not reconstructed datasets.
+  - No sequence is removed or relabeled solely because another dataset disagrees.
+  - Dependency grouping does not resolve which external annotation is correct.
+
+execution_gates:
+  model_training_enabled: false
+  confirmatory_use_enabled: false

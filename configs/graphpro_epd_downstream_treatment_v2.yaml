@@ -1,0 +1,51 @@
+treatment:
+  name: graphpro-epd-downstream-treated-v2
+  version: 2.0.0
+  status: exploratory_external_positive_exclusion
+  upstream_treatment_contract: configs/graphpro_epd_downstream_treatment_v1.yaml
+  specification: specs/graphpro_dataset_reconstruction.md
+  output_is_primary_reconstruction: false
+
+policy:
+  input_stage: graphpro-epd-downstream-treated-v1
+  external_positive_identity: minimum_forward_or_reverse_complement
+  external_positive_match_removes: graphpro_negative_record_only
+  expected_removed_count: 1
+  expected_removed_identifiers:
+    - FP002834|Gm50063_1
+  rationale: >-
+    A genomic control cannot remain in this candidate condition when its exact
+    strand-invariant identity is labeled positive in an active external source.
+    Removing the GraphPro control does not validate the external biological
+    label and does not modify the external dataset.
+  rebalance_after_filtering: false
+
+datasets:
+  - organism: human
+    positive:
+      path: data/interim/graphpro_epd_downstream_treated_v1/human/positive.fa
+      sha256: 0dab802e75a40f86c93f2a0032454ae0a51710a90aada84cae92d38b0b6258bf
+    negative:
+      path: data/interim/graphpro_epd_downstream_treated_v1/human/negative.fa
+      sha256: c0b946bdbfdb5af21fa4c2b39c21c56c5f41439a61732285f90f53f7f26196e3
+    external_positive_sources: []
+  - organism: mouse
+    positive:
+      path: data/interim/graphpro_epd_downstream_treated_v1/mouse/positive.fa
+      sha256: 3572e9f386c007c530c4437a69224cc693e45f278b792989a7c8f71b3f11efff
+    negative:
+      path: data/interim/graphpro_epd_downstream_treated_v1/mouse/negative.fa
+      sha256: 5a25af66f2f5db459d716117f92e36e6f27084b4f5bac83c3e2d73c25118e5b3
+    external_positive_sources:
+      - dataset_id: cnnprom-eukaryotic-Mouse_non_tata
+        files:
+          - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cnnprom-eukaryotic-Mouse_non_tata-p-13010-n-19834-train.csv
+            sha256: dc261b1ed8d8ce9ff68b2293cb6ba2316de7cb4b3dad2678a88ab481f3a45b0b
+          - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cnnprom-eukaryotic-Mouse_non_tata-p-3253-n-4959-test.csv
+            sha256: 665e2996e38f371165240a76aeafd6e150e610138abf589d2754c4fb1016c4ee
+
+execution_gates:
+  treatment_enabled: true
+  split_generation_enabled: false
+  model_training_enabled: false
+  confirmatory_use_enabled: false

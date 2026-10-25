@@ -1,0 +1,67 @@
+policy:
+  name: capsprom-remote-usage-policy-v3
+  status: active_local_first_persistent_async_jobs
+  scope: remote_access_frequency_sync_and_persistent_job_tracking
+  supersedes: configs/capsprom_remote_usage_policy_v2.yaml
+  preserves:
+    - scientific_execution_gates
+    - atomic_state_and_resume_requirements
+    - mlflow_identity_and_provenance
+    - backup_and_integrity_requirements
+
+default_work_location:
+  host: local
+  remote_access_required: false
+  activities: [code_development, configuration_drafting, documentation, focused_tests, fixture_tests, code_review, status_snapshots]
+
+remote_access:
+  default: do_not_access
+  requires_explicit_bounded_authorization: true
+  allowed_when_any: [many_repeated_executions, gpu_is_required, estimated_local_runtime_is_excessive, estimated_local_memory_is_insufficient, remote_specific_behavior_requires_validation, backup_or_restore_audit_is_required_for_an_authorized_remote_campaign]
+  objective_guidance:
+    many_repeated_executions_minimum_fits: 20
+    excessive_local_runtime_hours: 2
+    local_memory_headroom_minimum_fraction: 0.25
+
+hosts:
+  bioserver03:
+    primary_role: gpu_heavy_or_many_fit_execution
+    routine_development_enabled: false
+  bioserver04:
+    primary_role: heavy_cpu_auxiliary_and_remote_backup
+    routine_development_enabled: false
+    canonical_training_workers: 0
+
+persistent_execution:
+  required_for_long_remote_commands: true
+  preflight:
+    - inspect_registered_pending_jobs
+    - inspect_remote_process_and_result_identity
+    - refuse_equivalent_duplicate_execution
+    - verify_scientific_execution_gate
+  launcher_requirements:
+    - survives_ssh_disconnect
+    - records_remote_pid_or_scheduler_job_id
+    - writes_stdout_and_stderr_to_declared_log
+    - writes_exit_code_to_declared_path
+    - uses_declared_working_directory_and_configuration
+    - preserves_atomic_application_state_and_checkpoints
+  registry: manifests/remote_jobs.json
+  required_registry_fields: [job_id, status, server, launcher, remote_process_id, command, working_directory, configuration, log_path, result_paths, checkpoint_paths, exit_code_path, started_at_utc, last_checked_at_utc]
+  launch_response: confirm_process_active_and_return_without_waiting_for_completion
+  monitoring_model: check_on_subsequent_authorized_interactions_only
+  automatic_background_monitoring_claimed: false
+  completion_requirements: [process_stopped, exit_code_zero, expected_artifacts_present, artifact_integrity_checked]
+  failure_requirements: [preserve_logs, preserve_atomic_state_and_checkpoints, diagnose_before_retry, resume_when_scientifically_equivalent, avoid_duplicate_processing]
+
+synchronization:
+  timing: authorized_campaign_boundaries_only
+  content: minimum_immutable_execution_snapshot
+  routine_remote_updates: false
+
+execution_gates:
+  current_campaign_paused: true
+  canonical_jobs_enabled: false
+  final_fits_enabled: false
+  external_test_enabled: false
+  embedding_jobs_enabled: false

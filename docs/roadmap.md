@@ -488,13 +488,211 @@ Current state:
   *B. amyloliquefaciens* datasets and 195 shared positives between CDBProm
   Chlamydophila and GraphPro *C. phytofermentans*. These findings block final
   dependency clusters pending source-lineage review.
-- Next: resolve source provenance and cross-source label semantics for the eight
-  overlapping pairs, freeze the dependency clusters, and then implement the
-  statistical aggregation fixtures.
+- Completed: review source-label semantics and freeze the eligible confirmatory
+  scope. The review identified 1,345 raw GraphPro E. coli contradictions,
+  perfect class--strand confounding in five bacterial folders, 535 GraphPro
+  Bacillus negatives matching CDBProm positive TSS windows, and a CapsProm
+  `Cpne` organism-mapping error. The builder now identifies `Cpne` as
+  Chlamydophila pneumoniae. All eight GraphPro identities are exploratory until
+  independently reconstructed; the confirmatory scope contains 18 CDBProm and
+  CNNProm datasets in 14 reviewed dependency clusters.
+- Completed: define the GraphPro treatment and reinstatement contract. Released
+  labels remain unchanged; new `graphpro-reconstructed-v1` candidates require
+  independent TSS/EPD provenance, exact assembly versions, deterministic
+  GC-matched genomic controls, full filtering ledgers, and per-organism
+  eligibility. Fixture tests validate deterministic strand-aware reconstruction
+  and source auditing. No reconstructed real dataset or model job has run.
+- Completed: verify bacterial reconstruction feasibility against Promotech
+  commit `56251ad9b883ef831b4753fc623d5ec970fe65e0`. Matching BED6 TSS tables and
+  assemblies exist for all six bacteria. A controlled local run produced
+  11,903 positive--control pairs after TSS-level deduplication and source-window
+  filtering. Source hashes and BED--FASTA orientation checks pass for all six;
+  the smallest common discrete GC tolerance is four bases in 81 nt. These are feasibility
+  counts, not released datasets; no model job ran.
+- Completed: materialize immutable GraphPro reconstruction candidates. Version
+  1 exposed 77 strand-invariant repeated positive windows after TSS
+  deduplication. Version 2 removes each affected positive--control pair and
+  retains 11,826 balanced pairs across six organisms. Its exact-integrity audit
+  has zero within-class identities, zero cross-label exact/reverse-complement
+  collisions, zero invalid sequences, and zero GC-policy violations. No split
+  or model job has run.
+- Completed: freeze and materialize near-duplicate-aware group-safe splits for
+  the six bacterial version-2 candidates. Positive--control pairs and connected
+  components at strand-invariant Hamming distance at most eight are
+  indivisible. The split contains 18,920 training and 4,732 test rows with exact
+  class balance; an independent audit finds zero pair, group, exact,
+  reverse-complement, or distance-eight train/test overlap. A clean rebuild is
+  byte-identical. Model and confirmatory gates remain false.
+- Completed: create versioned exploratory integrity views for the released
+  GraphPro Human and Mouse collections without inferring biological labels.
+  Bilateral exact-collision and within-class duplicate filtering removes 13
+  Human records (8 positive and 5 negative) and four Mouse records (3 positive
+  and 1 negative), with every exclusion recorded by source identifier, class,
+  index, sequence hash, and reason. The resulting identities are not treated as
+  EPD-based reconstructions and remain blocked from training.
+- Completed: generate fixed-scale, class-separated before/after dataset logos
+  for the six bacterial reconstruction candidates and the two released
+  eukaryotic integrity views. Sixteen figures and 64 frequency/information CSV
+  matrices are bound to logo-audit contract v2. A standalone 11-page LaTeX/PDF
+  report distinguishes dataset composition from model-extracted motifs and
+  independently positioned bacterial TSSs from nominal eukaryotic alignment.
+- Completed: assess derived-artifact impact. The bacterial v2 grouped split
+  remains valid; released GraphPro model results remain historical only;
+  Human/Mouse canonical-v3 partitions cannot be reused for the new integrity
+  identity or a future EPD reconstruction. The active eligibility scope remains
+  18 CDBProm/CNNProm datasets.
+- Completed: run the formal candidate distribution and strand-invariant exact
+  dependency audits. All bacterial pairs respect the frozen four-base GC
+  tolerance, but five of six show small aggregate GC shifts after Holm
+  correction. Human and Mouse released integrity views show much larger class
+  differences of 11.0 and 10.4 GC percentage points. Across 26 identities,
+  five dependencies involve a GraphPro-derived candidate/view: 404 shared
+  Chlamydophila positives, two shared Bacillus positives, six CNNProm-negative
+  versus reconstructed-E. coli-positive conflicts, one CNNProm-positive versus
+  released-Mouse-negative conflict, and one shared Human/Mouse positive.
+  E. coli reinstatement is blocked pending source resolution; Chlamydophila
+  requires shared dependency clustering if reinstated. No labels were changed.
+- Completed: freeze the November 2023 EPDnew archive metadata, assemblies,
+  CC BY 4.0 notice, and BED hashes, then resolve the released Human/Mouse
+  identifiers. All 2,339 Human identifiers resolve to HsNC v001 on hg38; all
+  2,576 identifiers in the Mouse class union resolve to MmNC v001 on mm10.
+  Every Human identifier and 1,116 Mouse identifiers occur in both released
+  class files, confirming that EPD resolution cannot validate the released
+  negative label. A row-level coordinate ledger is reproducible and atomic.
+- Completed: perform a preliminary strand-aware coordinate check on three
+  Human pairs, one Mouse pair present in both classes, and one Mouse positive.
+  All checked positives span -80 through the EPD TSS; all checked paired
+  negatives span +1000 through +1080 relative to that TSS. This identifies a
+  likely released-data construction rule but does not replace a complete
+  hash-bound recreation from local hg38/mm10 assemblies.
+- Completed: acquire and verify the official UCSC hg38/mm10 twoBit assemblies
+  on the bounded `bioserver04` workspace and recreate all 8,370 released
+  Human/Mouse records. Every positive is exactly the strand-oriented EPD
+  interval [-80, 1), and every negative is [1000, 1081); there are zero
+  sequence or header-label mismatches. Two complete executions are byte-equal.
+  The result establishes source provenance, not verified non-promoter status.
+- Completed: perform a preliminary coordinate-only exclusion check for the
+  historical +1 kb controls. Another known coding/non-coding EPD TSS falls
+  inside 22 Human and 11 Mouse controls; the frozen 100-nt exclusion margin
+  affects 74 Human and 40 Mouse controls. Formal row-level treatment remains
+  pending.
+- Completed: materialize the formal historical downstream-control treatment on
+  top of the exact-integrity view. The all-EPD 100-nt exclusion removes 73
+  Human controls (21 direct TSS overlaps) and 40 Mouse controls (11 direct
+  overlaps); one Human positive reverse-complement duplicate is also removed.
+  Final counts are 2,330/2,261 Human and 1,843/1,805 Mouse. The ledger and
+  FASTAs rebuild byte-identically, and all final exact/reverse-complement and
+  TSS-margin checks pass. No artificial pairing or rebalancing was introduced.
+- Completed: audit the treated Human/Mouse downstream condition against the
+  confirmatory scope. Mean positive-minus-negative GC differences remain 0.1149
+  and 0.1069, so the construction shortcut persists. Human and Mouse share one
+  positive identity; one Mouse control (`FP002834|Gm50063_1`) reverse-complement
+  matches a CNNProm Mouse non-TATA positive. Mouse remains blocked pending
+  source resolution, and neither candidate receives a split or execution gate.
+- Completed: create the immutable downstream-treatment v2 successor under the
+  external-positive control-suitability rule. Only Mouse control
+  `FP002834|Gm50063_1` was removed; CNNProm was not modified or relabeled.
+  Mouse v2 contains 1,843 positives and 1,804 negatives, while Human is
+  byte-identical to v1. Rebuilds are deterministic. The repeated dependency
+  audit has no remaining opposite-label identity with the active confirmatory
+  scope, but one Human/Mouse shared positive remains. Mean class GC differences
+  remain 0.1149 and 0.1070, so both conditions remain exploratory, unsplit, and
+  blocked from training.
+- Completed: materialize the separate primary EPD GC-matched Human/Mouse v5
+  candidate. The frozen contract uses the union of 2,339 Human and 2,576 Mouse
+  EPD identifiers and one same-chromosome, same-strand control with at most two
+  GC-base differences per positive. Exact, one-base, and random-only two-base
+  feasibility attempts were preserved separately. A deterministic exhaustive
+  fallback was required for two extreme-GC Mouse promoters. Bilateral duplicate
+  filtering retained 2,332 Human and 2,571 Mouse pairs. Pairs are indivisible;
+  all known EPD
+  TSS margins, target/external positive identities, ambiguous windows, and
+  selected-control overlaps are excluded. Execution is isolated on
+  `bioserver04`; split and training gates remain false. The descriptive audit
+  reports mean class GC gaps of 0.00289 and 0.00405 and no opposite-label exact
+  dependency with the 18-dataset confirmatory scope. Same-label positive
+  dependencies remain for grouping. The distance-eight audit links 53 Human and
+  49 Mouse pairs; largest components contain six pairs, and Human has three
+  cross-label near-neighbor edges. A clean rebuild reproduced the complete
+  output tree and log byte-for-byte. Generation is validated; manual source
+  review and eligibility approval remain pending.
+- Next: independently sample-audit the primary TSS provenance, run the
+  near-duplicate/grouping audit, archive source citations for the six bacteria,
+  and predeclare a negative-control sensitivity for residual GC structure.
+  Approve per-organism eligibility only after those gates; do not generate
+  grouped splits beforehand.
+- Completed: implement and fixture-test paired-seed and cluster-level
+  aggregation under evaluation protocol v3. The synthetic contract enforces
+  the complete ten-seed pairing, calculates the median within-seed difference
+  per dataset, collapses related datasets to one dependency-cluster median,
+  withholds Wilcoxon inference below ten clusters, applies monotone Holm
+  adjustment, and validates a deterministic paired stratified bootstrap with
+  shared record indices. This closes only the fixture gate; group bootstrap,
+  final report integration, and all real canonical jobs remain blocked.
 - Next: reverify the remote plan and MLflow identities only after explicit
   authorization, then decide whether to retain the frozen 30-epoch budget or
   create a separate sensitivity contract. The release policy remains locally
   blocked in `configs/capsprom_future_campaign_release_policy_v1.yaml`.
+- Completed: supersede the remote usage policy with v3. Long remote commands
+  must use a disconnect-safe asynchronous launcher, persist their exit code,
+  and register server, process identity, command, working directory,
+  configuration, logs, results, and checkpoints in
+  `manifests/remote_jobs.json`. `make status` exposes pending entries. Future
+  authorized interactions inspect registered jobs before launching equivalent
+  work; no automatic monitoring between interactions is claimed. The registry
+  currently has no pending jobs, and all canonical, final-fit, external-test,
+  and embedding gates remain closed.
+- Completed: freeze the version-1 negative-control sensitivity design. Native,
+  GC-matched genomic, synthetic-shuffle, CDS-derived, and multi-negative
+  conditions keep separate identities and test panels; no pooled MCC is
+  allowed. The first future implementation is one provenance-selected pilot,
+  but construction and training remain blocked until the GraphPro manual audit,
+  statistical-aggregation fixtures, and coordinate feasibility inventory are
+  complete.
+- Completed: inventory coordinate and assembly feasibility for all 29 local
+  Bhandari, CDBProm, CNNProm, and reconstructed GraphPro identities. GraphPro
+  Human/Mouse have fully recreated EPD coordinates; the six bacteria have
+  reconstructed Promotech coordinates, but five still need primary-study row
+  sampling and Rhodobacter lacks an accessible published primary coordinate
+  source. CDBProm rows are sequence-only, CNNProm metadata are heterogeneous,
+  and the nominal Bhandari Plant file contains exclusively `mm10` coordinate
+  headers. No pilot was selected and every construction/training gate remains
+  closed.
+- Completed: freeze the GraphPro primary-TSS manual sample contract before
+  reading primary coordinate tables. Five publication-backed bacterial sources
+  receive deterministic ten-row, strand-aware samples. Rhodobacter remains a
+  separate blocker: GSE117537 exposes 4,045 rows and therefore cannot silently
+  replace the 5,374-row Promotech candidate. Primary file acquisition and the
+  row comparisons remain pending.
+- Completed: acquire and hash the five official Promotech BED inputs and
+  materialize the frozen manual sample. All input hashes match the existing
+  source registry; the output contains 50 rows (10 per dataset) with SHA-256
+  `751a9a757f0b0080dc9aa3778c3c94c87d057e6b74a49cacfe5754265d8c78f9`.
+  Primary supplementary-table acquisition and coordinate comparison remain
+  pending, and no dataset eligibility changed.
+- Completed: acquire the primary Campylobacter, Chlamydia, and Leptospira
+  supplements and compare their 30 frozen sample rows. All 30 match exact
+  one-based TSS position and strand after the declared BED0-to-publication
+  conversion. The ledger preserves repeated source annotations at identical
+  coordinate/strand pairs. Bacillus remains blocked because its exact
+  supplement has not been acquired; E. coli remains blocked because the
+  provenance of the published 278-row subset is not yet identified. No
+  eligibility, split, or execution gate changed.
+- Next: obtain the exact Bacillus supplement and resolve the E. coli 278-row
+  selection rule, then finish the immutable five-source comparison. Continue
+  to keep reconstruction, split, canonical, and embedding jobs blocked.
+- Completed: resolve the nominal E. coli source identity. The 278 Promotech BED
+  rows match the 278 ordered rows of Scientific Reports Supplementary Dataset
+  S1 exactly by converted coordinate, strand, and locus. All 278 published
+  51-nt windows match the pAA plasmid reference `NC_018666.1`; zero BED rows
+  declare that accession because all are mislabeled `NC_000913.3`. The nominal
+  MG1655 reconstruction and its controls, split, distribution, similarity, and
+  dependency artifacts are invalidated and retained only for provenance. No
+  source file was edited or relabeled.
+- Next: define a fresh pAA-specific reconstruction contract using
+  `NC_018666.1`, while continuing the legitimate search for a coordinate-level
+  Bacillus supplement. Do not generate pAA controls or splits until the new
+  contract is frozen; all model-execution gates remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 

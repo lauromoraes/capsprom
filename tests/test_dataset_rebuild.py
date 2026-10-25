@@ -6,7 +6,12 @@ from capsprom.data.dataset_builders import (
     build_intra_dataset_csvs_with_audit,
     crop_fasta_directory,
 )
+from capsprom.data.fasta_builders import GRAPHPRO_DATASET_NAMES
 from capsprom.data.sequences import SequenceRecord, read_fasta, write_fasta
+
+
+def test_graphpro_cpne_uses_the_organism_in_the_source_headers():
+    assert GRAPHPRO_DATASET_NAMES["Cpne"] == "chlamydophila_pneumoniae"
 
 
 def test_cropping_overwrites_output_instead_of_appending(tmp_path: Path):

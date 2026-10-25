@@ -109,19 +109,22 @@ def test_artifact_snapshot_manifest_detects_exact_copy_and_tampering(tmp_path: P
     assert tampered["mismatched"] == ["model.pt"]
 
 
-def test_remote_usage_policy_is_local_first_and_campaign_bounded() -> None:
+def test_remote_usage_policy_is_local_first_campaign_bounded_and_persistent() -> None:
     root = Path(__file__).parents[1]
     policy = yaml.safe_load(
-        (root / "configs/capsprom_remote_usage_policy_v2.yaml").read_text()
+        (root / "configs/capsprom_remote_usage_policy_v3.yaml").read_text()
     )
 
-    assert policy["policy"]["status"] == "active_local_first"
+    assert policy["policy"]["status"] == "active_local_first_persistent_async_jobs"
     assert policy["default_work_location"]["host"] == "local"
     assert policy["remote_access"]["default"] == "do_not_access"
     assert policy["remote_access"]["requires_explicit_bounded_authorization"] is True
     assert policy["synchronization"]["routine_remote_updates"] is False
-    assert policy["bioserver03"]["primary_role"] == "gpu_heavy_or_many_fit_execution"
-    assert policy["bioserver04"]["primary_role"] == "heavy_cpu_auxiliary_and_remote_backup"
+    assert policy["hosts"]["bioserver03"]["primary_role"] == "gpu_heavy_or_many_fit_execution"
+    assert policy["hosts"]["bioserver04"]["primary_role"] == "heavy_cpu_auxiliary_and_remote_backup"
+    assert policy["persistent_execution"]["required_for_long_remote_commands"] is True
+    assert policy["persistent_execution"]["registry"] == "manifests/remote_jobs.json"
+    assert policy["persistent_execution"]["automatic_background_monitoring_claimed"] is False
     assert policy["execution_gates"]["current_campaign_paused"] is True
     assert policy["execution_gates"]["final_fits_enabled"] is False
     assert policy["execution_gates"]["external_test_enabled"] is False

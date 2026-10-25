@@ -1,0 +1,36 @@
+dataset:
+  name: graphpro-released-eukaryotic-integrity-v1
+  version: 1.0.0
+  status: exploratory_integrity_treatment
+  source_family: released_graphpro
+  output_is_reconstruction: false
+  confirmatory_use_enabled: false
+
+policy:
+  sequence_length: 81
+  alphabet: ACGT
+  cross_label_collision: remove_all_occurrences_from_both_classes
+  within_class_duplicate: retain_first_in_source_order
+  unresolved_epd_identifier: retain_for_exploratory_integrity_view_only
+  unresolved_epd_identifier_rationale: >-
+    The reconstruction contract excludes unresolved identifiers from a future
+    independently reconstructed positive set, but no dated EPD release and
+    assembly have yet been frozen. Removing every released row here would not
+    create a reconstructed dataset and would leave no sequence-logo population.
+
+datasets:
+  - organism: human
+    positive: data/raw/GraphPro/human/positive
+    positive_sha256: b8af4848899881b5c88908011bb3f63f0517c464b30f149b90cdf01c529dd94a
+    negative: data/raw/GraphPro/human/negative
+    negative_sha256: aaf856d88f23122cdd6dc585232bda1f79bb556d2f1277e8a901e5d875fd7490
+  - organism: mouse
+    positive: data/raw/GraphPro/mouse/positive
+    positive_sha256: aa33c8f8a642136397e55740e9fb74ace12a2e930f664b26fc9b218e551e8316
+    negative: data/raw/GraphPro/mouse/negative
+    negative_sha256: 6d450cdccbb1230f3d9c36fc46fd2a405347bff11f06a1723462b63658c498c6
+
+execution_gates:
+  integrity_treatment_enabled: true
+  model_training_enabled: false
+  confirmatory_use_enabled: false

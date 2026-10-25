@@ -9,6 +9,21 @@ from pathlib import Path
 from .sequences import SequenceRecord, keep_most_common_length, normalize_sequence, normalize_to_min_length, read_fasta, write_fasta
 
 
+GRAPHPRO_DATASET_NAMES = {
+    "Bamy": "bacillus_amyloliquefaciens",
+    "Cje": "campylobacter_jejuni",
+    # The distributed records use accession NC_000922.1 and identify
+    # Chlamydophila/Chlamydia pneumoniae CWL029.  The folder abbreviation is
+    # therefore Cpne, not Clostridium phytofermentans.
+    "Cpne": "chlamydophila_pneumoniae",
+    "Ecol": "escherichia_coli",
+    "human": "Human",
+    "Lint": "leptospira_interrogans",
+    "mouse": "Mouse",
+    "Rcap": "rhodobacter_capsulatus",
+}
+
+
 @dataclass(frozen=True)
 class FastaBuildResult:
     source: Path
@@ -86,19 +101,9 @@ def build_cnnprom_fastas(raw_dir: Path, output_dir: Path) -> list[FastaBuildResu
 def build_graphpro_fastas(raw_dir: Path, output_dir: Path) -> list[FastaBuildResult]:
     """Convert GraphPro positive/negative folders into common FASTA files."""
 
-    names = {
-        "Bamy": "bacillus_amyloliquefaciens",
-        "Cje": "campylobacter_jejuni",
-        "Cpne": "clostridium_phytofermentans",
-        "Ecol": "escherichia_coli",
-        "human": "Human",
-        "Lint": "leptospira_interrogans",
-        "mouse": "Mouse",
-        "Rcap": "rhodobacter_capsulatus",
-    }
     eukaryotic = {"human", "mouse"}
     results: list[FastaBuildResult] = []
-    for folder, dataset in names.items():
+    for folder, dataset in GRAPHPRO_DATASET_NAMES.items():
         karyote = "eukaryotic" if folder in eukaryotic else "prokaryotic"
         for raw_name, class_name in (("positive", "prom"), ("negative", "nonprom")):
             source = raw_dir / folder / raw_name

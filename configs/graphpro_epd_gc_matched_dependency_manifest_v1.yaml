@@ -1,0 +1,63 @@
+manifest:
+  name: graphpro-epd-gc-matched-dependency-v1
+  version: 1.0.0
+  status: audited_candidate_release_pending
+  reconstruction_contract: configs/graphpro_epd_gc_matched_reconstruction_v5.yaml
+  reconstruction_contract_sha256: 0243d8276b6438a654fa3bfd4a2d03b464199e4aecbb9e23e65697dadfe4d911
+  build_summary_sha256: 518b526b2e8144a0e3bbb982340a2301531ad8e92c130aeb5368368848e9288e
+  candidate_audit: configs/graphpro_epd_gc_matched_candidate_audit_v1.yaml
+  audit_manifest_sha256: 43cb7607278b576c42deed9e01d586745fe91dd015fefb393f0d1f35faa131ed
+  similarity_audit_sha256: d6880b2fb9bd506d3c24f40c742bd5163f240e8c07a4a75c28834b480529006b
+  active_confirmatory_manifest_modified: false
+
+candidates:
+  - dataset_id: graphpro-epd-gc-matched-v5-human
+    pair_count: 2332
+    eligibility: release_pending
+    blockers:
+      - deterministic_rebuild_comparison_pending
+      - independent_manual_tss_and_control_sample_audit_pending
+      - grouped_split_not_generated
+      - eligibility_approval_pending
+    dependencies:
+      - dataset_id: cnnprom-eukaryotic-Human_non_tata
+        relationship: 14_shared_positive_strand_invariant_identities
+        required_action: shared_dependency_cluster_or_predeclared_source_separation
+      - dataset_id: graphpro-epd-gc-matched-v5-mouse
+        relationship: one_shared_positive_strand_invariant_identity
+        required_action: shared_dependency_cluster_if_both_are_admitted
+    within_candidate_similarity:
+      threshold: strand_invariant_hamming_distance_at_most_8
+      pairs_with_neighbor: 53
+      largest_component_pairs: 6
+      cross_label_neighbor_edges: 3
+      required_action: assign_complete_pair_components_to_one_partition
+  - dataset_id: graphpro-epd-gc-matched-v5-mouse
+    pair_count: 2571
+    eligibility: release_pending
+    blockers:
+      - deterministic_rebuild_comparison_pending
+      - independent_manual_tss_and_control_sample_audit_pending
+      - grouped_split_not_generated
+      - eligibility_approval_pending
+    dependencies:
+      - dataset_id: cnnprom-eukaryotic-Mouse_non_tata
+        relationship: 18_shared_positive_strand_invariant_identities
+        required_action: shared_dependency_cluster_or_predeclared_source_separation
+      - dataset_id: cnnprom-eukaryotic-Mouse_tata
+        relationship: 2_shared_positive_strand_invariant_identities
+        required_action: shared_dependency_cluster_or_predeclared_source_separation
+      - dataset_id: graphpro-epd-gc-matched-v5-human
+        relationship: one_shared_positive_strand_invariant_identity
+        required_action: shared_dependency_cluster_if_both_are_admitted
+    within_candidate_similarity:
+      threshold: strand_invariant_hamming_distance_at_most_8
+      pairs_with_neighbor: 49
+      largest_component_pairs: 6
+      cross_label_neighbor_edges: 0
+      required_action: assign_complete_pair_components_to_one_partition
+
+execution_gates:
+  split_generation_enabled: false
+  model_training_enabled: false
+  confirmatory_use_enabled: false

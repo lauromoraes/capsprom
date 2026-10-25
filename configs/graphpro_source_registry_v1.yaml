@@ -1,0 +1,89 @@
+registry:
+  name: graphpro-reconstruction-source-registry-v1
+  version: 1.0.0
+  status: candidate_sources_located_integrity_audit_pending
+  reconstruction_contract: configs/graphpro_reconstruction_v1.yaml
+  repository_url: https://github.com/BioinformaticsLabAtMUN/Promotech
+  repository_commit: 56251ad9b883ef831b4753fc623d5ec970fe65e0
+  source_license: GPL-3.0
+  paper_doi: 10.1186/s13059-021-02514-9
+
+sources:
+  - dataset_id: graphpro-reconstructed-prokaryotic-bacillus_amyloliquefaciens
+    source_key: BACILLUS
+    expected_accession: CP002927.1
+    source_partition: validation
+    reference_fasta: datasets/validation/whole-genome-and-tss/BACILLUS/BACILLUS.fasta
+    tss_bed: datasets/validation/whole-genome-and-tss/BACILLUS/BACILLUS.bed
+    processed_positive_bed: datasets/validation/40nt-sequences/bacteria-1-1-ratio/BACILLUS/positive.bed
+    processed_positive_fasta: datasets/validation/40nt-sequences/bacteria-1-1-ratio/BACILLUS/positive.fasta
+    expected_sha256:
+      reference_fasta: a4b8785960792a1642441d54b0175be7fa3df25b2e8afd9d8918e6aa2c60c775
+      tss_bed: fcbddb6035f3cd77ac97291131e18f05c5b3e049b003d61e4a3a65c8ffba9544
+      processed_positive_bed: add49e1aa63dd4b7e7f312d89d47b2708a5ee7f33484d025cc694144a042a0dc
+      processed_positive_fasta: 18ff9fd3751fc2b54eaac39ab1301ecffc443b08d225936e082f89e8de9375e0
+  - dataset_id: graphpro-reconstructed-prokaryotic-campylobacter_jejuni
+    source_key: CJEJUNI_2
+    expected_accession: NC_002163.1
+    source_partition: training
+    reference_fasta: datasets/training/whole-genome-and-tss/CJEJUNI_2/CJEJUNI_2.fasta
+    tss_bed: datasets/training/whole-genome-and-tss/CJEJUNI_2/CJEJUNI_2.bed
+    processed_positive_bed: datasets/training/40nt-sequences/bacteria-1-1-ratio/CJEJUNI_2/positive.bed
+    processed_positive_fasta: datasets/training/40nt-sequences/bacteria-1-1-ratio/CJEJUNI_2/positive.fasta
+    expected_sha256:
+      reference_fasta: 2461bf573a726afce3801c06cbbbf2072c33899798ff05cf3c2c29043f410086
+      tss_bed: 31979db2dc3ce23387657558569d547384026e9db5443335628a3a9ba46b2da1
+      processed_positive_bed: 0a8e55838c6564339324ce0b0f23514d208ba22c6ae0a0e3c3bf5ecfaa08b7ec
+      processed_positive_fasta: 0e328082ae67200f3c493152ba1366cd9d299d1b74d3d7be7ddb4ff46a5a2bb9
+  - dataset_id: graphpro-reconstructed-prokaryotic-chlamydophila_pneumoniae
+    source_key: CPNEUMONIAE
+    expected_accession: NC_000922.1
+    source_partition: training
+    reference_fasta: datasets/training/whole-genome-and-tss/CPNEUMONIAE/CPNEUMONIAE.fasta
+    tss_bed: datasets/training/whole-genome-and-tss/CPNEUMONIAE/CPNEUMONIAE.bed
+    processed_positive_bed: datasets/training/40nt-sequences/bacteria-1-1-ratio/CPNEUMONIAE/positive.bed
+    processed_positive_fasta: datasets/training/40nt-sequences/bacteria-1-1-ratio/CPNEUMONIAE/positive.fasta
+    expected_sha256:
+      reference_fasta: fab26128bb08329b90084c89d47e7e9265d8a8e03cc49a016696a68764252e69
+      tss_bed: 8ad74df345496652d82d3fb696bfe7c0edfb0520135b30e4d59eb5777d483085
+      processed_positive_bed: 49b62294b4784251988b68efd4361874b12cd751921f13467a153f24a8e1499d
+      processed_positive_fasta: e660694b6c2fe7666c92915afaeb684e22f3a6afc27ac72363a86ef6e922b999
+  - dataset_id: graphpro-reconstructed-prokaryotic-escherichia_coli
+    source_key: ECOLI
+    expected_accession: NC_000913.3
+    source_partition: training
+    reference_fasta: datasets/training/whole-genome-and-tss/ECOLI/ECOLI.fasta
+    tss_bed: datasets/training/whole-genome-and-tss/ECOLI/ECOLI.bed
+    processed_positive_bed: datasets/training/40nt-sequences/bacteria-1-1-ratio/ECOLI/positive.bed
+    processed_positive_fasta: datasets/training/40nt-sequences/bacteria-1-1-ratio/ECOLI/positive.fasta
+    expected_sha256:
+      reference_fasta: 53bb6a51b6e92139ced1e38f74b7938781027c52200922ff03718c2237d23bb4
+      tss_bed: d2484c9af295249b4a0d0c5e261b99b1a1d10ba56b167ce10b183486cfa59750
+      processed_positive_bed: 7ac3ffe66e2d0a8151b814eb9d34769668e06319afa90cb39800976414e37c15
+      processed_positive_fasta: d6290d6264e7f0a0778899564ad3e019396bd6938790bd94f5c47a5dc0d1e614
+  - dataset_id: graphpro-reconstructed-prokaryotic-leptospira_interrogans
+    source_key: LINTERROGANS
+    expected_accession: NZ_LT962963.1
+    source_partition: training
+    reference_fasta: datasets/training/whole-genome-and-tss/LINTERROGANS/LINTERROGANS.fasta
+    tss_bed: datasets/training/whole-genome-and-tss/LINTERROGANS/LINTERROGANS.bed
+    processed_positive_bed: datasets/training/40nt-sequences/bacteria-1-1-ratio/LINTERROGANS/positive.bed
+    processed_positive_fasta: datasets/training/40nt-sequences/bacteria-1-1-ratio/LINTERROGANS/positive.fasta
+    expected_sha256:
+      reference_fasta: 882c886aa1fd9102526707710c2727d985093ab46fdae4a9d4b997377be0d9c2
+      tss_bed: f676d4c579cc0ac51c962ac4e1260682ea21f8b14f4c706e315d9c452d67dbae
+      processed_positive_bed: 40fe333ca10b71b0f5a66f4edcfb847f1ad28b43e7711854c1d917abeadb4656
+      processed_positive_fasta: 707b45752fe9cc47e574a749b7fee36e9e398d03e36dca8a7d53e6cb15d7586f
+  - dataset_id: graphpro-reconstructed-prokaryotic-rhodobacter_capsulatus
+    source_key: RHODOBACTER_1
+    expected_accession: NC_014034.1
+    source_partition: validation
+    reference_fasta: datasets/validation/whole-genome-and-tss/RHODOBACTER_1/RHODOBACTER_1.fasta
+    tss_bed: datasets/validation/whole-genome-and-tss/RHODOBACTER_1/RHODOBACTER_1.bed
+    processed_positive_bed: datasets/validation/40nt-sequences/bacteria-1-1-ratio/RHODOBACTER_1/positive.bed
+    processed_positive_fasta: datasets/validation/40nt-sequences/bacteria-1-1-ratio/RHODOBACTER_1/positive.fasta
+    expected_sha256:
+      reference_fasta: 3ca379dcc72dc4d7072cdffa68b31a96964f19ecf823d761e77c2e711057331a
+      tss_bed: 18d8a2a28cb741d874da2a9c90c65e51d303b7c49304fe1559a6cc2201fe4a38
+      processed_positive_bed: 1ce499a8feed28d244b8b26b35d86f7552b4a157fa93916478af64017ebc3738
+      processed_positive_fasta: b7961d324666098ca1566ecc55757b2077281b4b746ec8ac6f3030a8fffef81c

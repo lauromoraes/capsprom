@@ -14,7 +14,7 @@ release_criteria:
   local_make_check_passed: true
   status_snapshot_updated: true
   dataset_dependency_manifest_complete: false
-  statistical_aggregation_fixture_validated: false
+  statistical_aggregation_fixture_validated: true
   canonical_data_hashes_reverified_on_execution_host: false
   explicit_human_authorization_for_bounded_tranche: false
 

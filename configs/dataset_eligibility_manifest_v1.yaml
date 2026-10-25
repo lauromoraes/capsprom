@@ -1,0 +1,63 @@
+manifest:
+  name: source-label-semantics-eligibility-v1
+  status: reviewed
+  dataset_build: canonical-v3
+  eligible_dataset_count: 18
+  excluded_dataset_count: 8
+  policy: >-
+    Exact-identity cleaning is necessary but not sufficient. A confirmatory
+    dataset must also have a defensible source-level meaning for both labels.
+    Ambiguous records are never relabeled from sequence content, strand, or
+    agreement with another study.
+
+eligible_sources:
+  cdbprom:
+    dataset_count: 11
+    rationale: >-
+      The source publication documents curated promoter inputs and negative
+      windows sampled downstream of the associated promoters.
+  cnnprom:
+    dataset_count: 7
+    rationale: >-
+      The distributed source documentation identifies the promoter resources
+      and describes bacterial and eukaryotic non-promoter construction.
+
+excluded_datasets:
+  - dataset_id: graphpro-eukaryotic-Human
+    reason: negative_generation_and_source_lineage_not_independently_verified
+  - dataset_id: graphpro-eukaryotic-Mouse
+    reason: negative_generation_and_source_lineage_not_independently_verified
+  - dataset_id: graphpro-prokaryotic-bacillus_amyloliquefaciens
+    reason: class_is_perfectly_confounded_with_strand_and_535_negatives_match_cdbprom_promoter_windows
+  - dataset_id: graphpro-prokaryotic-campylobacter_jejuni
+    reason: class_is_perfectly_confounded_with_strand
+  - dataset_id: graphpro-prokaryotic-chlamydophila_pneumoniae
+    legacy_dataset_id: graphpro-prokaryotic-clostridium_phytofermentans
+    reason: legacy_organism_mapping_error_and_class_is_perfectly_confounded_with_strand
+  - dataset_id: graphpro-prokaryotic-escherichia_coli
+    reason: 1345_raw_records_have_identical_sequence_header_coordinate_and_strand_in_both_classes
+  - dataset_id: graphpro-prokaryotic-leptospira_interrogans
+    reason: class_is_perfectly_confounded_with_strand
+  - dataset_id: graphpro-prokaryotic-rhodobacter_capsulatus
+    reason: class_is_perfectly_confounded_with_strand
+
+reinstatement_requirements:
+  - obtain a source-supported definition and construction procedure for each class
+  - verify class labels independently of FASTA strand notation
+  - verify organism identity from accessions and record headers
+  - produce a new immutable dataset build, filtering manifest, and hashes
+  - repeat exact-collision, duplicate, overlap, and near-duplicate audits
+
+reconstruction_candidate:
+  contract: configs/graphpro_reconstruction_v2.yaml
+  specification: specs/graphpro_dataset_reconstruction.md
+  identity: graphpro-reconstructed-v2
+  status: bacterial_exact_integrity_passed_split_and_release_audit_pending
+  reinstatement_granularity: per_organism
+  original_graphpro_labels_remain_unchanged: true
+  confirmatory_use_enabled: false
+
+historical_policy:
+  canonical_v3_graphpro_results: exploratory_provenance_only
+  automatic_relabeling: forbidden
+  deletion_of_source_artifacts: forbidden

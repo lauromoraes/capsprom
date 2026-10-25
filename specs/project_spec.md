@@ -8,8 +8,9 @@ evaluation, and thesis-oriented documentation.
 
 ## Dataset Contract
 
-Current confirmatory source-negative scope is restricted to the canonical CSV
-files in
+Current confirmatory source-negative scope is restricted to the 18 CDBProm and
+CNNProm identities selected by
+`configs/dataset_eligibility_manifest_v1.yaml` from the canonical CSV files in
 `data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/`. The
 original `intra/`, legacy `intra_strict_dna/`, regenerated v1, and regenerated
 v2 files are preserved for provenance and preprocessing audit. Bhandari remains
@@ -28,7 +29,24 @@ sequences from both classes (2,696 rows), produces zero label conflicts, and
 makes 10 pairs strictly eligible before deduplication. The canonical v3 build
 then removes 301 positive and 759 negative same-label duplicate rows, applies
 the strict-DNA filter, and creates deterministic unique-sequence group splits.
-All 26 pairs pass the final exact-identity audit.
+All 26 pairs pass the final exact-identity audit, but exact cleanliness is not
+sufficient evidence that source labels have the intended biological meaning.
+All eight GraphPro pairs are excluded from confirmatory inference. Five
+bacterial folders have class labels perfectly confounded with FASTA strand,
+GraphPro E. coli contains 1,345 raw records in both classes, and 535 GraphPro
+Bacillus negatives match canonical windows of CDBProm positive regions. The
+legacy `Cpne` mapping to Clostridium phytofermentans was also incorrect;
+accession NC_000922.1 and the raw headers identify Chlamydophila pneumoniae.
+Historical GraphPro artifacts remain exploratory provenance and must not be
+silently relabeled or reused by the revised confirmatory contract.
+
+Primary-source comparison further established that the 278-row Promotech
+`ECOLI.bed` is an ordered copy of the pAA plasmid TSS supplement from PMID
+27748404. Its declared `NC_000913.3` contig is incorrect: all published 51-nt
+windows match `NC_018666.1`. Therefore, every reconstructed candidate, control,
+split, distribution statistic, and dependency result derived by applying these
+coordinates to MG1655 is invalidated. The source BED is preserved unchanged;
+future reconstruction uses a new pAA-specific identity and fresh hashes.
 
 The Bhandari human promoter dataset is an explicit exception. Its legacy split
 contains extensive exact-sequence duplication and train/test overlap. Current
@@ -38,6 +56,12 @@ windows are deduplicated before one deterministic shuffled negative is generated
 per positive and whose positive--negative groups are assigned wholly to train or
 test. This dataset is a synthetic-negative shuffle control and must be labeled
 accordingly; it does not replace evaluation against genomic non-promoters.
+
+Alternative negative definitions are governed by
+`specs/negative_control_protocol.md`. Source-native, GC-matched genomic,
+synthetic-shuffle, CDS-derived, and multi-negative training conditions retain
+separate identities and test panels. They must not be concatenated into one
+reported task or selected using held-out model outcomes.
 
 
 Datasets must be CSV files with exactly the following required semantic fields:
@@ -61,6 +85,9 @@ Validation requirements:
   from both classes before partitioning.
 - Every filtering stage must record input counts, rows removed by class, output
   counts, application order, and output hashes in JSON and flat CSV manifests.
+- Released GraphPro labels remain exploratory. Any reinstatement follows
+  `specs/graphpro_dataset_reconstruction.md`, creates a new derived dataset
+  identity, and passes eligibility independently for each organism.
 
 Dataset naming convention:
 

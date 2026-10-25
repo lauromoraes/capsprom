@@ -1,0 +1,18 @@
+extends:
+  path: configs/graphpro_epd_gc_matched_reconstruction_v2.yaml
+  sha256: 8723ee235b55cc8aed5f3479fabe9097ba6f894ebd018cc389137e204dd96cc1
+
+reconstruction:
+  name: graphpro-epd-gc-matched-v3
+  version: 3.0.0
+  status: primary_eukaryotic_candidate_generation_second_feasibility_relaxation
+  supersedes: configs/graphpro_epd_gc_matched_reconstruction_v2.yaml
+
+negative_policy:
+  maximum_gc_count_difference: 2
+  rationale: >-
+    Version 1 exact matching was infeasible for Human promoter LIFR-AS1_1 and
+    version 2 one-base matching was infeasible for Mouse promoter
+    0610009L18Rik_1 at the frozen 100000-candidate ceiling. Two GC bases in 81
+    nt is the next discrete source-only feasibility relaxation. Predictive
+    outcomes were not used to select this policy.

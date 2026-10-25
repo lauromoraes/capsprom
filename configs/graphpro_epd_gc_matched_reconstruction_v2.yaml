@@ -1,0 +1,17 @@
+extends:
+  path: configs/graphpro_epd_gc_matched_reconstruction_v1.yaml
+  sha256: 6fa9b1dacbc0444289fb62e39985e670fce1a91bf61306aab94cff748c8dc9d0
+
+reconstruction:
+  name: graphpro-epd-gc-matched-v2
+  version: 2.0.0
+  status: primary_eukaryotic_candidate_generation_minimum_feasible_gc_relaxation
+  supersedes: configs/graphpro_epd_gc_matched_reconstruction_v1.yaml
+
+negative_policy:
+  maximum_gc_count_difference: 1
+  rationale: >-
+    Version 1 exact matching was infeasible for Human promoter LIFR-AS1_1
+    after the frozen 100000-candidate ceiling. One GC base in 81 nt is the
+    smallest discrete source-only feasibility relaxation. Predictive outcomes
+    were not used to select this policy.

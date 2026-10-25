@@ -1,0 +1,20 @@
+extends:
+  path: configs/graphpro_epd_gc_matched_reconstruction_v3.yaml
+  sha256: 4b46f2c345183cd78222a628f8e557b4bf03dbfccf10a63271a18c40167cd81f
+
+reconstruction:
+  name: graphpro-epd-gc-matched-v4
+  version: 4.0.0
+  status: primary_eukaryotic_candidate_generation_exhaustive_fallback
+  supersedes: configs/graphpro_epd_gc_matched_reconstruction_v3.yaml
+
+negative_policy:
+  exhaustive_fallback_on_random_exhaustion: true
+  exhaustive_fallback_order: genomic_coordinate_with_deterministic_reservoir_sampling
+  rationale: >-
+    Version 3 retained a two-GC-base caliper but random probing exhausted 100000
+    candidates for Mouse promoter 0610009L18Rik_1, whose positive window has 75
+    GC bases in 81 nt. Version 4 preserves that frozen caliper and uses a
+    bounded-memory exhaustive chromosome scan only after random exhaustion.
+    Eligible fallback windows are selected by deterministic reservoir sampling;
+    predictive outcomes are not consulted.

@@ -1,0 +1,16 @@
+extends:
+  path: configs/graphpro_epd_gc_matched_reconstruction_v4.yaml
+  sha256: ca4721b79186350033b8ef5338717af1cfd7508dddc53bd06868b1379e3272bf
+
+reconstruction:
+  name: graphpro-epd-gc-matched-v5
+  version: 5.0.0
+  status: primary_eukaryotic_candidate_generation_corrected_search_accounting
+  supersedes: configs/graphpro_epd_gc_matched_reconstruction_v4.yaml
+
+negative_policy:
+  search_accounting: >-
+    sampling_attempts records only random probes, while
+    exhaustive_windows_scanned records the separate fallback effort. Version 4
+    successfully generated all pairs but conflated these counters in two Mouse
+    ledger rows; version 5 corrects metadata without changing sequence policy.

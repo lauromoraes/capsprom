@@ -31,6 +31,151 @@ GraphPro & GraphPro: An interpretable graph neural network-based model for ident
 
 The source descriptions also provide methodological context that affects interpretation. For example, CNNProm reports bacterial non-promoter sequences sampled from protein-coding genes on the opposite strand, whereas its promoter sets are linked to resources such as RegulonDB, DBTBS, EPDnew, and DBTSS. GraphPro includes human and mouse eukaryotic datasets and bacterial datasets for six organisms. These differences motivate source-aware evaluation, since the empirical distribution $P_s(X,Y)$ may differ across studies.
 
+Source labels were audited separately from sequence-level integrity.
+Deduplication can remove an observable contradiction, but it cannot establish
+that a file named as a negative class contains biologically defensible
+non-promoters. In the distributed GraphPro bacterial files, the class is
+perfectly determined by the strand symbol in five of six organism folders:
+every positive header denotes the plus strand and every negative header denotes
+the minus strand. Because promoters can occur on either strand, this pattern
+does not support interpreting strand as promoter status. GraphPro
+\textit{E. coli} additionally contains 1,345 records with identical sequence,
+accession, coordinate, strand, and complete FASTA header in both classes.
+
+The audit also corrected an organism-mapping error in the CapsProm ingestion
+code. The GraphPro folder \texttt{Cpne} had been named as
+\textit{Clostridium phytofermentans}, but its records use accession
+\texttt{NC\_000922.1} and explicitly identify \textit{Chlamydophila pneumoniae}
+CWL029. Future reconstruction uses the header-supported organism identity;
+legacy v3 artifacts retain their original identifier only for provenance.
+
+Consequently, exact-sequence cleanliness and source-label validity are treated
+as distinct eligibility gates. The confirmatory scope contains the 11 CDBProm
+and seven CNNProm datasets. All eight GraphPro datasets are retained as
+exploratory provenance until their negative-set construction can be verified or
+independently reconstructed. No GraphPro record is automatically relabeled.
+
+The treatment path preserves the released GraphPro files as an exploratory
+reproduction benchmark and defines a distinct derived family,
+\texttt{graphpro-reconstructed-v1}. For bacterial organisms, positives must be
+recreated from independently documented experimental TSS coordinates and the
+versioned reference assembly. For human and mouse, every \texttt{FP}
+identifier must first be resolved against a dated EPD release and its genome
+assembly. Because EPD is a promoter/TSS resource, membership in the released
+GraphPro \texttt{negative} directory is not accepted as evidence of a
+non-promoter label.
+
+The identifier-resolution stage uses the November 2023 EPDnew archive. Human
+identifiers are resolved against HsNC EPDnew version 001 on GRCh38/hg38 and
+mouse identifiers against MmNC EPDnew version 001 on GRCm38/mm10. Coding EPDnew
+collections are retained only as alternative annotations. The released file
+class, the \texttt{FP} prefix, and the embedded header label remain provenance
+fields and are not used as independent biological evidence. Coordinate
+resolution precedes sequence recreation and negative-control generation, which
+remain separate eligibility gates.
+
+Complete sequence recreation subsequently established the released eukaryotic
+construction rule. Relative to the strand-oriented EPD TSS, positive windows
+span $[-80,1)$ and negative windows span $[1000,1081)$. All 8,370 released
+Human and Mouse records match the frozen hg38/mm10 assemblies exactly. The
+downstream windows are therefore treated as a reproducible, source-defined
+control condition, but not as experimentally verified non-promoters or as the
+primary GC-matched control policy.
+
+For the historical downstream-control condition, treatment is applied after
+the released-data exact-integrity stage. Strand-invariant cross-label
+collisions are removed bilaterally and within-class sequence/reverse-complement
+duplicates retain only their first source occurrence. A negative window is
+excluded when its interval, expanded by 100 nt on each side, contains any TSS
+from the union of the coding and non-coding EPDnew collections. Only the invalid
+control is removed because the Mouse source does not define a complete
+one-to-one positive--control pairing. No compensatory downsampling is applied;
+records sharing an EPD identifier are instead preserved as an indivisible group
+for future partitioning.
+
+The version-2 historical condition adds an external-positive control check. A
+negative control is unsuitable when its exact sequence or reverse complement
+is labeled positive in a hash-bound dataset in the active comparison scope.
+The control alone is removed under this rule, while the external dataset and
+its label remain unchanged. The exclusion ledger records both dataset
+identities, the external label, match orientation, source index, identifier,
+and sequence hash. This policy prevents an explicit control contradiction but
+does not establish which source annotation is biologically correct.
+
+Each verified positive is represented by the strand-oriented interval from 60
+nt upstream through 20 nt downstream of the TSS. Its primary control is sampled
+deterministically from the same assembly, with the same length and matched
+strand and GC distributions, outside a frozen exclusion region around every
+known TSS. Candidate controls that overlap an exclusion interval, duplicate a
+positive or another control, contain ambiguous symbols, or violate the frozen
+GC tolerance are rejected and counted. Positive--control pairs and records
+sharing one TSS or source experiment form indivisible partition groups.
+
+For the Human/Mouse primary candidate, matching is defined at the pair level:
+each control is sampled from the same chromosome, oriented on the same strand,
+and differs by at most two G/C bases from its 81-nt promoter. Exact equality
+first failed the frozen 100,000-candidate ceiling for one Human promoter; a
+separate one-base relaxation then failed for one Mouse promoter. The two-base
+random probe failed for that same Mouse promoter, whose window contains 75 G/C
+bases (92.59\%). These feasibility decisions used source composition only and
+did not inspect model outcomes.
+
+The final candidate therefore retains the two-base tolerance and invokes a
+bounded-memory exhaustive chromosome scan only after random exhaustion.
+Eligible fallback windows are chosen by deterministic reservoir sampling while
+all TSS-margin, sequence-identity, ambiguous-DNA, and control-overlap exclusions
+remain active. This procedure produced 2,332 Human pairs and 2,571 Mouse pairs
+after bilateral removal of seven and five duplicate-positive pairs,
+respectively. Two Mouse promoters required fallback:
+\texttt{0610009L18Rik\_1} (75/81 G/C, paired with 74/81) and
+\texttt{Gm15327\_1} (76/81, paired with 76/81). Random and exhaustive search
+effort are recorded in separate ledger fields.
+Here, pairing denotes a construction and grouping relation rather than
+biological homology. The positive and control share a stable pair identifier,
+are filtered together, and must be assigned to the same future fold. Controls
+also cannot match an active external positive in either orientation. Exact
+pair-level GC matching strongly constrains the univariate GC-count difference,
+but does not establish equivalence in aggregate, higher-order, or positional
+composition; these properties are audited separately before eligibility.
+
+In the descriptive audit, the mean positive-minus-negative GC-fraction
+difference was 0.00289 for Human and 0.00405 for Mouse, compared with
+approximately 0.11 in the historical downstream-control condition. Neither the
+two-sided Mann--Whitney nor Kolmogorov--Smirnov comparison indicated an
+aggregate GC-distribution difference after Holm correction. This result
+supports reduction of the intended univariate shortcut, but it does not imply
+biological equivalence: the largest positional nucleotide-composition
+difference occurs at the TSS, and dinucleotide, chromatin, gene-proximity, and
+unobserved-promoter effects remain possible. Exact dependency analysis found
+only same-label positive sharing with CNNProm and between the Human and Mouse
+candidates; no opposite-label identity was observed. These dependencies must
+be respected by grouping or by a predeclared cross-source separation policy.
+
+Within each candidate, the strand-invariant Hamming-distance audit found 53
+Human pairs and 49 Mouse pairs with a neighbor at distance at most eight. The
+largest connected component contained six pairs in either organism. Human had
+three cross-label near-neighbor edges at this threshold, including one at
+distance four, whereas Mouse had none. These relations are not exact label
+collisions; they motivate assigning the entire connected pair component to one
+fold and auditing train--test separation after partitioning.
+
+A strand-invariant near-duplicate graph additionally joins pairs whenever any of
+their sequences differ by at most eight substitutions in either orientation.
+Each connected component is assigned wholly to training or testing by a
+deterministic component hash (seed 42), targeting an 80/20 division. The
+partition is accepted only after a direct train--test audit confirms no exact,
+reverse-complement, or distance-eight neighbor. A separate CDS-derived negative
+condition is reserved as a sensitivity analysis,
+because the definition of the negative class changes the task itself.
+
+Reinstatement is evaluated per organism rather than collectively. It requires
+verified source coordinates and assemblies, immutable hashes, a complete
+candidate-rejection and filtering ledger, group-safe partitions, exact and
+near-duplicate audits, distribution diagnostics, and manual verification of a
+record sample. Only a new eligibility and dependency manifest may admit a
+reconstructed dataset to confirmatory experiments; predictive performance is
+never an eligibility criterion.
+
 Because the source studies provide heterogeneous sequence collections, all records were first mapped into a common labeled representation. Promoter sequences were assigned label $1$, whereas non-promoter sequences were assigned label $0$. For each source $s$, this step defines an initial labeled collection $\mathcal{D}^{0}_{s}=\{(z_i,y_i)\}_{i=1}^{m_s}$, where $z_i$ denotes the original sequence window before length normalization.
 
 A deterministic cropping function $c_s$ was then applied to each original sequence $z_i$ to obtain a standardized sequence $x_i=c_s(z_i)$ with $|x_i|=81$. The target window is defined relative to a source-specific transcription start site (TSS) coordinate and contains 60 bp upstream of the TSS, the TSS nucleotide itself, and 20 bp downstream. This window definition was adopted to maintain compatibility with the promoter-region representation used by the GraphPro and CNNProm studies for prokaryotic datasets, while enforcing a common input length across all sources. Because the original sequence windows differ across studies, the TSS coordinate used by $c_s$ was defined per source and original window length.

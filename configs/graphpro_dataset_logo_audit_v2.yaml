@@ -1,0 +1,43 @@
+report:
+  name: graphpro-dataset-logo-audit-v2
+  version: 2.0.0
+  supersedes: configs/graphpro_dataset_logo_audit_v1.yaml
+  status: exploratory_descriptive_analysis
+  model_motif_analysis: false
+  confirmatory_use_enabled: false
+  change_from_v1: distinguish_independent_tss_from_unverified_nominal_alignment
+
+alignment:
+  sequence_length: 81
+  coordinate_start: -60
+  coordinate_end: 20
+  tss_coordinate: 0
+  orientation: transcription_five_prime_to_three_prime
+  logo_scale: shannon_information_bits
+  y_axis: [0.0, 2.0]
+  nucleotide_order: ACGT
+  pseudocount: 0.0
+
+inputs:
+  bacterial_before_root: data/interim/graphpro_reconstructed_v1
+  bacterial_before_summary_sha256: 0452d62f2118b3d91cf69fc3dcb39c7c117c71262545b65a1a79949b42fdefbd
+  bacterial_after_root: data/interim/graphpro_reconstructed_v2
+  bacterial_after_summary_sha256: fd2c027aad4426f6cfef7a73f4fbb7d0060f82acca1fc85cd97a68dd7ac7292b
+  eukaryotic_before_root: data/raw/GraphPro
+  eukaryotic_after_root: data/interim/graphpro_eukaryotic_integrity_v1
+  eukaryotic_after_summary_sha256: 86bf86c735ecf665d6f82556ab223b3eb012a51992799454d6cbb7970327cc39
+
+datasets:
+  - {dataset: BACILLUS, organism: Bacillus amyloliquefaciens, source: Promotech, family: reconstructed, tss_status: independently_positioned}
+  - {dataset: CJEJUNI_2, organism: Campylobacter jejuni, source: Promotech, family: reconstructed, tss_status: independently_positioned}
+  - {dataset: CPNEUMONIAE, organism: Chlamydophila pneumoniae, source: Promotech, family: reconstructed, tss_status: independently_positioned}
+  - {dataset: ECOLI, organism: Escherichia coli, source: Promotech, family: reconstructed, tss_status: independently_positioned}
+  - {dataset: LINTERROGANS, organism: Leptospira interrogans, source: Promotech, family: reconstructed, tss_status: independently_positioned}
+  - {dataset: RHODOBACTER_1, organism: Rhodobacter capsulatus, source: Promotech, family: reconstructed, tss_status: independently_positioned}
+  - {dataset: human, organism: Homo sapiens, source: released GraphPro, family: released_integrity_view, tss_status: source_alignment_not_independently_verified}
+  - {dataset: mouse, organism: Mus musculus, source: released GraphPro, family: released_integrity_view, tss_status: source_alignment_not_independently_verified}
+
+execution_gates:
+  descriptive_logo_generation_enabled: true
+  model_training_enabled: false
+  confirmatory_use_enabled: false

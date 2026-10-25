@@ -1,0 +1,31 @@
+audit:
+  name: graphpro-epd-downstream-candidate-audit-v2
+  version: 2.0.0
+  status: exploratory_distribution_and_dependency_audit
+  treatment_contract: configs/graphpro_epd_downstream_treatment_v2.yaml
+
+inputs:
+  treated_root: data/interim/graphpro_epd_downstream_treated_v2
+  candidate_dataset_identity: graphpro-epd-downstream-treated-v2
+  datasets:
+    - organism: human
+      positive_sha256: 0dab802e75a40f86c93f2a0032454ae0a51710a90aada84cae92d38b0b6258bf
+      negative_sha256: c0b946bdbfdb5af21fa4c2b39c21c56c5f41439a61732285f90f53f7f26196e3
+    - organism: mouse
+      positive_sha256: 3572e9f386c007c530c4437a69224cc693e45f278b792989a7c8f71b3f11efff
+      negative_sha256: 82fd9d25d0d6954efb1921e7b721764bd900e6ac271a3700f7c538782a331c8f
+  dependency_manifest: configs/dataset_dependency_manifest_v2.yaml
+  confirmatory_root: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna
+
+policy:
+  class_distribution_tests: [mann_whitney_u, kolmogorov_smirnov]
+  multiple_testing_correction: holm
+  positional_comparison: maximum_total_variation
+  dependency_identity: exact_or_reverse_complement
+  test_outcomes_used_for_selection: false
+
+execution_gates:
+  audit_enabled: true
+  split_generation_enabled: false
+  model_training_enabled: false
+  confirmatory_use_enabled: false

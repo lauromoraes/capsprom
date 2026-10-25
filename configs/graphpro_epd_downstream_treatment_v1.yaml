@@ -1,0 +1,67 @@
+treatment:
+  name: graphpro-epd-downstream-treated-v1
+  version: 1.0.0
+  status: exploratory_source_reproduction_treatment
+  sequence_recreation_contract: configs/graphpro_epd_sequence_recreation_v1.yaml
+  specification: specs/graphpro_dataset_reconstruction.md
+  output_is_primary_reconstruction: false
+
+policy:
+  input_integrity_stage: graphpro-released-eukaryotic-integrity-v1
+  remove_within_class_reverse_complement_duplicates: true
+  downstream_relative_start: 1000
+  downstream_relative_end_exclusive: 1081
+  known_tss_exclusion_margin_nt: 100
+  tss_inventory: union_of_epdnew_coding_and_noncoding
+  tss_proximity_removes: negative_record_only
+  rationale: >-
+    Mouse released classes are not completely paired by EPD identifier. Removing
+    a positive solely because a distinct downstream control is invalid would
+    discard an independently valid promoter and silently impose a pairing that
+    the source files do not define. Shared EPD identifiers remain indivisible
+    groups during future partitioning.
+  rebalance_after_filtering: false
+
+organisms:
+  - organism: human
+    positive:
+      path: data/interim/graphpro_eukaryotic_integrity_v1/human/positive.fa
+      sha256: 8d1d504db20894b37b961c42acbe15389344cb584a17b652e38b6cba0896de11
+    negative:
+      path: data/interim/graphpro_eukaryotic_integrity_v1/human/negative.fa
+      sha256: d4ac986c20a51de3fdb7dcc5d451d8b3149cec0cfd0e5dc53983d2ca5abf20fa
+    primary_bed:
+      path: data/raw/references/epd_2023/HsNC_EPDnew_001_hg38.bed
+      collection: HsNC_EPDnew_001_hg38
+      sha256: 068b2bdd0a19a0a727e1331e86cec89a3726cc438daa710103f7b06371463ce3
+    known_tss_beds:
+      - path: data/raw/references/epd_2023/HsNC_EPDnew_001_hg38.bed
+        collection: HsNC_EPDnew_001_hg38
+        sha256: 068b2bdd0a19a0a727e1331e86cec89a3726cc438daa710103f7b06371463ce3
+      - path: data/raw/references/epd_2023/Hs_EPDnew_006_hg38.bed
+        collection: Hs_EPDnew_006_hg38
+        sha256: 3ecac81b26ed99cc4d91e84f9dedd123de250a42981920d8d065e09c2ca114f8
+  - organism: mouse
+    positive:
+      path: data/interim/graphpro_eukaryotic_integrity_v1/mouse/positive.fa
+      sha256: 3572e9f386c007c530c4437a69224cc693e45f278b792989a7c8f71b3f11efff
+    negative:
+      path: data/interim/graphpro_eukaryotic_integrity_v1/mouse/negative.fa
+      sha256: d1e776be1037c7385626c275b69e3261ebc4440dba2329fdee68573f361aa6e8
+    primary_bed:
+      path: data/raw/references/epd_2023/MmNC_EPDnew_001_mm10.bed
+      collection: MmNC_EPDnew_001_mm10
+      sha256: 3d4caf0f2c8e7d04b8d53cec4e376628d5539a37ccf3d4d611c3d134304cd2da
+    known_tss_beds:
+      - path: data/raw/references/epd_2023/MmNC_EPDnew_001_mm10.bed
+        collection: MmNC_EPDnew_001_mm10
+        sha256: 3d4caf0f2c8e7d04b8d53cec4e376628d5539a37ccf3d4d611c3d134304cd2da
+      - path: data/raw/references/epd_2023/Mm_EPDnew_003_mm10.bed
+        collection: Mm_EPDnew_003_mm10
+        sha256: d7cb99e6edc58e36172fa1f964f131710c62c5b0be2f7b681fc98ed4def5d2fe
+
+execution_gates:
+  treatment_enabled: true
+  split_generation_enabled: false
+  model_training_enabled: false
+  confirmatory_use_enabled: false

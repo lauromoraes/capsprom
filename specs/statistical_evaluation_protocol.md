@@ -27,9 +27,11 @@ Bhandari split is retained only for provenance and historical comparability.
 
 ### Confirmatory Tier
 
-Confirmatory comparisons use all eligible strict-DNA within-source train/test
-pairs. A dataset is eligible when both models can consume its representation,
-both labels occur in train and test, and the data audit passes. Comparisons
+Confirmatory comparisons use the 18 strict-DNA CDBProm and CNNProm pairs in
+`configs/dataset_eligibility_manifest_v1.yaml`. A dataset is eligible when both
+models can consume its representation, both labels occur in train and test,
+the exact-identity audit passes, and the biological meaning and construction of
+both source labels are sufficiently documented. Comparisons
 between two models use the intersection of their eligible datasets. The model
 specification, feature set, search space, training budget, and evaluation code
 must be frozen before test predictions are generated.
@@ -46,6 +48,10 @@ partitioning. All 26 v3 pairs pass the exact-identity criteria. A separate
 Hamming-distance audit found 96 of 35,991 test sequences with a same-label
 training neighbor within eight substitutions and no opposite-label neighbor at
 that threshold; this dependence is handled as a secondary sensitivity analysis.
+Subsequent source-semantic review excluded all eight GraphPro identities from
+confirmatory use. Collision removal can make a table internally consistent but
+cannot validate a label whose source construction is uncertain. Historical
+GraphPro runs are consequently exploratory only.
 
 ## Data Integrity and Leakage Controls
 
@@ -59,6 +65,8 @@ Before confirmatory training, each dataset pair must be audited for:
 - near-duplicate or homologous clusters when a defensible grouping method is
 available. The predeclared Hamming thresholds are 1, 2, 4, and 8 substitutions
 over the 81 bp window.
+- documented source meaning and construction for both labels, including checks
+  that class is not an accidental proxy for strand or another header field.
 
 Fixed benchmark partitions are preserved for comparability. If cross-partition
 duplicates or groups are found, the primary report must quantify them and add a
@@ -199,6 +207,15 @@ cross-partition duplicate removal, raw versus calibrated probability outputs,
 and the fixed 0.5 versus training-selected threshold. Post hoc analyses must be
 labeled exploratory.
 
+Negative-generation sensitivity follows
+`specs/negative_control_protocol.md`. Metrics are reported separately for each
+negative test panel; records from native, genomic, shuffled, or CDS-derived
+panels are never concatenated into one MCC. Prediction-level paired inference is
+valid only within a fixed panel containing identical test records. Negative
+policy effects are summarized within dataset and seed and then by audited
+dependency cluster. Version 1 treats model-by-policy interaction as
+exploratory.
+
 ## Required Provenance and Artifacts
 
 Each MLflow parent experiment and child run must record:
@@ -243,6 +260,19 @@ The protocol becomes executable in the following order:
 
 No confirmatory model ranking should be published before these gates are
 implemented and validated with synthetic or fixture data.
+
+### Statistical aggregation fixture acceptance
+
+The aggregation fixture is accepted only when it demonstrates all of the
+following without reading real test outcomes: exact matching of the ten
+predeclared seeds; rejection of missing, unexpected, or duplicate seed rows;
+the median of within-seed paired MCC differences as the dataset effect; one
+median contribution per dependency cluster even when a cluster contains
+multiple datasets; refusal to run cross-cluster Wilcoxon inference below ten
+clusters; deterministic stratified paired bootstrap using identical sampled
+record indices for both models and every seed; and monotone Holm-adjusted
+p-values. Passing this fixture closes only the statistical-aggregation fixture
+gate. It does not authorize confirmatory ranking or any model execution.
 
 Version 2 of the machine-readable contract is
 `configs/evaluation_protocol_v2.yaml`. Version 1 remains unchanged for analyses

@@ -77,3 +77,9 @@ crop -> remove_cross_label_collisions -> deduplicate_within_class -> strict_dna 
 The final v3 audit contains zero duplicate rows, zero conflicting-label
 sequences, and zero exact train/test overlap in all 26 pairs. Its identifier is
 `87371a88ca1c5456db340201de5c19558b1a5773cb441787ffffc0803b66d853`.
+
+Exact consistency does not by itself validate source-label semantics. The
+subsequent source audit found class--strand confounding and cross-source label
+reversals in GraphPro, so its eight cleaned pairs remain exploratory rather than
+confirmatory. See `docs/source_label_semantics_audit.md` and
+`configs/dataset_eligibility_manifest_v1.yaml`.

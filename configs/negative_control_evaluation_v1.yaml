@@ -1,0 +1,69 @@
+protocol:
+  name: capsprom-negative-control-evaluation-v1
+  version: 1.0.0
+  status: design_locked_execution_blocked
+  specification: specs/negative_control_protocol.md
+  modifies_active_confirmatory_scope: false
+
+hypothesis:
+  primary: models_stable_across_defensible_negative_definitions_are_less_dependent_on_negative_construction_shortcuts
+  higher_single_panel_mcc_alone_is_insufficient: true
+
+conditions:
+  native:
+    role: source_reproduction_and_active_confirmatory_condition
+    generated: false
+  genomic_gc_matched:
+    role: reconstructed_primary_or_sensitivity_condition
+    one_control_per_positive: true
+    pair_is_indivisible: true
+    positive_unlabeled_uncertainty: true
+  synthetic_shuffle:
+    role: development_or_mechanistic_sensitivity
+    genomic_nonpromoter_claim: false
+    parent_and_derivatives_share_group: true
+  cds_derived:
+    role: coding_background_sensitivity
+    pooled_with_genomic_controls: false
+  multi_negative:
+    role: training_exposure_ablation
+    positive_effective_weight: 0.5
+    negative_effective_weight: 0.5
+    negative_family_weighting: equal_across_available_families
+    duplicate_positive_per_negative_family: false
+
+pilot_selection:
+  dataset_count: 1
+  criteria_order: [independent_coordinate_provenance, exact_assembly_available, source_hashes_available, manageable_size]
+  model_outcomes_used: false
+  selected_dataset: null
+
+evaluation_matrix:
+  training_conditions: [native, genomic_gc_matched, multi_negative_native_plus_genomic]
+  test_panels: [native, genomic_gc_matched]
+  optional_sensitivity_panels: [synthetic_shuffle, cds_derived, genome_scale_scan]
+  concatenate_test_panels_for_one_mcc: false
+  freeze_common: [folds, seeds, representation, architecture, training_budget, selection_rule, threshold_rule]
+
+grouping:
+  global_across_conditions: true
+  links: [tss, positive_identity, source_experiment, control_pair, shuffle_parent, near_sequence_component]
+  test_outcomes_used_for_grouping: false
+
+statistics:
+  primary_metric: matthews_corrcoef_per_test_panel
+  within_panel_model_comparison: paired_prediction_level
+  across_panel_record_pairing_claimed: false
+  policy_effect_unit: dataset_seed
+  cross_dataset_unit: audited_dependency_cluster
+  model_by_policy_interaction: exploratory
+
+execution_gates:
+  graphpro_manual_audit_complete: false
+  statistical_aggregation_fixture_validated: true
+  coordinate_feasibility_inventory_complete: true
+  pilot_frozen: false
+  construction_enabled: false
+  split_generation_enabled: false
+  model_training_enabled: false
+  confirmatory_use_enabled: false

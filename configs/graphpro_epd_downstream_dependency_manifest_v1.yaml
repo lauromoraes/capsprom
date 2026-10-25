@@ -1,0 +1,38 @@
+manifest:
+  name: graphpro-epd-downstream-dependency-v1
+  version: 1.0.0
+  status: reviewed_exploratory_candidates_blocked
+  candidate_audit: configs/graphpro_epd_downstream_candidate_audit_v1.yaml
+  audit_manifest_sha256: 8f541eb6ddbeb7dcdd5db233b0e34b8ab0b21b8ee4908700625edffb8ab67e06
+  active_confirmatory_manifest_modified: false
+
+candidates:
+  - dataset_id: graphpro-epd-downstream-treated-v1-human
+    eligibility: exploratory_only
+    blockers:
+      - large_residual_class_gc_difference
+      - primary_gc_matched_control_condition_not_materialized
+    dependencies:
+      - dataset_id: graphpro-epd-downstream-treated-v1-mouse
+        relationship: one_shared_positive_strand_invariant_identity
+        required_action: shared_dependency_cluster_if_both_are_ever_admitted
+  - dataset_id: graphpro-epd-downstream-treated-v1-mouse
+    eligibility: blocked_pending_source_resolution
+    blockers:
+      - large_residual_class_gc_difference
+      - opposite_label_identity_with_cnnprom_mouse_non_tata
+      - primary_gc_matched_control_condition_not_materialized
+    dependencies:
+      - dataset_id: cnnprom-eukaryotic-Mouse_non_tata
+        relationship: one_cnnprom_positive_matches_graphpro_downstream_negative
+        graphpro_identifier: FP002834|Gm50063_1
+        orientation: reverse_complement
+        policy: do_not_delete_or_relabel_without_source_resolution
+      - dataset_id: graphpro-epd-downstream-treated-v1-human
+        relationship: one_shared_positive_strand_invariant_identity
+        required_action: shared_dependency_cluster_if_both_are_ever_admitted
+
+execution_gates:
+  split_generation_enabled: false
+  model_training_enabled: false
+  confirmatory_use_enabled: false

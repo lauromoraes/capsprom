@@ -68,22 +68,24 @@ dataset train--test leakage, but they prevent all 26 dataset identities from
 being assumed independent in cross-dataset statistical tests. Particularly,
 the two \textit{B. amyloliquefaciens} sets share 535 sequences with opposing
 labels, and CDBProm \textit{C. pneumoniae} shares 195 positive sequences with
-GraphPro \textit{C. phytofermentans}. Source-lineage review is required before
-the provisional dependency clusters are frozen.
+the legacy GraphPro \texttt{Cpne} identity. Header review established that this
+folder is also \textit{C. pneumoniae}, not \textit{C. phytofermentans}. The
+reviewed confirmatory clusters therefore exclude GraphPro and are frozen over
+the 18 eligible CDBProm and CNNProm identities.
 
 \begin{table}[htbp]
   \centering
   \caption{Exact sequence sharing across canonical v3 dataset identities. Same-
   label and opposite-label counts refer to labels assigned by the two source
-  datasets. These pairs form provisional dependency clusters for subsequent
-  cross-dataset inference.}
+  datasets. The GraphPro names are retained as legacy v3 identifiers; reviewed
+  confirmatory clusters are defined separately over the eligible scope.}
   \label{tab:results-cross-dataset-dependency}
   \begin{tabular}{p{0.29\textwidth}p{0.29\textwidth}rrr}
     \toprule
     Left dataset & Right dataset & Shared & Same & Opposite \\
     \midrule
     CDBProm \textit{B. amyloliquefaciens} & GraphPro \textit{B. amyloliquefaciens} & 535 & 0 & 535 \\
-    CDBProm \textit{C. pneumoniae} & GraphPro \textit{C. phytofermentans} & 195 & 195 & 0 \\
+    CDBProm \textit{C. pneumoniae} & GraphPro \texttt{Cpne} (legacy name) & 195 & 195 & 0 \\
     CDBProm \textit{S. typhimurium} & CNNProm \textit{E. coli} & 1 & 1 & 0 \\
     CNNProm Arabidopsis non-TATA & CNNProm Arabidopsis TATA & 1 & 1 & 0 \\
     CNNProm human non-TATA & CNNProm mouse non-TATA & 25 & 25 & 0 \\
@@ -138,6 +140,213 @@ class-specific effect.
     \bottomrule
   \end{tabular}
 \end{table}
+
+Passing the exact-identity audit did not make every source suitable for
+confirmatory interpretation. A subsequent audit of source-label semantics found
+the class--strand distributions summarized in
+Table~\ref{tab:results-graphpro-source-label-semantics}. In five bacterial
+folders, strand and class are perfectly confounded. The \texttt{Cpne} records
+also exposed a CapsProm organism-mapping error: their accession and headers
+identify \textit{Chlamydophila pneumoniae}, not \textit{Clostridium
+phytofermentans}. The mapping was corrected for future builds without modifying
+the hashes or identities of historical v3 artifacts.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Strand symbols in the raw GraphPro bacterial class files. Perfect
+  class--strand association is treated as an unresolved source-semantic threat,
+  not as evidence that minus-strand records are non-promoters.}
+  \label{tab:results-graphpro-source-label-semantics}
+  \begin{tabular}{lrrl}
+    \toprule
+    Folder & Positive headers & Negative headers & Confirmatory status \\
+    \midrule
+    Bamy & 928 plus & 928 minus & Excluded \\
+    Cje & 1,346 plus & 1,346 minus & Excluded \\
+    Cpne & 503 plus & 431 minus & Excluded \\
+    Ecol & 2,449 plus; 70 minus & 1,275 plus; 2,599 minus & Excluded \\
+    Lint & 2,847 plus & 2,116 minus & Excluded \\
+    Rcap & 3,607 plus & 3,241 minus & Excluded \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The cross-source Bacillus finding further supports exclusion rather than
+relabeling. Of the 928 raw GraphPro negative windows, 586 occur inside CDBProm
+positive 1,001-bp regions and 535 begin at offset 440, exactly the canonical
+start for a window from 60 bp upstream to 20 bp downstream of the CDBProm TSS at
+position 500. Thus, the 535 opposite-label identities pre-exist as a raw
+containment relation; cropping only reveals their exact equality.
+
+The finalized confirmatory dataset contract consequently retains 18 datasets:
+11 from CDBProm and seven from CNNProm. They form 14 dependency clusters after
+shared source pools and exact cross-dataset overlaps are accounted for. All
+eight GraphPro datasets remain available for exploratory reproduction and data
+quality analysis, but do not contribute to confirmatory model ranking.
+
+Independent reconstruction was initially evaluated for six nominal bacterial
+identities. The official Promotech resource contains BED6 TSS tables and
+reference sequences, but subsequent primary-source auditing showed that these
+metadata do not form matching biological identities for every entry.
+Table~\ref{tab:results-graphpro-reconstruction-feasibility} reports a
+controlled infrastructure exercise using
+predeclared construction parameters: 81 bp strand-oriented windows, a 100 bp
+known-TSS exclusion radius, and one same-strand genomic control per positive.
+GC tolerances of one through four nucleotides per 81 bp were tested without
+training a model. Four nucleotides ($4/81=0.04938$) was the smallest tolerance
+that supplied controls for all six organisms and was therefore frozen.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Feasibility of independent bacterial GraphPro reconstruction from
+  Promotech TSS coordinates and the initially assigned assemblies. Rejections describe source
+  TSSs unable to yield strict-DNA 81 bp windows. Counts are not a released
+  experimental dataset, and the ECOLI row is retrospectively invalid because
+  its coordinates belong to plasmid pAA rather than MG1655.}
+  \label{tab:results-graphpro-reconstruction-feasibility}
+  \begin{tabular}{lrrrl}
+    \toprule
+    Source key & Rows & Unique TSSs & Eligible & Final v2 pairs \\
+    \midrule
+    BACILLUS & 1,064 & 1,064 & 1,064 & 1,063 \\
+    CJEJUNI\_2 & 1,905 & 1,905 & 1,905 & 1,882 \\
+    CPNEUMONIAE & 530 & 530 & 529 & 529 \\
+    ECOLI & 278 & 248 & 248 & 248 \\
+    LINTERROGANS & 2,865 & 2,791 & 2,783 & 2,783 \\
+    RHODOBACTER\_1 & 5,374 & 5,374 & 5,374 & 5,321 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Primary-source resolution identified the ECOLI failure precisely. The nominal
+BED contains 278 rows on \texttt{NC\_000913.3}, but their converted positions,
+strands, and locus annotations reproduce all 278 ordered rows of Supplementary
+Dataset S1 from PMID 27748404. That study maps the pAA plasmid of
+\textit{E. coli} O104:H4. All 278 published 51-nt windows were independently
+recreated from \texttt{NC\_018666.1}, whereas zero BED rows declare that
+accession. Consequently, the 248 nominal MG1655 pairs in
+Table~\ref{tab:results-graphpro-reconstruction-feasibility} and all derived
+controls, partitions, similarity results, distribution statistics, and
+cross-dataset overlaps are invalid provenance artifacts. They cannot be
+repaired by renaming because their sequences were extracted from the wrong
+molecule.
+
+Before this source error was known, the infrastructure exercise generated
+11,903 positive--control pairs. It collapsed 30 repeated nominal E. coli and 74
+repeated Leptospira TSS rows by coordinate and strand, excluded
+one boundary-limited Chlamydophila TSS, and excluded seven ambiguous and one
+boundary-limited Leptospira windows. Post-generation sequence auditing then
+removed the complete pair for one strand-invariant repeated positive in
+BACILLUS, 23 in CJEJUNI\_2, and 53 in RHODOBACTER\_1. The version-2 candidate
+therefore contains 11,826 balanced pairs with no exact or reverse-complement
+identity within or across classes. It establishes computational feasibility,
+not source eligibility. Similarity-aware component splitting retained all
+11,826 pairs, assigning 9,460 pairs (18,920 rows) to training and 2,366 pairs
+(4,732 rows) to testing. Every partition remained exactly class-balanced. A
+direct post-split audit found zero shared pair or component identifiers and zero
+train--test sequence neighbors through strand-invariant Hamming distance eight;
+a clean rebuild reproduced every partition byte-for-byte.
+
+The subsequent distribution gate found residual class structure despite
+pair-level GC compliance. Every bacterial pair satisfied the frozen maximum
+difference of four GC bases, but five of six organisms retained a statistically
+detectable aggregate shift after Holm correction; mean positive-minus-control
+differences ranged from $-0.0200$ to $+0.0031$. Exact cross-dataset auditing in
+both orientations found 404 reconstructed Chlamydophila positives shared with
+CDBProm, two reconstructed Bacillus positives shared with CDBProm, and six
+nominal reconstructed E.~coli positives matching CNNProm negatives. Those six
+comparisons are now invalidated by the assembly error rather than interpreted
+as annotation disagreement. The first two valid-organism findings require
+shared dependency clusters if the candidates are admitted. No external labels
+were changed or removed on the basis of these disagreements. Primary-source
+sampling and manual release review remain required.
+
+The November 2023 EPDnew archive resolved every Human and Mouse identifier.
+The 2,339 Human identifiers equal the complete HsNC v001 collection on hg38 and
+occur in both released class files. The Mouse files contain 2,576 distinct
+identifiers from MmNC v001 on mm10: 1,116 occur in both released classes and
+730 occur only in each class. No identifier is unresolved. This closes the
+coordinate-identity gate but does not validate the released negative class.
+Complete strand-aware recreation from hash-verified hg38/mm10
+assemblies found that all 4,185 released positives occupy $[-80,1)$ relative
+to their EPD TSS and all 4,185 released negatives occupy $[1000,1081)$. All
+8,370 sequences and embedded file labels matched exactly, and an independent
+rerun produced byte-equal ledgers and summaries. Thus the released construction
+is fully reproducible, although the downstream class is not an EPD-verified
+non-promoter condition. Integrity-only filtering of the released files removed eight positive
+and five negative Human records and three positive and one negative Mouse
+records.
+
+Table~\ref{tab:results-epd-downstream-treatment} reports the subsequent
+strand-invariant and TSS-proximity treatment. One Human positive was a
+within-class reverse-complement duplicate. Among controls surviving the earlier
+integrity stage, 73 Human and 40 Mouse windows fell within the frozen 100-nt
+margin of another coding or non-coding EPDnew TSS; 21 and 11, respectively,
+contained that TSS directly.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Class-specific counts for the historical EPD downstream-control treatment. TSS removals affect only invalid controls; valid positives are not downsampled to impose balance.}
+  \label{tab:results-epd-downstream-treatment}
+  \begin{tabular}{lrrrrrr}
+    \toprule
+    Organism & Input $+$ & Input $-$ & RC removed $+$ & TSS removed $-$ & Final $+$ & Final $-$ \\
+    \midrule
+    Human & 2331 & 2334 & 1 & 73 & 2330 & 2261 \\
+    Mouse & 1843 & 1845 & 0 & 40 & 1843 & 1805 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The final populations contain no exact or reverse-complement duplicate within
+class, no strand-invariant cross-label collision, and no remaining TSS-margin
+violation. Their class-count differences are 69 Human and 38 Mouse records.
+The retained released classes before this TSS treatment differ by 0.1096 and
+0.1038 in mean GC fraction, respectively. After treatment, the corresponding
+positive-minus-negative differences are 0.1149 for Human and 0.1069 for Mouse.
+Two-sided Kolmogorov--Smirnov comparisons remain different after Holm
+correction ($p=4.37\times10^{-99}$ and $p=1.55\times10^{-92}$), and the largest
+positional total-variation distances are 0.397 at position $+20$ and 0.352 at
+position $+19$, respectively. These are descriptive distribution diagnostics,
+not validation of either class or criteria selected from model performance.
+
+The strand-invariant dependency audit found one positive identity shared by
+the treated Human and Mouse candidates. It also found that the Mouse control
+\texttt{FP002834|Gm50063\_1} is the reverse complement of a CNNProm Mouse
+non-TATA positive. Version 2 applied the predeclared rule that a genomic control
+cannot retain an identity labeled positive in the active external comparison
+scope. Only that GraphPro control was removed; CNNProm was neither modified nor
+relabeled. Mouse therefore changed from 1,843/1,805 to 1,843/1,804, while Human
+remained byte-identical at 2,330/2,261. Repeated auditing found no remaining
+opposite-label dependency with the 18 confirmatory datasets, although the
+same-label Human--Mouse positive dependency remains. Both historical downstream
+conditions remain exploratory because their residual GC structure precludes
+their use as the primary control condition. Neither candidate received a
+grouped split or an execution gate.
+
+The separate primary GC-matched reconstruction used the union of 2,339 Human
+and 2,576 Mouse EPD identifiers. Exact, one-base, and random-only two-base
+matching attempts were retained as distinct feasibility records. The final
+version kept the two-base tolerance and added a deterministic exhaustive scan
+only after 100,000 random probes were exhausted. It produced 2,332 Human pairs
+after removing seven duplicate-positive pairs and 2,571 Mouse pairs after
+removing five. Two extreme-GC Mouse promoters required exhaustive search:
+\texttt{0610009L18Rik\_1} (75/81 G/C) and \texttt{Gm15327\_1} (76/81).
+
+The mean positive-minus-control GC-fraction differences were 0.00289 for Human
+and 0.00405 for Mouse. Two-sided Mann--Whitney and Kolmogorov--Smirnov tests did
+not indicate an aggregate GC-distribution difference after Holm correction.
+The maximum positional total-variation distance nevertheless remained 0.392
+for Human and 0.411 for Mouse, both at the TSS. Exact dependency auditing found
+only same-label positive overlap with CNNProm and one Human--Mouse positive;
+there was no opposite-label identity. At strand-invariant Hamming distance
+eight, 53 Human and 49 Mouse pairs belonged to non-singleton neighborhoods,
+with largest components of six pairs. Human contained three cross-label
+near-neighbor edges, while Mouse contained none. A clean rebuild reproduced the
+complete output tree and execution log byte-for-byte. These results remove the
+large univariate GC shortcut of the historical condition, but grouping, manual
+source review, and eligibility approval remain required before any split or
+training run.
 
 Exact-identity correction does not exclude highly similar but non-identical
 sequences. Table~\ref{tab:results-near-duplicate-sensitivity} therefore reports
@@ -200,8 +409,9 @@ yet been executed, the difference is descriptive rather than confirmatory.
 
 \subsection{Exploratory biological-negative smoke test}
 
-The canonical v3 integration was verified on the GraphPro
-\textit{C. phytofermentans} pair using the same 66-dimensional representation.
+The canonical v3 integration was verified on the legacy GraphPro
+\texttt{Cpne} pair, then incorrectly identified as \textit{C.
+phytofermentans}, using the same 66-dimensional representation.
 This test exercised YAML loading, fold-manifest generation, MLflow tracking,
 row-level predictions, effectiveness metrics, and calibration metrics. Because
 the test outcomes have been observed, Table~\ref{tab:results-real-negative-smoke}
@@ -209,7 +419,7 @@ is an exploratory pipeline check and is excluded from confirmatory inference.
 
 \begin{table}[htbp]
   \centering
-  \caption{Exploratory fixed-seed smoke-test results on the canonical GraphPro \textit{C. phytofermentans} pair. These values validate pipeline integration and must not be used for confirmatory model selection.}
+  \caption{Exploratory fixed-seed smoke-test results on the legacy GraphPro \texttt{Cpne} pair, which was historically misidentified as \textit{C. phytofermentans}. These values validate pipeline integration and must not be used for confirmatory model selection.}
   \label{tab:results-real-negative-smoke}
   \begin{tabular}{lrr}
     \toprule
@@ -257,10 +467,10 @@ confirmatory inference.
 
 \subsection{Canonical source-negative ten-seed replication}
 
-The predeclared ten-seed XGBoost replication was completed for all 25
-confirmatory datasets. For each dataset, XGBoost was summarized by the median
+The historical ten-seed XGBoost replication was completed for all 25 datasets
+in the earlier canonical-v3 scope. For each dataset, XGBoost was summarized by the median
 MCC over seeds and paired with the single deterministic logistic-regression
-result. Table~\ref{tab:results-real-negative-ten-seed} reports the confirmatory
+result. Table~\ref{tab:results-real-negative-ten-seed} reports this exploratory
 cross-dataset outcome. The median paired difference remained positive at 0.0574,
 with a bootstrap 95\% interval from 0.0293 to 0.0777 and a two-sided Wilcoxon
 signed-rank $p$-value of $6.56\times10^{-6}$. XGBoost had the higher result on
@@ -271,7 +481,7 @@ replication.
 
 \begin{table}[htbp]
   \centering
-  \caption{Confirmatory cross-dataset MCC summary after ten predeclared XGBoost seeds on 25 canonical source-negative datasets. XGBoost is summarized within each dataset by its median MCC before pairing with deterministic logistic regression.}
+  \caption{Historical exploratory cross-dataset MCC summary after ten predeclared XGBoost seeds on 25 canonical-v3 source-negative datasets. The scope includes GraphPro and is therefore not confirmatory under the revised source-semantic eligibility policy.}
   \label{tab:results-real-negative-ten-seed}
   \begin{tabular}{lr}
     \toprule

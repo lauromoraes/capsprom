@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "policy": "configs/capsprom_remote_usage_policy_v3.yaml",
+  "updated_at_utc": "2026-10-23T00:00:00+00:00",
+  "jobs": []
+}

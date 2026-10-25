@@ -1,0 +1,153 @@
+inventory:
+  name: capsprom-control-coordinate-feasibility-v1
+  version: 1.0.0
+  status: complete_with_dataset_specific_blockers
+  purpose: source_only_feasibility_without_model_outcomes
+  generated_on: 2026-10-23
+  negative_control_protocol: configs/negative_control_evaluation_v1.yaml
+  dataset_count: 29
+  selection_authorized: false
+  construction_authorized: false
+  split_generation_authorized: false
+  training_authorized: false
+
+status_definitions:
+  verified_coordinates_and_assembly: >-
+    Row coordinates, strand, assembly, source identifiers, and sequence
+    recreation are hash-bound and independently checked.
+  embedded_coordinates_require_recreation: >-
+    Local headers contain coordinates and an assembly token, but complete
+    assembly recreation and coordinate-convention validation are pending.
+  identifiers_require_external_resolution: >-
+    Stable-looking identifiers exist, but a dated source release and assembly
+    must be resolved before coordinates can be used.
+  assembly_known_coordinates_absent: >-
+    A publication documents the organism assembly, but the local archive has
+    sequence-only rows with no row-level coordinate or identifier.
+  insufficient_or_conflicting_identity: >-
+    The local name and observed metadata conflict or do not identify a unique
+    biological source.
+
+source_families:
+  bhandari:
+    source: data/raw/Bhandari_etal
+    local_archive_role: promoter_only
+    source_native_negative_available: false
+    coordinate_summary: embedded_in_every_fasta_header
+    construction_decision: blocked_pending_recreation_and_identity_review
+  cdbprom:
+    source: data/raw/CDBProm
+    source_native_negative_available: true
+    coordinate_summary: publication_assembly_only_local_rows_are_sequence_only
+    construction_decision: conditional_on_unique_mapping_or_authoritative_row_ledger
+  cnnprom:
+    source: data/raw/CNNProm
+    source_native_negative_available: true
+    coordinate_summary: heterogeneous_identifiers_and_header_metadata
+    construction_decision: resolve_each_dataset_against_its_original_resource
+  graphpro_reconstructed:
+    source: specs/graphpro_dataset_reconstruction.md
+    source_native_negative_available: false
+    coordinate_summary: all_eight_reconstructions_have_coordinates_and_assemblies
+    construction_decision: generated_candidates_remain_blocked_from_training
+
+datasets:
+  - dataset_id: bhandari-human
+    source_family: bhandari
+    observed_assembly: hg38
+    positive_rows: 61546
+    coordinate_coverage_rows: 61546
+    status: embedded_coordinates_require_recreation
+    blockers: [complete_hash_bound_hg38_recreation, verify_header_to_tss_convention]
+  - dataset_id: bhandari-nominal-plant
+    source_family: bhandari
+    observed_assembly: mm10
+    positive_rows: 106520
+    coordinate_coverage_rows: 106520
+    status: insufficient_or_conflicting_identity
+    blockers: [resolve_plant_filename_vs_mouse_assembly_conflict, identify_intended_organism]
+  - dataset_id: bhandari-yeast
+    source_family: bhandari
+    observed_assembly: sacCer3
+    positive_rows: 6125
+    coordinate_coverage_rows: 6125
+    status: embedded_coordinates_require_recreation
+    blockers: [complete_hash_bound_sacCer3_recreation, verify_header_to_tss_convention]
+
+  - {dataset_id: cdbprom-anabaena_sp, source_family: cdbprom, published_assembly: CP034058.1, positive_rows: 2517, status: assembly_known_coordinates_absent}
+  - {dataset_id: cdbprom-bacillus_amyloliquefaciens, source_family: cdbprom, published_assembly: CP002927.1, positive_rows: 1059, status: assembly_known_coordinates_absent}
+  - {dataset_id: cdbprom-chlamydophila_pneumoniae, source_family: cdbprom, published_assembly: AE001363.1, positive_rows: 404, status: assembly_known_coordinates_absent}
+  - {dataset_id: cdbprom-corynebacterium_glutamicum, source_family: cdbprom, published_assembly: BA000036.3, positive_rows: 575, status: assembly_known_coordinates_absent}
+  - {dataset_id: cdbprom-helicobacter_pylori, source_family: cdbprom, published_assembly: CP003904.1, positive_rows: 714, status: assembly_known_coordinates_absent}
+  - {dataset_id: cdbprom-klebisiella_pneumoniae, source_family: cdbprom, published_assembly: CP000647.1, positive_rows: 1329, status: assembly_known_coordinates_absent}
+  - {dataset_id: cdbprom-mycrobacterium_tuberculosis, source_family: cdbprom, published_assembly: CP110619.1, positive_rows: 1772, status: assembly_known_coordinates_absent}
+  - {dataset_id: cdbprom-pseudonomas_aeruginosa, source_family: cdbprom, published_assembly: CP034244.1, positive_rows: 2055, status: assembly_known_coordinates_absent}
+  - {dataset_id: cdbprom-salmonella_typhimurium, source_family: cdbprom, published_assembly: CP133487.1, positive_rows: 981, status: assembly_known_coordinates_absent}
+  - {dataset_id: cdbprom-streptomyces_coelicolor, source_family: cdbprom, published_assembly: AL939104.1, positive_rows: 2611, status: assembly_known_coordinates_absent}
+  - {dataset_id: cdbprom-synechocistis, source_family: cdbprom, published_assembly: AP012276.1, positive_rows: 1639, status: assembly_known_coordinates_absent}
+
+  - dataset_id: cnnprom-ecoli
+    source_family: cnnprom
+    positive_rows: 839
+    identifier_type: regulondb_identifier_gene_strand_position
+    status: identifiers_require_external_resolution
+    blockers: [freeze_regulondb_release, verify_assembly_and_coordinate_convention]
+  - dataset_id: cnnprom-bacillus
+    source_family: cnnprom
+    positive_rows: 373
+    identifier_type: gene_name_only
+    status: identifiers_require_external_resolution
+    blockers: [freeze_dbtbs_release, resolve_gene_names_to_unique_tss_coordinates]
+  - {dataset_id: cnnprom-arabidopsis-non-tata, source_family: cnnprom, positive_rows: 5905, identifier_type: epd_identifier, status: identifiers_require_external_resolution}
+  - {dataset_id: cnnprom-arabidopsis-tata, source_family: cnnprom, positive_rows: 1497, identifier_type: epd_identifier, status: identifiers_require_external_resolution}
+  - {dataset_id: cnnprom-human-non-tata, source_family: cnnprom, positive_rows: 19811, identifier_type: epd_identifier, status: identifiers_require_external_resolution}
+  - {dataset_id: cnnprom-mouse-non-tata, source_family: cnnprom, positive_rows: 16283, identifier_type: epd_identifier, status: identifiers_require_external_resolution}
+  - dataset_id: cnnprom-mouse-tata
+    source_family: cnnprom
+    positive_rows: 1255
+    identifier_type: malformed_epd_style_or_dbtss_derived_identifier
+    status: identifiers_require_external_resolution
+    blockers: [resolve_gt_prefix_encoding, freeze_dbtss_or_epd_source_and_assembly]
+
+  - {dataset_id: graphpro-reconstructed-bacillus_amyloliquefaciens, source_family: graphpro_reconstructed, assembly: CP002927.1, primary_source_pmid: 26133043, source_tss_rows: 1064, status: verified_coordinates_and_assembly, manual_primary_row_crosscheck: pending}
+  - {dataset_id: graphpro-reconstructed-campylobacter_jejuni, source_family: graphpro_reconstructed, assembly: NC_002163.1, primary_source_pmid: 23696746, source_tss_rows: 1905, status: verified_coordinates_and_assembly, manual_primary_row_crosscheck: pending}
+  - {dataset_id: graphpro-reconstructed-chlamydophila_pneumoniae, source_family: graphpro_reconstructed, assembly: NC_000922.1, primary_source_pmid: 21989159, source_tss_rows: 530, status: verified_coordinates_and_assembly, manual_primary_row_crosscheck: pending}
+  - {dataset_id: graphpro-reconstructed-escherichia_coli, source_family: graphpro_reconstructed, assembly: NC_000913.3, primary_source_pmid: 27748404, source_tss_rows: 278, status: verified_coordinates_and_assembly, manual_primary_row_crosscheck: pending}
+  - {dataset_id: graphpro-reconstructed-leptospira_interrogans, source_family: graphpro_reconstructed, assembly: NZ_LT962963.1, primary_source_pmid: 28154810, source_tss_rows: 2865, status: verified_coordinates_and_assembly, manual_primary_row_crosscheck: pending}
+  - dataset_id: graphpro-reconstructed-rhodobacter_capsulatus
+    source_family: graphpro_reconstructed
+    assembly: NC_014034.1
+    primary_source_pmid: null
+    source_tss_rows: 5374
+    status: verified_coordinates_and_assembly
+    manual_primary_row_crosscheck: blocked_candidate_5374_primary_source_not_identified
+    later_public_resource:
+      accession: GSE117537
+      rows: 4045
+      sha256_gzip: 7deb0d2f4e0d03897266d7d430fd0c5a8da298e08a63e294f446eb18797a14c5
+      decision: distinct_collection_not_a_silent_replacement
+  - {dataset_id: graphpro-reconstructed-human, source_family: graphpro_reconstructed, assembly: GRCh38_hg38, source: EPDnewNC_Hs_v001_2023, resolved_identifiers: 2339, status: verified_coordinates_and_assembly, manual_primary_row_crosscheck: complete_by_full_sequence_recreation}
+  - {dataset_id: graphpro-reconstructed-mouse, source_family: graphpro_reconstructed, assembly: GRCm38_mm10, source: EPDnewNC_Mm_v001_2023, resolved_identifiers: 2576, status: verified_coordinates_and_assembly, manual_primary_row_crosscheck: complete_by_full_sequence_recreation}
+
+pilot_candidates:
+  policy: select_only_after_manual_source_audit_without_model_outcomes
+  currently_frozen: null
+  provenance_shortlist: [graphpro-reconstructed-escherichia_coli, graphpro-reconstructed-human, graphpro-reconstructed-mouse]
+  exclusion_from_shortlist_is_not_permanent: true
+
+references:
+  - {role: promotech_dataset_inventory, doi: 10.1186/s13059-021-02514-9}
+  - {role: cdbprom_dataset_inventory, doi: 10.1093/nargab/lqae018}
+  - {role: epd_frozen_snapshot, doi: 10.5281/zenodo.10149386}
+  - {role: rhodobacter_later_public_tss_resource, accession: GSE117537}
+
+gates:
+  inventory_complete: true
+  graphpro_eukaryotic_coordinate_audit_complete: true
+  graphpro_bacterial_dataset_lineage_confirmed: true
+  graphpro_bacterial_primary_row_sample_audit_complete: false
+  bhandari_identity_review_complete: false
+  cnnprom_coordinate_resolution_complete: false
+  cdbprom_coordinate_resolution_complete: false
+  pilot_selection_enabled: false
+  control_construction_enabled: false

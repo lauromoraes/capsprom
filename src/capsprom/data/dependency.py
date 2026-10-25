@@ -7,6 +7,8 @@ import re
 from itertools import combinations
 from pathlib import Path
 
+from .graphpro_reconstruction import reverse_complement
+
 
 def audit_cross_dataset_dependency(dataset_dir: Path) -> dict[str, object]:
     """Return deterministic pairwise overlap counts by source label."""
@@ -40,6 +42,40 @@ def audit_cross_dataset_dependency(dataset_dir: Path) -> dict[str, object]:
     return {
         "schema_version": 1,
         "dataset_count": len(datasets),
+        "overlapping_pair_count": len(overlaps),
+        "overlaps": overlaps,
+    }
+
+
+def audit_named_sequence_dependencies(
+    datasets: dict[str, dict[int, set[str]]],
+) -> dict[str, object]:
+    """Audit strand-invariant exact sharing across named labeled collections."""
+
+    canonical = {
+        dataset_id: {
+            label: {min(sequence, reverse_complement(sequence)) for sequence in sequences}
+            for label, sequences in labels.items()
+        }
+        for dataset_id, labels in datasets.items()
+    }
+    overlaps = []
+    for left, right in combinations(sorted(canonical), 2):
+        counts = {
+            "same_label_0": len(canonical[left][0] & canonical[right][0]),
+            "same_label_1": len(canonical[left][1] & canonical[right][1]),
+            "left_0_right_1": len(canonical[left][0] & canonical[right][1]),
+            "left_1_right_0": len(canonical[left][1] & canonical[right][0]),
+        }
+        total = sum(counts.values())
+        if total:
+            overlaps.append(
+                {"left_dataset_id": left, "right_dataset_id": right, "total": total, **counts}
+            )
+    return {
+        "schema_version": 2,
+        "canonicalization": "minimum_forward_or_reverse_complement",
+        "dataset_count": len(canonical),
         "overlapping_pair_count": len(overlaps),
         "overlaps": overlaps,
     }

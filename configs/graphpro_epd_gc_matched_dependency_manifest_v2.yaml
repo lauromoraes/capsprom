@@ -1,0 +1,36 @@
+manifest:
+  name: graphpro-epd-gc-matched-dependency-v2
+  version: 2.0.0
+  status: deterministic_generation_validated_release_pending
+  supersedes: configs/graphpro_epd_gc_matched_dependency_manifest_v1.yaml
+  superseded_manifest_sha256: f84d59311ac1eb134c3904b311483fd6551409d6f47186d57c5f68b9fbd1c643
+  reconstruction_contract: configs/graphpro_epd_gc_matched_reconstruction_v5.yaml
+  reconstruction_contract_sha256: 0243d8276b6438a654fa3bfd4a2d03b464199e4aecbb9e23e65697dadfe4d911
+  build_summary_sha256: 518b526b2e8144a0e3bbb982340a2301531ad8e92c130aeb5368368848e9288e
+  deterministic_rebuild:
+    complete_output_tree_byte_equal: true
+    log_byte_equal: true
+  active_confirmatory_manifest_modified: false
+
+candidates:
+  - dataset_id: graphpro-epd-gc-matched-v5-human
+    pair_count: 2332
+    eligibility: release_pending
+    blockers:
+      - independent_manual_tss_and_control_sample_audit_pending
+      - grouped_split_not_generated
+      - eligibility_approval_pending
+    dependency_and_similarity_details: configs/graphpro_epd_gc_matched_dependency_manifest_v1.yaml
+  - dataset_id: graphpro-epd-gc-matched-v5-mouse
+    pair_count: 2571
+    eligibility: release_pending
+    blockers:
+      - independent_manual_tss_and_control_sample_audit_pending
+      - grouped_split_not_generated
+      - eligibility_approval_pending
+    dependency_and_similarity_details: configs/graphpro_epd_gc_matched_dependency_manifest_v1.yaml
+
+execution_gates:
+  split_generation_enabled: false
+  model_training_enabled: false
+  confirmatory_use_enabled: false

@@ -1,0 +1,58 @@
+audit:
+  name: graphpro-primary-tss-source-comparison-v1
+  version: 1.0.0
+  sample_contract: configs/graphpro_primary_tss_sample_audit_v1.yaml
+  frozen_sample: outputs/reports/graphpro_primary_tss_sample_audit_v1/selected_rows.csv
+  frozen_sample_sha256: 751a9a757f0b0080dc9aa3778c3c94c87d057e6b74a49cacfe5754265d8c78f9
+  policy: exact_position_and_strand_after_declared_coordinate_conversion
+
+coordinate_conversion:
+  primary_tables: one_based_closed_point
+  promotech_bed: zero_based_half_open_point
+  comparison: primary_position_equals_bed_start_plus_one
+  unexplained_offset_tolerance_nt: 0
+
+sources:
+  graphpro-reconstructed-campylobacter_jejuni:
+    status: acquired
+    path: data/raw/references/graphpro_primary_tss_sources_v1/campylobacter_table_s4.xlsx
+    sha256: 067fc81dbc218a7e7e5df6a13b4d859b60be369aec23585c1c0681df4d76d98f
+    url: https://journals.plos.org/plosgenetics/article/file?type=supplementary&id=info:doi/10.1371/journal.pgen.1003495.s004
+    sheets: [NCTC11168]
+    position_column: A
+    strand_column: B
+  graphpro-reconstructed-chlamydophila_pneumoniae:
+    status: acquired
+    path: data/raw/references/graphpro_primary_tss_sources_v1/chlamydia_table_s2.xlsx
+    sha256: 4e2839a6664eba3fbb8dadf15c4984a36cca4c8689601d7e4e83c7eb90b9d69d
+    url: https://media.springernature.com/original/springer-static/esm/art%3A10.1186%2Fgb-2011-12-10-r98/MediaObjects/13059_2011_2689_MOESM2_ESM.XLSX
+    sheets: [TSS]
+    position_column: B
+    strand_column: G
+  graphpro-reconstructed-leptospira_interrogans:
+    status: acquired
+    path: data/raw/references/graphpro_primary_tss_sources_v1/leptospira_table_s4.xlsx
+    sha256: 4633cd5dc4eea129b51faca205e0d97adea37e63687942c2f04d67e328c32dc9
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5243855/supplementaryFiles
+    archive_member: Table4.XLSX
+    sheets: [TSS-30_all, TSS_37_all]
+    position_column: B
+    strand_column: C
+  graphpro-reconstructed-bacillus_amyloliquefaciens:
+    status: blocked_exact_supplement_not_acquired
+    primary_source_pmid: 26133043
+  graphpro-reconstructed-escherichia_coli:
+    status: blocked_exact_278_row_subset_not_identified
+    primary_source_pmid: 27748404
+
+outputs:
+  directory: outputs/reports/graphpro_primary_tss_source_comparison_v1
+  row_ledger: row_match_ledger.csv
+  summary: summary.json
+  manifest: audit_manifest.json
+
+execution_gates:
+  comparisons_for_acquired_sources_complete: true
+  all_five_sources_acquired: false
+  graphpro_manual_source_audit_complete: false
+  eligibility_update_enabled: false

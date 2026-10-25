@@ -5,8 +5,11 @@
 This local audit covers the 26 canonical v3 dataset identities and does not
 inspect model outcomes. Its exact-sequence component is reproducible with
 `scripts/audit_cross_dataset_dependency.py`. The versioned dependency manifest
-is provisional because absence of exact overlap does not establish independent
-source pools or biological independence.
+v1 remains the historical all-source audit. Source-label review subsequently
+excluded all eight GraphPro identities from confirmatory inference. The reviewed
+18-dataset, 14-cluster scope is frozen in
+`configs/dataset_dependency_manifest_v2.yaml`; absence of exact overlap still
+does not establish biological independence.
 
 ## Exact-sequence findings
 
@@ -16,7 +19,7 @@ complete canonical train and test partitions are considered:
 | Left dataset | Right dataset | Shared | Same label | Opposite label |
 | --- | --- | ---: | ---: | ---: |
 | CDBProm *B. amyloliquefaciens* | GraphPro *B. amyloliquefaciens* | 535 | 0 | 535 |
-| CDBProm *C. pneumoniae* | GraphPro *C. phytofermentans* | 195 | 195 | 0 |
+| CDBProm *C. pneumoniae* | GraphPro `Cpne` (legacy name: *C. phytofermentans*) | 195 | 195 | 0 |
 | CDBProm *S. typhimurium* | CNNProm *E. coli* | 1 | 1 | 0 |
 | CNNProm Arabidopsis non-TATA | CNNProm Arabidopsis TATA | 1 | 1 | 0 |
 | CNNProm human non-TATA | CNNProm mouse non-TATA | 25 | 25 | 0 |
@@ -35,22 +38,19 @@ promoter labels across the two studies. The 195 shared positives between
 apparently different organisms also require verification of source identifiers,
 cropping provenance, and possible dataset naming or reuse.
 
-## Provisional clusters
+## Confirmatory clusters
 
-The initial manifest uses connected components of exact overlap as conservative
-clusters. Singleton datasets remain provisional singleton clusters. Manual
-review must still determine whether apparently disjoint datasets share an
-original database, negative pool, organism collection, or derivation lineage.
-Until that review is complete, `dependency_manifest_complete` remains false and
-confirmatory cross-dataset ranking is blocked.
+The initial manifest used connected components of exact overlap as conservative
+clusters. Version 2 additionally groups known shared source pools and excludes
+GraphPro rather than attempting unsupported relabeling. It contains 14 clusters,
+which is above the predeclared minimum of ten for cross-dataset inference.
+Confirmatory ranking nevertheless remains blocked until the statistical
+aggregation fixtures pass.
 
-## Required completion work
+## Remaining work
 
-1. Trace each dataset to its original accession or downloadable source file.
-2. Verify organism labels for the Chlamydophila--Clostridium overlap.
-3. Explain the cross-source label reversal for *B. amyloliquefaciens* and
-   *E. coli*.
-4. Determine whether CNNProm and GraphPro eukaryotic sets reuse EPDnew, DBTSS,
-   or another shared source pool.
-5. Freeze reviewed cluster identifiers before implementing the Wilcoxon and
-   Friedman aggregation used in the thesis.
+1. Implement and fixture-test cluster-level Wilcoxon and Friedman aggregation.
+2. Independently reconstruct or source-verify GraphPro labels before any future
+   reinstatement in a new dataset contract.
+3. Retain all GraphPro and canonical-v3 results as explicitly exploratory
+   provenance.

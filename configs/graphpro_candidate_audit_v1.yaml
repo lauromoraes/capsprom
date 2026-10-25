@@ -1,0 +1,33 @@
+audit:
+  name: graphpro-candidate-distribution-dependency-v1
+  version: 1.0.0
+  status: descriptive_release_gate_audit
+  confirmatory_use_enabled: false
+
+inputs:
+  bacterial_root: data/interim/graphpro_reconstructed_v2
+  bacterial_summary_sha256: fd2c027aad4426f6cfef7a73f4fbb7d0060f82acca1fc85cd97a68dd7ac7292b
+  eukaryotic_root: data/interim/graphpro_eukaryotic_integrity_v1
+  eukaryotic_summary_sha256: 86bf86c735ecf665d6f82556ab223b3eb012a51992799454d6cbb7970327cc39
+  confirmatory_root: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna
+  dependency_manifest: configs/dataset_dependency_manifest_v2.yaml
+  dependency_manifest_sha256: 0536c3199aef8ab214a288530473c9046de7a4c15720f19d2d4c3fbfbc5f5cbd
+
+distribution:
+  sequence_length: 81
+  coordinate_start: -60
+  tests: [two_sided_mann_whitney_gc, two_sided_ks_gc]
+  multiplicity: holm_within_test_family_over_eight_datasets
+  interpretation: descriptive_not_model_selection
+
+dependency:
+  identity: minimum_lexicographic_forward_or_reverse_complement
+  include_confirmatory_scope: true
+  include_bacterial_candidates: true
+  include_eukaryotic_integrity_views: true
+  limitation: exact_non_overlap_does_not_prove_biological_independence
+
+execution_gates:
+  audit_enabled: true
+  model_training_enabled: false
+  confirmatory_use_enabled: false

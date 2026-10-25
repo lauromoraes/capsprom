@@ -16,6 +16,12 @@ def test_status_reports_checkpoint_and_writes_portable_snapshot(tmp_path: Path):
         "reused_run_count": 1,
         "completed": {"one": {}},
     }))
+    (root / "manifests").mkdir()
+    (root / "manifests/remote_jobs.json").write_text(json.dumps({
+        "schema_version": 1,
+        "updated_at_utc": "2026-10-23T00:00:00+00:00",
+        "jobs": [{"job_id": "remote-1", "status": "running"}],
+    }))
     subprocess.run(("git", "init"), cwd=root, check=True, capture_output=True)
     snapshot_path = root / "manifests/current_status.json"
 
@@ -24,5 +30,9 @@ def test_status_reports_checkpoint_and_writes_portable_snapshot(tmp_path: Path):
 
     assert status["experiments"]["xgboost_replication_v2"]["remaining"] == 9
     assert status["experiments"]["xgboost_replication_v2"]["summary_available"] is False
+    assert status["active_confirmatory_dataset_count"] == 18
+    assert status["active_evaluation_protocol"] == "configs/evaluation_protocol_v3.yaml"
+    assert status["remote_jobs"]["pending_count"] == 1
+    assert status["remote_jobs"]["jobs"][0]["job_id"] == "remote-1"
     assert written["next_action"] == "make replication-resume"
     assert "repository_root" not in json.loads(snapshot_path.read_text())

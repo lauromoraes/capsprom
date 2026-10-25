@@ -1,0 +1,59 @@
+audit:
+  name: graphpro-primary-tss-sample-audit-v1
+  version: 1.0.0
+  status: sampling_contract_frozen_source_files_pending
+  inventory: configs/control_coordinate_feasibility_inventory_v1.yaml
+  purpose: verify_promotech_rows_against_cited_primary_tss_tables
+  model_outcomes_used: false
+
+sampling:
+  rows_per_dataset: 10
+  selection: lowest_sha256_rank
+  canonical_key: dataset_id_tab_contig_tab_zero_based_start_tab_zero_based_end_tab_strand
+  digest: sha256
+  strand_stratification:
+    enabled: true
+    target_per_strand: 5
+    short_stratum_policy: take_all_then_fill_from_other_strand_by_hash_rank
+  replacement: false
+  selection_frozen_before_primary_table_comparison: true
+
+coordinate_comparison:
+  require_same_assembly_accession_and_version: true
+  require_same_strand: true
+  require_same_tss_after_documented_coordinate_conversion: true
+  tolerate_unexplained_offset_nt: 0
+  compare_sequence_when_primary_table_contains_sequence: true
+  ambiguous_primary_matches: fail_row
+  missing_primary_matches: fail_row
+  dataset_pass_rule: all_sampled_rows_match
+  failure_policy: keep_dataset_blocked_and_report_without_relabeling
+
+datasets:
+  - {dataset_id: graphpro-reconstructed-bacillus_amyloliquefaciens, assembly: CP002927.1, primary_source_pmid: 26133043, source_status: supplementary_coordinate_table_to_locate, promotech_bed: data/raw/references/promotech_primary_audit_v1/BACILLUS.bed, promotech_bed_sha256: fcbddb6035f3cd77ac97291131e18f05c5b3e049b003d61e4a3a65c8ffba9544}
+  - {dataset_id: graphpro-reconstructed-campylobacter_jejuni, assembly: NC_002163.1, primary_source_pmid: 23696746, source_status: supplementary_coordinate_table_located, promotech_bed: data/raw/references/promotech_primary_audit_v1/CJEJUNI_2.bed, promotech_bed_sha256: 31979db2dc3ce23387657558569d547384026e9db5443335628a3a9ba46b2da1}
+  - {dataset_id: graphpro-reconstructed-chlamydophila_pneumoniae, assembly: NC_000922.1, primary_source_pmid: 21989159, source_status: supplementary_coordinate_table_located, promotech_bed: data/raw/references/promotech_primary_audit_v1/CPNEUMONIAE.bed, promotech_bed_sha256: 8ad74df345496652d82d3fb696bfe7c0edfb0520135b30e4d59eb5777d483085}
+  - {dataset_id: graphpro-reconstructed-escherichia_coli, assembly: NC_000913.3, primary_source_pmid: 27748404, source_status: supplementary_coordinate_table_to_locate, promotech_bed: data/raw/references/promotech_primary_audit_v1/ECOLI.bed, promotech_bed_sha256: d2484c9af295249b4a0d0c5e261b99b1a1d10ba56b167ce10b183486cfa59750}
+  - {dataset_id: graphpro-reconstructed-leptospira_interrogans, assembly: NZ_LT962963.1, primary_source_pmid: 28154810, source_status: supplementary_table_4_located, promotech_bed: data/raw/references/promotech_primary_audit_v1/LINTERROGANS.bed, promotech_bed_sha256: f676d4c579cc0ac51c962ac4e1260682ea21f8b14f4c706e315d9c452d67dbae}
+
+excluded_from_this_audit:
+  - dataset_id: graphpro-reconstructed-rhodobacter_capsulatus
+    reason: promotech_5374_row_collection_has_no_identified_primary_table
+    later_resource: GSE117537
+    later_resource_rows: 4045
+    policy: audit_separately_do_not_substitute
+
+outputs_required:
+  - selected_rows_with_hash_rank
+  - primary_source_file_hashes_and_urls
+  - coordinate_convention_transform
+  - row_match_ledger
+  - per_dataset_summary
+  - audit_manifest
+
+execution_gates:
+  all_primary_source_files_acquired_and_hashed: false
+  sample_selection_enabled: true
+  coordinate_comparison_enabled: false
+  graphpro_manual_source_audit_complete: false
+  eligibility_update_enabled: false

@@ -1,0 +1,36 @@
+manifest:
+  name: confirmatory-eligible-v3-dependency-v2
+  status: reviewed_complete_for_eligible_scope
+  eligibility_manifest: configs/dataset_eligibility_manifest_v1.yaml
+  dataset_count: 18
+  dependency_cluster_count: 14
+  cluster_rule: shared_source_pool_or_observed_exact_sequence_overlap
+  limitations:
+    - Exact non-overlap does not prove biological independence.
+    - Dataset-level effects within one dependency cluster are aggregated before inference.
+
+datasets:
+  - {dataset_id: cdbprom-prokaryotic-anabaena_sp, dependency_cluster_id: cdbprom-anabaena}
+  - {dataset_id: cdbprom-prokaryotic-bacillus_amyloliquefaciens, dependency_cluster_id: cdbprom-bacillus-amyloliquefaciens}
+  - {dataset_id: cdbprom-prokaryotic-chlamydophila_pneumoniae, dependency_cluster_id: cdbprom-chlamydophila}
+  - {dataset_id: cdbprom-prokaryotic-corynebacterium_glutamicum, dependency_cluster_id: cdbprom-corynebacterium}
+  - {dataset_id: cdbprom-prokaryotic-helicobacter_pylori, dependency_cluster_id: cdbprom-helicobacter}
+  - {dataset_id: cdbprom-prokaryotic-klebisiella_pneumoniae, dependency_cluster_id: cdbprom-klebsiella}
+  - {dataset_id: cdbprom-prokaryotic-mycrobacterium_tuberculosis, dependency_cluster_id: cdbprom-mycobacterium}
+  - {dataset_id: cdbprom-prokaryotic-pseudonomas_aeruginosa, dependency_cluster_id: cdbprom-pseudomonas}
+  - {dataset_id: cdbprom-prokaryotic-salmonella_typhimurium, dependency_cluster_id: enteric-cross-source}
+  - {dataset_id: cdbprom-prokaryotic-streptomyces_coelicolor, dependency_cluster_id: cdbprom-streptomyces}
+  - {dataset_id: cdbprom-prokaryotic-synechocistis, dependency_cluster_id: cdbprom-synechocystis}
+  - {dataset_id: cnnprom-eukaryotic-Arabidopsis_non_tata, dependency_cluster_id: cnnprom-arabidopsis}
+  - {dataset_id: cnnprom-eukaryotic-Arabidopsis_tata, dependency_cluster_id: cnnprom-arabidopsis}
+  - {dataset_id: cnnprom-eukaryotic-Human_non_tata, dependency_cluster_id: cnnprom-mammal}
+  - {dataset_id: cnnprom-eukaryotic-Mouse_non_tata, dependency_cluster_id: cnnprom-mammal}
+  - {dataset_id: cnnprom-eukaryotic-Mouse_tata, dependency_cluster_id: cnnprom-mammal}
+  - {dataset_id: cnnprom-prokaryotic-Bacillus, dependency_cluster_id: cnnprom-bacillus}
+  - {dataset_id: cnnprom-prokaryotic-Ecoli, dependency_cluster_id: enteric-cross-source}
+
+observed_exact_overlaps_within_eligible_scope:
+  - {left: cdbprom-prokaryotic-salmonella_typhimurium, right: cnnprom-prokaryotic-Ecoli, total: 1, same_label: 1, opposite_label: 0}
+  - {left: cnnprom-eukaryotic-Arabidopsis_non_tata, right: cnnprom-eukaryotic-Arabidopsis_tata, total: 1, same_label: 1, opposite_label: 0}
+  - {left: cnnprom-eukaryotic-Human_non_tata, right: cnnprom-eukaryotic-Mouse_non_tata, total: 25, same_label: 25, opposite_label: 0}
+  - {left: cnnprom-eukaryotic-Mouse_non_tata, right: cnnprom-eukaryotic-Mouse_tata, total: 5, same_label: 5, opposite_label: 0}

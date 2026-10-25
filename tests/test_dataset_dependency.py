@@ -4,7 +4,10 @@ from pathlib import Path
 
 import yaml
 
-from capsprom.data.dependency import audit_cross_dataset_dependency
+from capsprom.data.dependency import (
+    audit_cross_dataset_dependency,
+    audit_named_sequence_dependencies,
+)
 
 
 def _write(path: Path, rows: list[tuple[str, int]]) -> None:
@@ -35,6 +38,19 @@ def test_cross_dataset_dependency_audit_counts_label_directions(tmp_path: Path) 
             "left_1_right_0": 0,
         }
     ]
+
+
+def test_named_dependency_audit_is_reverse_complement_invariant() -> None:
+    report = audit_named_sequence_dependencies(
+        {
+            "left": {0: {"A" * 81}, 1: {"C" * 81}},
+            "right": {0: {"G" * 81}, 1: {"T" * 81}},
+        }
+    )
+
+    assert report["overlapping_pair_count"] == 1
+    assert report["overlaps"][0]["left_0_right_1"] == 1
+    assert report["overlaps"][0]["left_1_right_0"] == 1
 
 
 def test_dependency_manifest_covers_the_canonical_contract() -> None:

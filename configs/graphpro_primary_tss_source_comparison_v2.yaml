@@ -1,0 +1,34 @@
+audit:
+  name: graphpro-primary-tss-source-comparison-v2
+  version: 2.0.0
+  supersedes: configs/graphpro_primary_tss_source_comparison_v1.yaml
+  frozen_sample_contract: configs/graphpro_primary_tss_sample_audit_v1.yaml
+  model_outcomes_used: false
+
+completed_sources_inherited_from_v1:
+  graphpro-reconstructed-campylobacter_jejuni: 10_of_10_exact_coordinate_and_strand_matches
+  graphpro-reconstructed-chlamydophila_pneumoniae: 10_of_10_exact_coordinate_and_strand_matches
+  graphpro-reconstructed-leptospira_interrogans: 10_of_10_exact_coordinate_and_strand_matches
+
+new_source_resolution:
+  nominal_dataset: graphpro-reconstructed-escherichia_coli
+  audit_contract: configs/graphpro_ecoli_paa_source_audit_v1.yaml
+  published_rows: 278
+  row_identity_result: 278_of_278_ordered_position_strand_and_locus_matches
+  published_sequence_result: 278_of_278_51nt_windows_match_NC_018666.1
+  assembly_result: fail_promotech_bed_declares_NC_000913.3_but_rows_are_NC_018666.1
+  disposition: invalidate_nominal_MG1655_candidate_and_reconstruct_as_new_pAA_identity
+
+remaining_source:
+  graphpro-reconstructed-bacillus_amyloliquefaciens:
+    status: blocked_exact_coordinate_supplement_not_available
+    primary_source_pmid: 26133043
+    note: available_supplement_description_mentions_strain_table_not_a_TSS_coordinate_ledger
+
+execution_gates:
+  four_source_identities_resolved: true
+  all_five_sources_resolved: false
+  graphpro_manual_source_audit_complete: false
+  eligibility_update_enabled: false
+  split_enabled: false
+  training_enabled: false

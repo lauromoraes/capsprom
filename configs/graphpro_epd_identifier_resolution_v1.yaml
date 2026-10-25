@@ -1,0 +1,63 @@
+audit:
+  name: graphpro-epd-identifier-resolution-v1
+  version: 1.0.0
+  status: identifier_resolution_only
+  specification: specs/graphpro_dataset_reconstruction.md
+  archive_record_doi: 10.5281/zenodo.10149386
+  archive_snapshot: epdnew-ftp-2023.11.zip
+  archive_snapshot_md5: 81bad42992bdfcf186a35fee0f695ab7
+  source_license: CC-BY-4.0
+  license_notice:
+    path: data/raw/references/epd_2023/EPDnew_Copyright
+    url: https://epd.expasy.org/ftp/epdnew/EPDnew_Copyright
+    sha256: ec85e536c7769d78f3e908e1b7e01b54d2e0b6683f32e9f14b5baafe1be7e13e
+
+policy:
+  primary_collection: noncoding
+  rationale: >-
+    Every released GraphPro human and mouse identifier resolves in the respective
+    EPDnewNC collection. Coding-collection matches are retained as alternative
+    annotations and do not override the EPDnewNC coordinate.
+  released_class_is_biological_evidence: false
+  embedded_header_label_is_biological_evidence: false
+  generate_reconstructed_sequences: false
+
+organisms:
+  - organism: human
+    assembly: GRCh38/hg38
+    released_positive: data/raw/GraphPro/human/positive
+    released_positive_sha256: b8af4848899881b5c88908011bb3f63f0517c464b30f149b90cdf01c529dd94a
+    released_negative: data/raw/GraphPro/human/negative
+    released_negative_sha256: aaf856d88f23122cdd6dc585232bda1f79bb556d2f1277e8a901e5d875fd7490
+    primary_bed:
+      collection: HsNC_EPDnew_001_hg38
+      path: data/raw/references/epd_2023/HsNC_EPDnew_001_hg38.bed
+      url: https://epd.expasy.org/ftp/epdnew/H_sapiens_nc/001/HsNC_EPDnew_001_hg38.bed
+      sha256: 068b2bdd0a19a0a727e1331e86cec89a3726cc438daa710103f7b06371463ce3
+    alternative_beds:
+      - collection: Hs_EPDnew_006_hg38
+        path: data/raw/references/epd_2023/Hs_EPDnew_006_hg38.bed
+        url: https://epd.expasy.org/ftp/epdnew/H_sapiens/006/Hs_EPDnew_006_hg38.bed
+        sha256: 3ecac81b26ed99cc4d91e84f9dedd123de250a42981920d8d065e09c2ca114f8
+  - organism: mouse
+    assembly: GRCm38/mm10
+    released_positive: data/raw/GraphPro/mouse/positive
+    released_positive_sha256: aa33c8f8a642136397e55740e9fb74ace12a2e930f664b26fc9b218e551e8316
+    released_negative: data/raw/GraphPro/mouse/negative
+    released_negative_sha256: 6d450cdccbb1230f3d9c36fc46fd2a405347bff11f06a1723462b63658c498c6
+    primary_bed:
+      collection: MmNC_EPDnew_001_mm10
+      path: data/raw/references/epd_2023/MmNC_EPDnew_001_mm10.bed
+      url: https://epd.expasy.org/ftp/epdnew/M_musculus_nc/001/MmNC_EPDnew_001_mm10.bed
+      sha256: 3d4caf0f2c8e7d04b8d53cec4e376628d5539a37ccf3d4d611c3d134304cd2da
+    alternative_beds:
+      - collection: Mm_EPDnew_003_mm10
+        path: data/raw/references/epd_2023/Mm_EPDnew_003_mm10.bed
+        url: https://epd.expasy.org/ftp/epdnew/M_musculus/003/Mm_EPDnew_003_mm10.bed
+        sha256: d7cb99e6edc58e36172fa1f964f131710c62c5b0be2f7b681fc98ed4def5d2fe
+
+execution_gates:
+  identifier_audit_enabled: true
+  sequence_reconstruction_enabled: false
+  model_training_enabled: false
+  confirmatory_use_enabled: false

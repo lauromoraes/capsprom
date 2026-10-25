@@ -1,0 +1,130 @@
+protocol:
+  name: capsprom-confirmatory-evaluation
+  version: 3.0.0
+  status: design_locked_execution_blocked
+  supersedes: configs/evaluation_protocol_v2.yaml
+  alpha: 0.05
+
+scope:
+  development_dataset: bhandari_human_shuffle_v1
+  development_results_are_exploratory: true
+  dataset_root: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna
+  eligibility_manifest: configs/dataset_eligibility_manifest_v1.yaml
+  dependency_manifest: configs/dataset_dependency_manifest_v2.yaml
+  eligible_dataset_count: 18
+  excluded_graphpro_dataset_count: 8
+  cross_dataset_unit: audited_dependency_cluster
+  require_both_classes: true
+  require_frozen_test_configuration: true
+
+data_audit:
+  source_label_semantics_required: true
+  unsupported_relabeling_forbidden: true
+  cross_label_collision_policy: remove_all_occurrences_from_both_classes_after_crop
+  same_label_duplicate_policy: keep_one_normalized_sequence_before_split
+  partition_policy: deterministic_unique_sequence_groups
+  filtering_manifest_required: true
+  filtering_stages: [crop, cross_label_collision_removal, within_class_deduplication, strict_dna, group_safe_split]
+  exact_duplicates: true
+  conflicting_labels: true
+  normalized_train_test_overlap: true
+  class_counts: true
+  strict_dna: true
+  sequence_length: 81
+  near_duplicate_sensitivity_analysis: true
+  near_duplicate_distance: hamming
+  near_duplicate_thresholds: [1, 2, 4, 8]
+  cross_dataset_dependency_audit:
+    required: true
+    dependency_cluster_count: 14
+    shared_source_pool_requires_same_cluster: true
+
+selection:
+  method: stratified_k_fold
+  folds: 5
+  fold_seed: 42
+  role: model_selection_only
+  test_used_for_selection: false
+  neural_epoch_rule: lower_median_fold_best_epoch
+  epoch_rule_scope: dataset_model_configuration_seed
+  maximum_epochs: 50
+  patience: 15
+
+replication:
+  stochastic_seeds: [13, 29, 42, 71, 101, 137, 173, 211, 251, 293]
+  role: algorithmic_stability
+  statistical_replication_unit: false
+  deterministic_models_run_once: true
+  stochastic_summary: [median, interquartile_range, mean, standard_deviation]
+  pair_stochastic_models_by_seed: true
+  failed_seed_policy: report_do_not_replace
+  primary_pair_requires_all_predeclared_seed_pairs: true
+
+prediction:
+  primary_threshold: 0.5
+  training_selected_threshold_is_secondary: true
+  persist_row_predictions: true
+  require_stable_row_id: true
+
+effectiveness:
+  primary_metric: matthews_corrcoef
+  secondary_metrics: [roc_auc, average_precision, specificity, balanced_accuracy, accuracy, precision, recall, f1]
+
+calibration:
+  metrics: [brier_score, log_loss, expected_calibration_error]
+  ece_bins: 10
+  ece_binning: equal_frequency
+  methods: [raw, sigmoid, isotonic]
+  fit_source: out_of_fold_training_predictions
+  reliability_diagram: true
+
+efficiency:
+  warmup_runs: 1
+  timed_runs: 3
+  summary: [median, interquartile_range]
+  stages: [feature_encoding, training, calibration, inference]
+  record_peak_resident_memory: true
+  record_hardware_and_threads: true
+
+uncertainty:
+  confidence_level: 0.95
+  bootstrap_resamples: 10000
+  bootstrap: stratified_paired
+  same_record_indices_for_all_models_and_seeds: true
+  use_group_bootstrap_when_available: true
+  resampling_seed: 20260715
+
+comparison:
+  seed_level_effect: mcc_model_a_minus_model_b
+  dataset_level_effect: median_of_seed_paired_mcc_differences
+  deterministic_baseline_pairing: subtract_single_locked_baseline_from_each_stochastic_seed
+  folds_are_never_test_observations: true
+  seeds_are_never_independent_dataset_observations: true
+  within_dataset:
+    primary_output: paired_effect_with_bootstrap_interval
+    seed_aggregated_inference: descriptive
+    per_locked_seed_secondary_test: paired_randomization
+    randomization_swaps: 10000
+    secondary_test: exact_mcnemar
+  across_datasets:
+    independent_unit: audited_dependency_cluster
+    cluster_effect: median_dataset_effect_within_cluster
+    two_model_test: two_sided_wilcoxon_signed_rank
+    multi_model_omnibus_test: friedman
+    post_hoc_test: pairwise_two_sided_wilcoxon_signed_rank
+    effect: median_paired_difference
+    descriptive: [win_tie_loss]
+  multiplicity:
+    family: predeclared_primary_metric_model_pairs
+    correction: holm
+
+tracking:
+  backend: mlflow
+  parent_child_runs: true
+  required_artifacts: [protocol_yaml, eligibility_manifest, data_audit_report, dataset_dependency_manifest, filtering_manifest, fold_manifest, test_predictions, metrics, comparison_report, fitted_model]
+
+execution_gates:
+  dependency_manifest_complete: true
+  source_label_semantics_review_complete: true
+  statistical_aggregation_fixture_validated: true
+  confirmatory_ranking_enabled: false

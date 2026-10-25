@@ -1,0 +1,52 @@
+audit:
+  name: graphpro-ecoli-paa-source-audit-v1
+  version: 1.0.0
+  purpose: resolve_the_identity_of_the_278_promotech_ecoli_rows
+  model_outcomes_used: false
+
+promotech_bed:
+  path: data/raw/references/promotech_primary_audit_v1/ECOLI.bed
+  sha256: d2484c9af295249b4a0d0c5e261b99b1a1d10ba56b167ce10b183486cfa59750
+  declared_contig: NC_000913.3
+
+primary_source:
+  pmid: 27748404
+  doi: 10.1038/srep35307
+  biological_entity: Escherichia_coli_O104_H4_pAA_plasmid
+  assembly: NC_018666.1
+  supplement_path: data/raw/references/graphpro_primary_tss_sources_v1/ecoli_paa_dataset_s1.xls
+  supplement_sha256: dd7a5935deaf442ad2806287ccbdca0c61935cecefd5dddf608713a4452f437b
+  worksheet: Data set S1
+  header_row_zero_based: 2
+  expected_rows: 278
+  reference_path: data/raw/references/graphpro_primary_tss_sources_v1/ecoli_paa_NC_018666.1.fasta
+  reference_sha256: 15f513b58e131f797b80ee93759ef36c41780197108ed68202b0865244e6d7d9
+  reference_length: 74217
+
+acceptance:
+  require_ordered_row_count_match: true
+  require_position_after_bed0_to_one_based_conversion: true
+  require_strand_match: true
+  require_locus_tag_match: true
+  require_all_published_51nt_windows_match_paa_reference: true
+  require_bed_contig_match_paa_reference: true
+
+decision:
+  expected_status: source_rows_verified_but_bed_contig_invalid
+  current_mg1655_reconstruction_valid: false
+  relabel_existing_sequences: false
+  corrected_dataset_identity: graphpro-reconstructed-escherichia_coli-o104h4-paa
+  corrected_reconstruction_required: true
+  downstream_split_and_model_reuse_allowed: false
+
+outputs:
+  directory: outputs/reports/graphpro_ecoli_paa_source_audit_v1
+  ledger: row_identity_ledger.csv
+  summary: summary.json
+  manifest: audit_manifest.json
+
+execution_gates:
+  audit_enabled: true
+  corrected_reconstruction_enabled: false
+  split_enabled: false
+  training_enabled: false

@@ -10,10 +10,11 @@ composition and GC descriptors contribute to this controlled discrimination.
 This finding concerns sequence-order disruption and does not establish the
 ability to reject genomic non-promoter regions.
 
-The canonical source-negative comparison addresses this limitation more
-directly. After ten-seed replication, the median paired MCC advantage of
-XGBoost over logistic regression was 0.0574 across 25 datasets, with a bootstrap
-95\% interval excluding zero and 21 dataset-level wins. The median
+The historical canonical-v3 source-negative comparison addresses this
+limitation more directly but is exploratory because it includes GraphPro.
+After ten-seed replication, the median paired MCC advantage of XGBoost over
+logistic regression was 0.0574 across 25 datasets, with a bootstrap 95\%
+interval excluding zero and 21 dataset-level wins. The median
 within-dataset standard deviation of 0.0124 shows that stochastic variation was
 small relative to the cross-dataset paired effect. This supports XGBoost as the
 classical reference for subsequent CapsProm comparisons, but does not establish
@@ -32,8 +33,9 @@ The most immediate threat is negative-set construction. The downloaded
 Bhandari collections contain promoters only, so their shuffled negatives do not
 represent intergenic regions, coding regions, or other genomic backgrounds that
 may generate false positives in practical use. Claims about biological
-generalization must therefore rely on CDBProm, CNNProm, and GraphPro experiments,
-whose source datasets include non-promoter examples. Their initially processed
+generalization must therefore rely on datasets whose negative construction is
+both documented and audited. The revised confirmatory scope uses CDBProm and
+CNNProm; GraphPro remains exploratory. Their initially processed
 partitions were not suitable for that purpose: all 26 audited pairs contained
 exact train--test overlap, covering 98.09\% of the combined test rows. This
 dominant contamination was traced to append-mode writes during
@@ -42,7 +44,8 @@ with overwrite semantics reduced overlap to 2.17\% and yielded 9 immediately
 eligible pairs before collision treatment. Mandatory bilateral removal of the
 1,348 post-cropping cross-label collisions removed 2,696 rows, eliminated label
 conflicts, and increased the eligible count to 10. Their source-provided class
-definitions remain valuable. The subsequent canonical build removed 301
+assignments remain useful for provenance but require the later semantic gate.
+The subsequent canonical build removed 301
 positive and 759 negative same-label duplicate rows and assigned unique
 sequence groups deterministically, after which all 26 pairs passed the exact
 duplicate, label-conflict, and train--test-overlap criteria. Near-duplicate and
@@ -72,6 +75,114 @@ retaining both labels would make the supervised target internally inconsistent.
 The removal is substantial---53.39\% of positive and 34.72\% of negative
 records---and must therefore be considered when interpreting comparability with
 the source study.
+
+The broader GraphPro source audit shows why bilateral collision removal is
+necessary but insufficient. Five bacterial folders associate every positive
+record with the plus strand and every negative record with the minus strand.
+Moreover, 535 GraphPro Bacillus negatives exactly match the canonical TSS
+windows of CDBProm positives, and the GraphPro \texttt{Cpne} folder was
+misidentified locally despite headers for \textit{Chlamydophila pneumoniae}.
+These observations materially threaten construct validity: a classifier could
+learn strand-associated composition or artifacts of dataset assembly rather
+than promoter status. Exclusion is preferable to automatic relabeling because
+neither sequence agreement nor model behavior establishes the true biological
+class. The finding is itself a methodological result of the thesis, showing
+that leakage-free partitions may still encode an invalid supervised target.
+
+The independent reconstruction exercise provides a defensible route to recover
+coverage without claiming to repair the released labels, but it also exposed
+why accession validation must precede sequence generation. Five nominal
+bacterial identities retain candidate TSS evidence; the sixth, E. coli, mixed
+pAA plasmid coordinates with an MG1655 chromosome label. Provisional genomic
+control generation had yielded 11,903 eligible TSS pairs and 11,826 pairs after
+strand-invariant sequence deduplication. The resulting
+datasets would answer a newly specified promoter-versus-matched-genomic-control
+question and must therefore carry new identities rather than being presented as
+the original GraphPro benchmark. Negative selection remains a design factor:
+GC matching reduces an obvious composition shortcut but does not prove that a
+random genomic window is biologically inactive, while CDS controls define a
+different background. Reporting both as separate, predeclared conditions is
+more informative than pooling them or choosing the condition with the better
+MCC.
+
+The similarity-aware partitioning result reduces a second threat: closely
+related windows cannot be divided between training and testing merely because
+their strings are not identical. Grouping connected components through eight
+substitutions produced no cross-partition neighbor at that threshold while
+preserving all 11,826 reconstructed pairs. This is strong evidence against
+within-dataset sequence leakage under the declared metric, but it is not
+evidence that the underlying TSS annotations or sampled genomic controls are
+biologically correct. Those source and distribution gates remain logically
+separate from computational cleanliness.
+
+The formal distribution audit further shows that a pairwise tolerance does not
+guarantee indistinguishable aggregate backgrounds. All bacterial controls meet
+the four-base GC rule, yet small systematic class shifts remain in five
+organisms. These effects are much smaller than the approximately ten to eleven
+percentage-point GC separation between the released Human and Mouse class
+folders, but both findings could support composition-based shortcuts. A future
+sensitivity contract should therefore predeclare stricter or distribution-level
+matching rather than selecting a control policy from predictive performance.
+
+The resulting protocol therefore treats negative construction as a controlled
+factor rather than selecting one universally ``best'' negative set. Models
+trained on source-native, GC-matched genomic, or mixed native--genomic exposure
+will be evaluated on separate native and genomic test panels. Shuffle- and
+CDS-based panels remain explicitly labeled sensitivity analyses. A metric is
+never pooled across these panels, because doing so would confound predictive
+performance with panel composition. Stability across defensible conditions is
+the relevant robustness evidence; a high MCC against only one conveniently
+separable negative family is not sufficient evidence of genomic promoter
+detection. This design is consistent with empirical reports that negative-set
+choice materially changes regulatory-sequence predictors
+\citep{gonzalez2025negative,krutzfeldt2020impact}.
+
+Cross-dataset identity is also a design dependency rather than a cleaning
+detail. The 404 shared Chlamydophila positives show that CDBProm and the
+reconstruction cannot contribute independent dataset-level evidence. The six
+nominal reconstructed E.~coli positives previously found among CNNProm
+negatives are no longer evidence of a biological annotation disagreement: they
+were extracted from the wrong reference molecule and are invalid. Automatic
+deletion or relabeling would still be inappropriate; the valid remedy is a new
+pAA-specific reconstruction with fresh provenance and dependencies.
+
+The complete EPD resolution of the eukaryotic identifiers sharpens the same
+distinction. All released Human identifiers and 1,116 Mouse identifiers occur
+in both class files even though EPDnewNC annotates them as promoter/TSS
+identities. The identifiers can anchor a new positive set, but cannot establish
+that the released sequence paired with the negative directory is a biological
+non-promoter. Reinstatement therefore requires recreation from hg38/mm10 and
+either treated, fully logged historical controls or newly sampled genomic
+controls rather than indiscriminate row deletion.
+
+Full assembly-based recreation shows that the eukaryotic issue is not sequence
+corruption introduced by CapsProm preprocessing. GraphPro systematically used
+the 81 bases ending at the EPD TSS for positives and an 81-base window beginning
+1 kb downstream for negatives. This makes the original benchmark reproducible,
+but it changes the scientific interpretation: downstream sequence is a
+constructed proxy control, not direct evidence of promoter absence. Its strong
+GC separation and occasional proximity to another annotated TSS justify
+reporting it separately from the primary GC-matched genomic-control condition.
+The formal 100-nt TSS exclusion removes these known annotation conflicts while
+preserving the slight resulting class imbalance. Deleting additional valid
+positives merely to force equal counts would conflate integrity correction with
+an experimental sampling decision; any balancing or class weighting must be
+predeclared at training time.
+
+The post-treatment audit also demonstrates that integrity filtering and
+distribution control answer different questions. The Human and Mouse GC gaps
+remain approximately 11.5 and 10.7 percentage points, with marked positional
+composition differences. Consequently, the treated downstream condition is
+useful for reproducibility and sensitivity analysis but should not be promoted
+to the primary genomic-control condition. The reverse-complement identity
+between one Mouse control and a CNNProm Mouse non-TATA positive is a separate
+annotation dependency. Its version-2 exclusion is justified narrowly by control
+suitability: a sequence already labeled positive in the active comparison scope
+is not retained as a GraphPro negative control. This does not adjudicate the
+biological label, does not alter CNNProm, and does not remove the need for a
+dependency-aware protocol. The virtually unchanged GC gap after exclusion
+confirms that resolving one exact conflict does not resolve the broader control
+construction bias.
 
 The legacy Bhandari split also contained extensive exact duplication: 49.87\%
 of its test rows occurred as sequences in training. Although the corrected split

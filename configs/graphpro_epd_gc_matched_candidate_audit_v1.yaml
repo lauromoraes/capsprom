@@ -1,0 +1,33 @@
+audit:
+  name: graphpro-epd-gc-matched-candidate-audit-v1
+  version: 1.0.0
+  status: exploratory_distribution_and_dependency_audit
+  reconstruction_contract: configs/graphpro_epd_gc_matched_reconstruction_v5.yaml
+  reconstruction_contract_sha256: 0243d8276b6438a654fa3bfd4a2d03b464199e4aecbb9e23e65697dadfe4d911
+
+inputs:
+  treated_root: data/interim/graphpro_epd_gc_matched_v5
+  candidate_dataset_identity: graphpro-epd-gc-matched-v5
+  datasets:
+    - organism: human
+      positive_sha256: dd16e37543aa59959f357773f57dd02dfecd439c2ce39eb364add6a9c35b9454
+      negative_sha256: bfa9b72a6ea187d6a517cd1493f80367827067c5349e7ba24b65b0704abe9dcd
+    - organism: mouse
+      positive_sha256: 71cbf4642fc2c2bc7e4531d4ecb2bc857db581c1e53be793fbf4e04f873ef750
+      negative_sha256: 39169bbb14f654e575cb49aa0a06891f469009c1f6c08e9a9f86aafb8e4ed1cf
+  dependency_manifest: configs/dataset_dependency_manifest_v2.yaml
+  dependency_manifest_sha256: 0536c3199aef8ab214a288530473c9046de7a4c15720f19d2d4c3fbfbc5f5cbd
+  confirmatory_root: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna
+
+policy:
+  class_distribution_tests: [mann_whitney_u, kolmogorov_smirnov]
+  multiple_testing_correction: holm
+  positional_comparison: maximum_total_variation
+  dependency_identity: exact_or_reverse_complement
+  test_outcomes_used_for_selection: false
+
+execution_gates:
+  audit_enabled: true
+  split_generation_enabled: false
+  model_training_enabled: false
+  confirmatory_use_enabled: false

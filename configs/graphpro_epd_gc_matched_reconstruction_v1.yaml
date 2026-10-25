@@ -1,0 +1,91 @@
+reconstruction:
+  name: graphpro-epd-gc-matched-v1
+  version: 1.0.0
+  status: primary_eukaryotic_candidate_generation
+  specification: specs/graphpro_dataset_reconstruction.md
+  output_is_new_derived_dataset: true
+
+window:
+  upstream: 60
+  include_tss_base: true
+  downstream: 20
+  length: 81
+  orientation: transcription_five_prime_to_three_prime
+
+negative_policy:
+  controls_per_positive: 1
+  same_assembly: true
+  same_chromosome: true
+  same_strand: true
+  exclusion_margin_nt: 100
+  maximum_gc_count_difference: 0
+  sampling_seed: 20261022
+  max_attempts_per_positive: 100000
+  strict_dna_only: true
+  exclude_selected_control_overlap: true
+  exclude_positive_and_control_strand_invariant_identities: true
+  exclude_active_external_positive_identities: true
+  pair_integrity: always_remove_positive_and_control_together
+  rationale: >-
+    Exact per-pair GC-count matching is the first source-only feasibility
+    policy. Predictive outcomes are not used to select or relax it.
+
+active_external_positive_scope:
+  dependency_manifest: configs/dataset_dependency_manifest_v2.yaml
+  dependency_manifest_sha256: 0536c3199aef8ab214a288530473c9046de7a4c15720f19d2d4c3fbfbc5f5cbd
+  dataset_count: 18
+  processed_root: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna
+
+organisms:
+  - organism: human
+    assembly: GRCh38/hg38
+    expected_source_identifier_count: 2339
+    source_fastas:
+      - path: data/raw/GraphPro/human/positive
+        sha256: b8af4848899881b5c88908011bb3f63f0517c464b30f149b90cdf01c529dd94a
+      - path: data/raw/GraphPro/human/negative
+        sha256: aaf856d88f23122cdd6dc585232bda1f79bb556d2f1277e8a901e5d875fd7490
+    primary_bed:
+      path: data/raw/references/epd_2023/HsNC_EPDnew_001_hg38.bed
+      collection: HsNC_EPDnew_001_hg38
+      sha256: 068b2bdd0a19a0a727e1331e86cec89a3726cc438daa710103f7b06371463ce3
+    known_tss_beds:
+      - path: data/raw/references/epd_2023/HsNC_EPDnew_001_hg38.bed
+        collection: HsNC_EPDnew_001_hg38
+        sha256: 068b2bdd0a19a0a727e1331e86cec89a3726cc438daa710103f7b06371463ce3
+      - path: data/raw/references/epd_2023/Hs_EPDnew_006_hg38.bed
+        collection: Hs_EPDnew_006_hg38
+        sha256: 3ecac81b26ed99cc4d91e84f9dedd123de250a42981920d8d065e09c2ca114f8
+    twobit:
+      path: data/raw/references/ucsc/hg38.2bit
+      size_bytes: 835393456
+      md5: dcc3ea27079aa6dc3f9deccd7275e0f8
+  - organism: mouse
+    assembly: GRCm38/mm10
+    expected_source_identifier_count: 2576
+    source_fastas:
+      - path: data/raw/GraphPro/mouse/positive
+        sha256: aa33c8f8a642136397e55740e9fb74ace12a2e930f664b26fc9b218e551e8316
+      - path: data/raw/GraphPro/mouse/negative
+        sha256: 6d450cdccbb1230f3d9c36fc46fd2a405347bff11f06a1723462b63658c498c6
+    primary_bed:
+      path: data/raw/references/epd_2023/MmNC_EPDnew_001_mm10.bed
+      collection: MmNC_EPDnew_001_mm10
+      sha256: 3d4caf0f2c8e7d04b8d53cec4e376628d5539a37ccf3d4d611c3d134304cd2da
+    known_tss_beds:
+      - path: data/raw/references/epd_2023/MmNC_EPDnew_001_mm10.bed
+        collection: MmNC_EPDnew_001_mm10
+        sha256: 3d4caf0f2c8e7d04b8d53cec4e376628d5539a37ccf3d4d611c3d134304cd2da
+      - path: data/raw/references/epd_2023/Mm_EPDnew_003_mm10.bed
+        collection: Mm_EPDnew_003_mm10
+        sha256: d7cb99e6edc58e36172fa1f964f131710c62c5b0be2f7b681fc98ed4def5d2fe
+    twobit:
+      path: data/raw/references/ucsc/mm10.2bit
+      size_bytes: 714784109
+      md5: fcfcc276799031793a513e2e9c07adad
+
+execution_gates:
+  reconstruction_enabled: true
+  split_generation_enabled: false
+  model_training_enabled: false
+  confirmatory_use_enabled: false

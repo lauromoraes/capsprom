@@ -6,7 +6,8 @@ At its current stage, this thesis contributes a reproducible promoter-prediction
 protocol, curated and validated source-defined datasets, feature mappings for
 multiple DNA representations, an explicit audit of exact-sequence leakage, and
 a leakage-controlled Bhandari shuffle-control workflow. It also establishes a
-ten-seed classical reference across 25 canonical source-negative datasets, with
+historical exploratory ten-seed classical reference across 25 canonical-v3
+source-negative datasets, with
 a median paired MCC advantage of 0.0574 for XGBoost over logistic regression.
 Capsule-based model evaluation remains part of the planned experimental
 contribution.
@@ -15,13 +16,17 @@ contribution.
 
 Current evidence is limited to classical baselines. In particular, Bhandari
 provides promoter sequences only, and its synthetic shuffle controls cannot
-replace evaluation against genomic non-promoters. Repeated-seed uncertainty,
-paired statistical comparison, and biological-negative cross-dataset evaluation
-are complete for the canonical classical baseline; broader homology auditing,
-cross-source transfer, and the capsule-model experiments remain incomplete.
+replace evaluation against genomic non-promoters. Repeated-seed uncertainty and
+paired statistical comparison are complete for the historical canonical-v3
+classical baseline, but confirmatory evaluation must be repeated over the
+revised 18-dataset eligible scope. Broader homology auditing, cross-source
+transfer, and capsule-model experiments remain incomplete.
 The exact-identity correction and Hamming-distance sensitivity audit are
 complete for all 26 CDBProm, CNNProm, and GraphPro pairs, but these do not by
-themselves exclude longer-range biological homology.
+themselves validate source-label semantics or exclude longer-range biological
+homology. Excluding GraphPro after detecting class--strand confounding, raw
+contradictory labels, and an organism-mapping error is an additional data
+curation contribution.
 
 \section{Future Work}\label{sec:conclusion-future-work}
 

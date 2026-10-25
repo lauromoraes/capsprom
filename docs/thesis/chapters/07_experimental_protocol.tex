@@ -19,9 +19,9 @@ composition, not discrimination from genomic non-promoters. Because its test
 results have already been observed during pipeline development, they are
 reported as fixed-split reference results rather than as blind confirmatory
 evidence. The contaminated legacy Bhandari partition is retained only for
-provenance and historical comparability. Confirmatory comparisons use eligible
-strict-DNA datasets from sources that provide non-promoter examples, including
-CDBProm, CNNProm, and GraphPro, with model specifications and search spaces
+provenance and historical comparability. Confirmatory comparisons use the 18
+eligible strict-DNA CDBProm and CNNProm datasets whose positive and negative
+class construction passed source-semantic review, with model specifications and search spaces
 frozen before test predictions are generated. Their legacy fixed partitions do
 not satisfy the integrity criteria and are replaced by deduplicated group-safe
 partitions before confirmatory use. Dataset-level results are the
@@ -49,10 +49,24 @@ biological or source groups are available, resampling preserves those groups.
 Eligibility is evaluated after all declared filters. A confirmatory pair must
 contain both classes in both partitions, no same-label exact duplicate rows, no
 cross-label collisions, and no exact sequence shared by training and test.
+It must additionally have a documented, biologically defensible construction
+for both labels and must not use strand or another metadata field as an
+unverified proxy for promoter status. This additional gate excludes the eight
+GraphPro datasets from the confirmatory scope even though their cleaned v3
+tables pass exact-identity checks. Their historical results are exploratory.
 Failure of any condition blocks confirmatory use but does not erase the source
 artifact: the original hashes, counts, reason for exclusion, correction policy,
 and corrected hashes remain in the audit trail. Near-duplicate and homology
 analyses are reported separately and do not replace these exact-identity gates.
+
+Coordinate-based reconstruction additionally requires agreement between the
+primary publication, accession version, and extracted sequence. A coordinate
+table is not accepted merely because its row count or organism label appears
+plausible. For each source, a frozen row sample is compared by position and
+strand, and any sequence supplied by the publication is recreated from the
+declared reference. Failure of the accession check invalidates all derived
+windows, controls, partitions, and results for that candidate; it is not treated
+as a removable duplicate or corrected by renaming an already extracted file.
 
 All data-dependent preprocessing and feature selection are fitted only on the
 training partition. Hyperparameters are selected using one fixed five-fold
@@ -60,6 +74,45 @@ stratified training manifest generated with seed 42. Models in a comparison
 receive an explicitly comparable search budget. Test outcomes are not used for
 feature selection, early stopping, threshold selection, calibration, or
 hyperparameter optimization.
+
+\section{Negative-Control Conditions}\label{sec:protocol-negative-controls}
+
+Negative-set construction is treated as an explicit experimental factor rather
+than as an interchangeable preprocessing choice. This distinction is required
+because negative selection can materially alter both measured performance and
+the shortcuts available to a sequence classifier
+\citep{gonzalez2025negative,krutzfeldt2020impact}. Five conditions are
+predeclared. Source-native negatives support reproduction of eligible source
+studies. GC-matched genomic controls pair each verified TSS with one window from
+the same assembly under frozen exclusion, identity, and GC-caliper rules.
+Deterministic mono- or dinucleotide shuffles are mechanistic controls and do not
+represent genomic non-promoters. CDS-derived controls form a separate coding-
+background sensitivity condition. Finally, multi-negative training exposes a
+model to more than one negative family without redefining any family as ground
+truth.
+
+In the multi-negative condition, each positive is represented once logically:
+positives receive one half of the effective batch or loss weight, and the other
+half is divided equally among the available negative families. Duplicating a
+positive once for each family is prohibited. Validation and test sets remain
+separate panels for source-native, genomic, shuffled, and CDS-derived controls;
+their records are never concatenated to calculate one MCC. Consequently,
+paired prediction-level comparisons are made only within an identical test
+panel. Effects across control policies are summarized by dataset and seed and
+then by the dependency clusters defined in
+Section~\ref{sec:protocol-statistics}; model-by-policy interactions are
+exploratory until a successor contract establishes sufficient independent
+clusters.
+
+All sequences connected by a TSS, positive identity, source experiment,
+positive--control pair, shuffle parent, or near-sequence component share one
+global partition group across control conditions. Control construction and its
+parameters use no held-out outcomes. Before real generation or training, the
+protocol requires completion of the GraphPro source audit, validation of the
+statistical aggregation fixtures, a coordinate-and-assembly feasibility
+inventory, and prospective freezing of one small pilot dataset. Thus the
+current contract defines the comparisons but does not yet authorize their
+execution.
 
 \section{Replication and Prediction Contract}\label{sec:protocol-replication}
 
@@ -181,6 +234,6 @@ raw sequences.
 Reports label analyses as exploratory, developmental, or confirmatory and state
 dataset eligibility, exclusions, failed runs, replication counts, and the
 resampling unit. The complete machine-readable contract is maintained in
-\path{configs/evaluation_protocol_v2.yaml}, while implementation requirements and
+\path{configs/evaluation_protocol_v3.yaml}, while implementation requirements and
 limitations are maintained in
 \path{specs/statistical_evaluation_protocol.md}.

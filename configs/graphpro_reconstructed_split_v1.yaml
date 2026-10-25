@@ -1,0 +1,38 @@
+split:
+  name: graphpro-reconstructed-bacterial-split-v1
+  version: 1.0.0
+  status: design_locked_execution_pending
+  input_dataset_family: graphpro-reconstructed-v2
+  input_root: data/interim/graphpro_reconstructed_v2
+  input_build_summary_sha256: fd2c027aad4426f6cfef7a73f4fbb7d0060f82acca1fc85cd97a68dd7ac7292b
+  reconstruction_contract: configs/graphpro_reconstruction_v2.yaml
+  reconstruction_contract_sha256: ff435581a282ebe8297a6c4b39f91b18873b96088976322f9b117d70091b5818
+  source_registry: configs/graphpro_source_registry_v1.yaml
+  source_registry_sha256: 040924c04334230916ed28414b1109b0dd18f3a0a14b133cc0eff67a31d4d6b8
+
+grouping:
+  pair_is_indivisible: true
+  distance: minimum_hamming_over_forward_and_reverse_complement
+  hamming_threshold: 8
+  threshold_rationale: strictest_predeclared_threshold_has_only_size_two_same_label_neighbor_components
+  similarity_audit: outputs/reports/graphpro_reconstruction_v2/similarity/similarity_audit_summary.json
+  similarity_audit_sha256: 612d135862dddcce269eaab4d87a9a637b976f04da519e6f503aab7a27a41002
+
+partition:
+  test_fraction: 0.2
+  seed: 42
+  assignment: deterministic_component_hash
+  preserve_one_to_one_class_balance: true
+  test_used_for_selection: false
+
+required_audits:
+  exact_train_test_overlap: true
+  reverse_complement_train_test_overlap: true
+  near_duplicate_train_test_overlap_at_or_below_8: true
+  class_balance: true
+  source_hashes: true
+
+execution_gates:
+  split_enabled: true
+  model_training_enabled: false
+  confirmatory_use_enabled: false

@@ -208,7 +208,114 @@ records provisional dependency clusters derived from the exact cross-dataset
 overlap audit. It remains provisional until the original source pools and
 cross-source label reversals are reviewed.
 
-`capsprom_remote_usage_policy_v2.yaml` is the active local-first access policy.
+`dataset_eligibility_manifest_v1.yaml` records the completed source-label
+semantics review. It retains 18 CDBProm and CNNProm identities for confirmatory
+work and classifies all eight GraphPro identities as exploratory provenance.
+`dataset_dependency_manifest_v2.yaml` freezes 14 reviewed dependency clusters
+for that eligible scope. `evaluation_protocol_v3.yaml` and
+`capsprom_basic_canonical_gpu_execution_v3.yaml` bind future 50-epoch,
+patience-15 work to these manifests; every real execution gate remains closed.
+
+`graphpro_reconstruction_v1.yaml` is the non-executable construction contract
+for treating the eight excluded GraphPro datasets. It never changes the
+released labels. Instead, it requires independently sourced TSS coordinates and
+dated reference assemblies, then defines new, deterministic genomic controls
+and per-organism eligibility gates under the identity
+`graphpro-reconstructed-v1`. Source acquisition, parameter freezing, dataset
+generation, and confirmatory use remain disabled or pending.
+
+`graphpro_source_registry_v1.yaml` binds the six bacterial candidate sources to
+the official Promotech commit, accession versions, relative paths, and SHA-256
+hashes. `graphpro_reconstruction_v2.yaml` preserves the version-1 candidate and
+adds the post-generation exact-integrity correction discovered by its audit:
+strand-invariant repeated positives remove their complete positive--control
+pair. The materialized v2 candidate has 11,826 balanced pairs, but confirmatory
+use remains disabled. `graphpro_reconstructed_split_v1.yaml` freezes an
+80/20 deterministic pair- and similarity-component-safe split at
+strand-invariant Hamming distance eight. Its six materialized splits contain
+18,920 training and 4,732 test rows; an independent audit finds zero exact,
+reverse-complement, or distance-eight train/test neighbors. Source,
+distribution, dependency, and manual-release gates remain pending.
+
+`graphpro_eukaryotic_integrity_v1.yaml` defines a separate exploratory
+integrity view of the released Human and Mouse files. It applies only the
+already established bilateral collision, within-class duplicate, length, and
+strict-DNA rules and writes a row-level exclusion ledger. It is explicitly not
+an EPD-based reconstruction. `graphpro_dataset_logo_audit_v2.yaml` compares the
+six bacterial reconstructed v1/v2 populations and the two released eukaryotic
+before/after integrity views with fixed coordinates and 0--2 bit scales. It
+supersedes logo-audit v1 only to label the unresolved eukaryotic coordinate as
+a nominal TSS. Neither contract enables model training or confirmatory use.
+
+`graphpro_candidate_audit_v1.yaml` binds the eight GraphPro-derived populations
+to formal GC, positional-composition, and strand-invariant exact-dependency
+audits against the active 18-dataset confirmatory scope.
+`graphpro_candidate_dependency_manifest_v1.yaml` records the resulting
+candidate relationships without modifying the active dependency manifest. It
+blocks reconstructed E. coli reinstatement on six opposite-label cross-source
+identities and requires Chlamydophila source-pool clustering if reinstated.
+Both model and confirmatory gates remain false.
+
+`graphpro_epd_identifier_resolution_v1.yaml` freezes the November 2023 EPDnew
+archive identity, CC BY 4.0 notice, hg38/mm10 assemblies, four BED-file hashes,
+and the released Human/Mouse source hashes. Its identifier-only audit resolves
+all 2,339 Human and all 2,576 union Mouse EPD identifiers to the respective
+EPDnewNC v001 coordinates. It records coding-collection aliases but does not
+interpret released classes, reconstruct sequences, generate controls, create
+splits, or enable training.
+
+`graphpro_epd_sequence_recreation_v1.yaml` freezes the official hg38/mm10 UCSC
+twoBit sizes and MD5 hashes and tests the source-construction rule without
+materializing a new dataset. All 8,370 released Human/Mouse records reproduce
+exactly: positives use the transcript-oriented interval `[-80, 1)` and
+negatives use `[1000, 1081)`. The +1 kb class is a separate historical
+downstream-control condition, not the primary GC-matched control policy. All
+dataset-generation, training, and confirmatory gates remain false.
+
+`graphpro_epd_downstream_treatment_v1.yaml` treats the historical +1 kb
+condition after the released-data integrity stage. It removes one Human
+within-positive reverse-complement duplicate and excludes 73 Human and 40 Mouse
+controls within 100 nt of any coding/non-coding EPDnew TSS. It deliberately does
+not downsample valid positives or invent absent Mouse pairings. Final counts are
+2,330/2,261 for Human and 1,843/1,805 for Mouse; split and training gates remain
+false.
+
+`graphpro_epd_downstream_candidate_audit_v1.yaml` binds the treated eukaryotic
+FASTAs to GC, positional-composition, and strand-invariant dependency audits
+against the 18-dataset confirmatory scope. The paired dependency manifest keeps
+both candidates exploratory: GC separation remains large, Human and Mouse share
+one positive, and Mouse has one reverse-complement opposite-label identity
+against a CNNProm Mouse non-TATA positive. No row is silently removed or
+relabeled, and no split is authorized.
+
+`graphpro_epd_downstream_treatment_v2.yaml` is the immutable successor that
+removes the single Mouse downstream control whose strand-invariant identity is
+positive in the hash-bound CNNProm Mouse non-TATA dataset. The incremental
+ledger records the external dataset, label, orientation, and sequence hash;
+CNNProm is not modified or relabeled. The corresponding
+`graphpro_epd_downstream_candidate_audit_v2.yaml` and
+`graphpro_epd_downstream_dependency_manifest_v2.yaml` confirm that no
+opposite-label identity remains against the active confirmatory scope. Both v2
+candidates remain exploratory and unsplit because the large GC separation and
+missing primary GC-matched control condition are unchanged.
+
+`graphpro_epd_gc_matched_reconstruction_v1.yaml` defines the separate primary
+Human/Mouse candidate condition and tests exact GC equality.
+`graphpro_epd_gc_matched_reconstruction_v2.yaml` is the separately versioned
+one-base relaxation after v1 proved infeasible. Version 3 tests the next
+two-base caliper, version 4 adds a deterministic exhaustive fallback for
+extreme-GC windows, and version 5 separates random and exhaustive effort in the
+ledger. These contracts create one
+same-chromosome, same-strand, 81-nt control per union EPD TSS, exclude
+coding/non-coding EPD TSS margins and active external positive identities, and
+keep every pair indivisible. Versions 1--3 preserve their failed feasibility
+evidence; version 5 materializes the first complete candidate.
+`graphpro_epd_gc_matched_candidate_audit_v1.yaml` binds that candidate to GC,
+positional-composition, exact-dependency, and near-similarity audits.
+Reconstruction and audit are enabled, but split, training, and confirmatory
+gates remain false pending manual provenance review and release approval.
+
+`capsprom_remote_usage_policy_v2.yaml` is the historical local-first access policy.
 It preserves the scientific, recovery, MLflow, and backup rules of the earlier
 remote execution policy while superseding its access-frequency assumptions.
 Routine development, fixture tests, documentation, status checks, and repository
@@ -217,3 +324,42 @@ authorized GPU-heavy or many-fit work; `bioserver04` is reserved for explicitly
 authorized heavy CPU work and backup verification associated with such a
 campaign. Remote synchronization occurs only at campaign boundaries and carries
 the minimum immutable execution snapshot.
+
+`capsprom_remote_usage_policy_v3.yaml` supersedes v2 as the active policy. It
+preserves the local-first host roles and all closed scientific gates while
+requiring long remote commands to survive SSH disconnection, persist an exit
+code, and register their process, command, configuration, logs, results, and
+checkpoints in `manifests/remote_jobs.json`. Project status reports pending
+registry entries; checks occur only during later authorized interactions and
+are not automatic background monitoring.
+
+`negative_control_evaluation_v1.yaml` freezes the design-only comparison of
+source-native, GC-matched genomic, shuffle, CDS-derived, and multi-negative
+conditions. It requires separate test-panel metrics, global grouping across
+derived conditions, equal negative-family weighting in mixed training, and a
+single provenance-selected pilot. Dataset generation, splits, training, and
+confirmatory use remain disabled.
+
+`control_coordinate_feasibility_inventory_v1.yaml` records, per dataset,
+whether assemblies, row coordinates, or resolvable source identifiers are
+available for future genomic or CDS control construction. Inventory completion
+is not execution authorization.
+
+`graphpro_primary_tss_sample_audit_v1.yaml` predeclares a deterministic,
+strand-aware ten-row audit against the five published primary bacterial TSS
+sources. It records Rhodobacter as a separate unresolved 5,374-row collection
+rather than substituting the later 4,045-row GEO dataset.
+
+`graphpro_primary_tss_source_comparison_v1.yaml` hash-binds the acquired
+Campylobacter, Chlamydia, and Leptospira publication supplements and declares
+their worksheet schemas and BED0-to-one-based coordinate conversion. The
+generated ledger confirms 30/30 frozen coordinate/strand matches. Bacillus and
+E. coli remain explicitly blocked, so this partial result does not change
+dataset eligibility or authorize experiment execution.
+
+`graphpro_ecoli_paa_source_audit_v1.yaml` resolves the nominal E. coli source:
+the 278 BED rows are exactly the pAA plasmid TSS supplement, but the BED declares
+the MG1655 chromosome. `graphpro_primary_tss_source_comparison_v2.yaml` records
+this as an assembly failure, not a successful MG1655 provenance check. Any
+corrected pAA reconstruction requires a new dataset identity and cannot reuse
+the nominal MG1655 derivatives.
