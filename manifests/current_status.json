@@ -41,7 +41,7 @@
       "summary_available": true
     }
   },
-  "generated_at_utc": "2026-10-26T14:43:13.409987+00:00",
+  "generated_at_utc": "2026-10-26T14:50:48.912370+00:00",
   "graphpro_policy": "configs/graphpro_deferral_policy_v1.yaml",
   "next_action": "review the completed v4 tranche and predeclare the next bounded training-only release",
   "remote_jobs": {
