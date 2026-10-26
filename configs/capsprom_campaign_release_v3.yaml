@@ -1,0 +1,40 @@
+release:
+  name: capsprom-campaign-release-v3
+  version: 3.0.0
+  status: authorized_bounded_training_only_tranche
+  authorized_on: 2026-10-25
+  authorization_source: explicit_user_instruction_to_proceed
+
+scope:
+  execution_contract: configs/capsprom_basic_canonical_gpu_execution_v4.yaml
+  eligible_dataset_count: 18
+  graphpro_included: false
+  dataset_id: cdbprom-prokaryotic-chlamydophila_pneumoniae
+  seed: 13
+  folds: [0, 1, 2, 3, 4]
+  maximum_new_inner_fits: 5
+  host: bioserver03
+  gpu_workers: 1
+
+scientific_boundaries:
+  training_data_only: true
+  reuse_previous_30_epoch_folds: false
+  restart_each_fold_from_epoch_one: true
+  maximum_epochs: 50
+  patience: 15
+  epoch_selection_rule: lower_median_fold_best_epoch
+  model_outcomes_may_not_expand_tranche: true
+
+execution_requirements:
+  persistent_asynchronous_launcher: true
+  remote_job_registry: manifests/remote_jobs.json
+  atomic_plan_state: true
+  mlflow_parent_child_tracking: true
+  inspect_for_equivalent_job_before_launch: true
+
+execution_gates:
+  authorized_inner_folds_enabled: true
+  additional_inner_folds_enabled: false
+  final_fits_enabled: false
+  external_test_enabled: false
+  embedding_jobs_enabled: false

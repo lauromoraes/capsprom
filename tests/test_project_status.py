@@ -32,6 +32,7 @@ def test_status_reports_checkpoint_and_writes_portable_snapshot(tmp_path: Path):
     assert status["experiments"]["xgboost_replication_v2"]["summary_available"] is False
     assert status["active_confirmatory_dataset_count"] == 18
     assert status["active_evaluation_protocol"] == "configs/evaluation_protocol_v3.yaml"
+    assert status["graphpro_policy"] == "configs/graphpro_deferral_policy_v1.yaml"
     assert status["remote_jobs"]["pending_count"] == 1
     assert status["remote_jobs"]["jobs"][0]["job_id"] == "remote-1"
     assert written["next_action"] == "make replication-resume"

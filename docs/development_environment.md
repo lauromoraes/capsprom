@@ -153,5 +153,6 @@ Synchronize only at a campaign boundary and transfer the minimum immutable
 snapshot needed to reproduce that campaign. A small remote pilot is acceptable
 only when explicitly authorized as a gate for a larger heavy campaign. During
 ordinary development, remote hosts should not be contacted for status polling,
-routine tests, documentation checks, or repository mirroring. The versioned
-contract is `configs/capsprom_remote_usage_policy_v2.yaml`.
+routine tests, documentation checks, or repository mirroring. The active
+versioned contract is `configs/capsprom_remote_usage_policy_v3.yaml`; version 2
+is retained as historical policy provenance.

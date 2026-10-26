@@ -693,6 +693,41 @@ Current state:
   `NC_018666.1`, while continuing the legitimate search for a coordinate-level
   Bacillus supplement. Do not generate pAA controls or splits until the new
   contract is frozen; all model-execution gates remain closed.
+- Decision: defer the complete GraphPro line, including released datasets,
+  bacterial reconstructions, the pAA successor, Bacillus source resolution,
+  and Human/Mouse EPD reconstructions. Existing artifacts and immutable
+  contracts remain preserved as exploratory provenance; no additional GraphPro
+  audit, reconstruction, control, split, eligibility, or training work is
+  active. The deferral is recorded in
+  `configs/graphpro_deferral_policy_v1.yaml` and can be reversed only by a new
+  explicit project decision.
+- Completed: freeze and execute the active classical-baseline consolidation
+  for the 18 eligible CDBProm/CNNProm datasets. It reuses completed logistic
+  and ten-seed XGBoost results, excludes GraphPro by the independently defined
+  eligibility scope, and performs no new model fitting. XGBoost wins 17 of 18
+  datasets; its median paired MCC advantage is 0.0681 with bootstrap 95%
+  interval [0.0361, 0.0927] and two-sided Wilcoxon p=0.00001526.
+- Next: prepare the already drafted 18-dataset basic-CapsProm GPU v3 campaign
+  and predeclare the subsequent representation/model comparison. Keep
+  canonical folds, final fits, external tests, and embedding jobs closed until
+  a bounded execution tranche is explicitly released.
+- Completed: create the execution-enabled v4 successor and release exactly five
+  training-only folds for CDBProm Chlamydophila at seed 13 on `bioserver03`.
+  All five completed on their first attempt with mean inner-validation MCC
+  0.757628 and sample standard deviation 0.031603. The lower-median rule selects
+  epoch 30 from best epochs 31, 41, 7, 30, and 25. The persistent launcher
+  exited zero, SQLite passed integrity checking, 55 files were hash-manifested,
+  and the plan records no external-test access. One fold reached the 50-epoch
+  ceiling and is retained as a monitoring signal; no budget was changed after
+  observing the result.
+- Completed: copy the v4 seed-13 campaign boundary directly from `bioserver03`
+  to `bioserver04`. A checksum dry run reports no differences, the snapshot has
+  55 files, and its SQLite copy independently passes integrity checking with
+  the same five finished children and one open campaign parent.
+- Next: synchronize the locally validated readiness implementation without
+  changing the immutable v4 contract, then release another bounded
+  training-only seed only after that operational check. Final fits, external
+  tests, and embeddings remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 

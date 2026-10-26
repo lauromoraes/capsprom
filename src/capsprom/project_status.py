@@ -24,6 +24,7 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
         "active_dataset_eligibility_manifest": "configs/dataset_eligibility_manifest_v1.yaml",
         "active_confirmatory_dataset_count": 18,
         "active_evaluation_protocol": "configs/evaluation_protocol_v3.yaml",
+        "graphpro_policy": "configs/graphpro_deferral_policy_v1.yaml",
         "experiments": {},
         "remote_jobs": _remote_job_status(project_root),
     }
@@ -68,13 +69,23 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
     active = status["experiments"]["xgboost_replication_v2"]
     summary = project_root / "outputs/reports/xgboost_ten_seed_replication_v2/ten_seed_summary.json"
     active["summary_available"] = summary.is_file()
+    active_summary = (
+        project_root / "outputs/reports/active_baseline_consolidation_v1/summary.json"
+    )
+    status["active_baseline_consolidation"] = {
+        "config": "configs/active_baseline_consolidation_v1.yaml",
+        "summary": "outputs/reports/active_baseline_consolidation_v1/summary.json",
+        "summary_available": active_summary.is_file(),
+    }
     if active.get("remaining", 0):
         status["next_action"] = "make replication-resume"
     elif not summary.is_file():
         status["next_action"] = "make replication-summary"
+    elif not active_summary.is_file():
+        status["next_action"] = "make baseline-consolidation"
     else:
         status["next_action"] = (
-            "freeze corrected pAA reconstruction and resolve Bacillus TSS source"
+            "review the completed v4 tranche and predeclare the next bounded training-only release"
         )
     return status
 

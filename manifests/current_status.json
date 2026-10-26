@@ -1,4 +1,9 @@
 {
+  "active_baseline_consolidation": {
+    "config": "configs/active_baseline_consolidation_v1.yaml",
+    "summary": "outputs/reports/active_baseline_consolidation_v1/summary.json",
+    "summary_available": true
+  },
   "active_confirmatory_dataset_count": 18,
   "active_dataset": "data/processed/assembled_datasets/intra_regenerated_v3_strict_dna",
   "active_dataset_eligibility_manifest": "configs/dataset_eligibility_manifest_v1.yaml",
@@ -36,13 +41,14 @@
       "summary_available": true
     }
   },
-  "generated_at_utc": "2026-10-25T15:21:54.677759+00:00",
-  "next_action": "freeze corrected pAA reconstruction and resolve Bacillus TSS source",
+  "generated_at_utc": "2026-10-26T14:43:13.409987+00:00",
+  "graphpro_policy": "configs/graphpro_deferral_policy_v1.yaml",
+  "next_action": "review the completed v4 tranche and predeclare the next bounded training-only release",
   "remote_jobs": {
     "available": true,
     "jobs": [],
     "pending_count": 0,
     "registry": "manifests/remote_jobs.json",
-    "updated_at_utc": "2026-10-23T00:00:00+00:00"
+    "updated_at_utc": "2026-10-26T14:07:30Z"
   }
 }

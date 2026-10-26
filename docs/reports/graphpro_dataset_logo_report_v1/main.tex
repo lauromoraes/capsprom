@@ -1,0 +1,249 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{microtype}
+\graphicspath{{../../../outputs/reports/graphpro_dataset_logo_audit_v2/figures/}}
+\title{Integrity Treatment and Dataset Sequence Logos for GraphPro-Derived Data}
+\author{CapsProm project}
+\date{22 October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This report documents the label-agnostic integrity treatment of the released
+GraphPro human and mouse collections and compares sequence logos before and
+after treatment for six independently reconstructed bacterial candidates and
+the two released eukaryotic integrity views. The logos describe aligned dataset
+composition; they are not motifs extracted from a trained model. All training
+and confirmatory-use gates remain disabled.
+\end{abstract}
+
+\section{Scope and dataset identities}
+
+The bacterial candidates were reconstructed from Promotech TSS tables and
+matching versioned assemblies. Their ``before'' version is
+\texttt{graphpro-reconstructed-v1}; their ``after'' version is the
+strand-invariant exact-integrity correction
+\texttt{graphpro-reconstructed-v2}. Human and mouse have not yet been
+independently reconstructed. Their ``before'' data are the released GraphPro
+files and their ``after'' data are the exploratory integrity view
+\texttt{graphpro-released-eukaryotic-integrity-v1}. This distinction prevents
+computational cleaning from being misrepresented as biological label
+validation.
+
+The Eukaryotic Promoter Database (EPD) is an experimentally supported promoter
+and TSS resource, not a negative-sequence catalogue
+\cite{meylan2020epd}. All released human and mouse records carry
+\texttt{FP}-style identifiers, including records in the directory named
+\texttt{negative}. A dated EPD release and its corresponding genome assembly
+must therefore be resolved before eukaryotic reconstruction. Directory names,
+header suffixes, sequence composition, and agreement with another dataset were
+not used to infer labels.
+
+Table~\ref{tab:inventory} introduces the populations included in the logo
+analysis. Every sequence has 81 nucleotides. The bacterial TSS coordinate is
+independently positioned. Human and mouse retain the source's nominal
+$-60\ldots+20$ alignment only for descriptive comparison; their TSS position
+has not been independently verified.
+
+\begin{table}[H]
+\centering
+\caption{Datasets and version comparisons used in this report. ``Reconstructed'' means that positives were recreated from independent TSS coordinates and negatives were newly sampled genomic controls. The eukaryotic rows are released-data integrity views, not reconstructions.}
+\label{tab:inventory}
+\small
+\begin{tabular}{llll}
+\toprule
+Key & Organism & Comparison & TSS status \\
+\midrule
+BACILLUS & \textit{B. amyloliquefaciens} & reconstructed v1--v2 & verified \\
+CJEJUNI\_2 & \textit{C. jejuni} & reconstructed v1--v2 & verified \\
+CPNEUMONIAE & \textit{C. pneumoniae} & reconstructed v1--v2 & verified \\
+ECOLI & \textit{E. coli} & reconstructed v1--v2 & verified \\
+LINTERROGANS & \textit{L. interrogans} & reconstructed v1--v2 & verified \\
+RHODOBACTER\_1 & \textit{R. capsulatus} & reconstructed v1--v2 & verified \\
+human & \textit{H. sapiens} & released--integrity v1 & nominal only \\
+mouse & \textit{M. musculus} & released--integrity v1 & nominal only \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Predeclared integrity treatment}
+
+Only criteria already established in the project were applied: (i) every
+occurrence of a sequence present in both classes was removed bilaterally;
+(ii) within each class, the first exact sequence in source order was retained
+and subsequent occurrences were removed; and (iii) sequences not composed of
+81 strict-DNA symbols were excluded. The four eukaryotic files already
+contained only strict 81-nt DNA. Unresolved EPD identifiers were retained only
+in this exploratory released-data view: under the reconstruction contract they
+remain ineligible until resolution, but excluding all of them here would yield
+an empty collection rather than a reconstructed dataset.
+
+Table~\ref{tab:euk-treatment} reports the eukaryotic changes. Human lost one
+cross-label sequence from each class, seven further positive duplicates, and
+four further negative duplicates. Mouse had no cross-label collision and lost
+three positive and one negative duplicate. The resulting class-count
+differences are three sequences for human and two for mouse; no resampling was
+used to restore balance.
+
+\begin{table}[H]
+\centering
+\caption{Released human and mouse counts before and after the exploratory integrity treatment. Counts remain unbalanced after removing the observed problems because no class was downsampled.}
+\label{tab:euk-treatment}
+\begin{tabular}{llrrrrr}
+\toprule
+Organism & Class & Before & Collision & Duplicate & After & Removed \\
+\midrule
+Human & positive & 2,339 & 1 & 7 & 2,331 & 8 \\
+Human & negative & 2,339 & 1 & 4 & 2,334 & 5 \\
+Mouse & positive & 1,846 & 0 & 3 & 1,843 & 3 \\
+Mouse & negative & 1,846 & 0 & 1 & 1,845 & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:all-counts} presents every comparison. An unchanged row means
+that the version-2 integrity filter found no affected positive--control pair;
+the before and after logo matrices are consequently identical.
+
+\begin{table}[H]
+\centering
+\caption{Sequence counts used in each class-specific logo before and after treatment. Bacterial removal preserves positive--control pairs; eukaryotic removal follows the released class files independently.}
+\label{tab:all-counts}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Dataset & Pos. before & Pos. after & Removed & Neg. before & Neg. after & Removed \\
+\midrule
+BACILLUS & 1,064 & 1,063 & 1 & 1,064 & 1,063 & 1 \\
+CJEJUNI\_2 & 1,905 & 1,882 & 23 & 1,905 & 1,882 & 23 \\
+CPNEUMONIAE & 529 & 529 & 0 & 529 & 529 & 0 \\
+ECOLI & 248 & 248 & 0 & 248 & 248 & 0 \\
+LINTERROGANS & 2,783 & 2,783 & 0 & 2,783 & 2,783 & 0 \\
+RHODOBACTER\_1 & 5,374 & 5,321 & 53 & 5,374 & 5,321 & 53 \\
+Human & 2,339 & 2,331 & 8 & 2,339 & 2,334 & 5 \\
+Mouse & 1,846 & 1,843 & 3 & 1,846 & 1,845 & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Sequence-logo method}
+
+The figures use the sequence-logo construction of Schneider and Stephens
+\cite{schneider1990logos}. At each aligned position, letter heights equal the
+observed nucleotide frequency multiplied by $2-H$, where $H$ is the base-2
+Shannon entropy of the four nucleotide frequencies. No pseudocount or
+small-sample correction was applied. Every panel uses positions $-60$ through
+$+20$, a fixed 0--2 bit scale, identical nucleotide colours, and the same
+15-by-6 inch rendering. The dashed line marks the verified TSS for bacteria and
+the explicitly labelled nominal TSS for human and mouse. Frequency and
+information-height matrices are stored as CSV files alongside the figures.
+
+Figures~\ref{fig:bacillus}--\ref{fig:mouse} show the class-specific dataset
+logos. Each embedded image contains its before panel above its after panel and
+states the number of contributing sequences. These are descriptive dataset
+logos and must not be cited as motifs learned by CapsProm or any baseline.
+
+\newcommand{\datasetlogos}[5]{%
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.96\textwidth]{#1_positive_before_after.png}
+\includegraphics[width=0.96\textwidth]{#1_negative_before_after.png}
+\caption{#2 dataset sequence logos before and after #3. The positive class is shown first and the negative class second. All panels use the same coordinate and information scales. #4}
+\label{#5}
+\end{figure}}
+
+\datasetlogos{bacillus}{\textit{Bacillus amyloliquefaciens}}{pair-preserving exact-integrity filtering}{One repeated positive and its paired control were removed.}{fig:bacillus}
+\datasetlogos{cjejuni_2}{\textit{Campylobacter jejuni}}{pair-preserving exact-integrity filtering}{Twenty-three repeated positives and their paired controls were removed.}{fig:cjejuni}
+\datasetlogos{cpneumoniae}{\textit{Chlamydophila pneumoniae}}{pair-preserving exact-integrity filtering}{No sequence was removed; before and after matrices are identical.}{fig:cpneumoniae}
+\datasetlogos{ecoli}{\textit{Escherichia coli}}{pair-preserving exact-integrity filtering}{No sequence was removed; before and after matrices are identical.}{fig:ecoli}
+\datasetlogos{linterrogans}{\textit{Leptospira interrogans}}{pair-preserving exact-integrity filtering}{No sequence was removed; before and after matrices are identical.}{fig:linterrogans}
+\datasetlogos{rhodobacter_1}{\textit{Rhodobacter capsulatus}}{pair-preserving exact-integrity filtering}{Fifty-three repeated positives and their paired controls were removed.}{fig:rhodobacter}
+\datasetlogos{human}{\textit{Homo sapiens}}{released-data integrity filtering}{The coordinate at zero is nominal and not independently verified.}{fig:human}
+\datasetlogos{mouse}{\textit{Mus musculus}}{released-data integrity filtering}{The coordinate at zero is nominal and not independently verified.}{fig:mouse}
+
+\section{Comparative observations}
+
+The removals have negligible visual impact. Across all changed populations,
+the largest absolute shift in aggregate GC fraction is approximately 0.001 and
+the largest shift in mean positional information is below 0.001 bits. This is
+consistent with removing at most 53 of 5,374 sequences in any bacterial class
+and at most eight of 2,339 sequences in an eukaryotic class. Thus, the treatment
+removes integrity violations without materially redefining the gross
+composition of the retained collections.
+
+The bacterial logos generally show low per-position information. CJEJUNI\_2
+has the largest mean positional information among these populations, whereas
+ECOLI is nearly compositionally diffuse on this aggregate scale. The paired
+genomic controls were GC-matched within four nucleotides per pair, but the logos
+do not establish that every control is biologically inactive. Nor does a weak
+aggregate logo imply that a classifier cannot exploit distributed or
+nonlinear signals.
+
+The released human and mouse classes display a substantial class-level GC
+difference: approximately 57.3\% versus 46.4\% for human and 56.1\% versus
+45.7\% for mouse. This is a potential dataset-construction shortcut and merits
+formal distribution testing after provenance resolution. A visibly conserved
+terminal position is also present in the released eukaryotic alignments. Since
+their assembly, coordinate extraction, and nominal TSS have not been
+independently verified, this terminal pattern is reported as a source-alignment
+observation, not as evidence of a promoter element.
+
+Canonical promoter elements such as TATA-like patterns or initiator-associated
+composition may motivate later, predeclared enrichment tests. Visual inspection
+alone cannot establish motif significance, functional activity, or causal
+importance. Such claims require background-aware statistics, multiple-testing
+control, independent annotation, and preferably replication across sources.
+
+\section{Reproducibility and remaining gates}
+
+The eukaryotic treatment contract is
+\texttt{configs/graphpro\_eukaryotic\_integrity\_v1.yaml}; its builder writes a
+row-level exclusion ledger with dataset, organism, released class, source
+index, identifier, description, sequence hash, and exclusion reason. The final
+logo contract is
+\texttt{configs/graphpro\_dataset\_logo\_audit\_v2.yaml}. The v1 logo output is
+preserved because it labelled the eukaryotic nominal coordinate too strongly;
+v2 corrects only that presentation and does not change matrices or populations.
+
+From the repository root, the products can be recreated with:
+\begin{verbatim}
+PYTHONPATH=src .venv/bin/python \
+  scripts/build_graphpro_eukaryotic_integrity.py \
+  --output-dir data/interim/graphpro_eukaryotic_integrity_v1
+MPLCONFIGDIR=/tmp/capsprom-mpl PYTHONPATH=src .venv/bin/python \
+  scripts/generate_graphpro_dataset_logos.py \
+  --config configs/graphpro_dataset_logo_audit_v2.yaml \
+  --output-dir outputs/reports/graphpro_dataset_logo_audit_v2
+\end{verbatim}
+
+Human and mouse reconstruction remains blocked until a dated EPD release,
+assembly, identifier-resolution table, coordinates, and independently generated
+controls are frozen. For all organisms, remaining work includes primary-source
+sampling, distribution and cross-dataset dependency audits, licensing metadata,
+and independent manual review. Existing model results tied to released GraphPro
+or canonical-v3 identities remain historical exploratory provenance and cannot
+be reused as results for these new identities. No training, final-fit,
+external-test, embedding, or confirmatory gate was opened for this report.
+
+\begin{thebibliography}{9}
+\bibitem{schneider1990logos}
+T. D. Schneider and R. M. Stephens.
+Sequence logos: a new way to display consensus sequences.
+\emph{Nucleic Acids Research}, 18(20):6097--6100, 1990.
+doi:10.1093/nar/18.20.6097.
+
+\bibitem{meylan2020epd}
+P. Meylan et al.
+EPD in 2020: enhanced data visualization and extension to ncRNA promoters.
+\emph{Nucleic Acids Research}, 48(D1):D65--D69, 2020.
+doi:10.1093/nar/gkz1014.
+\end{thebibliography}
+
+\end{document}

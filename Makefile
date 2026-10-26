@@ -1,6 +1,6 @@
 PYTHON ?= .venv/bin/python
 
-.PHONY: install-dev lint test check status status-snapshot replication-plan replication-resume replication-summary
+.PHONY: install-dev lint test check status status-snapshot replication-plan replication-resume replication-summary baseline-consolidation
 
 install-dev:
 	$(PYTHON) -m pip install -r requirements/dev.txt -r requirements/models-classical.txt
@@ -28,3 +28,6 @@ replication-resume:
 
 replication-summary:
 	$(PYTHON) scripts/summarize_xgboost_replication.py
+
+baseline-consolidation:
+	$(PYTHON) scripts/consolidate_active_baselines.py

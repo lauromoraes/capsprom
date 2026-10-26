@@ -216,6 +216,13 @@ for that eligible scope. `evaluation_protocol_v3.yaml` and
 `capsprom_basic_canonical_gpu_execution_v3.yaml` bind future 50-epoch,
 patience-15 work to these manifests; every real execution gate remains closed.
 
+`capsprom_basic_canonical_gpu_execution_v4.yaml` is the execution-enabled
+successor for the same 18-dataset, 50-epoch design. It has new tracking and
+output identities and keeps final-fit, external-test, and embedding gates
+closed. `capsprom_campaign_release_v3.yaml` is the separate authorization
+record for exactly five training-only folds of the smallest CDBProm dataset at
+seed 13 on `bioserver03`; it does not authorize any additional job.
+
 `graphpro_reconstruction_v1.yaml` is the non-executable construction contract
 for treating the eight excluded GraphPro datasets. It never changes the
 released labels. Instead, it requires independently sourced TSS coordinates and
@@ -363,3 +370,14 @@ the MG1655 chromosome. `graphpro_primary_tss_source_comparison_v2.yaml` records
 this as an assembly failure, not a successful MG1655 provenance check. Any
 corrected pAA reconstruction requires a new dataset identity and cannot reuse
 the nominal MG1655 derivatives.
+
+`graphpro_deferral_policy_v1.yaml` records the active decision to defer every
+GraphPro audit, reconstruction, control, split, eligibility, and training path
+without changing or deleting any earlier versioned contract or artifact. The
+active confirmatory scope is limited to the 18 eligible CDBProm/CNNProm
+datasets.
+
+`active_baseline_consolidation_v1.yaml` binds a derived statistical summary to
+the completed classical results and the current eligibility manifest. It
+reports only the 18 eligible CDBProm/CNNProm datasets, excludes GraphPro, and
+does not authorize or execute new model fits.

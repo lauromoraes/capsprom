@@ -1,0 +1,36 @@
+consolidation:
+  name: active-baseline-consolidation-v1
+  version: 1.0.0
+  status: frozen_posthoc_scope_restriction
+  purpose: report_completed_classical_results_for_the_current_eligible_scope
+  model_outcomes_used_to_define_scope: false
+
+scope:
+  eligibility_manifest: configs/dataset_eligibility_manifest_v1.yaml
+  eligibility_manifest_sha256: 2663fe21d8cb8810ccf3da0bf5933a4a7669f2fc64e146c67134014e43de0e57
+  included_source_prefixes: [cdbprom, cnnprom]
+  expected_dataset_count: 18
+  excluded_source_prefixes: [graphpro]
+
+inputs:
+  completed_summary: outputs/reports/xgboost_ten_seed_replication_v2/ten_seed_summary.json
+  completed_summary_sha256: 87c9bb41de07e9a62d623453f85c1fe93c887a542aa24943651cce9f94fee80c
+  models: [logistic_regression, xgboost]
+  xgboost_seed_count: 10
+
+statistics:
+  primary_effect: median_xgboost_mcc_minus_deterministic_logistic_mcc
+  bootstrap_seed: 20261019
+  bootstrap_resamples: 10000
+  confidence_level: 0.95
+  paired_test: wilcoxon_two_sided
+
+outputs:
+  directory: outputs/reports/active_baseline_consolidation_v1
+  json: summary.json
+  csv: dataset_results.csv
+
+execution_gates:
+  reuse_completed_results_enabled: true
+  new_model_training_enabled: false
+  graphpro_inclusion_enabled: false

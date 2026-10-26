@@ -1,0 +1,43 @@
+policy:
+  name: graphpro-deferral-policy-v1
+  version: 1.0.0
+  status: active_deferred
+  effective_date: 2026-10-25
+  rationale: prioritize_the_18_eligible_cdbprom_and_cnnprom_datasets
+  preserves_existing_artifacts: true
+  mutates_existing_graphpro_contracts: false
+
+scope:
+  families:
+    - released_graphpro
+    - reconstructed_bacterial_graphpro
+    - ecoli_o104h4_paa
+    - bacillus_primary_source_resolution
+    - reconstructed_epd_human_and_mouse
+  excluded_from_active_confirmatory_scope: true
+  active_confirmatory_manifest: configs/dataset_eligibility_manifest_v1.yaml
+  active_confirmatory_dataset_count: 18
+  active_sources: [cdbprom, cnnprom]
+
+deferred_work:
+  additional_source_or_coordinate_audits: true
+  reconstruction: true
+  control_generation: true
+  split_generation: true
+  distribution_and_dependency_audits: true
+  eligibility_review: true
+  model_training: true
+
+artifact_policy:
+  delete_or_relabel_existing_artifacts: false
+  historical_results_are_confirmatory: false
+  historical_results_role: exploratory_provenance_only
+  resume_requires_new_explicit_project_decision: true
+
+execution_gates:
+  graphpro_audit_enabled: false
+  graphpro_reconstruction_enabled: false
+  graphpro_control_generation_enabled: false
+  graphpro_split_enabled: false
+  graphpro_training_enabled: false
+  graphpro_confirmatory_use_enabled: false
