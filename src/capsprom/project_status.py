@@ -67,7 +67,9 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
             })
         status["experiments"][name] = entry
     active = status["experiments"]["xgboost_replication_v2"]
-    summary = project_root / "outputs/reports/xgboost_ten_seed_replication_v2/ten_seed_summary.json"
+    summary_relative = "outputs/reports/xgboost_ten_seed_replication_v2/ten_seed_summary.json"
+    summary = project_root / summary_relative
+    active["summary"] = summary_relative
     active["summary_available"] = summary.is_file()
     active_summary = (
         project_root / "outputs/reports/active_baseline_consolidation_v1/summary.json"

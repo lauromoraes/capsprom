@@ -234,6 +234,7 @@ __marimo__/
 /outputs/feasibility/
 /outputs/gpu_resume_equivalence*/
 /outputs/reports/capsprom_basic_feasibility_v1/
+/tmp/
 *.parquet
 *.h5
 *.hdf5

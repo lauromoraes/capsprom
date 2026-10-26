@@ -1,0 +1,39 @@
+policy:
+  name: capsprom-local-storage-policy-v1
+  status: active
+  scope: local_development_disk_budget_and_archive_to_bioserver04
+  complements: configs/capsprom_remote_usage_policy_v3.yaml
+  authorization: user_requested_2026-10-26_archive_and_backup_only
+  preserves: [scientific_execution_gates, dataset_and_configuration_hashes, mlflow_identity_and_provenance]
+
+local_budget:
+  project_gb_excluding_venv_and_git: 8
+  check_command: scripts/storage_archive.sh check
+
+keep_local:  # required for development, focused tests and status
+  - data/raw
+  - data/processed
+  - data/interim/fasta
+  - data/interim/cropped_fasta_regenerated_v3
+  - data/interim/graphpro_*      # small provenance artifacts
+  - mlflow.db
+  - mlruns                       # moving breaks MLflow artifact URIs
+  - outputs/reports
+
+archive:
+  host: bioserver04
+  path: /home/lauro/backups/capsprom/local-archive-v1
+  verification: sha256_manifest_checked_on_remote_before_any_local_deletion
+  prune_locally:
+    - data/interim/dinuc
+    - data/interim/trinuc
+    - data/interim/aligned_fasta
+    - data/interim/cropped_fasta
+    - outputs/neural_smoke/**/*.pt
+  backup_only: [data/raw, data/processed, mlflow.db, mlruns]
+
+rules:
+  - new large artifacts are produced on remote hosts by default when remote_usage_policy_v3 already allows the run
+  - never prune active datasets, versioned configs, state files, or MLflow stores
+  - deletion only after a fresh remote sha256 verification
+  - this policy opens no scientific execution gate

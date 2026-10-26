@@ -20,7 +20,7 @@
 - `README.md` presents an early incremental structure and does not enumerate the now extensive implementation; `docs/roadmap.md` and `make status` are current.
 - The earlier stale remote-policy v2 reference in `docs/development_environment.md` was corrected to active policy v3 in `315f5cc`.
 - The earlier stale GPU-v3 next action was corrected in `315f5cc`; `make status` now requests review of the completed v4 tranche and predeclaration of the next bounded training-only release.
-- XGBoost v2 status says a summary is available, but there is no `outputs/reports/xgboost_ten_seed_replication_v2/summary.json`; the documented summary is `docs/xgboost_ten_seed_replication.md` and the active consolidation JSON. Treat the status field as semantic availability, not that exact path.
+- Resolved on 2026-10-26: XGBoost v2 status now reports the exact summary path, `outputs/reports/xgboost_ten_seed_replication_v2/ten_seed_summary.json`, alongside its availability. The active eligible-scope consolidation remains a separate artifact at `outputs/reports/active_baseline_consolidation_v1/summary.json`.
 
 ## Unrecovered information
 

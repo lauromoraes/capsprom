@@ -4,14 +4,15 @@
 
 1. **Completed — preserve the audited implementation state.** The coherent campaign/consolidation changes are in `315f5cc`; the handover is committed separately. No datasets, MLflow databases, models, predictions, or generated experiment outputs were committed.
 2. **Keep scientific gates closed.** Dependency: none. Completion: no external-test, final-fit, GraphPro, or embedding execution occurs without a successor contract/release. Artifact: unchanged gate assertions/tests.
-3. **Partially completed — resolve status/document contradictions.** `make status` now names the post-v4 action and environment docs point to policy v3. The XGBoost v2 summary field/path ambiguity remains and should be resolved without changing the completed result.
+3. **Completed — resolve status/document contradictions.** `make status` names the post-v4 action, environment docs point to policy v3, and XGBoost v2 status exposes the exact `ten_seed_summary.json` path without changing the completed result.
 
 ## P1 — High priority
 
-1. **Completed at the versioning checkpoint — validate readiness implementation.** The full suite passed with 160 tests, lint passed, and `make status-snapshot` was refreshed before `315f5cc`. Revalidate after future code changes.
-2. **Predeclare the next bounded training-only release.** Dependencies: v4 tranche review, resource/integrity checks, explicit authorization. Completion: new immutable release YAML names only intended folds/seed; no final/test jobs. Artifact: release contract and review note.
-3. **Execute and verify that tranche only if authorized.** Dependencies: remote parity, backup plan, release. Completion: released jobs finish or are safely resumable; SQLite, hashes, MLflow identities, state, and `external_test_accessed: false` verify. Artifacts: registry entry, report, checksums.
-4. **Define the stop/continue rule for campaign expansion before observing more outcomes.** Completion: objective stability/resource/integrity criteria are versioned. Artifact: policy/config update with tests.
+1. **Apply Ponytail to every refactoring slice.** Map callers, tests, fixtures, configs, and persisted contracts first; choose the smallest complete change; reuse existing code and dependencies; add no speculative abstraction. Never remove validation, atomic state, error handling, gates, provenance, or necessary tests to reduce code. See `PROJECT_INDEX.md`.
+2. **Completed at the versioning checkpoint — validate readiness implementation.** The full suite passed with 160 tests, lint passed, and `make status-snapshot` was refreshed before `315f5cc`. Revalidate after future code changes.
+3. **Predeclare the next bounded training-only release.** Dependencies: v4 tranche review, resource/integrity checks, explicit authorization. Completion: new immutable release YAML names only intended folds/seed; no final/test jobs. Artifact: release contract and review note.
+4. **Execute and verify that tranche only if authorized.** Dependencies: remote parity, backup plan, release. Completion: released jobs finish or are safely resumable; SQLite, hashes, MLflow identities, state, and `external_test_accessed: false` verify. Artifacts: registry entry, report, checksums.
+5. **Define the stop/continue rule for campaign expansion before observing more outcomes.** Completion: objective stability/resource/integrity criteria are versioned. Artifact: policy/config update with tests.
 
 ## P2 — Intermediate
 

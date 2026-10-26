@@ -7,15 +7,17 @@ This directory is the entry point for resuming CapsProm without the preceding AI
 ## Resume order
 
 1. Read `AGENTS.md`, this file, `AI_CONTEXT.md`, and `CURRENT_STATE.md`.
-2. Run `git status --short`, `git rev-parse HEAD`, and `make status`; compare them with this audit. The handover checkpoint should be clean unless the environment generated a new status timestamp.
-3. Read `specs/project_spec.md`, `specs/statistical_evaluation_protocol.md`, and `specs/capsprom_canonical_experiment.md` before changing scientific behavior.
-4. Check `RUNNING_TASKS.md` before contacting a server or launching work.
-5. Read `ROADMAP.md` and continue only an explicitly released action.
-6. Use `RESUME_PROMPT.md` to initialize another AI session.
+2. Use `PROJECT_INDEX.md` to route selective inspection.
+3. Run `git status --short`, `git rev-parse HEAD`, and `make status`; compare them with this audit. The handover checkpoint should be clean unless the environment generated a new status timestamp.
+4. Read `specs/project_spec.md`, `specs/statistical_evaluation_protocol.md`, and `specs/capsprom_canonical_experiment.md` before changing scientific behavior.
+5. Check `RUNNING_TASKS.md` before contacting a server or launching work.
+6. Read `ROADMAP.md` and continue only an explicitly released action.
+7. Use `RESUME_PROMPT.md` to initialize another AI session.
 
 ## Document map
 
 - `PROJECT_OVERVIEW.md`: research question, hypotheses, and scope.
+- `PROJECT_INDEX.md`: compact routing map, verified drift, and prioritized refactoring queue.
 - `CURRENT_STATE.md`: verified state, results, and evidence classes.
 - `ARCHITECTURE.md`: code layout and processing flow.
 - `DATASETS.md`: data inventory, provenance, and eligibility.

@@ -29,6 +29,9 @@ def test_status_reports_checkpoint_and_writes_portable_snapshot(tmp_path: Path):
     written = write_status_snapshot(snapshot_path, root)
 
     assert status["experiments"]["xgboost_replication_v2"]["remaining"] == 9
+    assert status["experiments"]["xgboost_replication_v2"]["summary"] == (
+        "outputs/reports/xgboost_ten_seed_replication_v2/ten_seed_summary.json"
+    )
     assert status["experiments"]["xgboost_replication_v2"]["summary_available"] is False
     assert status["active_confirmatory_dataset_count"] == 18
     assert status["active_evaluation_protocol"] == "configs/evaluation_protocol_v3.yaml"

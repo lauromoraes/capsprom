@@ -19,11 +19,11 @@ ps -u "$(id -u)" -o pid,etimes,cmd
 
 ## Path validation
 
-All repository-relative paths named as current local inputs, contracts, state, or reports in this handover were observed during the audit, except where a gap is explicitly recorded. The v4 log and exit-marker paths in `RUNNING_TASKS.md` are remote paths copied from the job registry and are not present in the local output tree. The reported missing XGBoost v2 `summary.json` is intentionally documented in `KNOWN_ISSUES.md` rather than silently invented.
+All repository-relative paths named as current local inputs, contracts, state, or reports in this handover were observed during the audit, except where a gap is explicitly recorded. The v4 log and exit-marker paths in `RUNNING_TASKS.md` are remote paths copied from the job registry and are not present in the local output tree. XGBoost v2 status now exposes its actual `ten_seed_summary.json` path explicitly; it is distinct from the active consolidation `summary.json`.
 
 ## Consistency assessment
 
-The scientific source of truth is internally coherent across project specification, eligibility manifest, evaluation protocol, GraphPro deferral, baseline consolidation, and v4 report. The stale next-action and remote-policy references were corrected in `315f5cc`; the XGBoost summary-path ambiguity remains recorded in `KNOWN_ISSUES.md`. The remote registry and roadmap agree that the only registered v4 tranche completed, while direct live remote verification remains outside this audit.
+The scientific source of truth is internally coherent across project specification, eligibility manifest, evaluation protocol, GraphPro deferral, baseline consolidation, and v4 report. The stale next-action and remote-policy references were corrected in `315f5cc`; the XGBoost summary-path ambiguity was resolved on 2026-10-26 (see `KNOWN_ISSUES.md`). The remote registry and roadmap agree that the only registered v4 tranche completed, while direct live remote verification remains outside this audit.
 
 ## Autonomous migration limits
 
