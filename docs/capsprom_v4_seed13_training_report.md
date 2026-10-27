@@ -207,6 +207,44 @@ no checksum differences, verifies all 934 entries, and its SQLite copy is
 20 MB per fold, against 96 GB free. Final fits, external tests, and
 embeddings remain closed.
 
+## CDBProm Helicobacter pylori (release v9, 2026-10-27)
+
+Release v9 (SHA-256 `55e6848d…cf7d`) ran all 10 contract seeds for
+`cdbprom-prokaryotic-helicobacter_pylori` (1,130 training rows), 50 folds. It
+started at 13:09:53Z and exited 0 at 13:23:49Z. Every fold completed on its
+first attempt.
+
+| Seed | Mean MCC | SD | Selected epoch | Folds at 50 epochs |
+| --- | --- | --- | --- | --- |
+| 13 | 0.880186 | 0.046812 | 48 | 3/5 |
+| 29 | 0.894401 | 0.042201 | 44 | 3/5 |
+| 42 | 0.894524 | 0.037024 | 48 | 3/5 |
+| 71 | 0.889214 | 0.032882 | 46 | 5/5 |
+| 101 | 0.894451 | 0.042128 | 38 | 3/5 |
+| 137 | 0.887122 | 0.041331 | 49 | 3/5 |
+| 173 | 0.885715 | 0.044335 | 39 | 4/5 |
+| 211 | 0.891433 | 0.046492 | 43 | 3/5 |
+| 251 | 0.906662 | 0.028698 | 44 | 4/5 |
+| 293 | 0.904859 | 0.025781 | 50 | 5/5 |
+
+The mean of seed means is 0.892857, with SD 0.008179 and range
+0.880186-0.906662. Ceiling contact is the highest so far. Thirty-six of 50
+folds ran the full 50 epochs, eight had their best epoch at 50, and selected
+epochs range from 38 to 50. For seed 293 the selected epoch equals the budget.
+The decision to keep the 50-epoch ceiling stands, and this is reported only.
+It is still the strongest evidence so far that the budget limits training on
+some datasets, and that matters for interpreting the campaign.
+
+After a readiness refresh, the plan has 200 completed inner folds and 40 units
+`ready_for_final_fit`. `external_test_accessed` is false. All 18 data and
+fold-manifest hashes match, SQLite is `ok`, and MLflow has 200 finished
+children and one open parent. A 1,236-file manifest is in
+`remote_jobs/helicobacter-seeds13-293.sha256`. The backup at
+`bioserver04:/home/lauro/backups/capsprom/capsprom-v4-helicobacter-10-seeds`
+has no checksum differences, verifies all 1,236 entries, and its SQLite copy
+is `ok`. The remote output tree is 4.0 GB, against 95 GB free on
+`bioserver03` and 134 GB free on `bioserver04`.
+
 The plan has 50 completed inner folds, 10 units `ready_for_final_fit`, and
 `external_test_accessed: false`. All 18 data and fold-manifest hashes match,
 SQLite is `ok`, and MLflow has 50 finished children and one open parent. A

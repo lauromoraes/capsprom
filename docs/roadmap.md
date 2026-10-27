@@ -761,8 +761,14 @@ Current state:
   0.005389). 24 of 50 folds reached the ceiling, the highest share so far
   (recorded only). All 30 units are `ready_for_final_fit`. The backup is
   checksum-verified, and the remote output uses about 20 MB per fold.
+- Completed: release v9 ran `cdbprom-prokaryotic-helicobacter_pylori` (1,130
+  rows), all 10 seeds and 50 folds, in 13 min 56 s, with exit code 0 and every
+  fold completing on its first attempt. The mean of seed means is 0.892857 (SD
+  0.008179). 36 of 50 folds reached the ceiling, and seed 293 selected epoch 50
+  (recorded only; the ceiling is kept by decision). All 40 units are
+  `ready_for_final_fit`, and the backup is checksum-verified.
 - Next: release the next scheduled dataset,
-  `cdbprom-prokaryotic-helicobacter_pylori` (1,130 rows), all 10 seeds. 750
+  `cdbprom-prokaryotic-salmonella_typhimurium` (1,564 rows), all 10 seeds. 700
   inner folds remain, and final fits, external tests, and embeddings remain
   closed.
 

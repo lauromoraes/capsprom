@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "policy": "configs/capsprom_remote_usage_policy_v3.yaml",
-  "updated_at_utc": "2026-10-27T12:52:00Z",
+  "updated_at_utc": "2026-10-27T13:28:00Z",
   "jobs": [
     {
       "job_id": "capsprom-v4-cdbprom-chlamydophila-seed13-folds0-4",
@@ -152,6 +152,31 @@
       "exit_code": 0,
       "integrity_status": "sqlite_ok_and_934_file_hash_manifest_written",
       "backup": "bioserver04:/home/lauro/backups/capsprom/capsprom-v4-bacillus-10-seeds (checksum dry run 0 differences, 934 manifest files verified, SQLite ok with 150 finished children)"
+    },
+    {
+      "job_id": "capsprom-v4-cdbprom-helicobacter-seeds13-293-folds0-4",
+      "status": "completed",
+      "server": "bioserver03",
+      "launcher": "nohup_setsidx1",
+      "remote_process_id": 559730,
+      "command": "CUBLAS_WORKSPACE_CONFIG=:4096:8 /home/lauro/.conda/envs/capsprom-py313/bin/python scripts/run_bounded_canonical_tranche.py --contract configs/capsprom_basic_canonical_gpu_execution_v4.yaml --release configs/capsprom_campaign_release_v9.yaml --output-dir outputs/capsprom_basic_canonical_gpu_execution_v4 --exit-code-path outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/helicobacter-seeds13-293-folds0-4.exit",
+      "working_directory": "/home/lauro/workspace/capsprom",
+      "configuration": "configs/capsprom_campaign_release_v9.yaml",
+      "configuration_sha256": "55e6848d66d68ab881856d1b6c6ae8288849dca30c9caaac79bddd5b6ac9cf7d",
+      "log_path": "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/helicobacter-seeds13-293-folds0-4.log",
+      "result_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/plan_state.json",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/mlflow.db"
+      ],
+      "checkpoint_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/jobs/cdbprom-prokaryotic-helicobacter_pylori"
+      ],
+      "exit_code_path": "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/helicobacter-seeds13-293-folds0-4.exit",
+      "started_at_utc": "2026-10-27T13:09:53Z",
+      "last_checked_at_utc": "2026-10-27T13:28:00Z",
+      "exit_code": 0,
+      "integrity_status": "sqlite_ok_and_1236_file_hash_manifest_written",
+      "backup": "bioserver04:/home/lauro/backups/capsprom/capsprom-v4-helicobacter-10-seeds (checksum dry run 0 differences, 1236 manifest files verified, SQLite ok with 200 finished children)"
     }
   ]
 }
