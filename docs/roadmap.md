@@ -755,9 +755,16 @@ Current state:
   50 folds reached the ceiling. All 20 units are `ready_for_final_fit`. All
   hashes match and SQLite is `ok`. The backup on `bioserver04` is
   checksum-verified.
-- Next: release the next scheduled dataset, `cnnprom-prokaryotic-Bacillus`
-  (1,098 rows), all 10 seeds. 800 inner folds remain, and final fits, external
-  tests, and embeddings remain closed.
+- Completed: release v8 ran `cnnprom-prokaryotic-Bacillus` (1,098 rows), all
+  10 seeds and 50 folds, in 13 min 3 s, with exit code 0 and every fold
+  completing on its first attempt. The mean of seed means is 0.752207 (SD
+  0.005389). 24 of 50 folds reached the ceiling, the highest share so far
+  (recorded only). All 30 units are `ready_for_final_fit`. The backup is
+  checksum-verified, and the remote output uses about 20 MB per fold.
+- Next: release the next scheduled dataset,
+  `cdbprom-prokaryotic-helicobacter_pylori` (1,130 rows), all 10 seeds. 750
+  inner folds remain, and final fits, external tests, and embeddings remain
+  closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 

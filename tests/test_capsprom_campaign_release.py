@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pytest
 import yaml
 
 
@@ -66,13 +67,16 @@ def test_releases_v3_to_v6_cover_each_contract_seed_once_in_order() -> None:
     assert released == contract["replication"]["seeds"]
 
 
-def test_release_v7_opens_only_its_folds_and_keeps_the_v4_budget() -> None:
+@pytest.mark.parametrize("version", [7, 8])
+def test_dataset_release_opens_only_its_folds_and_keeps_the_v4_budget(version: int) -> None:
     root = Path(__file__).resolve().parents[1]
     contract = yaml.safe_load(
         (root / "configs/capsprom_basic_canonical_gpu_execution_v4.yaml").read_text()
     )
-    previous = yaml.safe_load((root / "configs/capsprom_campaign_release_v6.yaml").read_text())
-    draft = yaml.safe_load((root / "configs/capsprom_campaign_release_v7.yaml").read_text())
+    previous = yaml.safe_load(
+        (root / f"configs/capsprom_campaign_release_v{version - 1}.yaml").read_text()
+    )
+    draft = yaml.safe_load((root / f"configs/capsprom_campaign_release_v{version}.yaml").read_text())
 
     assert draft["scope"]["dataset_id"] in contract["protocol"]["dataset_ids"]
     assert draft["scope"]["seeds"] == contract["replication"]["seeds"]
