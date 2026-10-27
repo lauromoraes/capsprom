@@ -245,6 +245,47 @@ has no checksum differences, verifies all 1,236 entries, and its SQLite copy
 is `ok`. The remote output tree is 4.0 GB, against 95 GB free on
 `bioserver03` and 134 GB free on `bioserver04`.
 
+## CDBProm Salmonella typhimurium (release v10, 2026-10-27)
+
+Release v10 (SHA-256 `52cdfca2…ce1f`) ran all 10 contract seeds for
+`cdbprom-prokaryotic-salmonella_typhimurium` (1,564 training rows), 50 folds.
+It started at 13:30:51Z and exited 0 at 13:46:21Z. Every fold completed on its
+first attempt.
+
+| Seed | Mean MCC | SD | Selected epoch | Folds at 50 epochs |
+| --- | --- | --- | --- | --- |
+| 13 | 0.863814 | 0.022872 | 48 | 4/5 |
+| 29 | 0.868024 | 0.030303 | 48 | 4/5 |
+| 42 | 0.871568 | 0.037533 | 47 | 5/5 |
+| 71 | 0.859075 | 0.029728 | 40 | 3/5 |
+| 101 | 0.871448 | 0.037376 | 45 | 4/5 |
+| 137 | 0.859936 | 0.022243 | 42 | 4/5 |
+| 173 | 0.865187 | 0.032234 | 46 | 4/5 |
+| 211 | 0.869090 | 0.029537 | 40 | 5/5 |
+| 251 | 0.850733 | 0.026777 | 28 | 1/5 |
+| 293 | 0.872487 | 0.030330 | 40 | 3/5 |
+
+The mean of seed means is 0.865136, with SD 0.006930 and range
+0.850733-0.872487. Thirty-seven of 50 folds ran the full 50 epochs, and seven
+had their best epoch at 50. Selected epochs range from 28 to 48. This is
+reported only; the ceiling is kept by decision.
+
+After a readiness refresh, the plan has 250 completed inner folds and 50 units
+`ready_for_final_fit`. `external_test_accessed` is false. All 18 data and
+fold-manifest hashes match, SQLite is `ok`, and MLflow has 250 finished
+children and one open parent. A 1,538-file manifest is in
+`remote_jobs/salmonella-seeds13-293.sha256`. The backup at
+`bioserver04:/home/lauro/backups/capsprom/capsprom-v4-salmonella-10-seeds`
+has no checksum differences, verifies all 1,538 entries, and its SQLite copy
+is `ok`.
+
+Each backup so far has been a full, separate copy of the growing 5.0 GB output
+tree. With 13 datasets left, that would need about 150 GB on `bioserver04`,
+which has 131 GB free. From the next dataset on, each backup is written with
+`rsync --link-dest` against the previous one. Unchanged files become hardlinks,
+so each snapshot stays complete and independently verifiable while only new or
+changed files use space.
+
 The plan has 50 completed inner folds, 10 units `ready_for_final_fit`, and
 `external_test_accessed: false`. All 18 data and fold-manifest hashes match,
 SQLite is `ok`, and MLflow has 50 finished children and one open parent. A

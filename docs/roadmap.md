@@ -767,10 +767,16 @@ Current state:
   0.008179). 36 of 50 folds reached the ceiling, and seed 293 selected epoch 50
   (recorded only; the ceiling is kept by decision). All 40 units are
   `ready_for_final_fit`, and the backup is checksum-verified.
+- Completed: release v10 ran `cdbprom-prokaryotic-salmonella_typhimurium`
+  (1,564 rows), all 10 seeds and 50 folds, in 15 min 30 s, with exit code 0
+  and every fold completing on its first attempt. The mean of seed means is
+  0.865136 (SD 0.006930). 37 of 50 folds reached the ceiling (recorded only).
+  All 50 units are `ready_for_final_fit`, and the backup is checksum-verified.
+  Later backups use `rsync --link-dest` so that `bioserver04` does not fill up.
 - Next: release the next scheduled dataset,
-  `cdbprom-prokaryotic-salmonella_typhimurium` (1,564 rows), all 10 seeds. 700
-  inner folds remain, and final fits, external tests, and embeddings remain
-  closed.
+  `cdbprom-prokaryotic-bacillus_amyloliquefaciens` (1,692 rows), all 10
+  seeds. 650 inner folds remain, and final fits, external tests, and
+  embeddings remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 
