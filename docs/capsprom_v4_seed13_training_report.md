@@ -434,3 +434,17 @@ with hashes is in `remote_jobs/pruned-best-latest-20261027.sha256`. All 900
 fold-level explainability. The v4 outputs dropped to 9.64 GB, and
 `bioserver03` now has 96.2 GB free. A completed fold never resumes, so no
 training path reads the removed files.
+
+## Backup snapshot deduplication (2026-10-27)
+
+The first six v4 snapshots on `bioserver04` were full copies made before
+`rsync --link-dest` was adopted. After explicit authorization,
+`hardlink --content` (util-linux 2.39.3) was run over the 21
+`capsprom-v4-*` snapshots, first as a dry run. It linked 27,375 identical
+files; the snapshots dropped from 29.93 GB to 18.93 GB of unique data, and
+`bioserver04` went from 133.8 GB to 144.8 GB free. Every snapshot was then
+checked against its own manifest. Twenty of 21 passed in full. In
+`capsprom-v4-seed13`, the 54 data entries pass, but the manifest
+`seed13-folds0-4.sha256` lists a hash of itself, taken while it was being
+written on 2026-10-26, so that one line can never match. This predates the
+deduplication and does not affect any data file.
