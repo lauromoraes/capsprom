@@ -2,12 +2,12 @@
 
 ## Local environment
 
-Repository root: `/mnt/d/workspace/capsprom` in WSL. The project uses `.venv/` and Python 3.13. `docs/development_environment.md` reports Python 3.13.11 and pip 26.1.2; verify rather than assuming after migration.
+Repository root: `~/workspace/capsprom` in WSL (distro on the C: SSD since 2026-10-27; `/mnt/d/workspace/capsprom` on the D: HDD keeps only the legacy MLflow store and ignored outputs). The project uses `.venv/` and Python 3.13. `docs/development_environment.md` reports Python 3.13.11 and pip 26.1.2; verify rather than assuming after migration.
 
 Core setup:
 
 ```bash
-/home/lauro/.virtualenvs/doc-project/bin/python -m venv --clear .venv
+/home/lauro/miniconda3/bin/python3.13 -m venv --clear .venv
 .venv/bin/python -m pip install --upgrade pip
 .venv/bin/python -m pip install -r requirements/dev.txt -r requirements/models-classical.txt
 .venv/bin/python -m pip install --no-deps --no-build-isolation -e .

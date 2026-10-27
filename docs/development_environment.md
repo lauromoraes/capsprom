@@ -9,10 +9,10 @@ This project uses a local virtual environment at the repository root:
 ## Create or Recreate the Environment
 
 The current environment was created with Python 3.13.11 from the WSL Python
-installation available through the existing `doc-project` environment:
+installation (base interpreter `~/miniconda3/bin/python3.13`):
 
 ```bash
-/home/lauro/.virtualenvs/doc-project/bin/python -m venv --clear .venv
+/home/lauro/miniconda3/bin/python3.13 -m venv --clear .venv
 .venv/bin/python -m pip install --upgrade pip
 ```
 
