@@ -87,7 +87,7 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
         status["next_action"] = "make baseline-consolidation"
     else:
         status["next_action"] = (
-            "readiness synced on bioserver03; authorize configs/capsprom_campaign_release_v4.yaml"
+            "release v4 (seed 29) completed; predeclare the next bounded release (seed 42)"
         )
     return status
 

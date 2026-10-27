@@ -77,3 +77,33 @@ plan on `bioserver03`. The local training files match the same hashes. SQLite
 integrity was `ok`, and MLflow kept five finished children and one open parent.
 `external_test_accessed` remains false. No training, final fit, or external
 inference ran.
+
+## Seed-29 tranche (release v4, 2026-10-27)
+
+Release v4 (SHA-256 `4a618340…1a92`) ran Chlamydophila seed 29, folds 0-4, on
+`bioserver03` under `nohup`/`setsid` (PID 538712). It started at 11:27:04Z and
+exited with code 0 at 11:27:58Z. All five folds completed on their first
+attempt.
+
+| Fold | Best inner-validation MCC | Best epoch | Epochs run |
+| --- | --- | --- | --- |
+| 0 | 0.835629 | 42 | 50 |
+| 1 | 0.737122 | 8 | 23 |
+| 2 | 0.721327 | 23 | 38 |
+| 3 | 0.751923 | 5 | 20 |
+| 4 | 0.753255 | 47 | 50 |
+
+The mean is 0.759851 with sample SD 0.044298. The lower-median rule gives epoch
+23. Two folds (0 and 4) reached the 50-epoch ceiling. This is the second seed
+with ceiling contact, and it remains a monitoring signal; the budget was not
+changed. Across the two v4 seeds, the means are 0.757628 and 0.759851.
+
+The plan now has 10 completed inner folds and `external_test_accessed: false`.
+All 18 training-file and fold-manifest hashes still match. SQLite integrity is
+`ok`, and MLflow has 10 finished children and one open parent. An 87-file
+SHA-256 manifest is in `remote_jobs/seed29-folds0-4.sha256`. The boundary was
+copied to `bioserver04:/home/lauro/backups/capsprom/capsprom-v4-seed29`. A
+checksum dry run found no differences, all 87 manifest entries verify, and the
+copied SQLite is `ok`. Seed 29 has not been marked `ready_for_final_fit`,
+because release v4 did not include a readiness refresh. Final fits, external
+tests, and embeddings remain closed.

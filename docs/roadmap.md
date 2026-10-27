@@ -733,9 +733,16 @@ Current state:
   verified unchanged. The readiness refresh marked only Chlamydophila seed 13
   `ready_for_final_fit` (epoch 30), and a rerun was idempotent. All 18 data and
   fold-manifest hashes matched, and SQLite integrity was `ok`. No training ran.
-- Next: explicit authorization to open release v4 (Chlamydophila seed 29,
-  folds 0-4) as a new authorized release file. Final fits, external tests, and
-  embeddings remain closed.
+- Completed: release v4 ran Chlamydophila seed 29, folds 0-4, in 54 seconds,
+  with exit code 0 and every fold completing on its first attempt. Mean
+  inner-validation MCC is 0.759851 (SD 0.044298), and the lower-median epoch
+  is 23. Two of five folds reached the 50-epoch ceiling, which is recorded as a
+  monitoring signal only. All hashes match and SQLite is `ok`. The backup on
+  `bioserver04` is checksum-verified.
+- Next: predeclare the next bounded release. By the schedule, the next unit is
+  Chlamydophila seed 42. Decide whether ceiling contact in 3 of 10 folds needs
+  a predeclared monitoring rule before more seeds run. Final fits, external
+  tests, and embeddings remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 
