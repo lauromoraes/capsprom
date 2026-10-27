@@ -46,6 +46,38 @@ def test_release_v4_opens_only_its_folds_and_follows_the_contract_seed_order() -
     }
 
 
+def test_dataset_releases_are_unique_and_follow_the_smallest_first_schedule() -> None:
+    root = Path(__file__).resolve().parents[1]
+    contract = yaml.safe_load(
+        (root / "configs/capsprom_basic_canonical_gpu_execution_v4.yaml").read_text()
+    )
+    releases = {
+        int(path.stem.rsplit("_v", 1)[1]): yaml.safe_load(path.read_text())
+        for path in (root / "configs").glob("capsprom_campaign_release_v*.yaml")
+    }
+    # v3-v6 together cover the first dataset; each release from v7 covers one whole dataset.
+    released = [releases[3]["scope"]["dataset_id"]] + [
+        releases[version]["scope"]["dataset_id"]
+        for version in sorted(releases)
+        if version >= 7
+    ]
+    assert len(set(released)) == len(released)
+
+    dataset_root = root / contract["protocol"]["dataset_root"]
+    train_files = {
+        dataset_id: sorted(dataset_root.glob(f"{dataset_id}-p-*-n-*-train.csv"))
+        for dataset_id in contract["protocol"]["dataset_ids"]
+    }
+    if not all(len(files) == 1 for files in train_files.values()):
+        pytest.skip("canonical training files are not available locally")
+    rows = {
+        dataset_id: sum(1 for _ in files[0].open(encoding="utf-8")) - 1
+        for dataset_id, files in train_files.items()
+    }
+    schedule = sorted(rows, key=lambda dataset_id: (rows[dataset_id], dataset_id))
+    assert released == schedule[: len(released)]
+
+
 def test_releases_v3_to_v6_cover_each_contract_seed_once_in_order() -> None:
     root = Path(__file__).resolve().parents[1]
     contract = yaml.safe_load(
