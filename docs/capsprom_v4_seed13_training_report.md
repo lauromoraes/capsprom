@@ -37,3 +37,20 @@ plan has not been mutated to `ready_for_final_fit`. The lower-median epoch above
 was independently calculated read-only from the five completed plan entries.
 Synchronizing and validating the readiness implementation is required before a
 future final-fit release; final-fit and external-test gates remain closed.
+
+## Review (2026-10-27, local and read-only)
+
+The reported values are internally consistent: the fold MCCs average 0.757628,
+and the sorted best epochs (7, 25, 30, 31, 41) give lower median 30. The
+tranche stayed within release v3: five inner fits, no final fit, no external
+test access, and no embedding job. No fold collapsed. One of five folds reached
+the epoch ceiling, which is a monitoring signal only. The seed-13 mean is close
+to the superseded 30-epoch v1/v2 line (0.756845 at seed 13, 0.744017 at seed
+29). That comparison is descriptive and is not used for any selection.
+
+The remaining blocker is operational: the readiness command is not yet on
+`bioserver03`. The next unit is fixed by the deterministic scheduler
+(`remote_operations.build_pending_fold_schedule`): the same dataset at seed 29,
+folds 0-4. It is predeclared as the closed draft
+`configs/capsprom_campaign_release_v4.yaml`, which the tranche runner refuses
+to execute until an explicit authorization opens its inner-fold gate.

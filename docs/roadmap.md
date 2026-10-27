@@ -724,10 +724,14 @@ Current state:
   to `bioserver04`. A checksum dry run reports no differences, the snapshot has
   55 files, and its SQLite copy independently passes integrity checking with
   the same five finished children and one open campaign parent.
-- Next: synchronize the locally validated readiness implementation without
-  changing the immutable v4 contract, then release another bounded
-  training-only seed only after that operational check. Final fits, external
-  tests, and embeddings remain closed.
+- Completed: review the v4 seed-13 tranche locally (values consistent, within
+  release v3) and predeclare the next unit, Chlamydophila seed 29 folds 0-4,
+  as the closed draft `configs/capsprom_campaign_release_v4.yaml`. The unit
+  comes from the deterministic smallest-dataset-first schedule.
+- Next: with explicit authorization, synchronize the locally validated
+  readiness implementation to `bioserver03` without changing the immutable v4
+  contract, refresh readiness, reverify hashes, then authorize release v4.
+  Final fits, external tests, and embeddings remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 
