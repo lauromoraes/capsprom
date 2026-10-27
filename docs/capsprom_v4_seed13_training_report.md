@@ -286,6 +286,43 @@ which has 131 GB free. From the next dataset on, each backup is written with
 so each snapshot stays complete and independently verifiable while only new or
 changed files use space.
 
+## CDBProm Bacillus amyloliquefaciens (release v11, 2026-10-27)
+
+Release v11 (SHA-256 `0a4684ab…6f48`) ran all 10 contract seeds for
+`cdbprom-prokaryotic-bacillus_amyloliquefaciens` (1,692 training rows), 50
+folds. It started at 14:02:38Z and exited 0 at 14:15:37Z. Every fold completed
+on its first attempt.
+
+| Seed | Mean MCC | SD | Selected epoch | Folds at 50 epochs |
+| --- | --- | --- | --- | --- |
+| 13 | 0.662557 | 0.025407 | 28 | 2/5 |
+| 29 | 0.668430 | 0.024912 | 19 | 1/5 |
+| 42 | 0.666398 | 0.034072 | 22 | 0/5 |
+| 71 | 0.662129 | 0.029519 | 23 | 0/5 |
+| 101 | 0.670244 | 0.031416 | 28 | 1/5 |
+| 137 | 0.672325 | 0.038318 | 22 | 2/5 |
+| 173 | 0.668551 | 0.044318 | 19 | 1/5 |
+| 211 | 0.657077 | 0.035369 | 25 | 0/5 |
+| 251 | 0.648549 | 0.028926 | 15 | 0/5 |
+| 293 | 0.661980 | 0.041646 | 25 | 2/5 |
+
+The mean of seed means is 0.663824, with SD 0.007074 and range
+0.648549-0.672325. This is the lowest dataset mean so far. Ceiling contact is
+low here: 9 of 50 folds reached 50 epochs, and one fold had its best epoch at
+50. Selected epochs range from 15 to 28, so the budget is not binding on this
+dataset.
+
+After a readiness refresh, the plan has 300 completed inner folds and 60 units
+`ready_for_final_fit`. `external_test_accessed` is false. All 18 data and
+fold-manifest hashes match, SQLite is `ok`, and MLflow has 300 finished
+children and one open parent. A 1,840-file manifest is in
+`remote_jobs/amyloliquefaciens-seeds13-293.sha256`. The first hardlinked
+backup, at
+`bioserver04:/home/lauro/backups/capsprom/capsprom-v4-amyloliquefaciens-10-seeds`,
+used 1,011 MB of new space instead of about 6 GB. It has no checksum
+differences, verifies all 1,840 entries on its own, and its SQLite copy is
+`ok`. `bioserver04` has 125 GB free.
+
 The plan has 50 completed inner folds, 10 units `ready_for_final_fit`, and
 `external_test_accessed: false`. All 18 data and fold-manifest hashes match,
 SQLite is `ok`, and MLflow has 50 finished children and one open parent. A

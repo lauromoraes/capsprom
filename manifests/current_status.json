@@ -42,14 +42,14 @@
       "summary_available": true
     }
   },
-  "generated_at_utc": "2026-10-27T13:48:50.424060+00:00",
+  "generated_at_utc": "2026-10-27T14:17:42.471206+00:00",
   "graphpro_policy": "configs/graphpro_deferral_policy_v1.yaml",
-  "next_action": "5 of 18 datasets trained; release cdbprom-prokaryotic-bacillus_amyloliquefaciens (10 seeds) next",
+  "next_action": "6 of 18 datasets trained; release cdbprom-prokaryotic-klebisiella_pneumoniae (10 seeds) next",
   "remote_jobs": {
     "available": true,
     "jobs": [],
     "pending_count": 0,
     "registry": "manifests/remote_jobs.json",
-    "updated_at_utc": "2026-10-27T13:50:00Z"
+    "updated_at_utc": "2026-10-27T14:20:00Z"
   }
 }

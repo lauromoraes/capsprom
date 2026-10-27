@@ -773,10 +773,16 @@ Current state:
   0.865136 (SD 0.006930). 37 of 50 folds reached the ceiling (recorded only).
   All 50 units are `ready_for_final_fit`, and the backup is checksum-verified.
   Later backups use `rsync --link-dest` so that `bioserver04` does not fill up.
+- Completed: release v11 ran `cdbprom-prokaryotic-bacillus_amyloliquefaciens`
+  (1,692 rows), all 10 seeds and 50 folds, in 12 min 59 s, with exit code 0
+  and every fold completing on its first attempt. The mean of seed means is
+  0.663824 (SD 0.007074), the lowest dataset so far. Only 9 of 50 folds
+  reached the ceiling. All 60 units are `ready_for_final_fit`. The first
+  hardlinked backup is verified and used about 1 GB of new space.
 - Next: release the next scheduled dataset,
-  `cdbprom-prokaryotic-bacillus_amyloliquefaciens` (1,692 rows), all 10
-  seeds. 650 inner folds remain, and final fits, external tests, and
-  embeddings remain closed.
+  `cdbprom-prokaryotic-klebisiella_pneumoniae` (2,124 rows), all 10 seeds.
+  600 inner folds remain, and final fits, external tests, and embeddings
+  remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 
