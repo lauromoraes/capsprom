@@ -54,3 +54,26 @@ The remaining blocker is operational: the readiness command is not yet on
 folds 0-4. It is predeclared as the closed draft
 `configs/capsprom_campaign_release_v4.yaml`, which the tranche runner refuses
 to execute until an explicit authorization opens its inner-fold gate.
+
+## Readiness synchronization (2026-10-27, authorized, no training)
+
+The `bioserver03` checkout had been synchronized by file copy (Git `c466e97`
+plus local changes). A read-only diff showed that the inner-fold training path
+was unchanged. `neural_training.py` only adds a test-only interruption hook
+that is disabled by default. Both removed lines in `canonical_neural.py` are in
+the final-fit path, which had never run. Before any change, the plan was copied
+to `plan_state.pre-readiness-20261027.json` (SHA-256 `c09eeee7…c62d`) and
+`src/` and `scripts/` were archived to `tmp/code-pre-readiness-20261027.tgz`.
+Then `src/` and `scripts/` were copied without deletion. The v4 contract
+(SHA-256 `e2c244d8…cdc2`) and release v3 were already identical to the local
+copies and were not touched.
+
+`refresh-neural-canonical-readiness` marked exactly one unit, Chlamydophila
+seed 13, as `ready_for_final_fit` with selected epoch 30 from fold epochs 31,
+41, 7, 30, and 25. A second run changed nothing. A diff of the plan before and
+after shows that only that final-fit job changed; all 1,080 jobs remain. Before
+and after the refresh, all 18 training-file and fold-manifest hashes matched the
+plan on `bioserver03`. The local training files match the same hashes. SQLite
+integrity was `ok`, and MLflow kept five finished children and one open parent.
+`external_test_accessed` remains false. No training, final fit, or external
+inference ran.

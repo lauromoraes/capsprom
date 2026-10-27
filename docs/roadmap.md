@@ -728,10 +728,14 @@ Current state:
   release v3) and predeclare the next unit, Chlamydophila seed 29 folds 0-4,
   as the closed draft `configs/capsprom_campaign_release_v4.yaml`. The unit
   comes from the deterministic smallest-dataset-first schedule.
-- Next: with explicit authorization, synchronize the locally validated
-  readiness implementation to `bioserver03` without changing the immutable v4
-  contract, refresh readiness, reverify hashes, then authorize release v4.
-  Final fits, external tests, and embeddings remain closed.
+- Completed: after explicit authorization, synchronize `src/` and `scripts/` to
+  `bioserver03` without changing the v4 contract. The inner-fold path was
+  verified unchanged. The readiness refresh marked only Chlamydophila seed 13
+  `ready_for_final_fit` (epoch 30), and a rerun was idempotent. All 18 data and
+  fold-manifest hashes matched, and SQLite integrity was `ok`. No training ran.
+- Next: explicit authorization to open release v4 (Chlamydophila seed 29,
+  folds 0-4) as a new authorized release file. Final fits, external tests, and
+  embeddings remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 
