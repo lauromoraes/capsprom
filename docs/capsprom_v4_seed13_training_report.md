@@ -420,3 +420,17 @@ Each backup had no checksum differences, verified its own manifest, and had an
 `ok` SQLite copy. The v4 outputs use 18 GB on `bioserver03` (82 GB free), and
 `bioserver04` has 113 GB free. Final fits, external tests, and embeddings
 remain closed until a separate decision.
+
+## Resume-checkpoint pruning (2026-10-27)
+
+Under the retention rule in `specs/capsprom_canonical_experiment.md`, and
+after explicit authorization, the 900 `best.latest.pt` resume checkpoints were
+removed from `bioserver03`. Before removal, the plan showed 900 of 900 inner
+folds completed and no job was running. All 900 files matched the
+`release-v23.sha256` manifest both locally and in the `bioserver04` snapshot
+`capsprom-v4-release-v23`, which keeps the verified copies. The pruned list
+with hashes is in `remote_jobs/pruned-best-latest-20261027.sha256`. All 900
+`best.pt` checkpoints and fold states remain on `bioserver03` for audit and
+fold-level explainability. The v4 outputs dropped to 9.64 GB, and
+`bioserver03` now has 96.2 GB free. A completed fold never resumes, so no
+training path reads the removed files.
