@@ -87,7 +87,7 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
         status["next_action"] = "make baseline-consolidation"
     else:
         status["next_action"] = (
-            "release v4 (seed 29) completed; predeclare the next bounded release (seed 42)"
+            "Chlamydophila 10 seeds done; review epoch ceiling, then release Corynebacterium seed 13"
         )
     return status
 

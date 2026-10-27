@@ -107,3 +107,40 @@ checksum dry run found no differences, all 87 manifest entries verify, and the
 copied SQLite is `ok`. Seed 29 has not been marked `ready_for_final_fit`,
 because release v4 did not include a readiness refresh. Final fits, external
 tests, and embeddings remain closed.
+
+## Remaining Chlamydophila seeds (releases v5 and v6, 2026-10-27)
+
+Before launch, a readiness refresh marked seed 29 `ready_for_final_fit`
+(epoch 23). Release v5 (seed 42) exited 0 after 57 s. Release v6 covered
+seeds 71, 101, 137, 173, 211, 251, and 293 in schedule order, 35 folds, and
+exited 0 after 6 min 56 s. For v6, `scripts/run_bounded_canonical_tranche.py`
+was extended to accept a `seeds` list. It still accepts a single `seed`, and
+the inner-fold command it calls is unchanged. Every fold completed on its first
+attempt. A refresh after each release marked every seed `ready_for_final_fit`.
+
+| Seed | Mean MCC | SD | Selected epoch | Folds at 50 epochs |
+| --- | --- | --- | --- | --- |
+| 13 | 0.757628 | 0.031603 | 30 | 1/5 |
+| 29 | 0.759851 | 0.044298 | 23 | 2/5 |
+| 42 | 0.732165 | 0.041744 | 9 | 1/5 |
+| 71 | 0.744610 | 0.042871 | 39 | 4/5 |
+| 101 | 0.752773 | 0.062173 | 32 | 2/5 |
+| 137 | 0.765219 | 0.056676 | 33 | 2/5 |
+| 173 | 0.758399 | 0.051162 | 18 | 0/5 |
+| 211 | 0.757059 | 0.060750 | 32 | 1/5 |
+| 251 | 0.743526 | 0.035332 | 8 | 1/5 |
+| 293 | 0.756374 | 0.057575 | 31 | 2/5 |
+
+Across the 10 seeds, the mean of seed means is 0.752760, with SD 0.009823 and
+range 0.732165-0.765219. Selected epochs vary widely, from 8 to 39. Sixteen of
+the 50 folds ran the full 50 epochs, and one of them (seed 293, fold 3) had its
+best epoch at 50. This shows that the budget is often binding on this dataset.
+The signal is recorded only; the budget cannot change within contract v4.
+
+The plan has 50 completed inner folds, 10 units `ready_for_final_fit`, and
+`external_test_accessed: false`. All 18 data and fold-manifest hashes match,
+SQLite is `ok`, and MLflow has 50 finished children and one open parent. A
+330-file manifest is in `remote_jobs/chlamydophila-seeds42-293.sha256`. The
+backup at `bioserver04:/home/lauro/backups/capsprom/capsprom-v4-chlamydophila-10-seeds`
+has no checksum differences, verifies all 330 entries, and its SQLite copy is
+`ok`. Final fits, external tests, and embeddings remain closed.

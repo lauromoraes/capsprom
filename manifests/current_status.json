@@ -42,14 +42,14 @@
       "summary_available": true
     }
   },
-  "generated_at_utc": "2026-10-27T11:30:27.617235+00:00",
+  "generated_at_utc": "2026-10-27T12:07:13.350622+00:00",
   "graphpro_policy": "configs/graphpro_deferral_policy_v1.yaml",
-  "next_action": "release v4 (seed 29) completed; predeclare the next bounded release (seed 42)",
+  "next_action": "Chlamydophila 10 seeds done; review epoch ceiling, then release Corynebacterium seed 13",
   "remote_jobs": {
     "available": true,
     "jobs": [],
     "pending_count": 0,
     "registry": "manifests/remote_jobs.json",
-    "updated_at_utc": "2026-10-27T11:40:00Z"
+    "updated_at_utc": "2026-10-27T12:10:00Z"
   }
 }

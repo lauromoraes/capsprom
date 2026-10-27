@@ -43,3 +43,51 @@ def test_release_v4_opens_only_its_folds_and_follows_the_contract_seed_order() -
     assert {name for name, open_ in draft["execution_gates"].items() if open_} == {
         "authorized_inner_folds_enabled"
     }
+
+
+def test_releases_v3_to_v6_cover_each_contract_seed_once_in_order() -> None:
+    root = Path(__file__).resolve().parents[1]
+    contract = yaml.safe_load(
+        (root / "configs/capsprom_basic_canonical_gpu_execution_v4.yaml").read_text()
+    )
+    released = []
+    for version in (3, 4, 5, 6):
+        release = yaml.safe_load(
+            (root / f"configs/capsprom_campaign_release_v{version}.yaml").read_text()
+        )
+        scope = release["scope"]
+        seeds = scope.get("seeds", [scope.get("seed")])
+        assert scope["maximum_new_inner_fits"] == len(scope["folds"]) * len(seeds)
+        assert release["scientific_boundaries"]["maximum_epochs"] == 50
+        assert {name for name, open_ in release["execution_gates"].items() if open_} == {
+            "authorized_inner_folds_enabled"
+        }
+        released += seeds
+    assert released == contract["replication"]["seeds"]
+
+
+def test_tranche_runner_expands_seed_list_in_order(tmp_path, monkeypatch) -> None:
+    import scripts.run_bounded_canonical_tranche as runner
+
+    root = Path(__file__).resolve().parents[1]
+    calls = []
+    monkeypatch.setattr(runner.subprocess, "run", lambda command, check: calls.append(command))
+    monkeypatch.setattr(
+        runner.sys,
+        "argv",
+        [
+            "runner",
+            "--contract", "contract.yaml",
+            "--release", str(root / "configs/capsprom_campaign_release_v6.yaml"),
+            "--output-dir", str(tmp_path),
+            "--exit-code-path", str(tmp_path / "job.exit"),
+        ],
+    )
+
+    assert runner.main() == 0
+    assert [(command[-2], command[-1]) for command in calls] == [
+        (str(seed), str(fold))
+        for seed in (71, 101, 137, 173, 211, 251, 293)
+        for fold in range(5)
+    ]
+    assert (tmp_path / "job.exit").read_text() == "0\n"

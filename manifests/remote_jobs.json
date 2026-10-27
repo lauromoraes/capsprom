@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "policy": "configs/capsprom_remote_usage_policy_v3.yaml",
-  "updated_at_utc": "2026-10-27T11:40:00Z",
+  "updated_at_utc": "2026-10-27T12:10:00Z",
   "jobs": [
     {
       "job_id": "capsprom-v4-cdbprom-chlamydophila-seed13-folds0-4",
@@ -52,6 +52,56 @@
       "exit_code": 0,
       "integrity_status": "sqlite_ok_and_87_file_hash_manifest_written",
       "backup": "bioserver04:/home/lauro/backups/capsprom/capsprom-v4-seed29 (checksum dry run 0 differences, 87 manifest files verified, SQLite ok)"
+    },
+    {
+      "job_id": "capsprom-v4-cdbprom-chlamydophila-seed42-folds0-4",
+      "status": "completed",
+      "server": "bioserver03",
+      "launcher": "nohup_setsidx1",
+      "remote_process_id": 540158,
+      "command": "CUBLAS_WORKSPACE_CONFIG=:4096:8 /home/lauro/.conda/envs/capsprom-py313/bin/python scripts/run_bounded_canonical_tranche.py --contract configs/capsprom_basic_canonical_gpu_execution_v4.yaml --release configs/capsprom_campaign_release_v5.yaml --output-dir outputs/capsprom_basic_canonical_gpu_execution_v4 --exit-code-path outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/seed42-folds0-4.exit",
+      "working_directory": "/home/lauro/workspace/capsprom",
+      "configuration": "configs/capsprom_campaign_release_v5.yaml",
+      "configuration_sha256": "e3cbe2ff289734aa877360c10e6cc04e87b590f0072c09f9ca78201a86c42697",
+      "log_path": "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/seed42-folds0-4.log",
+      "result_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/plan_state.json",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/mlflow.db"
+      ],
+      "checkpoint_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/jobs/cdbprom-prokaryotic-chlamydophila_pneumoniae"
+      ],
+      "exit_code_path": "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/seed42-folds0-4.exit",
+      "started_at_utc": "2026-10-27T11:56:36Z",
+      "last_checked_at_utc": "2026-10-27T11:57:47Z",
+      "exit_code": 0,
+      "integrity_status": "sqlite_ok_hashes_match_readiness_refreshed"
+    },
+    {
+      "job_id": "capsprom-v4-cdbprom-chlamydophila-seeds71-293-folds0-4",
+      "status": "completed",
+      "server": "bioserver03",
+      "launcher": "nohup_setsidx1",
+      "remote_process_id": 541071,
+      "command": "CUBLAS_WORKSPACE_CONFIG=:4096:8 /home/lauro/.conda/envs/capsprom-py313/bin/python scripts/run_bounded_canonical_tranche.py --contract configs/capsprom_basic_canonical_gpu_execution_v4.yaml --release configs/capsprom_campaign_release_v6.yaml --output-dir outputs/capsprom_basic_canonical_gpu_execution_v4 --exit-code-path outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/seeds71-293-folds0-4.exit",
+      "working_directory": "/home/lauro/workspace/capsprom",
+      "configuration": "configs/capsprom_campaign_release_v6.yaml",
+      "configuration_sha256": "24899a9f911a52a31bf4edceea093320342d3d77663a5bcaca50945e3082d29b",
+      "log_path": "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/seeds71-293-folds0-4.log",
+      "result_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/plan_state.json",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/mlflow.db",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/chlamydophila-seeds42-293.sha256"
+      ],
+      "checkpoint_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/jobs/cdbprom-prokaryotic-chlamydophila_pneumoniae"
+      ],
+      "exit_code_path": "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/seeds71-293-folds0-4.exit",
+      "started_at_utc": "2026-10-27T11:57:47Z",
+      "last_checked_at_utc": "2026-10-27T12:10:00Z",
+      "exit_code": 0,
+      "integrity_status": "sqlite_ok_and_330_file_hash_manifest_written",
+      "backup": "bioserver04:/home/lauro/backups/capsprom/capsprom-v4-chlamydophila-10-seeds (checksum dry run 0 differences, 330 manifest files verified, SQLite ok with 50 finished children)"
     }
   ]
 }

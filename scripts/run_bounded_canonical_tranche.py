@@ -23,7 +23,10 @@ def main() -> int:
     scope = release["scope"]
     gates = release["execution_gates"]
     folds = [int(fold) for fold in scope["folds"]]
-    if scope["maximum_new_inner_fits"] != len(folds):
+    seeds = [int(seed) for seed in scope.get("seeds", [scope.get("seed")])]
+    if len(set(seeds)) != len(seeds):
+        raise ValueError("release repeats a seed")
+    if scope["maximum_new_inner_fits"] != len(folds) * len(seeds):
         raise ValueError("released fold count differs from the bounded maximum")
     if not gates["authorized_inner_folds_enabled"]:
         raise ValueError("bounded inner-fold execution is disabled")
@@ -46,12 +49,12 @@ def main() -> int:
         str(args.contract),
         str(args.output_dir),
         str(scope["dataset_id"]),
-        str(scope["seed"]),
     ]
     exit_code = 0
     try:
-        for fold in folds:
-            subprocess.run([*command_prefix, str(fold)], check=True)
+        for seed in seeds:
+            for fold in folds:
+                subprocess.run([*command_prefix, str(seed), str(fold)], check=True)
     except subprocess.CalledProcessError as exc:
         exit_code = int(exc.returncode)
     finally:

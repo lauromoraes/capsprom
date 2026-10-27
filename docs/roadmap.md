@@ -739,10 +739,17 @@ Current state:
   is 23. Two of five folds reached the 50-epoch ceiling, which is recorded as a
   monitoring signal only. All hashes match and SQLite is `ok`. The backup on
   `bioserver04` is checksum-verified.
-- Next: predeclare the next bounded release. By the schedule, the next unit is
-  Chlamydophila seed 42. Decide whether ceiling contact in 3 of 10 folds needs
-  a predeclared monitoring rule before more seeds run. Final fits, external
-  tests, and embeddings remain closed.
+- Completed: releases v5 (seed 42) and v6 (seeds 71-293) finished all 10
+  contract seeds for Chlamydophila, 50 inner folds in total, each completing on
+  its first attempt. All 10 units are `ready_for_final_fit`. The mean of seed
+  means is 0.752760 (SD 0.009823). Sixteen of 50 folds ran the full 50 epochs,
+  so the budget is often binding; this is recorded only. The backup on
+  `bioserver04` is checksum-verified. The tranche runner now accepts a `seeds`
+  list.
+- Next: decide how to handle the binding epoch budget, which needs a new
+  contract and cannot change inside v4. Then release the next scheduled unit,
+  Corynebacterium glutamicum (906 rows) seed 13. 850 inner folds remain, and
+  final fits, external tests, and embeddings remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 
