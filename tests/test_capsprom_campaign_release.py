@@ -99,7 +99,7 @@ def test_releases_v3_to_v6_cover_each_contract_seed_once_in_order() -> None:
     assert released == contract["replication"]["seeds"]
 
 
-@pytest.mark.parametrize("version", [7, 8, 9, 10, 11, 12])
+@pytest.mark.parametrize("version", [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23])
 def test_dataset_release_opens_only_its_folds_and_keeps_the_v4_budget(version: int) -> None:
     root = Path(__file__).resolve().parents[1]
     contract = yaml.safe_load(

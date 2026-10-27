@@ -1,0 +1,52 @@
+release:
+  name: capsprom-campaign-release-v19
+  version: 19.0.0
+  status: authorized_bounded_training_only_tranche
+  drafted_on: 2026-10-27
+  authorized_on: 2026-10-27
+  authorization_source: explicit_user_instruction_to_proceed
+  predecessor: configs/capsprom_campaign_release_v18.yaml
+  # Next dataset of remote_operations.build_pending_fold_schedule after Mouse_tata.
+  selection_basis: deterministic_pending_fold_schedule
+
+scope:
+  execution_contract: configs/capsprom_basic_canonical_gpu_execution_v4.yaml
+  eligible_dataset_count: 18
+  graphpro_included: false
+  dataset_id: cdbprom-prokaryotic-streptomyces_coelicolor
+  seeds: [13, 29, 42, 71, 101, 137, 173, 211, 251, 293]
+  folds: [0, 1, 2, 3, 4]
+  maximum_new_inner_fits: 50
+  host: bioserver03
+  gpu_workers: 1
+
+preconditions:
+  - inspect manifests/remote_jobs.json and the host for an equivalent job before launch
+  - all 50 Streptomyces inner folds are pending and external_test_accessed is false
+
+postconditions:
+  - refresh-neural-canonical-readiness after the folds complete
+  - hash manifest and checksum-verified backup to bioserver04
+
+scientific_boundaries:
+  training_data_only: true
+  reuse_previous_30_epoch_folds: false
+  restart_each_fold_from_epoch_one: true
+  maximum_epochs: 50
+  patience: 15
+  epoch_selection_rule: lower_median_fold_best_epoch
+  model_outcomes_may_not_expand_tranche: true
+
+execution_requirements:
+  persistent_asynchronous_launcher: true
+  remote_job_registry: manifests/remote_jobs.json
+  atomic_plan_state: true
+  mlflow_parent_child_tracking: true
+  inspect_for_equivalent_job_before_launch: true
+
+execution_gates:
+  authorized_inner_folds_enabled: true
+  additional_inner_folds_enabled: false
+  final_fits_enabled: false
+  external_test_enabled: false
+  embedding_jobs_enabled: false
