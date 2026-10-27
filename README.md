@@ -23,30 +23,12 @@ experimental validation, and thesis-grade documentation.
 - Required configuration: YAML files validated by a robust schema.
 - Required scholarly output: LaTeX snippets and thesis-ready documentation.
 
-## Repository Organization
+## Repository Organization and Current State
 
-```text
-.
-├── .codex/
-│   └── skills/
-│       └── capsprom-research/
-│           └── SKILL.md
-├── configs/
-│   ├── README.md
-│   └── example_experiment.yaml
-├── data/
-│   └── README.md
-├── docs/
-│   ├── project_brief.md
-│   └── roadmap.md
-├── specs/
-│   ├── project_spec.md
-│   └── pipeline_mvp.md
-├── src/
-│   └── capsprom/
-│       └── __init__.py
-└── README.md
-```
+See `docs/ai-handover/PROJECT_INDEX.md` for the component map, data and
+experiment locations, and recovery path. Current execution state comes from
+`make status`; released work is tracked in `docs/roadmap.md`. The sections
+below describe the original incremental plan and the first MVP runs.
 
 ## Development Environment
 

@@ -37,6 +37,7 @@ The compatibility module `src/capsprom/experiment.py` is a thin facade over the 
 - Neural state: GPU v4 Chlamydophila seed 13 folds 0-4 completed; training-only, selected epoch 30, external test not accessed. See `docs/capsprom_v4_seed13_training_report.md` and `manifests/remote_jobs.json`.
 - Local storage: `configs/capsprom_local_storage_policy_v1.yaml` (8 GB budget); legacy `data/interim/{dinuc,trinuc,aligned_fasta,cropped_fasta}` and `outputs/neural_smoke/**/*.pt` archive to `bioserver04:/home/lauro/backups/capsprom/local-archive-v1` via `scripts/storage_archive.sh {check|copy|prune}`; `data/interim/ARCHIVED.md` appears after pruning.
   - Measured 2026-10-26 (pre-archive): `data/interim` 14 GB (`dinuc` 11 GB, `trinuc` 1.9 GB, `aligned_fasta` 719 MB, `cropped_fasta` 223 MB), `outputs/neural_smoke` 1.1 GB, `data/raw` 967 MB, `data/processed` 381 MB, `mlruns` 613 MB, `mlflow.db` 7 MB. Archive set ~15 GB; the remainder (~3.5 GB) fits the budget.
+  - Verified 2026-10-26 after archive: project 2 GB of 8 GB budget; WSL Ubuntu-24.04 (only distro) lives at `D:\WSL\Ubuntu-24.04\ext4.vhdx` (47 GB); `.venv` depends on WSL `~/miniconda3` Python 3.13.11; `make status` passes from WSL; bioserver03 (RTX 3060 idle, 99 GB free) and bioserver04 (141 GB free) reachable, no CapsProm/MLflow process.
   - bioserver04 reachable from WSL Ubuntu-24.04 only with `-i ~/.ssh/capsprom_bioserver04` (the `~/.ssh/config` entry has no `IdentityFile`); 157 GB free; no GPU; no MLflow running.
   - Smoke configs reference `outputs/neural_smoke/*/best.pt`; those runs are complete, so pruning only blocks re-inspection until restored.
   - MLflow: no persistent server. Tracking URIs are SQLite paths inside immutable versioned configs, and remote campaigns already keep per-root `mlflow.db` on the execution host. Browse on demand: `ssh -L 5000:localhost:5000 <host> 'mlflow ui --backend-store-uri sqlite:///<root>/mlflow.db'`. shortcut: reconsider a server only when two concurrent hosts must write one store.
@@ -44,12 +45,12 @@ The compatibility module `src/capsprom/experiment.py` is a thin facade over the 
 
 ## Verified inconsistencies and limits
 
-- Root `README.md` still describes an early incremental layout; use this index, `docs/roadmap.md`, and `make status` for current state.
+- Resolved 2026-10-26: root `README.md` stale layout tree replaced by a pointer to this index.
 - Resolved: XGBoost v2 status explicitly reports `outputs/reports/xgboost_ten_seed_replication_v2/ten_seed_summary.json`; the active consolidation has its own `summary.json`.
 - XGBoost v1 is superseded and incomplete (35/250); do not resume it by default.
 - Ignored outputs and remote backup parity were not independently verified.
 - 2026-10-26 audit: `project_status.py`, `tests/test_project_status.py`, and several handover files have mtimes after the last commit (`Refresh post-handover project status`); likely uncommitted. Confirm with `git status --short`.
-- `AGENTS.md` rule "Refactor `experiment.py` ... before adding capsule-network training" is obsolete (done).
+- Resolved 2026-10-26: obsolete `AGENTS.md` `experiment.py` refactor rule replaced by a facade-preservation rule.
 - GraphPro v1/v2 scripts duplicate `_load_hashed_fasta`/`_verify_hash`; keep as is (deferred line, provenance only).
 
 ## Refactoring queue (ENG)
@@ -66,7 +67,7 @@ Apply the [Ponytail](https://github.com/DietrichGebert/ponytail) smallest-comple
 | P2 | `_mapping` identical in 5 modules (`config`, `baseline_batch`, `xgboost_replication`, `neural_experiment`, `canonical_neural`); import from `config.py` | Low-medium | Low | Error messages unchanged; no new module |
 | P2 | Contract hash expression repeated 3x in `neural_training.py`; one private `_contract_sha256()` | Low-medium | Low | Must yield identical hashes or resume breaks; test against an existing state file |
 | P2 | Summary JSON written non-atomically in 3 scripts and `runner.py`; reuse `state.write_json_atomic` | Low-medium | Low | Scripts already use `sort_keys`+newline (byte-identical); `runner.py` does not, so leave it or version the change |
-| P2 | Retire `experiment.py` facade: only callers are `cli.py`, `baseline_batch.py`, `xgboost_replication.py` (no tests) | Low | Low | Update the stale `AGENTS.md` scope rule in the same change |
+| P2 | Retire `experiment.py` facade: only callers are `cli.py`, `baseline_batch.py`, `xgboost_replication.py` (no tests) | Low | Low | Drop the `AGENTS.md` facade rule in the same change |
 | P3 | Review broad optional dependency groups against exercised workflows | Low-medium | Low | Environment locks and remote compatibility must remain reproducible |
 
 First refactoring slice completed: status/document path ambiguity fixed with one focused test and no experimental change. Next, create characterization tests for one bounded canonical inner-fold lifecycle before moving any neural orchestration code.

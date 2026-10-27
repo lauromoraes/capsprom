@@ -26,4 +26,4 @@
 
 - Prefer the smallest change that satisfies the current research step.
 - Do not introduce a generic framework until at least three concrete workflows require the same abstraction.
-- Refactor `experiment.py` into model, tracking, evaluation, and runner modules before adding capsule-network training.
+- Keep `experiment.py` as a thin compatibility facade; add new logic to the model, tracking, evaluation, runner, or neural modules instead.
