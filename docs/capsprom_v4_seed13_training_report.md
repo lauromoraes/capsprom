@@ -323,6 +323,41 @@ used 1,011 MB of new space instead of about 6 GB. It has no checksum
 differences, verifies all 1,840 entries on its own, and its SQLite copy is
 `ok`. `bioserver04` has 125 GB free.
 
+## CDBProm Klebsiella pneumoniae (release v12, 2026-10-27)
+
+Release v12 (SHA-256 `a5217a4b…514b`) ran all 10 contract seeds for
+`cdbprom-prokaryotic-klebisiella_pneumoniae` (2,124 training rows), 50 folds.
+The `klebisiella` spelling is the source identifier and is kept as is. The run
+started at 14:26:19Z and exited 0 at 14:42:54Z. Every fold completed on its
+first attempt.
+
+| Seed | Mean MCC | SD | Selected epoch | Folds at 50 epochs |
+| --- | --- | --- | --- | --- |
+| 13 | 0.847811 | 0.009199 | 30 | 2/5 |
+| 29 | 0.848505 | 0.011758 | 45 | 3/5 |
+| 42 | 0.840365 | 0.020212 | 37 | 3/5 |
+| 71 | 0.849743 | 0.016263 | 44 | 4/5 |
+| 101 | 0.843860 | 0.005262 | 29 | 2/5 |
+| 137 | 0.839233 | 0.010296 | 32 | 2/5 |
+| 173 | 0.844132 | 0.010269 | 30 | 2/5 |
+| 211 | 0.844233 | 0.012767 | 29 | 2/5 |
+| 251 | 0.837930 | 0.008618 | 36 | 3/5 |
+| 293 | 0.843473 | 0.017778 | 31 | 1/5 |
+
+The mean of seed means is 0.843928, with SD 0.003957 and range
+0.837930-0.849743. The fold-level SDs are the smallest so far. Twenty-four of
+50 folds ran the full 50 epochs, and one had its best epoch at 50. Selected
+epochs range from 29 to 45.
+
+After a readiness refresh, the plan has 350 completed inner folds and 70 units
+`ready_for_final_fit`. `external_test_accessed` is false. All 18 data and
+fold-manifest hashes match, SQLite is `ok`, and MLflow has 350 finished
+children and one open parent. A 2,142-file manifest is in
+`remote_jobs/klebsiella-seeds13-293.sha256`. The hardlinked backup at
+`bioserver04:/home/lauro/backups/capsprom/capsprom-v4-klebsiella-10-seeds`
+used 1,013 MB of new space. It has no checksum differences, verifies all 2,142
+entries, and its SQLite copy is `ok`. `bioserver04` has 124 GB free.
+
 The plan has 50 completed inner folds, 10 units `ready_for_final_fit`, and
 `external_test_accessed: false`. All 18 data and fold-manifest hashes match,
 SQLite is `ok`, and MLflow has 50 finished children and one open parent. A

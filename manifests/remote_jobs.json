@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "policy": "configs/capsprom_remote_usage_policy_v3.yaml",
-  "updated_at_utc": "2026-10-27T14:20:00Z",
+  "updated_at_utc": "2026-10-27T14:48:00Z",
   "jobs": [
     {
       "job_id": "capsprom-v4-cdbprom-chlamydophila-seed13-folds0-4",
@@ -227,6 +227,31 @@
       "exit_code": 0,
       "integrity_status": "sqlite_ok_and_1840_file_hash_manifest_written",
       "backup": "bioserver04:/home/lauro/backups/capsprom/capsprom-v4-amyloliquefaciens-10-seeds (rsync --link-dest to the Salmonella snapshot, 1011 MB new space; checksum dry run 0 differences, 1840 manifest files verified, SQLite ok with 300 finished children)"
+    },
+    {
+      "job_id": "capsprom-v4-cdbprom-klebsiella-seeds13-293-folds0-4",
+      "status": "completed",
+      "server": "bioserver03",
+      "launcher": "nohup_setsidx1",
+      "remote_process_id": 582331,
+      "command": "CUBLAS_WORKSPACE_CONFIG=:4096:8 /home/lauro/.conda/envs/capsprom-py313/bin/python scripts/run_bounded_canonical_tranche.py --contract configs/capsprom_basic_canonical_gpu_execution_v4.yaml --release configs/capsprom_campaign_release_v12.yaml --output-dir outputs/capsprom_basic_canonical_gpu_execution_v4 --exit-code-path outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/klebsiella-seeds13-293-folds0-4.exit",
+      "working_directory": "/home/lauro/workspace/capsprom",
+      "configuration": "configs/capsprom_campaign_release_v12.yaml",
+      "configuration_sha256": "a5217a4b481da19a8dea87cf33bf10147f090dbf2c5f4ab6a4c82ae9cc81514b",
+      "log_path": "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/klebsiella-seeds13-293-folds0-4.log",
+      "result_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/plan_state.json",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/mlflow.db"
+      ],
+      "checkpoint_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/jobs/cdbprom-prokaryotic-klebisiella_pneumoniae"
+      ],
+      "exit_code_path": "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/klebsiella-seeds13-293-folds0-4.exit",
+      "started_at_utc": "2026-10-27T14:26:19Z",
+      "last_checked_at_utc": "2026-10-27T14:48:00Z",
+      "exit_code": 0,
+      "integrity_status": "sqlite_ok_and_2142_file_hash_manifest_written",
+      "backup": "bioserver04:/home/lauro/backups/capsprom/capsprom-v4-klebsiella-10-seeds (rsync --link-dest to the amyloliquefaciens snapshot, 1013 MB new space; checksum dry run 0 differences, 2142 manifest files verified, SQLite ok with 350 finished children)"
     }
   ]
 }

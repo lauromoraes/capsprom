@@ -779,10 +779,15 @@ Current state:
   0.663824 (SD 0.007074), the lowest dataset so far. Only 9 of 50 folds
   reached the ceiling. All 60 units are `ready_for_final_fit`. The first
   hardlinked backup is verified and used about 1 GB of new space.
+- Completed: release v12 ran `cdbprom-prokaryotic-klebisiella_pneumoniae`
+  (2,124 rows), all 10 seeds and 50 folds, in 16 min 35 s, with exit code 0
+  and every fold completing on its first attempt. The mean of seed means is
+  0.843928 (SD 0.003957). 24 of 50 folds reached the ceiling. All 70 units are
+  `ready_for_final_fit`, and the hardlinked backup is verified (about 1 GB of
+  new space).
 - Next: release the next scheduled dataset,
-  `cdbprom-prokaryotic-klebisiella_pneumoniae` (2,124 rows), all 10 seeds.
-  600 inner folds remain, and final fits, external tests, and embeddings
-  remain closed.
+  `cdbprom-prokaryotic-synechocistis` (2,612 rows), all 10 seeds. 550 inner
+  folds remain, and final fits, external tests, and embeddings remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 
