@@ -1,10 +1,10 @@
 release:
   name: capsprom-campaign-release-v7
   version: 7.0.0
-  status: draft_pending_explicit_authorization
+  status: authorized_bounded_training_only_tranche
   drafted_on: 2026-10-27
-  authorized_on: null
-  authorization_source: null
+  authorized_on: 2026-10-27
+  authorization_source: explicit_user_instruction_to_proceed
   predecessor: configs/capsprom_campaign_release_v6.yaml
   # Next dataset of remote_operations.build_pending_fold_schedule after Chlamydophila.
   selection_basis: deterministic_pending_fold_schedule
@@ -45,7 +45,7 @@ execution_requirements:
   inspect_for_equivalent_job_before_launch: true
 
 execution_gates:
-  authorized_inner_folds_enabled: false
+  authorized_inner_folds_enabled: true
   additional_inner_folds_enabled: false
   final_fits_enabled: false
   external_test_enabled: false

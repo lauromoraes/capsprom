@@ -749,9 +749,15 @@ Current state:
 - Decision (2026-10-27, user): keep the 50-epoch ceiling. Contract v4 is
   unchanged for the whole campaign, and ceiling contact stays a reported
   monitoring statistic, not a trigger for adaptation.
-- Next: authorize the closed draft `configs/capsprom_campaign_release_v7.yaml`
-  (Corynebacterium glutamicum, 906 rows, all 10 seeds, 50 folds). 850 inner
-  folds remain, and final fits, external tests, and embeddings remain closed.
+- Completed: release v7 ran Corynebacterium glutamicum (906 rows), all 10
+  seeds and 50 folds, in 11 min 14 s, with exit code 0 and every fold completing
+  on its first attempt. The mean of seed means is 0.770813 (SD 0.006269). 13 of
+  50 folds reached the ceiling. All 20 units are `ready_for_final_fit`. All
+  hashes match and SQLite is `ok`. The backup on `bioserver04` is
+  checksum-verified.
+- Next: release the next scheduled dataset, `cnnprom-prokaryotic-Bacillus`
+  (1,098 rows), all 10 seeds. 800 inner folds remain, and final fits, external
+  tests, and embeddings remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 

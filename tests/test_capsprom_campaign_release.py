@@ -66,7 +66,7 @@ def test_releases_v3_to_v6_cover_each_contract_seed_once_in_order() -> None:
     assert released == contract["replication"]["seeds"]
 
 
-def test_release_v7_draft_is_closed_and_keeps_the_v4_budget() -> None:
+def test_release_v7_opens_only_its_folds_and_keeps_the_v4_budget() -> None:
     root = Path(__file__).resolve().parents[1]
     contract = yaml.safe_load(
         (root / "configs/capsprom_basic_canonical_gpu_execution_v4.yaml").read_text()
@@ -78,8 +78,10 @@ def test_release_v7_draft_is_closed_and_keeps_the_v4_budget() -> None:
     assert draft["scope"]["seeds"] == contract["replication"]["seeds"]
     assert draft["scope"]["maximum_new_inner_fits"] == 50
     assert draft["scientific_boundaries"] == previous["scientific_boundaries"]
-    assert draft["release"]["status"] == "draft_pending_explicit_authorization"
-    assert not any(draft["execution_gates"].values())
+    assert draft["release"]["status"] == "authorized_bounded_training_only_tranche"
+    assert {name for name, open_ in draft["execution_gates"].items() if open_} == {
+        "authorized_inner_folds_enabled"
+    }
 
 
 def test_tranche_runner_expands_seed_list_in_order(tmp_path, monkeypatch) -> None:

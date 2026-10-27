@@ -139,6 +139,39 @@ The signal is recorded only; the budget cannot change within contract v4.
 On 2026-10-27 the user decided to keep the 50-epoch ceiling for the whole v4
 campaign. Ceiling contact is reported per dataset as a monitoring statistic.
 
+## Corynebacterium glutamicum (release v7, 2026-10-27)
+
+Release v7 (SHA-256 `0e2be325…6000`) ran all 10 contract seeds for
+`cdbprom-prokaryotic-corynebacterium_glutamicum` (906 training rows), 50
+folds. It started at 12:15:38Z and exited 0 at 12:26:52Z. Every fold completed
+on its first attempt.
+
+| Seed | Mean MCC | SD | Selected epoch | Folds at 50 epochs |
+| --- | --- | --- | --- | --- |
+| 13 | 0.761969 | 0.041699 | 25 | 2/5 |
+| 29 | 0.771568 | 0.038252 | 31 | 2/5 |
+| 42 | 0.779212 | 0.050193 | 31 | 0/5 |
+| 71 | 0.769223 | 0.043918 | 26 | 0/5 |
+| 101 | 0.777536 | 0.049313 | 27 | 1/5 |
+| 137 | 0.777664 | 0.029166 | 33 | 2/5 |
+| 173 | 0.772663 | 0.045638 | 31 | 1/5 |
+| 211 | 0.769649 | 0.041636 | 34 | 2/5 |
+| 251 | 0.761107 | 0.043030 | 26 | 0/5 |
+| 293 | 0.767543 | 0.045412 | 43 | 3/5 |
+
+The mean of seed means is 0.770813, with SD 0.006269 and range
+0.761107-0.779212. Selected epochs range from 25 to 43. Thirteen of 50 folds
+ran the full 50 epochs, and one (seed 137, fold 4) had its best epoch at 50.
+
+After a readiness refresh, the plan has 100 completed inner folds and 20 units
+`ready_for_final_fit`. `external_test_accessed` is false. All 18 data and
+fold-manifest hashes match, SQLite is `ok`, and MLflow has 100 finished
+children and one open parent. A 632-file manifest is in
+`remote_jobs/corynebacterium-seeds13-293.sha256`. The backup at
+`bioserver04:/home/lauro/backups/capsprom/capsprom-v4-corynebacterium-10-seeds`
+has no checksum differences, verifies all 632 entries, and its SQLite copy is
+`ok`. Final fits, external tests, and embeddings remain closed.
+
 The plan has 50 completed inner folds, 10 units `ready_for_final_fit`, and
 `external_test_accessed: false`. All 18 data and fold-manifest hashes match,
 SQLite is `ok`, and MLflow has 50 finished children and one open parent. A

@@ -87,7 +87,7 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
         status["next_action"] = "make baseline-consolidation"
     else:
         status["next_action"] = (
-            "authorize configs/capsprom_campaign_release_v7.yaml (Corynebacterium, 10 seeds)"
+            "2 of 18 datasets trained; release cnnprom-prokaryotic-Bacillus (10 seeds) next"
         )
     return status
 
