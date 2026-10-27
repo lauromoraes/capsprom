@@ -42,14 +42,14 @@
       "summary_available": true
     }
   },
-  "generated_at_utc": "2026-10-27T14:44:56.729639+00:00",
+  "generated_at_utc": "2026-10-27T20:21:26.638801+00:00",
   "graphpro_policy": "configs/graphpro_deferral_policy_v1.yaml",
-  "next_action": "7 of 18 datasets trained; release cdbprom-prokaryotic-synechocistis (10 seeds) next",
+  "next_action": "18 of 18 datasets trained (900 inner folds); decide on opening the 180 v4 final fits",
   "remote_jobs": {
     "available": true,
     "jobs": [],
     "pending_count": 0,
     "registry": "manifests/remote_jobs.json",
-    "updated_at_utc": "2026-10-27T14:48:00Z"
+    "updated_at_utc": "2026-10-27T20:30:00Z"
   }
 }

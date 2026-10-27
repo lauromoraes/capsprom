@@ -87,7 +87,7 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
         status["next_action"] = "make baseline-consolidation"
     else:
         status["next_action"] = (
-            "7 of 18 datasets trained; release cdbprom-prokaryotic-synechocistis (10 seeds) next"
+            "18 of 18 datasets trained (900 inner folds); decide on opening the 180 v4 final fits"
         )
     return status
 

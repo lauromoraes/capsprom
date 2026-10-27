@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "policy": "configs/capsprom_remote_usage_policy_v3.yaml",
-  "updated_at_utc": "2026-10-27T14:48:00Z",
+  "updated_at_utc": "2026-10-27T20:30:00Z",
   "jobs": [
     {
       "job_id": "capsprom-v4-cdbprom-chlamydophila-seed13-folds0-4",
@@ -252,6 +252,66 @@
       "exit_code": 0,
       "integrity_status": "sqlite_ok_and_2142_file_hash_manifest_written",
       "backup": "bioserver04:/home/lauro/backups/capsprom/capsprom-v4-klebsiella-10-seeds (rsync --link-dest to the amyloliquefaciens snapshot, 1013 MB new space; checksum dry run 0 differences, 2142 manifest files verified, SQLite ok with 350 finished children)"
+    },
+    {
+      "job_id": "capsprom-v4-release-queue-v13-v23",
+      "status": "completed",
+      "server": "bioserver03",
+      "launcher": "nohup_setsidx1_queue_driver",
+      "remote_process_id": 590554,
+      "command": "bash tmp/queue.sh 13 23 /home/lauro/backups/capsprom/capsprom-v4-klebsiella-10-seeds",
+      "working_directory": "/home/lauro/workspace/capsprom",
+      "configuration": [
+        "configs/capsprom_campaign_release_v13.yaml",
+        "configs/capsprom_campaign_release_v14.yaml",
+        "configs/capsprom_campaign_release_v15.yaml",
+        "configs/capsprom_campaign_release_v16.yaml",
+        "configs/capsprom_campaign_release_v17.yaml",
+        "configs/capsprom_campaign_release_v18.yaml",
+        "configs/capsprom_campaign_release_v19.yaml",
+        "configs/capsprom_campaign_release_v20.yaml",
+        "configs/capsprom_campaign_release_v21.yaml",
+        "configs/capsprom_campaign_release_v22.yaml",
+        "configs/capsprom_campaign_release_v23.yaml"
+      ],
+      "log_path": "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/queue-v13-v23.log",
+      "result_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/plan_state.json",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/mlflow.db",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v13.sha256",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v14.sha256",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v15.sha256",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v16.sha256",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v17.sha256",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v18.sha256",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v19.sha256",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v20.sha256",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v21.sha256",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v22.sha256",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v23.sha256"
+      ],
+      "checkpoint_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/jobs"
+      ],
+      "exit_code_path": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v13.exit",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v14.exit",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v15.exit",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v16.exit",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v17.exit",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v18.exit",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v19.exit",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v20.exit",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v21.exit",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v22.exit",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/release-v23.exit"
+      ],
+      "started_at_utc": "2026-10-27T15:01:40Z",
+      "last_checked_at_utc": "2026-10-27T20:30:00Z",
+      "stop_policy": "driver stops at the first failed preflight, tranche, readiness refresh, integrity check, manifest, or backup verification",
+      "exit_code": 0,
+      "integrity_status": "per_release_verify_ok_sqlite_ok_900_finished_children_and_5476_file_hash_manifest_written",
+      "backup": "bioserver04:/home/lauro/backups/capsprom/capsprom-v4-release-v13 ... capsprom-v4-release-v23 (hardlinked; each checksum dry run 0 differences, own manifest verified, SQLite ok)"
     }
   ]
 }

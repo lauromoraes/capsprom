@@ -785,9 +785,16 @@ Current state:
   0.843928 (SD 0.003957). 24 of 50 folds reached the ceiling. All 70 units are
   `ready_for_final_fit`, and the hardlinked backup is verified (about 1 GB of
   new space).
-- Next: release the next scheduled dataset,
-  `cdbprom-prokaryotic-synechocistis` (2,612 rows), all 10 seeds. 550 inner
-  folds remain, and final fits, external tests, and embeddings remain closed.
+- Completed: releases v13-v23 ran the remaining 11 datasets in schedule order
+  through one fail-stop queue driver (5 h 15 min). Every tranche exited 0 and
+  every fold completed on its first attempt. All 900 inner folds are complete,
+  all 180 units are `ready_for_final_fit`, and `external_test_accessed` is
+  false. Each release has a verified manifest and hardlinked backup. Means of
+  seed means range from 0.732277 (Human non-TATA) to 0.951194 (Arabidopsis
+  TATA). The large non-TATA datasets never reach the 50-epoch ceiling.
+- Next: review the complete inner-fold evidence and decide, as a separate
+  authorization, whether to open the 180 v4 final fits. External tests and
+  embeddings remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 

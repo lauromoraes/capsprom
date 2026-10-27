@@ -139,6 +139,14 @@ The signal is recorded only; the budget cannot change within contract v4.
 On 2026-10-27 the user decided to keep the 50-epoch ceiling for the whole v4
 campaign. Ceiling contact is reported per dataset as a monitoring statistic.
 
+The plan has 50 completed inner folds, 10 units `ready_for_final_fit`, and
+`external_test_accessed: false`. All 18 data and fold-manifest hashes match,
+SQLite is `ok`, and MLflow has 50 finished children and one open parent. A
+330-file manifest is in `remote_jobs/chlamydophila-seeds42-293.sha256`. The
+backup at `bioserver04:/home/lauro/backups/capsprom/capsprom-v4-chlamydophila-10-seeds`
+has no checksum differences, verifies all 330 entries, and its SQLite copy is
+`ok`. Final fits, external tests, and embeddings remain closed.
+
 ## Corynebacterium glutamicum (release v7, 2026-10-27)
 
 Release v7 (SHA-256 `0e2be325…6000`) ran all 10 contract seeds for
@@ -358,10 +366,57 @@ children and one open parent. A 2,142-file manifest is in
 used 1,013 MB of new space. It has no checksum differences, verifies all 2,142
 entries, and its SQLite copy is `ok`. `bioserver04` has 124 GB free.
 
-The plan has 50 completed inner folds, 10 units `ready_for_final_fit`, and
-`external_test_accessed: false`. All 18 data and fold-manifest hashes match,
-SQLite is `ok`, and MLflow has 50 finished children and one open parent. A
-330-file manifest is in `remote_jobs/chlamydophila-seeds42-293.sha256`. The
-backup at `bioserver04:/home/lauro/backups/capsprom/capsprom-v4-chlamydophila-10-seeds`
-has no checksum differences, verifies all 330 entries, and its SQLite copy is
-`ok`. Final fits, external tests, and embeddings remain closed.
+## Remaining 11 datasets (releases v13-v23, 2026-10-27)
+
+One queue driver, `tmp/queue.sh 13 23`, ran releases v13 to v23 in schedule
+order from 15:01:40Z to 20:17:13Z. For each release it checked that all 50
+folds were pending, ran the tranche, refreshed readiness, verified integrity,
+wrote a SHA-256 manifest (`remote_jobs/release-v<N>.sha256`), and made a
+hardlinked backup at `bioserver04:/home/lauro/backups/capsprom/capsprom-v4-release-v<N>`.
+It would have stopped at the first failed step; none failed. Every tranche
+exited 0, and all 550 folds completed on their first attempt.
+
+| Release | Dataset | Training rows | Training time | Mean of seed means | SD | Range | Folds at 50 epochs | Selected epochs |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| v13 | `cdbprom-prokaryotic-synechocistis` | 2,612 | 17 min 55 s | 0.880870 | 0.002567 | 0.876869-0.885439 | 21/50 | 22-38 |
+| v14 | `cdbprom-prokaryotic-mycrobacterium_tuberculosis` | 2,823 | 19 min 24 s | 0.887403 | 0.003101 | 0.881724-0.892869 | 32/50 | 30-45 |
+| v15 | `cnnprom-prokaryotic-Ecoli` | 3,071 | 18 min 43 s | 0.773192 | 0.010053 | 0.756067-0.787707 | 32/50 | 34-45 |
+| v16 | `cdbprom-prokaryotic-pseudonomas_aeruginosa` | 3,281 | 20 min 37 s | 0.810996 | 0.004850 | 0.800703-0.816953 | 40/50 | 40-50 |
+| v17 | `cnnprom-eukaryotic-Arabidopsis_tata` | 3,500 | 19 min 43 s | 0.951194 | 0.001342 | 0.949471-0.953374 | 27/50 | 21-43 |
+| v18 | `cnnprom-eukaryotic-Mouse_tata` | 3,824 | 20 min 13 s | 0.938014 | 0.002230 | 0.934154-0.941330 | 20/50 | 24-47 |
+| v19 | `cdbprom-prokaryotic-streptomyces_coelicolor` | 4,014 | 20 min 41 s | 0.874884 | 0.001941 | 0.871794-0.878574 | 18/50 | 21-46 |
+| v20 | `cdbprom-prokaryotic-anabaena_sp` | 4,020 | 20 min 47 s | 0.855895 | 0.003165 | 0.851356-0.861710 | 15/50 | 28-40 |
+| v21 | `cnnprom-eukaryotic-Arabidopsis_non_tata` | 13,885 | 33 min 02 s | 0.813608 | 0.001553 | 0.810995-0.815244 | 0/50 | 15-19 |
+| v22 | `cnnprom-eukaryotic-Mouse_non_tata` | 32,844 | 51 min 38 s | 0.838190 | 0.001275 | 0.836333-0.840305 | 0/50 | 8-12 |
+| v23 | `cnnprom-eukaryotic-Human_non_tata` | 37,438 | 57 min 05 s | 0.732277 | 0.001105 | 0.730641-0.733697 | 0/50 | 8-12 |
+
+Mean validation MCC per seed:
+
+| Release | 13 | 29 | 42 | 71 | 101 | 137 | 173 | 211 | 251 | 293 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| v13 | 0.8802 | 0.8821 | 0.8783 | 0.8786 | 0.8854 | 0.8769 | 0.8807 | 0.8834 | 0.8807 | 0.8824 |
+| v14 | 0.8873 | 0.8867 | 0.8889 | 0.8895 | 0.8873 | 0.8840 | 0.8864 | 0.8929 | 0.8817 | 0.8895 |
+| v15 | 0.7694 | 0.7777 | 0.7877 | 0.7818 | 0.7743 | 0.7815 | 0.7610 | 0.7771 | 0.7561 | 0.7653 |
+| v16 | 0.8145 | 0.8100 | 0.8133 | 0.8007 | 0.8059 | 0.8111 | 0.8157 | 0.8095 | 0.8122 | 0.8170 |
+| v17 | 0.9507 | 0.9520 | 0.9503 | 0.9510 | 0.9515 | 0.9496 | 0.9495 | 0.9508 | 0.9532 | 0.9534 |
+| v18 | 0.9364 | 0.9397 | 0.9392 | 0.9355 | 0.9384 | 0.9413 | 0.9342 | 0.9390 | 0.9398 | 0.9367 |
+| v19 | 0.8746 | 0.8753 | 0.8745 | 0.8746 | 0.8736 | 0.8786 | 0.8776 | 0.8741 | 0.8718 | 0.8742 |
+| v20 | 0.8533 | 0.8579 | 0.8542 | 0.8561 | 0.8567 | 0.8536 | 0.8544 | 0.8617 | 0.8514 | 0.8597 |
+| v21 | 0.8110 | 0.8124 | 0.8151 | 0.8145 | 0.8113 | 0.8150 | 0.8134 | 0.8143 | 0.8152 | 0.8138 |
+| v22 | 0.8363 | 0.8375 | 0.8391 | 0.8368 | 0.8400 | 0.8380 | 0.8403 | 0.8382 | 0.8381 | 0.8377 |
+| v23 | 0.7317 | 0.7306 | 0.7325 | 0.7337 | 0.7323 | 0.7309 | 0.7313 | 0.7326 | 0.7335 | 0.7335 |
+
+Ceiling contact falls as the datasets grow. Pseudomonas aeruginosa is the most
+budget-bound dataset (40 of 50 folds at 50 epochs; seed 137 selects epoch 50).
+The three large eukaryotic non-TATA datasets never reach the ceiling and
+select epochs 8-19. Under the user's 2026-10-27 decision, this is reported
+only; the 50-epoch budget does not change within contract v4.
+
+After the last release, the plan has 900 of 900 completed inner folds and all
+180 units `ready_for_final_fit`. `external_test_accessed` is false. All 18
+data and fold-manifest hashes match, SQLite is `ok`, and MLflow has 900
+finished children and one open parent. The last manifest has 5,476 entries.
+Each backup had no checksum differences, verified its own manifest, and had an
+`ok` SQLite copy. The v4 outputs use 18 GB on `bioserver03` (82 GB free), and
+`bioserver04` has 113 GB free. Final fits, external tests, and embeddings
+remain closed until a separate decision.
