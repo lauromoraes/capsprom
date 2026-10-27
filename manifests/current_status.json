@@ -42,9 +42,9 @@
       "summary_available": true
     }
   },
-  "generated_at_utc": "2026-10-27T12:07:13.350622+00:00",
+  "generated_at_utc": "2026-10-27T12:12:39.103091+00:00",
   "graphpro_policy": "configs/graphpro_deferral_policy_v1.yaml",
-  "next_action": "Chlamydophila 10 seeds done; review epoch ceiling, then release Corynebacterium seed 13",
+  "next_action": "authorize configs/capsprom_campaign_release_v7.yaml (Corynebacterium, 10 seeds)",
   "remote_jobs": {
     "available": true,
     "jobs": [],

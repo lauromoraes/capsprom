@@ -66,6 +66,22 @@ def test_releases_v3_to_v6_cover_each_contract_seed_once_in_order() -> None:
     assert released == contract["replication"]["seeds"]
 
 
+def test_release_v7_draft_is_closed_and_keeps_the_v4_budget() -> None:
+    root = Path(__file__).resolve().parents[1]
+    contract = yaml.safe_load(
+        (root / "configs/capsprom_basic_canonical_gpu_execution_v4.yaml").read_text()
+    )
+    previous = yaml.safe_load((root / "configs/capsprom_campaign_release_v6.yaml").read_text())
+    draft = yaml.safe_load((root / "configs/capsprom_campaign_release_v7.yaml").read_text())
+
+    assert draft["scope"]["dataset_id"] in contract["protocol"]["dataset_ids"]
+    assert draft["scope"]["seeds"] == contract["replication"]["seeds"]
+    assert draft["scope"]["maximum_new_inner_fits"] == 50
+    assert draft["scientific_boundaries"] == previous["scientific_boundaries"]
+    assert draft["release"]["status"] == "draft_pending_explicit_authorization"
+    assert not any(draft["execution_gates"].values())
+
+
 def test_tranche_runner_expands_seed_list_in_order(tmp_path, monkeypatch) -> None:
     import scripts.run_bounded_canonical_tranche as runner
 

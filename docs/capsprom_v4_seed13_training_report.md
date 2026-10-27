@@ -136,6 +136,8 @@ range 0.732165-0.765219. Selected epochs vary widely, from 8 to 39. Sixteen of
 the 50 folds ran the full 50 epochs, and one of them (seed 293, fold 3) had its
 best epoch at 50. This shows that the budget is often binding on this dataset.
 The signal is recorded only; the budget cannot change within contract v4.
+On 2026-10-27 the user decided to keep the 50-epoch ceiling for the whole v4
+campaign. Ceiling contact is reported per dataset as a monitoring statistic.
 
 The plan has 50 completed inner folds, 10 units `ready_for_final_fit`, and
 `external_test_accessed: false`. All 18 data and fold-manifest hashes match,

@@ -746,10 +746,12 @@ Current state:
   so the budget is often binding; this is recorded only. The backup on
   `bioserver04` is checksum-verified. The tranche runner now accepts a `seeds`
   list.
-- Next: decide how to handle the binding epoch budget, which needs a new
-  contract and cannot change inside v4. Then release the next scheduled unit,
-  Corynebacterium glutamicum (906 rows) seed 13. 850 inner folds remain, and
-  final fits, external tests, and embeddings remain closed.
+- Decision (2026-10-27, user): keep the 50-epoch ceiling. Contract v4 is
+  unchanged for the whole campaign, and ceiling contact stays a reported
+  monitoring statistic, not a trigger for adaptation.
+- Next: authorize the closed draft `configs/capsprom_campaign_release_v7.yaml`
+  (Corynebacterium glutamicum, 906 rows, all 10 seeds, 50 folds). 850 inner
+  folds remain, and final fits, external tests, and embeddings remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 
