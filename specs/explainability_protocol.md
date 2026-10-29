@@ -45,6 +45,14 @@ uncertainty. Absence of a stable match is reported rather than suppressed.
 | Frozen contextual vectors | attribution of the trained projection to vector dimensions, plus token occlusion if the encoder can be rerun | pooled dimensions have no direct nucleotide coordinate; token occlusion provides the defensible positional map | encoder/tokenizer revisions, pooling rule, projection checkpoint, occlusion scores | only from token/base perturbation results, not pooled dimensions |
 | Joint contextual encoder | integrated gradients or token occlusion through the fold-local encoder; attention is supplementary only | tokenizer offsets map tokens to all covered bases; overlaps use a frozen aggregation rule | encoder checkpoint, tokenizer offsets, baselines, token/base scores, selected seqlets | yes, from mapped base-level attribution seqlets |
 
+Perturbation analyses are model-agnostic and apply to every row above, not
+only to one-hot models: any model can rescore a sequence after substitution by
+rerunning its complete prediction pipeline. Window substitution and single-base
+in-silico mutagenesis for all compared models are governed by
+`specs/substitution_sensitivity_protocol.md`. Within the CNN control and
+one-hot CapsProm row, in-silico mutagenesis additionally serves as the
+robustness check for gradient attributions.
+
 CapsProm routing can be analysed by perturbing selected input regions and
 measuring changes in class-capsule lengths and routing coefficients. This tests
 a capsule-specific mechanism, but routing coefficients alone are not feature

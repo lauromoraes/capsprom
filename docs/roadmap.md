@@ -829,6 +829,12 @@ Goals:
 - Relate learned patterns to candidate motifs and biological concepts.
 - Generate plots, tables, and LaTeX snippets.
 - Document where each artifact belongs in the thesis.
+- Measure positional model dependence with window substitution (primary) and
+  single-base in-silico mutagenesis for every compared model, under
+  `specs/substitution_sensitivity_protocol.md` and
+  `configs/substitution_sensitivity_v1.yaml`. Design only: all execution gates
+  are closed, and the primary CapsProm versus matched-CNN contrast waits for
+  the matched CNN contract.
 
 Exit criteria:
 

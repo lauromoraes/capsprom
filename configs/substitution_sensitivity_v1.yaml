@@ -1,0 +1,83 @@
+protocol:
+  name: capsprom-substitution-sensitivity-v1
+  version: 1.0.0
+  status: design_locked_execution_blocked
+  specification: specs/substitution_sensitivity_protocol.md
+  source_method: umarov2017recognition_random_substitution
+  evidence_level: prediction_attribution
+  modifies_active_confirmatory_scope: false
+
+scope:
+  dataset_manifest: configs/dataset_eligibility_manifest_v1.yaml
+  dataset_count: 18
+  sequence_length: 81
+  tss_index: 60
+  models: [logistic_kmer, xgboost_kmer, cdbprom_adapted, cnnprom_adapted, cnn_matched_control, capsprom_basic]
+  optional_models: [cnn_bilstm, dnabert_finetuned]
+
+window_substitution:
+  primary_length: 6
+  sensitivity_lengths: [3, 12]
+  stride: 1
+  edge_policy: full_windows_only
+  per_base_aggregation: mean_of_covering_windows_with_coverage
+  primary_distribution: training_partition_mononucleotide_composition
+  sensitivity_distributions: [uniform]
+  repetition_candidates: [10, 20, 50]
+  repetition_rule: smallest_candidate_with_max_monte_carlo_se_at_or_below_limit
+  monte_carlo_se_limit: 0.01
+  seed_key: [dataset_id, model_seed, fold, window_length, start, repetition]
+
+in_silico_mutagenesis:
+  enabled: true
+  alternatives_per_position: 3
+  positional_summaries: [mean, max]
+  inferential_use: false
+
+metrics:
+  primary: relative_mean_score_drop_on_promoters
+  secondary: [absolute_mean_score_drop_on_promoters, sensitivity_drop_at_fixed_threshold, mean_score_change_on_nonpromoters]
+  decision_threshold: 0.5
+  unperturbed_pass_must_match_stored_predictions: true
+
+partitions:
+  settings_frozen_on: inner_validation
+  confirmatory_partition: external_test
+  external_test_after_final_fit_only: true
+  used_for_model_selection: false
+  used_for_hyperparameter_tuning: false
+
+regions:
+  assignment_from_model_outcomes: false
+  window_overlap_fraction: 0.5
+  prokaryotic:
+    minus_35: [-36, -29]
+    minus_10: [-13, -6]
+  eukaryotic_tata:
+    tata_box: [-32, -23]
+  eukaryotic_non_tata:
+    initiator: [-3, 5]
+
+diagnostics:
+  used_for_selection: false
+  flat_profile_min_relative_drop: 0.05
+  edge_dominant_starts: primary_length
+
+statistics:
+  descriptive: all_models_all_datasets
+  regional_summary: mean_primary_metric_over_overlapping_starts
+  seed_pairing: within_dataset
+  cross_dataset_test: two_sided_wilcoxon_signed_rank
+  multiplicity: holm
+  contrasts:
+    - {id: primary, a: capsprom_basic, b: cnn_matched_control}
+    - {id: secondary, a: capsprom_basic, b: cnnprom_adapted}
+  per_position_tests: false
+
+execution_gates:
+  cnn_matched_control_contract_frozen: false
+  inner_fold_checkpoints_verified: false
+  implementation_validated: false
+  inner_validation_enabled: false
+  final_fits_complete: false
+  external_test_enabled: false
