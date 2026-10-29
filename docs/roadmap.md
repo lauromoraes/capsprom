@@ -801,6 +801,24 @@ Current state:
   false.
 - Next: decide, as a separate authorization, whether to open the external
   test evaluation. Embeddings remain closed.
+- Completed: redo source acquisition for future datasets under
+  `specs/source_acquisition_protocol.md`. 210 pinned upstream files (eight
+  study releases plus Promotech, EPDnew, primary TSS supplements, and UCSC
+  genomes) were downloaded and hash-verified into `data/acquired/`, and 64
+  collections were canonicalized into `data/canonical/`. All collections pass
+  exact release counts and legacy parity. The legacy EPD export has one
+  corrupted record, and iPro-MP has 171 cross-label sequences. No dataset was
+  built and no gate changed (`docs/source_acquisition_v1_report.md`).
+- Completed: data provenance under `specs/data_provenance_policy.md`.
+  `source_acquisition_v1` is the reference collection. Acquisition runs now
+  record their command, code version, and upstream response headers. Upstream
+  release dates are kept separate from acquisition dates. `data/raw/` is
+  inventoried by SHA-256, and unknown dates stay unknown. Replaying the
+  regenerated-v3 build from the acquired files reproduces all 18 confirmatory
+  datasets byte for byte, and 287 of 298 local run summaries link to
+  replay-verified datasets. Records are in `manifests/provenance/`, and the log,
+  findings, and lineage are in `docs/provenance/`. No experiment was rerun and no
+  gate changed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 

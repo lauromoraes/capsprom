@@ -1,0 +1,552 @@
+{
+  "acquisition": "source-acquisition-v1",
+  "interpretation": "Commit dates and Last-Modified headers describe the upstream copy as reported by the source at observed_at. They are not acquisition dates; acquisition times are the acquired_at values in the acquisition manifest.",
+  "observed_at": "2026-10-28T20:42:04+00:00",
+  "schema_version": 1,
+  "sources": {
+    "bdgp": {
+      "declared": {
+        "kind": "url_list",
+        "landing_page": "https://www.fruitfly.org/seq_tools/datasets/",
+        "source_id": "bdgp",
+        "study": "berkeley_drosophila_genome_project_promoter_datasets"
+      },
+      "files": {
+        "Drosophila/promoter/1998/CDS/cds-part0.300": {
+          "headers": {
+            "content-length": "76464"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/1998/CDS/cds-part1.300": {
+          "headers": {
+            "content-length": "76411"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/1998/CDS/cds-part2.300": {
+          "headers": {
+            "content-length": "76432"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/1998/intron/intron-part0.300": {
+          "headers": {
+            "content-length": "26472"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/1998/intron/intron-part1.300": {
+          "headers": {
+            "content-length": "26417"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/1998/intron/intron-part2.300": {
+          "headers": {
+            "content-length": "26471"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/1998/prom/drosophila.0": {
+          "headers": {
+            "content-length": "28091"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/1998/prom/drosophila.1": {
+          "headers": {
+            "content-length": "28421"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/1998/prom/drosophila.2": {
+          "headers": {
+            "content-length": "28105"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/CDS/cds-part.0": {
+          "headers": {
+            "content-length": "178231"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/CDS/cds-part.1": {
+          "headers": {
+            "content-length": "197860"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/CDS/cds-part.2": {
+          "headers": {
+            "content-length": "182560"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/CDS/cds-part.3": {
+          "headers": {
+            "content-length": "186471"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/CDS/cds-part.4": {
+          "headers": {
+            "content-length": "222429"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/intron/intron-part.0": {
+          "headers": {
+            "content-length": "122105"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/intron/intron-part.1": {
+          "headers": {
+            "content-length": "123848"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/intron/intron-part.2": {
+          "headers": {
+            "content-length": "118706"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/intron/intron-part.3": {
+          "headers": {
+            "content-length": "123868"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/intron/intron-part.4": {
+          "headers": {
+            "content-length": "120054"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/prom/dro-part.0": {
+          "headers": {
+            "content-length": "126108"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/prom/dro-part.1": {
+          "headers": {
+            "content-length": "126456"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/prom/dro-part.2": {
+          "headers": {
+            "content-length": "126456"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/prom/dro-part.3": {
+          "headers": {
+            "content-length": "126465"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/prom/dro-part.4": {
+          "headers": {
+            "content-length": "126456"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/prom/promoter_all_1941.fa": {
+          "headers": {
+            "content-length": "671586"
+          },
+          "http_status": 200
+        },
+        "Drosophila/promoter/prom/promoter_training_1842.fa": {
+          "headers": {
+            "content-length": "580275"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/CDS/cds-part0.300": {
+          "headers": {
+            "content-length": "57438"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/CDS/cds-part1.300": {
+          "headers": {
+            "content-length": "57409"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/CDS/cds-part2.300": {
+          "headers": {
+            "content-length": "57427"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/CDS/cds-part3.300": {
+          "headers": {
+            "content-length": "57472"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/CDS/cds-part4.300": {
+          "headers": {
+            "content-length": "57387"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/intron/intron-part0.300": {
+          "headers": {
+            "content-length": "287494"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/intron/intron-part1.300": {
+          "headers": {
+            "content-length": "287198"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/intron/intron-part2.300": {
+          "headers": {
+            "content-length": "288152"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/intron/intron-part3.300": {
+          "headers": {
+            "content-length": "286727"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/intron/intron-part4.300": {
+          "headers": {
+            "content-length": "286697"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/prom/vertebrate.0": {
+          "headers": {
+            "content-length": "37403"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/prom/vertebrate.1": {
+          "headers": {
+            "content-length": "37403"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/prom/vertebrate.2": {
+          "headers": {
+            "content-length": "37403"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/prom/vertebrate.3": {
+          "headers": {
+            "content-length": "37403"
+          },
+          "http_status": 200
+        },
+        "Human/promoter/prom/vertebrate.4": {
+          "headers": {
+            "content-length": "37403"
+          },
+          "http_status": 200
+        }
+      }
+    },
+    "bhandari-drive": {
+      "declared": {
+        "kind": "url_list",
+        "landing_page": "https://drive.google.com/drive/folders/1VQ4r2SHGMmFMAq52oDhqYWz7cpTboeHE",
+        "source_id": "bhandari-drive",
+        "study": "bhandari2021comparison"
+      },
+      "files": {
+        "Human_promoter.gz": {
+          "headers": {
+            "content-length": "13011771",
+            "content-type": "application/octet-stream",
+            "last-modified": "Thu, 21 Jan 2021 09:03:12 GMT"
+          },
+          "http_status": 200
+        },
+        "Plant_promoters.gz": {
+          "headers": {
+            "content-length": "21753916",
+            "content-type": "application/octet-stream",
+            "last-modified": "Thu, 21 Jan 2021 09:03:24 GMT"
+          },
+          "http_status": 200
+        },
+        "Yeast_promoter.gz": {
+          "headers": {
+            "content-length": "2064549",
+            "content-type": "application/octet-stream",
+            "last-modified": "Thu, 21 Jan 2021 09:03:27 GMT"
+          },
+          "http_status": 200
+        }
+      }
+    },
+    "bhandari-github": {
+      "declared": {
+        "commit": "31d88cd82ea911fbb62262075811c91b5a9c6b49",
+        "kind": "github_tree",
+        "repository": "nikitabhandari-dl/Dataset",
+        "source_id": "bhandari-github",
+        "study": "bhandari2021comparison"
+      },
+      "pinned_commit": {
+        "author_date": "2022-10-12T07:30:08Z",
+        "committer_date": "2022-10-12T07:30:08Z",
+        "html_url": "https://github.com/nikitabhandari-dl/Dataset/commit/31d88cd82ea911fbb62262075811c91b5a9c6b49",
+        "sha": "31d88cd82ea911fbb62262075811c91b5a9c6b49"
+      }
+    },
+    "cdbprom-github": {
+      "declared": {
+        "commit": "a4357d97d0ae94ad40521c6686b80e9b13e1e973",
+        "kind": "github_tree",
+        "repository": "gustavsganzerla/cdbprom",
+        "source_id": "cdbprom-github",
+        "study": "martinez2024cdbprom"
+      },
+      "pinned_commit": {
+        "author_date": "2023-11-10T16:25:39Z",
+        "committer_date": "2023-11-10T16:25:39Z",
+        "html_url": "https://github.com/gustavsganzerla/cdbprom/commit/a4357d97d0ae94ad40521c6686b80e9b13e1e973",
+        "sha": "a4357d97d0ae94ad40521c6686b80e9b13e1e973"
+      }
+    },
+    "cdbprom-website": {
+      "declared": {
+        "kind": "url_list",
+        "landing_page": "https://aw.iimas.unam.mx/cdbprom/",
+        "source_id": "cdbprom-website",
+        "study": "martinez2024cdbprom"
+      },
+      "files": {
+        "training_sequences.zip": {
+          "headers": {
+            "content-length": "4816262",
+            "content-type": "application/zip",
+            "etag": "\"497d86-609c02ecfb900\"",
+            "last-modified": "Thu, 09 Nov 2023 23:01:24 GMT"
+          },
+          "http_status": 200
+        }
+      }
+    },
+    "cnnprom": {
+      "declared": {
+        "commit": "b4d2949e9bc5206f3049b35a488b036125ccc653",
+        "kind": "github_tree",
+        "repository": "solovictor/CNNPromoterData",
+        "source_id": "cnnprom",
+        "study": "umarov2017recognition"
+      },
+      "pinned_commit": {
+        "author_date": "2016-12-24T04:31:15Z",
+        "committer_date": "2016-12-24T04:31:15Z",
+        "html_url": "https://github.com/solovictor/CNNPromoterData/commit/b4d2949e9bc5206f3049b35a488b036125ccc653",
+        "sha": "b4d2949e9bc5206f3049b35a488b036125ccc653"
+      }
+    },
+    "epd": {
+      "declared": {
+        "kind": "url_list",
+        "landing_page": "https://epd.expasy.org/epd/EPD_download.php",
+        "release": 128,
+        "source_id": "epd",
+        "study": "meylan2020epd"
+      },
+      "files": {
+        "EPD_Copyright": {
+          "headers": {
+            "content-length": "450",
+            "content-type": "text/plain; charset=UTF-8",
+            "last-modified": "Wed, 21 Feb 2024 14:11:00 GMT"
+          },
+          "http_status": 200
+        },
+        "README": {
+          "headers": {
+            "content-length": "4312",
+            "content-type": "text/plain; charset=UTF-8",
+            "last-modified": "Thu, 26 May 2011 14:50:38 GMT"
+          },
+          "http_status": 200
+        },
+        "epd128.seq": {
+          "headers": {
+            "content-length": "3144454",
+            "last-modified": "Wed, 20 Jul 2016 09:22:13 GMT"
+          },
+          "http_status": 200
+        }
+      }
+    },
+    "epdnew": {
+      "declared": {
+        "kind": "url_list",
+        "landing_page": "https://epd.expasy.org/epdnew/",
+        "source_id": "epdnew",
+        "study": "dreos2013epd"
+      },
+      "files": {
+        "EPDnew_Copyright": {
+          "headers": {
+            "content-length": "450",
+            "content-type": "text/plain; charset=UTF-8",
+            "last-modified": "Fri, 16 Feb 2024 08:23:41 GMT"
+          },
+          "http_status": 200
+        },
+        "H_sapiens/006/Hs_EPDnew_006_hg38.bed": {
+          "headers": {
+            "content-length": "1676348",
+            "content-type": "text/plain; charset=UTF-8",
+            "last-modified": "Tue, 15 May 2018 13:06:31 GMT"
+          },
+          "http_status": 200
+        },
+        "H_sapiens_nc/001/HsNC_EPDnew_001_hg38.bed": {
+          "headers": {
+            "content-length": "140277",
+            "content-type": "text/plain; charset=UTF-8",
+            "last-modified": "Wed, 17 Apr 2019 10:46:24 GMT"
+          },
+          "http_status": 200
+        },
+        "M_musculus/003/Mm_EPDnew_003_mm10.bed": {
+          "headers": {
+            "content-length": "1440666",
+            "content-type": "text/plain; charset=UTF-8",
+            "last-modified": "Thu, 14 Jun 2018 11:14:58 GMT"
+          },
+          "http_status": 200
+        },
+        "M_musculus_nc/001/MmNC_EPDnew_001_mm10.bed": {
+          "headers": {
+            "content-length": "185967",
+            "content-type": "text/plain; charset=UTF-8",
+            "last-modified": "Tue, 27 Aug 2019 14:05:29 GMT"
+          },
+          "http_status": 200
+        }
+      }
+    },
+    "graphpro": {
+      "declared": {
+        "commit": "f75c42bbe4c255dc0ad915ed58fe7161705f1a48",
+        "kind": "github_tree",
+        "repository": "liuliwei1980/GraphPro",
+        "source_id": "graphpro",
+        "study": "zhang2024graphpro"
+      },
+      "pinned_commit": {
+        "author_date": "2024-02-18T03:28:53Z",
+        "committer_date": "2024-02-18T03:28:53Z",
+        "html_url": "https://github.com/liuliwei1980/GraphPro/commit/f75c42bbe4c255dc0ad915ed58fe7161705f1a48",
+        "sha": "f75c42bbe4c255dc0ad915ed58fe7161705f1a48"
+      }
+    },
+    "ipro-mp": {
+      "declared": {
+        "commit": "4266b521bc6617db939c5871cb1b6850dff63fdb",
+        "kind": "github_tree",
+        "repository": "Jackie-Suv/iPro-MP",
+        "source_id": "ipro-mp",
+        "study": "su2025ipro"
+      },
+      "pinned_commit": {
+        "author_date": "2025-07-10T15:03:20Z",
+        "committer_date": "2025-07-10T15:03:20Z",
+        "html_url": "https://github.com/Jackie-Suv/iPro-MP/commit/4266b521bc6617db939c5871cb1b6850dff63fdb",
+        "sha": "4266b521bc6617db939c5871cb1b6850dff63fdb"
+      }
+    },
+    "primary-tss-supplements": {
+      "declared": {
+        "kind": "url_list",
+        "source_id": "primary-tss-supplements",
+        "study": "graphpro_primary_tss_sources"
+      },
+      "files": {
+        "campylobacter_table_s4.xlsx": {
+          "error": "<HTTPError 403: 'Forbidden'>"
+        },
+        "chlamydia_table_s2.xlsx": {
+          "headers": {
+            "content-length": "3038",
+            "content-type": "text/html; charset=utf-8"
+          },
+          "http_status": 200
+        },
+        "ecoli_paa_NC_018666.1.fasta": {
+          "error": "<HTTPError 405: 'Method Not Allowed'>"
+        },
+        "leptospira_supplementary_files.zip": {
+          "headers": {
+            "content-type": "application/zip"
+          },
+          "http_status": 200
+        }
+      }
+    },
+    "promotech": {
+      "declared": {
+        "commit": "56251ad9b883ef831b4753fc623d5ec970fe65e0",
+        "kind": "github_tree",
+        "repository": "BioinformaticsLabAtMUN/Promotech",
+        "source_id": "promotech",
+        "study": "chevez2021promotech"
+      },
+      "pinned_commit": {
+        "author_date": "2023-06-19T21:25:42Z",
+        "committer_date": "2023-06-19T21:25:42Z",
+        "html_url": "https://github.com/BioinformaticsLabAtMUN/Promotech/commit/56251ad9b883ef831b4753fc623d5ec970fe65e0",
+        "sha": "56251ad9b883ef831b4753fc623d5ec970fe65e0"
+      }
+    },
+    "ucsc-genomes": {
+      "declared": {
+        "kind": "url_list",
+        "source_id": "ucsc-genomes",
+        "study": "ucsc_genome_browser"
+      },
+      "files": {
+        "hg38.2bit": {
+          "headers": {
+            "content-length": "835393456",
+            "etag": "\"31cb17b0-514f9499d2180\"",
+            "last-modified": "Thu, 30 Apr 2015 23:16:38 GMT"
+          },
+          "http_status": 200
+        },
+        "mm10.2bit": {
+          "headers": {
+            "content-length": "714784109",
+            "etag": "\"2a9abd6d-4b8644897f040\"",
+            "last-modified": "Tue, 07 Feb 2012 18:52:41 GMT"
+          },
+          "http_status": 200
+        },
+        "sacCer3.2bit": {
+          "headers": {
+            "content-length": "3039745",
+            "etag": "\"2e6201-4ab44dbe22780\"",
+            "last-modified": "Wed, 24 Aug 2011 18:55:42 GMT"
+          },
+          "http_status": 200
+        }
+      }
+    }
+  }
+}

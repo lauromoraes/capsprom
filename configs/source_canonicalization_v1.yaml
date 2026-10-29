@@ -1,0 +1,1920 @@
+# Canonicalization contract v1. Immutable once its canonical manifest exists; create v2 to change it.
+canonicalization:
+  name: source-canonicalization-v1
+  version: 1.0.0
+  protocol: specs/source_acquisition_protocol.md
+  acquisition_config: configs/source_acquisition_v1.yaml
+  acquisition_manifest: data/acquired/source_acquisition_v1/acquisition_manifest.json
+  acquired_root: data/acquired/source_acquisition_v1
+  output_dir: data/canonical/source_canonicalization_v1
+  cleaning: whitespace removed and bases uppercased; no record is dropped, cropped, padded or relabelled
+  status_rule: pass requires exact release counts per class and, where declared, identical per-class sequence multisets
+    with the legacy data/raw copy
+collections:
+- collection_id: bhandari-human
+  source: bhandari
+  domain: eukaryotic
+  organism: Homo sapiens (hg38)
+  expected_length: 1000
+  publication_counts:
+    positive: 61546
+  inputs:
+  - file: bhandari-drive/Human_promoter.gz
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 61546
+    tss_index: 700
+  legacy_inputs:
+  - path: data/raw/Bhandari_etal/Human_promoter.fa
+    format: fasta
+    source_class: positive
+  notes: Window -700..+299 around the TSS (headers up_700 and 3-prime pad 300). Published negatives are synthetic
+    shuffles and are not distributed.
+- collection_id: bhandari-yeast
+  source: bhandari
+  domain: eukaryotic
+  organism: Saccharomyces cerevisiae (sacCer3)
+  expected_length: 1000
+  publication_counts:
+    positive: 6125
+  inputs:
+  - file: bhandari-drive/Yeast_promoter.gz
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 6125
+    tss_index: 700
+  legacy_inputs:
+  - path: data/raw/Bhandari_etal/Yeast_promoter.fa
+    format: fasta
+    source_class: positive
+  notes: Window -700..+299 around the TSS (headers up_700 and 3-prime pad 300). Published negatives are synthetic
+    shuffles and are not distributed.
+- collection_id: bhandari-nominal-plant
+  source: bhandari
+  domain: eukaryotic
+  organism: ''
+  expected_length: 1000
+  publication_counts:
+    positive: 41671
+  inputs:
+  - file: bhandari-drive/Plant_promoters.gz
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 106520
+    tss_index: 700
+  legacy_inputs:
+  - path: data/raw/Bhandari_etal/Plant_promoters.fa
+    format: fasta
+    source_class: positive
+  notes: 'Identity conflict: file name and publication say A. thaliana (araTha1), but every header carries mm10
+    coordinates. Organism is left blank on purpose.'
+- collection_id: bhandari-human-random-genomic
+  source: bhandari
+  domain: eukaryotic
+  organism: Homo sapiens (hg38)
+  expected_length: 1000
+  publication_counts:
+    negative_random_genomic: 600
+  inputs:
+  - file: bhandari-github/random_sequences.fasta
+    format: fasta
+    source_class: negative_random_genomic
+    label: 0
+    expected_records: 593
+  notes: Random human genomic sequences used by the authors only as external test negatives.
+- collection_id: cdbprom-anabaena-sp
+  source: cdbprom
+  domain: prokaryotic
+  organism: Anabaena sp. (CP034058.1)
+  publication_counts:
+    positive: 2517
+    negative_downstream: 2517
+  inputs:
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: positive
+    label: 1
+    expected_records: 2517
+    member: anabaena_sp.txt
+    expected_length: 1001
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: negative_downstream
+    label: 0
+    expected_records: 2517
+    member: negative_anabaena_sp.txt
+    expected_length: 100
+  legacy_inputs:
+  - path: data/raw/CDBProm/anabaena_sp.txt
+    format: lines
+    source_class: positive
+  - path: data/raw/CDBProm/negative_anabaena_sp.txt
+    format: lines
+    source_class: negative_downstream
+  notes: TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code
+    uses -60..+20. File names keep upstream spellings.
+- collection_id: cdbprom-bacillus-amyloliquefaciens
+  source: cdbprom
+  domain: prokaryotic
+  organism: Bacillus amyloliquefaciens XH7 (CP002927.1)
+  publication_counts:
+    positive: 1059
+    negative_downstream: 1059
+  inputs:
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: positive
+    label: 1
+    expected_records: 1059
+    member: bacillus_amyloliquefaciens.txt
+    expected_length: 1001
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: negative_downstream
+    label: 0
+    expected_records: 1059
+    member: negative_bacillus_amyloliquefaciens.txt
+    expected_length: 100
+  legacy_inputs:
+  - path: data/raw/CDBProm/bacillus_amyloliquefaciens.txt
+    format: lines
+    source_class: positive
+  - path: data/raw/CDBProm/negative_bacillus_amyloliquefaciens.txt
+    format: lines
+    source_class: negative_downstream
+  notes: TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code
+    uses -60..+20. File names keep upstream spellings.
+- collection_id: cdbprom-chlamydophila-pneumoniae
+  source: cdbprom
+  domain: prokaryotic
+  organism: Chlamydophila pneumoniae CWL029 (AE001363.1)
+  publication_counts:
+    positive: 404
+    negative_downstream: 404
+  inputs:
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: positive
+    label: 1
+    expected_records: 404
+    member: chlamydophila_pneumoniae.txt
+    expected_length: 1001
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: negative_downstream
+    label: 0
+    expected_records: 404
+    member: negative_chlamydophila_pneumoniae.txt
+    expected_length: 100
+  legacy_inputs:
+  - path: data/raw/CDBProm/chlamydophila_pneumoniae.txt
+    format: lines
+    source_class: positive
+  - path: data/raw/CDBProm/negative_chlamydophila_pneumoniae.txt
+    format: lines
+    source_class: negative_downstream
+  notes: TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code
+    uses -60..+20. File names keep upstream spellings.
+- collection_id: cdbprom-corynebacterium-glutamicum
+  source: cdbprom
+  domain: prokaryotic
+  organism: Corynebacterium glutamicum ATCC 13032 (BA000036.3)
+  publication_counts:
+    positive: 575
+    negative_downstream: 575
+  inputs:
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: positive
+    label: 1
+    expected_records: 575
+    member: corynebacterium_glutamicum.txt
+    expected_length: 1001
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: negative_downstream
+    label: 0
+    expected_records: 575
+    member: negative_corynebacterium_glutamicum.txt
+    expected_length: 100
+  legacy_inputs:
+  - path: data/raw/CDBProm/corynebacterium_glutamicum.txt
+    format: lines
+    source_class: positive
+  - path: data/raw/CDBProm/negative_corynebacterium_glutamicum.txt
+    format: lines
+    source_class: negative_downstream
+  notes: TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code
+    uses -60..+20. File names keep upstream spellings.
+- collection_id: cdbprom-helicobacter-pylori
+  source: cdbprom
+  domain: prokaryotic
+  organism: Helicobacter pylori 26695 (CP003904.1)
+  publication_counts:
+    positive: 713
+    negative_downstream: 713
+  inputs:
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: positive
+    label: 1
+    expected_records: 714
+    member: helicobacter_pylori.txt
+    expected_length: 1001
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: negative_downstream
+    label: 0
+    expected_records: 714
+    member: negative_helicobacter_pylori.txt
+    expected_length: 100
+  legacy_inputs:
+  - path: data/raw/CDBProm/helicobacter_pylori.txt
+    format: lines
+    source_class: positive
+  - path: data/raw/CDBProm/negative_helicobacter_pylori.txt
+    format: lines
+    source_class: negative_downstream
+  notes: TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code
+    uses -60..+20. File names keep upstream spellings.
+- collection_id: cdbprom-klebisiella-pneumoniae
+  source: cdbprom
+  domain: prokaryotic
+  organism: Klebsiella pneumoniae MGH 78578 (CP000647.1)
+  publication_counts:
+    positive: 1329
+    negative_downstream: 1329
+  inputs:
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: positive
+    label: 1
+    expected_records: 1329
+    member: klebisiella_pneumoniae.txt
+    expected_length: 1001
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: negative_downstream
+    label: 0
+    expected_records: 1329
+    member: negative_klebisiella_pneumoniae.txt
+    expected_length: 100
+  legacy_inputs:
+  - path: data/raw/CDBProm/klebisiella_pneumoniae.txt
+    format: lines
+    source_class: positive
+  - path: data/raw/CDBProm/negative_klebisiella_pneumoniae.txt
+    format: lines
+    source_class: negative_downstream
+  notes: TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code
+    uses -60..+20. File names keep upstream spellings.
+- collection_id: cdbprom-mycrobacterium-tuberculosis
+  source: cdbprom
+  domain: prokaryotic
+  organism: Mycobacterium tuberculosis H37Rv (CP110619.1)
+  publication_counts:
+    positive: 1772
+    negative_downstream: 1772
+  inputs:
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: positive
+    label: 1
+    expected_records: 1772
+    member: mycrobacterium_tuberculosis.txt
+    expected_length: 1001
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: negative_downstream
+    label: 0
+    expected_records: 1772
+    member: negative_mycrobacterium_tuberculosis.txt
+    expected_length: 100
+  legacy_inputs:
+  - path: data/raw/CDBProm/mycrobacterium_tuberculosis.txt
+    format: lines
+    source_class: positive
+  - path: data/raw/CDBProm/negative_mycrobacterium_tuberculosis.txt
+    format: lines
+    source_class: negative_downstream
+  notes: TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code
+    uses -60..+20. File names keep upstream spellings.
+- collection_id: cdbprom-pseudonomas-aeruginosa
+  source: cdbprom
+  domain: prokaryotic
+  organism: Pseudomonas aeruginosa UCBPP-PA14 (CP034244.1)
+  publication_counts:
+    positive: 2054
+    negative_downstream: 2054
+  inputs:
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: positive
+    label: 1
+    expected_records: 2055
+    member: pseudonomas_aeruginosa.txt
+    expected_length: 1001
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: negative_downstream
+    label: 0
+    expected_records: 2055
+    member: negative_pseudonomas_aeruginosa.txt
+    expected_length: 100
+  legacy_inputs:
+  - path: data/raw/CDBProm/pseudonomas_aeruginosa.txt
+    format: lines
+    source_class: positive
+  - path: data/raw/CDBProm/negative_pseudonomas_aeruginosa.txt
+    format: lines
+    source_class: negative_downstream
+  notes: TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code
+    uses -60..+20. File names keep upstream spellings.
+- collection_id: cdbprom-salmonella-typhimurium
+  source: cdbprom
+  domain: prokaryotic
+  organism: Salmonella enterica Typhimurium SL1344 (CP133487.1)
+  publication_counts:
+    positive: 981
+    negative_downstream: 981
+  inputs:
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: positive
+    label: 1
+    expected_records: 981
+    member: salmonella_typhimurium.txt
+    expected_length: 1001
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: negative_downstream
+    label: 0
+    expected_records: 981
+    member: negative_salmonella_typhimurium.txt
+    expected_length: 100
+  legacy_inputs:
+  - path: data/raw/CDBProm/salmonella_typhimurium.txt
+    format: lines
+    source_class: positive
+  - path: data/raw/CDBProm/negative_salmonella_typhimurium.txt
+    format: lines
+    source_class: negative_downstream
+  notes: TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code
+    uses -60..+20. File names keep upstream spellings.
+- collection_id: cdbprom-streptomyces-coelicolor
+  source: cdbprom
+  domain: prokaryotic
+  organism: Streptomyces coelicolor A3(2) (AL939104.1)
+  publication_counts:
+    positive: 2611
+    negative_downstream: 2611
+  inputs:
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: positive
+    label: 1
+    expected_records: 2611
+    member: streptomyces_coelicolor.txt
+    expected_length: 1001
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: negative_downstream
+    label: 0
+    expected_records: 2611
+    member: negative_streptomyces_coelicolor.txt
+    expected_length: 100
+  legacy_inputs:
+  - path: data/raw/CDBProm/streptomyces_coelicolor.txt
+    format: lines
+    source_class: positive
+  - path: data/raw/CDBProm/negative_streptomyces_coelicolor.txt
+    format: lines
+    source_class: negative_downstream
+  notes: TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code
+    uses -60..+20. File names keep upstream spellings.
+- collection_id: cdbprom-synechocistis
+  source: cdbprom
+  domain: prokaryotic
+  organism: Synechocistis sp. PCC 6803 (AP012276.1)
+  publication_counts:
+    positive: 1639
+    negative_downstream: 1639
+  inputs:
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: positive
+    label: 1
+    expected_records: 1639
+    member: synechocistis.txt
+    expected_length: 1001
+  - file: cdbprom-website/training_sequences.zip
+    format: lines
+    source_class: negative_downstream
+    label: 0
+    expected_records: 1639
+    member: negative_synechocistis.txt
+    expected_length: 100
+  legacy_inputs:
+  - path: data/raw/CDBProm/synechocistis.txt
+    format: lines
+    source_class: positive
+  - path: data/raw/CDBProm/negative_synechocistis.txt
+    format: lines
+    source_class: negative_downstream
+  notes: TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code
+    uses -60..+20. File names keep upstream spellings.
+- collection_id: cnnprom-ecoli-sigma70
+  source: cnnprom
+  domain: prokaryotic
+  organism: Escherichia coli K-12 MG1655
+  expected_length: 81
+  publication_counts:
+    positive: 839
+    negative_opposite_strand_cds: 3000
+  inputs:
+  - file: cnnprom/Ecoli_prom.fa
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 839
+    tss_index: 60
+  - file: cnnprom/Ecoli_non_prom.fa
+    format: fasta
+    source_class: negative_opposite_strand_cds
+    label: 0
+    expected_records: 3000
+  legacy_inputs:
+  - path: data/raw/CNNProm/Ecoli_pos.fa
+    format: fasta
+    source_class: positive
+  - path: data/raw/CNNProm/Ecoli_neg.fa
+    format: fasta
+    source_class: negative_opposite_strand_cds
+  notes: Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1
+    counts.
+- collection_id: cnnprom-bacillus-subtilis
+  source: cnnprom
+  domain: prokaryotic
+  organism: Bacillus subtilis 168
+  expected_length: 81
+  publication_counts:
+    positive: 746
+    negative_opposite_strand_cds: 2000
+  inputs:
+  - file: cnnprom/Bacillus_prom.fa
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 373
+    tss_index: 60
+  - file: cnnprom/Bacillus_non_prom.fa
+    format: fasta
+    source_class: negative_opposite_strand_cds
+    label: 0
+    expected_records: 1000
+  legacy_inputs:
+  - path: data/raw/CNNProm/Bacillus_pos.fa
+    format: fasta
+    source_class: positive
+  - path: data/raw/CNNProm/Bacillus_neg.fa
+    format: fasta
+    source_class: negative_opposite_strand_cds
+  notes: Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1
+    counts.
+- collection_id: cnnprom-human-non-tata
+  source: cnnprom
+  domain: eukaryotic
+  organism: Homo sapiens
+  expected_length: 251
+  publication_counts:
+    positive: 19811
+    negative_post_first_exon: 27731
+  inputs:
+  - file: cnnprom/human_non_tata.fa
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 19811
+    tss_index: 200
+  - file: cnnprom/human_nonprom_big.fa
+    format: fasta
+    source_class: negative_post_first_exon
+    label: 0
+    expected_records: 27731
+  legacy_inputs:
+  - path: data/raw/CNNProm/Human_non_tata_pos.fa
+    format: fasta
+    source_class: positive
+  - path: data/raw/CNNProm/Human_non_tata_neg.fa
+    format: fasta
+    source_class: negative_post_first_exon
+  notes: Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1
+    counts.
+- collection_id: cnnprom-mouse-non-tata
+  source: cnnprom
+  domain: eukaryotic
+  organism: Mus musculus
+  expected_length: 251
+  publication_counts:
+    positive: 16283
+    negative_post_first_exon: 24822
+  inputs:
+  - file: cnnprom/Mouse_non_tata.fa
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 16283
+    tss_index: 200
+  - file: cnnprom/Mouse_non_nonprom_big.fa
+    format: fasta
+    source_class: negative_post_first_exon
+    label: 0
+    expected_records: 24822
+  legacy_inputs:
+  - path: data/raw/CNNProm/Mouse_non_tata_pos.fa
+    format: fasta
+    source_class: positive
+  - path: data/raw/CNNProm/Mouse_non_tata_neg.fa
+    format: fasta
+    source_class: negative_post_first_exon
+  notes: Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1
+    counts.
+- collection_id: cnnprom-mouse-tata
+  source: cnnprom
+  domain: eukaryotic
+  organism: Mus musculus
+  expected_length: 251
+  publication_counts:
+    positive: 1255
+    negative_post_first_exon: 3530
+  inputs:
+  - file: cnnprom/Mouse_tata.fa
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 1255
+    tss_index: 200
+  - file: cnnprom/Mouse_nonprom.fa
+    format: fasta
+    source_class: negative_post_first_exon
+    label: 0
+    expected_records: 3530
+  legacy_inputs:
+  - path: data/raw/CNNProm/Mouse_tata_pos.fa
+    format: fasta
+    source_class: positive
+  - path: data/raw/CNNProm/Mouse_tata_neg.fa
+    format: fasta
+    source_class: negative_post_first_exon
+  notes: Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1
+    counts.
+- collection_id: cnnprom-arabidopsis-tata
+  source: cnnprom
+  domain: eukaryotic
+  organism: Arabidopsis thaliana
+  expected_length: 251
+  publication_counts:
+    positive: 1497
+    negative_post_first_exon: 2879
+  inputs:
+  - file: cnnprom/Arabidopsis_tata.fa
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 1497
+    tss_index: 200
+  - file: cnnprom/Arabidopsis_non_prom.fa
+    format: fasta
+    source_class: negative_post_first_exon
+    label: 0
+    expected_records: 2879
+  legacy_inputs:
+  - path: data/raw/CNNProm/Arabidopsis_tata_pos.fa
+    format: fasta
+    source_class: positive
+  - path: data/raw/CNNProm/Arabidopsis_tata_neg.fa
+    format: fasta
+    source_class: negative_post_first_exon
+  notes: Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1
+    counts.
+- collection_id: cnnprom-arabidopsis-non-tata
+  source: cnnprom
+  domain: eukaryotic
+  organism: Arabidopsis thaliana
+  expected_length: 251
+  publication_counts:
+    positive: 5905
+    negative_post_first_exon: 11459
+  inputs:
+  - file: cnnprom/Arabidopsis_non_tata.fa
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 5905
+    tss_index: 200
+  - file: cnnprom/Arabidopsis_non_prom_big.fa
+    format: fasta
+    source_class: negative_post_first_exon
+    label: 0
+    expected_records: 11459
+  legacy_inputs:
+  - path: data/raw/CNNProm/Arabidopsis_non_tata_pos.fa
+    format: fasta
+    source_class: positive
+  - path: data/raw/CNNProm/Arabidopsis_non_tata_neg.fa
+    format: fasta
+    source_class: negative_post_first_exon
+  notes: Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1
+    counts.
+- collection_id: cnnprom-mouse-tata-dbtss
+  source: cnnprom
+  domain: eukaryotic
+  organism: Mus musculus
+  expected_length: 251
+  publication_counts:
+    positive: 1354
+  inputs:
+  - file: cnnprom/Mouse_tata_dbtss.fa
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 1354
+  legacy_inputs:
+  - path: data/raw/CNNProm/Mouse_tata_dbtss.fa
+    format: fasta
+    source_class: positive
+  notes: DBTSS mouse TATA set (1,083 train + 271 test in the paper). TSS position not documented.
+- collection_id: graphpro-bamy
+  source: graphpro
+  domain: prokaryotic
+  organism: Bacillus amyloliquefaciens
+  expected_length: 81
+  inputs:
+  - file: graphpro/Datasets/Bamy/positive
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 928
+  - file: graphpro/Datasets/Bamy/negative
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 928
+  legacy_inputs:
+  - path: data/raw/GraphPro/Bamy/positive
+    format: fasta
+    source_class: positive
+  - path: data/raw/GraphPro/Bamy/negative
+    format: fasta
+    source_class: negative
+  notes: Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.
+- collection_id: graphpro-cje
+  source: graphpro
+  domain: prokaryotic
+  organism: Campylobacter jejuni
+  expected_length: 81
+  inputs:
+  - file: graphpro/Datasets/Cje/positive
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 1346
+  - file: graphpro/Datasets/Cje/negative
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 1346
+  legacy_inputs:
+  - path: data/raw/GraphPro/Cje/positive
+    format: fasta
+    source_class: positive
+  - path: data/raw/GraphPro/Cje/negative
+    format: fasta
+    source_class: negative
+  notes: Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.
+- collection_id: graphpro-cpne
+  source: graphpro
+  domain: prokaryotic
+  organism: Chlamydophila pneumoniae CWL029
+  expected_length: 81
+  inputs:
+  - file: graphpro/Datasets/Cpne/positive
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 503
+  - file: graphpro/Datasets/Cpne/negative
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 431
+  legacy_inputs:
+  - path: data/raw/GraphPro/Cpne/positive
+    format: fasta
+    source_class: positive
+  - path: data/raw/GraphPro/Cpne/negative
+    format: fasta
+    source_class: negative
+  notes: Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.
+- collection_id: graphpro-ecol
+  source: graphpro
+  domain: prokaryotic
+  organism: Escherichia coli
+  expected_length: 81
+  inputs:
+  - file: graphpro/Datasets/Ecol/positive
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 2519
+  - file: graphpro/Datasets/Ecol/negative
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 3874
+  legacy_inputs:
+  - path: data/raw/GraphPro/Ecol/positive
+    format: fasta
+    source_class: positive
+  - path: data/raw/GraphPro/Ecol/negative
+    format: fasta
+    source_class: negative
+  notes: Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.
+- collection_id: graphpro-lint
+  source: graphpro
+  domain: prokaryotic
+  organism: Leptospira interrogans
+  expected_length: 81
+  inputs:
+  - file: graphpro/Datasets/Lint/positive
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 2847
+  - file: graphpro/Datasets/Lint/negative
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 2116
+  legacy_inputs:
+  - path: data/raw/GraphPro/Lint/positive
+    format: fasta
+    source_class: positive
+  - path: data/raw/GraphPro/Lint/negative
+    format: fasta
+    source_class: negative
+  notes: Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.
+- collection_id: graphpro-rcap
+  source: graphpro
+  domain: prokaryotic
+  organism: Rhodobacter capsulatus
+  expected_length: 81
+  inputs:
+  - file: graphpro/Datasets/Rcap/positive
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 3607
+  - file: graphpro/Datasets/Rcap/negative
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 3241
+  legacy_inputs:
+  - path: data/raw/GraphPro/Rcap/positive
+    format: fasta
+    source_class: positive
+  - path: data/raw/GraphPro/Rcap/negative
+    format: fasta
+    source_class: negative
+  notes: Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.
+- collection_id: graphpro-human
+  source: graphpro
+  domain: eukaryotic
+  organism: Homo sapiens
+  expected_length: 81
+  inputs:
+  - file: graphpro/Datasets/human/positive
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 2339
+  - file: graphpro/Datasets/human/negative
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 2339
+  legacy_inputs:
+  - path: data/raw/GraphPro/human/positive
+    format: fasta
+    source_class: positive
+  - path: data/raw/GraphPro/human/negative
+    format: fasta
+    source_class: negative
+  notes: Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.
+- collection_id: graphpro-mouse
+  source: graphpro
+  domain: eukaryotic
+  organism: Mus musculus
+  expected_length: 81
+  inputs:
+  - file: graphpro/Datasets/mouse/positive
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 1846
+  - file: graphpro/Datasets/mouse/negative
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 1846
+  legacy_inputs:
+  - path: data/raw/GraphPro/mouse/positive
+    format: fasta
+    source_class: positive
+  - path: data/raw/GraphPro/mouse/negative
+    format: fasta
+    source_class: negative
+  notes: Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.
+- collection_id: ipro-mp-01-acinetobacter-baumannii-atcc-17978
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Acinetobacter baumannii ATCC 17978 (CP000521.1)
+  expected_length: 81
+  publication_counts:
+    positive: 1111
+    negative_cds: 1111
+    negative_intergenic: 1111
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/1_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 889
+      negative_cds: 889
+      negative_intergenic: 889
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/1_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 222
+      negative_cds: 222
+      negative_intergenic: 222
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/1_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/1_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-02-bradyrhizobium-japonicum-usda-110
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Bradyrhizobium japonicum USDA 110 (NC_004463.1)
+  expected_length: 81
+  publication_counts:
+    positive: 14779
+    negative_cds: 14779
+    negative_intergenic: 14779
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/2_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 11823
+      negative_cds: 11823
+      negative_intergenic: 11823
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/2_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 2956
+      negative_cds: 2956
+      negative_intergenic: 2956
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/2_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/2_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-03-burkholderia-cenocepacia-j2315
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Burkholderia cenocepacia J2315 (AM747720.1;AM747721.1;AM747722.1)
+  expected_length: 81
+  publication_counts:
+    positive: 9663
+    negative_cds: 9663
+    negative_intergenic: 9663
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/3_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 7730
+      negative_cds: 7730
+      negative_intergenic: 7730
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/3_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1933
+      negative_cds: 1933
+      negative_intergenic: 1933
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/3_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/3_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-04-campylobacter-jejuni-rm1221
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Campylobacter jejuni RM1221 (NC_003912.7)
+  expected_length: 81
+  publication_counts:
+    positive: 1995
+    negative_cds: 1995
+    negative_intergenic: 1995
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/4_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1596
+      negative_cds: 1596
+      negative_intergenic: 1596
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/4_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 399
+      negative_cds: 399
+      negative_intergenic: 399
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/4_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/4_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-05-campylobacter-jejuni-subsp-jejuni-81116
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Campylobacter jejuni subsp. jejuni 81116 (NC_009839.1)
+  expected_length: 81
+  publication_counts:
+    positive: 1790
+    negative_cds: 1790
+    negative_intergenic: 1790
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/5_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1432
+      negative_cds: 1432
+      negative_intergenic: 1432
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/5_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 358
+      negative_cds: 358
+      negative_intergenic: 358
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/5_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/5_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-06-campylobacter-jejuni-subsp-jejuni-81-176
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Campylobacter jejuni subsp. jejuni 81-176 (NC_008787.1)
+  expected_length: 81
+  publication_counts:
+    positive: 1944
+    negative_cds: 1944
+    negative_intergenic: 1944
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/6_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1555
+      negative_cds: 1555
+      negative_intergenic: 1555
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/6_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 389
+      negative_cds: 389
+      negative_intergenic: 389
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/6_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/6_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-07-campylobacter-jejuni-subsp-jejuni-nctc-11168
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Campylobacter jejuni subsp. jejuni NCTC 11168 (NC_002163.1)
+  expected_length: 81
+  publication_counts:
+    positive: 1745
+    negative_cds: 1745
+    negative_intergenic: 1745
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/7_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1396
+      negative_cds: 1396
+      negative_intergenic: 1396
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/7_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 349
+      negative_cds: 349
+      negative_intergenic: 349
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/7_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/7_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-08-corynebacterium-diphtheriae-nctc-13129
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Corynebacterium diphtheriae NCTC 13129 (NC_002935.2)
+  expected_length: 81
+  publication_counts:
+    positive: 1518
+    negative_cds: 1518
+    negative_intergenic: 1518
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/8_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1214
+      negative_cds: 1214
+      negative_intergenic: 1214
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/8_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 304
+      negative_cds: 304
+      negative_intergenic: 304
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/8_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/8_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-09-corynebacterium-glutamicum-atcc-13032
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Corynebacterium glutamicum ATCC 13032 (BX927147.1)
+  expected_length: 81
+  publication_counts:
+    positive: 3031
+    negative_cds: 3031
+    negative_intergenic: 3031
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/9_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 2425
+      negative_cds: 2425
+      negative_intergenic: 2425
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/9_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 606
+      negative_cds: 606
+      negative_intergenic: 606
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/9_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/9_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-10-escherichia-coli-k-12-mg1655
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Escherichia coli K-12 MG1655 (NC_000913.3)
+  expected_length: 81
+  publication_counts:
+    positive: 6230
+    negative_cds: 6230
+    negative_intergenic: 6230
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/10_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 4984
+      negative_cds: 4984
+      negative_intergenic: 4984
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/10_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1246
+      negative_cds: 1246
+      negative_intergenic: 1246
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/10_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/10_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-11-haloferax-volcanii-ds2
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Haloferax volcanii DS2 (NC_013967.1)
+  expected_length: 81
+  publication_counts:
+    positive: 4394
+    negative_cds: 4394
+    negative_intergenic: 4394
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/11_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 3515
+      negative_cds: 3515
+      negative_intergenic: 3515
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/11_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 879
+      negative_cds: 879
+      negative_intergenic: 879
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/11_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/11_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-12-helicobacter-pylori-26695
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Helicobacter pylori 26695 (NC_000915.1)
+  expected_length: 81
+  publication_counts:
+    positive: 2062
+    negative_cds: 2062
+    negative_intergenic: 2062
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/12_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1650
+      negative_cds: 1650
+      negative_intergenic: 1650
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/12_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 412
+      negative_cds: 412
+      negative_intergenic: 412
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/12_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/12_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-13-nostoc-sp-pcc-7120
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Nostoc sp. PCC 7120 (NC_003272.1)
+  expected_length: 81
+  publication_counts:
+    positive: 12560
+    negative_cds: 12560
+    negative_intergenic: 12560
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/13_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 10048
+      negative_cds: 10048
+      negative_intergenic: 10048
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/13_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 2512
+      negative_cds: 2512
+      negative_intergenic: 2512
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/13_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/13_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-14-paenibacillus-riograndensis-sbr5
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Paenibacillus riograndensis SBR5 (NZ_LN831776.1)
+  expected_length: 81
+  publication_counts:
+    positive: 2276
+    negative_cds: 2276
+    negative_intergenic: 2276
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/14_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1821
+      negative_cds: 1821
+      negative_intergenic: 1821
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/14_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 455
+      negative_cds: 455
+      negative_intergenic: 455
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/14_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/14_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-15-pseudomonas-putida-kt2440
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Pseudomonas putida KT2440 (NC_002947.3)
+  expected_length: 81
+  publication_counts:
+    positive: 6881
+    negative_cds: 6881
+    negative_intergenic: 6881
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/15_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 5505
+      negative_cds: 5505
+      negative_intergenic: 5505
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/15_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1376
+      negative_cds: 1376
+      negative_intergenic: 1376
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/15_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/15_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-16-shigella-flexneri-5a-m90t
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Shigella flexneri 5a M90T (NZ_CP037923.1)
+  expected_length: 81
+  publication_counts:
+    positive: 9760
+    negative_cds: 9760
+    negative_intergenic: 9760
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/16_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 7808
+      negative_cds: 7808
+      negative_intergenic: 7808
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/16_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1952
+      negative_cds: 1952
+      negative_intergenic: 1952
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/16_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/16_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-17-sinorhizobium-meliloti-1021
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Sinorhizobium meliloti 1021 (NC_003047.1)
+  expected_length: 81
+  publication_counts:
+    positive: 14482
+    negative_cds: 14482
+    negative_intergenic: 14482
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/17_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 11586
+      negative_cds: 11586
+      negative_intergenic: 11586
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/17_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 2896
+      negative_cds: 2896
+      negative_intergenic: 2896
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/17_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/17_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-18-staphylococcus-aureus-subsp-aureus-mw2
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Staphylococcus aureus subsp. aureus MW2 (NC_003923.1)
+  expected_length: 81
+  publication_counts:
+    positive: 1969
+    negative_cds: 1969
+    negative_intergenic: 1969
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/18_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1575
+      negative_cds: 1575
+      negative_intergenic: 1575
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/18_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 394
+      negative_cds: 394
+      negative_intergenic: 394
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/18_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/18_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-19-staphylococcus-epidermidis-atcc-12228
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Staphylococcus epidermidis ATCC 12228 (NC_004461.1)
+  expected_length: 81
+  publication_counts:
+    positive: 1647
+    negative_cds: 1647
+    negative_intergenic: 1647
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/19_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1318
+      negative_cds: 1318
+      negative_intergenic: 1318
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/19_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 329
+      negative_cds: 329
+      negative_intergenic: 329
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/19_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/19_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-20-synechococcus-elongatus-pcc-7942
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Synechococcus elongatus PCC 7942 (CP000100.1)
+  expected_length: 81
+  publication_counts:
+    positive: 1410
+    negative_cds: 1410
+    negative_intergenic: 1410
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/20_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1128
+      negative_cds: 1128
+      negative_intergenic: 1128
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/20_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 282
+      negative_cds: 282
+      negative_intergenic: 282
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/20_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/20_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-21-thermococcus-kodakarensis-kod1
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Thermococcus kodakarensis KOD1 (NC_006624.1)
+  expected_length: 81
+  publication_counts:
+    positive: 2413
+    negative_cds: 2413
+    negative_intergenic: 2413
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/21_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 1930
+      negative_cds: 1930
+      negative_intergenic: 1930
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/21_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 483
+      negative_cds: 483
+      negative_intergenic: 483
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/21_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/21_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-22-xanthomonas-campestris-pv-campestris-b100
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Xanthomonas campestris pv. campestris B100 (AM920689.1)
+  expected_length: 81
+  publication_counts:
+    positive: 2963
+    negative_cds: 2963
+    negative_intergenic: 2963
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/22_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 2370
+      negative_cds: 2370
+      negative_intergenic: 2370
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/22_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 593
+      negative_cds: 593
+      negative_intergenic: 593
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/22_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/22_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: ipro-mp-23-bacillus-subtilis-subsp-subtilis-168
+  source: ipro-mp
+  domain: prokaryotic
+  organism: Bacillus subtilis subsp. subtilis 168 (NC_000964.3)
+  expected_length: 81
+  publication_counts:
+    positive: 663
+    negative_cds: 663
+    negative_intergenic: 663
+  inputs:
+  - file: ipro-mp/Benchmark Dataset/Train/23_train.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 530
+      negative_cds: 530
+      negative_intergenic: 530
+    tss_index: 60
+    source_split: train
+  - file: ipro-mp/Benchmark Dataset/Test/23_test.txt
+    format: ipro_fasta
+    expected_records:
+      positive: 133
+      negative_cds: 133
+      negative_intergenic: 133
+    tss_index: 60
+    source_split: test
+  legacy_inputs:
+  - path: data/raw/iPro-MP/repo/Dataset/Train/23_train.txt
+    format: ipro_fasta
+  - path: data/raw/iPro-MP/repo/Dataset/Test/23_test.txt
+    format: ipro_fasta
+  notes: Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').
+- collection_id: epd-128
+  source: epd
+  domain: eukaryotic
+  organism: multiple (EPD release 128)
+  expected_length: 600
+  inputs:
+  - file: epd/epd128.seq
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 4806
+    tss_index: 499
+  notes: Window -499..+100; EPD pads short entries with N. The legacy data/raw/EDP file is a -250..+50 web export,
+    so parity is checked by cropping in the acquisition report.
+- collection_id: bdgp-drosophila-1998
+  source: bdgp
+  domain: eukaryotic
+  organism: Drosophila melanogaster
+  expected_length: 300
+  inputs:
+  - file: bdgp/Drosophila/promoter/1998/prom/drosophila.0
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 85
+  - file: bdgp/Drosophila/promoter/1998/prom/drosophila.1
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 86
+  - file: bdgp/Drosophila/promoter/1998/prom/drosophila.2
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 85
+  - file: bdgp/Drosophila/promoter/1998/CDS/cds-part0.300
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 237
+  - file: bdgp/Drosophila/promoter/1998/CDS/cds-part1.300
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 237
+  - file: bdgp/Drosophila/promoter/1998/CDS/cds-part2.300
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 237
+  - file: bdgp/Drosophila/promoter/1998/intron/intron-part0.300
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 80
+  - file: bdgp/Drosophila/promoter/1998/intron/intron-part1.300
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 80
+  - file: bdgp/Drosophila/promoter/1998/intron/intron-part2.300
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 80
+  legacy_inputs:
+  - path: data/raw/Fuitfly/drosophila.fa
+    format: fasta
+    source_class: positive
+  notes: Headers state 250 bp upstream and 50 bp downstream; the TSS base convention is unresolved.
+- collection_id: bdgp-drosophila-1941
+  source: bdgp
+  domain: eukaryotic
+  organism: Drosophila melanogaster
+  expected_length: 300
+  inputs:
+  - file: bdgp/Drosophila/promoter/prom/promoter_all_1941.fa
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 1941
+  - file: bdgp/Drosophila/promoter/CDS/cds-part.0
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 527
+  - file: bdgp/Drosophila/promoter/CDS/cds-part.1
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 585
+  - file: bdgp/Drosophila/promoter/CDS/cds-part.2
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 539
+  - file: bdgp/Drosophila/promoter/CDS/cds-part.3
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 551
+  - file: bdgp/Drosophila/promoter/CDS/cds-part.4
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 657
+  - file: bdgp/Drosophila/promoter/intron/intron-part.0
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 361
+  - file: bdgp/Drosophila/promoter/intron/intron-part.1
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 366
+  - file: bdgp/Drosophila/promoter/intron/intron-part.2
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 351
+  - file: bdgp/Drosophila/promoter/intron/intron-part.3
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 366
+  - file: bdgp/Drosophila/promoter/intron/intron-part.4
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 355
+  legacy_inputs:
+  - path: data/raw/Fuitfly/Drosophila_promoter_all_1941.fa
+    format: fasta
+    source_class: positive
+  notes: Negatives are paired by BDGP directory (Drosophila/promoter/CDS and intron). dro-part.* and promoter_training_1842.fa
+    are subsets of the 1,941 set and are acquired only.
+- collection_id: bdgp-human
+  source: bdgp
+  domain: eukaryotic
+  organism: Homo sapiens
+  expected_length: 300
+  inputs:
+  - file: bdgp/Human/promoter/prom/vertebrate.0
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 113
+  - file: bdgp/Human/promoter/prom/vertebrate.1
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 113
+  - file: bdgp/Human/promoter/prom/vertebrate.2
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 113
+  - file: bdgp/Human/promoter/prom/vertebrate.3
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 113
+  - file: bdgp/Human/promoter/prom/vertebrate.4
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 113
+  - file: bdgp/Human/promoter/CDS/cds-part0.300
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 178
+  - file: bdgp/Human/promoter/CDS/cds-part1.300
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 178
+  - file: bdgp/Human/promoter/CDS/cds-part2.300
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 178
+  - file: bdgp/Human/promoter/CDS/cds-part3.300
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 178
+  - file: bdgp/Human/promoter/CDS/cds-part4.300
+    format: fasta
+    source_class: negative_cds
+    label: 0
+    expected_records: 178
+  - file: bdgp/Human/promoter/intron/intron-part0.300
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 869
+  - file: bdgp/Human/promoter/intron/intron-part1.300
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 869
+  - file: bdgp/Human/promoter/intron/intron-part2.300
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 869
+  - file: bdgp/Human/promoter/intron/intron-part3.300
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 869
+  - file: bdgp/Human/promoter/intron/intron-part4.300
+    format: fasta
+    source_class: negative_intron
+    label: 0
+    expected_records: 869
+  legacy_inputs:
+  - path: data/raw/Fuitfly/human.fa
+    format: fasta
+    source_class: positive
+  notes: Positives carry EPD identifiers; headers state 250 bp upstream and 50 bp downstream.
+- collection_id: promotech-cjejuni-2
+  source: promotech
+  domain: prokaryotic
+  organism: Campylobacter jejuni NCTC 11168 (NC_002163.1)
+  expected_length: 40
+  inputs:
+  - file: promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/CJEJUNI_2/positive.fasta
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 1905
+    source_split: training
+  - file: promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/CJEJUNI_2/negative.fasta
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 1846
+    source_split: training
+  notes: Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references
+    and are not canonicalized.
+- collection_id: promotech-cpneumoniae
+  source: promotech
+  domain: prokaryotic
+  organism: Chlamydophila pneumoniae CWL029 (NC_000922.1)
+  expected_length: 40
+  inputs:
+  - file: promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/CPNEUMONIAE/positive.fasta
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 530
+    source_split: training
+  - file: promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/CPNEUMONIAE/negative.fasta
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 520
+    source_split: training
+  notes: Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references
+    and are not canonicalized.
+- collection_id: promotech-ecoli
+  source: promotech
+  domain: prokaryotic
+  organism: declared E. coli K-12 MG1655 (NC_000913.3); source rows describe plasmid pAA (NC_018666.1)
+  expected_length: 40
+  inputs:
+  - file: promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/ECOLI/positive.fasta
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 278
+    source_split: training
+  - file: promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/ECOLI/negative.fasta
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 278
+    source_split: training
+  notes: Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references
+    and are not canonicalized.
+- collection_id: promotech-linterrogans
+  source: promotech
+  domain: prokaryotic
+  organism: Leptospira interrogans (NZ_LT962963.1)
+  expected_length: 40
+  inputs:
+  - file: promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/LINTERROGANS/positive.fasta
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 2865
+    source_split: training
+  - file: promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/LINTERROGANS/negative.fasta
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 2805
+    source_split: training
+  notes: Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references
+    and are not canonicalized.
+- collection_id: promotech-bacillus
+  source: promotech
+  domain: prokaryotic
+  organism: Bacillus amyloliquefaciens XH7 (CP002927.1)
+  expected_length: 40
+  inputs:
+  - file: promotech/datasets/validation/40nt-sequences/bacteria-1-1-ratio/BACILLUS/positive.fasta
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 1064
+    source_split: validation
+  - file: promotech/datasets/validation/40nt-sequences/bacteria-1-1-ratio/BACILLUS/negative.fasta
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 1055
+    source_split: validation
+  notes: Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references
+    and are not canonicalized.
+- collection_id: promotech-rhodobacter-1
+  source: promotech
+  domain: prokaryotic
+  organism: Rhodobacter capsulatus (NC_014034.1)
+  expected_length: 40
+  inputs:
+  - file: promotech/datasets/validation/40nt-sequences/bacteria-1-1-ratio/RHODOBACTER_1/positive.fasta
+    format: fasta
+    source_class: positive
+    label: 1
+    expected_records: 5374
+    source_split: validation
+  - file: promotech/datasets/validation/40nt-sequences/bacteria-1-1-ratio/RHODOBACTER_1/negative.fasta
+    format: fasta
+    source_class: negative
+    label: 0
+    expected_records: 5207
+    source_split: validation
+  notes: Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references
+    and are not canonicalized.

@@ -1,0 +1,226 @@
+acquisition:
+  name: source-acquisition-v1
+  version: 1.0.0
+  protocol: specs/source_acquisition_protocol.md
+  audit: docs/dataset_reconstruction_sources.md
+  root: data/acquired/source_acquisition_v1
+  frozen_on: 2026-10-27
+  policy: >-
+    GitHub sources are pinned to a full commit and every blob must reproduce the
+    Git blob SHA-1 listed by that commit's tree. Direct URLs are verified against
+    every digest declared below; files without a declared digest are recorded on
+    first acquisition and verified against the manifest thereafter.
+
+sources:
+  # Released study datasets -------------------------------------------------
+  - source_id: bhandari-drive
+    kind: url_list
+    study: bhandari2021comparison
+    landing_page: https://drive.google.com/drive/folders/1VQ4r2SHGMmFMAq52oDhqYWz7cpTboeHE
+    files:
+      - path: Human_promoter.gz
+        url: https://drive.usercontent.google.com/download?id=1LyNlIh9-tN9U-IHXQuNxdQi4XsDVEyoO&export=download&confirm=t
+      - path: Plant_promoters.gz
+        url: https://drive.usercontent.google.com/download?id=159d_z54XIuoPNGLgDgSaLzYd6xYtXvN6&export=download&confirm=t
+      - path: Yeast_promoter.gz
+        url: https://drive.usercontent.google.com/download?id=1mAK2w4INdwJkVoS0TDstQ9OUFOVb_l0L&export=download&confirm=t
+        expected:
+          md5: 0bc1877520a5e308b88c43d33b7ab0a7
+
+  - source_id: bhandari-github
+    kind: github_tree
+    study: bhandari2021comparison
+    repository: nikitabhandari-dl/Dataset
+    commit: 31d88cd82ea911fbb62262075811c91b5a9c6b49
+    include: [README.md, Update, random_sequences.fasta]
+
+  - source_id: cdbprom-website
+    kind: url_list
+    study: martinez2024cdbprom
+    landing_page: https://aw.iimas.unam.mx/cdbprom/
+    files:
+      - path: training_sequences.zip
+        url: https://aw.iimas.unam.mx/cdbprom/descargasFiles/training_sequences.zip
+        expected:
+          md5: 68bf4c0d94190cbcf3f28eec049905ab
+        # The server omits its intermediate certificate; the issuer's AIA copy is pinned.
+        tls_intermediate:
+          url: http://secure.globalsign.com/cacert/gsrsaovsslca2018.crt
+          sha256: b676ffa3179e8812093a1b5eafee876ae7a6aaf231078dad1bfb21cd2893764a
+
+  - source_id: cdbprom-github
+    kind: github_tree
+    study: martinez2024cdbprom
+    repository: gustavsganzerla/cdbprom
+    commit: a4357d97d0ae94ad40521c6686b80e9b13e1e973
+    include: [README.md, predictor.py, stability_converter.py, training_data.csv]
+
+  - source_id: cnnprom
+    kind: github_tree
+    study: umarov2017recognition
+    repository: solovictor/CNNPromoterData
+    commit: b4d2949e9bc5206f3049b35a488b036125ccc653
+    include:
+      - README
+      - Arabidopsis_non_prom.fa
+      - Arabidopsis_non_prom_big.fa
+      - Arabidopsis_non_tata.fa
+      - Arabidopsis_tata.fa
+      - Bacillus_non_prom.fa
+      - Bacillus_prom.fa
+      - Ecoli_non_prom.fa
+      - Ecoli_prom.fa
+      - Mouse_non_nonprom_big.fa
+      - Mouse_non_tata.fa
+      - Mouse_nonprom.fa
+      - Mouse_tata.fa
+      - Mouse_tata_dbtss.fa
+      - human_non_tata.fa
+      - human_nonprom_big.fa
+
+  - source_id: graphpro
+    kind: github_tree
+    study: zhang2024graphpro
+    repository: liuliwei1980/GraphPro
+    commit: f75c42bbe4c255dc0ad915ed58fe7161705f1a48
+    include: [README.md, Datasets]
+
+  - source_id: ipro-mp
+    kind: github_tree
+    study: su2025ipro
+    repository: Jackie-Suv/iPro-MP
+    commit: 4266b521bc6617db939c5871cb1b6850dff63fdb
+    include: [README.md, Benchmark Dataset]
+
+  - source_id: epd
+    kind: url_list
+    study: meylan2020epd
+    landing_page: https://epd.expasy.org/epd/EPD_download.php
+    release: 128
+    files:
+      - path: epd128.seq
+        url: https://epd.expasy.org/ftp/epd/views/epd128.seq
+      - path: README
+        url: https://epd.expasy.org/ftp/epd/views/README
+      - path: EPD_Copyright
+        url: https://epd.expasy.org/ftp/epd/EPD_Copyright
+        expected:
+          sha256: ec85e536c7769d78f3e908e1b7e01b54d2e0b6683f32e9f14b5baafe1be7e13e
+
+  - source_id: bdgp
+    kind: url_list
+    study: berkeley_drosophila_genome_project_promoter_datasets
+    landing_page: https://www.fruitfly.org/seq_tools/datasets/
+    files:
+      - {path: Drosophila/promoter/prom/promoter_all_1941.fa, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/prom/promoter_all_1941.fa}
+      - {path: Drosophila/promoter/prom/promoter_training_1842.fa, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/prom/promoter_training_1842.fa}
+      - {path: Drosophila/promoter/prom/dro-part.0, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/prom/dro-part.0}
+      - {path: Drosophila/promoter/prom/dro-part.1, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/prom/dro-part.1}
+      - {path: Drosophila/promoter/prom/dro-part.2, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/prom/dro-part.2}
+      - {path: Drosophila/promoter/prom/dro-part.3, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/prom/dro-part.3}
+      - {path: Drosophila/promoter/prom/dro-part.4, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/prom/dro-part.4}
+      - {path: Drosophila/promoter/CDS/cds-part.0, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/CDS/cds-part.0}
+      - {path: Drosophila/promoter/CDS/cds-part.1, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/CDS/cds-part.1}
+      - {path: Drosophila/promoter/CDS/cds-part.2, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/CDS/cds-part.2}
+      - {path: Drosophila/promoter/CDS/cds-part.3, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/CDS/cds-part.3}
+      - {path: Drosophila/promoter/CDS/cds-part.4, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/CDS/cds-part.4}
+      - {path: Drosophila/promoter/intron/intron-part.0, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/intron/intron-part.0}
+      - {path: Drosophila/promoter/intron/intron-part.1, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/intron/intron-part.1}
+      - {path: Drosophila/promoter/intron/intron-part.2, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/intron/intron-part.2}
+      - {path: Drosophila/promoter/intron/intron-part.3, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/intron/intron-part.3}
+      - {path: Drosophila/promoter/intron/intron-part.4, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/intron/intron-part.4}
+      - {path: Drosophila/promoter/1998/prom/drosophila.0, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/1998/prom/drosophila.0}
+      - {path: Drosophila/promoter/1998/prom/drosophila.1, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/1998/prom/drosophila.1}
+      - {path: Drosophila/promoter/1998/prom/drosophila.2, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/1998/prom/drosophila.2}
+      - {path: Drosophila/promoter/1998/CDS/cds-part0.300, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/1998/CDS/cds-part0.300}
+      - {path: Drosophila/promoter/1998/CDS/cds-part1.300, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/1998/CDS/cds-part1.300}
+      - {path: Drosophila/promoter/1998/CDS/cds-part2.300, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/1998/CDS/cds-part2.300}
+      - {path: Drosophila/promoter/1998/intron/intron-part0.300, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/1998/intron/intron-part0.300}
+      - {path: Drosophila/promoter/1998/intron/intron-part1.300, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/1998/intron/intron-part1.300}
+      - {path: Drosophila/promoter/1998/intron/intron-part2.300, url: https://www.fruitfly.org/seq_tools/datasets/Drosophila/promoter/1998/intron/intron-part2.300}
+      - {path: Human/promoter/prom/vertebrate.0, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/prom/vertebrate.0}
+      - {path: Human/promoter/prom/vertebrate.1, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/prom/vertebrate.1}
+      - {path: Human/promoter/prom/vertebrate.2, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/prom/vertebrate.2}
+      - {path: Human/promoter/prom/vertebrate.3, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/prom/vertebrate.3}
+      - {path: Human/promoter/prom/vertebrate.4, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/prom/vertebrate.4}
+      - {path: Human/promoter/CDS/cds-part0.300, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/CDS/cds-part0.300}
+      - {path: Human/promoter/CDS/cds-part1.300, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/CDS/cds-part1.300}
+      - {path: Human/promoter/CDS/cds-part2.300, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/CDS/cds-part2.300}
+      - {path: Human/promoter/CDS/cds-part3.300, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/CDS/cds-part3.300}
+      - {path: Human/promoter/CDS/cds-part4.300, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/CDS/cds-part4.300}
+      - {path: Human/promoter/intron/intron-part0.300, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/intron/intron-part0.300}
+      - {path: Human/promoter/intron/intron-part1.300, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/intron/intron-part1.300}
+      - {path: Human/promoter/intron/intron-part2.300, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/intron/intron-part2.300}
+      - {path: Human/promoter/intron/intron-part3.300, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/intron/intron-part3.300}
+      - {path: Human/promoter/intron/intron-part4.300, url: https://www.fruitfly.org/seq_tools/datasets/Human/promoter/intron/intron-part4.300}
+
+  # Primary reconstruction sources -------------------------------------------
+  - source_id: promotech
+    kind: github_tree
+    study: chevez2021promotech
+    repository: BioinformaticsLabAtMUN/Promotech
+    commit: 56251ad9b883ef831b4753fc623d5ec970fe65e0
+    include:
+      - datasets/training/whole-genome-and-tss/CJEJUNI_2
+      - datasets/training/whole-genome-and-tss/CPNEUMONIAE
+      - datasets/training/whole-genome-and-tss/ECOLI
+      - datasets/training/whole-genome-and-tss/LINTERROGANS
+      - datasets/validation/whole-genome-and-tss/BACILLUS
+      - datasets/validation/whole-genome-and-tss/RHODOBACTER_1
+      - datasets/training/40nt-sequences/bacteria-1-1-ratio/CJEJUNI_2
+      - datasets/training/40nt-sequences/bacteria-1-1-ratio/CPNEUMONIAE
+      - datasets/training/40nt-sequences/bacteria-1-1-ratio/ECOLI
+      - datasets/training/40nt-sequences/bacteria-1-1-ratio/LINTERROGANS
+      - datasets/validation/40nt-sequences/bacteria-1-1-ratio/BACILLUS
+      - datasets/validation/40nt-sequences/bacteria-1-1-ratio/RHODOBACTER_1
+
+  - source_id: epdnew
+    kind: url_list
+    study: dreos2013epd
+    landing_page: https://epd.expasy.org/epdnew/
+    files:
+      - path: EPDnew_Copyright
+        url: https://epd.expasy.org/ftp/epdnew/EPDnew_Copyright
+        expected: {sha256: ec85e536c7769d78f3e908e1b7e01b54d2e0b6683f32e9f14b5baafe1be7e13e}
+      - path: H_sapiens/006/Hs_EPDnew_006_hg38.bed
+        url: https://epd.expasy.org/ftp/epdnew/H_sapiens/006/Hs_EPDnew_006_hg38.bed
+        expected: {sha256: 3ecac81b26ed99cc4d91e84f9dedd123de250a42981920d8d065e09c2ca114f8}
+      - path: H_sapiens_nc/001/HsNC_EPDnew_001_hg38.bed
+        url: https://epd.expasy.org/ftp/epdnew/H_sapiens_nc/001/HsNC_EPDnew_001_hg38.bed
+        expected: {sha256: 068b2bdd0a19a0a727e1331e86cec89a3726cc438daa710103f7b06371463ce3}
+      - path: M_musculus/003/Mm_EPDnew_003_mm10.bed
+        url: https://epd.expasy.org/ftp/epdnew/M_musculus/003/Mm_EPDnew_003_mm10.bed
+        expected: {sha256: d7cb99e6edc58e36172fa1f964f131710c62c5b0be2f7b681fc98ed4def5d2fe}
+      - path: M_musculus_nc/001/MmNC_EPDnew_001_mm10.bed
+        url: https://epd.expasy.org/ftp/epdnew/M_musculus_nc/001/MmNC_EPDnew_001_mm10.bed
+        expected: {sha256: 3d4caf0f2c8e7d04b8d53cec4e376628d5539a37ccf3d4d611c3d134304cd2da}
+
+  - source_id: primary-tss-supplements
+    kind: url_list
+    study: graphpro_primary_tss_sources
+    files:
+      - path: campylobacter_table_s4.xlsx
+        url: https://journals.plos.org/plosgenetics/article/file?type=supplementary&id=info:doi/10.1371/journal.pgen.1003495.s004
+        expected: {sha256: 067fc81dbc218a7e7e5df6a13b4d859b60be369aec23585c1c0681df4d76d98f}
+      - path: chlamydia_table_s2.xlsx
+        url: https://media.springernature.com/original/springer-static/esm/art%3A10.1186%2Fgb-2011-12-10-r98/MediaObjects/13059_2011_2689_MOESM2_ESM.XLSX
+        expected: {sha256: 4e2839a6664eba3fbb8dadf15c4984a36cca4c8689601d7e4e83c7eb90b9d69d}
+      - path: leptospira_supplementary_files.zip
+        url: https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5243855/supplementaryFiles
+      - path: ecoli_paa_NC_018666.1.fasta
+        url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_018666.1&rettype=fasta&retmode=text
+        expected: {sha256: 15f513b58e131f797b80ee93759ef36c41780197108ed68202b0865244e6d7d9}
+
+  - source_id: ucsc-genomes
+    kind: url_list
+    study: ucsc_genome_browser
+    files:
+      - path: sacCer3.2bit
+        url: https://hgdownload.soe.ucsc.edu/goldenPath/sacCer3/bigZips/sacCer3.2bit
+        expected: {md5: 880201a7d1ec95c0185b0b4783c80411}
+      - path: mm10.2bit
+        url: https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/mm10.2bit
+        expected: {md5: fcfcc276799031793a513e2e9c07adad}
+      - path: hg38.2bit
+        url: https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.2bit
+        expected: {md5: dcc3ea27079aa6dc3f9deccd7275e0f8}

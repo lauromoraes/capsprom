@@ -1,0 +1,3868 @@
+{
+  "acquisition": "source-acquisition-v1",
+  "acquisition_config_sha256": "8e08e61424534884d63bacc3742c7f13c115be1b1922ffb6016f501a17eb9d32",
+  "canonical_config_sha256": "eb5460a0c3322f508576ea8b10d6a741296e36238ea75e0a1326363264f89991",
+  "files": [
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in docs/bhandari_leakage_controlled_processing.md at 29a985deee60def097cfe53d223164541a73f9bc",
+        "status": "no_later_than",
+        "value": "2026-10-05T22:09:12-03:00"
+      },
+      "byte_identical_to": [
+        "bhandari-drive/Human_promoter.gz!gunzip"
+      ],
+      "group": "Bhandari_etal",
+      "path": "data/raw/Bhandari_etal/Human_promoter.fa",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "29a985deee60def097cfe53d223164541a73f9bc",
+          "first_commit_date": "2026-10-05T22:09:12-03:00",
+          "path": "docs/bhandari_leakage_controlled_processing.md"
+        }
+      ],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "bhandari-human",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "be6befb98673fc70a7135c21742461038470b40b56cfaff830812b1e9b72e2e5",
+      "size_bytes": 71932775,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "bhandari-drive/Human_promoter.gz"
+      ],
+      "group": "Bhandari_etal",
+      "path": "data/raw/Bhandari_etal/Human_promoter.gz",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "e968467da6d060012334cee30112cdb004979fb31d3b72995c16d0c71d4bfd59",
+      "size_bytes": 13011771,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "bhandari-drive/Plant_promoters.gz!gunzip"
+      ],
+      "group": "Bhandari_etal",
+      "path": "data/raw/Bhandari_etal/Plant_promoters.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "bhandari-nominal-plant",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "9372eb88b5adfe738c335114c9b06d52afc13ca5211e51c765e52ecf1f596227",
+      "size_bytes": 123612077,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "bhandari-drive/Plant_promoters.gz"
+      ],
+      "group": "Bhandari_etal",
+      "path": "data/raw/Bhandari_etal/Plant_promoters.gz",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "49438378c8b1375e3cd044925ea135abac6526c83ac18c05b8499019bdbefb95",
+      "size_bytes": 21753916,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "Bhandari_etal",
+      "path": "data/raw/Bhandari_etal/README",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "cba72c100edcad4f5196b8c16a5db620b045eb387a50a3e32923c3806993badb",
+      "size_bytes": 681,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "bhandari-drive/Yeast_promoter.gz!gunzip"
+      ],
+      "group": "Bhandari_etal",
+      "path": "data/raw/Bhandari_etal/Yeast_promoter.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "bhandari-yeast",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "fa5d4d67324d1def13e974398a9114d3528c62a6ed3657d4fb739eb5149b2be3",
+      "size_bytes": 7101893,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "bhandari-drive/Yeast_promoter.gz"
+      ],
+      "group": "Bhandari_etal",
+      "path": "data/raw/Bhandari_etal/Yeast_promoter.gz",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "0c1998499d5033e56c232cff9a12aa0486d7dd6ac0edc198ff27f00de4abc0d6",
+      "size_bytes": 2064549,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/README",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "a9ab9db8743aefbc75127fa1650204f0654219eb3bd723d0ae835d59de769b55",
+      "size_bytes": 438,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!anabaena_sp.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/anabaena_sp.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-anabaena-sp",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "9518c59c391700ac19c4c09a8d8df980a2dde690fdad9ba3c75003b4cc7e99f9",
+      "size_bytes": 2522034,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!bacillus_amyloliquefaciens.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/bacillus_amyloliquefaciens.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-bacillus-amyloliquefaciens",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "c51d23d89aed61be625b7cebd7a78a72d4d8b3656d4290ec6bcd6ef3d2ef5cb7",
+      "size_bytes": 1061118,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!chlamydophila_pneumoniae.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/chlamydophila_pneumoniae.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-chlamydophila-pneumoniae",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "feff84faa91230eab5c140867c9d759338ab5d7b68aae197ede652639fccbcbf",
+      "size_bytes": 404808,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!corynebacterium_glutamicum.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/corynebacterium_glutamicum.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-corynebacterium-glutamicum",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "038ed16e6571b94dff106d93c22e7c8ef41f61a009900ee2bec4f45addee3ee6",
+      "size_bytes": 576150,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!helicobacter_pylori.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/helicobacter_pylori.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-helicobacter-pylori",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "a0a1dd2935d4f55f72c16a89465cfd37cb4f7fa3056da4dff85aef56567df529",
+      "size_bytes": 715428,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!klebisiella_pneumoniae.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/klebisiella_pneumoniae.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-klebisiella-pneumoniae",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "258632427d5e86c2cc2b300334395ee9d90811186d079382a7deb17f58458380",
+      "size_bytes": 1331658,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!mycrobacterium_tuberculosis.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/mycrobacterium_tuberculosis.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-mycrobacterium-tuberculosis",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "1691bdb6d743e7de22227aa5127e3dcc9f0f7235fad8f86cf2588231cd1dce89",
+      "size_bytes": 1775544,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!negative_anabaena_sp.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/negative_anabaena_sp.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-anabaena-sp",
+          "source_class": "negative_downstream"
+        }
+      ],
+      "sha256": "1f5bbf173cf236a6e0df5eb7772e14da6eb834ceb53c4749cb3284a8f77e1eae",
+      "size_bytes": 254217,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!negative_bacillus_amyloliquefaciens.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/negative_bacillus_amyloliquefaciens.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-bacillus-amyloliquefaciens",
+          "source_class": "negative_downstream"
+        }
+      ],
+      "sha256": "8ed53def726347d336e0b5934f198facf62bb5cda01d3d4d60a5855e72c5bd8d",
+      "size_bytes": 106959,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!negative_chlamydophila_pneumoniae.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/negative_chlamydophila_pneumoniae.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-chlamydophila-pneumoniae",
+          "source_class": "negative_downstream"
+        }
+      ],
+      "sha256": "f5a18e8710451502d949d4e7ba4ab9fa69923f9ac2f74db23cccf7a792ba1815",
+      "size_bytes": 40804,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!negative_corynebacterium_glutamicum.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/negative_corynebacterium_glutamicum.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-corynebacterium-glutamicum",
+          "source_class": "negative_downstream"
+        }
+      ],
+      "sha256": "d6a3fe2fc763ce89111ce04fcc07e608a90684e64d10f11beb90409a4c7adc6a",
+      "size_bytes": 58075,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!negative_helicobacter_pylori.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/negative_helicobacter_pylori.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-helicobacter-pylori",
+          "source_class": "negative_downstream"
+        }
+      ],
+      "sha256": "713e3677b1b51e33806972092b304bab7d59bf44d9d3ab4de5abcf7002edb370",
+      "size_bytes": 72114,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!negative_klebisiella_pneumoniae.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/negative_klebisiella_pneumoniae.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-klebisiella-pneumoniae",
+          "source_class": "negative_downstream"
+        }
+      ],
+      "sha256": "079f2df949dadf17c7cbb701e3646f618e78b7b5a792699c733d8a19de46b82f",
+      "size_bytes": 134229,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!negative_mycrobacterium_tuberculosis.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/negative_mycrobacterium_tuberculosis.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-mycrobacterium-tuberculosis",
+          "source_class": "negative_downstream"
+        }
+      ],
+      "sha256": "9407d79e180c2819ce409ddf07ad91e84f1f150462ca89be5082d9a8321c0fdf",
+      "size_bytes": 178972,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!negative_pseudonomas_aeruginosa.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/negative_pseudonomas_aeruginosa.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-pseudonomas-aeruginosa",
+          "source_class": "negative_downstream"
+        }
+      ],
+      "sha256": "72675bd4f44da400a505251561819c75c6cab71ad8b6ff961fe2773e100c4e51",
+      "size_bytes": 207555,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!negative_salmonella_typhimurium.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/negative_salmonella_typhimurium.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-salmonella-typhimurium",
+          "source_class": "negative_downstream"
+        }
+      ],
+      "sha256": "5326b09edae05502754722314b342149204c582bbb69b729c51a84fd8ae8597c",
+      "size_bytes": 99081,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!negative_streptomyces_coelicolor.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/negative_streptomyces_coelicolor.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-streptomyces-coelicolor",
+          "source_class": "negative_downstream"
+        }
+      ],
+      "sha256": "b0b90017227aac43888b5869d4b9a09ec3b1c2d370568cd1435e2e8c51979ab8",
+      "size_bytes": 263711,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!negative_synechocistis.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/negative_synechocistis.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-synechocistis",
+          "source_class": "negative_downstream"
+        }
+      ],
+      "sha256": "5011a58ec137a840ee679573a9091ce0ad7bc9a6955f30cf9e9050c885d0c408",
+      "size_bytes": 165539,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!pseudonomas_aeruginosa.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/pseudonomas_aeruginosa.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-pseudonomas-aeruginosa",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "375494f75be88497c7ff949cd02b7c9c01630c7bebb80f458e5981cb9318eff7",
+      "size_bytes": 2059110,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!salmonella_typhimurium.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/salmonella_typhimurium.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-salmonella-typhimurium",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "bf4470ee5243412395755f2e7cc278cec47fb68c14e44572973623b8d1eab136",
+      "size_bytes": 982962,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!streptomyces_coelicolor.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/streptomyces_coelicolor.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-streptomyces-coelicolor",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "dc50e17096645760c3506433ec2833785ec904f8984e2b1f84cacad56986e6d6",
+      "size_bytes": 2616222,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip!synechocistis.txt"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/synechocistis.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cdbprom-synechocistis",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "f23113422cd2c66e96833322b784419457586f5e46f712242e12834c7e5afd44",
+      "size_bytes": 1642278,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-github/training_data.csv"
+      ],
+      "group": "CDBProm",
+      "path": "data/raw/CDBProm/training_data.csv",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "d835a79f041d5f3a54d10ecff4ef559db87d5bad9e813987f3bb23f7d546aa8e",
+      "size_bytes": 17136997,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Arabidopsis_non_tata_neg.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-arabidopsis-non-tata",
+          "source_class": "negative_post_first_exon"
+        }
+      ],
+      "sha256": "9ae4cd812177c528b461aa1fabae4a5fed3c392ee9bae9a8618f5e385e16273f",
+      "size_bytes": 3977250,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Arabidopsis_non_tata_pos.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-arabidopsis-non-tata",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "b8bf8fdf4a963611ea21267ad6ee8662053cde0d0bf93abd24e24ec6cc313e74",
+      "size_bytes": 1925030,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Arabidopsis_tata_neg.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-arabidopsis-tata",
+          "source_class": "negative_post_first_exon"
+        }
+      ],
+      "sha256": "c8da348274730bd94c29bd4d029e90a59d62d1874314abc44036c6867ec04354",
+      "size_bytes": 999231,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Arabidopsis_tata_pos.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-arabidopsis-tata",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "bdf6215d753193391248aeb0431850bb673d3a26fb36b46530111f8010ebfdf7",
+      "size_bytes": 488022,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Bacillus_neg.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-bacillus-subtilis",
+          "source_class": "negative_opposite_strand_cds"
+        }
+      ],
+      "sha256": "1a513783d5a322e4cfd013cad3328308d02a562fc0224bb5bc5846b338a37a08",
+      "size_bytes": 94000,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Bacillus_pos.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-bacillus-subtilis",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "f29bf6fea28b6922e014d471394eb99386b0b126c2716f13da3fcf7a2c00c72d",
+      "size_bytes": 33598,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Ecoli_neg.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-ecoli-sigma70",
+          "source_class": "negative_opposite_strand_cds"
+        }
+      ],
+      "sha256": "40af90101b30b577f33b3f9977d1b56a994eb7b01476186cfbb72b0c1b3869db",
+      "size_bytes": 279716,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Ecoli_pos.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-ecoli-sigma70",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "bb6546c5f222463d2b079eabf4c2d7fb622d806ff47a8aebcc98a1b605106c51",
+      "size_bytes": 103266,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Human_non_tata_neg.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-human-non-tata",
+          "source_class": "negative_post_first_exon"
+        }
+      ],
+      "sha256": "fb7cb1bfafa8a5c93de459d868329524eb40d2db9a8edca933c6d07239f10799",
+      "size_bytes": 8846189,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Human_non_tata_pos.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-human-non-tata",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "2c9ceeb9e8fe89138ad54e956449be1b372f7fb001fa7ad292d8a0832ba0513d",
+      "size_bytes": 6458386,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Mouse_non_tata_neg.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-mouse-non-tata",
+          "source_class": "negative_post_first_exon"
+        }
+      ],
+      "sha256": "ee8ff4d3f981755af7172579f9cb3e2e66780958c9c2cf5bae9c85477881142a",
+      "size_bytes": 8760400,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Mouse_non_tata_pos.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-mouse-non-tata",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "ceefc656cc2858464daf17570bb7ab364ece83c2f6df64ba3a05651f01618b9b",
+      "size_bytes": 5177994,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Mouse_tata_dbtss.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-mouse-tata-dbtss",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "e09aab7c2d509d59ab38be6fdff60fdc5b8518471e567174f3bc3017dacf96a3",
+      "size_bytes": 423734,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Mouse_tata_neg.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-mouse-tata",
+          "source_class": "negative_post_first_exon"
+        }
+      ],
+      "sha256": "2588d33517fd74977d4dda0c6ec067d10e17beaa2400b1c43a8e0e52c381c218",
+      "size_bytes": 1252350,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/Mouse_tata_pos.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "cnnprom-mouse-tata",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "2f498c1d5331aae751e5b85d9288a99766d1941d0f2017927bae8c69574ea67a",
+      "size_bytes": 412895,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "CNNProm",
+      "path": "data/raw/CNNProm/README",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "5851c057d7b36ac27f26ddddb36c18806cf1a411aa0f0f82b859537e0a6f1076",
+      "size_bytes": 2211,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "EDP",
+      "path": "data/raw/EDP/README",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "69f11b0860c604edf3c646212a55bab90f75a0c18132454fbb5fa47f56e46671",
+      "size_bytes": 1459,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "EDP",
+      "path": "data/raw/EDP/edp_all.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "2602db0a450876612d37afa24b5449839d4c5ef381d9174653297aa6ab3568ba",
+      "size_bytes": 1679856,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "bdgp/Drosophila/promoter/prom/promoter_all_1941.fa"
+      ],
+      "group": "Fuitfly",
+      "path": "data/raw/Fuitfly/Drosophila_promoter_all_1941.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "bdgp-drosophila-1941",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "413a2f14644ad6247a990700b296d6f8532f487bfab5b74e0cd2332775970a76",
+      "size_bytes": 671586,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "Fuitfly",
+      "path": "data/raw/Fuitfly/drosophila.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "bdgp-drosophila-1998",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "f19e7d1e5016a182cffa08a3577cc8696dcbbc665a4abb9c368c33648bc87ed9",
+      "size_bytes": 84617,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "Fuitfly",
+      "path": "data/raw/Fuitfly/human.fa",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "bdgp-human",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "f843daf8c11da82e1f5f2bffe2b966a5207db1e66b184ea5669a554d63c0cd62",
+      "size_bytes": 187015,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Bamy/cTest.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "0a2a1aabc91b6371715fffb9df7a7cefe1f5a14906f089df9ec93cf81b4addb2",
+      "size_bytes": 8835,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Bamy/negative",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-bamy",
+          "source_class": "negative"
+        }
+      ],
+      "sha256": "008c04739840dd50797daa5b400e38548d4b4309d82c97cec6e005859d124021",
+      "size_bytes": 154783,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Bamy/positive",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-bamy",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "f4d7726f864da848776d9299a85d7438e500aa4aa1dfae1eecd8d75338c31a99",
+      "size_bytes": 144442,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Cje/cTest.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "4f7c0cd87b4655d6499f7a605dd8838fc62c10917561faf1fb06a2ac195cefad",
+      "size_bytes": 9884,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Cje/negative",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-cje",
+          "source_class": "negative"
+        }
+      ],
+      "sha256": "580f78442d9d57c4cdf3d05605a115ee4880a34fcd88e02a78dc0eb6a46fd0de",
+      "size_bytes": 252087,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Cje/positive",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-cje",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "4e2a7bc98d011bb8d7bd019c9d4cd708815f70316975494a2570d9b73d11ecf5",
+      "size_bytes": 242768,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Cpne/negative",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-cpne",
+          "source_class": "negative"
+        }
+      ],
+      "sha256": "72462633c386d1793b6711f8efda328c25ab50c501f7527ba8c6722ab14328e6",
+      "size_bytes": 71554,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Cpne/positive",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-cpne",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "cd46af5ec9f8eded44dd33d62a47dad1441a13f4a32ee96b8381948a218a6e72",
+      "size_bytes": 84576,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Ecol/negative",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-ecol",
+          "source_class": "negative"
+        }
+      ],
+      "sha256": "06909e6c4667287bd0729deeb08aef68104b9e75c98332890ab4a1517692d6ae",
+      "size_bytes": 678156,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Ecol/positive",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-ecol",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "099a478731f3b3490b8a058ca52ffbc9a85680f0de8ba59f2bc0e34240afcebb",
+      "size_bytes": 422961,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Lint/negative",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-lint",
+          "source_class": "negative"
+        }
+      ],
+      "sha256": "dbd5a2a1ec47c5818d5d3ae9a1f3df2c79651467dfc01ae7c42240f2a4aae1ec",
+      "size_bytes": 471328,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Lint/positive",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-lint",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "a4e71278cb669bacd4243caaeef3d428c667e87101ab4c32391c54a109d1b290",
+      "size_bytes": 602998,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/README",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "d8b31d59e6ff9e68a0c28e4ab3243f9c1ecbadca0f382c49371a179b9be98d1b",
+      "size_bytes": 785,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Rcap/negative",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-rcap",
+          "source_class": "negative"
+        }
+      ],
+      "sha256": "ca725ae459ab032b43bb4c9ff287e5332debcce42ae44030fcd28ab7900e1cce",
+      "size_bytes": 549909,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/Rcap/positive",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-rcap",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "380d70ac7b3e01a6857cf1a8fe0ab79a05c6eae94d9716fe3837ea38c7f32473",
+      "size_bytes": 565332,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_epd_gc_matched_reconstruction_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/human/negative",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_gc_matched_reconstruction_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_identifier_resolution_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_sequence_recreation_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_eukaryotic_integrity_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-human",
+          "source_class": "negative"
+        }
+      ],
+      "sha256": "aaf856d88f23122cdd6dc585232bda1f79bb556d2f1277e8a901e5d875fd7490",
+      "size_bytes": 251929,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_epd_gc_matched_reconstruction_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/human/positive",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_gc_matched_reconstruction_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_identifier_resolution_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_sequence_recreation_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_eukaryotic_integrity_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-human",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "b8af4848899881b5c88908011bb3f63f0517c464b30f149b90cdf01c529dd94a",
+      "size_bytes": 251929,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_epd_gc_matched_reconstruction_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/mouse/negative",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_gc_matched_reconstruction_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_identifier_resolution_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_sequence_recreation_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_eukaryotic_integrity_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-mouse",
+          "source_class": "negative"
+        }
+      ],
+      "sha256": "6d450cdccbb1230f3d9c36fc46fd2a405347bff11f06a1723462b63658c498c6",
+      "size_bytes": 199350,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_epd_gc_matched_reconstruction_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [],
+      "group": "GraphPro",
+      "path": "data/raw/GraphPro/mouse/positive",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_gc_matched_reconstruction_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_identifier_resolution_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_sequence_recreation_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_eukaryotic_integrity_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "graphpro-mouse",
+          "source_class": "positive"
+        }
+      ],
+      "sha256": "aa33c8f8a642136397e55740e9fb74ace12a2e930f664b26fc9b218e551e8316",
+      "size_bytes": 199472,
+      "status": "sequence_equivalent_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "Nova pasta",
+      "path": "data/raw/Nova pasta/predictions_ecoli.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "8ba503d55e7afcb9d4327ed584c835a1476b255201349d37d92192094ee33c3f",
+      "size_bytes": 633064281,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "cdbprom-website/training_sequences.zip"
+      ],
+      "group": "Nova pasta (2)",
+      "path": "data/raw/Nova pasta (2)/training_sequences.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81",
+      "size_bytes": 4816262,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/README.md",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "30106e01d291b17e035a666086e9060e7589f0183767e94e6a65952af0b35def",
+      "size_bytes": 2497,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/10_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/10_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-10-escherichia-coli-k-12-mg1655",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "d7ce226f22d1064d1637bc8e8c2dadde0339df92bf2956fe27cde6c5e4a17fbf",
+      "size_bytes": 506386,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/11_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/11_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-11-haloferax-volcanii-ds2",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "c43207229c0b034491df00910b5f95f46b63374fc027dde1b63bbcfe57823243",
+      "size_bytes": 309001,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/12_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/12_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-12-helicobacter-pylori-26695",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "ae02438d6cc549bc063974b7efc77366274e05dc96ce979ea4078fa71d858955",
+      "size_bytes": 157023,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/13_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/13_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-13-nostoc-sp-pcc-7120",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "ad77ba37d2f8fb1df986a20ad64677c0df8df8defd3530fa14ebce0c0bdb737d",
+      "size_bytes": 857542,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/14_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/14_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-14-paenibacillus-riograndensis-sbr5",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "fa4860e62e206834cf2012645bcb07029f02e8e2f815105d5920cb5a58f1e334",
+      "size_bytes": 174149,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/15_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/15_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-15-pseudomonas-putida-kt2440",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "a2f1300606cd4b273bce52d84aed621c02fdf2cf2099853c78d265174a47195b",
+      "size_bytes": 507533,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/16_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/16_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-16-shigella-flexneri-5a-m90t",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "8ba5a45e7efa70e5b5483dbab2c12ce3fcbc43908f59ef8c3af29370a5514312",
+      "size_bytes": 735679,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/17_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/17_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-17-sinorhizobium-meliloti-1021",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "00aa0e68819275f6c9250fcd980b0a73269f8ce0d58966bab5a80cedd53ea936",
+      "size_bytes": 1066446,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/18_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/18_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-18-staphylococcus-aureus-subsp-aureus-mw2",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "f74d9c9fd62fa10757af4c88667a674445b974adb2b90d5f53789ca8a620fcb1",
+      "size_bytes": 158583,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/19_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/19_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-19-staphylococcus-epidermidis-atcc-12228",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "ca7dbff71321768c27114e95af2df87166b98ac69f8b56d3efeda28587f4f59f",
+      "size_bytes": 130440,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/1_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/1_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-01-acinetobacter-baumannii-atcc-17978",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "09b1d87eab0ecbaa9b9ae4c5c6109018bbfe4873f0e94986b1e71f610007b49c",
+      "size_bytes": 86017,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/20_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/20_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-20-synechococcus-elongatus-pcc-7942",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "388aa5420052254f98346cc99d2bc98565c6f2f83ae43369ee35e61faf709da4",
+      "size_bytes": 107432,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/21_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/21_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-21-thermococcus-kodakarensis-kod1",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "672ed9d632dbf33dfb916a44bfbf6d0ee37d31628625dbe7c23b251a28fc5c4d",
+      "size_bytes": 181192,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/22_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/22_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-22-xanthomonas-campestris-pv-campestris-b100",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "3c65ae245a82cf13bf2cc7e18c399a59f2117540474d1e0b10b987c0c6a44481",
+      "size_bytes": 244731,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/23_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/23_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-23-bacillus-subtilis-subsp-subtilis-168",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "d7061bb7d32b52dba456a79be7f024934fde49fb7db7dc7b24173d2be6fd33e4",
+      "size_bytes": 54666,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/2_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/2_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-02-bradyrhizobium-japonicum-usda-110",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "e86f201512f1f906137f52b24c278ed7910c44e1c1d589fd325a66f12d0c09c2",
+      "size_bytes": 1142687,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/3_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/3_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-03-burkholderia-cenocepacia-j2315",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "c4bf55bf3140b21ee4f86d8c29ac3b92772888b4db911b9ed00faefabf4017ba",
+      "size_bytes": 745895,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/4_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/4_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-04-campylobacter-jejuni-rm1221",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "6f6ea5e3dd52ac5ccb86e4c53e16935d278f9cb08bea180ecbc04b95f7a91a8e",
+      "size_bytes": 146025,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/5_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/5_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-05-campylobacter-jejuni-subsp-jejuni-81116",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "7ead3a386eae801f2d26b50d6b36ae1e71d4e750168d3ba703041d549d770ff4",
+      "size_bytes": 144879,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/6_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/6_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-06-campylobacter-jejuni-subsp-jejuni-81-176",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "23b6725e49fbc483981472666ebbc2a5a0f1586eee48ab3b2017094dc78d42b7",
+      "size_bytes": 158695,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/7_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/7_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-07-campylobacter-jejuni-subsp-jejuni-nctc-11168",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "5721e05ed60540aee28ae94beb59fa9bf8081a2bea6e4bdef3482d57f8262ae0",
+      "size_bytes": 146504,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/8_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/8_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-08-corynebacterium-diphtheriae-nctc-13129",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "4dada8303979f1f37c2710d027e3419de4bc3d8405173b7b3bac152acb649824",
+      "size_bytes": 121324,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Test/9_test.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Test/9_test.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-09-corynebacterium-glutamicum-atcc-13032",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "034d1c4b1cd3f6d50952683a2c335faf8da3ac63e9b7e51ff2a26864052a419b",
+      "size_bytes": 240346,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/10_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/10_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-10-escherichia-coli-k-12-mg1655",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "df7fed76215a5f0dc013c9dbcc99de8010d086a9ee3de5b23b1866861a8c65fe",
+      "size_bytes": 2025439,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/11_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/11_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-11-haloferax-volcanii-ds2",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "1cab17a6f018590f3af82413df5c91773d9a69e6ef1858231c9d60dadd2e3488",
+      "size_bytes": 1235796,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/12_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/12_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-12-helicobacter-pylori-26695",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "34c784c4523ccdce18b8b020f9ad411a89add0ac29f4561fc471168e8c08d0ff",
+      "size_bytes": 628915,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/13_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/13_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-13-nostoc-sp-pcc-7120",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "480ab316750a00933789df791e24a3706d1d5b064ce3a1e332961c24921b22a6",
+      "size_bytes": 3430175,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/14_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/14_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-14-paenibacillus-riograndensis-sbr5",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "516b729cf01214b406abb7b53e94c4c8c0f2dd88fc478b90dbc5da632e65f119",
+      "size_bytes": 697086,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/15_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/15_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-15-pseudomonas-putida-kt2440",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "3ec4a589af5001209aa20bb201598e63093a64b64a09313b48b6af437bacacee",
+      "size_bytes": 2030777,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/16_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/16_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-16-shigella-flexneri-5a-m90t",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "3d05560cea5f09e414663f5b22c7a3442671c9dcdc1c573bd6d33e0d571531c5",
+      "size_bytes": 2942677,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/17_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/17_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-17-sinorhizobium-meliloti-1021",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "ce25b2add2193e924a76c3cfa3020acc3c832e8b09b68606fc8b1db0052f001d",
+      "size_bytes": 4266670,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/18_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/18_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-18-staphylococcus-aureus-subsp-aureus-mw2",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "5d01a8421e81bf1383c31b4362ec8dad2c21bc8508f02ca549ed115d6f1456d3",
+      "size_bytes": 633904,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/19_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/19_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-19-staphylococcus-epidermidis-atcc-12228",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "ce14bcd178007155352f9460747ad3a31fd32b6c80276711db4a748a4144ba34",
+      "size_bytes": 522507,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/1_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/1_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-01-acinetobacter-baumannii-atcc-17978",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "29f7d0d760598e6293473b9ba252ff0f4a1213776f7e4827660053ca2524c9c4",
+      "size_bytes": 344457,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/20_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/20_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-20-synechococcus-elongatus-pcc-7942",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "17f556e50911fb3e43ae3f036c2ff2898a80f229f2ab6967657877be0a345681",
+      "size_bytes": 429760,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/21_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/21_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-21-thermococcus-kodakarensis-kod1",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "f80ae29a36c54d7e53a37bcbd189393f3bdf41a4c591ee93fbc3ede1462f1740",
+      "size_bytes": 724053,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/22_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/22_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-22-xanthomonas-campestris-pv-campestris-b100",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "51b281f78a86c1ebd3417408163fde69153618883c736a1c4ca69142a0a271c7",
+      "size_bytes": 978048,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/23_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/23_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-23-bacillus-subtilis-subsp-subtilis-168",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "2d53fa623323992343288186d2a98c72e34d4c982cceab6344acfb13f2557053",
+      "size_bytes": 217837,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/2_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/2_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-02-bradyrhizobium-japonicum-usda-110",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "d9b605019a60d3cbf17da0f72204603a846d81f6f2c1e9455ee0263a5e0e0cbf",
+      "size_bytes": 4570651,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/3_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/3_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-03-burkholderia-cenocepacia-j2315",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "8432de6beb893be06c2411e2b2e2711e72cd35ee7e6875ccd08f3e046c5394f7",
+      "size_bytes": 2982935,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/4_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/4_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-04-campylobacter-jejuni-rm1221",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "398e76750c2170cdc3725640241a492c79ebb3766357eb1c78c417d0c4fa79c0",
+      "size_bytes": 584101,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/5_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/5_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-05-campylobacter-jejuni-subsp-jejuni-81116",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "0c57b548c275fa73cbf43c2050cd467e4224f3a65f36190cbba4667836caa7c0",
+      "size_bytes": 579473,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/6_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/6_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-06-campylobacter-jejuni-subsp-jejuni-81-176",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "065438f37f4f3552fe97cc656a0e4a1d06f07247062b2901023f45a635d07664",
+      "size_bytes": 634216,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/7_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/7_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-07-campylobacter-jejuni-subsp-jejuni-nctc-11168",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "a120e6d82bced9ccd3ddec4d0a67edf81b01a3d5b4175974fc1c49193b4c064f",
+      "size_bytes": 586090,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/8_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/8_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-08-corynebacterium-diphtheriae-nctc-13129",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "962906ee227ab2ccce0aa1a835f95b5fb4c3a2abcc24f9be42088c8382f89cb4",
+      "size_bytes": 484539,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/Benchmark Dataset/Train/9_train.txt"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/Dataset/Train/9_train.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [
+        {
+          "collection_id": "ipro-mp-09-corynebacterium-glutamicum-atcc-13032",
+          "source_class": "all"
+        }
+      ],
+      "sha256": "5d74a1050e813f29e99de1d168c0d49311114835f9632a1042260732c9aa202e",
+      "size_bytes": 961828,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [
+        "ipro-mp/README.md"
+      ],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/README.md",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "8245ed3d5199578dc5c47af893eb96b28b100ac5fc88dfc2585074096d7f8191",
+      "size_bytes": 3807,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/iPro-MP_predict.py",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "e5de9189a1559eaa715529acf18c2a28c9015728343d6331cdc063e43f5a4a51",
+      "size_bytes": 8145,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/iPro-MP_train.py",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "19f8efeccc6587e2574dd481cc366471b2a6050325c9486011739d774a186c2a",
+      "size_bytes": 12198,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "iPro-MP",
+      "path": "data/raw/iPro-MP/repo/requirements.txt",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "6dd1db2cad87fc1c78234162b2de1993813b55556a412d0b99bf2fe92d12490e",
+      "size_bytes": 69,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000008745.1/GCF_000008745.1.gff",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "e14321bbdfc2a8a49bbc8e2f582e5abb7460a9365bffe5e42f7a2e91280d9c11",
+      "size_bytes": 651148,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000008745.1/GCF_000008745.1_ASM874v1_genomic.fna",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "ea5a5280b773477dee943fbf86e76e3f5edd9ee63dee52fbd12724212fe9d8f3",
+      "size_bytes": 1245668,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000008745.1/assembly_data_report.jsonl",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "d770a6c43acbba4c9509f39d2be698cceb967bcfe2ea50a1476e89964ca4cb7d",
+      "size_bytes": 2755,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000011325.1/GCF_000011325.1.gff",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "35251a1f71f6e59e7794bf28229e7bf744dfe3d92b37fac9921144de831c1875",
+      "size_bytes": 1904140,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000011325.1/GCF_000011325.1_ASM1132v1_genomic.fna",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "77a96e75167d6e750d09f40616bb14a682e30b625e0f8f51fafe7c634deff636",
+      "size_bytes": 3350839,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000011325.1/assembly_data_report.jsonl",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "99348b29f0af4dde92b081829965b9c7919b45b2d7ce9bb1da3a876c92fb988b",
+      "size_bytes": 3049,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000016305.1/GCF_000016305.1.gff",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "e5a9b48b955b007f5c315de996315615d838d9bcbe00824da518a88b430416d3",
+      "size_bytes": 3433508,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000016305.1/GCF_000016305.1_ASM1630v1_genomic.fna",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "a62bedcb43eb0cebdb3f1fa6c29e23cc220dd01823d6f4abfc858b79c080889c",
+      "size_bytes": 5766645,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000016305.1/assembly_data_report.jsonl",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "5e12cb5d6e760cd891f02a31703eb1780e6ab58c1d388f78e528909e1f9b3524",
+      "size_bytes": 3781,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000203835.1/GCF_000203835.1.gff",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "7dacd8a1bae2b03208e05f074d53b187beb06a591273ac856fe6397a77283757",
+      "size_bytes": 4902869,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000203835.1/GCF_000203835.1_ASM20383v1_genomic.fna",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "0fd098e241ad998c8aa090ab9f1592d6cee7d142be8a17032093bf57be123112",
+      "size_bytes": 9168246,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000203835.1/assembly_data_report.jsonl",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "91983258ff65fbcfb415f6c0fc795c36620db9742a518898597f73e436c5ae3a",
+      "size_bytes": 3890,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000221645.1/GCF_000221645.1.gff",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "c1c556021b733efa6dba60f48406dbb8e39c323eb9e8c1804a251bc9a466b0bf",
+      "size_bytes": 2520815,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000221645.1/GCF_000221645.1_ASM22164v1_genomic.fna",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "4429346c1a538305dc3da50a8f7730cf92908ee845155134e0be0d7f3b7fb035",
+      "size_bytes": 3988507,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000221645.1/assembly_data_report.jsonl",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "f1ebbf3a9ac9699d9417343fdaa15072c3073cefbbeda8ac23b48a1c2af74bfe",
+      "size_bytes": 3450,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000284135.1/GCF_000284135.1.gff",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "285127cff34c4efeff0331600131f95bcf363237e6975769834079cfefc0b090",
+      "size_bytes": 1990360,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000284135.1/GCF_000284135.1_ASM28413v1_genomic.fna",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "f3e21ea7e9c87d05e7cc70f5fd903a4946a0d2bdd5cd8667266ffa757ec79a0d",
+      "size_bytes": 3614702,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000284135.1/assembly_data_report.jsonl",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "cee5da245e730623c1956ad678caa3c84e915eca21b60fa7741a9eaefec4037b",
+      "size_bytes": 3489,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000307795.1/GCF_000307795.1.gff",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "2591bc8b45ede1e000acfbcde6bef49601fd0866db235c79a8521adec6091d09",
+      "size_bytes": 979690,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000307795.1/GCF_000307795.1_ASM30779v1_genomic.fna",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "ebdebcd7ac6ff6031748b0cac1b4d412bd3bcd0cac5ceb73baae265bcec3a3a5",
+      "size_bytes": 1688799,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_000307795.1/assembly_data_report.jsonl",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "27dcb0eb35cd1006bdfd67048f4c96c1c1063753c0a61530d62ba20897fd23f1",
+      "size_bytes": 2907,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_006974045.1/GCF_006974045.1.gff",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "46190d5cd917706e6bc8fcb8314f6e5dfe9648e9ad0caeb6b9bd96ad1e645188",
+      "size_bytes": 3755210,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_006974045.1/GCF_006974045.1_ASM697404v1_genomic.fna",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "461bb666ac22d102bd4d45d45ab37a5885d2455c6eb6b9c6e32d1fd76468226b",
+      "size_bytes": 6618358,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_006974045.1/assembly_data_report.jsonl",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "c2798e436dfdc8f94289df9134e068f4158f59c13ad6015e0e98a5a5ef2f1df9",
+      "size_bytes": 3655,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_009498015.1/GCF_009498015.1.gff",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "c9235d40e211c03b4b732ebbbdcee3f25db90c037a4e7f714a66b02c6808f097",
+      "size_bytes": 3435296,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_009498015.1/GCF_009498015.1_ASM949801v1_genomic.fna",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "2cd3073a9e58a553a79a21a12990c56b161e64150c206c4ca4d2fb24b1717c5c",
+      "size_bytes": 7100927,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_009498015.1/assembly_data_report.jsonl",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "54be69fb0c0708abe41c75281caa4e78c8821f4f7f8732f03e4e313b2fc83cb2",
+      "size_bytes": 3345,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_026185275.1/GCF_026185275.1.gff",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "6e226ca155d674c554c42948fecf24108cc6bf8f52d0efa6245a91730b69f823",
+      "size_bytes": 2392528,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_026185275.1/GCF_026185275.1_ASM2618527v1_genomic.fna",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "dea19a99b5f6b0e40d89adea98e3afc93e9130272db8a455b46504d480a65819",
+      "size_bytes": 4473252,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_026185275.1/assembly_data_report.jsonl",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "2d5aec259d17cb1b4e842dc9b0954196127ce7a1edf7d6146a52e6bda4bef202",
+      "size_bytes": 3534,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_031197025.1/GCF_031197025.1.gff",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "31cfc4e25f0d2c94ecdccf03587fba0c19f8e65e51f2192ce1f90646f9ba3ad5",
+      "size_bytes": 3153713,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_031197025.1/GCF_031197025.1_ASM3119702v1_genomic.fna",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "5377b3b4551a9c636997fc2c974f626b0299bce51a6b46e17d3add8e03b10d90",
+      "size_bytes": 5256880,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/GCF_031197025.1/assembly_data_report.jsonl",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "d6776bbb50d5bd4646cd7ccbc24a549195bd7d19b125992bae0f5da7239cc7cc",
+      "size_bytes": 4144,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/_zips/GCF_000008745.1.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "a130b9b8b1b281d68b5ec0226e4927f399f2e465c0432d1dd5f252a458256a42",
+      "size_bytes": 463863,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/_zips/GCF_000011325.1.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "0e8e7e7a2f8757df7f4f502401e01f3297721fca97e735aff40e78cec59a0284",
+      "size_bytes": 1256156,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/_zips/GCF_000016305.1.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "12e2c96e0565c753493843d2de799e80bd1642040d60c988176b7693f065e652",
+      "size_bytes": 2180431,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/_zips/GCF_000203835.1.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "f3e9c0e0a79d2d241d3c92b6769f3633127256d8ffc68b1ff6f3d23ac8c86675",
+      "size_bytes": 3189149,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/_zips/GCF_000221645.1.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "7c60363f008eba9b0ba43b8c2337bd4492aaa62cf2ace107f1b372fa5a29e7ca",
+      "size_bytes": 1521755,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/_zips/GCF_000284135.1.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "7782f945c92be757f46d791ebd125e3319b7ea84a0356aa1d345b0daa619976e",
+      "size_bytes": 1336793,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/_zips/GCF_000307795.1.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "9cd4fdd77c0f62454f149a68d882f2f69fd2403a8b273dc4d22bb877c92a5e8b",
+      "size_bytes": 637207,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/_zips/GCF_006974045.1.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "8c7d338e9d771b405ed60aba166c641d997b954d6489c61d57b5c82cfe73ee9c",
+      "size_bytes": 2392648,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/_zips/GCF_009498015.1.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "062156d9ba01bbb79cc478ede31622ca397b5798ef8316caecdeea2b426b98d7",
+      "size_bytes": 2549363,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/_zips/GCF_026185275.1.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "20b1ef8310ab991f2829f97a765b59bf8516552a8f448959b330a2cb76d2ade1",
+      "size_bytes": 1615826,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "retrieved_utc in data/raw/references/cdbprom_genomes_v1/manifest.json (untracked legacy record)",
+        "status": "recorded",
+        "value": "2026-10-27T22:50:59+00:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/_zips/GCF_031197025.1.zip",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "8df464945ef26a5176dfacf78db00a855d8d0b24a621bbe31c1e5b382784ef44",
+      "size_bytes": 2022773,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/cdbprom_genomes_v1/manifest.json",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "39369a3a569abcd9e99cfaca506da579ad661afe84864e8627da2ec95cb474f7",
+      "size_bytes": 6619,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_epd_identifier_resolution_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "epd/EPD_Copyright",
+        "epdnew/EPDnew_Copyright"
+      ],
+      "group": "references",
+      "path": "data/raw/references/epd_2023/EPDnew_Copyright",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_identifier_resolution_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "ec85e536c7769d78f3e908e1b7e01b54d2e0b6683f32e9f14b5baafe1be7e13e",
+      "size_bytes": 450,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_epd_downstream_treatment_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "epdnew/H_sapiens_nc/001/HsNC_EPDnew_001_hg38.bed"
+      ],
+      "group": "references",
+      "path": "data/raw/references/epd_2023/HsNC_EPDnew_001_hg38.bed",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_downstream_treatment_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_gc_matched_reconstruction_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_identifier_resolution_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_sequence_recreation_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "068b2bdd0a19a0a727e1331e86cec89a3726cc438daa710103f7b06371463ce3",
+      "size_bytes": 140277,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_epd_downstream_treatment_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "epdnew/H_sapiens/006/Hs_EPDnew_006_hg38.bed"
+      ],
+      "group": "references",
+      "path": "data/raw/references/epd_2023/Hs_EPDnew_006_hg38.bed",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_downstream_treatment_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_gc_matched_reconstruction_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_identifier_resolution_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "3ecac81b26ed99cc4d91e84f9dedd123de250a42981920d8d065e09c2ca114f8",
+      "size_bytes": 1676348,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_epd_downstream_treatment_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "epdnew/M_musculus_nc/001/MmNC_EPDnew_001_mm10.bed"
+      ],
+      "group": "references",
+      "path": "data/raw/references/epd_2023/MmNC_EPDnew_001_mm10.bed",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_downstream_treatment_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_gc_matched_reconstruction_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_identifier_resolution_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_sequence_recreation_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "3d4caf0f2c8e7d04b8d53cec4e376628d5539a37ccf3d4d611c3d134304cd2da",
+      "size_bytes": 185967,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_epd_downstream_treatment_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "epdnew/M_musculus/003/Mm_EPDnew_003_mm10.bed"
+      ],
+      "group": "references",
+      "path": "data/raw/references/epd_2023/Mm_EPDnew_003_mm10.bed",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_downstream_treatment_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_gc_matched_reconstruction_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_epd_identifier_resolution_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "d7cb99e6edc58e36172fa1f964f131710c62c5b0be2f7b681fc98ed4def5d2fe",
+      "size_bytes": 1440666,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/graphpro_primary_tss_sources_v1/bacillus_mmc1.docx",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "1f688512549eaea8090995931bca0ce8297504e5f99eff51076ef8651ccc0489",
+      "size_bytes": 18027,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/graphpro_primary_tss_sources_v1/bacillus_mmc2.docx",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "3734a000973d51e93d6dcdab703a11ce1c1a04937e5e5dc38f92eced965e61d8",
+      "size_bytes": 18234,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_primary_tss_source_comparison_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "primary-tss-supplements/campylobacter_table_s4.xlsx"
+      ],
+      "group": "references",
+      "path": "data/raw/references/graphpro_primary_tss_sources_v1/campylobacter_table_s4.xlsx",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_primary_tss_source_comparison_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "067fc81dbc218a7e7e5df6a13b4d859b60be369aec23585c1c0681df4d76d98f",
+      "size_bytes": 1334816,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_primary_tss_source_comparison_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "primary-tss-supplements/chlamydia_table_s2.xlsx"
+      ],
+      "group": "references",
+      "path": "data/raw/references/graphpro_primary_tss_sources_v1/chlamydia_table_s2.xlsx",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_primary_tss_source_comparison_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "4e2839a6664eba3fbb8dadf15c4984a36cca4c8689601d7e4e83c7eb90b9d69d",
+      "size_bytes": 163204,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_ecoli_paa_source_audit_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "primary-tss-supplements/ecoli_paa_NC_018666.1.fasta"
+      ],
+      "group": "references",
+      "path": "data/raw/references/graphpro_primary_tss_sources_v1/ecoli_paa_NC_018666.1.fasta",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_ecoli_paa_source_audit_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "15f513b58e131f797b80ee93759ef36c41780197108ed68202b0865244e6d7d9",
+      "size_bytes": 75369,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_ecoli_paa_source_audit_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/graphpro_primary_tss_sources_v1/ecoli_paa_dataset_s1.xls",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_ecoli_paa_source_audit_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "dd7a5935deaf442ad2806287ccbdca0c61935cecefd5dddf608713a4452f437b",
+      "size_bytes": 111616,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/graphpro_primary_tss_sources_v1/ecoli_paa_dataset_s2.xls",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "c14a5e5aa9f7bc221b710ab87265162e2f0cc8abb014b261cf17932faa16c14d",
+      "size_bytes": 67584,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_primary_tss_source_comparison_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "primary-tss-supplements/leptospira_supplementary_files.zip!Table4.XLSX"
+      ],
+      "group": "references",
+      "path": "data/raw/references/graphpro_primary_tss_sources_v1/leptospira_table_s4.xlsx",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_primary_tss_source_comparison_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "4633cd5dc4eea129b51faca205e0d97adea37e63687942c2f04d67e328c32dc9",
+      "size_bytes": 8224223,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/normalized-dinuc.tsv",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "6aa11cc3f01b8487410752d02435745ad39fe47561d26d74b9f4faff33b7a5fa",
+      "size_bytes": 4680,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "no acquisition record exists; file modification times are not accepted as evidence",
+        "status": "unknown",
+        "value": null
+      },
+      "byte_identical_to": [],
+      "group": "references",
+      "path": "data/raw/references/normalized-trinuc.tsv",
+      "recorded_by_committed_files": [],
+      "sequence_equivalent_to": [],
+      "sha256": "480b3f6756df3b9069127573b5a77b13c20305c59cbf13dd69ad4d19ccb31bf4",
+      "size_bytes": 5533,
+      "status": "not_reproduced_by_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_primary_tss_sample_audit_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "promotech/datasets/validation/whole-genome-and-tss/BACILLUS/BACILLUS.bed"
+      ],
+      "group": "references",
+      "path": "data/raw/references/promotech_primary_audit_v1/BACILLUS.bed",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_primary_tss_sample_audit_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_source_registry_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "fcbddb6035f3cd77ac97291131e18f05c5b3e049b003d61e4a3a65c8ffba9544",
+      "size_bytes": 34524,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_primary_tss_sample_audit_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "promotech/datasets/training/whole-genome-and-tss/CJEJUNI_2/CJEJUNI_2.bed"
+      ],
+      "group": "references",
+      "path": "data/raw/references/promotech_primary_audit_v1/CJEJUNI_2.bed",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_primary_tss_sample_audit_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_source_registry_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "31979db2dc3ce23387657558569d547384026e9db5443335628a3a9ba46b2da1",
+      "size_bytes": 62177,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_primary_tss_sample_audit_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "promotech/datasets/training/whole-genome-and-tss/CPNEUMONIAE/CPNEUMONIAE.bed"
+      ],
+      "group": "references",
+      "path": "data/raw/references/promotech_primary_audit_v1/CPNEUMONIAE.bed",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_primary_tss_sample_audit_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_source_registry_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "8ad74df345496652d82d3fb696bfe7c0edfb0520135b30e4d59eb5777d483085",
+      "size_bytes": 17076,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_ecoli_paa_source_audit_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "promotech/datasets/training/whole-genome-and-tss/ECOLI/ECOLI.bed"
+      ],
+      "group": "references",
+      "path": "data/raw/references/promotech_primary_audit_v1/ECOLI.bed",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_ecoli_paa_source_audit_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_primary_tss_sample_audit_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_source_registry_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "d2484c9af295249b4a0d0c5e261b99b1a1d10ba56b167ce10b183486cfa59750",
+      "size_bytes": 10658,
+      "status": "byte_identical_to_acquisition"
+    },
+    {
+      "acquisition_date": {
+        "basis": "SHA-256 first committed in configs/graphpro_primary_tss_sample_audit_v1.yaml at 93a3bedcff63516b193d26f894ab1b4f812e1d38",
+        "status": "no_later_than",
+        "value": "2026-10-25T12:22:22-03:00"
+      },
+      "byte_identical_to": [
+        "promotech/datasets/training/whole-genome-and-tss/LINTERROGANS/LINTERROGANS.bed"
+      ],
+      "group": "references",
+      "path": "data/raw/references/promotech_primary_audit_v1/LINTERROGANS.bed",
+      "recorded_by_committed_files": [
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_primary_tss_sample_audit_v1.yaml"
+        },
+        {
+          "first_commit": "93a3bedcff63516b193d26f894ab1b4f812e1d38",
+          "first_commit_date": "2026-10-25T12:22:22-03:00",
+          "path": "configs/graphpro_source_registry_v1.yaml"
+        }
+      ],
+      "sequence_equivalent_to": [],
+      "sha256": "f676d4c579cc0ac51c962ac4e1260682ea21f8b14f4c706e315d9c452d67dbae",
+      "size_bytes": 135602,
+      "status": "byte_identical_to_acquisition"
+    }
+  ],
+  "legacy_root": "data/raw",
+  "observed_at": "2026-10-28T22:05:11+00:00",
+  "schema_version": 1,
+  "summary": {
+    "Bhandari_etal": {
+      "byte_identical_to_acquisition": 6,
+      "date_no_later_than": 1,
+      "date_unknown": 6,
+      "not_reproduced_by_acquisition": 1
+    },
+    "CDBProm": {
+      "byte_identical_to_acquisition": 23,
+      "date_unknown": 24,
+      "not_reproduced_by_acquisition": 1
+    },
+    "CNNProm": {
+      "date_unknown": 16,
+      "not_reproduced_by_acquisition": 1,
+      "sequence_equivalent_to_acquisition": 15
+    },
+    "EDP": {
+      "date_unknown": 2,
+      "not_reproduced_by_acquisition": 2
+    },
+    "Fuitfly": {
+      "byte_identical_to_acquisition": 1,
+      "date_unknown": 3,
+      "sequence_equivalent_to_acquisition": 2
+    },
+    "GraphPro": {
+      "date_no_later_than": 4,
+      "date_unknown": 15,
+      "not_reproduced_by_acquisition": 3,
+      "sequence_equivalent_to_acquisition": 16
+    },
+    "Nova pasta": {
+      "date_unknown": 1,
+      "not_reproduced_by_acquisition": 1
+    },
+    "Nova pasta (2)": {
+      "byte_identical_to_acquisition": 1,
+      "date_unknown": 1
+    },
+    "iPro-MP": {
+      "byte_identical_to_acquisition": 47,
+      "date_unknown": 51,
+      "not_reproduced_by_acquisition": 4
+    },
+    "references": {
+      "byte_identical_to_acquisition": 14,
+      "date_no_later_than": 15,
+      "date_recorded": 44,
+      "date_unknown": 6,
+      "not_reproduced_by_acquisition": 51
+    }
+  }
+}

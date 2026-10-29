@@ -48,12 +48,25 @@ metadata and documentation should be versioned.
 ```text
 data/
 ├── raw/                         # Original source datasets and references
+├── acquired/source_acquisition_v1        # Pinned, hash-verified upstream downloads
+├── canonical/source_canonicalization_v1  # One validated canonical CSV.gz per collection
 ├── interim/                     # FASTA conversion, cropped sequences, and feature intermediates
 ├── processed/assembled_datasets # CSV datasets ready for pipeline experiments
 │   └── intra_strict_dna          # Cleaned CSV copies with strict A/C/G/T sequences
 ├── processed/leakage_controlled  # Deduplicated, group-split corrective datasets
 └── *.ipynb                      # Legacy or exploratory preparation notebooks
 ```
+
+## Provenance
+
+`data/acquired/source_acquisition_v1/` is the reference collection for future
+datasets. `data/raw/` is legacy and has no acquisition record. Its files are
+inventoried by SHA-256 against the reference collection, with unknown
+acquisition dates kept as unknown, in
+`manifests/provenance/source_acquisition_v1/legacy_raw_inventory.json`. The
+lineage of the current experimental datasets is in
+`docs/provenance/dataset_lineage.md`, and the rules are in
+`specs/data_provenance_policy.md`.
 
 ## Processed Dataset Contract
 

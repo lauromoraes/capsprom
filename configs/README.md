@@ -377,6 +377,14 @@ without changing or deleting any earlier versioned contract or artifact. The
 active confirmatory scope is limited to the 18 eligible CDBProm/CNNProm
 datasets.
 
+`source_acquisition_v1.yaml` pins every upstream file used to rebuild future
+datasets (GitHub commits, URLs, and digests), and
+`source_canonicalization_v1.yaml` declares how those files become validated
+canonical collections. Both follow `specs/source_acquisition_protocol.md` and
+are immutable once their manifests exist. Together they form the reference
+collection defined in `specs/data_provenance_policy.md`. Their provenance
+records are in `manifests/provenance/source_acquisition_v1/`.
+
 `active_baseline_consolidation_v1.yaml` binds a derived statistical summary to
 the completed classical results and the current eligibility manifest. It
 reports only the 18 eligible CDBProm/CNNProm datasets, excludes GraphPro, and

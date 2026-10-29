@@ -1,0 +1,2816 @@
+{
+  "canonicalization": "source-canonicalization-v1",
+  "collections": {
+    "bdgp-drosophila-1941": {
+      "input_sha256": {
+        "bdgp/Drosophila/promoter/CDS/cds-part.0": "b1045f3bb85b340073bee6282359bef40ae0faec7fce342638f104da1fb6bf02",
+        "bdgp/Drosophila/promoter/CDS/cds-part.1": "3e094a71b4c822aebdc7b83119fb56827fab4bff36987b7863ebb1622908a6cc",
+        "bdgp/Drosophila/promoter/CDS/cds-part.2": "f8d00e44f71adebb88317c5a02cd1c34408507d6e89353165eee02837749b47d",
+        "bdgp/Drosophila/promoter/CDS/cds-part.3": "f48cbab3a234b3bad9ccd2631238292f102edbd8a66bd061d395273b733b49ee",
+        "bdgp/Drosophila/promoter/CDS/cds-part.4": "f0b150a26d82a60eff602663236d5c3e146e2cb12175e8caa8017176bc3891a7",
+        "bdgp/Drosophila/promoter/intron/intron-part.0": "291f40e0ae500f2841d1a7fa5488a8f01f7d6747ff510bf79e4f2fe749ede80f",
+        "bdgp/Drosophila/promoter/intron/intron-part.1": "2efb27a428652890db634045ffbb40d5b264608b9317c36c34fc96188f4249c5",
+        "bdgp/Drosophila/promoter/intron/intron-part.2": "559d3dd277b482ced6f1f10bfe98d4b7020742dcc6891f7b44d69391a81d8994",
+        "bdgp/Drosophila/promoter/intron/intron-part.3": "0152590f04753dbe72553f6e3577f369f45296c6f852bfadddffc07808a71dd5",
+        "bdgp/Drosophila/promoter/intron/intron-part.4": "9e335e5c7c7ad2f95c7d9b0f0154aedacb1c06b6c4c8188f42bb4053ad6f9708",
+        "bdgp/Drosophila/promoter/prom/promoter_all_1941.fa": "413a2f14644ad6247a990700b296d6f8532f487bfab5b74e0cd2332775970a76"
+      },
+      "notes": "Negatives are paired by BDGP directory (Drosophila/promoter/CDS and intron). dro-part.* and promoter_training_1842.fa are subsets of the 1,941 set and are acquired only.",
+      "output": "data/canonical/source_canonicalization_v1/bdgp-drosophila-1941.csv.gz",
+      "output_sha256": "61510ab24777e791900417be6c6ccf059c814912fa10f65d285f00fb11f2dd63",
+      "source": "bdgp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 2859,
+          "negative_intron": 1799,
+          "positive": 1941
+        },
+        "legacy_sequence_match": {
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            300,
+            6599
+          ]
+        ],
+        "non_strict_dna_records": 5,
+        "publication_count_discrepancies": {},
+        "records": 6599,
+        "records_by_class": {
+          "negative_cds": 2859,
+          "negative_intron": 1799,
+          "positive": 1941
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 6599
+      }
+    },
+    "bdgp-drosophila-1998": {
+      "input_sha256": {
+        "bdgp/Drosophila/promoter/1998/CDS/cds-part0.300": "8aeadfba5184201410dd6eae98e88b1149f181fc4b07fdfac3797788c6c9afee",
+        "bdgp/Drosophila/promoter/1998/CDS/cds-part1.300": "7bdb21400bf4ba00f82d5be9638e3eaec8507ecb09c9bbe318041fcf89a0bc8d",
+        "bdgp/Drosophila/promoter/1998/CDS/cds-part2.300": "3face41bdd8a08dc8b580b78693d03583238e232a14cd2ced565c1fead587efc",
+        "bdgp/Drosophila/promoter/1998/intron/intron-part0.300": "07f9c3df82b5812264f67de247f1f2936329f22100dfce28b00e3a67d685c0bf",
+        "bdgp/Drosophila/promoter/1998/intron/intron-part1.300": "ce1d1265b3c6c6fa9da5a638d952d9ea977e79ceefd5bff28155eb6b77a0c778",
+        "bdgp/Drosophila/promoter/1998/intron/intron-part2.300": "476bef782e1ae561ec6d51479b5183cbdeb02bc059f177f4e132f6b43327eb1e",
+        "bdgp/Drosophila/promoter/1998/prom/drosophila.0": "0168a764af1c095b5c4cad63bd99f009136ab6b49d5c5dfb61ed38552814e082",
+        "bdgp/Drosophila/promoter/1998/prom/drosophila.1": "c2548a60c6c9db86ccedcd9ca58c24643260cef9b0b6ae32cd03113757750912",
+        "bdgp/Drosophila/promoter/1998/prom/drosophila.2": "edeacbd856ef31488ff3061dbd52ce2b64f8d73a60f2081b1e3d55b4a464464a"
+      },
+      "notes": "Headers state 250 bp upstream and 50 bp downstream; the TSS base convention is unresolved.",
+      "output": "data/canonical/source_canonicalization_v1/bdgp-drosophila-1998.csv.gz",
+      "output_sha256": "4ea599a6b817ec920c6894201c5269e52e125b30d7b3a9008822f7e2a0e5577c",
+      "source": "bdgp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 1,
+        "expected_release_records_by_class": {
+          "negative_cds": 711,
+          "negative_intron": 240,
+          "positive": 256
+        },
+        "legacy_sequence_match": {
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            300,
+            1207
+          ]
+        ],
+        "non_strict_dna_records": 46,
+        "publication_count_discrepancies": {},
+        "records": 1207,
+        "records_by_class": {
+          "negative_cds": 711,
+          "negative_intron": 240,
+          "positive": 256
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 1206
+      }
+    },
+    "bdgp-human": {
+      "input_sha256": {
+        "bdgp/Human/promoter/CDS/cds-part0.300": "8ec50e641b85f266819685e12e392346384f47628a46c9337cd02146ab7b9900",
+        "bdgp/Human/promoter/CDS/cds-part1.300": "f430ba2c5c79289a6131beddf5c78b6d77496388c5870b01382bc2c043826147",
+        "bdgp/Human/promoter/CDS/cds-part2.300": "1d9d375519d0c22d78308aceec7f29f45e2c1662dc69734aa2fd81919c800b45",
+        "bdgp/Human/promoter/CDS/cds-part3.300": "c3f6d9cb44196e5a7509ee88e7237d39c4176f7b02975da9f18387c50733fc44",
+        "bdgp/Human/promoter/CDS/cds-part4.300": "b7e592baecf717205b7368dcf8008e53412ee9e1c710650903767eb5ac719fad",
+        "bdgp/Human/promoter/intron/intron-part0.300": "61b697b09fa304f480d332887e06c560ba95a01a503b0b4fa1a57af2c003605d",
+        "bdgp/Human/promoter/intron/intron-part1.300": "0b4a16f9d4c1320d6b4f259f30cb1f7a7ad84054e91bb2e3187ca5a19399584b",
+        "bdgp/Human/promoter/intron/intron-part2.300": "69a5a50c90ce0d2835959f1819ed01bcbc3ea2fbef4d6ab4d534ed0f68d3ec2b",
+        "bdgp/Human/promoter/intron/intron-part3.300": "327d525495b0e30db13a4bceb277926c94e01928132cb74501ea0a8d03b5dd08",
+        "bdgp/Human/promoter/intron/intron-part4.300": "7f4c74dea3c58b29f82d7f2c723f492a8add645f4293b71f96a6a0a787adfc4a",
+        "bdgp/Human/promoter/prom/vertebrate.0": "6685e86b65db8f772d2b19c7f1b656a8881e8abce0fb4c360856a1824e39a98e",
+        "bdgp/Human/promoter/prom/vertebrate.1": "c7709ff72f872ed723301a0d3f78b69dfdba4d4c646d2b03abe0d0c0798d6f43",
+        "bdgp/Human/promoter/prom/vertebrate.2": "461a1899592472c8ec05ef618321c269fb7c68e2b49a8ba560b0db49ca72ca34",
+        "bdgp/Human/promoter/prom/vertebrate.3": "652243b087c5328600f073df76347dd8d51885579408f5c386d8beb8bbf6d4fd",
+        "bdgp/Human/promoter/prom/vertebrate.4": "a03d2ecf072d65e47a14ddc6672c2973d2d694b1a96c696b94b1e13d58bc84c7"
+      },
+      "notes": "Positives carry EPD identifiers; headers state 250 bp upstream and 50 bp downstream.",
+      "output": "data/canonical/source_canonicalization_v1/bdgp-human.csv.gz",
+      "output_sha256": "0c785e984202a4fa9ade3f688ec04764b44e6fe472a4d16cf3f85916f6aa185a",
+      "source": "bdgp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 1,
+        "expected_release_records_by_class": {
+          "negative_cds": 890,
+          "negative_intron": 4345,
+          "positive": 565
+        },
+        "legacy_sequence_match": {
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            300,
+            5800
+          ]
+        ],
+        "non_strict_dna_records": 198,
+        "publication_count_discrepancies": {},
+        "records": 5800,
+        "records_by_class": {
+          "negative_cds": 890,
+          "negative_intron": 4345,
+          "positive": 565
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 5799
+      }
+    },
+    "bhandari-human": {
+      "input_sha256": {
+        "bhandari-drive/Human_promoter.gz": "e968467da6d060012334cee30112cdb004979fb31d3b72995c16d0c71d4bfd59"
+      },
+      "notes": "Window -700..+299 around the TSS (headers up_700 and 3-prime pad 300). Published negatives are synthetic shuffles and are not distributed.",
+      "output": "data/canonical/source_canonicalization_v1/bhandari-human.csv.gz",
+      "output_sha256": "b4fc09fc180eaad1ebaeb69f37d0d178c41835348e64821b8f2a462dce25bc73",
+      "source": "bhandari",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 26577,
+        "expected_release_records_by_class": {
+          "positive": 61546
+        },
+        "legacy_sequence_match": {
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1000,
+            61516
+          ],
+          [
+            772,
+            6
+          ],
+          [
+            367,
+            6
+          ],
+          [
+            350,
+            1
+          ],
+          [
+            659,
+            1
+          ]
+        ],
+        "non_strict_dna_records": 58,
+        "publication_count_discrepancies": {},
+        "records": 61546,
+        "records_by_class": {
+          "positive": 61546
+        },
+        "records_not_expected_length": 30,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 34969
+      }
+    },
+    "bhandari-human-random-genomic": {
+      "input_sha256": {
+        "bhandari-github/random_sequences.fasta": "cd015f453116a3761496b335bb36eb35460c986e24f4aa4a1129a2e62a92ca10"
+      },
+      "notes": "Random human genomic sequences used by the authors only as external test negatives.",
+      "output": "data/canonical/source_canonicalization_v1/bhandari-human-random-genomic.csv.gz",
+      "output_sha256": "29ee6afd553ec23f09b67d6124af66f21dfa348f1c0d30ef62831eba0612ed80",
+      "source": "bhandari",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 74,
+        "expected_release_records_by_class": {
+          "negative_random_genomic": 593
+        },
+        "most_common_lengths": [
+          [
+            1000,
+            587
+          ],
+          [
+            993,
+            1
+          ],
+          [
+            971,
+            1
+          ],
+          [
+            981,
+            1
+          ],
+          [
+            990,
+            1
+          ]
+        ],
+        "non_strict_dna_records": 24,
+        "publication_count_discrepancies": {
+          "negative_random_genomic": {
+            "publication": 600,
+            "release": 593
+          }
+        },
+        "records": 593,
+        "records_by_class": {
+          "negative_random_genomic": 593
+        },
+        "records_not_expected_length": 6,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 519
+      }
+    },
+    "bhandari-nominal-plant": {
+      "input_sha256": {
+        "bhandari-drive/Plant_promoters.gz": "49438378c8b1375e3cd044925ea135abac6526c83ac18c05b8499019bdbefb95"
+      },
+      "notes": "Identity conflict: file name and publication say A. thaliana (araTha1), but every header carries mm10 coordinates. Organism is left blank on purpose.",
+      "output": "data/canonical/source_canonicalization_v1/bhandari-nominal-plant.csv.gz",
+      "output_sha256": "a32e0adf56f4902eedbd06a2a6118f59aff79f93a751870cbec31ade4fd075fc",
+      "source": "bhandari",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 32070,
+        "expected_release_records_by_class": {
+          "positive": 106520
+        },
+        "legacy_sequence_match": {
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1000,
+            106515
+          ],
+          [
+            306,
+            2
+          ],
+          [
+            334,
+            1
+          ],
+          [
+            344,
+            1
+          ],
+          [
+            801,
+            1
+          ]
+        ],
+        "non_strict_dna_records": 57,
+        "publication_count_discrepancies": {
+          "positive": {
+            "publication": 41671,
+            "release": 106520
+          }
+        },
+        "records": 106520,
+        "records_by_class": {
+          "positive": 106520
+        },
+        "records_not_expected_length": 5,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 74450
+      }
+    },
+    "bhandari-yeast": {
+      "input_sha256": {
+        "bhandari-drive/Yeast_promoter.gz": "0c1998499d5033e56c232cff9a12aa0486d7dd6ac0edc198ff27f00de4abc0d6"
+      },
+      "notes": "Window -700..+299 around the TSS (headers up_700 and 3-prime pad 300). Published negatives are synthetic shuffles and are not distributed.",
+      "output": "data/canonical/source_canonicalization_v1/bhandari-yeast.csv.gz",
+      "output_sha256": "319eb5b91fc0b49056d017436b53b2d06c28b19498074a74d83bc199aaf08d82",
+      "source": "bhandari",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 80,
+        "expected_release_records_by_class": {
+          "positive": 6125
+        },
+        "legacy_sequence_match": {
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1000,
+            6122
+          ],
+          [
+            352,
+            1
+          ],
+          [
+            884,
+            1
+          ],
+          [
+            732,
+            1
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 6125,
+        "records_by_class": {
+          "positive": 6125
+        },
+        "records_not_expected_length": 3,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 6045
+      }
+    },
+    "cdbprom-anabaena-sp": {
+      "input_sha256": {
+        "cdbprom-website/training_sequences.zip": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81"
+      },
+      "notes": "TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code uses -60..+20. File names keep upstream spellings.",
+      "output": "data/canonical/source_canonicalization_v1/cdbprom-anabaena-sp.csv.gz",
+      "output_sha256": "7332fea17b24a98a3d633abb6749ed5d8635082af9e71c877ae0a16679e71204",
+      "source": "cdbprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 1,
+        "expected_release_records_by_class": {
+          "negative_downstream": 2517,
+          "positive": 2517
+        },
+        "legacy_sequence_match": {
+          "negative_downstream": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1001,
+            2517
+          ],
+          [
+            100,
+            2511
+          ],
+          [
+            99,
+            6
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 5034,
+        "records_by_class": {
+          "negative_downstream": 2517,
+          "positive": 2517
+        },
+        "records_not_expected_length": 6,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 5033
+      }
+    },
+    "cdbprom-bacillus-amyloliquefaciens": {
+      "input_sha256": {
+        "cdbprom-website/training_sequences.zip": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81"
+      },
+      "notes": "TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code uses -60..+20. File names keep upstream spellings.",
+      "output": "data/canonical/source_canonicalization_v1/cdbprom-bacillus-amyloliquefaciens.csv.gz",
+      "output_sha256": "c1fc6569affe1aa8767d71ca273391b3106333c8b90e6dd92816852f13a133d2",
+      "source": "cdbprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_downstream": 1059,
+          "positive": 1059
+        },
+        "legacy_sequence_match": {
+          "negative_downstream": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1001,
+            1059
+          ],
+          [
+            100,
+            1056
+          ],
+          [
+            99,
+            3
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 2118,
+        "records_by_class": {
+          "negative_downstream": 1059,
+          "positive": 1059
+        },
+        "records_not_expected_length": 3,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 2118
+      }
+    },
+    "cdbprom-chlamydophila-pneumoniae": {
+      "input_sha256": {
+        "cdbprom-website/training_sequences.zip": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81"
+      },
+      "notes": "TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code uses -60..+20. File names keep upstream spellings.",
+      "output": "data/canonical/source_canonicalization_v1/cdbprom-chlamydophila-pneumoniae.csv.gz",
+      "output_sha256": "56b202c39f30fef7ef103ec033979a9126a81bff59a86db051a99b292f71b2c5",
+      "source": "cdbprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_downstream": 404,
+          "positive": 404
+        },
+        "legacy_sequence_match": {
+          "negative_downstream": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1001,
+            404
+          ],
+          [
+            100,
+            404
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 808,
+        "records_by_class": {
+          "negative_downstream": 404,
+          "positive": 404
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 808
+      }
+    },
+    "cdbprom-corynebacterium-glutamicum": {
+      "input_sha256": {
+        "cdbprom-website/training_sequences.zip": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81"
+      },
+      "notes": "TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code uses -60..+20. File names keep upstream spellings.",
+      "output": "data/canonical/source_canonicalization_v1/cdbprom-corynebacterium-glutamicum.csv.gz",
+      "output_sha256": "d51298e879ba4175785991f9a875bcce128f0f37a299b863d0966d190d6056fd",
+      "source": "cdbprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 15,
+        "expected_release_records_by_class": {
+          "negative_downstream": 575,
+          "positive": 575
+        },
+        "legacy_sequence_match": {
+          "negative_downstream": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1001,
+            575
+          ],
+          [
+            100,
+            572
+          ],
+          [
+            99,
+            3
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 1150,
+        "records_by_class": {
+          "negative_downstream": 575,
+          "positive": 575
+        },
+        "records_not_expected_length": 3,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 1135
+      }
+    },
+    "cdbprom-helicobacter-pylori": {
+      "input_sha256": {
+        "cdbprom-website/training_sequences.zip": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81"
+      },
+      "notes": "TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code uses -60..+20. File names keep upstream spellings.",
+      "output": "data/canonical/source_canonicalization_v1/cdbprom-helicobacter-pylori.csv.gz",
+      "output_sha256": "427e2e842d702552f6b1a709ca17e8f0d00c14eb1e9f28dbe74fc13c5e20cad0",
+      "source": "cdbprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 7,
+        "expected_release_records_by_class": {
+          "negative_downstream": 714,
+          "positive": 714
+        },
+        "legacy_sequence_match": {
+          "negative_downstream": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1001,
+            714
+          ],
+          [
+            100,
+            710
+          ],
+          [
+            99,
+            4
+          ]
+        ],
+        "non_strict_dna_records": 8,
+        "publication_count_discrepancies": {
+          "negative_downstream": {
+            "publication": 713,
+            "release": 714
+          },
+          "positive": {
+            "publication": 713,
+            "release": 714
+          }
+        },
+        "records": 1428,
+        "records_by_class": {
+          "negative_downstream": 714,
+          "positive": 714
+        },
+        "records_not_expected_length": 4,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 1421
+      }
+    },
+    "cdbprom-klebisiella-pneumoniae": {
+      "input_sha256": {
+        "cdbprom-website/training_sequences.zip": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81"
+      },
+      "notes": "TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code uses -60..+20. File names keep upstream spellings.",
+      "output": "data/canonical/source_canonicalization_v1/cdbprom-klebisiella-pneumoniae.csv.gz",
+      "output_sha256": "07163862f91c74ef6428c488620fbbd51a16ab4537c45d832a7a3882e2896c36",
+      "source": "cdbprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_downstream": 1329,
+          "positive": 1329
+        },
+        "legacy_sequence_match": {
+          "negative_downstream": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1001,
+            1329
+          ],
+          [
+            100,
+            1326
+          ],
+          [
+            99,
+            3
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 2658,
+        "records_by_class": {
+          "negative_downstream": 1329,
+          "positive": 1329
+        },
+        "records_not_expected_length": 3,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 2658
+      }
+    },
+    "cdbprom-mycrobacterium-tuberculosis": {
+      "input_sha256": {
+        "cdbprom-website/training_sequences.zip": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81"
+      },
+      "notes": "TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code uses -60..+20. File names keep upstream spellings.",
+      "output": "data/canonical/source_canonicalization_v1/cdbprom-mycrobacterium-tuberculosis.csv.gz",
+      "output_sha256": "ac901fc2cbc4724b50bc2c3d09e620fd5a67a51d1d43c35dfac0371553bb2fb0",
+      "source": "cdbprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_downstream": 1772,
+          "positive": 1772
+        },
+        "legacy_sequence_match": {
+          "negative_downstream": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1001,
+            1772
+          ],
+          [
+            100,
+            1767
+          ],
+          [
+            99,
+            5
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 3544,
+        "records_by_class": {
+          "negative_downstream": 1772,
+          "positive": 1772
+        },
+        "records_not_expected_length": 5,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 3544
+      }
+    },
+    "cdbprom-pseudonomas-aeruginosa": {
+      "input_sha256": {
+        "cdbprom-website/training_sequences.zip": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81"
+      },
+      "notes": "TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code uses -60..+20. File names keep upstream spellings.",
+      "output": "data/canonical/source_canonicalization_v1/cdbprom-pseudonomas-aeruginosa.csv.gz",
+      "output_sha256": "0e52ef879ce0eef78f8c1b5f3fdd82b2010dbab7fedd51d91ac45609c3e82cb0",
+      "source": "cdbprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 2,
+        "expected_release_records_by_class": {
+          "negative_downstream": 2055,
+          "positive": 2055
+        },
+        "legacy_sequence_match": {
+          "negative_downstream": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1001,
+            2055
+          ],
+          [
+            100,
+            2049
+          ],
+          [
+            99,
+            6
+          ]
+        ],
+        "non_strict_dna_records": 2,
+        "publication_count_discrepancies": {
+          "negative_downstream": {
+            "publication": 2054,
+            "release": 2055
+          },
+          "positive": {
+            "publication": 2054,
+            "release": 2055
+          }
+        },
+        "records": 4110,
+        "records_by_class": {
+          "negative_downstream": 2055,
+          "positive": 2055
+        },
+        "records_not_expected_length": 6,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 4108
+      }
+    },
+    "cdbprom-salmonella-typhimurium": {
+      "input_sha256": {
+        "cdbprom-website/training_sequences.zip": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81"
+      },
+      "notes": "TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code uses -60..+20. File names keep upstream spellings.",
+      "output": "data/canonical/source_canonicalization_v1/cdbprom-salmonella-typhimurium.csv.gz",
+      "output_sha256": "852672f1405241c91e01ab2a3404546cca99bf99c8cea0d603fa3a4b538c5a84",
+      "source": "cdbprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_downstream": 981,
+          "positive": 981
+        },
+        "legacy_sequence_match": {
+          "negative_downstream": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1001,
+            981
+          ],
+          [
+            100,
+            974
+          ],
+          [
+            99,
+            7
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 1962,
+        "records_by_class": {
+          "negative_downstream": 981,
+          "positive": 981
+        },
+        "records_not_expected_length": 7,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 1962
+      }
+    },
+    "cdbprom-streptomyces-coelicolor": {
+      "input_sha256": {
+        "cdbprom-website/training_sequences.zip": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81"
+      },
+      "notes": "TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code uses -60..+20. File names keep upstream spellings.",
+      "output": "data/canonical/source_canonicalization_v1/cdbprom-streptomyces-coelicolor.csv.gz",
+      "output_sha256": "452f36aa30ae990b30f5030e33aee6fac3512993c76ee25873a0437a5b4452e6",
+      "source": "cdbprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 198,
+        "expected_release_records_by_class": {
+          "negative_downstream": 2611,
+          "positive": 2611
+        },
+        "legacy_sequence_match": {
+          "negative_downstream": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1001,
+            2611
+          ],
+          [
+            100,
+            2606
+          ],
+          [
+            99,
+            5
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 5222,
+        "records_by_class": {
+          "negative_downstream": 2611,
+          "positive": 2611
+        },
+        "records_not_expected_length": 5,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 5024
+      }
+    },
+    "cdbprom-synechocistis": {
+      "input_sha256": {
+        "cdbprom-website/training_sequences.zip": "468592622eb5df8a7d73af521473f43c5029147e256053a499aa9d7fd0b9bb81"
+      },
+      "notes": "TSS index inside the 1,001-nt positives is not documented; the paper states -60..+1 and the released code uses -60..+20. File names keep upstream spellings.",
+      "output": "data/canonical/source_canonicalization_v1/cdbprom-synechocistis.csv.gz",
+      "output_sha256": "87bf519542233f0e6da8addde37148f8b972a802cbc40baebc62576bec392625",
+      "source": "cdbprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_downstream": 1639,
+          "positive": 1639
+        },
+        "legacy_sequence_match": {
+          "negative_downstream": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            1001,
+            1639
+          ],
+          [
+            100,
+            1630
+          ],
+          [
+            99,
+            9
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 3278,
+        "records_by_class": {
+          "negative_downstream": 1639,
+          "positive": 1639
+        },
+        "records_not_expected_length": 9,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 3278
+      }
+    },
+    "cnnprom-arabidopsis-non-tata": {
+      "input_sha256": {
+        "cnnprom/Arabidopsis_non_prom_big.fa": "12f6901527b506907373a6c4bcbaf289622159657e9f0a307b29f822ea2dc250",
+        "cnnprom/Arabidopsis_non_tata.fa": "93f7c91d25bd18d7640c09f7fcd6052abf9f6f4425eda56dbebe6cc6ecfa2d1b"
+      },
+      "notes": "Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1 counts.",
+      "output": "data/canonical/source_canonicalization_v1/cnnprom-arabidopsis-non-tata.csv.gz",
+      "output_sha256": "9931aa1521ccfa0625321af52092c3ee2b3d776ef1c0d5f47146947ea4eeb59f",
+      "source": "cnnprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 7,
+        "expected_release_records_by_class": {
+          "negative_post_first_exon": 11459,
+          "positive": 5905
+        },
+        "legacy_sequence_match": {
+          "negative_post_first_exon": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            251,
+            17364
+          ]
+        ],
+        "non_strict_dna_records": 2,
+        "publication_count_discrepancies": {},
+        "records": 17364,
+        "records_by_class": {
+          "negative_post_first_exon": 11459,
+          "positive": 5905
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 17357
+      }
+    },
+    "cnnprom-arabidopsis-tata": {
+      "input_sha256": {
+        "cnnprom/Arabidopsis_non_prom.fa": "1ab75553cdbf99d54e56928a56b3f35eb14a5f3bbb31bba7c1102b406a615c90",
+        "cnnprom/Arabidopsis_tata.fa": "2beaa31c2797e7f8d193b6015b7239a89509341f59dde57d904d8664e492901b"
+      },
+      "notes": "Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1 counts.",
+      "output": "data/canonical/source_canonicalization_v1/cnnprom-arabidopsis-tata.csv.gz",
+      "output_sha256": "e76f75f4ba2912a8f33faf6a0f59034b66e37d7a1aba5697be56785e2985991f",
+      "source": "cnnprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 1,
+        "expected_release_records_by_class": {
+          "negative_post_first_exon": 2879,
+          "positive": 1497
+        },
+        "legacy_sequence_match": {
+          "negative_post_first_exon": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            251,
+            4376
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 4376,
+        "records_by_class": {
+          "negative_post_first_exon": 2879,
+          "positive": 1497
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 4375
+      }
+    },
+    "cnnprom-bacillus-subtilis": {
+      "input_sha256": {
+        "cnnprom/Bacillus_non_prom.fa": "ffb3bc854a6b410ce692a0dea47838dadb6c0f6bdeaf41bcbffe24108b4f7fad",
+        "cnnprom/Bacillus_prom.fa": "ed567448ac42e2b7958f58c971e2b8e95d7e28e266a1d8d778fec03de0d8bb68"
+      },
+      "notes": "Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1 counts.",
+      "output": "data/canonical/source_canonicalization_v1/cnnprom-bacillus-subtilis.csv.gz",
+      "output_sha256": "656d5e9ace9fee695595d7bda0f02694fd6449e61fb276c0d68068bde4f62d85",
+      "source": "cnnprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_opposite_strand_cds": 1000,
+          "positive": 373
+        },
+        "legacy_sequence_match": {
+          "negative_opposite_strand_cds": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            1373
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {
+          "negative_opposite_strand_cds": {
+            "publication": 2000,
+            "release": 1000
+          },
+          "positive": {
+            "publication": 746,
+            "release": 373
+          }
+        },
+        "records": 1373,
+        "records_by_class": {
+          "negative_opposite_strand_cds": 1000,
+          "positive": 373
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 1373
+      }
+    },
+    "cnnprom-ecoli-sigma70": {
+      "input_sha256": {
+        "cnnprom/Ecoli_non_prom.fa": "cf5f078da7e56c5f38c8abd8ffaeaa227863bff4f5c249f2cfda61cb5331c774",
+        "cnnprom/Ecoli_prom.fa": "1712f385e357491d309bd14f8fd4e8de3d018bd418402cab3c6014232197ce5e"
+      },
+      "notes": "Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1 counts.",
+      "output": "data/canonical/source_canonicalization_v1/cnnprom-ecoli-sigma70.csv.gz",
+      "output_sha256": "f58a080c9caf9f5b978e74092c93ecb5a9b904d671d5bbcc287b8566eee1f447",
+      "source": "cnnprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_opposite_strand_cds": 3000,
+          "positive": 839
+        },
+        "legacy_sequence_match": {
+          "negative_opposite_strand_cds": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            3839
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 3839,
+        "records_by_class": {
+          "negative_opposite_strand_cds": 3000,
+          "positive": 839
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 3839
+      }
+    },
+    "cnnprom-human-non-tata": {
+      "input_sha256": {
+        "cnnprom/human_non_tata.fa": "f9cfdc7f4fa38dbb08843390010bf568b71ad8edd56c882359fe52a70e288327",
+        "cnnprom/human_nonprom_big.fa": "d94b38e54c0b43d75c3e6b7ec30200c7a2921ca9328b861e7c8daa478bb5afcd"
+      },
+      "notes": "Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1 counts.",
+      "output": "data/canonical/source_canonicalization_v1/cnnprom-human-non-tata.csv.gz",
+      "output_sha256": "e99190d77ce591ca21143ed07e14bd87cb98cba6f1a1fb01057385e20b74afea",
+      "source": "cnnprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 687,
+        "expected_release_records_by_class": {
+          "negative_post_first_exon": 27731,
+          "positive": 19811
+        },
+        "legacy_sequence_match": {
+          "negative_post_first_exon": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            251,
+            47542
+          ]
+        ],
+        "non_strict_dna_records": 1,
+        "publication_count_discrepancies": {},
+        "records": 47542,
+        "records_by_class": {
+          "negative_post_first_exon": 27731,
+          "positive": 19811
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 46855
+      }
+    },
+    "cnnprom-mouse-non-tata": {
+      "input_sha256": {
+        "cnnprom/Mouse_non_nonprom_big.fa": "b639bbeae42613956c9edf2bf6762960b937d00fcdef107c20d058db6c884569",
+        "cnnprom/Mouse_non_tata.fa": "3461f20f19f7d94073fe1b298e56bcc34f056199fb65d9e09a3015a978876967"
+      },
+      "notes": "Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1 counts.",
+      "output": "data/canonical/source_canonicalization_v1/cnnprom-mouse-non-tata.csv.gz",
+      "output_sha256": "6f455bed4a445197167d9c20a3fb6d259fff9226b1dad5c613d4cd8958a57da3",
+      "source": "cnnprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 34,
+        "expected_release_records_by_class": {
+          "negative_post_first_exon": 24822,
+          "positive": 16283
+        },
+        "legacy_sequence_match": {
+          "negative_post_first_exon": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            251,
+            41105
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 41105,
+        "records_by_class": {
+          "negative_post_first_exon": 24822,
+          "positive": 16283
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 41071
+      }
+    },
+    "cnnprom-mouse-tata": {
+      "input_sha256": {
+        "cnnprom/Mouse_nonprom.fa": "44fc703c470dd77c4c44ceb0b8b40f198742cd9781055fda9d1328f89b688026",
+        "cnnprom/Mouse_tata.fa": "754bde10d814e65ab74ab94c249b1cd3c483ab96a3a7ad7a6f85a6451353f4cd"
+      },
+      "notes": "Window -60..+20 (bacteria) or -200..+50 (eukaryotes) per Table 1. Negative pairing follows the Table 1 counts.",
+      "output": "data/canonical/source_canonicalization_v1/cnnprom-mouse-tata.csv.gz",
+      "output_sha256": "970759b515dfc8f4dadef9c6a8c5c171d53f523d60f40cfb4dd6a0777fe0e9b0",
+      "source": "cnnprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 3,
+        "expected_release_records_by_class": {
+          "negative_post_first_exon": 3530,
+          "positive": 1255
+        },
+        "legacy_sequence_match": {
+          "negative_post_first_exon": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            251,
+            4785
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 4785,
+        "records_by_class": {
+          "negative_post_first_exon": 3530,
+          "positive": 1255
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 4782
+      }
+    },
+    "cnnprom-mouse-tata-dbtss": {
+      "input_sha256": {
+        "cnnprom/Mouse_tata_dbtss.fa": "f1c68a9c3af678409a6184d825f1b09bd320912259ffcc63ef7acf63717c1f9b"
+      },
+      "notes": "DBTSS mouse TATA set (1,083 train + 271 test in the paper). TSS position not documented.",
+      "output": "data/canonical/source_canonicalization_v1/cnnprom-mouse-tata-dbtss.csv.gz",
+      "output_sha256": "63b828a5c72e865c112935af32cf60f656b205aab8c8863741ebf8c04ce952e8",
+      "source": "cnnprom",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 20,
+        "expected_release_records_by_class": {
+          "positive": 1354
+        },
+        "legacy_sequence_match": {
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            251,
+            1354
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 1354,
+        "records_by_class": {
+          "positive": 1354
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 1334
+      }
+    },
+    "epd-128": {
+      "input_sha256": {
+        "epd/epd128.seq": "ba7318aa68c741a26116373af578f302dda2f4fc0cb1e83a011b8f0f6b234ddb"
+      },
+      "notes": "Window -499..+100; EPD pads short entries with N. The legacy data/raw/EDP file is a -250..+50 web export, so parity is checked by cropping in the acquisition report.",
+      "output": "data/canonical/source_canonicalization_v1/epd-128.csv.gz",
+      "output_sha256": "902d14e2b7b7f287e16737e207036ae06ceaa62f0eefc632ebc9bd62991a4758",
+      "source": "epd",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 13,
+        "expected_release_records_by_class": {
+          "positive": 4806
+        },
+        "most_common_lengths": [
+          [
+            600,
+            4806
+          ]
+        ],
+        "non_strict_dna_records": 278,
+        "publication_count_discrepancies": {},
+        "records": 4806,
+        "records_by_class": {
+          "positive": 4806
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 4793
+      }
+    },
+    "graphpro-bamy": {
+      "input_sha256": {
+        "graphpro/Datasets/Bamy/negative": "23090c72958e51fc105cf0f074700a77a286e3a9937f2fc7289bc3a928f51c6f",
+        "graphpro/Datasets/Bamy/positive": "a935b542a2ff120ea9ddee4fdd2c6ebbba3136e0eb634a0f427bdfb87a2cc826"
+      },
+      "notes": "Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.",
+      "output": "data/canonical/source_canonicalization_v1/graphpro-bamy.csv.gz",
+      "output_sha256": "7a58ae78c88897f4f9dff7a9d669f6d5bb203b844889130d16a1b994c21992fb",
+      "source": "graphpro",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative": 928,
+          "positive": 928
+        },
+        "legacy_sequence_match": {
+          "negative": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            1856
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 1856,
+        "records_by_class": {
+          "negative": 928,
+          "positive": 928
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 1856
+      }
+    },
+    "graphpro-cje": {
+      "input_sha256": {
+        "graphpro/Datasets/Cje/negative": "68a14cab799c0338d4b7639a9cc86de6c65496a2e069b6f9a553c0c221b088fb",
+        "graphpro/Datasets/Cje/positive": "5c15d90f47e54b221fab87f226bb599ca7b7b4e9e53f3882b137c6b55b417c75"
+      },
+      "notes": "Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.",
+      "output": "data/canonical/source_canonicalization_v1/graphpro-cje.csv.gz",
+      "output_sha256": "0271fc6c583efd87b4abb68b67b1d4871b6e3d8b53ea901462aea3d927e2098e",
+      "source": "graphpro",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 1,
+        "expected_release_records_by_class": {
+          "negative": 1346,
+          "positive": 1346
+        },
+        "legacy_sequence_match": {
+          "negative": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            2692
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 2692,
+        "records_by_class": {
+          "negative": 1346,
+          "positive": 1346
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 2691
+      }
+    },
+    "graphpro-cpne": {
+      "input_sha256": {
+        "graphpro/Datasets/Cpne/negative": "c5e3b19e64637cd63e9b57488036c8d6c9c55896dede01e52c2a6db8d6422158",
+        "graphpro/Datasets/Cpne/positive": "a5297e850cb0e44d2338421d6a9481e4e3e00ed1b6161a8d1e548884831c2d9c"
+      },
+      "notes": "Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.",
+      "output": "data/canonical/source_canonicalization_v1/graphpro-cpne.csv.gz",
+      "output_sha256": "ea5334830d3ba6fb8d631ea3980600ca56f5ae1202fd89a997e0fbdc9233797b",
+      "source": "graphpro",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative": 431,
+          "positive": 503
+        },
+        "legacy_sequence_match": {
+          "negative": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            934
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 934,
+        "records_by_class": {
+          "negative": 431,
+          "positive": 503
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 934
+      }
+    },
+    "graphpro-ecol": {
+      "input_sha256": {
+        "graphpro/Datasets/Ecol/negative": "09896d0f7f9925c4898746252377fb937459e71114af7b5f5ea305f123989218",
+        "graphpro/Datasets/Ecol/positive": "76dbe07ececd06e4d39cd443976c451bf04f7224a93043d0b913df6323e764d3"
+      },
+      "notes": "Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.",
+      "output": "data/canonical/source_canonicalization_v1/graphpro-ecol.csv.gz",
+      "output_sha256": "2505ba70972f07f286191b3237cd96bc24da14be5ede202d883648191ee6e74d",
+      "source": "graphpro",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 2690,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative": 3874,
+          "positive": 2519
+        },
+        "legacy_sequence_match": {
+          "negative": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            6393
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 6393,
+        "records_by_class": {
+          "negative": 3874,
+          "positive": 2519
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 5048
+      }
+    },
+    "graphpro-human": {
+      "input_sha256": {
+        "graphpro/Datasets/human/negative": "297a4c3b7ea82bd8cf47c368b64b9e38738531e27d8bb487ff657a33531851ad",
+        "graphpro/Datasets/human/positive": "ba62e5b64679e3aab0e85f46f125e4dda88c72e360785f9b1d8d6395cf826018"
+      },
+      "notes": "Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.",
+      "output": "data/canonical/source_canonicalization_v1/graphpro-human.csv.gz",
+      "output_sha256": "087229bb6ec01e7bd643fd1d0b448c4ad5efc7dd70aecf1eaeb6ab5ea9ffb1a1",
+      "source": "graphpro",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 2,
+        "duplicate_records": 11,
+        "expected_release_records_by_class": {
+          "negative": 2339,
+          "positive": 2339
+        },
+        "legacy_sequence_match": {
+          "negative": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            4678
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 4678,
+        "records_by_class": {
+          "negative": 2339,
+          "positive": 2339
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 4666
+      }
+    },
+    "graphpro-lint": {
+      "input_sha256": {
+        "graphpro/Datasets/Lint/negative": "7fad29cebb70572b0642538dd97d1545899c375d17155804f2f058ada028bbde",
+        "graphpro/Datasets/Lint/positive": "6c3892d37f47e07e9a80c9d1b0f291b8e96f7e58b74345172b5977a98007932b"
+      },
+      "notes": "Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.",
+      "output": "data/canonical/source_canonicalization_v1/graphpro-lint.csv.gz",
+      "output_sha256": "1eaf773dd9ad608717a0d249f1b9ca343f8c7188a396722819b530d3210acbbd",
+      "source": "graphpro",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 1,
+        "expected_release_records_by_class": {
+          "negative": 2116,
+          "positive": 2847
+        },
+        "legacy_sequence_match": {
+          "negative": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            4961
+          ],
+          [
+            82,
+            2
+          ]
+        ],
+        "non_strict_dna_records": 3,
+        "publication_count_discrepancies": {},
+        "records": 4963,
+        "records_by_class": {
+          "negative": 2116,
+          "positive": 2847
+        },
+        "records_not_expected_length": 2,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 4962
+      }
+    },
+    "graphpro-mouse": {
+      "input_sha256": {
+        "graphpro/Datasets/mouse/negative": "33d9adeeed11544000461ba7b8f44ab9ea1b1865089f82b51f4f0e1064e65c81",
+        "graphpro/Datasets/mouse/positive": "bfc5a775e3936f2d821522bd1418b85d778b291a43ac8f9e66dc87b335dec6fa"
+      },
+      "notes": "Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.",
+      "output": "data/canonical/source_canonicalization_v1/graphpro-mouse.csv.gz",
+      "output_sha256": "95c4da5d346e6f038f8d5333d8c28f6b867da4127ea23aa8e48288ae1cd80dc8",
+      "source": "graphpro",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 4,
+        "expected_release_records_by_class": {
+          "negative": 1846,
+          "positive": 1846
+        },
+        "legacy_sequence_match": {
+          "negative": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            3692
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 3692,
+        "records_by_class": {
+          "negative": 1846,
+          "positive": 1846
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 3688
+      }
+    },
+    "graphpro-rcap": {
+      "input_sha256": {
+        "graphpro/Datasets/Rcap/negative": "dc412c4285e92687e00f147bcc0a80ef1c11e72db3e09486d039fc3fb16ba08d",
+        "graphpro/Datasets/Rcap/positive": "229d477ba34fb33f392494168f1a308406de59fa3eccd6629265d8279d38308e"
+      },
+      "notes": "Released class semantics are unverified; see specs/graphpro_dataset_reconstruction.md. TSS index not documented.",
+      "output": "data/canonical/source_canonicalization_v1/graphpro-rcap.csv.gz",
+      "output_sha256": "8a14208ae0510d5827656680d0e0b15364b105f0d93509516f4a968c060ed563",
+      "source": "graphpro",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative": 3241,
+          "positive": 3607
+        },
+        "legacy_sequence_match": {
+          "negative": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            6848
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 6848,
+        "records_by_class": {
+          "negative": 3241,
+          "positive": 3607
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 6848
+      }
+    },
+    "ipro-mp-01-acinetobacter-baumannii-atcc-17978": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/1_test.txt": "09b1d87eab0ecbaa9b9ae4c5c6109018bbfe4873f0e94986b1e71f610007b49c",
+        "ipro-mp/Benchmark Dataset/Train/1_train.txt": "29f7d0d760598e6293473b9ba252ff0f4a1213776f7e4827660053ca2524c9c4"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-01-acinetobacter-baumannii-atcc-17978.csv.gz",
+      "output_sha256": "4f2e5fcdbfe4c1f4d6d39e4dabb1e49c86119d6e48907f11085fdd13dd228243",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 2,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 1111,
+          "negative_intergenic": 1111,
+          "positive": 1111
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            3333
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 3333,
+        "records_by_class": {
+          "negative_cds": 1111,
+          "negative_intergenic": 1111,
+          "positive": 1111
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 3332
+      }
+    },
+    "ipro-mp-02-bradyrhizobium-japonicum-usda-110": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/2_test.txt": "e86f201512f1f906137f52b24c278ed7910c44e1c1d589fd325a66f12d0c09c2",
+        "ipro-mp/Benchmark Dataset/Train/2_train.txt": "d9b605019a60d3cbf17da0f72204603a846d81f6f2c1e9455ee0263a5e0e0cbf"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-02-bradyrhizobium-japonicum-usda-110.csv.gz",
+      "output_sha256": "122fcdef13bd4c9f2c4921d967263b57c84c21308b995101f9019bd27d68d114",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 68,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 14779,
+          "negative_intergenic": 14779,
+          "positive": 14779
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            44337
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 44337,
+        "records_by_class": {
+          "negative_cds": 14779,
+          "negative_intergenic": 14779,
+          "positive": 14779
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 44303
+      }
+    },
+    "ipro-mp-03-burkholderia-cenocepacia-j2315": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/3_test.txt": "c4bf55bf3140b21ee4f86d8c29ac3b92772888b4db911b9ed00faefabf4017ba",
+        "ipro-mp/Benchmark Dataset/Train/3_train.txt": "8432de6beb893be06c2411e2b2e2711e72cd35ee7e6875ccd08f3e046c5394f7"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-03-burkholderia-cenocepacia-j2315.csv.gz",
+      "output_sha256": "7f714a11f7b7fe46a3fed7071a2f7ecdeff929be31b59515adeecc791f2e4df6",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 34,
+        "duplicate_records": 1,
+        "expected_release_records_by_class": {
+          "negative_cds": 9663,
+          "negative_intergenic": 9663,
+          "positive": 9663
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            28989
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 28989,
+        "records_by_class": {
+          "negative_cds": 9663,
+          "negative_intergenic": 9663,
+          "positive": 9663
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 28971
+      }
+    },
+    "ipro-mp-04-campylobacter-jejuni-rm1221": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/4_test.txt": "6f6ea5e3dd52ac5ccb86e4c53e16935d278f9cb08bea180ecbc04b95f7a91a8e",
+        "ipro-mp/Benchmark Dataset/Train/4_train.txt": "398e76750c2170cdc3725640241a492c79ebb3766357eb1c78c417d0c4fa79c0"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-04-campylobacter-jejuni-rm1221.csv.gz",
+      "output_sha256": "68cc5104631dac93e1b6f66d6cca2dfbe1f6b39128087b230633721246f0468e",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 2,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 1995,
+          "negative_intergenic": 1995,
+          "positive": 1995
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            5985
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 5985,
+        "records_by_class": {
+          "negative_cds": 1995,
+          "negative_intergenic": 1995,
+          "positive": 1995
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 5984
+      }
+    },
+    "ipro-mp-05-campylobacter-jejuni-subsp-jejuni-81116": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/5_test.txt": "7ead3a386eae801f2d26b50d6b36ae1e71d4e750168d3ba703041d549d770ff4",
+        "ipro-mp/Benchmark Dataset/Train/5_train.txt": "0c57b548c275fa73cbf43c2050cd467e4224f3a65f36190cbba4667836caa7c0"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-05-campylobacter-jejuni-subsp-jejuni-81116.csv.gz",
+      "output_sha256": "1e69739d1cf7ec7e57ea3c1447310b4d53999d5e9eb96b92e5b1bac9f073e26c",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 8,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 1790,
+          "negative_intergenic": 1790,
+          "positive": 1790
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            5370
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 5370,
+        "records_by_class": {
+          "negative_cds": 1790,
+          "negative_intergenic": 1790,
+          "positive": 1790
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 5366
+      }
+    },
+    "ipro-mp-06-campylobacter-jejuni-subsp-jejuni-81-176": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/6_test.txt": "23b6725e49fbc483981472666ebbc2a5a0f1586eee48ab3b2017094dc78d42b7",
+        "ipro-mp/Benchmark Dataset/Train/6_train.txt": "065438f37f4f3552fe97cc656a0e4a1d06f07247062b2901023f45a635d07664"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-06-campylobacter-jejuni-subsp-jejuni-81-176.csv.gz",
+      "output_sha256": "1e170f973ce8dbff7d3d1b70a23de7bb370cdca7803c41bad675d3619f973697",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 4,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 1944,
+          "negative_intergenic": 1944,
+          "positive": 1944
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            5832
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 5832,
+        "records_by_class": {
+          "negative_cds": 1944,
+          "negative_intergenic": 1944,
+          "positive": 1944
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 5830
+      }
+    },
+    "ipro-mp-07-campylobacter-jejuni-subsp-jejuni-nctc-11168": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/7_test.txt": "5721e05ed60540aee28ae94beb59fa9bf8081a2bea6e4bdef3482d57f8262ae0",
+        "ipro-mp/Benchmark Dataset/Train/7_train.txt": "a120e6d82bced9ccd3ddec4d0a67edf81b01a3d5b4175974fc1c49193b4c064f"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-07-campylobacter-jejuni-subsp-jejuni-nctc-11168.csv.gz",
+      "output_sha256": "ad8a0c6515113f4596c6a8c59d92f536aed7db978b506183c627ad1dff2ddc8a",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 1745,
+          "negative_intergenic": 1745,
+          "positive": 1745
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            5235
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 5235,
+        "records_by_class": {
+          "negative_cds": 1745,
+          "negative_intergenic": 1745,
+          "positive": 1745
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 5235
+      }
+    },
+    "ipro-mp-08-corynebacterium-diphtheriae-nctc-13129": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/8_test.txt": "4dada8303979f1f37c2710d027e3419de4bc3d8405173b7b3bac152acb649824",
+        "ipro-mp/Benchmark Dataset/Train/8_train.txt": "962906ee227ab2ccce0aa1a835f95b5fb4c3a2abcc24f9be42088c8382f89cb4"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-08-corynebacterium-diphtheriae-nctc-13129.csv.gz",
+      "output_sha256": "3efd549ea391e5f639cc70c1bafee532e3da9d212509fca3ab26fab0929133cd",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 1518,
+          "negative_intergenic": 1518,
+          "positive": 1518
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            4554
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 4554,
+        "records_by_class": {
+          "negative_cds": 1518,
+          "negative_intergenic": 1518,
+          "positive": 1518
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 4554
+      }
+    },
+    "ipro-mp-09-corynebacterium-glutamicum-atcc-13032": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/9_test.txt": "034d1c4b1cd3f6d50952683a2c335faf8da3ac63e9b7e51ff2a26864052a419b",
+        "ipro-mp/Benchmark Dataset/Train/9_train.txt": "5d74a1050e813f29e99de1d168c0d49311114835f9632a1042260732c9aa202e"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-09-corynebacterium-glutamicum-atcc-13032.csv.gz",
+      "output_sha256": "4373044feed4f39dc5246f7256e2edd278b041387e1047955ec27d20c7ac4388",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 2,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 3031,
+          "negative_intergenic": 3031,
+          "positive": 3031
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            9093
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 9093,
+        "records_by_class": {
+          "negative_cds": 3031,
+          "negative_intergenic": 3031,
+          "positive": 3031
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 9092
+      }
+    },
+    "ipro-mp-10-escherichia-coli-k-12-mg1655": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/10_test.txt": "d7ce226f22d1064d1637bc8e8c2dadde0339df92bf2956fe27cde6c5e4a17fbf",
+        "ipro-mp/Benchmark Dataset/Train/10_train.txt": "df7fed76215a5f0dc013c9dbcc99de8010d086a9ee3de5b23b1866861a8c65fe"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-10-escherichia-coli-k-12-mg1655.csv.gz",
+      "output_sha256": "88309fc1bbea176703b62b3c69b5479cf716b207c0099308feeb8933793568af",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 14,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 6230,
+          "negative_intergenic": 6230,
+          "positive": 6230
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            18690
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 18690,
+        "records_by_class": {
+          "negative_cds": 6230,
+          "negative_intergenic": 6230,
+          "positive": 6230
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 18683
+      }
+    },
+    "ipro-mp-11-haloferax-volcanii-ds2": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/11_test.txt": "c43207229c0b034491df00910b5f95f46b63374fc027dde1b63bbcfe57823243",
+        "ipro-mp/Benchmark Dataset/Train/11_train.txt": "1cab17a6f018590f3af82413df5c91773d9a69e6ef1858231c9d60dadd2e3488"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-11-haloferax-volcanii-ds2.csv.gz",
+      "output_sha256": "6ff779b43d8ccbad1a895223a1ae3213ec8a7a1d8cfc71faa58c3b68a2534b05",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 6,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 4394,
+          "negative_intergenic": 4394,
+          "positive": 4394
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            13182
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 13182,
+        "records_by_class": {
+          "negative_cds": 4394,
+          "negative_intergenic": 4394,
+          "positive": 4394
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 13179
+      }
+    },
+    "ipro-mp-12-helicobacter-pylori-26695": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/12_test.txt": "ae02438d6cc549bc063974b7efc77366274e05dc96ce979ea4078fa71d858955",
+        "ipro-mp/Benchmark Dataset/Train/12_train.txt": "34c784c4523ccdce18b8b020f9ad411a89add0ac29f4561fc471168e8c08d0ff"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-12-helicobacter-pylori-26695.csv.gz",
+      "output_sha256": "f68944a36868a61b49a55670de013088fa0f25d9d4e6bf6ca1c81a6ab484e12c",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 6,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 2062,
+          "negative_intergenic": 2062,
+          "positive": 2062
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            6186
+          ]
+        ],
+        "non_strict_dna_records": 8,
+        "publication_count_discrepancies": {},
+        "records": 6186,
+        "records_by_class": {
+          "negative_cds": 2062,
+          "negative_intergenic": 2062,
+          "positive": 2062
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 6183
+      }
+    },
+    "ipro-mp-13-nostoc-sp-pcc-7120": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/13_test.txt": "ad77ba37d2f8fb1df986a20ad64677c0df8df8defd3530fa14ebce0c0bdb737d",
+        "ipro-mp/Benchmark Dataset/Train/13_train.txt": "480ab316750a00933789df791e24a3706d1d5b064ce3a1e332961c24921b22a6"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-13-nostoc-sp-pcc-7120.csv.gz",
+      "output_sha256": "b127f44cc22de87d5177e4c8e54c9a3154c957befa3866bf6e0d777c9f9d32f0",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 26,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 12560,
+          "negative_intergenic": 12560,
+          "positive": 12560
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            37680
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 37680,
+        "records_by_class": {
+          "negative_cds": 12560,
+          "negative_intergenic": 12560,
+          "positive": 12560
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 37667
+      }
+    },
+    "ipro-mp-14-paenibacillus-riograndensis-sbr5": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/14_test.txt": "fa4860e62e206834cf2012645bcb07029f02e8e2f815105d5920cb5a58f1e334",
+        "ipro-mp/Benchmark Dataset/Train/14_train.txt": "516b729cf01214b406abb7b53e94c4c8c0f2dd88fc478b90dbc5da632e65f119"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-14-paenibacillus-riograndensis-sbr5.csv.gz",
+      "output_sha256": "13d0c590cfa9bcee54808d9564363888b29580f32d955dca125a32917d5f1c9a",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 2276,
+          "negative_intergenic": 2276,
+          "positive": 2276
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            6828
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 6828,
+        "records_by_class": {
+          "negative_cds": 2276,
+          "negative_intergenic": 2276,
+          "positive": 2276
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 6828
+      }
+    },
+    "ipro-mp-15-pseudomonas-putida-kt2440": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/15_test.txt": "a2f1300606cd4b273bce52d84aed621c02fdf2cf2099853c78d265174a47195b",
+        "ipro-mp/Benchmark Dataset/Train/15_train.txt": "3ec4a589af5001209aa20bb201598e63093a64b64a09313b48b6af437bacacee"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-15-pseudomonas-putida-kt2440.csv.gz",
+      "output_sha256": "d7eae8fc0302ba22fae28a0ff6278d1f1287a8fa110a5513ae53705df4ad3d95",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 44,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 6881,
+          "negative_intergenic": 6881,
+          "positive": 6881
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            20643
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 20643,
+        "records_by_class": {
+          "negative_cds": 6881,
+          "negative_intergenic": 6881,
+          "positive": 6881
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 20621
+      }
+    },
+    "ipro-mp-16-shigella-flexneri-5a-m90t": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/16_test.txt": "8ba5a45e7efa70e5b5483dbab2c12ce3fcbc43908f59ef8c3af29370a5514312",
+        "ipro-mp/Benchmark Dataset/Train/16_train.txt": "3d05560cea5f09e414663f5b22c7a3442671c9dcdc1c573bd6d33e0d571531c5"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-16-shigella-flexneri-5a-m90t.csv.gz",
+      "output_sha256": "26b46c289c9a456691a0ce50d1640f900f5c95dbaa421802d3a20376fb2b18c9",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 50,
+        "duplicate_records": 1,
+        "expected_release_records_by_class": {
+          "negative_cds": 9760,
+          "negative_intergenic": 9760,
+          "positive": 9760
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            29280
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 29280,
+        "records_by_class": {
+          "negative_cds": 9760,
+          "negative_intergenic": 9760,
+          "positive": 9760
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 29254
+      }
+    },
+    "ipro-mp-17-sinorhizobium-meliloti-1021": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/17_test.txt": "00aa0e68819275f6c9250fcd980b0a73269f8ce0d58966bab5a80cedd53ea936",
+        "ipro-mp/Benchmark Dataset/Train/17_train.txt": "ce25b2add2193e924a76c3cfa3020acc3c832e8b09b68606fc8b1db0052f001d"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-17-sinorhizobium-meliloti-1021.csv.gz",
+      "output_sha256": "2d7bf7c765f5c2a9dd122ef1496295f8f54284876d0aca2fb081fb24941906ed",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 52,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 14482,
+          "negative_intergenic": 14482,
+          "positive": 14482
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            43446
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 43446,
+        "records_by_class": {
+          "negative_cds": 14482,
+          "negative_intergenic": 14482,
+          "positive": 14482
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 43420
+      }
+    },
+    "ipro-mp-18-staphylococcus-aureus-subsp-aureus-mw2": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/18_test.txt": "f74d9c9fd62fa10757af4c88667a674445b974adb2b90d5f53789ca8a620fcb1",
+        "ipro-mp/Benchmark Dataset/Train/18_train.txt": "5d01a8421e81bf1383c31b4362ec8dad2c21bc8508f02ca549ed115d6f1456d3"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-18-staphylococcus-aureus-subsp-aureus-mw2.csv.gz",
+      "output_sha256": "affd1dadd6d46d6d93200fd3ba4d579fe5cbb763f5954e580cc5d9a03960e2de",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 6,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 1969,
+          "negative_intergenic": 1969,
+          "positive": 1969
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            5907
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 5907,
+        "records_by_class": {
+          "negative_cds": 1969,
+          "negative_intergenic": 1969,
+          "positive": 1969
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 5904
+      }
+    },
+    "ipro-mp-19-staphylococcus-epidermidis-atcc-12228": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/19_test.txt": "ca7dbff71321768c27114e95af2df87166b98ac69f8b56d3efeda28587f4f59f",
+        "ipro-mp/Benchmark Dataset/Train/19_train.txt": "ce14bcd178007155352f9460747ad3a31fd32b6c80276711db4a748a4144ba34"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-19-staphylococcus-epidermidis-atcc-12228.csv.gz",
+      "output_sha256": "0d88ada8b2fe900fa49035d011bac62e5fcfe629a93c91b41b5dde4b5b797180",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 1647,
+          "negative_intergenic": 1647,
+          "positive": 1647
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            4941
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 4941,
+        "records_by_class": {
+          "negative_cds": 1647,
+          "negative_intergenic": 1647,
+          "positive": 1647
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 4941
+      }
+    },
+    "ipro-mp-20-synechococcus-elongatus-pcc-7942": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/20_test.txt": "388aa5420052254f98346cc99d2bc98565c6f2f83ae43369ee35e61faf709da4",
+        "ipro-mp/Benchmark Dataset/Train/20_train.txt": "17f556e50911fb3e43ae3f036c2ff2898a80f229f2ab6967657877be0a345681"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-20-synechococcus-elongatus-pcc-7942.csv.gz",
+      "output_sha256": "927af74625a7e971e1fc3161597343f05129b919d7fd4741853561edf014b893",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 1410,
+          "negative_intergenic": 1410,
+          "positive": 1410
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            4230
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 4230,
+        "records_by_class": {
+          "negative_cds": 1410,
+          "negative_intergenic": 1410,
+          "positive": 1410
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 4230
+      }
+    },
+    "ipro-mp-21-thermococcus-kodakarensis-kod1": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/21_test.txt": "672ed9d632dbf33dfb916a44bfbf6d0ee37d31628625dbe7c23b251a28fc5c4d",
+        "ipro-mp/Benchmark Dataset/Train/21_train.txt": "f80ae29a36c54d7e53a37bcbd189393f3bdf41a4c591ee93fbc3ede1462f1740"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-21-thermococcus-kodakarensis-kod1.csv.gz",
+      "output_sha256": "4a3505c62b001c4a691250771d6aa112d0fc9267ed1e99060aee1714b242ae22",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 16,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 2413,
+          "negative_intergenic": 2413,
+          "positive": 2413
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            7239
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 7239,
+        "records_by_class": {
+          "negative_cds": 2413,
+          "negative_intergenic": 2413,
+          "positive": 2413
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 7231
+      }
+    },
+    "ipro-mp-22-xanthomonas-campestris-pv-campestris-b100": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/22_test.txt": "3c65ae245a82cf13bf2cc7e18c399a59f2117540474d1e0b10b987c0c6a44481",
+        "ipro-mp/Benchmark Dataset/Train/22_train.txt": "51b281f78a86c1ebd3417408163fde69153618883c736a1c4ca69142a0a271c7"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-22-xanthomonas-campestris-pv-campestris-b100.csv.gz",
+      "output_sha256": "7ea2ba778126d87ae26a45ffbec5f3fc1daffe95989c2409579872242b37529e",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 2,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 2963,
+          "negative_intergenic": 2963,
+          "positive": 2963
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            8889
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 8889,
+        "records_by_class": {
+          "negative_cds": 2963,
+          "negative_intergenic": 2963,
+          "positive": 2963
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 8888
+      }
+    },
+    "ipro-mp-23-bacillus-subtilis-subsp-subtilis-168": {
+      "input_sha256": {
+        "ipro-mp/Benchmark Dataset/Test/23_test.txt": "d7061bb7d32b52dba456a79be7f024934fde49fb7db7dc7b24173d2be6fd33e4",
+        "ipro-mp/Benchmark Dataset/Train/23_train.txt": "2d53fa623323992343288186d2a98c72e34d4c982cceab6344acfb13f2557053"
+      },
+      "notes": "Window -60..+20; classes come from the header suffix (' CDS--n' and ' Convergent--n').",
+      "output": "data/canonical/source_canonicalization_v1/ipro-mp-23-bacillus-subtilis-subsp-subtilis-168.csv.gz",
+      "output_sha256": "22d43a15f542e8936686c54fb00cf17a7a48a5077ef21c1deddc11dc96e6d2d8",
+      "source": "ipro-mp",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative_cds": 663,
+          "negative_intergenic": 663,
+          "positive": 663
+        },
+        "legacy_sequence_match": {
+          "negative_cds": true,
+          "negative_intergenic": true,
+          "positive": true
+        },
+        "most_common_lengths": [
+          [
+            81,
+            1989
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 1989,
+        "records_by_class": {
+          "negative_cds": 663,
+          "negative_intergenic": 663,
+          "positive": 663
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 1989
+      }
+    },
+    "promotech-bacillus": {
+      "input_sha256": {
+        "promotech/datasets/validation/40nt-sequences/bacteria-1-1-ratio/BACILLUS/negative.fasta": "3817f226b992d7497f05c37c5a55e34401b41e0ed0d5d88b000299af97b84cce",
+        "promotech/datasets/validation/40nt-sequences/bacteria-1-1-ratio/BACILLUS/positive.fasta": "18ff9fd3751fc2b54eaac39ab1301ecffc443b08d225936e082f89e8de9375e0"
+      },
+      "notes": "Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references and are not canonicalized.",
+      "output": "data/canonical/source_canonicalization_v1/promotech-bacillus.csv.gz",
+      "output_sha256": "5b43778e5cd73b72adfb21c0f4c34cab345ea9b19333e3ade58fb0d545e6c31d",
+      "source": "promotech",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative": 1055,
+          "positive": 1064
+        },
+        "most_common_lengths": [
+          [
+            40,
+            2119
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 2119,
+        "records_by_class": {
+          "negative": 1055,
+          "positive": 1064
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 2119
+      }
+    },
+    "promotech-cjejuni-2": {
+      "input_sha256": {
+        "promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/CJEJUNI_2/negative.fasta": "5dcacd702568c53273bbe300499b2bc3497cac0c88ce4b4d73d9cf0895161d84",
+        "promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/CJEJUNI_2/positive.fasta": "0e328082ae67200f3c493152ba1366cd9d299d1b74d3d7be7ddb4ff46a5a2bb9"
+      },
+      "notes": "Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references and are not canonicalized.",
+      "output": "data/canonical/source_canonicalization_v1/promotech-cjejuni-2.csv.gz",
+      "output_sha256": "5df097a13c4d833414169e21c19169b0eef257cd01007aec4269b6f82499ffbb",
+      "source": "promotech",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 27,
+        "expected_release_records_by_class": {
+          "negative": 1846,
+          "positive": 1905
+        },
+        "most_common_lengths": [
+          [
+            40,
+            3751
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 3751,
+        "records_by_class": {
+          "negative": 1846,
+          "positive": 1905
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 3724
+      }
+    },
+    "promotech-cpneumoniae": {
+      "input_sha256": {
+        "promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/CPNEUMONIAE/negative.fasta": "6e12ea0795b30f6e6929e3c9b7fb0c2a70448340571d829e51b11d090d76ce3e",
+        "promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/CPNEUMONIAE/positive.fasta": "e660694b6c2fe7666c92915afaeb684e22f3a6afc27ac72363a86ef6e922b999"
+      },
+      "notes": "Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references and are not canonicalized.",
+      "output": "data/canonical/source_canonicalization_v1/promotech-cpneumoniae.csv.gz",
+      "output_sha256": "291444088be8835ff107c37f2674b17deb61c31db810aa0c4903a82a61446dff",
+      "source": "promotech",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 0,
+        "expected_release_records_by_class": {
+          "negative": 520,
+          "positive": 530
+        },
+        "most_common_lengths": [
+          [
+            40,
+            1049
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 1050,
+        "records_by_class": {
+          "negative": 520,
+          "positive": 530
+        },
+        "records_not_expected_length": 1,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 1050
+      }
+    },
+    "promotech-ecoli": {
+      "input_sha256": {
+        "promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/ECOLI/negative.fasta": "2e422f6d41140feac3dd96e536ea73ff9c7b3712a01cd2965c492e287014c174",
+        "promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/ECOLI/positive.fasta": "d6290d6264e7f0a0778899564ad3e019396bd6938790bd94f5c47a5dc0d1e614"
+      },
+      "notes": "Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references and are not canonicalized.",
+      "output": "data/canonical/source_canonicalization_v1/promotech-ecoli.csv.gz",
+      "output_sha256": "ed19370cc70c1c4ec9e1c66bf4065cc3e0c7ba799908215e27ed41c2907be493",
+      "source": "promotech",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 30,
+        "expected_release_records_by_class": {
+          "negative": 278,
+          "positive": 278
+        },
+        "most_common_lengths": [
+          [
+            40,
+            556
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 556,
+        "records_by_class": {
+          "negative": 278,
+          "positive": 278
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 526
+      }
+    },
+    "promotech-linterrogans": {
+      "input_sha256": {
+        "promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/LINTERROGANS/negative.fasta": "0a0dc2f4b2a83cd852f3a41917e8c8273719026cf0e41368db6a3c0ee5869074",
+        "promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/LINTERROGANS/positive.fasta": "707b45752fe9cc47e574a749b7fee36e9e398d03e36dca8a7d53e6cb15d7586f"
+      },
+      "notes": "Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references and are not canonicalized.",
+      "output": "data/canonical/source_canonicalization_v1/promotech-linterrogans.csv.gz",
+      "output_sha256": "6f5549b4b840eb7d4952658067330d6347067edc86a41e11ff2c92ba81855711",
+      "source": "promotech",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 76,
+        "expected_release_records_by_class": {
+          "negative": 2805,
+          "positive": 2865
+        },
+        "most_common_lengths": [
+          [
+            40,
+            5670
+          ]
+        ],
+        "non_strict_dna_records": 14,
+        "publication_count_discrepancies": {},
+        "records": 5670,
+        "records_by_class": {
+          "negative": 2805,
+          "positive": 2865
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 5594
+      }
+    },
+    "promotech-rhodobacter-1": {
+      "input_sha256": {
+        "promotech/datasets/validation/40nt-sequences/bacteria-1-1-ratio/RHODOBACTER_1/negative.fasta": "0e6fb3e3f85e97d9b230efea8d439492a032b4fdbea561d362815533db35b0d5",
+        "promotech/datasets/validation/40nt-sequences/bacteria-1-1-ratio/RHODOBACTER_1/positive.fasta": "b7961d324666098ca1566ecc55757b2077281b4b746ec8ac6f3030a8fffef81c"
+      },
+      "notes": "Promotech 40-nt windows; genome FASTA, TSS BED and CSV files are acquired as reconstruction references and are not canonicalized.",
+      "output": "data/canonical/source_canonicalization_v1/promotech-rhodobacter-1.csv.gz",
+      "output_sha256": "c58bc0cd75d212e9a1cab9f02d29a034c1f0b97723dc55f3368a58d5ed3c2a34",
+      "source": "promotech",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 2,
+        "duplicate_records": 59,
+        "expected_release_records_by_class": {
+          "negative": 5207,
+          "positive": 5374
+        },
+        "most_common_lengths": [
+          [
+            40,
+            10581
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 10581,
+        "records_by_class": {
+          "negative": 5207,
+          "positive": 5374
+        },
+        "records_not_expected_length": 0,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 10521
+      }
+    }
+  },
+  "columns": [
+    "record_id",
+    "collection_id",
+    "source",
+    "organism",
+    "domain",
+    "source_file",
+    "source_member",
+    "record_index",
+    "source_split",
+    "source_class",
+    "label",
+    "original_header",
+    "sequence",
+    "length",
+    "tss_index",
+    "sequence_sha1",
+    "strict_dna",
+    "invalid_symbols",
+    "case_normalized",
+    "length_matches_expected",
+    "duplicate_of",
+    "cross_label_collision"
+  ],
+  "config_sha256": "eb5460a0c3322f508576ea8b10d6a741296e36238ea75e0a1326363264f89991",
+  "schema_version": 1
+}

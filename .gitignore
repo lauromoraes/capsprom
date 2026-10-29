@@ -221,6 +221,8 @@ __marimo__/
 /data/raw/
 /data/interim/
 /data/processed/
+/data/acquired/
+/data/canonical/
 /data/*.ipynb
 /mlruns/
 /mlflow.db

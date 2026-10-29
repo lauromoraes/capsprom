@@ -5,6 +5,7 @@
 - Read `specs/` before changing scientific behavior.
 - Use `docs/roadmap.md` for current phase and `make status` for local execution state.
 - Treat versioned YAML files as immutable contracts after their state file exists.
+- Follow `specs/data_provenance_policy.md` for data acquisition, lineage, and provenance records; log data procedures and findings in `docs/provenance/`.
 - Write repository documentation, code, comments, configuration, and experiment notes in English.
 
 ## Required Validation

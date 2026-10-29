@@ -1,0 +1,81 @@
+% !TEX root = main.tex
+\subsection{Data acquisition and provenance}\label{sec:methods-data-acquisition}
+
+A comparison between learning methods is only as interpretable as the data on
+which it is made. Promoter benchmarks are distributed as files in code
+repositories, journal supplements, and institutional servers. These copies can
+change without notice, and several of them differ from the publications that
+describe them. The data used in this thesis are therefore treated as an object
+whose origin must be demonstrable, following the findability, accessibility,
+interoperability and reusability principles for scientific data
+\citep{wilkinson2016fair}. Three requirements guided the procedure: each
+experimental example must be traceable to an identified upstream file; the
+upstream copy must be identified independently of the moment at which it was
+obtained; and any later acquisition must be distinguishable from the first.
+
+\paragraph{Reference collection.}
+The datasets released with the evaluated studies
+\citep{umarov2017recognition,bhandari2021comparison,martinez2024cdbprom,zhang2024graphpro},
+together with primary references used for reconstruction, such as the
+Eukaryotic Promoter Database \citep{meylan2020epd}, were acquired again directly
+from their distribution points into a single versioned reference collection.
+Each source was identified by an access identifier that cannot drift. Code
+repositories were pinned to a full commit identifier, and every file had to
+reproduce the content hash that the repository records for it. For servers
+without version control, the release number was recorded together with the
+digests published by the server or recorded by earlier project contracts. Two
+dates are kept apart: the date on which the project obtained each file, and the
+date at which the source reports that its copy was last changed, such as the
+commit date or the last-modification date declared by the server. For example,
+the CNNProm benchmark obtained in 2026 corresponds to a repository state from
+2016. Any change of source, version, or expected content defines a new
+collection version rather than modifying the existing one.
+
+\paragraph{Canonical representation.}
+The acquired files were converted into one uniform tabular representation per
+released dataset. The conversion was deliberately conservative. It removed
+formatting whitespace and normalized letter case, and it neither discarded,
+trimmed, deduplicated, nor relabelled any record. Properties that later stages
+must handle, namely length deviations, symbols outside $\Sigma$, exact
+duplicates, and identical sequences carrying opposite labels, were recorded as
+attributes of each record instead of being corrected silently. A released
+dataset was accepted only when its class counts equalled those of the release
+and, where a previously used copy existed, when both copies contained the same
+multiset of sequences in each class.
+
+\paragraph{Continuity with earlier experiments.}
+The experiments reported in this thesis were prepared from copies obtained
+before this procedure existed, for which no acquisition record survives. Their
+acquisition date is therefore reported as unknown, and it is not inferred from
+file-system metadata. Their origin was instead established by evidence. The
+preparation pipeline was executed again on the newly acquired files, under the
+original rules and random seed. It reproduced, bit for bit, the model-ready
+training and test partitions of all eighteen confirmatory datasets, and of
+seven of the eight GraphPro datasets, which are retained only for exploratory
+use. In the remaining GraphPro dataset, a correction of the organism name
+changed the seed from which its partition is derived; the same examples were
+recovered, assigned differently between partitions. The confirmatory results
+are thus linked to identified upstream releases without being recomputed.
+
+\paragraph{Observed properties of the releases.}
+The renewed acquisition exposed release characteristics that are relevant for
+interpreting published benchmarks. In one multi-species prokaryotic benchmark,
+identical sequences occur with both labels, and some of them span the
+distributed training and test partitions. In two eukaryotic promoter
+collections, a large fraction of the positive examples are exact duplicates.
+One file distributed as a plant promoter set carries mouse genome coordinates
+in its headers, which suggests, but does not establish, a mislabelled release.
+For one bacterial resource, the published window around the transcription
+start site does not match the length of the distributed sequences. These
+observations are reported as properties of the releases. They motivate the
+explicit treatment of duplicates and label collisions summarized in
+Table~\ref{tab:sequence-integrity-policies}, and they qualify any comparison with
+results reported on the original files.
+
+\paragraph{Limitations.}
+For servers that publish no checksums, the identity of a file rests on its first
+acquisition by the project, supplemented by agreement with earlier copies where
+these exist. Several servers report no modification date, so the version of
+their content can be dated only by acquisition. Exact agreement of sequences
+does not establish their biological annotation: the procedure guarantees that
+the data are the released data, not that the released labels are correct.

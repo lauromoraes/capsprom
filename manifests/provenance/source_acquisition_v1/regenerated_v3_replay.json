@@ -1,0 +1,746 @@
+{
+  "all_datasets_match": false,
+  "dataset_count": 26,
+  "datasets": [
+    {
+      "all_match": true,
+      "dataset": "cdbprom-prokaryotic-anabaena_sp",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cdbprom-prokaryotic-anabaena_sp"
+    },
+    {
+      "all_match": true,
+      "dataset": "cdbprom-prokaryotic-bacillus_amyloliquefaciens",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cdbprom-prokaryotic-bacillus_amyloliquefaciens"
+    },
+    {
+      "all_match": true,
+      "dataset": "cdbprom-prokaryotic-chlamydophila_pneumoniae",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cdbprom-prokaryotic-chlamydophila_pneumoniae"
+    },
+    {
+      "all_match": true,
+      "dataset": "cdbprom-prokaryotic-corynebacterium_glutamicum",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cdbprom-prokaryotic-corynebacterium_glutamicum"
+    },
+    {
+      "all_match": true,
+      "dataset": "cdbprom-prokaryotic-helicobacter_pylori",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cdbprom-prokaryotic-helicobacter_pylori"
+    },
+    {
+      "all_match": true,
+      "dataset": "cdbprom-prokaryotic-klebisiella_pneumoniae",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cdbprom-prokaryotic-klebisiella_pneumoniae"
+    },
+    {
+      "all_match": true,
+      "dataset": "cdbprom-prokaryotic-mycrobacterium_tuberculosis",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cdbprom-prokaryotic-mycrobacterium_tuberculosis"
+    },
+    {
+      "all_match": true,
+      "dataset": "cdbprom-prokaryotic-pseudonomas_aeruginosa",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cdbprom-prokaryotic-pseudonomas_aeruginosa"
+    },
+    {
+      "all_match": true,
+      "dataset": "cdbprom-prokaryotic-salmonella_typhimurium",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cdbprom-prokaryotic-salmonella_typhimurium"
+    },
+    {
+      "all_match": true,
+      "dataset": "cdbprom-prokaryotic-streptomyces_coelicolor",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cdbprom-prokaryotic-streptomyces_coelicolor"
+    },
+    {
+      "all_match": true,
+      "dataset": "cdbprom-prokaryotic-synechocistis",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cdbprom-prokaryotic-synechocistis"
+    },
+    {
+      "all_match": true,
+      "dataset": "cnnprom-eukaryotic-Arabidopsis_non_tata",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cnnprom-eukaryotic-Arabidopsis_non_tata"
+    },
+    {
+      "all_match": true,
+      "dataset": "cnnprom-eukaryotic-Arabidopsis_tata",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cnnprom-eukaryotic-Arabidopsis_tata"
+    },
+    {
+      "all_match": true,
+      "dataset": "cnnprom-eukaryotic-Human_non_tata",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cnnprom-eukaryotic-Human_non_tata"
+    },
+    {
+      "all_match": true,
+      "dataset": "cnnprom-eukaryotic-Mouse_non_tata",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cnnprom-eukaryotic-Mouse_non_tata"
+    },
+    {
+      "all_match": true,
+      "dataset": "cnnprom-eukaryotic-Mouse_tata",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cnnprom-eukaryotic-Mouse_tata"
+    },
+    {
+      "all_match": true,
+      "dataset": "cnnprom-prokaryotic-Bacillus",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cnnprom-prokaryotic-Bacillus"
+    },
+    {
+      "all_match": true,
+      "dataset": "cnnprom-prokaryotic-Ecoli",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "cnnprom-prokaryotic-Ecoli"
+    },
+    {
+      "all_match": true,
+      "dataset": "graphpro-eukaryotic-Human",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "graphpro-eukaryotic-Human"
+    },
+    {
+      "all_match": true,
+      "dataset": "graphpro-eukaryotic-Mouse",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "graphpro-eukaryotic-Mouse"
+    },
+    {
+      "all_match": true,
+      "dataset": "graphpro-prokaryotic-bacillus_amyloliquefaciens",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "graphpro-prokaryotic-bacillus_amyloliquefaciens"
+    },
+    {
+      "all_match": true,
+      "dataset": "graphpro-prokaryotic-campylobacter_jejuni",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "graphpro-prokaryotic-campylobacter_jejuni"
+    },
+    {
+      "all_match": false,
+      "dataset": "graphpro-prokaryotic-clostridium_phytofermentans",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": false,
+        "train_output_sha256": false
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "graphpro-prokaryotic-chlamydophila_pneumoniae"
+    },
+    {
+      "all_match": true,
+      "dataset": "graphpro-prokaryotic-escherichia_coli",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "graphpro-prokaryotic-escherichia_coli"
+    },
+    {
+      "all_match": true,
+      "dataset": "graphpro-prokaryotic-leptospira_interrogans",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "graphpro-prokaryotic-leptospira_interrogans"
+    },
+    {
+      "all_match": true,
+      "dataset": "graphpro-prokaryotic-rhodobacter_capsulatus",
+      "interim_fasta_bytes_match": {
+        "n": false,
+        "p": false
+      },
+      "interim_fasta_records_match": {
+        "n": true,
+        "p": true
+      },
+      "outputs_match": {
+        "test_output_sha256": true,
+        "train_output_sha256": true
+      },
+      "pooled_rows_match": true,
+      "replayed_as": "graphpro-prokaryotic-rhodobacter_capsulatus"
+    }
+  ],
+  "observed_at": "2026-10-28T20:50:06+00:00",
+  "reference_filtering_manifest": "data/processed/audits/real_negative_regenerated_v3/filtering_manifest.json",
+  "reference_filtering_manifest_sha256": "de958c7091f01b3e52b27a6ac8d100da53ec9ab0428f43a9971a3ccd087bb7af",
+  "replay": "real-negative-regenerated-v3",
+  "schema_version": 1,
+  "staged_inputs": [
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!anabaena_sp.txt",
+      "legacy_path": "data/raw/CDBProm/anabaena_sp.txt",
+      "sha256": "9518c59c391700ac19c4c09a8d8df980a2dde690fdad9ba3c75003b4cc7e99f9"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!negative_anabaena_sp.txt",
+      "legacy_path": "data/raw/CDBProm/negative_anabaena_sp.txt",
+      "sha256": "1f5bbf173cf236a6e0df5eb7772e14da6eb834ceb53c4749cb3284a8f77e1eae"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!bacillus_amyloliquefaciens.txt",
+      "legacy_path": "data/raw/CDBProm/bacillus_amyloliquefaciens.txt",
+      "sha256": "c51d23d89aed61be625b7cebd7a78a72d4d8b3656d4290ec6bcd6ef3d2ef5cb7"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!negative_bacillus_amyloliquefaciens.txt",
+      "legacy_path": "data/raw/CDBProm/negative_bacillus_amyloliquefaciens.txt",
+      "sha256": "8ed53def726347d336e0b5934f198facf62bb5cda01d3d4d60a5855e72c5bd8d"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!chlamydophila_pneumoniae.txt",
+      "legacy_path": "data/raw/CDBProm/chlamydophila_pneumoniae.txt",
+      "sha256": "feff84faa91230eab5c140867c9d759338ab5d7b68aae197ede652639fccbcbf"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!negative_chlamydophila_pneumoniae.txt",
+      "legacy_path": "data/raw/CDBProm/negative_chlamydophila_pneumoniae.txt",
+      "sha256": "f5a18e8710451502d949d4e7ba4ab9fa69923f9ac2f74db23cccf7a792ba1815"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!corynebacterium_glutamicum.txt",
+      "legacy_path": "data/raw/CDBProm/corynebacterium_glutamicum.txt",
+      "sha256": "038ed16e6571b94dff106d93c22e7c8ef41f61a009900ee2bec4f45addee3ee6"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!negative_corynebacterium_glutamicum.txt",
+      "legacy_path": "data/raw/CDBProm/negative_corynebacterium_glutamicum.txt",
+      "sha256": "d6a3fe2fc763ce89111ce04fcc07e608a90684e64d10f11beb90409a4c7adc6a"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!helicobacter_pylori.txt",
+      "legacy_path": "data/raw/CDBProm/helicobacter_pylori.txt",
+      "sha256": "a0a1dd2935d4f55f72c16a89465cfd37cb4f7fa3056da4dff85aef56567df529"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!negative_helicobacter_pylori.txt",
+      "legacy_path": "data/raw/CDBProm/negative_helicobacter_pylori.txt",
+      "sha256": "713e3677b1b51e33806972092b304bab7d59bf44d9d3ab4de5abcf7002edb370"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!klebisiella_pneumoniae.txt",
+      "legacy_path": "data/raw/CDBProm/klebisiella_pneumoniae.txt",
+      "sha256": "258632427d5e86c2cc2b300334395ee9d90811186d079382a7deb17f58458380"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!negative_klebisiella_pneumoniae.txt",
+      "legacy_path": "data/raw/CDBProm/negative_klebisiella_pneumoniae.txt",
+      "sha256": "079f2df949dadf17c7cbb701e3646f618e78b7b5a792699c733d8a19de46b82f"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!mycrobacterium_tuberculosis.txt",
+      "legacy_path": "data/raw/CDBProm/mycrobacterium_tuberculosis.txt",
+      "sha256": "1691bdb6d743e7de22227aa5127e3dcc9f0f7235fad8f86cf2588231cd1dce89"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!negative_mycrobacterium_tuberculosis.txt",
+      "legacy_path": "data/raw/CDBProm/negative_mycrobacterium_tuberculosis.txt",
+      "sha256": "9407d79e180c2819ce409ddf07ad91e84f1f150462ca89be5082d9a8321c0fdf"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!pseudonomas_aeruginosa.txt",
+      "legacy_path": "data/raw/CDBProm/pseudonomas_aeruginosa.txt",
+      "sha256": "375494f75be88497c7ff949cd02b7c9c01630c7bebb80f458e5981cb9318eff7"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!negative_pseudonomas_aeruginosa.txt",
+      "legacy_path": "data/raw/CDBProm/negative_pseudonomas_aeruginosa.txt",
+      "sha256": "72675bd4f44da400a505251561819c75c6cab71ad8b6ff961fe2773e100c4e51"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!salmonella_typhimurium.txt",
+      "legacy_path": "data/raw/CDBProm/salmonella_typhimurium.txt",
+      "sha256": "bf4470ee5243412395755f2e7cc278cec47fb68c14e44572973623b8d1eab136"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!negative_salmonella_typhimurium.txt",
+      "legacy_path": "data/raw/CDBProm/negative_salmonella_typhimurium.txt",
+      "sha256": "5326b09edae05502754722314b342149204c582bbb69b729c51a84fd8ae8597c"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!streptomyces_coelicolor.txt",
+      "legacy_path": "data/raw/CDBProm/streptomyces_coelicolor.txt",
+      "sha256": "dc50e17096645760c3506433ec2833785ec904f8984e2b1f84cacad56986e6d6"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!negative_streptomyces_coelicolor.txt",
+      "legacy_path": "data/raw/CDBProm/negative_streptomyces_coelicolor.txt",
+      "sha256": "b0b90017227aac43888b5869d4b9a09ec3b1c2d370568cd1435e2e8c51979ab8"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!synechocistis.txt",
+      "legacy_path": "data/raw/CDBProm/synechocistis.txt",
+      "sha256": "f23113422cd2c66e96833322b784419457586f5e46f712242e12834c7e5afd44"
+    },
+    {
+      "acquired_input": "cdbprom-website/training_sequences.zip!negative_synechocistis.txt",
+      "legacy_path": "data/raw/CDBProm/negative_synechocistis.txt",
+      "sha256": "5011a58ec137a840ee679573a9091ce0ad7bc9a6955f30cf9e9050c885d0c408"
+    },
+    {
+      "acquired_input": "cnnprom/Ecoli_prom.fa",
+      "legacy_path": "data/raw/CNNProm/Ecoli_pos.fa",
+      "sha256": "1712f385e357491d309bd14f8fd4e8de3d018bd418402cab3c6014232197ce5e"
+    },
+    {
+      "acquired_input": "cnnprom/Ecoli_non_prom.fa",
+      "legacy_path": "data/raw/CNNProm/Ecoli_neg.fa",
+      "sha256": "cf5f078da7e56c5f38c8abd8ffaeaa227863bff4f5c249f2cfda61cb5331c774"
+    },
+    {
+      "acquired_input": "cnnprom/Bacillus_prom.fa",
+      "legacy_path": "data/raw/CNNProm/Bacillus_pos.fa",
+      "sha256": "ed567448ac42e2b7958f58c971e2b8e95d7e28e266a1d8d778fec03de0d8bb68"
+    },
+    {
+      "acquired_input": "cnnprom/Bacillus_non_prom.fa",
+      "legacy_path": "data/raw/CNNProm/Bacillus_neg.fa",
+      "sha256": "ffb3bc854a6b410ce692a0dea47838dadb6c0f6bdeaf41bcbffe24108b4f7fad"
+    },
+    {
+      "acquired_input": "cnnprom/human_non_tata.fa",
+      "legacy_path": "data/raw/CNNProm/Human_non_tata_pos.fa",
+      "sha256": "f9cfdc7f4fa38dbb08843390010bf568b71ad8edd56c882359fe52a70e288327"
+    },
+    {
+      "acquired_input": "cnnprom/human_nonprom_big.fa",
+      "legacy_path": "data/raw/CNNProm/Human_non_tata_neg.fa",
+      "sha256": "d94b38e54c0b43d75c3e6b7ec30200c7a2921ca9328b861e7c8daa478bb5afcd"
+    },
+    {
+      "acquired_input": "cnnprom/Mouse_non_tata.fa",
+      "legacy_path": "data/raw/CNNProm/Mouse_non_tata_pos.fa",
+      "sha256": "3461f20f19f7d94073fe1b298e56bcc34f056199fb65d9e09a3015a978876967"
+    },
+    {
+      "acquired_input": "cnnprom/Mouse_non_nonprom_big.fa",
+      "legacy_path": "data/raw/CNNProm/Mouse_non_tata_neg.fa",
+      "sha256": "b639bbeae42613956c9edf2bf6762960b937d00fcdef107c20d058db6c884569"
+    },
+    {
+      "acquired_input": "cnnprom/Mouse_tata.fa",
+      "legacy_path": "data/raw/CNNProm/Mouse_tata_pos.fa",
+      "sha256": "754bde10d814e65ab74ab94c249b1cd3c483ab96a3a7ad7a6f85a6451353f4cd"
+    },
+    {
+      "acquired_input": "cnnprom/Mouse_nonprom.fa",
+      "legacy_path": "data/raw/CNNProm/Mouse_tata_neg.fa",
+      "sha256": "44fc703c470dd77c4c44ceb0b8b40f198742cd9781055fda9d1328f89b688026"
+    },
+    {
+      "acquired_input": "cnnprom/Arabidopsis_tata.fa",
+      "legacy_path": "data/raw/CNNProm/Arabidopsis_tata_pos.fa",
+      "sha256": "2beaa31c2797e7f8d193b6015b7239a89509341f59dde57d904d8664e492901b"
+    },
+    {
+      "acquired_input": "cnnprom/Arabidopsis_non_prom.fa",
+      "legacy_path": "data/raw/CNNProm/Arabidopsis_tata_neg.fa",
+      "sha256": "1ab75553cdbf99d54e56928a56b3f35eb14a5f3bbb31bba7c1102b406a615c90"
+    },
+    {
+      "acquired_input": "cnnprom/Arabidopsis_non_tata.fa",
+      "legacy_path": "data/raw/CNNProm/Arabidopsis_non_tata_pos.fa",
+      "sha256": "93f7c91d25bd18d7640c09f7fcd6052abf9f6f4425eda56dbebe6cc6ecfa2d1b"
+    },
+    {
+      "acquired_input": "cnnprom/Arabidopsis_non_prom_big.fa",
+      "legacy_path": "data/raw/CNNProm/Arabidopsis_non_tata_neg.fa",
+      "sha256": "12f6901527b506907373a6c4bcbaf289622159657e9f0a307b29f822ea2dc250"
+    },
+    {
+      "acquired_input": "cnnprom/Mouse_tata_dbtss.fa",
+      "legacy_path": "data/raw/CNNProm/Mouse_tata_dbtss.fa",
+      "sha256": "f1c68a9c3af678409a6184d825f1b09bd320912259ffcc63ef7acf63717c1f9b"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Bamy/positive",
+      "legacy_path": "data/raw/GraphPro/Bamy/positive",
+      "sha256": "a935b542a2ff120ea9ddee4fdd2c6ebbba3136e0eb634a0f427bdfb87a2cc826"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Bamy/negative",
+      "legacy_path": "data/raw/GraphPro/Bamy/negative",
+      "sha256": "23090c72958e51fc105cf0f074700a77a286e3a9937f2fc7289bc3a928f51c6f"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Cje/positive",
+      "legacy_path": "data/raw/GraphPro/Cje/positive",
+      "sha256": "5c15d90f47e54b221fab87f226bb599ca7b7b4e9e53f3882b137c6b55b417c75"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Cje/negative",
+      "legacy_path": "data/raw/GraphPro/Cje/negative",
+      "sha256": "68a14cab799c0338d4b7639a9cc86de6c65496a2e069b6f9a553c0c221b088fb"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Cpne/positive",
+      "legacy_path": "data/raw/GraphPro/Cpne/positive",
+      "sha256": "a5297e850cb0e44d2338421d6a9481e4e3e00ed1b6161a8d1e548884831c2d9c"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Cpne/negative",
+      "legacy_path": "data/raw/GraphPro/Cpne/negative",
+      "sha256": "c5e3b19e64637cd63e9b57488036c8d6c9c55896dede01e52c2a6db8d6422158"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Ecol/positive",
+      "legacy_path": "data/raw/GraphPro/Ecol/positive",
+      "sha256": "76dbe07ececd06e4d39cd443976c451bf04f7224a93043d0b913df6323e764d3"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Ecol/negative",
+      "legacy_path": "data/raw/GraphPro/Ecol/negative",
+      "sha256": "09896d0f7f9925c4898746252377fb937459e71114af7b5f5ea305f123989218"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Lint/positive",
+      "legacy_path": "data/raw/GraphPro/Lint/positive",
+      "sha256": "6c3892d37f47e07e9a80c9d1b0f291b8e96f7e58b74345172b5977a98007932b"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Lint/negative",
+      "legacy_path": "data/raw/GraphPro/Lint/negative",
+      "sha256": "7fad29cebb70572b0642538dd97d1545899c375d17155804f2f058ada028bbde"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Rcap/positive",
+      "legacy_path": "data/raw/GraphPro/Rcap/positive",
+      "sha256": "229d477ba34fb33f392494168f1a308406de59fa3eccd6629265d8279d38308e"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/Rcap/negative",
+      "legacy_path": "data/raw/GraphPro/Rcap/negative",
+      "sha256": "dc412c4285e92687e00f147bcc0a80ef1c11e72db3e09486d039fc3fb16ba08d"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/human/positive",
+      "legacy_path": "data/raw/GraphPro/human/positive",
+      "sha256": "ba62e5b64679e3aab0e85f46f125e4dda88c72e360785f9b1d8d6395cf826018"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/human/negative",
+      "legacy_path": "data/raw/GraphPro/human/negative",
+      "sha256": "297a4c3b7ea82bd8cf47c368b64b9e38738531e27d8bb487ff657a33531851ad"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/mouse/positive",
+      "legacy_path": "data/raw/GraphPro/mouse/positive",
+      "sha256": "bfc5a775e3936f2d821522bd1418b85d778b291a43ac8f9e66dc87b335dec6fa"
+    },
+    {
+      "acquired_input": "graphpro/Datasets/mouse/negative",
+      "legacy_path": "data/raw/GraphPro/mouse/negative",
+      "sha256": "33d9adeeed11544000461ba7b8f44ab9ea1b1865089f82b51f4f0e1064e65c81"
+    }
+  ]
+}
