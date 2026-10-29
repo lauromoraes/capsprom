@@ -10,7 +10,8 @@ defined in `specs/data_provenance_policy.md` §6:
 IDs are stable. A status change is a new dated row that references the old ID;
 existing rows are not rewritten. Data version abbreviations:
 `acq-v1` = `configs/source_acquisition_v1.yaml` (SHA-256 `8e08e614…`),
-`can-v1` = `configs/source_canonicalization_v1.yaml` (SHA-256 `eb5460a0…`).
+`can-v1` = `configs/source_canonicalization_v1.yaml` (SHA-256 `eb5460a0…`),
+`ref-acq-v1` = `configs/reference_acquisition_v1.yaml` (SHA-256 `cd6e3ac6…`).
 Records cited as `prov/…` are in `manifests/provenance/source_acquisition_v1/`.
 
 ## Acquisition and sources
@@ -54,6 +55,11 @@ Records cited as `prov/…` are in `manifests/provenance/source_acquisition_v1/`
 | F-044 | 2026-10-29 | Fact | Supersedes the "may lie outside" part of F-032: all 38 short Bhandari windows (Human 30, Yeast 3, nominal Plant 5) lost only upstream bases at a contig or chromosome end; their downstream side is intact. Under F-043 the TSS lies inside every one, at index 1 to 620 instead of 700. | `bhandari_range_pilot.json`; log R-018 |
 | F-045 | 2026-10-29 | Fact | All 40 pilot records of the file distributed as Bhandari "Plant" are recreated exactly from mm10 at their header coordinates. This locates those sequences in the mouse assembly; it does not establish why the publication describes *A. thaliana* (F-016, F-017). | `bhandari_range_pilot.json` |
 | F-046 | 2026-10-29 | Fact | The regenerated-v3 CDBProm negative FASTA files hold exactly the canonical negatives minus the 99-nt records in each of the 11 organisms (51 in total), so the legacy modal-length step removed precisely the F-034 records and no other. | `data/interim/fasta/nonprom-cdbprom-*` record counts versus canonical tables; log R-018 |
+| F-047 | 2026-10-29 | Fact | Supersedes F-043 where the transcript version is still annotated: in the UCSC RefSeq tables acquired by `ref-acq-v1`, every record whose `accession.version` is present on the same chromosome and strand has its window TSS (1-based: name coordinate + 700 on `+`, name coordinate − 1 on `-`) equal to the transcript start in Yeast (6,125/6,125), Human (13,604/13,608), and nominal Plant on mm10 (45,528/45,530). The few exceptions differ by 12 kb or more. | `manifests/provenance/source_acquisition_v1/bhandari_tss_refseq_comparison.json`; log R-019 |
+| F-048 | 2026-10-29 | Fact | The current tables cannot test most Human and nominal-Plant records: only another version of the accession is annotated for 46,808 Human (4,928 still at the same TSS) and 40,502 nominal-Plant records (4,750 at the same TSS); the accession is absent for 1,113 Human and 20,479 nominal-Plant records; 17 Human and 9 nominal-Plant versions now lie on another chromosome or strand. | same record |
+| F-049 | 2026-10-29 | Fact | The acquired tables report `Last-Modified` 2025-08-13 (hg38 `ncbiRefSeqCurated`), 2021-04-23 (mm10 `ncbiRefSeq`), and 2021-02-10 (sacCer3 `ncbiRefSeq`). The Bhandari Drive archives are dated 2021-01-21. | `manifests/provenance/reference_acquisition_v1/acquisition_manifest.json` (`response_headers`) |
+| F-050 | 2026-10-29 | Limitation | The TSS of Bhandari records whose transcript version is no longer annotated remains unverified (F-048). A dated NCBI RefSeq annotation release contemporary with the January 2021 archives would be needed; the current UCSC tables are snapshots, not releases. | F-048, F-049 |
+| F-051 | 2026-10-29 | Fact | 45 Bhandari records (Human 13, Yeast 19, nominal Plant 13) name mitochondrial protein accessions (`YP_`, `NP_`) instead of transcript accessions; their TSS also equals the annotated start. | `bhandari_tss_refseq_comparison.json` |
 
 ## Lineage of experimental datasets
 

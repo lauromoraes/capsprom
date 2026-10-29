@@ -1,0 +1,148 @@
+{
+  "acquisition": "reference-acquisition-v1",
+  "config_sha256": "cd6e3ac622254818f1fb3cd8efaaf515fdf471aaaaafb42bf68edcfe7635a0c4",
+  "files": {
+    "ucsc-refseq-tables/hg38/ncbiRefSeqCurated.sql": {
+      "acquired_at": "2026-10-29T21:51:37+00:00",
+      "expected": {},
+      "git_blob_sha1": "29206bcc2797c4c62959651131eb4a4ad38ab073",
+      "md5": "a8c6b787be00a0ec548881134259325c",
+      "path": "hg38/ncbiRefSeqCurated.sql",
+      "response_headers": {
+        "content-length": "2043",
+        "content-type": "application/sql",
+        "etag": "\"7fb-63c40d6ddd024\"",
+        "last-modified": "Wed, 13 Aug 2025 15:30:40 GMT"
+      },
+      "sha256": "46609be6ff019b56e27fb665fd6f2743d099b66bfdc769dd713bac1eb9274a9b",
+      "size_bytes": 2043,
+      "source_id": "ucsc-refseq-tables",
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/ncbiRefSeqCurated.sql",
+      "verified_against": []
+    },
+    "ucsc-refseq-tables/hg38/ncbiRefSeqCurated.txt.gz": {
+      "acquired_at": "2026-10-29T21:51:36+00:00",
+      "expected": {},
+      "git_blob_sha1": "095a1e202f226a46e5955cd03cc17caf31b6eb56",
+      "md5": "b079f98248c868e745f9cce1c48b703c",
+      "path": "hg38/ncbiRefSeqCurated.txt.gz",
+      "response_headers": {
+        "content-length": "4801131",
+        "content-type": "application/x-gzip",
+        "etag": "\"49426b-63c40d6ddd024\"",
+        "last-modified": "Wed, 13 Aug 2025 15:30:40 GMT"
+      },
+      "sha256": "67090326b606658bdabdfe5f8dcb97b7943ac802c7945399522be7174ec021ca",
+      "size_bytes": 4801131,
+      "source_id": "ucsc-refseq-tables",
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/ncbiRefSeqCurated.txt.gz",
+      "verified_against": []
+    },
+    "ucsc-refseq-tables/mm10/ncbiRefSeq.sql": {
+      "acquired_at": "2026-10-29T21:51:43+00:00",
+      "expected": {},
+      "git_blob_sha1": "bc59510798836f1093e6b9e8f0a0cd3dcbbf12cc",
+      "md5": "b732df741a7c04f005b946406b0d4f14",
+      "path": "mm10/ncbiRefSeq.sql",
+      "response_headers": {
+        "content-length": "1994",
+        "content-type": "application/sql",
+        "etag": "\"7ca-5c0a0f1548f85\"",
+        "last-modified": "Fri, 23 Apr 2021 10:05:59 GMT"
+      },
+      "sha256": "353bd2bab64bef47d051a41cc03d36c21b5fbaabc3e8ffae65412e09470ff5a5",
+      "size_bytes": 1994,
+      "source_id": "ucsc-refseq-tables",
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ncbiRefSeq.sql",
+      "verified_against": []
+    },
+    "ucsc-refseq-tables/mm10/ncbiRefSeq.txt.gz": {
+      "acquired_at": "2026-10-29T21:51:42+00:00",
+      "expected": {},
+      "git_blob_sha1": "5478e645247bd95c861e4ad4071026f308f44302",
+      "md5": "2bca3a7487787aaa5c2c7947c2f17319",
+      "path": "mm10/ncbiRefSeq.txt.gz",
+      "response_headers": {
+        "content-length": "5585058",
+        "content-type": "application/x-gzip",
+        "etag": "\"5538a2-5c0a0f1548f85\"",
+        "last-modified": "Fri, 23 Apr 2021 10:05:59 GMT"
+      },
+      "sha256": "8f3aace6f00adc4a83103d5f88ebefda7d3fbf1d1982aec976548e5ed607c1d9",
+      "size_bytes": 5585058,
+      "source_id": "ucsc-refseq-tables",
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ncbiRefSeq.txt.gz",
+      "verified_against": []
+    },
+    "ucsc-refseq-tables/sacCer3/ncbiRefSeq.sql": {
+      "acquired_at": "2026-10-29T21:51:39+00:00",
+      "expected": {},
+      "git_blob_sha1": "a3beb3d0627b90405417011b4011303c3131c199",
+      "md5": "f0649eec0391bce72c8cd0a7f15f8e44",
+      "path": "sacCer3/ncbiRefSeq.sql",
+      "response_headers": {
+        "content-length": "1997",
+        "content-type": "application/sql",
+        "etag": "\"7cd-5bb03ff72cfdb\"",
+        "last-modified": "Wed, 10 Feb 2021 23:45:28 GMT"
+      },
+      "sha256": "157bd4a825181add95fa3d66a8cafe2fdcfedf42ffc2f34bb87cfce344a52862",
+      "size_bytes": 1997,
+      "source_id": "ucsc-refseq-tables",
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/sacCer3/database/ncbiRefSeq.sql",
+      "verified_against": []
+    },
+    "ucsc-refseq-tables/sacCer3/ncbiRefSeq.txt.gz": {
+      "acquired_at": "2026-10-29T21:51:38+00:00",
+      "expected": {},
+      "git_blob_sha1": "aac05735a226ed11ff72fd41f9bc31d85c0bce43",
+      "md5": "c57b455eb3d9e5facdb4022ef2bd0da3",
+      "path": "sacCer3/ncbiRefSeq.txt.gz",
+      "response_headers": {
+        "content-length": "143519",
+        "content-type": "application/x-gzip",
+        "etag": "\"2309f-5bb03ff72cfdb\"",
+        "last-modified": "Wed, 10 Feb 2021 23:45:28 GMT"
+      },
+      "sha256": "1532a7a2e5288265228612361cc451ca678d9bddcb64aaa4211dd3c2c7cf37b7",
+      "size_bytes": 143519,
+      "source_id": "ucsc-refseq-tables",
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/sacCer3/database/ncbiRefSeq.txt.gz",
+      "verified_against": []
+    }
+  },
+  "resolved_listings": {},
+  "runs": [
+    {
+      "command": [
+        "python",
+        "scripts/acquire_sources.py",
+        "--config",
+        "configs/reference_acquisition_v1.yaml",
+        "--execute"
+      ],
+      "finished_at": "2026-10-29T21:51:43+00:00",
+      "only_sources": null,
+      "started_at": "2026-10-29T21:51:26+00:00",
+      "status": "completed",
+      "summary": {
+        "declared_files": 6,
+        "downloaded": 6,
+        "planned": 6,
+        "recorded_files": 6,
+        "skipped_verified": 0
+      },
+      "tool": {
+        "code": {
+          "commit": "42628b8f545e8b0d430212d783f5f156b3481ba9",
+          "worktree_clean": false
+        },
+        "module_sha256": "a8e71e40ff7889c369afaa583f7e94605216a0494e3f9cdd084a07525d4b27a4",
+        "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.13.11",
+        "user_agent": "capsprom-source-acquisition/1"
+      }
+    }
+  ],
+  "schema_version": 1
+}

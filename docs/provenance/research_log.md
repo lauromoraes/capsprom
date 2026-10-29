@@ -320,3 +320,30 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **Code state.** Deviation record: uncommitted on `bed443f`, committed with
   this entry. Pilot: scratch script outside the repository, SHA-256
   `1b7892d707ac9c40…`.
+
+## R-019 · 2026-10-29 · Reference acquisition v1 and Bhandari TSS comparison
+
+- **Procedure.**
+  1. Created `configs/reference_acquisition_v1.yaml` (SHA-256 `cd6e3ac6…`)
+     for the UCSC RefSeq transcript tables (genePred, with their SQL schema)
+     of hg38 `ncbiRefSeqCurated`, sacCer3 `ncbiRefSeq`, and mm10
+     `ncbiRefSeq`, the tracks named in the Bhandari headers. Ran
+     `PYTHONPATH=src .venv/bin/python scripts/acquire_sources.py --config configs/reference_acquisition_v1.yaml --execute`;
+     6 files downloaded and recorded, no declared digest (trust on first use).
+     `source_acquisition_v1` was not changed.
+  2. For every Bhandari Human, Yeast, and nominal-Plant record, derived the
+     window TSS from the name coordinate (F-042) and compared it with the
+     transcript start of the same `accession.version` on the same chromosome
+     and strand.
+- **Results.** Where the version is annotated, the TSS equals the transcript
+  start in all Yeast records and in all but 4 Human and 2 nominal-Plant ones
+  (F-047). Most Human and nominal-Plant records name versions that the current
+  tables no longer hold (F-048), so their TSS stays unverified (F-050). Table
+  dates in F-049; mitochondrial protein accessions in F-051.
+- **Data version.** `can-v1` (SHA-256 `eb5460a0…`); `ref-acq-v1` (SHA-256
+  `cd6e3ac6…`).
+- **Records.** `manifests/provenance/reference_acquisition_v1/acquisition_manifest.json`,
+  `manifests/provenance/source_acquisition_v1/bhandari_tss_refseq_comparison.json`.
+- **Code state.** Acquisition with the committed `capsprom.data.acquisition`
+  at `42628b8`; comparison by a scratch script outside the repository,
+  SHA-256 `ac75e333dba3f5b7…`.

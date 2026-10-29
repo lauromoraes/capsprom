@@ -1,0 +1,111 @@
+{
+ "bhandari-human": {
+  "records": 61546,
+  "status": {
+   "accession_absent": 1113,
+   "other_version_only:tss_differs": 41880,
+   "other_version_only:tss_equal": 4928,
+   "version_found:other_locus": 17,
+   "version_found:tss_differs": 4,
+   "version_found:tss_equal": 13604
+  },
+  "tss_offset_annotation_minus_window_in_transcript_direction": {
+   "-197214": 1,
+   "-58087": 1,
+   "-36550": 1,
+   "-12342": 1
+  },
+  "examples": {
+   "version_found:tss_equal": [
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000000 NR_031705.1",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000001 NR_002994.2",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000008 NM_001308251.1"
+   ],
+   "other_version_only:tss_differs": [
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000002 NM_153254.2",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000003 NM_003036.3",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000005 NM_001198850.1"
+   ],
+   "other_version_only:tss_equal": [
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000004 NM_024676.4",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000011 NM_001039703.5",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000012 NM_001302371.1"
+   ],
+   "accession_absent": [
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000041 NR_106781.1",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000043 NR_028327.1",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0000044 NR_033908.1"
+   ],
+   "version_found:tss_differs": [
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0004494 NR_126347.1",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0021276 NM_001291990.1",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0045574 NR_135638.1"
+   ],
+   "version_found:other_locus": [
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0005528 NM_173858.1",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0017837 NM_001285987.1",
+    "bhandari-human:bhandari-drive/Human_promoter.gz:0018044 NM_000544.3"
+   ]
+  }
+ },
+ "bhandari-yeast": {
+  "records": 6125,
+  "status": {
+   "version_found:tss_equal": 6125
+  },
+  "tss_offset_annotation_minus_window_in_transcript_direction": {},
+  "examples": {
+   "version_found:tss_equal": [
+    "bhandari-yeast:bhandari-drive/Yeast_promoter.gz:0000000 NM_001184582.1",
+    "bhandari-yeast:bhandari-drive/Yeast_promoter.gz:0000001 NM_001180043.1",
+    "bhandari-yeast:bhandari-drive/Yeast_promoter.gz:0000002 NM_001178208.1"
+   ]
+  }
+ },
+ "bhandari-nominal-plant": {
+  "records": 106520,
+  "status": {
+   "accession_absent": 20479,
+   "other_version_only:tss_differs": 35752,
+   "other_version_only:tss_equal": 4750,
+   "version_found:other_locus": 9,
+   "version_found:tss_differs": 2,
+   "version_found:tss_equal": 45528
+  },
+  "tss_offset_annotation_minus_window_in_transcript_direction": {
+   "-28318": 1,
+   "-59417": 1
+  },
+  "examples": {
+   "version_found:tss_equal": [
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000000 XR_865590.1",
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000005 XM_017312907.1",
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000006 XM_017312906.1"
+   ],
+   "other_version_only:tss_equal": [
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000001 XR_001778825.1",
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000002 XR_865202.1",
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000003 XR_865201.2"
+   ],
+   "other_version_only:tss_differs": [
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000008 XM_006495952.3",
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000009 XR_865499.2",
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000010 XR_001778955.1"
+   ],
+   "accession_absent": [
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000013 XM_006529147.2",
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000017 XR_387290.2",
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0000031 XR_865166.2"
+   ],
+   "version_found:other_locus": [
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0005941 XR_104601.3",
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0012129 XR_866682.1",
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0012130 XR_374936.2"
+   ],
+   "version_found:tss_differs": [
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0063865 NM_026643.5",
+    "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0105891 NM_013758.4"
+   ]
+  }
+ }
+}
