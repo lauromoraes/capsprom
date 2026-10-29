@@ -28,3 +28,12 @@
 - Prefer the smallest change that satisfies the current research step.
 - Do not introduce a generic framework until at least three concrete workflows require the same abstraction.
 - Keep `experiment.py` as a thin compatibility facade; add new logic to the model, tracking, evaluation, runner, or neural modules instead.
+
+## Codebase Overview
+
+CapsProm compares classical baselines (logistic regression, XGBoost) with capsule networks for binary promoter prediction on 81 bp DNA windows, under hash-locked versioned YAML contracts, resumable state and MLflow tracking.
+
+**Stack**: Python 3.13, NumPy/pandas, scikit-learn, XGBoost, PyTorch, MLflow, pytest, ruff.
+**Structure**: `src/capsprom/` (`data/`, `features/`, `models/`, `eda/`, neural and classical runners), `scripts/` (thin wrappers), `configs/` (versioned contracts), `specs/`, `docs/`, `manifests/`.
+
+For detailed architecture, see [docs/CODEBASE_MAP.md](docs/CODEBASE_MAP.md).
