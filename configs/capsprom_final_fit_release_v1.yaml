@@ -1,0 +1,70 @@
+release:
+  name: capsprom-final-fit-release-v1
+  version: 1.0.0
+  status: authorized_bounded_final_fit_training_tranche
+  drafted_on: 2026-10-28
+  authorized_on: 2026-10-28
+  authorization_source: explicit_user_instruction_to_run_the_180_v4_final_fits
+  predecessor: configs/capsprom_campaign_release_v23.yaml
+  # The v4 contract keeps final_fits_enabled false and its hash locks the plan;
+  # this release opens only the final-fit gate without changing the contract.
+  selection_basis: deterministic_pending_fold_schedule
+
+scope:
+  execution_contract: configs/capsprom_basic_canonical_gpu_execution_v4.yaml
+  execution_contract_sha256: e2c244d8b1d2559e11c35f4eb01778439fbdb54630af912f99c3ba4b87a8cdc2
+  eligible_dataset_count: 18
+  graphpro_included: false
+  # Smallest-first order of releases v3 and v7-v23.
+  dataset_ids:
+    - cdbprom-prokaryotic-chlamydophila_pneumoniae
+    - cdbprom-prokaryotic-corynebacterium_glutamicum
+    - cnnprom-prokaryotic-Bacillus
+    - cdbprom-prokaryotic-helicobacter_pylori
+    - cdbprom-prokaryotic-salmonella_typhimurium
+    - cdbprom-prokaryotic-bacillus_amyloliquefaciens
+    - cdbprom-prokaryotic-klebisiella_pneumoniae
+    - cdbprom-prokaryotic-synechocistis
+    - cdbprom-prokaryotic-mycrobacterium_tuberculosis
+    - cnnprom-prokaryotic-Ecoli
+    - cdbprom-prokaryotic-pseudonomas_aeruginosa
+    - cnnprom-eukaryotic-Arabidopsis_tata
+    - cnnprom-eukaryotic-Mouse_tata
+    - cdbprom-prokaryotic-streptomyces_coelicolor
+    - cdbprom-prokaryotic-anabaena_sp
+    - cnnprom-eukaryotic-Arabidopsis_non_tata
+    - cnnprom-eukaryotic-Mouse_non_tata
+    - cnnprom-eukaryotic-Human_non_tata
+  seeds: [13, 29, 42, 71, 101, 137, 173, 211, 251, 293]
+  maximum_new_final_fits: 180
+  host: bioserver03
+  gpu_workers: 1
+
+preconditions:
+  - inspect manifests/remote_jobs.json and the host for an equivalent job before launch
+  - all 180 final-fit jobs are ready_for_final_fit and external_test_accessed is false
+
+postconditions:
+  - all 180 final-fit jobs are completed_final_fit_training and external_test_accessed is false
+  - hash manifest and checksum-verified backup to bioserver04
+
+scientific_boundaries:
+  training_data_only: true
+  train_on_all_training_rows: true
+  epochs: persisted_lower_median_fold_best_epoch
+  restart_from_initialization: true
+  model_outcomes_may_not_expand_tranche: true
+
+execution_requirements:
+  persistent_asynchronous_launcher: true
+  remote_job_registry: manifests/remote_jobs.json
+  atomic_plan_state: true
+  mlflow_parent_child_tracking: true
+  inspect_for_equivalent_job_before_launch: true
+
+execution_gates:
+  authorized_inner_folds_enabled: false
+  additional_inner_folds_enabled: false
+  final_fits_enabled: true
+  external_test_enabled: false
+  embedding_jobs_enabled: false

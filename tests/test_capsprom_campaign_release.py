@@ -145,3 +145,57 @@ def test_tranche_runner_expands_seed_list_in_order(tmp_path, monkeypatch) -> Non
         for fold in range(5)
     ]
     assert (tmp_path / "job.exit").read_text() == "0\n"
+
+
+def test_final_fit_release_v1_opens_only_the_180_v4_final_fits() -> None:
+    from capsprom.data.loading import sha256_file
+
+    root = Path(__file__).resolve().parents[1]
+    contract_path = root / "configs/capsprom_basic_canonical_gpu_execution_v4.yaml"
+    contract = yaml.safe_load(contract_path.read_text())
+    release = yaml.safe_load((root / "configs/capsprom_final_fit_release_v1.yaml").read_text())
+    scope = release["scope"]
+    inner_releases = [3] + list(range(7, 24))
+    schedule = [
+        yaml.safe_load(
+            (root / f"configs/capsprom_campaign_release_v{version}.yaml").read_text()
+        )["scope"]["dataset_id"]
+        for version in inner_releases
+    ]
+
+    assert scope["execution_contract_sha256"] == sha256_file(contract_path)
+    assert scope["dataset_ids"] == schedule
+    assert sorted(scope["dataset_ids"]) == sorted(contract["protocol"]["dataset_ids"])
+    assert scope["seeds"] == contract["replication"]["seeds"]
+    assert scope["maximum_new_final_fits"] == 180
+    assert {name for name, open_ in release["execution_gates"].items() if open_} == {
+        "final_fits_enabled"
+    }
+
+
+def test_final_fit_runner_expands_datasets_then_seeds(tmp_path, monkeypatch) -> None:
+    import scripts.run_bounded_final_fit_tranche as runner
+
+    root = Path(__file__).resolve().parents[1]
+    release_path = root / "configs/capsprom_final_fit_release_v1.yaml"
+    scope = yaml.safe_load(release_path.read_text())["scope"]
+    calls = []
+    monkeypatch.setattr(runner.subprocess, "run", lambda command, check: calls.append(command))
+    monkeypatch.setattr(
+        runner.sys,
+        "argv",
+        [
+            "runner",
+            "--contract", "contract.yaml",
+            "--release", str(release_path),
+            "--output-dir", str(tmp_path),
+            "--exit-code-path", str(tmp_path / "job.exit"),
+        ],
+    )
+
+    assert runner.main() == 0
+    assert [(command[-4], command[-3]) for command in calls] == [
+        (dataset_id, str(seed)) for dataset_id in scope["dataset_ids"] for seed in scope["seeds"]
+    ]
+    assert all(command[-2:] == ["--release", str(release_path)] for command in calls)
+    assert (tmp_path / "job.exit").read_text() == "0\n"

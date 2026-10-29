@@ -792,9 +792,15 @@ Current state:
   false. Each release has a verified manifest and hardlinked backup. Means of
   seed means range from 0.732277 (Human non-TATA) to 0.951194 (Arabidopsis
   TATA). The large non-TATA datasets never reach the 50-epoch ceiling.
-- Next: review the complete inner-fold evidence and decide, as a separate
-  authorization, whether to open the 180 v4 final fits. External tests and
-  embeddings remain closed.
+- Completed: `configs/capsprom_final_fit_release_v1.yaml` opened only the
+  final-fit gate and ran the 180 v4 final fits on `bioserver03` through one
+  fail-stop queue driver (2026-10-28 22:45:59Z to 23:44:25Z UTC, exit code 0).
+  The completion record reports 180 completed final fits; verification checked
+  18 datasets and 1,080 completed jobs with SQLite integrity ok, and wrote a
+  5,301-file hash manifest and a backup snapshot. `external_test_accessed` is
+  false.
+- Next: decide, as a separate authorization, whether to open the external
+  test evaluation. Embeddings remain closed.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 

@@ -517,6 +517,7 @@ def run_canonical_final_fit_job(
     seed: int,
     *,
     fixture_only: bool = False,
+    release_path: Path | None = None,
     interrupt_after_epoch: int | None = None,
     interrupt_after_training: bool = False,
 ) -> dict[str, Any]:
@@ -533,7 +534,12 @@ def run_canonical_final_fit_job(
     if plan.get("protocol_sha256") != sha256_file(config_path):
         raise ValueError("canonical plan and protocol hashes differ")
     gates = _mapping(raw, "execution_gates")
-    if not fixture_only and gates.get("final_fits_enabled") is not True:
+    release_sha256 = None
+    if release_path is not None:
+        release_sha256 = _check_final_fit_release(
+            release_path, plan["protocol_sha256"], dataset_id, seed
+        )
+    elif not fixture_only and gates.get("final_fits_enabled") is not True:
         raise ValueError("canonical final-fit execution is blocked by the versioned contract")
     job = _find_final_job(plan, dataset_id, seed)
     if job["status"] == "completed_final_fit_training":
@@ -643,6 +649,7 @@ def run_canonical_final_fit_job(
             "protocol_sha256": plan["protocol_sha256"],
             "train_sha256": dataset["train_sha256"],
             "checkpoint_sha256": checkpoint_sha256,
+            **({"release_sha256": release_sha256} if release_sha256 else {}),
         }.items():
             client.log_param(run_id, name, value)
         client.log_artifact(run_id, str(training_config.state_path), "provenance")
@@ -651,7 +658,11 @@ def run_canonical_final_fit_job(
             plan_path,
             dataset_id,
             seed,
-            {"status": "completed_final_fit_training", "error": None},
+            {
+                "status": "completed_final_fit_training",
+                "error": None,
+                **({"release_sha256": release_sha256} if release_sha256 else {}),
+            },
             parent_run_id=parent_run_id,
         )
     except (SimulatedFixedEpochInterruption, SimulatedFinalTrainingInterruption):
@@ -1174,6 +1185,29 @@ def _find_final_job(
 
 def _job_key(dataset_id: str, seed: int, fold: int) -> str:
     return f"{dataset_id}--seed-{seed}--fold-{fold}"
+
+
+def _check_final_fit_release(
+    release_path: Path, protocol_sha256: str, dataset_id: str, seed: int
+) -> str:
+    """Return the release hash if it opens exactly this final fit and nothing else."""
+
+    release = yaml.safe_load(release_path.read_text(encoding="utf-8"))
+    scope = _mapping(release, "scope")
+    gates = _mapping(release, "execution_gates")
+    if scope.get("execution_contract_sha256") != protocol_sha256:
+        raise ValueError("final-fit release targets a different execution contract")
+    if gates.get("final_fits_enabled") is not True:
+        raise ValueError("final-fit release does not open the final-fit gate")
+    if any(open_ for name, open_ in gates.items() if name != "final_fits_enabled"):
+        raise ValueError("final-fit release opens a gate outside final fits")
+    dataset_ids = list(scope.get("dataset_ids", []))
+    seeds = [int(item) for item in scope.get("seeds", [])]
+    if scope.get("maximum_new_final_fits") != len(dataset_ids) * len(seeds):
+        raise ValueError("released final-fit count differs from the bounded maximum")
+    if dataset_id not in dataset_ids or seed not in seeds:
+        raise ValueError("final fit is outside the release scope")
+    return sha256_file(release_path)
 
 
 def _final_job_key(dataset_id: str, seed: int) -> str:

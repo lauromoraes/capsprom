@@ -567,6 +567,79 @@ def test_final_fit_training_is_gated_and_resume_reuses_mlflow_run(
     assert observed[0]["history"] == observed[1]["history"]
 
 
+def test_final_fit_release_opens_only_its_scope_without_changing_the_contract(
+    tmp_path: Path,
+) -> None:
+    from capsprom.data.loading import sha256_file
+
+    project = tmp_path / "project"
+    config = project / "configs" / "canonical.yaml"
+    data = project / "data"
+    config.parent.mkdir(parents=True)
+    _write_training_file(data / "fixture-source-organism-p-5-n-5-train.csv")
+    _write_protocol(config, data, f"sqlite:///{project / 'mlflow.db'}")
+    output = project / "outputs" / "canonical"
+    prepare_canonical_neural_plan(config, output)
+    for fold in range(5):
+        run_canonical_inner_fold_job(config, output, "fixture-source-organism", 13, fold)
+    refresh_canonical_final_fit_readiness(config, output)
+
+    valid = {
+        "scope": {
+            "execution_contract_sha256": sha256_file(config),
+            "dataset_ids": ["fixture-source-organism"],
+            "seeds": [13],
+            "maximum_new_final_fits": 1,
+        },
+        "execution_gates": {
+            "authorized_inner_folds_enabled": False,
+            "final_fits_enabled": True,
+            "external_test_enabled": False,
+            "embedding_jobs_enabled": False,
+        },
+    }
+
+    def release(name: str, change) -> Path:
+        candidate = copy.deepcopy(valid)
+        change(candidate)
+        path = project / "configs" / f"{name}.yaml"
+        path.write_text(yaml.safe_dump(candidate), encoding="utf-8")
+        return path
+
+    rejected = {
+        "different execution contract": lambda r: r["scope"].update(
+            execution_contract_sha256="0" * 64
+        ),
+        "does not open the final-fit gate": lambda r: r["execution_gates"].update(
+            final_fits_enabled=False
+        ),
+        "opens a gate outside final fits": lambda r: r["execution_gates"].update(
+            external_test_enabled=True
+        ),
+        "outside the release scope": lambda r: r["scope"].update(seeds=[29]),
+        "differs from the bounded maximum": lambda r: r["scope"].update(
+            maximum_new_final_fits=2
+        ),
+    }
+    for message, change in rejected.items():
+        with pytest.raises(ValueError, match=message):
+            run_canonical_final_fit_job(
+                config,
+                output,
+                "fixture-source-organism",
+                13,
+                release_path=release(message.replace(" ", "-"), change),
+            )
+
+    authorized = release("authorized", lambda r: None)
+    result = run_canonical_final_fit_job(
+        config, output, "fixture-source-organism", 13, release_path=authorized
+    )
+    assert result["status"] == "completed_final_fit_training"
+    assert result["release_sha256"] == sha256_file(authorized)
+    assert prepare_canonical_neural_plan(config, output)["external_test_accessed"] is False
+
+
 def test_bounded_dispatch_uses_one_parent_and_distinct_mlflow_children(
     tmp_path: Path,
 ) -> None:

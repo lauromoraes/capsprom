@@ -58,6 +58,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     final_fit_parser.add_argument("output_dir", type=Path)
     final_fit_parser.add_argument("dataset_id")
     final_fit_parser.add_argument("seed", type=int)
+    final_fit_parser.add_argument("--release", type=Path, help="Bounded final-fit release")
     external_parser = subparsers.add_parser("run-neural-canonical-external-inference")
     external_parser.add_argument("config", type=Path)
     external_parser.add_argument("output_dir", type=Path)
@@ -118,7 +119,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         if args.command == "run-neural-canonical-final-fit":
             report = run_canonical_final_fit_job(
-                args.config, args.output_dir, args.dataset_id, args.seed
+                args.config,
+                args.output_dir,
+                args.dataset_id,
+                args.seed,
+                release_path=args.release,
             )
             print(json.dumps(report, indent=2))
             return 0

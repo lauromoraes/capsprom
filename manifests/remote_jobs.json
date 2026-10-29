@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "policy": "configs/capsprom_remote_usage_policy_v3.yaml",
-  "updated_at_utc": "2026-10-27T20:30:00Z",
+  "updated_at_utc": "2026-10-29T18:37:32Z",
   "jobs": [
     {
       "job_id": "capsprom-v4-cdbprom-chlamydophila-seed13-folds0-4",
@@ -312,6 +312,36 @@
       "exit_code": 0,
       "integrity_status": "per_release_verify_ok_sqlite_ok_900_finished_children_and_5476_file_hash_manifest_written",
       "backup": "bioserver04:/home/lauro/backups/capsprom/capsprom-v4-release-v13 ... capsprom-v4-release-v23 (hardlinked; each checksum dry run 0 differences, own manifest verified, SQLite ok)"
+    },
+    {
+      "checkpoint_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/jobs"
+      ],
+      "command": "bash tmp/final_fit_queue.sh /home/lauro/backups/capsprom/capsprom-v4-release-v23",
+      "configuration": "configs/capsprom_final_fit_release_v1.yaml",
+      "configuration_sha256": "39944a267f56cd11609a6e073270d6449f5f1d51284ef416828b580c870c4016",
+      "exit_code_path": "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/final-fit-release-v1.exit",
+      "job_id": "capsprom-v4-final-fit-release-v1",
+      "last_checked_at_utc": "2026-10-29T18:37:32Z",
+      "launcher": "nohup_setsidx1_queue_driver",
+      "log_path": "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/final-fit-release-v1.log",
+      "remote_process_id": 721481,
+      "result_paths": [
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/plan_state.json",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/mlflow.db",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/final-fit-release-v1.completion.json",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/final-fit-release-v1.verify.json",
+        "outputs/capsprom_basic_canonical_gpu_execution_v4/remote_jobs/final-fit-release-v1.sha256"
+      ],
+      "server": "bioserver03",
+      "started_at_utc": "2026-10-28T22:45:59Z",
+      "status": "completed",
+      "finished_at_utc": "2026-10-28T23:44:25Z",
+      "exit_code": 0,
+      "integrity_status": "verify_ok_sqlite_ok_18_datasets_1080_completed_jobs_180_final_fits_external_test_not_accessed_5301_file_hash_manifest_written",
+      "backup": "/home/lauro/backups/capsprom/capsprom-v4-final-fit-release-v1 (written by the queue driver, which stops on failed backup verification)",
+      "stop_policy": "driver stops at the first failed preflight, final fit, completion check, integrity check, manifest, or backup verification",
+      "working_directory": "/home/lauro/workspace/capsprom"
     }
   ]
 }
