@@ -14,7 +14,9 @@ Feature-engineering documentation and thesis text must use a consistent notation
 contract. When writing about neural networks, learned embeddings, model inputs,
 losses, or trainable parameters, prefer the notation style used by Goodfellow,
 Bengio, and Courville's *Deep Learning*. A model-ready DNA sequence is `x_i\in\Sigma^L`, with
-`\Sigma=\{A,C,G,T\}` and `L=81`. For k-mer encodings, use
+`\Sigma=\{A,C,G,T\}` and `L` the domain window length of
+`specs/sequence_window_policy.md` (`L=251` for eukaryotes, `L=81` for
+prokaryotes). For k-mer encodings, use
 `\mathcal{K}_k=\Sigma^k`, `L_k=L-k+1`, and `u_{it}^{(k)}` for the `t`-th
 overlapping k-mer. Use `\phi_j` for an individual feature mapping,
 `z_{ij}=\phi_j(x_i)` for its output, and `\Phi(x_i)` for combined feature
@@ -118,8 +120,8 @@ Examples:
 
 Any feature block with a k-mer vocabulary must record `k` explicitly. The
 configuration layer supports one-hot k-mer tokens, but the methodological
-default is `one_hot` with `k: 1`. For an 81 bp sequence, one-hot k-mer matrices
-have `(81 - k + 1) x 4^k` values, k-mer frequency vectors have `4^k` values,
+default is `one_hot` with `k: 1`. For a sequence of length `L`, one-hot k-mer
+matrices have `(L - k + 1) x 4^k` values (at `L = 251` and `k = 6`, 1,007,616), k-mer frequency vectors have `4^k` values,
 and PseKNC vectors have `4^k + lambda_value` values. These dimensions must be
 considered before combining feature blocks.
 

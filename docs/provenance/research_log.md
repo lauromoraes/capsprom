@@ -379,3 +379,22 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **Code state.** Acquisition with the committed `capsprom.data.acquisition` at
   `c6bd1e0`. Scratch scripts outside the repository: release comparison
   `f0bf9f4c…`, version scan `2455b6ab…`, consolidation `0caa9cf5…`.
+
+## R-021 · 2026-10-29 · Domain-specific sequence windows
+
+- **Decision (user).** Eukaryotic datasets use 251 nt windows (-200..+50) and
+  prokaryotic datasets 81 nt windows (-60..+20). Archaea count as prokaryotes.
+- **Procedure.** Read the released lengths of every `can-v1` collection from
+  `prov/canonical_manifest.json` and listed where code and specs fix 81 nt.
+  Wrote `specs/sequence_window_policy.md` with the windows, the allowed
+  derivations, the non-promoter rule, and the feasibility of each collection.
+  Updated the dataset contract (`specs/project_spec.md`) and the 81 nt
+  passages of the feature, GraphPro reconstruction, CapsProm, and MVP specs.
+  Wrote `docs/legacy_data_archive_plan.md`; nothing was archived or deleted.
+- **Results.** CNNProm eukaryotes are 251 nt natively; Bhandari (TSS index 700)
+  and EPD 128 (index 499) can be cropped; GraphPro Human/Mouse, BDGP, CDBProm,
+  and Promotech need further evidence. The regenerated-v3 builds crop CNNProm
+  eukaryotes from 251 to 81 nt (F-057).
+- **Data version.** `can-v1`; no new data.
+- **Code state.** Documentation only, uncommitted on `d681bb6`.
+- **Findings.** F-057.

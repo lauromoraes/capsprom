@@ -35,7 +35,8 @@ The first implementation should support:
 
 - CSV datasets.
 - Binary labels.
-- 81 bp sequence validation.
+- 81 bp sequence validation (the MVP scope; later builds validate the domain
+  window of `specs/sequence_window_policy.md`).
 - DNA alphabet validation.
 - One k-mer frequency encoder.
 - Physicochemical encoder loading from the dinucleotide and trinucleotide TSV references.

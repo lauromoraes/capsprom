@@ -23,6 +23,12 @@ method accepts only a tensor with shape `[batch, 81, 4]`. Multi-head features
 and trainable embeddings are therefore separate model families rather than
 silent changes to basic CapsProm.
 
+This frozen identity is defined for 81 nt windows. Under
+`specs/sequence_window_policy.md`, eukaryotic datasets use 251 nt windows, for
+which basic CapsProm needs a new versioned model contract (`[batch, 251, 4]`,
+with its own capsule count and decoder size). Results of this contract on
+eukaryotic 81 nt builds are not evidence for the 251 nt task.
+
 ## Dataset and replication scope
 
 The eligible set is the 26 collision-free, within-class-deduplicated,

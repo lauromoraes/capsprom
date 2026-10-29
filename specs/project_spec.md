@@ -68,12 +68,19 @@ Datasets must be CSV files with exactly the following required semantic fields:
 
 | Field | Description |
 | --- | --- |
-| `sequence` | DNA nucleotide sequence normalized to 81 bp |
+| `sequence` | DNA nucleotide sequence of the dataset's domain window |
 | `label` | Binary class label: `0` for non-promoter, `1` for promoter |
+
+The window depends on the organism's domain, as defined in
+`specs/sequence_window_policy.md`: 251 nt (-200..+50) for eukaryotes and
+81 nt (-60..+20) for prokaryotes (bacteria and archaea). Builds made before
+that policy, including the eukaryotic regenerated-v3 datasets, use 81 nt and
+remain valid provenance for the experiments that used them.
 
 Validation requirements:
 
-- Every sequence must have length 81.
+- Every sequence must have the domain length declared in the dataset's build
+  config (251 for eukaryotes, 81 for prokaryotes).
 - Every sequence must use only `A`, `C`, `G`, and `T`.
 - Labels must be binary.
 - Dataset partitions must be explicit in the filename or configuration.

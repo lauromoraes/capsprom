@@ -47,8 +47,10 @@ window but cannot be its only source of truth.
 Every positive must retain: organism and strain, assembly accession and version,
 contig, zero-based TSS, strand, original coordinate convention, primary-source
 identifier, source citation, source-file hash, and the final oriented window.
-The standard window is 60 nt upstream, the TSS base, and 20 nt downstream,
-oriented 5-prime to 3-prime relative to transcription.
+The window follows `specs/sequence_window_policy.md`: 60 nt upstream, the TSS
+base, and 20 nt downstream for bacteria, and 200 nt upstream, the TSS base, and
+50 nt downstream for the eukaryotic (Human, Mouse) reconstructions, oriented
+5-prime to 3-prime relative to transcription.
 
 The source contig is part of the biological identity and must be verified
 against the primary table before extracting any window. In particular, the
