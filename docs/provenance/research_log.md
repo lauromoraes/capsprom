@@ -234,3 +234,42 @@ SHA-256 of the module that ran, when the change was not yet committed.
   for the other modules it is `44ad351` only as far as the files were not edited
   after those runs, which no record establishes.
 - **Code state.** `44ad351`.
+
+## R-015 · 2026-10-29 · Reference identification and coordinate mapping protocol
+
+- **Procedure.** Inspected the existing provenance records, data modules, and
+  the first `original_header` per class of all 64 canonical collections
+  (read-only), to design how references are identified and sequences located.
+  Official conventions were checked against the UCSC coordinate blog, the SAM
+  specification, and the Bowtie 2 manual.
+- **Decision.** Location and label validation are separate. Declared
+  coordinates are verified before any search. Every accepted candidate locus is
+  kept, and records carry one of five statuses. Normalized coordinates are
+  0-based half-open with named conversion rules. No mapping was run.
+- **Data version.** `can-v1` (SHA-256 `eb5460a0…`).
+- **Records.** `specs/reference_coordinate_mapping_protocol.md`,
+  `docs/coordinate_mapping_gap_inventory.md`.
+- **Not done.** The coordinate conventions of the Bhandari, Promotech 40-nt,
+  and GraphPro headers are hypotheses until their pilots run. No aligner is
+  installed.
+- **Code state.** Documentation only; uncommitted on `aa7d437`.
+
+## R-016 · 2026-10-29 · Length deviations, strand balance, and length-exclusion rule
+
+- **Procedure.** Read-only counts over the canonical tables: lengths, strands,
+  and exact reverse-complement pairs of Bhandari Human and Yeast positives, and
+  non-100-nt CDBProm negatives. Reviewed how existing builders handle
+  off-length records.
+- **Results.** 33 short Bhandari windows, all on alternate contigs or at
+  chromosome ends (F-031, F-032). Strands are balanced, with 1 and 3
+  reverse-complement pairs (F-033). 51 CDBProm negatives are exactly 99 nt
+  (F-034, F-035). Legacy builders drop or truncate off-length records without a
+  per-reason count (F-036).
+- **Decision.** Off-length records are excluded, never reshaped. The rule is
+  declared per dataset, from the release declaration rather than the modal
+  length, and every exclusion is counted with its reason
+  (`specs/dataset_integrity_audit.md`, "Length exclusion"). Existing build
+  outputs are not changed; the rule applies to new build versions.
+- **Data version.** `can-v1` (SHA-256 `eb5460a0…`).
+- **Code state.** Documentation only; scratch scripts outside the repository;
+  uncommitted on `aa7d437`.

@@ -58,6 +58,40 @@ The classifications are ordered by severity as listed above. A non-eligible
 pair must not enter a confirmatory experiment until a source-aware correction
 and a new immutable manifest are defined.
 
+## Length exclusion
+
+A record whose length differs from its dataset's declared window is excluded,
+never cropped, padded, or truncated to fit, because its anchor (the TSS for
+promoters, the sampling rule for negatives) is then unknown. The rule is
+declared per dataset in its build config before any build or model result is
+seen:
+
+- `expected_length` per source class, taken from the release declaration in
+  `configs/source_canonicalization_v1.yaml`, never from the modal length of the
+  data;
+- the action, always `exclude` in version 1;
+- the documented reason for each known deviation, with its finding ID.
+
+The filtering ledger records, per dataset and class, the input count, every
+excluded `record_id` with its length and reason, and the output count. A
+deviation without a documented reason is still excluded, but it is reported as
+`undocumented_length` and requires a findings-register entry before the build
+is accepted.
+
+Known deviations:
+
+| Dataset | Class | Deviation | Reason | Findings |
+| --- | --- | --- | --- | --- |
+| Bhandari Human | positive | 30 records, 302 to 921 nt | window truncated on hg38 alternate contigs | F-031, F-032 |
+| Bhandari Yeast | positive | 3 records, 352, 732, 884 nt | window truncated at a chromosome end | F-031, F-032 |
+| CDBProm (10 organisms) | negative | 51 records, 99 nt | probable off-by-one in the authors' sampling | F-034, F-035 |
+| Promotech C. pneumoniae | positive | 1 record, 1 nt | undocumented | F-019 |
+
+Existing builders that use `keep_most_common_length` or
+`normalize_to_min_length` (F-036) do not meet this rule. Their outputs remain
+valid provenance for completed experiments. A new build version applies the
+rule above, and its ledger must reproduce the counts in this table.
+
 ## Artifacts
 
 The build command writes JSON and CSV filtering manifests plus a build report.

@@ -13,6 +13,7 @@ Where the evidence for the data's origin lives, and which documents depend on it
 | Facts, hypotheses, limitations | `docs/provenance/findings_register.md` |
 | Lineage of experimental datasets | `docs/provenance/dataset_lineage.md` |
 | Source and publication comparison | `docs/dataset_reconstruction_sources.md` |
+| Reference identification and coordinate mapping (design) | `specs/reference_coordinate_mapping_protocol.md`, `docs/coordinate_mapping_gap_inventory.md` |
 | Acquisition v1 report | `docs/source_acquisition_v1_report.md` |
 | Academic text | `docs/thesis/data_acquisition_provenance.tex` (input by chapter 4) |
 
