@@ -273,3 +273,23 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **Data version.** `can-v1` (SHA-256 `eb5460a0…`).
 - **Code state.** Documentation only; scratch scripts outside the repository;
   uncommitted on `aa7d437`.
+
+## R-017 · 2026-10-29 · Complete scan of length deviations
+
+- **Procedure.** Read-only scan of `length_matches_expected` in all 64
+  canonical collections. The off-length records not covered by R-016 were
+  inspected by header, and the six short Bhandari random-genomic negatives were
+  compared with whole scaffolds read from the acquired `hg38.2bit` through
+  `capsprom.data.twobit.TwoBitGenome`.
+- **Problem.** The known-deviation table written in R-016 came from a partial
+  analysis (Bhandari Human and Yeast, CDBProm) and omitted 13 records in three
+  collections.
+- **Results.** 98 off-length records in 16 collections (F-040). The added
+  cases: 5 nominal-Plant windows truncated on mm10 unplaced contigs (F-037);
+  6 random-genomic negatives that equal entire hg38 unplaced scaffolds (F-038);
+  2 GraphPro *L. interrogans* records of 82 nt with no documented reason
+  (F-039).
+- **Decision.** Completed the table in `specs/dataset_integrity_audit.md` and
+  marked it as the complete list for `can-v1`. The rule itself is unchanged.
+- **Data version.** `can-v1` (SHA-256 `eb5460a0…`); `hg38.2bit` from `acq-v1`.
+- **Code state.** Scratch scripts outside the repository, on `af28ec9`.
