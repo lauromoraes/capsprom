@@ -1,0 +1,47 @@
+{
+ "bhandari-human": {
+  "release": "ncbi-refseq-human-ar109-20201120/GCF_000001405.39_GRCh38.p13",
+  "records": 61546,
+  "status": {
+   "version_absent": 46643,
+   "version_found:other_locus": 17,
+   "version_found:tss_differs": 3,
+   "version_found:tss_equal": 14883
+  },
+  "by_ucsc_snapshot_status": {
+   "ucsc_version_absent|version_absent": 46629,
+   "ucsc_version_absent|version_found:other_locus": 2,
+   "ucsc_version_absent|version_found:tss_equal": 1290,
+   "ucsc_version_present|version_absent": 14,
+   "ucsc_version_present|version_found:other_locus": 15,
+   "ucsc_version_present|version_found:tss_differs": 3,
+   "ucsc_version_present|version_found:tss_equal": 13593
+  },
+  "tss_offset_annotation_minus_window_in_transcript_direction": {
+   "-197214": 1,
+   "-58087": 1,
+   "-12342": 1
+  }
+ },
+ "bhandari-nominal-plant": {
+  "release": "ncbi-refseq-mouse-ar108-20200622/GCF_000001635.26_GRCm38.p6",
+  "records": 106520,
+  "status": {
+   "version_absent": 60994,
+   "version_found:other_locus": 9,
+   "version_found:tss_differs": 2,
+   "version_found:tss_equal": 45515
+  },
+  "by_ucsc_snapshot_status": {
+   "ucsc_version_absent|version_absent": 60981,
+   "ucsc_version_present|version_absent": 13,
+   "ucsc_version_present|version_found:other_locus": 9,
+   "ucsc_version_present|version_found:tss_differs": 2,
+   "ucsc_version_present|version_found:tss_equal": 45515
+  },
+  "tss_offset_annotation_minus_window_in_transcript_direction": {
+   "-28318": 1,
+   "-59417": 1
+  }
+ }
+}

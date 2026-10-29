@@ -1,0 +1,23 @@
+{
+  "observed_at": "2026-10-29",
+  "purpose": "Identify the NCBI RefSeq annotation release closest to the Bhandari extraction by counting exact accession.version matches. Source metadata only; no model result was used.",
+  "method": "Top-level RNA features (ID=rna-*) of each release GFF, transcript_id compared with the accession.version in every Bhandari header. Files downloaded to a scratch directory, MD5 checked against each release's md5checksums.txt; not part of an acquisition manifest except the releases later acquired by reference_acquisition_v2 and v3.",
+  "script_sha256_prefix": "2455b6ab85e70ba6",
+  "candidates": {
+    "bhandari-human (61,546 records)": {
+      "9606/109 (GRCh38.p12)": {"same": 58817, "release_newer": 2404, "absent": 325},
+      "9606/109.20190607": {"same": 29340, "release_newer": 31599, "absent": 607},
+      "9606/109.20190905": {"same": 26700, "release_newer": 34182, "absent": 664},
+      "9606/109.20191205": {"same": 25913, "release_newer": 34949, "absent": 684},
+      "9606/109.20200228": {"same": 25333, "release_newer": 35517, "absent": 696},
+      "9606/109.20200522": {"same": 24713, "release_newer": 36037, "absent": 796},
+      "9606/109.20200815": {"same": 15495, "release_newer": 45209, "absent": 842},
+      "9606/109.20201120": {"same": 14903, "release_newer": 45724, "absent": 919}
+    },
+    "bhandari-nominal-plant (106,520 records)": {
+      "10090/108 (GRCm38.p6)": {"same": 46815, "release_newer": 42281, "absent": 17424},
+      "10090/108.20200622": {"same": 45526, "release_newer": 40502, "absent": 20492}
+    }
+  },
+  "not_scanned": "Human releases on other assemblies (105, 110, RS_2023 onward); mouse release 109 and later (GRCm39). No GRCm38 release older than 108 is listed on the NCBI FTP."
+}

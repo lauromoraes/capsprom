@@ -1,0 +1,156 @@
+{
+  "acquisition": "reference-acquisition-v2",
+  "config_sha256": "5faffcbc219080d138ab77c2e2753dc1b2c84b3141bd12e6740217f7a449bdf9",
+  "files": {
+    "ncbi-refseq-human-ar109-20201120/GCF_000001405.39_GRCh38.p13_assembly_report.txt": {
+      "acquired_at": "2026-10-29T22:04:12+00:00",
+      "expected": {
+        "md5": "8b563090696d938ae9be5fddc9d19ab5"
+      },
+      "git_blob_sha1": "f4062f6166408c5123a64954ae184afdf64fdbde",
+      "md5": "8b563090696d938ae9be5fddc9d19ab5",
+      "path": "GCF_000001405.39_GRCh38.p13_assembly_report.txt",
+      "response_headers": {
+        "content-length": "72597",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Mon, 23 Nov 2020 16:40:21 GMT"
+      },
+      "sha256": "0146eafc19f5c58a9e6c271d2f1919f5c2ac0de6504083018cd3f92f9b020962",
+      "size_bytes": 72597,
+      "source_id": "ncbi-refseq-human-ar109-20201120",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/109.20201120/GCF_000001405.39_GRCh38.p13/GCF_000001405.39_GRCh38.p13_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "ncbi-refseq-human-ar109-20201120/GCF_000001405.39_GRCh38.p13_genomic.gff.gz": {
+      "acquired_at": "2026-10-29T22:05:22+00:00",
+      "expected": {
+        "md5": "87a42d2b84d6f69620fa2ba9c667fe88"
+      },
+      "git_blob_sha1": "692e44056f4e5b6a2b2f5d374f577e6a6cd58881",
+      "md5": "87a42d2b84d6f69620fa2ba9c667fe88",
+      "path": "GCF_000001405.39_GRCh38.p13_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "50535814",
+        "content-type": "application/x-gzip",
+        "last-modified": "Mon, 23 Nov 2020 16:40:48 GMT"
+      },
+      "sha256": "03881b5538506c262d4b4fe1a1da65e5273370536d121c0a1a03e8b876479e0d",
+      "size_bytes": 50535814,
+      "source_id": "ncbi-refseq-human-ar109-20201120",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/109.20201120/GCF_000001405.39_GRCh38.p13/GCF_000001405.39_GRCh38.p13_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "ncbi-refseq-human-ar109-20201120/README_Homo_sapiens_annotation_release_109.20201120": {
+      "acquired_at": "2026-10-29T22:04:10+00:00",
+      "expected": {},
+      "git_blob_sha1": "c0206c6e8037f3137ab2f787e9184fb36410ce8e",
+      "md5": "92ce39ed9de2e7860b518af48fe3b9ac",
+      "path": "README_Homo_sapiens_annotation_release_109.20201120",
+      "response_headers": {
+        "content-length": "1883",
+        "last-modified": "Mon, 23 Nov 2020 16:40:21 GMT"
+      },
+      "sha256": "f1883088b16a5ef845719467a4cf31fb0165fa32debaebac046b846be2cd6df1",
+      "size_bytes": 1883,
+      "source_id": "ncbi-refseq-human-ar109-20201120",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/109.20201120/README_Homo_sapiens_annotation_release_109.20201120",
+      "verified_against": []
+    },
+    "ncbi-refseq-mouse-ar108-20200622/GCF_000001635.26_GRCm38.p6_assembly_report.txt": {
+      "acquired_at": "2026-10-29T22:05:24+00:00",
+      "expected": {
+        "md5": "b1dc4c7203615321eebc26419bcbd8e1"
+      },
+      "git_blob_sha1": "9ffd0069372a715374eeaab01270c80756ad858e",
+      "md5": "b1dc4c7203615321eebc26419bcbd8e1",
+      "path": "GCF_000001635.26_GRCm38.p6_assembly_report.txt",
+      "response_headers": {
+        "content-length": "24706",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Fri, 25 Nov 2022 22:33:10 GMT"
+      },
+      "sha256": "56b946a55667fa288bf5cfbd3b28caf3051cace038d25609ba6b9e74f1ac8074",
+      "size_bytes": 24706,
+      "source_id": "ncbi-refseq-mouse-ar108-20200622",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/108.20200622/GCF_000001635.26_GRCm38.p6/GCF_000001635.26_GRCm38.p6_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "ncbi-refseq-mouse-ar108-20200622/GCF_000001635.26_GRCm38.p6_genomic.gff.gz": {
+      "acquired_at": "2026-10-29T22:05:48+00:00",
+      "expected": {
+        "md5": "34ab98553d293f91a8439e7e6bddc250"
+      },
+      "git_blob_sha1": "29436232d2b293faee6e5e18630be2e65e04c90c",
+      "md5": "34ab98553d293f91a8439e7e6bddc250",
+      "path": "GCF_000001635.26_GRCm38.p6_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "34312355",
+        "content-type": "application/x-gzip",
+        "last-modified": "Thu, 09 Jul 2020 17:01:36 GMT"
+      },
+      "sha256": "acfc6497c3e3c140f5b3fa3ebc9d40bf23251d68fa1120dd127306851e807d53",
+      "size_bytes": 34312355,
+      "source_id": "ncbi-refseq-mouse-ar108-20200622",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/108.20200622/GCF_000001635.26_GRCm38.p6/GCF_000001635.26_GRCm38.p6_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "ncbi-refseq-mouse-ar108-20200622/README_Mus_musculus_annotation_release_108.20200622": {
+      "acquired_at": "2026-10-29T22:05:23+00:00",
+      "expected": {},
+      "git_blob_sha1": "09d967f98df5a072a31f96cb66d6b497408dcf8f",
+      "md5": "a943e92af04d9908e3cd10b84b2a97e4",
+      "path": "README_Mus_musculus_annotation_release_108.20200622",
+      "response_headers": {
+        "content-length": "1132",
+        "last-modified": "Thu, 09 Jul 2020 17:01:11 GMT"
+      },
+      "sha256": "077dceac393b0e91c5c0d0eb706c7503a8f32360e1280566f3f36c589c64a99a",
+      "size_bytes": 1132,
+      "source_id": "ncbi-refseq-mouse-ar108-20200622",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/108.20200622/README_Mus_musculus_annotation_release_108.20200622",
+      "verified_against": []
+    }
+  },
+  "resolved_listings": {},
+  "runs": [
+    {
+      "command": [
+        "python",
+        "scripts/acquire_sources.py",
+        "--config",
+        "configs/reference_acquisition_v2.yaml",
+        "--execute"
+      ],
+      "finished_at": "2026-10-29T22:05:48+00:00",
+      "only_sources": null,
+      "started_at": "2026-10-29T22:04:07+00:00",
+      "status": "completed",
+      "summary": {
+        "declared_files": 6,
+        "downloaded": 6,
+        "planned": 6,
+        "recorded_files": 6,
+        "skipped_verified": 0
+      },
+      "tool": {
+        "code": {
+          "commit": "c6bd1e090f0ee0a69428d9b99ae28da6e7383b52",
+          "worktree_clean": false
+        },
+        "module_sha256": "a8e71e40ff7889c369afaa583f7e94605216a0494e3f9cdd084a07525d4b27a4",
+        "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.13.11",
+        "user_agent": "capsprom-source-acquisition/1"
+      }
+    }
+  ],
+  "schema_version": 1
+}

@@ -347,3 +347,35 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **Code state.** Acquisition with the committed `capsprom.data.acquisition`
   at `42628b8`; comparison by a scratch script outside the repository,
   SHA-256 `ac75e333dba3f5b7…`.
+
+## R-020 · 2026-10-29 · Dated NCBI RefSeq releases and Bhandari TSS status
+
+- **Procedure.**
+  1. Created `configs/reference_acquisition_v2.yaml` (SHA-256 `5faffcbc…`),
+     choosing by a date rule fixed before comparison: the latest NCBI annotation
+     release of each declared assembly before the 2021-01-21 Drive archive
+     (Human 109.20201120, mouse GRCm38 108.20200622). Acquired with published
+     MD5 digests.
+  2. The comparison refuted the rule (F-052). As an identification step, scanned
+     every GRCh38 release 109.* listed on the NCBI FTP and both GRCm38 releases,
+     downloaded to a scratch directory with MD5 checked, counting exact
+     `accession.version` matches only (F-053).
+  3. Created `configs/reference_acquisition_v3.yaml` (SHA-256 `a64e93bb…`) for
+     the releases the scan identified (Human 109, mouse 108) and acquired them.
+  4. Compared the window TSS with every acquired source and consolidated one
+     status per record (F-055, F-056).
+- **Decision.** The failed date rule stays recorded in `ref-acq-v2`; it is not
+  edited. Release identification by version matches uses source metadata only.
+  All candidates are reported.
+- **Results.** TSS at index 700 holds for 58,816 of 61,546 Human records,
+  46,817 of 106,520 nominal-Plant records, and all 6,125 Yeast records.
+  6 records contradict it and 20 name a version found only at another locus.
+  The rest are untestable with the releases available.
+- **Data version.** `can-v1`; `ref-acq-v1`, `ref-acq-v2`, `ref-acq-v3`.
+- **Records.** `manifests/provenance/reference_acquisition_v2/`, `…_v3/`;
+  `manifests/provenance/source_acquisition_v1/bhandari_refseq_release_scan.json`,
+  `bhandari_tss_ncbi_ar_dated_rule.json`, `bhandari_tss_ncbi_ar_identified.json`,
+  `bhandari_tss_status.json`.
+- **Code state.** Acquisition with the committed `capsprom.data.acquisition` at
+  `c6bd1e0`. Scratch scripts outside the repository: release comparison
+  `f0bf9f4c…`, version scan `2455b6ab…`, consolidation `0caa9cf5…`.

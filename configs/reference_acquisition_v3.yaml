@@ -1,0 +1,52 @@
+acquisition:
+  name: reference-acquisition-v3
+  version: 1.0.0
+  protocol: specs/reference_coordinate_mapping_protocol.md
+  audit: docs/coordinate_mapping_gap_inventory.md
+  root: data/acquired/reference_acquisition_v3
+  frozen_on: 2026-10-29
+  policy: >-
+    NCBI RefSeq annotation releases identified as the closest to the Bhandari
+    extraction. reference_acquisition_v2 applied a date rule (latest release
+    before the 2021-01-21 Drive archive) and was refuted: those releases hold
+    newer versions of most transcripts named in the data (log R-020). The
+    releases below were selected instead by an identification scan of every
+    annotation release then listed on the NCBI FTP for the declared assembly:
+    the release that holds the largest number of the exact accession.version
+    values named in the Bhandari headers. The scan uses source metadata only,
+    never a model result, and every candidate is reported. MD5 digests are
+    those published in each release's md5checksums.txt.
+
+sources:
+  # GRCh38.p12 (UCSC hg38), annotation release 109.
+  - source_id: ncbi-refseq-human-ar109
+    kind: url_list
+    study: ncbi_refseq_annotation
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/109/
+    release: '109'
+    files:
+      - path: README_Homo_sapiens_annotation_release_109
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/109/README_Homo_sapiens_annotation_release_109
+      - path: GCF_000001405.38_GRCh38.p12_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/109/GCF_000001405.38_GRCh38.p12/GCF_000001405.38_GRCh38.p12_assembly_report.txt
+        expected: {md5: 66f55d68afc5d252f2c1eaab8921141c}
+      - path: GCF_000001405.38_GRCh38.p12_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/109/GCF_000001405.38_GRCh38.p12/GCF_000001405.38_GRCh38.p12_genomic.gff.gz
+        expected: {md5: 5a688281862a17cecc0b178dfb2d1b9c}
+
+  # GRCm38.p6 (UCSC mm10), annotation release 108, the oldest GRCm38 release
+  # listed on the NCBI FTP.
+  - source_id: ncbi-refseq-mouse-ar108
+    kind: url_list
+    study: ncbi_refseq_annotation
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/108/
+    release: '108'
+    files:
+      - path: README_Mus_musculus_annotation_release_108
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/108/README_Mus_musculus_annotation_release_108
+      - path: GCF_000001635.26_GRCm38.p6_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/108/GCF_000001635.26_GRCm38.p6/GCF_000001635.26_GRCm38.p6_assembly_report.txt
+        expected: {md5: ea9aa2cbed224cb3e62482abe26c9bec}
+      - path: GCF_000001635.26_GRCm38.p6_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/108/GCF_000001635.26_GRCm38.p6/GCF_000001635.26_GRCm38.p6_genomic.gff.gz
+        expected: {md5: d84f3bf0da7f200df268a401c00f865f}

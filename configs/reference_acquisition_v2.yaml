@@ -1,0 +1,49 @@
+acquisition:
+  name: reference-acquisition-v2
+  version: 1.0.0
+  protocol: specs/reference_coordinate_mapping_protocol.md
+  audit: docs/coordinate_mapping_gap_inventory.md
+  root: data/acquired/reference_acquisition_v2
+  frozen_on: 2026-10-29
+  policy: >-
+    Dated NCBI RefSeq annotation releases, complementing reference_acquisition_v1
+    (UCSC table snapshots), which stays unchanged. Each release is selected by a
+    rule fixed before comparison: the latest NCBI annotation release of the
+    assembly declared by the source that is dated before the source's earliest
+    dated record. For Bhandari that record is the Google Drive archive date,
+    2021-01-21. MD5 digests are those published in each release's
+    md5checksums.txt.
+
+sources:
+  # GRCh38.p13 (UCSC hg38), annotation release 109.20201120.
+  - source_id: ncbi-refseq-human-ar109-20201120
+    kind: url_list
+    study: ncbi_refseq_annotation
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/109.20201120/
+    release: 109.20201120
+    files:
+      - path: README_Homo_sapiens_annotation_release_109.20201120
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/109.20201120/README_Homo_sapiens_annotation_release_109.20201120
+      - path: GCF_000001405.39_GRCh38.p13_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/109.20201120/GCF_000001405.39_GRCh38.p13/GCF_000001405.39_GRCh38.p13_assembly_report.txt
+        expected: {md5: 8b563090696d938ae9be5fddc9d19ab5}
+      - path: GCF_000001405.39_GRCh38.p13_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/109.20201120/GCF_000001405.39_GRCh38.p13/GCF_000001405.39_GRCh38.p13_genomic.gff.gz
+        expected: {md5: 87a42d2b84d6f69620fa2ba9c667fe88}
+
+  # GRCm38.p6 (UCSC mm10), annotation release 108.20200622. Release 109 is on
+  # GRCm39 and does not match the mm10 coordinates of the nominal-Plant file.
+  - source_id: ncbi-refseq-mouse-ar108-20200622
+    kind: url_list
+    study: ncbi_refseq_annotation
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/108.20200622/
+    release: 108.20200622
+    files:
+      - path: README_Mus_musculus_annotation_release_108.20200622
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/108.20200622/README_Mus_musculus_annotation_release_108.20200622
+      - path: GCF_000001635.26_GRCm38.p6_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/108.20200622/GCF_000001635.26_GRCm38.p6/GCF_000001635.26_GRCm38.p6_assembly_report.txt
+        expected: {md5: b1dc4c7203615321eebc26419bcbd8e1}
+      - path: GCF_000001635.26_GRCm38.p6_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/108.20200622/GCF_000001635.26_GRCm38.p6/GCF_000001635.26_GRCm38.p6_genomic.gff.gz
+        expected: {md5: 34ab98553d293f91a8439e7e6bddc250}

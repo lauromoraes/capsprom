@@ -11,7 +11,9 @@ IDs are stable. A status change is a new dated row that references the old ID;
 existing rows are not rewritten. Data version abbreviations:
 `acq-v1` = `configs/source_acquisition_v1.yaml` (SHA-256 `8e08e614…`),
 `can-v1` = `configs/source_canonicalization_v1.yaml` (SHA-256 `eb5460a0…`),
-`ref-acq-v1` = `configs/reference_acquisition_v1.yaml` (SHA-256 `cd6e3ac6…`).
+`ref-acq-v1` = `configs/reference_acquisition_v1.yaml` (SHA-256 `cd6e3ac6…`),
+`ref-acq-v2` = `configs/reference_acquisition_v2.yaml` (SHA-256 `5faffcbc…`),
+`ref-acq-v3` = `configs/reference_acquisition_v3.yaml` (SHA-256 `a64e93bb…`).
 Records cited as `prov/…` are in `manifests/provenance/source_acquisition_v1/`.
 
 ## Acquisition and sources
@@ -60,6 +62,11 @@ Records cited as `prov/…` are in `manifests/provenance/source_acquisition_v1/`
 | F-049 | 2026-10-29 | Fact | The acquired tables report `Last-Modified` 2025-08-13 (hg38 `ncbiRefSeqCurated`), 2021-04-23 (mm10 `ncbiRefSeq`), and 2021-02-10 (sacCer3 `ncbiRefSeq`). The Bhandari Drive archives are dated 2021-01-21. | `manifests/provenance/reference_acquisition_v1/acquisition_manifest.json` (`response_headers`) |
 | F-050 | 2026-10-29 | Limitation | The TSS of Bhandari records whose transcript version is no longer annotated remains unverified (F-048). A dated NCBI RefSeq annotation release contemporary with the January 2021 archives would be needed; the current UCSC tables are snapshots, not releases. | F-048, F-049 |
 | F-051 | 2026-10-29 | Fact | 45 Bhandari records (Human 13, Yeast 19, nominal Plant 13) name mitochondrial protein accessions (`YP_`, `NP_`) instead of transcript accessions; their TSS also equals the annotated start. | `bhandari_tss_refseq_comparison.json` |
+| F-052 | 2026-10-29 | Fact | The date rule of `ref-acq-v2` (latest NCBI RefSeq release before the 2021-01-21 Drive archive) is refuted for Bhandari: release 109.20201120 holds the exact version of only 14,903 of 61,546 Human transcripts and a newer version of 45,724; release 108.20200622 holds 45,526 of 106,520 nominal-Plant versions and a newer version of 40,502. The Drive date is therefore not the extraction date. | `prov/bhandari_refseq_release_scan.json`, `prov/bhandari_tss_ncbi_ar_dated_rule.json`; log R-020 |
+| F-053 | 2026-10-29 | Fact | Among the eight GRCh38 annotation releases scanned, release 109 (GRCh38.p12) holds the most exact Human versions (58,817 of 61,546), and later releases hold progressively fewer. Among the two GRCm38 releases on the NCBI FTP, release 108 holds the most nominal-Plant versions (46,815 of 106,520). | `prov/bhandari_refseq_release_scan.json` |
+| F-054 | 2026-10-29 | Hypothesis | The Bhandari Human windows were extracted from a UCSC `ncbiRefSeqCurated` table built from NCBI annotation release 109, before mid-2019. The 2,404 Human records whose versions are older than release 109 suggest a mixture or an earlier snapshot. | F-053 |
+| F-055 | 2026-10-29 | Fact | Supersedes F-050 for most records. Combining the UCSC tables (`ref-acq-v1`) and NCBI releases 109.20201120, 109, 108.20200622, and 108 (`ref-acq-v2`, `ref-acq-v3`), the window TSS (index 700) equals the transcript start of the exact `accession.version` on the same chromosome and strand for 58,816 of 61,546 Human records and 46,817 of 106,520 nominal-Plant records (Yeast: 6,125 of 6,125, F-047). It differs for 4 Human and 2 nominal-Plant records (by 1 kb or more), and the version lies only on another chromosome or strand for 11 and 9. | `prov/bhandari_tss_status.json`; log R-020 |
+| F-056 | 2026-10-29 | Limitation | The TSS remains untestable for 2,715 Human records (NM 2,218, NR 497) and 59,692 nominal-Plant records (XM 37,597, XR 18,073, NM 3,825, NR 197), whose versions are in none of the acquired sources. No older GRCm38 release is listed on the NCBI FTP; the predicted `XM`/`XR` models change version frequently. | `prov/bhandari_tss_status.json` |
 
 ## Lineage of experimental datasets
 

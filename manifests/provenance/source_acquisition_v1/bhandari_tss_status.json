@@ -1,0 +1,40 @@
+{
+ "bhandari-human": {
+  "records": 61546,
+  "status": {
+   "contradicted": 4,
+   "other_locus": 11,
+   "untestable": 2715,
+   "verified": 58816
+  },
+  "untestable_by_accession_prefix": {
+   "NM": 2218,
+   "NR": 497
+  },
+  "sources": [
+   "data/acquired/reference_acquisition_v1/ucsc-refseq-tables/hg38/ncbiRefSeqCurated.txt.gz",
+   "data/acquired/reference_acquisition_v2/ncbi-refseq-human-ar109-20201120/GCF_000001405.39_GRCh38.p13",
+   "data/acquired/reference_acquisition_v3/ncbi-refseq-human-ar109/GCF_000001405.38_GRCh38.p12"
+  ]
+ },
+ "bhandari-nominal-plant": {
+  "records": 106520,
+  "status": {
+   "contradicted": 2,
+   "other_locus": 9,
+   "untestable": 59692,
+   "verified": 46817
+  },
+  "untestable_by_accession_prefix": {
+   "NM": 3825,
+   "NR": 197,
+   "XM": 37597,
+   "XR": 18073
+  },
+  "sources": [
+   "data/acquired/reference_acquisition_v1/ucsc-refseq-tables/mm10/ncbiRefSeq.txt.gz",
+   "data/acquired/reference_acquisition_v2/ncbi-refseq-mouse-ar108-20200622/GCF_000001635.26_GRCm38.p6",
+   "data/acquired/reference_acquisition_v3/ncbi-refseq-mouse-ar108/GCF_000001635.26_GRCm38.p6"
+  ]
+ }
+}
