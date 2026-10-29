@@ -213,3 +213,24 @@ SHA-256 of the module that ran, when the change was not yet committed.
   The 2026-10-28 `s3.log` on `bioserver04` still records a failed lookup of its
   path and was not edited.
 - **Code state.** Documentation only; uncommitted on `6bb5e4e`.
+
+## R-014 · 2026-10-29 · Provenance work committed
+
+- **Procedure.** Committed the acquisition, canonicalization, and provenance
+  code, configs, specs, documentation, and manifests recorded in R-001 to R-013
+  as `44ad351` ("Acquire, canonicalize, and record provenance of source data"),
+  on top of `99ebe13`, and pushed it to `origin` on branch
+  `codex/estruturar-projeto-de-doutorado`. `data/acquired/` and
+  `data/canonical/` remain untracked.
+- **Verification.** `make check` passed before committing (ruff clean, 202
+  tests). The `module_sha256` recorded in the acquisition manifest run record
+  (`a8e71e40…`) equals the SHA-256 of `src/capsprom/data/acquisition.py` in
+  `44ad351`. Committed SHA-256 values of the other modules:
+  `canonical_sources.py` `0f3d1210…`, `provenance.py` `d7361f10…`,
+  `scripts/record_provenance.py` `a1638824…`; no run record stores these, so
+  their equality with the code that produced earlier records is not verified.
+- **Effect on earlier entries.** Entries that say `uncommitted on 6bb5e4e` are
+  not rewritten. For acquisition runs the code state they describe is `44ad351`;
+  for the other modules it is `44ad351` only as far as the files were not edited
+  after those runs, which no record establishes.
+- **Code state.** `44ad351`.
