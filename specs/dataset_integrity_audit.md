@@ -80,19 +80,22 @@ is accepted.
 
 Known deviations:
 
-| Dataset | Class | Deviation | Reason | Findings |
+| Collections | Class | Deviation | Reason | Findings |
 | --- | --- | --- | --- | --- |
-| Bhandari Human | positive | 30 records, 302 to 921 nt | window truncated on hg38 alternate contigs | F-031, F-032 |
-| Bhandari Yeast | positive | 3 records, 352, 732, 884 nt | window truncated at a chromosome end | F-031, F-032 |
-| Bhandari nominal Plant | positive | 5 records, 306 (2), 334, 344, 801 nt | window truncated on mm10 unplaced or `_random` contigs | F-037 |
-| Bhandari Human random genomic | negative | 6 records, 970 to 998 nt | each is an entire hg38 unplaced scaffold shorter than 1,000 nt | F-038 |
-| CDBProm (10 organisms) | negative | 51 records, 99 nt | probable off-by-one in the authors' sampling | F-034, F-035 |
-| GraphPro L. interrogans | positive, negative | 1 + 1 records, 82 nt | undocumented | F-039 |
-| Promotech C. pneumoniae | positive | 1 record, 1 nt | undocumented | F-019 |
+| `bhandari-human` | positive | 30 records, 302 to 921 nt | window truncated on hg38 alternate contigs | F-031, F-032 |
+| `bhandari-yeast` | positive | 3 records, 352, 732, 884 nt | window truncated at a chromosome end | F-031, F-032 |
+| `bhandari-nominal-plant` | positive | 5 records, 306 (2), 334, 344, 801 nt | window truncated on mm10 unplaced or random contigs | F-037 |
+| `bhandari-human-random-genomic` | negative | 6 records, 970 to 998 nt | each is an entire hg38 unplaced scaffold shorter than 1,000 nt | F-038 |
+| `cdbprom-anabaena-sp`, `cdbprom-bacillus-amyloliquefaciens`, `cdbprom-corynebacterium-glutamicum`, `cdbprom-helicobacter-pylori`, `cdbprom-klebisiella-pneumoniae`, `cdbprom-mycrobacterium-tuberculosis`, `cdbprom-pseudonomas-aeruginosa`, `cdbprom-salmonella-typhimurium`, `cdbprom-streptomyces-coelicolor`, `cdbprom-synechocistis` | negative | 51 records, 99 nt | probable off-by-one in the authors' sampling | F-034, F-035 |
+| `graphpro-lint` | positive, negative | 1 + 1 records, 82 nt | undocumented | F-039 |
+| `promotech-cpneumoniae` | positive | 1 record, 1 nt | undocumented | F-019 |
 
-This table is the complete list for `can-v1` (log R-017): no other canonical
-collection has a record whose length differs from its declared release
-length.
+This table is the complete list for `can-v1` (log R-017). It is checked
+against the generated record
+`manifests/provenance/source_acquisition_v1/length_deviations.json`
+(`record_provenance.py length-deviations`) by
+`tests/test_provenance.py`: a deviating collection missing from the table,
+or a table entry without a deviation, fails the test.
 
 Existing builders that use `keep_most_common_length` or
 `normalize_to_min_length` (F-036) do not meet this rule. Their outputs remain

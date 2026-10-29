@@ -12,6 +12,8 @@ Three records are produced, each stamped with when it was observed:
 
 from __future__ import annotations
 
+import csv
+import fnmatch
 import gzip
 import hashlib
 import json
@@ -490,4 +492,60 @@ def link_experiment_records(
         "fully_linked_records": sum(1 for item in records if not item["not_linked"]),
         "unlinked_dataset_hashes": sorted(unlinked),
         "records": records,
+    }
+
+
+def length_deviations(canonical_dir: Path, canonical_manifest: dict[str, Any]) -> dict[str, Any]:
+    """List every canonical record whose length differs from its declared release length.
+
+    The record holds identifiers and lengths only, never sequences, so it can be
+    committed and compared with the known-deviation table of the integrity spec.
+    """
+
+    collections: dict[str, dict[str, Any]] = {}
+    total = 0
+    for path in sorted(canonical_dir.glob("*.csv.gz")):
+        collection_id = path.name.removesuffix(".csv.gz")
+        by_class: dict[str, list[dict[str, Any]]] = defaultdict(list)
+        with gzip.open(path, "rt", encoding="utf-8", newline="") as handle:
+            for row in csv.DictReader(handle):
+                if row["length_matches_expected"] == "false":
+                    by_class[row["source_class"]].append(
+                        {"record_id": row["record_id"], "length": int(row["length"])}
+                    )
+        if by_class:
+            collections[collection_id] = {
+                source_class: {"count": len(records), "records": records}
+                for source_class, records in sorted(by_class.items())
+            }
+            total += sum(len(records) for records in by_class.values())
+    return {
+        "schema_version": PROVENANCE_SCHEMA_VERSION,
+        "observed_at": _now(),
+        "canonical_config_sha256": canonical_manifest.get("config_sha256"),
+        "collection_count": len(collections),
+        "record_count": total,
+        "collections": collections,
+    }
+
+
+def spec_deviation_patterns(spec_text: str) -> list[str]:
+    """Return the collection-ID patterns of the spec's known-deviation table."""
+
+    section = spec_text.split("## Length exclusion", 1)[1].split("\n## ", 1)[0]
+    patterns: list[str] = []
+    for line in section.splitlines():
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        if line.startswith("|") and cells and cells[0].startswith("`"):
+            patterns.extend(re.findall(r"`([^`]+)`", cells[0]))
+    return patterns
+
+
+def uncovered_deviations(record: dict[str, Any], patterns: list[str]) -> dict[str, list[str]]:
+    """Compare a deviation record with the spec table in both directions."""
+
+    collections = sorted(record["collections"])
+    return {
+        "missing_from_spec": [c for c in collections if not any(fnmatch.fnmatch(c, p) for p in patterns)],
+        "stale_in_spec": [p for p in patterns if not any(fnmatch.fnmatch(c, p) for c in collections)],
     }

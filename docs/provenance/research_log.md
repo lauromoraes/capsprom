@@ -293,3 +293,30 @@ SHA-256 of the module that ran, when the change was not yet committed.
   marked it as the complete list for `can-v1`. The rule itself is unchanged.
 - **Data version.** `can-v1` (SHA-256 `eb5460a0…`); `hg38.2bit` from `acq-v1`.
 - **Code state.** Scratch scripts outside the repository, on `af28ec9`.
+
+## R-018 · 2026-10-29 · Generated deviation record, Bhandari range pilot, CDBProm drop check
+
+- **Procedure.**
+  1. Added `record_provenance.py length-deviations`, which writes
+     `length_deviations.json` (record IDs and lengths only), and a test that
+     fails when the spec's known-deviation table and the record disagree in
+     either direction. The table's first column now lists collection IDs.
+  2. Ran the B1 pilot of `specs/reference_coordinate_mapping_protocol.md` on
+     Bhandari: the first 20 full-length records per strand by `sequence_sha1`
+     rank in Human, Yeast, and nominal Plant, plus all 38 short records,
+     extracted from the acquired UCSC 2bit files under both the 1-based closed
+     and 0-based half-open readings.
+  3. Compared the record counts of the regenerated-v3 CDBProm negative FASTA
+     files with the canonical negatives.
+- **Results.** 98 deviations in 16 collections, equal to the spec table. The
+  1-based closed reading reproduces all 158 records, and the other reading none
+  (F-041). The name coordinate is the start of the upstream region (F-042);
+  TSS at index 700 remains a hypothesis (F-043). Short windows lost only
+  upstream bases (F-044). Nominal-Plant pilot records come from mm10 (F-045).
+  The v3 build dropped exactly the 51 short CDBProm negatives (F-046).
+- **Data version.** `can-v1` (SHA-256 `eb5460a0…`); 2bit files from `acq-v1`.
+- **Records.** `manifests/provenance/source_acquisition_v1/length_deviations.json`,
+  `bhandari_range_pilot.json`.
+- **Code state.** Deviation record: uncommitted on `bed443f`, committed with
+  this entry. Pilot: scratch script outside the repository, SHA-256
+  `1b7892d707ac9c40…`.

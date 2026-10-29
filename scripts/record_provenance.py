@@ -18,6 +18,7 @@ from capsprom.data.acquisition import load_acquisition_config
 from capsprom.data.canonical_sources import load_canonicalization_config
 from capsprom.data.provenance import (
     inventory_legacy_tree,
+    length_deviations,
     link_experiment_records,
     replay_regenerated_v3,
     source_release_metadata,
@@ -38,7 +39,15 @@ def _load_json(path: Path) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "record", choices=["snapshot", "source-metadata", "legacy-inventory", "replay-v3", "experiment-links"]
+        "record",
+        choices=[
+            "snapshot",
+            "source-metadata",
+            "legacy-inventory",
+            "replay-v3",
+            "experiment-links",
+            "length-deviations",
+        ],
     )
     args = parser.parse_args()
 
@@ -75,6 +84,10 @@ def main() -> None:
         )
         write_json_atomic(RECORD_DIR / "experiment_dataset_links.json", result)
         result = {key: result[key] for key in ("record_count", "fully_linked_records")}
+    elif args.record == "length-deviations":
+        result = length_deviations(canonical_manifest_path.parent, _load_json(canonical_manifest_path))
+        write_json_atomic(RECORD_DIR / "length_deviations.json", result)
+        result = {key: result[key] for key in ("collection_count", "record_count")}
     else:
         result = replay_regenerated_v3(
             canonical,

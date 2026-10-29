@@ -180,7 +180,7 @@ Named conversion rules (each fixture-tested before use):
 | Rule | Source form | Status |
 | --- | --- | --- |
 | `bed0_halfopen` | BED rows (EPDnew, Promotech BED) | Evidence: UCSC format definition |
-| `ucsc_position_1closed` | UCSC `range=chr:a-b` (Bhandari headers) | Hypothesis until the B1 pilot passes |
+| `ucsc_position_1closed` | UCSC `range=chr:a-b` (Bhandari headers) | Evidence: B1 pilot passed on hg38, sacCer3, and mm10 (F-041) |
 | `colon_range_strand` | `acc:a-b(+/-)` with `b - a` equal to the length (Promotech 40-nt) | Hypothesis: 0-based half-open, as written by `bedtools getfasta`; pilot required |
 | `ncbi_efetch_complement` | `acc:cA-B` (GraphPro negatives) | Hypothesis: NCBI 1-based closed complement range; pilot required |
 | `epd_bed_tss` | EPDnew BED 60-nt interval to TSS base | Implemented in `capsprom.data.epd_resolution` |

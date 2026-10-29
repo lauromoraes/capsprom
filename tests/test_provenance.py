@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import gzip
 import hashlib
+import json
 import zipfile
 from pathlib import Path
 
@@ -8,8 +10,11 @@ import pytest
 
 from capsprom.data.provenance import (
     inventory_legacy_tree,
+    length_deviations,
     source_release_metadata,
+    spec_deviation_patterns,
     stage_legacy_inputs,
+    uncovered_deviations,
 )
 
 
@@ -159,3 +164,42 @@ def test_experiment_links_accept_only_replayed_outputs(tmp_path: Path) -> None:
     assert links["records"][0]["replay_verified"] == ["s-o-d:train"]
     assert links["unlinked_dataset_hashes"] == ["b" * 64]
     assert links["fully_linked_records"] == 0
+
+
+def _write_canonical(path: Path, rows: list[tuple[str, str, int, str]]) -> None:
+    header = "record_id,source_class,length,length_matches_expected\n"
+    body = "".join(f"{rid},{cls},{length},{match}\n" for rid, cls, length, match in rows)
+    with gzip.open(path, "wt", encoding="utf-8") as handle:
+        handle.write(header + body)
+
+
+def test_length_deviations_lists_only_declared_mismatches(tmp_path: Path) -> None:
+    _write_canonical(
+        tmp_path / "a.csv.gz",
+        [("a:1", "positive", 10, "true"), ("a:2", "positive", 9, "false"), ("a:3", "negative", 7, "false")],
+    )
+    _write_canonical(tmp_path / "b.csv.gz", [("b:1", "positive", 10, "true"), ("b:2", "positive", 4, "")])
+
+    record = length_deviations(tmp_path, {"config_sha256": "e" * 64})
+
+    assert record["record_count"] == 2
+    assert list(record["collections"]) == ["a"]
+    assert record["collections"]["a"]["positive"] == {"count": 1, "records": [{"record_id": "a:2", "length": 9}]}
+    assert "sequence" not in json.dumps(record)
+
+
+def test_spec_table_covers_generated_deviations_both_ways() -> None:
+    spec = Path("specs/dataset_integrity_audit.md").read_text(encoding="utf-8")
+    patterns = spec_deviation_patterns(spec)
+    record = json.loads(
+        Path("manifests/provenance/source_acquisition_v1/length_deviations.json").read_text(encoding="utf-8")
+    )
+
+    assert "bhandari-human" in patterns
+    assert uncovered_deviations(record, patterns) == {"missing_from_spec": [], "stale_in_spec": []}
+
+
+def test_uncovered_deviations_reports_gaps_in_both_directions() -> None:
+    record = {"collections": {"x-1": {}, "y-1": {}}}
+
+    assert uncovered_deviations(record, ["x-*", "z-1"]) == {"missing_from_spec": ["y-1"], "stale_in_spec": ["z-1"]}

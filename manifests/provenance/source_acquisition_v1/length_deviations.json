@@ -1,0 +1,518 @@
+{
+  "canonical_config_sha256": "eb5460a0c3322f508576ea8b10d6a741296e36238ea75e0a1326363264f89991",
+  "collection_count": 16,
+  "collections": {
+    "bhandari-human": {
+      "positive": {
+        "count": 30,
+        "records": [
+          {
+            "length": 350,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0056025"
+          },
+          {
+            "length": 659,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0056253"
+          },
+          {
+            "length": 772,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058954"
+          },
+          {
+            "length": 772,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058955"
+          },
+          {
+            "length": 772,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058956"
+          },
+          {
+            "length": 772,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058957"
+          },
+          {
+            "length": 772,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058958"
+          },
+          {
+            "length": 772,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058959"
+          },
+          {
+            "length": 775,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058961"
+          },
+          {
+            "length": 710,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058971"
+          },
+          {
+            "length": 367,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059003"
+          },
+          {
+            "length": 367,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059004"
+          },
+          {
+            "length": 367,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059005"
+          },
+          {
+            "length": 367,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059006"
+          },
+          {
+            "length": 367,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059007"
+          },
+          {
+            "length": 367,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059008"
+          },
+          {
+            "length": 807,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059030"
+          },
+          {
+            "length": 906,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059122"
+          },
+          {
+            "length": 740,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059274"
+          },
+          {
+            "length": 476,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059327"
+          },
+          {
+            "length": 454,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059332"
+          },
+          {
+            "length": 451,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059333"
+          },
+          {
+            "length": 505,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059806"
+          },
+          {
+            "length": 666,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059935"
+          },
+          {
+            "length": 302,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061056"
+          },
+          {
+            "length": 725,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061115"
+          },
+          {
+            "length": 325,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061140"
+          },
+          {
+            "length": 529,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061168"
+          },
+          {
+            "length": 842,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061394"
+          },
+          {
+            "length": 921,
+            "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061483"
+          }
+        ]
+      }
+    },
+    "bhandari-human-random-genomic": {
+      "negative_random_genomic": {
+        "count": 6,
+        "records": [
+          {
+            "length": 993,
+            "record_id": "bhandari-human-random-genomic:bhandari-github/random_sequences.fasta:0000116"
+          },
+          {
+            "length": 971,
+            "record_id": "bhandari-human-random-genomic:bhandari-github/random_sequences.fasta:0000136"
+          },
+          {
+            "length": 981,
+            "record_id": "bhandari-human-random-genomic:bhandari-github/random_sequences.fasta:0000511"
+          },
+          {
+            "length": 990,
+            "record_id": "bhandari-human-random-genomic:bhandari-github/random_sequences.fasta:0000519"
+          },
+          {
+            "length": 998,
+            "record_id": "bhandari-human-random-genomic:bhandari-github/random_sequences.fasta:0000589"
+          },
+          {
+            "length": 970,
+            "record_id": "bhandari-human-random-genomic:bhandari-github/random_sequences.fasta:0000591"
+          }
+        ]
+      }
+    },
+    "bhandari-nominal-plant": {
+      "positive": {
+        "count": 5,
+        "records": [
+          {
+            "length": 334,
+            "record_id": "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0106349"
+          },
+          {
+            "length": 344,
+            "record_id": "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0106356"
+          },
+          {
+            "length": 306,
+            "record_id": "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0106463"
+          },
+          {
+            "length": 306,
+            "record_id": "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0106464"
+          },
+          {
+            "length": 801,
+            "record_id": "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0106475"
+          }
+        ]
+      }
+    },
+    "bhandari-yeast": {
+      "positive": {
+        "count": 3,
+        "records": [
+          {
+            "length": 352,
+            "record_id": "bhandari-yeast:bhandari-drive/Yeast_promoter.gz:0002184"
+          },
+          {
+            "length": 884,
+            "record_id": "bhandari-yeast:bhandari-drive/Yeast_promoter.gz:0002639"
+          },
+          {
+            "length": 732,
+            "record_id": "bhandari-yeast:bhandari-drive/Yeast_promoter.gz:0003366"
+          }
+        ]
+      }
+    },
+    "cdbprom-anabaena-sp": {
+      "negative_downstream": {
+        "count": 6,
+        "records": [
+          {
+            "length": 99,
+            "record_id": "cdbprom-anabaena-sp:cdbprom-website/training_sequences.zip!negative_anabaena_sp.txt:0000205"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-anabaena-sp:cdbprom-website/training_sequences.zip!negative_anabaena_sp.txt:0000473"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-anabaena-sp:cdbprom-website/training_sequences.zip!negative_anabaena_sp.txt:0000489"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-anabaena-sp:cdbprom-website/training_sequences.zip!negative_anabaena_sp.txt:0000742"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-anabaena-sp:cdbprom-website/training_sequences.zip!negative_anabaena_sp.txt:0001977"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-anabaena-sp:cdbprom-website/training_sequences.zip!negative_anabaena_sp.txt:0002481"
+          }
+        ]
+      }
+    },
+    "cdbprom-bacillus-amyloliquefaciens": {
+      "negative_downstream": {
+        "count": 3,
+        "records": [
+          {
+            "length": 99,
+            "record_id": "cdbprom-bacillus-amyloliquefaciens:cdbprom-website/training_sequences.zip!negative_bacillus_amyloliquefaciens.txt:0000229"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-bacillus-amyloliquefaciens:cdbprom-website/training_sequences.zip!negative_bacillus_amyloliquefaciens.txt:0000562"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-bacillus-amyloliquefaciens:cdbprom-website/training_sequences.zip!negative_bacillus_amyloliquefaciens.txt:0000934"
+          }
+        ]
+      }
+    },
+    "cdbprom-corynebacterium-glutamicum": {
+      "negative_downstream": {
+        "count": 3,
+        "records": [
+          {
+            "length": 99,
+            "record_id": "cdbprom-corynebacterium-glutamicum:cdbprom-website/training_sequences.zip!negative_corynebacterium_glutamicum.txt:0000241"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-corynebacterium-glutamicum:cdbprom-website/training_sequences.zip!negative_corynebacterium_glutamicum.txt:0000394"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-corynebacterium-glutamicum:cdbprom-website/training_sequences.zip!negative_corynebacterium_glutamicum.txt:0000528"
+          }
+        ]
+      }
+    },
+    "cdbprom-helicobacter-pylori": {
+      "negative_downstream": {
+        "count": 4,
+        "records": [
+          {
+            "length": 99,
+            "record_id": "cdbprom-helicobacter-pylori:cdbprom-website/training_sequences.zip!negative_helicobacter_pylori.txt:0000238"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-helicobacter-pylori:cdbprom-website/training_sequences.zip!negative_helicobacter_pylori.txt:0000245"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-helicobacter-pylori:cdbprom-website/training_sequences.zip!negative_helicobacter_pylori.txt:0000356"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-helicobacter-pylori:cdbprom-website/training_sequences.zip!negative_helicobacter_pylori.txt:0000392"
+          }
+        ]
+      }
+    },
+    "cdbprom-klebisiella-pneumoniae": {
+      "negative_downstream": {
+        "count": 3,
+        "records": [
+          {
+            "length": 99,
+            "record_id": "cdbprom-klebisiella-pneumoniae:cdbprom-website/training_sequences.zip!negative_klebisiella_pneumoniae.txt:0000060"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-klebisiella-pneumoniae:cdbprom-website/training_sequences.zip!negative_klebisiella_pneumoniae.txt:0000658"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-klebisiella-pneumoniae:cdbprom-website/training_sequences.zip!negative_klebisiella_pneumoniae.txt:0000810"
+          }
+        ]
+      }
+    },
+    "cdbprom-mycrobacterium-tuberculosis": {
+      "negative_downstream": {
+        "count": 5,
+        "records": [
+          {
+            "length": 99,
+            "record_id": "cdbprom-mycrobacterium-tuberculosis:cdbprom-website/training_sequences.zip!negative_mycrobacterium_tuberculosis.txt:0000375"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-mycrobacterium-tuberculosis:cdbprom-website/training_sequences.zip!negative_mycrobacterium_tuberculosis.txt:0000658"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-mycrobacterium-tuberculosis:cdbprom-website/training_sequences.zip!negative_mycrobacterium_tuberculosis.txt:0000664"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-mycrobacterium-tuberculosis:cdbprom-website/training_sequences.zip!negative_mycrobacterium_tuberculosis.txt:0001171"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-mycrobacterium-tuberculosis:cdbprom-website/training_sequences.zip!negative_mycrobacterium_tuberculosis.txt:0001588"
+          }
+        ]
+      }
+    },
+    "cdbprom-pseudonomas-aeruginosa": {
+      "negative_downstream": {
+        "count": 6,
+        "records": [
+          {
+            "length": 99,
+            "record_id": "cdbprom-pseudonomas-aeruginosa:cdbprom-website/training_sequences.zip!negative_pseudonomas_aeruginosa.txt:0000555"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-pseudonomas-aeruginosa:cdbprom-website/training_sequences.zip!negative_pseudonomas_aeruginosa.txt:0000757"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-pseudonomas-aeruginosa:cdbprom-website/training_sequences.zip!negative_pseudonomas_aeruginosa.txt:0000796"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-pseudonomas-aeruginosa:cdbprom-website/training_sequences.zip!negative_pseudonomas_aeruginosa.txt:0000943"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-pseudonomas-aeruginosa:cdbprom-website/training_sequences.zip!negative_pseudonomas_aeruginosa.txt:0001034"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-pseudonomas-aeruginosa:cdbprom-website/training_sequences.zip!negative_pseudonomas_aeruginosa.txt:0001405"
+          }
+        ]
+      }
+    },
+    "cdbprom-salmonella-typhimurium": {
+      "negative_downstream": {
+        "count": 7,
+        "records": [
+          {
+            "length": 99,
+            "record_id": "cdbprom-salmonella-typhimurium:cdbprom-website/training_sequences.zip!negative_salmonella_typhimurium.txt:0000031"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-salmonella-typhimurium:cdbprom-website/training_sequences.zip!negative_salmonella_typhimurium.txt:0000138"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-salmonella-typhimurium:cdbprom-website/training_sequences.zip!negative_salmonella_typhimurium.txt:0000231"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-salmonella-typhimurium:cdbprom-website/training_sequences.zip!negative_salmonella_typhimurium.txt:0000594"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-salmonella-typhimurium:cdbprom-website/training_sequences.zip!negative_salmonella_typhimurium.txt:0000705"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-salmonella-typhimurium:cdbprom-website/training_sequences.zip!negative_salmonella_typhimurium.txt:0000804"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-salmonella-typhimurium:cdbprom-website/training_sequences.zip!negative_salmonella_typhimurium.txt:0000925"
+          }
+        ]
+      }
+    },
+    "cdbprom-streptomyces-coelicolor": {
+      "negative_downstream": {
+        "count": 5,
+        "records": [
+          {
+            "length": 99,
+            "record_id": "cdbprom-streptomyces-coelicolor:cdbprom-website/training_sequences.zip!negative_streptomyces_coelicolor.txt:0000610"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-streptomyces-coelicolor:cdbprom-website/training_sequences.zip!negative_streptomyces_coelicolor.txt:0001283"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-streptomyces-coelicolor:cdbprom-website/training_sequences.zip!negative_streptomyces_coelicolor.txt:0001503"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-streptomyces-coelicolor:cdbprom-website/training_sequences.zip!negative_streptomyces_coelicolor.txt:0001535"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-streptomyces-coelicolor:cdbprom-website/training_sequences.zip!negative_streptomyces_coelicolor.txt:0002479"
+          }
+        ]
+      }
+    },
+    "cdbprom-synechocistis": {
+      "negative_downstream": {
+        "count": 9,
+        "records": [
+          {
+            "length": 99,
+            "record_id": "cdbprom-synechocistis:cdbprom-website/training_sequences.zip!negative_synechocistis.txt:0000192"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-synechocistis:cdbprom-website/training_sequences.zip!negative_synechocistis.txt:0000272"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-synechocistis:cdbprom-website/training_sequences.zip!negative_synechocistis.txt:0000343"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-synechocistis:cdbprom-website/training_sequences.zip!negative_synechocistis.txt:0000381"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-synechocistis:cdbprom-website/training_sequences.zip!negative_synechocistis.txt:0000677"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-synechocistis:cdbprom-website/training_sequences.zip!negative_synechocistis.txt:0000996"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-synechocistis:cdbprom-website/training_sequences.zip!negative_synechocistis.txt:0001064"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-synechocistis:cdbprom-website/training_sequences.zip!negative_synechocistis.txt:0001132"
+          },
+          {
+            "length": 99,
+            "record_id": "cdbprom-synechocistis:cdbprom-website/training_sequences.zip!negative_synechocistis.txt:0001166"
+          }
+        ]
+      }
+    },
+    "graphpro-lint": {
+      "negative": {
+        "count": 1,
+        "records": [
+          {
+            "length": 82,
+            "record_id": "graphpro-lint:graphpro/Datasets/Lint/negative:0002115"
+          }
+        ]
+      },
+      "positive": {
+        "count": 1,
+        "records": [
+          {
+            "length": 82,
+            "record_id": "graphpro-lint:graphpro/Datasets/Lint/positive:0002846"
+          }
+        ]
+      }
+    },
+    "promotech-cpneumoniae": {
+      "positive": {
+        "count": 1,
+        "records": [
+          {
+            "length": 1,
+            "record_id": "promotech-cpneumoniae:promotech/datasets/training/40nt-sequences/bacteria-1-1-ratio/CPNEUMONIAE/positive.fasta:0000529"
+          }
+        ]
+      }
+    }
+  },
+  "observed_at": "2026-10-29T21:30:04+00:00",
+  "record_count": 98,
+  "schema_version": 1
+}

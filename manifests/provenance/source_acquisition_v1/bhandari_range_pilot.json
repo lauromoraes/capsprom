@@ -1,0 +1,680 @@
+{
+ "bhandari-human": {
+  "results": {
+   "pilot|+|closed": 20,
+   "pilot|-|closed": 20,
+   "short|+|closed": 10,
+   "short|-|closed": 20
+  },
+  "name_offsets": {
+   "pilot|+|0|999": 20,
+   "pilot|-|300|699": 20,
+   "short|+|-698|999": 1,
+   "short|+|-675|999": 1,
+   "short|+|-650|999": 1,
+   "short|+|-524|999": 1,
+   "short|+|-471|999": 1,
+   "short|+|-290|999": 1,
+   "short|+|-275|999": 1,
+   "short|+|-225|999": 1,
+   "short|+|-94|999": 1,
+   "short|+|-79|999": 1,
+   "short|-|300|66": 6,
+   "short|-|300|150": 1,
+   "short|-|300|153": 1,
+   "short|-|300|204": 1,
+   "short|-|300|358": 1,
+   "short|-|300|365": 1,
+   "short|-|300|439": 1,
+   "short|-|300|471": 6,
+   "short|-|300|506": 1,
+   "short|-|300|541": 1
+  },
+  "short": [
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0056025",
+    "strand": "+",
+    "length": 350,
+    "contig": "chr2_GL383522v1_alt",
+    "contig_size": 123821,
+    "range": [
+     1,
+     350
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -649
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0056253",
+    "strand": "-",
+    "length": 659,
+    "contig": "chr5_KI270795v1_alt",
+    "contig_size": 131892,
+    "range": [
+     131234,
+     131892
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 131534
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058954",
+    "strand": "-",
+    "length": 772,
+    "contig": "chr6_KI270801v1_alt",
+    "contig_size": 870480,
+    "range": [
+     869709,
+     870480
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 870009
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058955",
+    "strand": "-",
+    "length": 772,
+    "contig": "chr6_KI270801v1_alt",
+    "contig_size": 870480,
+    "range": [
+     869709,
+     870480
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 870009
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058956",
+    "strand": "-",
+    "length": 772,
+    "contig": "chr6_KI270801v1_alt",
+    "contig_size": 870480,
+    "range": [
+     869709,
+     870480
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 870009
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058957",
+    "strand": "-",
+    "length": 772,
+    "contig": "chr6_KI270801v1_alt",
+    "contig_size": 870480,
+    "range": [
+     869709,
+     870480
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 870009
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058958",
+    "strand": "-",
+    "length": 772,
+    "contig": "chr6_KI270801v1_alt",
+    "contig_size": 870480,
+    "range": [
+     869709,
+     870480
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 870009
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058959",
+    "strand": "-",
+    "length": 772,
+    "contig": "chr6_KI270801v1_alt",
+    "contig_size": 870480,
+    "range": [
+     869709,
+     870480
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 870009
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058961",
+    "strand": "+",
+    "length": 775,
+    "contig": "chr7_GL383534v2_alt",
+    "contig_size": 119183,
+    "range": [
+     1,
+     775
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -224
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0058971",
+    "strand": "+",
+    "length": 710,
+    "contig": "chr7_KI270803v1_alt",
+    "contig_size": 1111570,
+    "range": [
+     1,
+     710
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -289
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059003",
+    "strand": "-",
+    "length": 367,
+    "contig": "chr7_KI270806v1_alt",
+    "contig_size": 158166,
+    "range": [
+     157800,
+     158166
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 158100
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059004",
+    "strand": "-",
+    "length": 367,
+    "contig": "chr7_KI270806v1_alt",
+    "contig_size": 158166,
+    "range": [
+     157800,
+     158166
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 158100
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059005",
+    "strand": "-",
+    "length": 367,
+    "contig": "chr7_KI270806v1_alt",
+    "contig_size": 158166,
+    "range": [
+     157800,
+     158166
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 158100
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059006",
+    "strand": "-",
+    "length": 367,
+    "contig": "chr7_KI270806v1_alt",
+    "contig_size": 158166,
+    "range": [
+     157800,
+     158166
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 158100
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059007",
+    "strand": "-",
+    "length": 367,
+    "contig": "chr7_KI270806v1_alt",
+    "contig_size": 158166,
+    "range": [
+     157800,
+     158166
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 158100
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059008",
+    "strand": "-",
+    "length": 367,
+    "contig": "chr7_KI270806v1_alt",
+    "contig_size": 158166,
+    "range": [
+     157800,
+     158166
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 158100
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059030",
+    "strand": "-",
+    "length": 807,
+    "contig": "chr8_KI270811v1_alt",
+    "contig_size": 292436,
+    "range": [
+     291630,
+     292436
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 291930
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059122",
+    "strand": "+",
+    "length": 906,
+    "contig": "chr8_KI270821v1_alt",
+    "contig_size": 985506,
+    "range": [
+     1,
+     906
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -93
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059274",
+    "strand": "-",
+    "length": 740,
+    "contig": "chr11_KI270902v1_alt",
+    "contig_size": 106711,
+    "range": [
+     105972,
+     106711
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 106272
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059327",
+    "strand": "+",
+    "length": 476,
+    "contig": "chr12_KI270834v1_alt",
+    "contig_size": 119498,
+    "range": [
+     1,
+     476
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -523
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059332",
+    "strand": "-",
+    "length": 454,
+    "contig": "chr12_KI270834v1_alt",
+    "contig_size": 119498,
+    "range": [
+     119045,
+     119498
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 119345
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059333",
+    "strand": "-",
+    "length": 451,
+    "contig": "chr12_KI270834v1_alt",
+    "contig_size": 119498,
+    "range": [
+     119048,
+     119498
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 119348
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059806",
+    "strand": "-",
+    "length": 505,
+    "contig": "chr17_JH159147v1_alt",
+    "contig_size": 70345,
+    "range": [
+     69841,
+     70345
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 70141
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0059935",
+    "strand": "-",
+    "length": 666,
+    "contig": "chr17_KI270857v1_alt",
+    "contig_size": 2877074,
+    "range": [
+     2876409,
+     2877074
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 2876709
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061056",
+    "strand": "+",
+    "length": 302,
+    "contig": "chr19_KI270920v1_alt",
+    "contig_size": 198005,
+    "range": [
+     1,
+     302
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -697
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061115",
+    "strand": "+",
+    "length": 725,
+    "contig": "chr19_KI270922v1_alt",
+    "contig_size": 187935,
+    "range": [
+     1,
+     725
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -274
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061140",
+    "strand": "+",
+    "length": 325,
+    "contig": "chr19_KI270923v1_alt",
+    "contig_size": 189352,
+    "range": [
+     1,
+     325
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -674
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061168",
+    "strand": "+",
+    "length": 529,
+    "contig": "chr19_KI270929v1_alt",
+    "contig_size": 186203,
+    "range": [
+     1,
+     529
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -470
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061394",
+    "strand": "-",
+    "length": 842,
+    "contig": "chr20_KI270869v1_alt",
+    "contig_size": 118774,
+    "range": [
+     117933,
+     118774
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 118233
+   },
+   {
+    "record_id": "bhandari-human:bhandari-drive/Human_promoter.gz:0061483",
+    "strand": "+",
+    "length": 921,
+    "contig": "chr22_KI270879v1_alt",
+    "contig_size": 304135,
+    "range": [
+     1,
+     921
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -78
+   }
+  ]
+ },
+ "bhandari-yeast": {
+  "results": {
+   "pilot|+|closed": 20,
+   "pilot|-|closed": 20,
+   "short|+|closed": 2,
+   "short|-|closed": 1
+  },
+  "name_offsets": {
+   "pilot|+|0|999": 20,
+   "pilot|-|300|699": 20,
+   "short|+|-648|999": 1,
+   "short|+|-116|999": 1,
+   "short|-|300|431": 1
+  },
+  "short": [
+   {
+    "record_id": "bhandari-yeast:bhandari-drive/Yeast_promoter.gz:0002184",
+    "strand": "+",
+    "length": 352,
+    "contig": "chrVI",
+    "contig_size": 270161,
+    "range": [
+     1,
+     352
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -647
+   },
+   {
+    "record_id": "bhandari-yeast:bhandari-drive/Yeast_promoter.gz:0002639",
+    "strand": "+",
+    "length": 884,
+    "contig": "chrXV",
+    "contig_size": 1091291,
+    "range": [
+     1,
+     884
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -115
+   },
+   {
+    "record_id": "bhandari-yeast:bhandari-drive/Yeast_promoter.gz:0003366",
+    "strand": "-",
+    "length": 732,
+    "contig": "chrIII",
+    "contig_size": 316620,
+    "range": [
+     315889,
+     316620
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 316189
+   }
+  ]
+ },
+ "bhandari-nominal-plant": {
+  "results": {
+   "pilot|+|closed": 20,
+   "pilot|-|closed": 20,
+   "short|+|closed": 2,
+   "short|-|closed": 3
+  },
+  "name_offsets": {
+   "pilot|+|0|999": 20,
+   "pilot|-|300|699": 20,
+   "short|+|-694|999": 1,
+   "short|+|-656|999": 1,
+   "short|-|300|5": 1,
+   "short|-|300|33": 1,
+   "short|-|300|500": 1
+  },
+  "short": [
+   {
+    "record_id": "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0106349",
+    "strand": "-",
+    "length": 334,
+    "contig": "chrUn_GL456366",
+    "contig_size": 47073,
+    "range": [
+     46740,
+     47073
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 47040
+   },
+   {
+    "record_id": "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0106356",
+    "strand": "+",
+    "length": 344,
+    "contig": "chr1_GL456210_random",
+    "contig_size": 169725,
+    "range": [
+     1,
+     344
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -655
+   },
+   {
+    "record_id": "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0106463",
+    "strand": "-",
+    "length": 306,
+    "contig": "chr4_JH584293_random",
+    "contig_size": 207968,
+    "range": [
+     207663,
+     207968
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 207963
+   },
+   {
+    "record_id": "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0106464",
+    "strand": "+",
+    "length": 306,
+    "contig": "chr4_JH584294_random",
+    "contig_size": 191905,
+    "range": [
+     1,
+     306
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": -693
+   },
+   {
+    "record_id": "bhandari-nominal-plant:bhandari-drive/Plant_promoters.gz:0106475",
+    "strand": "-",
+    "length": 801,
+    "contig": "chr4_JH584295_random",
+    "contig_size": 1976,
+    "range": [
+     1176,
+     1976
+    ],
+    "match_1based_closed": true,
+    "clipped": [
+     "upstream"
+    ],
+    "named": 1476
+   }
+  ]
+ }
+}
