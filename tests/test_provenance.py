@@ -3,18 +3,23 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import struct
 import zipfile
 from pathlib import Path
 
 import pytest
 
 from capsprom.data.provenance import (
+    classify_window_tss,
     inventory_legacy_tree,
     length_deviations,
+    locate_exact_sequences,
+    recreate_ucsc_ranges,
     source_release_metadata,
     spec_deviation_patterns,
     stage_legacy_inputs,
     uncovered_deviations,
+    verify_label_csv_canonical,
 )
 
 
@@ -203,3 +208,108 @@ def test_uncovered_deviations_reports_gaps_in_both_directions() -> None:
     record = {"collections": {"x-1": {}, "y-1": {}}}
 
     assert uncovered_deviations(record, ["x-*", "z-1"]) == {"missing_from_spec": ["y-1"], "stale_in_spec": ["z-1"]}
+
+
+def _write_twobit(path: Path, contigs: dict[str, str]) -> None:
+    """Write an unmasked twoBit file without N blocks."""
+
+    codes = {base: index for index, base in enumerate("TCAG")}
+    index_size = sum(1 + len(name) + 4 for name in contigs)
+    blobs, offset = [], 16 + index_size
+    for sequence in contigs.values():
+        packed = bytearray((len(sequence) + 3) // 4)
+        for position, base in enumerate(sequence):
+            packed[position // 4] |= codes[base] << (6 - 2 * (position % 4))
+        blob = struct.pack(">IIII", len(sequence), 0, 0, 0) + bytes(packed)
+        blobs.append((offset, blob))
+        offset += len(blob)
+    with path.open("wb") as handle:
+        handle.write(struct.pack(">IIII", 0x1A412743, 0, len(contigs), 0))
+        for (name, _), (blob_offset, _) in zip(contigs.items(), blobs, strict=True):
+            handle.write(bytes([len(name)]) + name.encode("ascii") + struct.pack(">I", blob_offset))
+        for _, blob in blobs:
+            handle.write(blob)
+
+
+def _write_headers(path: Path, rows: list[tuple[str, str, str]]) -> None:
+    with gzip.open(path, "wt", encoding="utf-8", newline="") as handle:
+        handle.write("record_id,original_header,sequence\n")
+        handle.write("".join(f"{rid},{header},{sequence}\n" for rid, header, sequence in rows))
+
+
+def test_recreate_ucsc_ranges_reads_one_based_closed_intervals(tmp_path: Path) -> None:
+    genome = tmp_path / "g.2bit"
+    _write_twobit(genome, {"chr1": "AACCGGTTAC"})
+    table = tmp_path / "t.csv.gz"
+    _write_headers(
+        table,
+        [
+            ("t:0", "mm10_x range=chr1:3-6 5'pad=0 strand=+", "CCGG"),
+            ("t:1", "mm10_x range=chr1:1-4 strand=-", "GGTT"),
+            ("t:2", "mm10_x range=chr1:1-4 strand=+", "AAAA"),
+            ("t:3", "hg38_x range=chr1:1-4 strand=+", "AACC"),
+            ("t:4", "mm10_x range=chrZ:1-4 strand=+", "AACC"),
+        ],
+    )
+
+    record = recreate_ucsc_ranges(table, {"mm10": genome})
+
+    assert record["record_count"] == 5
+    assert record["identical_count"] == 2
+    assert record["failures"]["sequence_differs"]["record_ids"] == ["t:2"]
+    assert record["failures"]["undeclared_assembly"]["record_ids"] == ["t:3"]
+    assert record["failures"]["missing_contig"]["record_ids"] == ["t:4"]
+    assert "CCGG" not in json.dumps(record)
+
+
+def test_locate_exact_sequences_finds_both_strands_and_rejects_partial_matches(tmp_path: Path) -> None:
+    genome = tmp_path / "g.2bit"
+    _write_twobit(genome, {"c1": "TTTTACGTACCGGATTTT", "c2": "GGGGGG"})
+    sequences = {"fwd": "ACGTACCGGA", "rev": "TCCGGTACGT", "partial": "ACGTACCGGC", "short": "AC"}
+
+    record = locate_exact_sequences(sequences, genome, anchor_size=4)
+
+    assert record["loci"]["fwd"] == [{"contig": "c1", "start": 4, "strand": "+"}]
+    assert record["loci"]["rev"] == [{"contig": "c1", "start": 4, "strand": "-"}]
+    assert record["not_located"] == ["partial"]
+    assert record["unanchored"] == ["short"]
+
+
+def test_verify_label_csv_canonical_rebuilds_source_bytes(tmp_path: Path) -> None:
+    source = tmp_path / "p.csv"
+    source.write_bytes(b"P,ACGT\r\nP,ACGT\r\nP,AANT\r\n")
+    table = tmp_path / "c.csv.gz"
+    with gzip.open(table, "wt", encoding="utf-8", newline="") as handle:
+        handle.write("record_id,collection_id,record_index,original_header,sequence,sequence_sha1,"
+                     "case_normalized,strict_dna,duplicate_of\n")
+        for index, (sequence, strict, dup) in enumerate((("ACGT", "true", ""), ("ACGT", "true", "c:s:0000000"),
+                                                         ("AANT", "false", ""))):
+            sha = hashlib.sha1(sequence.encode()).hexdigest()
+            handle.write(f"c:s:{index:07d},c,{index},P,{sequence},{sha},false,{strict},{dup}\n")
+
+    record = verify_label_csv_canonical(table, source, "s")
+
+    assert record["rebuilt_equals_source_bytes"] and record["record_ids_contiguous"]
+    assert record["sequence_sha1_valid"]
+    assert (record["duplicate_records"], record["non_strict_dna_records"], record["unique_sequences"]) == (1, 1, 2)
+
+
+def test_classify_window_tss_uses_strand_specific_coordinates(tmp_path: Path) -> None:
+    gtf = tmp_path / "a.gtf.gz"
+    with gzip.open(gtf, "wt", encoding="utf-8") as handle:
+        handle.write("c\tx\ttranscript\t708\t900\t.\t+\t.\tid\n")  # TSS 708 on +
+        handle.write("c\tx\ttranscript\t100\t1295\t.\t-\t.\tid\n")  # TSS 1295 on -
+    table = tmp_path / "t.csv.gz"
+    with gzip.open(table, "wt", encoding="utf-8", newline="") as handle:
+        handle.write("record_id,source_file,record_index,length\n")
+        handle.write("r:0,f/p.csv,0,1000\nr:1,f/p.csv,1,1000\nr:2,f/p.csv,2,1000\nr:3,f/p.csv,3,9\n")
+    loci = {
+        "p.csv:0": [{"contig": "c", "start": 7, "strand": "+"}],  # index 700 -> 708: exact
+        "p.csv:1": [{"contig": "c", "start": 995, "strand": "-"}],  # 995 + 1000 - 700 = 1295: exact
+        "p.csv:3": [{"contig": "c", "start": 0, "strand": "+"}],
+    }
+
+    summary, evidence = classify_window_tss(table, loci, {"a": gtf})
+
+    assert [row["a"] for row in evidence[:2]] == ["exact:0", "exact:0"]
+    assert summary["scope"] == {"evaluated": 2, "not_located": 1, "not_full_length": 1}

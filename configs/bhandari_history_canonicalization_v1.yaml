@@ -1,0 +1,74 @@
+# Canonicalization contract for the historical Bhandari repository files (P-6).
+# Immutable once its canonical manifest exists; create v2 to change it.
+canonicalization:
+  name: bhandari-history-canonicalization-v1
+  version: 1.0.0
+  protocol: specs/source_acquisition_protocol.md
+  condition_policy: specs/dataset_condition_policy.md
+  audit: docs/bhandari_nominal_plant_assessment.md
+  acquisition_config: configs/bhandari_history_acquisition_v1.yaml
+  acquisition_manifest: data/acquired/bhandari_history_acquisition_v1/acquisition_manifest.json
+  acquired_root: data/acquired/bhandari_history_acquisition_v1
+  output_dir: data/canonical/bhandari_history_canonicalization_v1
+  condition: released
+  cleaning: >-
+    Each "label,sequence" row becomes one record in file order. Whitespace is
+    removed and bases are uppercased; no record is dropped, cropped, padded,
+    relabelled, re-oriented, or replaced by a genome or annotation sequence.
+    The row's label text is kept verbatim in original_header and must equal the
+    declared source_label. Duplicates, symbols outside ACGT, and length
+    deviations are flagged, not removed; filtering belongs to the dataset
+    builds that read these tables.
+  status_rule: pass requires the exact release count of every file.
+collections:
+- collection_id: bhandari-history-arabidopsis
+  source: bhandari
+  domain: eukaryotic
+  organism: Arabidopsis thaliana
+  expected_length: 1000
+  publication_counts:
+    positive: 41671
+  inputs:
+  - file: bhandari-github-history/Promoter_ArabidopsisThaliana.csv
+    format: label_csv
+    source_label: Plant_Promoter
+    source_class: positive
+    label: 1
+    expected_records: 41671
+    tss_index: 700
+  notes: Repository commit c1c97ee (held 2020-04-23 to 2021-01-21). Organism as declared by the file name and the
+    publication (araTha1); exact location of 41,594 records in TAIR10.1 is F-066. The TSS index 700 is declared by
+    the publication's -700..+300 window, not verified per record here; that evidence belongs to the reconstructed
+    condition. Not the Drive Plant_promoters file (mouse, collection bhandari-nominal-plant).
+- collection_id: bhandari-history-human
+  source: bhandari
+  domain: eukaryotic
+  organism: Homo sapiens (hg38)
+  expected_length: 1000
+  publication_counts:
+    positive: 61546
+  inputs:
+  - file: bhandari-github-history/Promoter_Human.csv
+    format: label_csv
+    source_label: Human_Promoter
+    source_class: positive
+    label: 1
+    expected_records: 61546
+    tss_index: 700
+  notes: Repository commit c1c97ee. Same sequence multiset as the Drive Human_promoter file (F-065).
+- collection_id: bhandari-history-yeast
+  source: bhandari
+  domain: eukaryotic
+  organism: Saccharomyces cerevisiae (sacCer3)
+  expected_length: 1000
+  publication_counts:
+    positive: 6125
+  inputs:
+  - file: bhandari-github-history/Promoter_Yeast.csv
+    format: label_csv
+    source_label: Fungus_Promoter
+    source_class: positive
+    label: 1
+    expected_records: 6125
+    tss_index: 700
+  notes: Repository commit c1c97ee. Same sequence multiset as the Drive Yeast_promoter file (F-065).

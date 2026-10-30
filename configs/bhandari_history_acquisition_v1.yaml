@@ -1,0 +1,28 @@
+acquisition:
+  name: bhandari-history-acquisition-v1
+  version: 1.0.0
+  protocol: specs/source_acquisition_protocol.md
+  audit: docs/bhandari_nominal_plant_assessment.md
+  root: data/acquired/bhandari_history_acquisition_v1
+  frozen_on: 2026-10-29
+  policy: >-
+    Files that the official Bhandari repository held before 2021-01-21, when
+    commits 325aeba, 1322ffc, 32c168e, and c37bbbf deleted them and the README
+    began pointing to the Google Drive folder. Commit c1c97ee is the last commit
+    whose tree holds them; the GitHub API reports 41,671, 61,546, and 6,125
+    lines for the three CSV deletions, the counts stated by the publication.
+    Every blob must reproduce the Git blob SHA-1 of that tree.
+    source_acquisition_v1 is not changed.
+
+sources:
+  - source_id: bhandari-github-history
+    kind: github_tree
+    study: bhandari2021comparison
+    repository: nikitabhandari-dl/Dataset
+    commit: c1c97eed7103782406db2052580c7047e0842810
+    include:
+      - Promoter_ArabidopsisThaliana.csv
+      - Promoter_Human.csv
+      - Promoter_Yeast.csv
+      - Code.ipynb
+      - README.md

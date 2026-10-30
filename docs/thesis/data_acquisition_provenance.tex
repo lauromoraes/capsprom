@@ -63,14 +63,90 @@ interpreting published benchmarks. In one multi-species prokaryotic benchmark,
 identical sequences occur with both labels, and some of them span the
 distributed training and test partitions. In two eukaryotic promoter
 collections, a large fraction of the positive examples are exact duplicates.
-One file distributed as a plant promoter set carries mouse genome coordinates
-in its headers, which suggests, but does not establish, a mislabelled release.
-For one bacterial resource, the published window around the transcription
+One file distributed as a plant promoter set is a mouse promoter set; this case
+is examined below. For one bacterial resource, the published window around the transcription
 start site does not match the length of the distributed sequences. These
 observations are reported as properties of the releases. They motivate the
 explicit treatment of duplicates and label collisions summarized in
 Table~\ref{tab:sequence-integrity-policies}, and they qualify any comparison with
 results reported on the original files.
+
+\paragraph{Identity of a released collection: the Bhandari plant set.}
+\citet{bhandari2021comparison} compare learning methods on promoters of yeast,
+human, and \textit{Arabidopsis thaliana}, and report results for each organism
+and for transfer between them. Their publication states that about 41{,}671
+\textit{A. thaliana} promoter regions, from 700 bases upstream to 300 bases
+downstream of the transcription start site, were extracted from the UCSC
+assembly \texttt{araTha1}, and points to a data folder in which the plant file
+is named \texttt{Plant\_promoters}. A name and a declaration do not establish
+the organism of a file. The identity of this file was therefore examined with
+evidence independent of its name, in four steps: the assembly and chromosome
+names declared in its record headers were inspected; sequences were recreated
+from the declared assembly at the declared coordinates; the position assumed
+to be the transcription start site was compared with the start of the named
+transcript in dated annotation releases; and the history of the authors'
+repository was searched for earlier releases.
+
+The distributed file does not contain plant sequences. All 106{,}520 headers
+name the mouse assembly \texttt{mm10}, the records lie on mouse chromosomes
+that have no counterpart in the five-chromosome \textit{A. thaliana} genome,
+all 106{,}520 sequences were recreated exactly from the mouse genome at their
+declared coordinates, and for
+46{,}817 records the assumed start site coincides with the start of the named
+mouse transcript. The repository history, in turn, contains a file named
+\texttt{Promoter\_ArabidopsisThaliana.csv}, available from April 2020 and
+removed in January 2021, on the date of the archives in the data folder that
+replaced the repository as distribution point. It holds
+exactly 41{,}671 sequences of 1{,}000 bases, the number stated in the
+publication, and 41{,}594 of them occur exactly, over their full length, in the
+\textit{A. thaliana} reference genome; the human and yeast files removed on the
+same day are identical in content to those of the data folder. The plant set
+described by the publication therefore exists, but under another name and in
+an earlier release than the one the publication points to, while the
+designated plant file is a mouse set.
+
+These results determine how each file can be used, following the conditions
+defined in Section~\ref{sec:protocol-data-conditions}. The mouse file keeps its
+original designation and is used, if at all, as a mouse dataset, with its
+verified organism recorded beside the designation; it cannot support any
+statement about plants. The earlier file can be used to repeat the published
+procedure on the data the publication describes. Such a repetition remains
+qualified: the random seed and the shuffled negatives are not available, and
+the released notebook selects the first records of each class where the text
+describes a random selection. Whether the published plant results were
+computed on this earlier file is not established, because no output of a plant
+run was released. In addition, the 77 sequences not found in the current
+reference all occur exactly in the earlier mitochondrial genome sequence, which
+the current reference replaced in 2018, so every sequence of the file is
+located in an \textit{A. thaliana} reference.
+
+Whether the windows are centred on transcription start sites depends on the
+annotation used to judge them. Of the 41{,}591 windows that have the declared
+length and a genome locus, 22{,}970 place the declared start site exactly at
+the start of a transcript in the current RefSeq annotation, and similar
+numbers hold for its 2018 and 2023 releases. Most of the remaining windows lie
+within a few hundred bases of an annotated start, and the annotated start is
+far more often upstream than downstream of the window. Against the TAIR10 gene
+models, however, which contain exactly 41{,}671 transcripts, the declared start
+site coincides with a transcript start in 41{,}539 windows; the other 52 lie on
+the mitochondrial genome or on a nuclear segment of mitochondrial origin. The
+apparent disagreements therefore reflect later revisions of the annotation,
+which extended many transcripts at their 5$'$ end, rather than errors in the
+windows, although this interpretation, and the correspondence of each window
+to one transcript, have not been tested record by record. For the released
+condition, the file was converted into a canonical table that keeps every
+record, sequence, and label, with an identifier derived from its row in the
+acquired file; writing the table back reproduced the acquired file byte for
+byte. Genome coordinates and start-site classes are kept apart from that table,
+as evidence for a possible reconstruction, and do not alter it.
+
+Repeating a published computation and relying on its conclusions are different
+claims. A repetition on the identified plant file can show that the reported
+values are reproducible; it cannot remove the limitations of the original
+design, such as synthetic negatives and duplicate sequences, which affect what
+those values mean. Whether the identity error changes the conclusions of model
+comparisons is an empirical question addressed by evaluating the same models
+under the released and reconstructed conditions.
 
 \paragraph{Limitations.}
 For servers that publish no checksums, the identity of a file rests on its first

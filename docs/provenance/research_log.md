@@ -398,3 +398,129 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **Data version.** `can-v1`; no new data.
 - **Code state.** Documentation only, uncommitted on `d681bb6`.
 - **Findings.** F-057.
+
+## R-022 · 2026-10-29 · Data conditions and the Bhandari nominal Plant file
+
+- **Procedure.**
+  1. Defined two data conditions (released-filtered `orig`, reconstructed
+     `recon`), the order in which an intervention is classed as
+     reconstruction, metadata correction, or filtering, and the separate
+     identifiers and ledgers each condition needs
+     (`specs/dataset_condition_policy.md`).
+  2. Read arXiv:2105.07659 v1 (PDF SHA-256
+     `0a60e28b1a72d7429b347cac5a14b1d49cf9218aff1c5fc7d87a360dbabcb35c`,
+     fetched 2026-10-29) for the plant-set description and the reported
+     results (F-059). The PeerJ article page returned HTTP 403 and was not
+     read.
+  3. Read the acquired repository file `bhandari-github/Update` (F-060).
+  4. Counted header chromosome names and mean GC content in the canonical
+     Bhandari tables (F-058).
+- **Decision.** `bhandari-nominal-plant` keeps its collection ID and file name.
+  It may be used in the `orig` condition only with the explicit metadata
+  correction *Mus musculus* `mm10`, and in the `recon` condition only as a
+  mouse reconstruction; never as a plant set. Its published-protocol replay is
+  `not_comparable` to the published *A. thaliana* results. Justification and
+  pending evidence: `docs/bhandari_nominal_plant_assessment.md`. No dataset,
+  partition, config, or gate was changed, and no training ran.
+- **Data version.** `acq-v1`, `can-v1`.
+- **Records.** `docs/bhandari_nominal_plant_assessment.md`.
+- **Code state.** Documentation on `d681bb6`. Counts by a scratch script
+  outside the repository, SHA-256 `5abbc8efc4afc03c…`, run with the project
+  virtual environment.
+- **Findings.** F-058 to F-063.
+
+## R-023 · 2026-10-29 · Bhandari repository history, *A. thaliana* identification, full recreation
+
+- **Procedure.**
+  1. Listed the commit history of `nikitabhandari-dl/Dataset` through the
+     GitHub API (P-2). Found three CSVs, deleted on 2021-01-21 (F-064).
+  2. Created `configs/bhandari_history_acquisition_v1.yaml` for commit
+     `c1c97ee`, the last tree holding them, and acquired 5 files (blob SHA-1
+     verified; log `data/acquired/bhandari_history_acquisition_v1/logs/run_20261029T230848Z.log`).
+  3. Checked UCSC for `araTha1` (P-3): HTTP 404 and API error (F-069); the
+     Internet Archive CDX service was offline.
+  4. Acquired the UCSC GenArk TAIR10.1 reference. `ref-acq-v4` failed on a
+     stale hub digest for `chromAlias.txt`; `ref-acq-v5` was generated with an
+     error (its `chrom.sizes` entry took the assembly-report URL) and is
+     invalid; `ref-acq-v6` succeeded with 4 files. v4 and v5 are kept unchanged
+     as records.
+  5. Added `record_provenance.py bhandari-history` (history comparison, exact
+     genome location, TSS check) and `bhandari-recreation` (P-1: every Drive
+     Human, Yeast, and nominal-Plant record against its header coordinates),
+     with tests on synthetic genomes. Ran both in one persistent `nohup setsid`
+     job; log `data/interim/bhandari_history/logs/run_20261029T232216Z.log`.
+- **Decision.** The historical repository file is a released file of the
+  study, used unchanged under its own acquisition and never merged with the
+  Drive release; the Drive file keeps its role as a mouse dataset. The
+  notebook's first-N selection, which contradicts the text, is a declared
+  assumption of any published-protocol replay.
+- **Results.** F-064 to F-072. P-1: see the addendum below (F-073).
+- **Data version.** `acq-v1`, `can-v1`, `bh-hist-v1`
+  (`configs/bhandari_history_acquisition_v1.yaml`), `ref-acq-v6`.
+- **Records.** `manifests/provenance/bhandari_history_acquisition_v1/history_comparison.json`,
+  `manifests/provenance/source_acquisition_v1/bhandari_recreation.json`,
+  acquisition manifests under `manifests/provenance/` (snapshots).
+- **Code state.** Uncommitted on `3cc3618`; module SHA-256
+  `f21bc01445c1bcbb…` (`provenance.py`) and `d10c2b4d79e8b574…`
+  (`record_provenance.py`), as logged by the run.
+- **Addendum (P-1).** The job finished at 2026-10-29T23:29:20Z with exit code
+  0. Every Drive record is recreated exactly from its coordinates: Human
+  61,546, Yeast 6,125, nominal Plant 106,520 (F-073).
+
+## R-024 · 2026-10-29 · Test of F-067 against the earlier mitochondrial genome
+
+- **Procedure.** Identified the earlier *A. thaliana* mitochondrial sequence
+  with NCBI esummary (Y08501.2, 366,924 bp; NC_001284.2 suppressed, replaced by
+  NC_037304.1). Acquired it under `configs/reference_acquisition_v7.yaml`
+  (efetch FASTA, no upstream digest). Searched the 77 unlocated records
+  (F-066) exactly on both strands, treating the genome as circular; as a
+  control, searched the 36 records located on NC_037304.1.
+- **Results.** 77/77 found exactly (26 `+`, 51 `-`); control 36/36 (F-074).
+- **Data version.** `bh-hist-v1`, `ref-acq-v6`, `ref-acq-v7`.
+- **Code state.** Scratch script outside the repository, SHA-256
+  `7e5af12907e2335f…`, run with the project environment on `3cc3618`.
+- **Findings.** F-074 (supersedes F-067).
+
+## R-025 · 2026-10-29 · P-6 canonicalization of the historical files; *A. thaliana* TSS classification
+
+- **Procedure (historical condition).**
+  1. Added the `label_csv` input format to `capsprom.data.canonical_sources`:
+     two-field `label,sequence` rows in which every label must equal the
+     declared `source_label` (a header row or another class fails the build).
+  2. Created `configs/bhandari_history_canonicalization_v1.yaml` for the three
+     historical CSVs of `bh-hist-v1` and ran
+     `scripts/canonicalize_sources.py --config configs/bhandari_history_canonicalization_v1.yaml`:
+     3 built, all `pass`.
+  3. Added `record_provenance.py bhandari-history-canonical`
+     (`verify_label_csv_canonical`), which rebuilds each source file from its
+     canonical rows and checks IDs, hashes, labels, and the comparison with the
+     Drive tables (F-075).
+- **Procedure (reconstructed condition, separate artifacts).**
+  4. Created `configs/reference_acquisition_v8.yaml` (NCBI GCF_000001735.3 and
+     .4 GFF) and `configs/reference_acquisition_v9.yaml` (Ensembl Plants 31
+     TAIR10 GTF; BSD sum checked by hand against Ensembl `CHECKSUMS`).
+  5. Added `record_provenance.py arabidopsis-tss` (`classify_window_tss`): per
+     record, signed distance from the window TSS to the nearest annotated
+     transcript 5' end in each of four annotations (F-076, F-077).
+- **Incident.** While creating step 4, this session first wrote its config to
+  `configs/reference_acquisition_v7.yaml`, which another session had already
+  created and used (R-024). The other session's acquisition and manifest were
+  not modified (the run against the wrong config failed before writing), but
+  its untracked config text was overwritten. It was asked to restore it; until
+  then `ref-acq-v7` has a manifest without its config.
+- **Decision.** The canonical tables keep every historical record, sequence, and
+  label as released; the TAIR10 coordinates and TSS classes are evidence of
+  the reconstructed condition and are stored apart from them. No window is
+  judged incorrect from a mismatch with a later annotation.
+- **Data version.** `bh-hist-v1`; `bh-can-v1`
+  (`configs/bhandari_history_canonicalization_v1.yaml`); `ref-acq-v6`, `v8`,
+  `v9`.
+- **Records.** `manifests/provenance/bhandari_history_canonicalization_v1/`
+  (`canonical_manifest.json`, `canonical_verification.json`),
+  `manifests/provenance/bhandari_arabidopsis_tss_v1/tss_classification.json`,
+  acquisition manifest snapshots for `ref-acq-v8` and `v9`.
+- **Code state.** Uncommitted on `3cc3618`; SHA-256 `54e7035d6269cc7e…` (`provenance.py`), `00ee52d9832d4500…` (`canonical_sources.py`), `4c9f914f8f7b2b62…` (`record_provenance.py`).
+- **Findings.** F-075 to F-079.
+- **Addendum (incident).** The session that wrote `ref-acq-v7` restored its
+  config byte for byte; its SHA-256 equals the manifest's `config_sha256`
+  (`d9d38d578e7c5c0c…`), checked here with `sha256sum`.

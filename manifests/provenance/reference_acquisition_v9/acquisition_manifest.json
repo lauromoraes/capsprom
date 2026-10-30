@@ -1,0 +1,75 @@
+{
+  "acquisition": "reference-acquisition-v9",
+  "config_sha256": "e26f31ec77dab2685fb2f94d2855e2cc7b8db72c3f3e702f302577d5521a885e",
+  "files": {
+    "ensembl-plants-31-athaliana/Arabidopsis_thaliana.TAIR10.31.gtf.gz": {
+      "acquired_at": "2026-10-30T00:27:13+00:00",
+      "expected": {},
+      "git_blob_sha1": "3d4f73979deca5dd6f332793746bb97a14f9924a",
+      "md5": "56061b29ad3d836371071c8638f6842f",
+      "path": "Arabidopsis_thaliana.TAIR10.31.gtf.gz",
+      "response_headers": {
+        "content-length": "7894066",
+        "content-type": "application/x-gzip",
+        "etag": "\"787432-554962d250f24\"",
+        "last-modified": "Tue, 18 Jul 2017 11:54:22 GMT"
+      },
+      "sha256": "d5c3117d09b27147422791f0f3ca7163acafeedd4e4827bd8446e893de2d8d5b",
+      "size_bytes": 7894066,
+      "source_id": "ensembl-plants-31-athaliana",
+      "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-31/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.31.gtf.gz",
+      "verified_against": []
+    },
+    "ensembl-plants-31-athaliana/CHECKSUMS": {
+      "acquired_at": "2026-10-30T00:27:14+00:00",
+      "expected": {},
+      "git_blob_sha1": "f54305f33b77ae3948e781e5cb35faf2f8217ec0",
+      "md5": "85473e64910cc505edbf5a5163af0104",
+      "path": "CHECKSUMS",
+      "response_headers": {
+        "content-length": "178",
+        "etag": "\"b2-559387b2149d9\"",
+        "last-modified": "Fri, 15 Sep 2017 11:13:22 GMT"
+      },
+      "sha256": "09071a3c73920205cc18dbe46bdb02efbc4d7b3a4dabbf940879a7ae64beac8b",
+      "size_bytes": 178,
+      "source_id": "ensembl-plants-31-athaliana",
+      "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-31/gtf/arabidopsis_thaliana/CHECKSUMS",
+      "verified_against": []
+    }
+  },
+  "resolved_listings": {},
+  "runs": [
+    {
+      "command": [
+        "python",
+        "scripts/acquire_sources.py",
+        "--config",
+        "configs/reference_acquisition_v9.yaml",
+        "--execute"
+      ],
+      "finished_at": "2026-10-30T00:27:15+00:00",
+      "only_sources": null,
+      "started_at": "2026-10-30T00:26:23+00:00",
+      "status": "completed",
+      "summary": {
+        "declared_files": 2,
+        "downloaded": 2,
+        "planned": 2,
+        "recorded_files": 2,
+        "skipped_verified": 0
+      },
+      "tool": {
+        "code": {
+          "commit": "3cc36186b49dfa5f10f7eba261719f48d3e188a6",
+          "worktree_clean": false
+        },
+        "module_sha256": "a8e71e40ff7889c369afaa583f7e94605216a0494e3f9cdd084a07525d4b27a4",
+        "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.13.11",
+        "user_agent": "capsprom-source-acquisition/1"
+      }
+    }
+  ],
+  "schema_version": 1
+}

@@ -21,7 +21,7 @@ from capsprom.state import write_json_atomic
 
 CANONICAL_SCHEMA_VERSION = 1
 DNA_ALPHABET = frozenset("ACGT")
-FORMATS = ("fasta", "lines", "ipro_fasta")
+FORMATS = ("fasta", "lines", "ipro_fasta", "label_csv")
 CANONICAL_COLUMNS = (
     "record_id",
     "collection_id",
@@ -65,6 +65,8 @@ def load_canonicalization_config(path: Path) -> dict[str, Any]:
                     raise ValueError(f"{collection['collection_id']}: ipro_fasta needs per-class counts")
             elif item.get("label") not in (0, 1) or not item.get("source_class"):
                 raise ValueError(f"{collection['collection_id']}: inputs need label 0/1 and source_class")
+            if item["format"] == "label_csv" and not item.get("source_label"):
+                raise ValueError(f"{collection['collection_id']}: label_csv needs the declared source_label")
     return config
 
 
@@ -102,6 +104,21 @@ def parse_lines(text: str) -> Iterator[tuple[str, str]]:
             yield "", "".join(line.split())
 
 
+def parse_label_csv(text: str, source_label: str) -> Iterator[tuple[str, str]]:
+    """Yield (source label, raw sequence) from two-field "label,sequence" rows.
+
+    Every row must carry the declared source label, so that a file holding
+    another class or a header row is rejected instead of being relabelled.
+    """
+
+    for number, row in enumerate(csv.reader(io.StringIO(text)), start=1):
+        if not row:
+            continue
+        if len(row) != 2 or row[0] != source_label:
+            raise ValueError(f"row {number}: expected '{source_label},<sequence>', found {row[:1]}")
+        yield row[0], row[1]
+
+
 def ipro_source_class(header: str) -> str:
     """Return the iPro-MP class encoded in a header such as '<species> CDS--12'."""
 
@@ -124,9 +141,12 @@ def _input_records(
     item: dict[str, Any], acquired_root: Path, default_length: int | None
 ) -> Iterator[dict[str, Any]]:
     text = _read_bytes(acquired_root / item["file"], item.get("member")).decode("utf-8", "replace")
-    parser = parse_lines if item["format"] == "lines" else parse_fasta
+    if item["format"] == "label_csv":
+        records = parse_label_csv(text, item["source_label"])
+    else:
+        records = (parse_lines if item["format"] == "lines" else parse_fasta)(text)
     expected_length = item.get("expected_length", default_length)
-    for index, (header, raw) in enumerate(parser(text)):
+    for index, (header, raw) in enumerate(records):
         if item["format"] == "ipro_fasta":
             source_class = ipro_source_class(header)
             label = 1 if source_class == "positive" else 0

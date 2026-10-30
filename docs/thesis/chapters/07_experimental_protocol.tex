@@ -75,6 +75,48 @@ receive an explicitly comparable search budget. Test outcomes are not used for
 feature selection, early stopping, threshold selection, calibration, or
 hyperparameter optimization.
 
+\section{Data Conditions and Comparability}\label{sec:protocol-data-conditions}
+
+Two data conditions are distinguished, because they answer different
+questions. In the \emph{released} condition, a dataset is derived from the files
+distributed by a source study, whose sequences and labels are kept unchanged;
+it answers what the published benchmark supports. In the \emph{reconstructed}
+condition, the examples are rebuilt from independently verified references,
+such as a genome assembly and a dated transcription start site annotation; it
+answers what holds when the biological identity of each example has been
+established without relying on the released files. Results of the two
+conditions are reported separately and never pooled.
+
+Every change between an acquired file and an experimental dataset is assigned
+to one of three classes, tested in a fixed order. A change is a
+\emph{reconstruction} when any row comes to depend on data other than its
+released record, for instance a window re-extracted from a genome or a label
+not present in the release. It is a \emph{metadata correction} when only
+descriptive fields, such as the organism or the assembly, change, the rows,
+sequences, and labels remain identical, and the correction rests on a verified
+finding; the value declared by the source is kept beside the corrected one. It
+is a \emph{filtering} step when whole records are removed by a rule declared
+before the dataset is built. A dataset is labelled as released only if every
+row can be traced to an acquired record through filtering or a protocol
+transformation applied to all records alike; otherwise it is reconstructed.
+A modified dataset is therefore never presented as an original one by default.
+
+Within the released condition, two protocols are separated. The
+\emph{published} protocol repeats the split, window, negative generation,
+subsampling, and metrics of the source study as far as they are documented,
+and is used only to reproduce its reported baselines. The \emph{common}
+protocol is the one defined in this chapter and is used to compare models
+across sources. Each result states its comparability with the published value:
+direct, when the published protocol is applied to the released data with the
+filters the publication itself describes; qualified, when undocumented
+parameters had to be fixed or additional filters applied; and not comparable,
+when the data or the protocol differ in a way that invalidates the published
+value as a reference, for example a different organism or split design. Results
+of the common protocol and of the reconstructed condition are not comparable
+with published values by construction. Section~\ref{sec:methods-data-acquisition}
+describes a case in which this distinction decides how a released collection
+may be used.
+
 \section{Negative-Control Conditions}\label{sec:protocol-negative-controls}
 
 Negative-set construction is treated as an explicit experimental factor rather

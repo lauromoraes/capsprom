@@ -20,6 +20,7 @@ from capsprom.data.canonical_sources import (
     load_canonicalization_config,
     normalize_sequence,
     parse_fasta,
+    parse_label_csv,
     write_canonical_csv_gz,
 )
 
@@ -296,3 +297,27 @@ def test_real_canonical_config_reads_only_declared_acquisition_sources() -> None
     assert len(ipro) == 23
     plant = next(c for c in canonical["collections"] if c["collection_id"] == "bhandari-nominal-plant")
     assert plant["organism"] == ""
+
+
+def test_label_csv_requires_the_declared_label_on_every_row() -> None:
+    assert list(parse_label_csv("Plant_Promoter,ACGT\r\nPlant_Promoter,acnt\r\n", "Plant_Promoter")) == [
+        ("Plant_Promoter", "ACGT"),
+        ("Plant_Promoter", "acnt"),
+    ]
+    with pytest.raises(ValueError, match="row 2"):
+        list(parse_label_csv("Plant_Promoter,ACGT\nHuman_Promoter,ACGT\n", "Plant_Promoter"))
+    with pytest.raises(ValueError, match="row 1"):
+        list(parse_label_csv("Y,X\nPlant_Promoter,ACGT\n", "Plant_Promoter"))
+
+
+def test_real_history_canonical_config_keeps_historical_identity() -> None:
+    canonical = load_canonicalization_config(ROOT / "configs" / "bhandari_history_canonicalization_v1.yaml")
+    acquisition = load_acquisition_config(ROOT / "configs" / "bhandari_history_acquisition_v1.yaml")
+    source_ids = {source["source_id"] for source in acquisition["sources"]}
+    collections = {c["collection_id"]: c for c in canonical["collections"]}
+
+    assert set(collections) == {"bhandari-history-arabidopsis", "bhandari-history-human", "bhandari-history-yeast"}
+    for collection in collections.values():
+        assert collection["publication_counts"]["positive"] == collection["inputs"][0]["expected_records"]
+        assert collection["inputs"][0]["file"].split("/", 1)[0] in source_ids
+    assert collections["bhandari-history-arabidopsis"]["inputs"][0]["source_label"] == "Plant_Promoter"

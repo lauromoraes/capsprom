@@ -30,7 +30,7 @@ repository.
 
 | Directory | Publication | Local copy equals published release | Publication equals released data | Reconstructable from primary sources |
 | --- | --- | --- | --- | --- |
-| `Bhandari_etal` | Bhandari et al., PeerJ CS 7:e365 (2021) | Yes (same Drive file names; headers decoded) | No for `Plant_promoters` | Human and Yeast: yes (coordinates in headers). Plant: blocked |
+| `Bhandari_etal` | Bhandari et al., PeerJ CS 7:e365 (2021) | Yes (same Drive file names; headers decoded) | No for `Plant_promoters` (mouse, F-063); the described *A. thaliana* set is in the repository history (F-064 to F-066) | Human and Yeast: yes (coordinates in headers). Plant: the Drive file as mouse only; *A. thaliana* by genome location of the historical file |
 | `CDBProm` | Martinez et al., NAR Genom. Bioinform. 6(1):lqae018 (2024) | Yes (22/22 files identical to the website zip) | Partially (counts yes, window no) | Positives: only via sequence mapping to GenBank; negatives: no seed |
 | `CNNProm` | Umarov & Solovyev, PLOS One 12(2):e0171410 (2017) | Yes (files renamed; content identical) | Partially (Bacillus counts, Human TATA missing) | Per resource, requires dated releases |
 | `iPro-MP` | Su et al., Genome Biol. 26:353 (2025) | Yes (`Dataset/` = upstream `Benchmark Dataset/`) | Yes (all 23 species, every count) | Positives via PPD; negatives need the sampling seed |
@@ -75,6 +75,11 @@ window.
   (74,450 rather than about 35,000). The upstream file itself carries the
   mismatch; it was not introduced locally. This confirms the conflict already
   recorded in `docs/control_coordinate_feasibility_inventory.md`.
+- The repository history holds `Promoter_ArabidopsisThaliana.csv` (41,671
+  records, 2020-04-23 to 2021-01-21), whose sequences occur in TAIR10.1
+  (F-064 to F-066). It matches the publication's description in count, organism,
+  and window length; whether the published results used it is open (F-071). See
+  `docs/bhandari_nominal_plant_assessment.md`.
 - Negatives are not distributed. The published shuffling function splits a
   sequence into blocks of `k_let` bases and permutes them, but the README leaves
   `k_let` unspecified (`k_let = #`) and gives no seed.
@@ -86,7 +91,7 @@ window.
 | Human TSS annotation | UCSC Table Browser, track NCBI RefSeq Curated, `hg38`: https://genome.ucsc.edu/cgi-bin/hgTables |
 | Yeast TSS annotation | UCSC Table Browser, NCBI RefSeq, `sacCer3` |
 | Mouse annotation (what the nominal Plant file actually contains) | UCSC Table Browser, NCBI RefSeq, `mm10` |
-| *A. thaliana* (what the paper describes) | UCSC `araTha1`; no matching file was released |
+| *A. thaliana* (what the paper describes) | Repository commit `c1c97ee`, `Promoter_ArabidopsisThaliana.csv` (`configs/bhandari_history_acquisition_v1.yaml`); reference TAIR10.1, UCSC GenArk GCF_000001735.4 (`araTha1` is no longer served, F-069) |
 | Genomes | https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.2bit, https://hgdownload.soe.ucsc.edu/goldenPath/sacCer3/bigZips/sacCer3.2bit, https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/mm10.2bit |
 | Negative procedure | Block-shuffle code in https://github.com/nikitabhandari-dl/Dataset (README); `k_let` and seed undocumented |
 | Human random-genome test negatives | `random_sequences.fasta` in the same repository (not present locally) |
@@ -327,8 +332,10 @@ pneumoniae* CWL029 (`NC_000922.1`).
 
 ## Open actions
 
-1. Keep the Bhandari `Plant_promoters` identity blocked; the upstream release
-   contradicts the publication.
+1. Keep the Bhandari `Plant_promoters` identity blocked as a plant set; the
+   upstream release contradicts the publication. The file is *Mus musculus*
+   `mm10` (F-063); its permitted uses as a mouse dataset, and the evidence
+   still pending, are in `docs/bhandari_nominal_plant_assessment.md`.
 2. Record the CDBProm -60..+20 effective window and the 1,001/100-nt raw
    lengths wherever CDBProm windows are described in the thesis.
 3. Describe CNNProm Bacillus with the released 373/1,000 counts and note that

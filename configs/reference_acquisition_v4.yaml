@@ -1,0 +1,39 @@
+acquisition:
+  name: reference-acquisition-v4
+  version: 1.0.0
+  protocol: specs/reference_coordinate_mapping_protocol.md
+  audit: docs/bhandari_nominal_plant_assessment.md
+  root: data/acquired/reference_acquisition_v4
+  frozen_on: 2026-10-29
+  policy: >-
+    Arabidopsis thaliana reference used to identify the organism of the
+    Promoter_ArabidopsisThaliana.csv file held by the Bhandari repository before
+    2021-01-21 (bhandari_history_acquisition_v1). The publication names UCSC
+    araTha1, which UCSC no longer serves (HTTP 404 on goldenPath/araTha1, and
+    the genome API does not list it); the UCSC GenArk hub of the same TAIR10
+    sequence, GCF_000001735.4 (TAIR10.1), is used instead. MD5 digests are those
+    of the hub's md5sum.txt. The RefSeq gene table is a current snapshot, not a
+    release contemporary with the 2020 extraction.
+
+sources:
+  - source_id: ucsc-genark-tair10
+    kind: url_list
+    study: ucsc_genark
+    landing_page: https://hgdownload.soe.ucsc.edu/hubs/GCF/000/001/735/GCF_000001735.4/
+    release: GCF_000001735.4
+    files:
+      - path: GCF_000001735.4.2bit
+        url: https://hgdownload.soe.ucsc.edu/hubs/GCF/000/001/735/GCF_000001735.4/GCF_000001735.4.2bit
+        expected: {md5: ea4e3aed9786cf5db949ee377275ecd1}
+      - path: GCF_000001735.4.chrom.sizes.txt
+        url: https://hgdownload.soe.ucsc.edu/hubs/GCF/000/001/735/GCF_000001735.4/GCF_000001735.4.chrom.sizes.txt
+        expected: {md5: b91146f82a5aa4f88274a74c22867806}
+      - path: GCF_000001735.4.chromAlias.txt
+        url: https://hgdownload.soe.ucsc.edu/hubs/GCF/000/001/735/GCF_000001735.4/GCF_000001735.4.chromAlias.txt
+        expected: {md5: e54deaaea7576c6bc134e1ba493e313a}
+      - path: GCF_000001735.4_assembly_report.txt
+        url: https://hgdownload.soe.ucsc.edu/hubs/GCF/000/001/735/GCF_000001735.4/GCF_000001735.4_assembly_report.txt
+        expected: {md5: a0fafa5fc5214c21f49ca3415640f033}
+      - path: GCF_000001735.4_TAIR10.1.ncbiRefSeq.gtf.gz
+        url: https://hgdownload.soe.ucsc.edu/hubs/GCF/000/001/735/GCF_000001735.4/genes/GCF_000001735.4_TAIR10.1.ncbiRefSeq.gtf.gz
+        expected: {md5: 60a22b9ffba4a30a6c4f029d1e1f4c96}

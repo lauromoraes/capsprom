@@ -1,0 +1,183 @@
+{
+  "acquisition": "bhandari-history-acquisition-v1",
+  "config_sha256": "784c97eba2a66c96707d605b6290e82c5d501e3fac48eb5f666400d222044b5d",
+  "files": {
+    "bhandari-github-history/Code.ipynb": {
+      "acquired_at": "2026-10-29T23:08:51+00:00",
+      "expected": {
+        "git_blob_sha1": "497533de9e317e5757bb228cd5b76d6f5f511053"
+      },
+      "git_blob_sha1": "497533de9e317e5757bb228cd5b76d6f5f511053",
+      "md5": "52634340bc552ab01ddcf6337cd440f5",
+      "path": "Code.ipynb",
+      "response_headers": {
+        "content-length": "62472",
+        "content-type": "text/plain; charset=utf-8",
+        "etag": "\"cf9b608c283f1766913b95a4b7bca565779cb5518fcf3c90d71ec701c23330ef\""
+      },
+      "sha256": "c666587eccc2f7588bd7f4dab4fdba89966f99d1909d376576b6cebc02447168",
+      "size_bytes": 62472,
+      "source_id": "bhandari-github-history",
+      "url": "https://raw.githubusercontent.com/nikitabhandari-dl/Dataset/c1c97eed7103782406db2052580c7047e0842810/Code.ipynb",
+      "verified_against": [
+        "git_blob_sha1"
+      ]
+    },
+    "bhandari-github-history/Promoter_ArabidopsisThaliana.csv": {
+      "acquired_at": "2026-10-29T23:08:57+00:00",
+      "expected": {
+        "git_blob_sha1": "e28b8935e64660caad9af869d66f1dce97560128"
+      },
+      "git_blob_sha1": "e28b8935e64660caad9af869d66f1dce97560128",
+      "md5": "6274e656a110bfa1c7d295622389bf4f",
+      "path": "Promoter_ArabidopsisThaliana.csv",
+      "response_headers": {
+        "content-length": "42378033",
+        "content-type": "text/plain; charset=utf-8",
+        "etag": "\"80f71a4074ad6607af47249e4511e44059b926cced2aadac7970d80de5748474\""
+      },
+      "sha256": "9dd8df09612cb069d672976507a6e49e9c82854537fa50710e9fc0f3e775e1b0",
+      "size_bytes": 42378033,
+      "source_id": "bhandari-github-history",
+      "url": "https://raw.githubusercontent.com/nikitabhandari-dl/Dataset/c1c97eed7103782406db2052580c7047e0842810/Promoter_ArabidopsisThaliana.csv",
+      "verified_against": [
+        "git_blob_sha1"
+      ]
+    },
+    "bhandari-github-history/Promoter_Human.csv": {
+      "acquired_at": "2026-10-29T23:09:06+00:00",
+      "expected": {
+        "git_blob_sha1": "e404c847e20037b7765302762f233ba9dec08e93"
+      },
+      "git_blob_sha1": "e404c847e20037b7765302762f233ba9dec08e93",
+      "md5": "7d52954c2af11777fda7b9a914f5b369",
+      "path": "Promoter_Human.csv",
+      "response_headers": {
+        "content-length": "62580259",
+        "content-type": "text/plain; charset=utf-8",
+        "etag": "\"3ef64d5fde524f80668374659759510673c1ae4be424e7dd6585b1b17f3ceaf4\""
+      },
+      "sha256": "75fc70b6ad893e9346a2c152b439e0f507223b71c703b5414f02d8d91d62edd5",
+      "size_bytes": 62580259,
+      "source_id": "bhandari-github-history",
+      "url": "https://raw.githubusercontent.com/nikitabhandari-dl/Dataset/c1c97eed7103782406db2052580c7047e0842810/Promoter_Human.csv",
+      "verified_against": [
+        "git_blob_sha1"
+      ]
+    },
+    "bhandari-github-history/Promoter_Yeast.csv": {
+      "acquired_at": "2026-10-29T23:09:08+00:00",
+      "expected": {
+        "git_blob_sha1": "a8844b087c40e4e8bfe8b092dddd81d1fa2edcba"
+      },
+      "git_blob_sha1": "a8844b087c40e4e8bfe8b092dddd81d1fa2edcba",
+      "md5": "cf0dc10b1c28cb2ef235ff58657f5e16",
+      "path": "Promoter_Yeast.csv",
+      "response_headers": {
+        "content-length": "6234218",
+        "content-type": "text/plain; charset=utf-8",
+        "etag": "\"15a4441e5bed992db161e00590a707148fbb204b4bbe8d3a9e6bbb0730ae7f09\""
+      },
+      "sha256": "e7eef92f51ad97e1678c661978df70157a8d2f6509374d7b5930e7d6b6220d58",
+      "size_bytes": 6234218,
+      "source_id": "bhandari-github-history",
+      "url": "https://raw.githubusercontent.com/nikitabhandari-dl/Dataset/c1c97eed7103782406db2052580c7047e0842810/Promoter_Yeast.csv",
+      "verified_against": [
+        "git_blob_sha1"
+      ]
+    },
+    "bhandari-github-history/README.md": {
+      "acquired_at": "2026-10-29T23:09:09+00:00",
+      "expected": {
+        "git_blob_sha1": "41cef805a6055319dc09d0518d6a4eda5bd7a00d"
+      },
+      "git_blob_sha1": "41cef805a6055319dc09d0518d6a4eda5bd7a00d",
+      "md5": "f8e1622321343e0dc256e2385ad307af",
+      "path": "README.md",
+      "response_headers": {
+        "content-length": "6937",
+        "content-type": "text/plain; charset=utf-8",
+        "etag": "\"848abc3a83162fc1d15718bef0e50586dbb14e4e2d9a0ca233a6d198ec8ffc85\""
+      },
+      "sha256": "b1f72b1a054fbe931e01f94d5928aa10b0239005c750b40a1d91ca726a588908",
+      "size_bytes": 6937,
+      "source_id": "bhandari-github-history",
+      "url": "https://raw.githubusercontent.com/nikitabhandari-dl/Dataset/c1c97eed7103782406db2052580c7047e0842810/README.md",
+      "verified_against": [
+        "git_blob_sha1"
+      ]
+    }
+  },
+  "resolved_listings": {
+    "bhandari-github-history": [
+      {
+        "expected": {
+          "git_blob_sha1": "497533de9e317e5757bb228cd5b76d6f5f511053"
+        },
+        "path": "Code.ipynb",
+        "url": "https://raw.githubusercontent.com/nikitabhandari-dl/Dataset/c1c97eed7103782406db2052580c7047e0842810/Code.ipynb"
+      },
+      {
+        "expected": {
+          "git_blob_sha1": "e28b8935e64660caad9af869d66f1dce97560128"
+        },
+        "path": "Promoter_ArabidopsisThaliana.csv",
+        "url": "https://raw.githubusercontent.com/nikitabhandari-dl/Dataset/c1c97eed7103782406db2052580c7047e0842810/Promoter_ArabidopsisThaliana.csv"
+      },
+      {
+        "expected": {
+          "git_blob_sha1": "e404c847e20037b7765302762f233ba9dec08e93"
+        },
+        "path": "Promoter_Human.csv",
+        "url": "https://raw.githubusercontent.com/nikitabhandari-dl/Dataset/c1c97eed7103782406db2052580c7047e0842810/Promoter_Human.csv"
+      },
+      {
+        "expected": {
+          "git_blob_sha1": "a8844b087c40e4e8bfe8b092dddd81d1fa2edcba"
+        },
+        "path": "Promoter_Yeast.csv",
+        "url": "https://raw.githubusercontent.com/nikitabhandari-dl/Dataset/c1c97eed7103782406db2052580c7047e0842810/Promoter_Yeast.csv"
+      },
+      {
+        "expected": {
+          "git_blob_sha1": "41cef805a6055319dc09d0518d6a4eda5bd7a00d"
+        },
+        "path": "README.md",
+        "url": "https://raw.githubusercontent.com/nikitabhandari-dl/Dataset/c1c97eed7103782406db2052580c7047e0842810/README.md"
+      }
+    ]
+  },
+  "runs": [
+    {
+      "command": [
+        "python",
+        "scripts/acquire_sources.py",
+        "--config",
+        "configs/bhandari_history_acquisition_v1.yaml",
+        "--execute"
+      ],
+      "finished_at": "2026-10-29T23:09:09+00:00",
+      "only_sources": null,
+      "started_at": "2026-10-29T23:08:48+00:00",
+      "status": "completed",
+      "summary": {
+        "declared_files": 5,
+        "downloaded": 5,
+        "planned": 5,
+        "recorded_files": 5,
+        "skipped_verified": 0
+      },
+      "tool": {
+        "code": {
+          "commit": "d681bb658ed1a970ed9ff06f51014ffdea95e153",
+          "worktree_clean": false
+        },
+        "module_sha256": "a8e71e40ff7889c369afaa583f7e94605216a0494e3f9cdd084a07525d4b27a4",
+        "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.13.11",
+        "user_agent": "capsprom-source-acquisition/1"
+      }
+    }
+  ],
+  "schema_version": 1
+}

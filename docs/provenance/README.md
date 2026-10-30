@@ -12,6 +12,10 @@ Where the evidence for the data's origin lives, and which documents depend on it
 | Chronological log | `docs/provenance/research_log.md` |
 | Facts, hypotheses, limitations | `docs/provenance/findings_register.md` |
 | Lineage of experimental datasets | `docs/provenance/dataset_lineage.md` |
+| Data conditions (released-filtered, reconstructed) and intervention classes | `specs/dataset_condition_policy.md` |
+| Bhandari "Plant" provenance, identification, and use (technical record) | `docs/bhandari_nominal_plant_assessment.md` |
+| Bhandari repository history (machine records) | `manifests/provenance/bhandari_history_acquisition_v1/` |
+| Bhandari historical canonical tables (P-6) and *A. thaliana* TSS classes | `manifests/provenance/bhandari_history_canonicalization_v1/`, `manifests/provenance/bhandari_arabidopsis_tss_v1/` |
 | Source and publication comparison | `docs/dataset_reconstruction_sources.md` |
 | Reference identification and coordinate mapping (design) | `specs/reference_coordinate_mapping_protocol.md`, `docs/coordinate_mapping_gap_inventory.md` |
 | Acquisition v1 report | `docs/source_acquisition_v1_report.md` |

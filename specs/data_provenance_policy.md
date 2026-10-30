@@ -70,6 +70,10 @@ Every experimental dataset must be traceable to acquired files:
 
 The evidence for existing datasets is in `docs/provenance/dataset_lineage.md`.
 
+Future builds also declare their data condition (released-filtered or
+reconstructed) and class every intervention as filtering, metadata correction,
+or reconstruction, under `specs/dataset_condition_policy.md`.
+
 ## 5. Legacy files and unknown dates
 
 - Every legacy file is inventoried by SHA-256 and classified by the evidence

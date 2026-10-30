@@ -1,0 +1,112 @@
+{
+  "bhandari-history-arabidopsis": {
+    "canonical_sha256": "4d95d569f91d4524e080edd1874a188e85f0d0180beb96bacc102f33fd05c534",
+    "canonical_table": "bhandari-history-arabidopsis.csv.gz",
+    "case_normalized_records": 0,
+    "comparison": {
+      "equal_multiset": false,
+      "equal_order": false,
+      "shared_unique_sequences": 0,
+      "table": "bhandari-nominal-plant.csv.gz"
+    },
+    "duplicate_records": 3711,
+    "length_1000_records": 41668,
+    "non_strict_dna_records": 27,
+    "other_lengths": {
+      "326": 1,
+      "524": 1,
+      "776": 1
+    },
+    "rebuilt_equals_source_bytes": true,
+    "record_count": 41671,
+    "record_ids_contiguous": true,
+    "record_indexes_contiguous": true,
+    "sequence_sha1_valid": true,
+    "source_file": "bhandari-github-history/Promoter_ArabidopsisThaliana.csv",
+    "source_labels": [
+      "Plant_Promoter"
+    ],
+    "source_line_count": 41671,
+    "source_sha256": "9dd8df09612cb069d672976507a6e49e9c82854537fa50710e9fc0f3e775e1b0",
+    "unique_sequences": 37960
+  },
+  "bhandari-history-human": {
+    "canonical_sha256": "e2c54699ba05d1b5877b449ec62504986e36c438c6a9bbb22970152a2bccb7d8",
+    "canonical_table": "bhandari-history-human.csv.gz",
+    "case_normalized_records": 0,
+    "comparison": {
+      "equal_multiset": true,
+      "equal_order": true,
+      "shared_unique_sequences": 34969,
+      "table": "bhandari-human.csv.gz"
+    },
+    "duplicate_records": 26577,
+    "length_1000_records": 61516,
+    "non_strict_dna_records": 58,
+    "other_lengths": {
+      "302": 1,
+      "325": 1,
+      "350": 1,
+      "367": 6,
+      "451": 1,
+      "454": 1,
+      "476": 1,
+      "505": 1,
+      "529": 1,
+      "659": 1,
+      "666": 1,
+      "710": 1,
+      "725": 1,
+      "740": 1,
+      "772": 6,
+      "775": 1,
+      "807": 1,
+      "842": 1,
+      "906": 1,
+      "921": 1
+    },
+    "rebuilt_equals_source_bytes": true,
+    "record_count": 61546,
+    "record_ids_contiguous": true,
+    "record_indexes_contiguous": true,
+    "sequence_sha1_valid": true,
+    "source_file": "bhandari-github-history/Promoter_Human.csv",
+    "source_labels": [
+      "Human_Promoter"
+    ],
+    "source_line_count": 61546,
+    "source_sha256": "75fc70b6ad893e9346a2c152b439e0f507223b71c703b5414f02d8d91d62edd5",
+    "unique_sequences": 34969
+  },
+  "bhandari-history-yeast": {
+    "canonical_sha256": "908b4d7c7336d2dffe65a36fc125985dd29b2ed33becd98316f50d82199992f4",
+    "canonical_table": "bhandari-history-yeast.csv.gz",
+    "case_normalized_records": 0,
+    "comparison": {
+      "equal_multiset": true,
+      "equal_order": true,
+      "shared_unique_sequences": 6045,
+      "table": "bhandari-yeast.csv.gz"
+    },
+    "duplicate_records": 80,
+    "length_1000_records": 6122,
+    "non_strict_dna_records": 0,
+    "other_lengths": {
+      "352": 1,
+      "732": 1,
+      "884": 1
+    },
+    "rebuilt_equals_source_bytes": true,
+    "record_count": 6125,
+    "record_ids_contiguous": true,
+    "record_indexes_contiguous": true,
+    "sequence_sha1_valid": true,
+    "source_file": "bhandari-github-history/Promoter_Yeast.csv",
+    "source_labels": [
+      "Fungus_Promoter"
+    ],
+    "source_line_count": 6125,
+    "source_sha256": "e7eef92f51ad97e1678c661978df70157a8d2f6509374d7b5930e7d6b6220d58",
+    "unique_sequences": 6045
+  }
+}

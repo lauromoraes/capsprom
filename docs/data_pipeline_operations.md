@@ -45,6 +45,10 @@ wsl.exe -e sh -c 'cd /mnt/d/workspace/capsprom && PYTHONPATH=src .venv/bin/pytho
 | Upstream dates | `PYTHONPATH=src python scripts/record_provenance.py source-metadata` | `source_release_metadata.json` |
 | Legacy inventory | `PYTHONPATH=src python scripts/record_provenance.py legacy-inventory` | `legacy_raw_inventory.json` |
 | Legacy build replay | `PYTHONPATH=src python scripts/record_provenance.py replay-v3` | `regenerated_v3_replay.json`, staging under `data/interim/provenance_replay_regenerated_v3/` |
+| Bhandari full recreation | `PYTHONPATH=src python scripts/record_provenance.py bhandari-recreation` | `bhandari_recreation.json` |
+| Bhandari repository history | `PYTHONPATH=src python scripts/record_provenance.py bhandari-history` (needs `bhandari_history_acquisition_v1` and `reference_acquisition_v6`) | `manifests/provenance/bhandari_history_acquisition_v1/history_comparison.json`; loci in `data/interim/bhandari_history/` |
+| Historical canonicalization (P-6) | `PYTHONPATH=src python scripts/canonicalize_sources.py --config configs/bhandari_history_canonicalization_v1.yaml`, then `scripts/record_provenance.py bhandari-history-canonical` | `data/canonical/bhandari_history_canonicalization_v1/`; `canonical_verification.json` |
+| *A. thaliana* TSS classes | `PYTHONPATH=src python scripts/record_provenance.py arabidopsis-tss` (needs `reference_acquisition_v6`, `v8`, `v9` and the `bhandari-history` loci) | `tss_classification.json`; per-record evidence in `data/interim/bhandari_history/` |
 
 Run long steps detached and logged so they survive a closed terminal, for example:
 

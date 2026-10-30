@@ -819,6 +819,58 @@ Current state:
   replay-verified datasets. Records are in `manifests/provenance/`, and the log,
   findings, and lineage are in `docs/provenance/`. No experiment was rerun and no
   gate changed.
+- Decision (2026-10-29, user): plan two complementary data conditions under
+  `specs/dataset_condition_policy.md`. *Released, filtered* (`orig`) keeps the
+  acquired files unchanged and allows only declared filtering and explicit
+  metadata correction; inside it, the *published* protocol (`pub`) reproduces
+  each source study's baselines and the *common* protocol (`common`) compares
+  models under the project contract. *Reconstructed* (`recon`) rebuilds
+  examples from verified references, as for GraphPro. The two conditions have
+  separate identifiers, configs, and ledgers, every result states its
+  comparability with the published numbers, and any row not traceable to an
+  acquired record makes a dataset `recon`. Design only: no dataset was built.
+- Completed: assess the Bhandari nominal "Plant" file
+  (`docs/bhandari_nominal_plant_assessment.md`, F-058 to F-063). It is
+  *Mus musculus* `mm10`, not *A. thaliana*; why the publication describes a
+  plant set is unresolved. Recommendation: use it in both conditions as a mouse
+  dataset, keeping `Plant_promoters` as its source designation, and never as a
+  plant set; its published-protocol replay is not comparable with the published
+  *A. thaliana* results, and the study's cross-kingdom pairs cannot be tested
+  with released data.
+- Next (data conditions, each a separate authorization): complete the `mm10`
+  sequence recreation of all 106,520 nominal-Plant records (P-1); audit its
+  overlap with CNNProm and GraphPro mouse sets (P-4); then freeze versioned
+  `orig-pub`, `orig-common`, and `recon` contracts per source. Existing
+  datasets, partitions, and every execution gate stay as they are.
+- Completed: trace the Bhandari "Plant" data through the repository history
+  (`docs/bhandari_nominal_plant_assessment.md`, F-064 to F-074, logs R-023, R-024).
+  The repository held `Promoter_ArabidopsisThaliana.csv` (41,671 records, the
+  published count) until 2021-01-21; 41,594 of its sequences occur exactly in
+  TAIR10.1, so the described *A. thaliana* set exists under another name in an
+  earlier release, while the Drive "Plant" file is mouse. Acquired under
+  `configs/bhandari_history_acquisition_v1.yaml` and
+  `configs/reference_acquisition_v6.yaml` (v4 failed and v5 is invalid; both
+  kept as records). All 174,191 Drive records (Human, Yeast, nominal
+  Plant) are recreated exactly from their coordinates (P-1, F-073). Thesis
+  text added to chapters 4, 7, 9, and 10. No dataset, partition, or gate changed.
+- Next (each a separate authorization): a canonicalization contract for the
+  historical repository files (P-6); the overlap audit with CNNProm and
+  GraphPro mouse sets (P-4); then the versioned `orig-pub` replay of the
+  *A. thaliana* file and the `orig-common` and `recon` contracts.
+- Completed: P-6, the canonicalization of the historical Bhandari repository
+  files (`configs/bhandari_history_canonicalization_v1.yaml`, F-075, log
+  R-025). The three tables keep every record, sequence, and label; each
+  acquired file is rebuilt byte for byte from its table. Separately, for the
+  reconstructed condition only, the *A. thaliana* window TSS was classified
+  against four annotations (`ref-acq-v6`, `v8`, `v9`): the 22,970 matches are
+  against the 2025 RefSeq table out of 41,591 evaluated windows, while the
+  TAIR10 gene models (41,671 transcripts) match 41,539 (F-076, F-077). No
+  dataset was built, no partition generated, and no gate changed.
+- Next (each a separate authorization): freeze the
+  `bhandari-history-arabidopsis.orig-pub-v1` replay contract (declared
+  assumptions: `k_let = 1`, first-N selection versus the text's random
+  selection, seed, filters); P-4 for the mouse file. An *A. thaliana* reconstruction waits for
+  R-1 to R-5 of `docs/bhandari_nominal_plant_assessment.md`.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 

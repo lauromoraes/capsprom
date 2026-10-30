@@ -1,0 +1,170 @@
+{
+  "canonicalization": "bhandari-history-canonicalization-v1",
+  "collections": {
+    "bhandari-history-arabidopsis": {
+      "input_sha256": {
+        "bhandari-github-history/Promoter_ArabidopsisThaliana.csv": "9dd8df09612cb069d672976507a6e49e9c82854537fa50710e9fc0f3e775e1b0"
+      },
+      "notes": "Repository commit c1c97ee (held 2020-04-23 to 2021-01-21). Organism as declared by the file name and the publication (araTha1); exact location of 41,594 records in TAIR10.1 is F-066. The TSS index 700 is declared by the publication's -700..+300 window, not verified per record here; that evidence belongs to the reconstructed condition. Not the Drive Plant_promoters file (mouse, collection bhandari-nominal-plant).",
+      "output": "data/canonical/bhandari_history_canonicalization_v1/bhandari-history-arabidopsis.csv.gz",
+      "output_sha256": "4d95d569f91d4524e080edd1874a188e85f0d0180beb96bacc102f33fd05c534",
+      "source": "bhandari",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 3711,
+        "expected_release_records_by_class": {
+          "positive": 41671
+        },
+        "most_common_lengths": [
+          [
+            1000,
+            41668
+          ],
+          [
+            326,
+            1
+          ],
+          [
+            776,
+            1
+          ],
+          [
+            524,
+            1
+          ]
+        ],
+        "non_strict_dna_records": 27,
+        "publication_count_discrepancies": {},
+        "records": 41671,
+        "records_by_class": {
+          "positive": 41671
+        },
+        "records_not_expected_length": 3,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 37960
+      }
+    },
+    "bhandari-history-human": {
+      "input_sha256": {
+        "bhandari-github-history/Promoter_Human.csv": "75fc70b6ad893e9346a2c152b439e0f507223b71c703b5414f02d8d91d62edd5"
+      },
+      "notes": "Repository commit c1c97ee. Same sequence multiset as the Drive Human_promoter file (F-065).",
+      "output": "data/canonical/bhandari_history_canonicalization_v1/bhandari-history-human.csv.gz",
+      "output_sha256": "e2c54699ba05d1b5877b449ec62504986e36c438c6a9bbb22970152a2bccb7d8",
+      "source": "bhandari",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 26577,
+        "expected_release_records_by_class": {
+          "positive": 61546
+        },
+        "most_common_lengths": [
+          [
+            1000,
+            61516
+          ],
+          [
+            772,
+            6
+          ],
+          [
+            367,
+            6
+          ],
+          [
+            350,
+            1
+          ],
+          [
+            659,
+            1
+          ]
+        ],
+        "non_strict_dna_records": 58,
+        "publication_count_discrepancies": {},
+        "records": 61546,
+        "records_by_class": {
+          "positive": 61546
+        },
+        "records_not_expected_length": 30,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 34969
+      }
+    },
+    "bhandari-history-yeast": {
+      "input_sha256": {
+        "bhandari-github-history/Promoter_Yeast.csv": "e7eef92f51ad97e1678c661978df70157a8d2f6509374d7b5930e7d6b6220d58"
+      },
+      "notes": "Repository commit c1c97ee. Same sequence multiset as the Drive Yeast_promoter file (F-065).",
+      "output": "data/canonical/bhandari_history_canonicalization_v1/bhandari-history-yeast.csv.gz",
+      "output_sha256": "908b4d7c7336d2dffe65a36fc125985dd29b2ed33becd98316f50d82199992f4",
+      "source": "bhandari",
+      "validation": {
+        "case_normalized_records": 0,
+        "cross_label_collision_records": 0,
+        "duplicate_records": 80,
+        "expected_release_records_by_class": {
+          "positive": 6125
+        },
+        "most_common_lengths": [
+          [
+            1000,
+            6122
+          ],
+          [
+            352,
+            1
+          ],
+          [
+            884,
+            1
+          ],
+          [
+            732,
+            1
+          ]
+        ],
+        "non_strict_dna_records": 0,
+        "publication_count_discrepancies": {},
+        "records": 6125,
+        "records_by_class": {
+          "positive": 6125
+        },
+        "records_not_expected_length": 3,
+        "release_counts_match": true,
+        "status": "pass",
+        "unique_sequences": 6045
+      }
+    }
+  },
+  "columns": [
+    "record_id",
+    "collection_id",
+    "source",
+    "organism",
+    "domain",
+    "source_file",
+    "source_member",
+    "record_index",
+    "source_split",
+    "source_class",
+    "label",
+    "original_header",
+    "sequence",
+    "length",
+    "tss_index",
+    "sequence_sha1",
+    "strict_dna",
+    "invalid_symbols",
+    "case_normalized",
+    "length_matches_expected",
+    "duplicate_of",
+    "cross_label_collision"
+  ],
+  "config_sha256": "154e24e5d1276a6f2b8afc3bb991c023957ead1f36dc42fe1ea20e0e63cf48ec",
+  "schema_version": 1
+}

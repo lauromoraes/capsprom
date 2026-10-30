@@ -1,0 +1,40 @@
+acquisition:
+  name: reference-acquisition-v8
+  version: 1.0.0
+  protocol: specs/reference_coordinate_mapping_protocol.md
+  audit: docs/bhandari_nominal_plant_assessment.md
+  root: data/acquired/reference_acquisition_v8
+  frozen_on: 2026-10-29
+  policy: >-
+    Dated NCBI RefSeq annotations of the A. thaliana TAIR10 sequence, used to
+    classify the TSS of the historical Bhandari A. thaliana windows against more
+    than one annotation version (reconstructed condition only). GCF_000001735.3
+    (TAIR10; GFF dated 2018-04-02) and GCF_000001735.4 (TAIR10.1; GFF dated
+    2023-06-16). None is known to be the annotation the authors used; UCSC
+    araTha1 is not available (F-069). MD5 digests are from each directory's
+    md5checksums.txt. The earlier mitochondrion (P-7) is handled by
+    reference_acquisition_v7, not here.
+
+sources:
+  - source_id: ncbi-tair10-gcf3
+    kind: url_list
+    study: ncbi_refseq_annotation
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/735/GCF_000001735.3_TAIR10/
+    release: GCF_000001735.3
+    files:
+      - path: GCF_000001735.3_TAIR10_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/735/GCF_000001735.3_TAIR10/GCF_000001735.3_TAIR10_assembly_report.txt
+        expected: {md5: 9dae62a971ee21815341fa180d0ff6d4}
+      - path: GCF_000001735.3_TAIR10_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/735/GCF_000001735.3_TAIR10/GCF_000001735.3_TAIR10_genomic.gff.gz
+        expected: {md5: 9f7943604f4129274c744ca7c91befba}
+
+  - source_id: ncbi-tair10-gcf4
+    kind: url_list
+    study: ncbi_refseq_annotation
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/735/GCF_000001735.4_TAIR10.1/
+    release: GCF_000001735.4
+    files:
+      - path: GCF_000001735.4_TAIR10.1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/735/GCF_000001735.4_TAIR10.1/GCF_000001735.4_TAIR10.1_genomic.gff.gz
+        expected: {md5: b809ab966e03e2a2d438b78656d9b409}

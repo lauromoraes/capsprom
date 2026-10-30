@@ -1,0 +1,83 @@
+{
+  "acquisition": "reference-acquisition-v4",
+  "config_sha256": "70719e705a7d4bd3d06e834a1e5a3362a7e578dcc1d78123f5106a107a81d374",
+  "files": {
+    "ucsc-genark-tair10/GCF_000001735.4.2bit": {
+      "acquired_at": "2026-10-29T23:13:36+00:00",
+      "expected": {
+        "md5": "ea4e3aed9786cf5db949ee377275ecd1"
+      },
+      "git_blob_sha1": "8d2990f60e0b8640759d038574cc13b918a3271c",
+      "md5": "ea4e3aed9786cf5db949ee377275ecd1",
+      "path": "GCF_000001735.4.2bit",
+      "response_headers": {
+        "content-length": "35914993",
+        "content-type": "application/x-troff-man",
+        "etag": "\"22404f1-5ad540f0c5f8d\"",
+        "last-modified": "Thu, 20 Aug 2020 19:23:44 GMT"
+      },
+      "sha256": "7d11c57fc0ec8e37cdb165cec00da6bd3b46dd1f234b12517dfbea5a738f009e",
+      "size_bytes": 35914993,
+      "source_id": "ucsc-genark-tair10",
+      "url": "https://hgdownload.soe.ucsc.edu/hubs/GCF/000/001/735/GCF_000001735.4/GCF_000001735.4.2bit",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "ucsc-genark-tair10/GCF_000001735.4.chrom.sizes.txt": {
+      "acquired_at": "2026-10-29T23:13:37+00:00",
+      "expected": {
+        "md5": "b91146f82a5aa4f88274a74c22867806"
+      },
+      "git_blob_sha1": "332974385203264ef31381c1f94b56c6bba9ae2d",
+      "md5": "b91146f82a5aa4f88274a74c22867806",
+      "path": "GCF_000001735.4.chrom.sizes.txt",
+      "response_headers": {
+        "content-length": "143",
+        "content-type": "text/plain; charset=UTF-8",
+        "etag": "\"8f-56ddeaf6281b5\"",
+        "last-modified": "Tue, 05 Jun 2018 05:54:36 GMT"
+      },
+      "sha256": "dfe6dec39b52cdeedc05898bf03c56a78a5cf4b2a55c1691adb00ead1d000e6d",
+      "size_bytes": 143,
+      "source_id": "ucsc-genark-tair10",
+      "url": "https://hgdownload.soe.ucsc.edu/hubs/GCF/000/001/735/GCF_000001735.4/GCF_000001735.4.chrom.sizes.txt",
+      "verified_against": [
+        "md5"
+      ]
+    }
+  },
+  "resolved_listings": {},
+  "runs": [
+    {
+      "command": [
+        "python",
+        "scripts/acquire_sources.py",
+        "--config",
+        "configs/reference_acquisition_v4.yaml",
+        "--execute"
+      ],
+      "error": "ValueError(\"ucsc-genark-tair10/GCF_000001735.4.chromAlias.txt: digest mismatch {'md5': {'expected': 'e54deaaea7576c6bc134e1ba493e313a', 'observed': '633ba76d23e96293a6d3a871d3aa12f8'}}\")",
+      "finished_at": "2026-10-29T23:13:38+00:00",
+      "only_sources": null,
+      "started_at": "2026-10-29T23:10:58+00:00",
+      "status": "failed",
+      "summary": {
+        "downloaded": 2,
+        "planned": 3,
+        "skipped_verified": 0
+      },
+      "tool": {
+        "code": {
+          "commit": "d681bb658ed1a970ed9ff06f51014ffdea95e153",
+          "worktree_clean": false
+        },
+        "module_sha256": "a8e71e40ff7889c369afaa583f7e94605216a0494e3f9cdd084a07525d4b27a4",
+        "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.13.11",
+        "user_agent": "capsprom-source-acquisition/1"
+      }
+    }
+  ],
+  "schema_version": 1
+}

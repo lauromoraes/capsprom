@@ -12,6 +12,7 @@ Three records are produced, each stamped with when it was observed:
 
 from __future__ import annotations
 
+import bisect
 import csv
 import fnmatch
 import gzip
@@ -35,6 +36,7 @@ from capsprom.data.acquisition import (
     file_digests,
     tls_context,
 )
+from capsprom.state import write_json_atomic
 
 PROVENANCE_SCHEMA_VERSION = 1
 UNKNOWN_ACQUISITION_DATE = {
@@ -549,3 +551,405 @@ def uncovered_deviations(record: dict[str, Any], patterns: list[str]) -> dict[st
         "missing_from_spec": [c for c in collections if not any(fnmatch.fnmatch(c, p) for p in patterns)],
         "stale_in_spec": [p for p in patterns if not any(fnmatch.fnmatch(c, p) for c in collections)],
     }
+
+
+_UCSC_RANGE = re.compile(r"^(?P<assembly>[A-Za-z0-9]+)_.*\brange=(?P<chrom>[^:\s]+):(?P<start>\d+)-(?P<end>\d+)\b.*\bstrand=(?P<strand>[+-])")
+
+
+def recreate_ucsc_ranges(canonical_path: Path, genomes: dict[str, Path]) -> dict[str, Any]:
+    """Compare every record of a canonical table with its declared UCSC ``range``.
+
+    Headers such as ``mm10_..._up_700_... range=chr1:a-b ... strand=-`` are read
+    as 1-based closed intervals (F-041): ``[a - 1, b)`` is extracted from the
+    named assembly and reverse-complemented on ``-``. The record lists the IDs of
+    records that are not reproduced, never a sequence.
+    """
+
+    from capsprom.data.twobit import TwoBitGenome
+
+    opened: dict[str, TwoBitGenome] = {}
+    counts: dict[str, int] = defaultdict(int)
+    failures: dict[str, list[str]] = defaultdict(list)
+    by_assembly: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+    try:
+        with gzip.open(canonical_path, "rt", encoding="utf-8", newline="") as handle:
+            for row in csv.DictReader(handle):
+                counts["records"] += 1
+                match = _UCSC_RANGE.match(row["original_header"])
+                if match is None:
+                    failures["unparsed_header"].append(row["record_id"])
+                    continue
+                assembly = match["assembly"]
+                if assembly not in genomes:
+                    failures["undeclared_assembly"].append(row["record_id"])
+                    continue
+                genome = opened.get(assembly) or opened.setdefault(assembly, TwoBitGenome(genomes[assembly]))
+                if match["chrom"] not in genome.sequence_names:
+                    failures["missing_contig"].append(row["record_id"])
+                    continue
+                start, end = int(match["start"]) - 1, int(match["end"])
+                try:
+                    recreated = genome.fetch(match["chrom"], start, end, reverse_complement=match["strand"] == "-")
+                except ValueError:
+                    failures["interval_outside_contig"].append(row["record_id"])
+                    continue
+                if recreated.upper() == row["sequence"].upper():
+                    counts["identical"] += 1
+                    by_assembly[assembly]["identical"] += 1
+                else:
+                    failures["sequence_differs"].append(row["record_id"])
+                    by_assembly[assembly]["sequence_differs"] += 1
+    finally:
+        for genome in opened.values():
+            genome.close()
+    return {
+        "schema_version": PROVENANCE_SCHEMA_VERSION,
+        "observed_at": _now(),
+        "canonical_table": canonical_path.name,
+        "canonical_table_sha256": _sha256_file(canonical_path),
+        "genomes": {name: {"path": str(path), "sha256": _sha256_file(path)} for name, path in sorted(genomes.items())},
+        "convention": "ucsc_position_1closed",
+        "record_count": counts["records"],
+        "identical_count": counts["identical"],
+        "by_assembly": {name: dict(values) for name, values in sorted(by_assembly.items())},
+        "failures": {reason: {"count": len(ids), "record_ids": ids} for reason, ids in sorted(failures.items())},
+    }
+
+
+_REVERSE_COMPLEMENT = str.maketrans("ACGTN", "TGCAN")
+
+
+def _anchor(sequence: str, size: int) -> tuple[int, str] | None:
+    for offset in range(0, len(sequence) - size + 1, size):
+        candidate = sequence[offset : offset + size]
+        if set(candidate) <= set("ACGT"):
+            return offset, candidate
+    return None
+
+
+def locate_exact_sequences(sequences: dict[str, str], genome_path: Path, anchor_size: int = 32) -> dict[str, Any]:
+    """Find every exact, full-length occurrence of each sequence on either strand.
+
+    Each sequence is reduced to its first ACGT-only ``anchor_size``-mer (on the
+    forward sequence and on its reverse complement); one pass over the genome
+    collects anchor positions, and every candidate is confirmed by comparing the
+    whole sequence. Positions are 0-based starts of the forward-strand interval.
+    """
+
+    from capsprom.data.twobit import TwoBitGenome
+
+    anchors: dict[str, list[tuple[str, str, int]]] = defaultdict(list)
+    unanchored: list[str] = []
+    for record_id, sequence in sequences.items():
+        sequence = sequence.upper()
+        for strand, oriented in (("+", sequence), ("-", sequence.translate(_REVERSE_COMPLEMENT)[::-1])):
+            found = _anchor(oriented, anchor_size)
+            if found is None:
+                unanchored.append(record_id)
+                break
+            anchors[found[1]].append((record_id, strand, found[0]))
+    hits: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    with TwoBitGenome(genome_path) as genome:
+        for name in genome.sequence_names:
+            contig = genome.fetch(name, 0, genome.sequence_size(name)).upper()
+            for position in range(len(contig) - anchor_size + 1):
+                entries = anchors.get(contig[position : position + anchor_size])
+                if not entries:
+                    continue
+                for record_id, strand, offset in entries:
+                    sequence = sequences[record_id].upper()
+                    start = position - offset
+                    window = contig[start : start + len(sequence)] if start >= 0 else ""
+                    if strand == "-":
+                        window = window.translate(_REVERSE_COMPLEMENT)[::-1]
+                    if window == sequence:
+                        hits[record_id].append({"contig": name, "start": start, "strand": strand})
+    located = {record_id: loci for record_id, loci in hits.items()}
+    return {
+        "genome_sha256": _sha256_file(genome_path),
+        "anchor_size": anchor_size,
+        "sequence_count": len(sequences),
+        "located_count": len(located),
+        "unique_locus_count": sum(1 for loci in located.values() if len(loci) == 1),
+        "unanchored": sorted(set(unanchored)),
+        "not_located": sorted(set(sequences) - set(located) - set(unanchored)),
+        "loci": located,
+    }
+
+
+def _transcript_starts(gtf_path: Path) -> set[tuple[str, str, int]]:
+    """Return ``(contig, strand, 1-based TSS)`` for every transcript of a GTF."""
+
+    starts: set[tuple[str, str, int]] = set()
+    with gzip.open(gtf_path, "rt", encoding="utf-8") as handle:
+        for line in handle:
+            fields = line.split("\t")
+            if len(fields) > 6 and fields[2] == "transcript":
+                tss = int(fields[3]) if fields[6] == "+" else int(fields[4])
+                starts.add((fields[0], fields[6], tss))
+    return starts
+
+
+def bhandari_history_record(
+    history_files: dict[str, tuple[Path, Path]],
+    arabidopsis_csv: Path,
+    arabidopsis_genome: Path,
+    arabidopsis_gtf: Path,
+    loci_path: Path,
+) -> dict[str, Any]:
+    """Compare the pre-2021 Bhandari repository CSVs with the Drive release.
+
+    ``history_files`` maps a CSV name to ``(csv_path, canonical_table)``. The
+    *A. thaliana* CSV, which has no coordinates, is also located exactly in the
+    *A. thaliana* genome, and the base at index 700 of each located window is
+    compared with annotated transcript starts. Loci are written to the ignored
+    ``loci_path``; the returned record holds counts and hashes only.
+    """
+
+    files: dict[str, Any] = {}
+    for name, (csv_path, canonical_table) in sorted(history_files.items()):
+        with csv_path.open(encoding="utf-8", newline="") as handle:
+            rows = [(label, sequence.upper()) for label, sequence in csv.reader(handle)]
+        with gzip.open(canonical_table, "rt", encoding="utf-8", newline="") as handle:
+            released = [row["sequence"].upper() for row in csv.DictReader(handle)]
+        history = [sequence for _, sequence in rows]
+        lengths = defaultdict(int)
+        for sequence in history:
+            lengths[len(sequence)] += 1
+        files[name] = {
+            "sha256": _sha256_file(csv_path),
+            "record_count": len(rows),
+            "labels": sorted({label for label, _ in rows}),
+            "length_1000_count": lengths[1000],
+            "other_lengths": sorted(length for length in lengths if length != 1000),
+            "unique_sequence_count": len(set(history)),
+            "non_acgt_record_count": sum(1 for sequence in history if set(sequence) - set("ACGT")),
+            "mean_gc": round(sum(s.count("G") + s.count("C") for s in history) / sum(map(len, history)), 4),
+            "compared_with": canonical_table.name,
+            "equal_multiset": sorted(history) == sorted(released),
+            "shared_unique_sequences": len(set(history) & set(released)),
+        }
+    with arabidopsis_csv.open(encoding="utf-8", newline="") as handle:
+        sequences = {f"{arabidopsis_csv.name}:{index}": row[1] for index, row in enumerate(csv.reader(handle))}
+    located = locate_exact_sequences(sequences, arabidopsis_genome)
+    starts = _transcript_starts(arabidopsis_gtf)
+    tss_match = 0
+    contigs: dict[str, int] = defaultdict(int)
+    for record_id, loci in located["loci"].items():
+        length = len(sequences[record_id])
+        contigs[loci[0]["contig"]] += 1
+        for locus in loci:
+            if length != 1000:
+                continue
+            tss = locus["start"] + 701 if locus["strand"] == "+" else locus["start"] + length - 700
+            if (locus["contig"], locus["strand"], tss) in starts:
+                tss_match += 1
+                break
+    loci_path.parent.mkdir(parents=True, exist_ok=True)
+    write_json_atomic(loci_path, located["loci"])
+    return {
+        "schema_version": PROVENANCE_SCHEMA_VERSION,
+        "observed_at": _now(),
+        "files": files,
+        "arabidopsis_location": {
+            "genome_sha256": located["genome_sha256"],
+            "gtf_sha256": _sha256_file(arabidopsis_gtf),
+            "anchor_size": located["anchor_size"],
+            "sequence_count": located["sequence_count"],
+            "located_count": located["located_count"],
+            "unique_locus_count": located["unique_locus_count"],
+            "first_locus_contigs": dict(sorted(contigs.items())),
+            "unanchored_count": len(located["unanchored"]),
+            "not_located_count": len(located["not_located"]),
+            "not_located_record_ids": located["not_located"],
+            "index_700_equals_transcript_start_count": tss_match,
+            "loci_file": str(loci_path),
+            "loci_sha256": _sha256_file(loci_path),
+        },
+    }
+
+
+def verify_label_csv_canonical(
+    canonical_table: Path, source_file: Path, source_key: str, comparison_table: Path | None = None
+) -> dict[str, Any]:
+    """Check that a canonical table built from a ``label,sequence`` file loses nothing.
+
+    The rows, written back as ``label,sequence`` with the source's line ending,
+    must reproduce the source file byte for byte; record IDs must be contiguous
+    and stable; ``sequence_sha1`` must match. ``comparison_table`` (another
+    release of the same study) is compared by sequence multiset and by order.
+    """
+
+    with gzip.open(canonical_table, "rt", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    collection_id = rows[0]["collection_id"] if rows else ""
+    raw = source_file.read_bytes()
+    newline = b"\r\n" if b"\r\n" in raw[:4096] else b"\n"
+    rebuilt = b"".join(f"{row['original_header']},{row['sequence']}".encode() + newline for row in rows)
+    expected_ids = [f"{collection_id}:{source_key}:{index:07d}" for index in range(len(rows))]
+    sequences = [row["sequence"] for row in rows]
+    lengths = defaultdict(int)
+    for sequence in sequences:
+        lengths[len(sequence)] += 1
+    record: dict[str, Any] = {
+        "canonical_table": canonical_table.name,
+        "canonical_sha256": _sha256_file(canonical_table),
+        "source_file": source_key,
+        "source_sha256": _sha256(raw),
+        "record_count": len(rows),
+        "source_line_count": raw.count(newline),
+        "rebuilt_equals_source_bytes": rebuilt == raw,
+        "record_ids_contiguous": [row["record_id"] for row in rows] == expected_ids,
+        "record_indexes_contiguous": [int(row["record_index"]) for row in rows] == list(range(len(rows))),
+        "sequence_sha1_valid": all(
+            hashlib.sha1(row["sequence"].encode()).hexdigest() == row["sequence_sha1"] for row in rows
+        ),
+        "case_normalized_records": sum(row["case_normalized"] == "true" for row in rows),
+        "source_labels": sorted({row["original_header"] for row in rows}),
+        "length_1000_records": lengths[1000],
+        "other_lengths": {str(length): count for length, count in sorted(lengths.items()) if length != 1000},
+        "non_strict_dna_records": sum(row["strict_dna"] != "true" for row in rows),
+        "duplicate_records": sum(bool(row["duplicate_of"]) for row in rows),
+        "unique_sequences": len(set(sequences)),
+    }
+    if comparison_table is not None:
+        with gzip.open(comparison_table, "rt", encoding="utf-8", newline="") as handle:
+            other = [row["sequence"] for row in csv.DictReader(handle)]
+        record["comparison"] = {
+            "table": comparison_table.name,
+            "equal_multiset": sorted(sequences) == sorted(other),
+            "equal_order": sequences == other,
+            "shared_unique_sequences": len(set(sequences) & set(other)),
+        }
+    return record
+
+
+TRANSCRIPT_FEATURES = frozenset(
+    {"transcript", "mRNA", "lnc_RNA", "ncRNA", "tRNA", "rRNA", "snoRNA", "snRNA", "miRNA",
+     "primary_transcript", "antisense_RNA"}
+)
+TSS_DISTANCE_BINS = ((0, 0, "exact"), (1, 10, "within_10"), (11, 100, "within_100"), (101, 500, "within_500"))
+
+
+def transcript_intervals(
+    path: Path, aliases: dict[str, str] | None = None
+) -> dict[tuple[str, str], list[tuple[int, int]]]:
+    """Return 1-based closed transcript intervals by ``(contig, strand)`` from a GTF or GFF3.
+
+    ``aliases`` renames contigs (for example Ensembl ``1`` to RefSeq ``NC_003070.9``).
+    """
+
+    aliases = aliases or {}
+
+    intervals: dict[tuple[str, str], list[tuple[int, int]]] = defaultdict(list)
+    with gzip.open(path, "rt", encoding="utf-8") as handle:
+        for line in handle:
+            fields = line.split("\t")
+            if len(fields) > 6 and fields[2] in TRANSCRIPT_FEATURES and fields[6] in "+-":
+                intervals[(aliases.get(fields[0], fields[0]), fields[6])].append((int(fields[3]), int(fields[4])))
+    return {key: sorted(set(values)) for key, values in intervals.items()}
+
+
+def _nearest_tss(position: int, strand: str, starts: list[int]) -> int | None:
+    """Signed distance, along transcription, from the window TSS to the nearest annotated TSS.
+
+    Negative values mean the annotated TSS lies upstream of the window TSS.
+    """
+
+    if not starts:
+        return None
+    index = bisect.bisect_left(starts, position)
+    nearest = min(
+        (starts[i] for i in (index - 1, index) if 0 <= i < len(starts)), key=lambda start: abs(start - position)
+    )
+    return nearest - position if strand == "+" else position - nearest
+
+
+def classify_window_tss(
+    canonical_table: Path,
+    loci: dict[str, list[dict[str, Any]]],
+    annotations: dict[str, Path],
+    window_tss: int = 700,
+    aliases: dict[str, dict[str, str]] | None = None,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Classify, per record, the agreement of index ``window_tss`` with annotated transcript starts.
+
+    A record is evaluated only if it has the declared length and an exact genome
+    locus. Its window TSS is the 1-based genome position of index ``window_tss``
+    on the locus strand: ``start + window_tss + 1`` on ``+`` and
+    ``start + length - window_tss`` on ``-``, where ``start`` is the 0-based locus
+    start. An annotated TSS is the 5' end of a transcript feature on the same
+    contig and strand (GFF/GTF column 4 on ``+``, column 5 on ``-``). For records
+    with several loci, the locus nearest an annotated TSS is used. Records are
+    never judged incorrect here: the classes describe distance only.
+    """
+
+    starts = {}
+    inside = {}
+    for name, path in annotations.items():
+        intervals = transcript_intervals(path, (aliases or {}).get(name))
+        starts[name] = {
+            key: sorted({start if key[1] == "+" else end for start, end in values}) for key, values in intervals.items()
+        }
+        inside[name] = intervals
+    with gzip.open(canonical_table, "rt", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    evidence: list[dict[str, Any]] = []
+    counts: dict[str, dict[str, int]] = {name: defaultdict(int) for name in annotations}
+    signed: dict[str, dict[str, int]] = {name: defaultdict(int) for name in annotations}
+    scope: dict[str, int] = defaultdict(int)
+    for row in rows:
+        record_loci = loci.get(f"{row['source_file'].rsplit('/', 1)[-1]}:{row['record_index']}", [])
+        length = int(row["length"])
+        entry: dict[str, Any] = {"record_id": row["record_id"], "locus_count": len(record_loci)}
+        if not record_loci:
+            entry["scope"] = "not_located"
+        elif length != 1000:
+            entry["scope"] = "not_full_length"
+        else:
+            entry["scope"] = "evaluated"
+        scope[entry["scope"]] += 1
+        for name in annotations:
+            if entry["scope"] != "evaluated":
+                entry[name] = ""
+                continue
+            best: tuple[int, int, str] | None = None
+            for locus in record_loci:
+                strand = locus["strand"]
+                position = locus["start"] + window_tss + 1 if strand == "+" else locus["start"] + length - window_tss
+                distance = _nearest_tss(position, strand, starts[name].get((locus["contig"], strand), []))
+                if distance is not None and (best is None or abs(distance) < abs(best[0])):
+                    best = (distance, position, f"{locus['contig']}:{strand}")
+            if best is None:
+                status = "no_transcript_on_strand"
+            else:
+                status = next((label for low, high, label in TSS_DISTANCE_BINS if low <= abs(best[0]) <= high), "")
+                if not status:
+                    contig, strand = best[2].split(":")
+                    within = any(s <= best[1] <= e for s, e in inside[name].get((contig, strand), []))
+                    status = "inside_transcript_far" if within else "outside_transcript_far"
+                elif best[0]:
+                    signed[name]["upstream" if best[0] < 0 else "downstream"] += 1
+            entry[name] = status if best is None else f"{status}:{best[0]}"
+            counts[name][status] += 1
+        evidence.append(entry)
+    agreement = defaultdict(int)
+    for entry in evidence:
+        if entry["scope"] == "evaluated":
+            agreement["+".join(n for n in annotations if entry[n].startswith("exact")) or "none"] += 1
+    summary = {
+        "schema_version": PROVENANCE_SCHEMA_VERSION,
+        "observed_at": _now(),
+        "canonical_table": canonical_table.name,
+        "canonical_sha256": _sha256_file(canonical_table),
+        "annotations": {name: {"path": str(path), "sha256": _sha256_file(path)} for name, path in annotations.items()},
+        "window_tss_index": window_tss,
+        "definition": "1-based TSS = locus start + 701 on '+', locus start + length - 700 on '-'; annotated TSS = "
+        "5' end of a transcript feature on the same contig and strand; distance signed along transcription "
+        "(negative = annotated TSS upstream)",
+        "scope": dict(scope),
+        "by_annotation": {name: dict(sorted(values.items())) for name, values in counts.items()},
+        "near_miss_direction": {name: dict(values) for name, values in signed.items()},
+        "exact_agreement_sets": dict(sorted(agreement.items())),
+    }
+    return summary, evidence

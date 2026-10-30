@@ -31,9 +31,11 @@ prokaryotes under this policy: `ipro-mp-11-haloferax-volcanii-ds2` and
 `ipro-mp-21-thermococcus-kodakarensis-kod1` use 81 nt.
 
 A collection whose organism evidence is `conflicting` has no domain until the
-conflict is resolved. This applies to `bhandari-nominal-plant` (F-016): its
-declared organism is a plant and its headers point to mouse, so both possible
-domains are eukaryotic, but the collection stays blocked by its own conflict.
+conflict is resolved. For `bhandari-nominal-plant` (F-016), the organism is now
+verified as mouse (F-063), a metadata correction under
+`specs/dataset_condition_policy.md`; it is eukaryotic and is never used as a
+plant set. The *A. thaliana* set the publication describes is a separate
+historical file (F-064 to F-066) that has no canonical collection yet.
 
 ## Allowed derivations
 
@@ -83,7 +85,7 @@ not yet exist; it is not a decision to exclude.
 | --- | --- | --- | --- | --- |
 | `cnnprom-human-non-tata`, `-mouse-non-tata`, `-mouse-tata`, `-mouse-tata-dbtss`, `-arabidopsis-tata`, `-arabidopsis-non-tata` | Eukaryota | 251 | native | ready |
 | `bhandari-human`, `bhandari-yeast` | Eukaryota | 1,000 (TSS index 700) | crop to indexes 500..750 | ready for records whose TSS status is verified (F-055); the rest follow F-056 |
-| `bhandari-nominal-plant` | conflicting | 1,000 | crop | blocked by F-016 |
+| `bhandari-nominal-plant` | Eukaryota (mouse, F-063) | 1,000 | crop to indexes 500..750 | as mouse only (P-1 passed, F-073); never as a plant set |
 | `bhandari-human-random-genomic` | Eukaryota (negatives) | 1,000 | same offsets as Bhandari positives | ready |
 | `epd-128` | Eukaryota | 600 (-499..+100) | crop to indexes 299..549 | ready after per-entry organism resolution |
 | `graphpro-human`, `graphpro-mouse` | Eukaryota | 81 | genomic re-extraction from the verified EPDnew loci | pending: new reconstruction; negatives rebuilt |

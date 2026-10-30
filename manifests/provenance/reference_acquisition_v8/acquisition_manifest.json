@@ -1,0 +1,103 @@
+{
+  "acquisition": "reference-acquisition-v8",
+  "config_sha256": "00c14e0a76b7ec1bcd1cd10fbd4adbba6bbf0b14971a2b14282575578ae8d447",
+  "files": {
+    "ncbi-tair10-gcf3/GCF_000001735.3_TAIR10_assembly_report.txt": {
+      "acquired_at": "2026-10-30T00:24:11+00:00",
+      "expected": {
+        "md5": "9dae62a971ee21815341fa180d0ff6d4"
+      },
+      "git_blob_sha1": "7af79f797159ecc7627a85002aaa1c839bc2bfc8",
+      "md5": "9dae62a971ee21815341fa180d0ff6d4",
+      "path": "GCF_000001735.3_TAIR10_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1750",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Fri, 24 Mar 2017 05:34:40 GMT"
+      },
+      "sha256": "0a1242edf973648596d14f985ec07f5f82f28a2b56e33dd603303b9e98f4c807",
+      "size_bytes": 1750,
+      "source_id": "ncbi-tair10-gcf3",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/735/GCF_000001735.3_TAIR10/GCF_000001735.3_TAIR10_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "ncbi-tair10-gcf3/GCF_000001735.3_TAIR10_genomic.gff.gz": {
+      "acquired_at": "2026-10-30T00:24:19+00:00",
+      "expected": {
+        "md5": "9f7943604f4129274c744ca7c91befba"
+      },
+      "git_blob_sha1": "ae141c16951abb435f624544aa29e7ca1d3976c7",
+      "md5": "9f7943604f4129274c744ca7c91befba",
+      "path": "GCF_000001735.3_TAIR10_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "21302932",
+        "content-type": "application/x-gzip",
+        "last-modified": "Mon, 02 Apr 2018 05:23:32 GMT"
+      },
+      "sha256": "09ad6244ac4a37d96adbbf7724f0beda2ec238a0d20d328ea8af35618ddced96",
+      "size_bytes": 21302932,
+      "source_id": "ncbi-tair10-gcf3",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/735/GCF_000001735.3_TAIR10/GCF_000001735.3_TAIR10_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "ncbi-tair10-gcf4/GCF_000001735.4_TAIR10.1_genomic.gff.gz": {
+      "acquired_at": "2026-10-30T00:24:24+00:00",
+      "expected": {
+        "md5": "b809ab966e03e2a2d438b78656d9b409"
+      },
+      "git_blob_sha1": "131a59472772725b0d8c206e03f7607c0e9acf17",
+      "md5": "b809ab966e03e2a2d438b78656d9b409",
+      "path": "GCF_000001735.4_TAIR10.1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "22213077",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 16 Jun 2023 20:44:55 GMT"
+      },
+      "sha256": "d6a3aa3c00df97cf0a458608572fbe721424a4740e64e9ddef9398c4eef7db5f",
+      "size_bytes": 22213077,
+      "source_id": "ncbi-tair10-gcf4",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/735/GCF_000001735.4_TAIR10.1/GCF_000001735.4_TAIR10.1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    }
+  },
+  "resolved_listings": {},
+  "runs": [
+    {
+      "command": [
+        "python",
+        "scripts/acquire_sources.py",
+        "--config",
+        "configs/reference_acquisition_v8.yaml",
+        "--execute"
+      ],
+      "finished_at": "2026-10-30T00:24:24+00:00",
+      "only_sources": null,
+      "started_at": "2026-10-30T00:24:08+00:00",
+      "status": "completed",
+      "summary": {
+        "declared_files": 3,
+        "downloaded": 3,
+        "planned": 3,
+        "recorded_files": 3,
+        "skipped_verified": 0
+      },
+      "tool": {
+        "code": {
+          "commit": "3cc36186b49dfa5f10f7eba261719f48d3e188a6",
+          "worktree_clean": false
+        },
+        "module_sha256": "a8e71e40ff7889c369afaa583f7e94605216a0494e3f9cdd084a07525d4b27a4",
+        "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.13.11",
+        "user_agent": "capsprom-source-acquisition/1"
+      }
+    }
+  ],
+  "schema_version": 1
+}

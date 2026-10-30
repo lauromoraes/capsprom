@@ -1,0 +1,106 @@
+{
+  "acquisition": "reference-acquisition-v5",
+  "config_sha256": "79a54c7e1fdcef794f7029cd14f82abe0bd545fe6ec05dc39a0907585a1ee412",
+  "files": {
+    "ucsc-genark-tair10/GCF_000001735.4.2bit": {
+      "acquired_at": "2026-10-29T23:16:23+00:00",
+      "expected": {
+        "md5": "ea4e3aed9786cf5db949ee377275ecd1"
+      },
+      "git_blob_sha1": "8d2990f60e0b8640759d038574cc13b918a3271c",
+      "md5": "ea4e3aed9786cf5db949ee377275ecd1",
+      "path": "GCF_000001735.4.2bit",
+      "response_headers": {
+        "content-length": "35914993",
+        "content-type": "application/x-troff-man",
+        "etag": "\"22404f1-5ad540f0c5f8d\"",
+        "last-modified": "Thu, 20 Aug 2020 19:23:44 GMT"
+      },
+      "sha256": "7d11c57fc0ec8e37cdb165cec00da6bd3b46dd1f234b12517dfbea5a738f009e",
+      "size_bytes": 35914993,
+      "source_id": "ucsc-genark-tair10",
+      "url": "https://hgdownload.soe.ucsc.edu/hubs/GCF/000/001/735/GCF_000001735.4/GCF_000001735.4.2bit",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "ucsc-genark-tair10/GCF_000001735.4.chrom.sizes.txt": {
+      "acquired_at": "2026-10-29T23:16:25+00:00",
+      "expected": {
+        "md5": "a0fafa5fc5214c21f49ca3415640f033"
+      },
+      "git_blob_sha1": "a0bf55a97e2700fd1e444486f834ee9f0620c405",
+      "md5": "a0fafa5fc5214c21f49ca3415640f033",
+      "path": "GCF_000001735.4.chrom.sizes.txt",
+      "response_headers": {
+        "content-length": "1783",
+        "content-type": "text/plain; charset=UTF-8",
+        "etag": "\"6f7-5836800f79396\"",
+        "last-modified": "Wed, 06 Mar 2019 07:33:19 GMT"
+      },
+      "sha256": "12ce7833ce4d38b8ad49256e5fbe8eec6b6d4f870ec39ae698f9d74bcb750e19",
+      "size_bytes": 1783,
+      "source_id": "ucsc-genark-tair10",
+      "url": "https://hgdownload.soe.ucsc.edu/hubs/GCF/000/001/735/GCF_000001735.4/GCF_000001735.4_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "ucsc-genark-tair10/GCF_000001735.4_TAIR10.1.ncbiRefSeq.gtf.gz": {
+      "acquired_at": "2026-10-29T23:16:38+00:00",
+      "expected": {
+        "md5": "60a22b9ffba4a30a6c4f029d1e1f4c96"
+      },
+      "git_blob_sha1": "dcbafd510007e4af6167824b5cc687e1b6918f31",
+      "md5": "60a22b9ffba4a30a6c4f029d1e1f4c96",
+      "path": "GCF_000001735.4_TAIR10.1.ncbiRefSeq.gtf.gz",
+      "response_headers": {
+        "content-length": "9328188",
+        "content-type": "application/x-gzip",
+        "etag": "\"8e563c-6372c9dd82fbb\"",
+        "last-modified": "Tue, 10 Jun 2025 00:17:06 GMT"
+      },
+      "sha256": "f51fe7d49d9fccb60357d56ee7be47ae27b4bf71597e70f4918c5bd58a0d671a",
+      "size_bytes": 9328188,
+      "source_id": "ucsc-genark-tair10",
+      "url": "https://hgdownload.soe.ucsc.edu/hubs/GCF/000/001/735/GCF_000001735.4/genes/GCF_000001735.4_TAIR10.1.ncbiRefSeq.gtf.gz",
+      "verified_against": [
+        "md5"
+      ]
+    }
+  },
+  "resolved_listings": {},
+  "runs": [
+    {
+      "command": [
+        "python",
+        "scripts/acquire_sources.py",
+        "--config",
+        "configs/reference_acquisition_v5.yaml",
+        "--execute"
+      ],
+      "finished_at": "2026-10-29T23:16:38+00:00",
+      "only_sources": null,
+      "started_at": "2026-10-29T23:14:01+00:00",
+      "status": "completed",
+      "summary": {
+        "declared_files": 3,
+        "downloaded": 3,
+        "planned": 3,
+        "recorded_files": 3,
+        "skipped_verified": 0
+      },
+      "tool": {
+        "code": {
+          "commit": "3cc36186b49dfa5f10f7eba261719f48d3e188a6",
+          "worktree_clean": false
+        },
+        "module_sha256": "a8e71e40ff7889c369afaa583f7e94605216a0494e3f9cdd084a07525d4b27a4",
+        "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.13.11",
+        "user_agent": "capsprom-source-acquisition/1"
+      }
+    }
+  ],
+  "schema_version": 1
+}

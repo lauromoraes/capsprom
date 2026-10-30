@@ -1,0 +1,89 @@
+{
+  "bhandari-human": {
+    "by_assembly": {
+      "hg38": {
+        "identical": 61546
+      }
+    },
+    "canonical_table": "bhandari-human.csv.gz",
+    "canonical_table_sha256": "b4fc09fc180eaad1ebaeb69f37d0d178c41835348e64821b8f2a462dce25bc73",
+    "convention": "ucsc_position_1closed",
+    "failures": {},
+    "genomes": {
+      "hg38": {
+        "path": "data/acquired/source_acquisition_v1/ucsc-genomes/hg38.2bit",
+        "sha256": "1f67aaa17a77b327738fe750ab37430a85dddf73c7d9189385ad1839259acec0"
+      },
+      "mm10": {
+        "path": "data/acquired/source_acquisition_v1/ucsc-genomes/mm10.2bit",
+        "sha256": "4de06ca0bfca5417ae3782c09cf2caf7afc97c190172f60dc07b783f1bc6f39d"
+      },
+      "sacCer3": {
+        "path": "data/acquired/source_acquisition_v1/ucsc-genomes/sacCer3.2bit",
+        "sha256": "b061b22fdce3cb82c24d85101bc6eae98d23ea7194c1888c966b5446dd7909ab"
+      }
+    },
+    "identical_count": 61546,
+    "observed_at": "2026-10-29T23:25:19+00:00",
+    "record_count": 61546,
+    "schema_version": 1
+  },
+  "bhandari-nominal-plant": {
+    "by_assembly": {
+      "mm10": {
+        "identical": 106520
+      }
+    },
+    "canonical_table": "bhandari-nominal-plant.csv.gz",
+    "canonical_table_sha256": "a32e0adf56f4902eedbd06a2a6118f59aff79f93a751870cbec31ade4fd075fc",
+    "convention": "ucsc_position_1closed",
+    "failures": {},
+    "genomes": {
+      "hg38": {
+        "path": "data/acquired/source_acquisition_v1/ucsc-genomes/hg38.2bit",
+        "sha256": "1f67aaa17a77b327738fe750ab37430a85dddf73c7d9189385ad1839259acec0"
+      },
+      "mm10": {
+        "path": "data/acquired/source_acquisition_v1/ucsc-genomes/mm10.2bit",
+        "sha256": "4de06ca0bfca5417ae3782c09cf2caf7afc97c190172f60dc07b783f1bc6f39d"
+      },
+      "sacCer3": {
+        "path": "data/acquired/source_acquisition_v1/ucsc-genomes/sacCer3.2bit",
+        "sha256": "b061b22fdce3cb82c24d85101bc6eae98d23ea7194c1888c966b5446dd7909ab"
+      }
+    },
+    "identical_count": 106520,
+    "observed_at": "2026-10-29T23:29:04+00:00",
+    "record_count": 106520,
+    "schema_version": 1
+  },
+  "bhandari-yeast": {
+    "by_assembly": {
+      "sacCer3": {
+        "identical": 6125
+      }
+    },
+    "canonical_table": "bhandari-yeast.csv.gz",
+    "canonical_table_sha256": "319eb5b91fc0b49056d017436b53b2d06c28b19498074a74d83bc199aaf08d82",
+    "convention": "ucsc_position_1closed",
+    "failures": {},
+    "genomes": {
+      "hg38": {
+        "path": "data/acquired/source_acquisition_v1/ucsc-genomes/hg38.2bit",
+        "sha256": "1f67aaa17a77b327738fe750ab37430a85dddf73c7d9189385ad1839259acec0"
+      },
+      "mm10": {
+        "path": "data/acquired/source_acquisition_v1/ucsc-genomes/mm10.2bit",
+        "sha256": "4de06ca0bfca5417ae3782c09cf2caf7afc97c190172f60dc07b783f1bc6f39d"
+      },
+      "sacCer3": {
+        "path": "data/acquired/source_acquisition_v1/ucsc-genomes/sacCer3.2bit",
+        "sha256": "b061b22fdce3cb82c24d85101bc6eae98d23ea7194c1888c966b5446dd7909ab"
+      }
+    },
+    "identical_count": 6125,
+    "observed_at": "2026-10-29T23:25:49+00:00",
+    "record_count": 6125,
+    "schema_version": 1
+  }
+}

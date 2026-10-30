@@ -1,0 +1,29 @@
+acquisition:
+  name: reference-acquisition-v9
+  version: 1.0.0
+  protocol: specs/reference_coordinate_mapping_protocol.md
+  audit: docs/bhandari_nominal_plant_assessment.md
+  root: data/acquired/reference_acquisition_v9
+  frozen_on: 2026-10-29
+  policy: >-
+    TAIR10 gene models as distributed by Ensembl Plants release 31 (GTF dated
+    2017-07-18), used to test whether the historical Bhandari A. thaliana
+    windows follow the TAIR10 annotation rather than the later Araport11-based
+    RefSeq annotations (reconstructed condition only). The TAIR download site
+    requires an account (HTTP 403). Ensembl publishes only BSD sum checksums
+    (CHECKSUMS: "02936 7710"), which the acquisition tool cannot verify; the
+    file is recorded on first use and the BSD sum is checked separately (log
+    R-025 or later). Ensembl contig names (1-5, Mt, Pt) are mapped to RefSeq
+    accessions through the GCF_000001735.3 assembly report.
+
+sources:
+  - source_id: ensembl-plants-31-athaliana
+    kind: url_list
+    study: ensembl_plants
+    landing_page: https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-31/gtf/arabidopsis_thaliana/
+    release: '31'
+    files:
+      - path: Arabidopsis_thaliana.TAIR10.31.gtf.gz
+        url: https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-31/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.31.gtf.gz
+      - path: CHECKSUMS
+        url: https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-31/gtf/arabidopsis_thaliana/CHECKSUMS

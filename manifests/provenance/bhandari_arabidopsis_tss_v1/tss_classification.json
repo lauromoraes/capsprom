@@ -1,0 +1,99 @@
+{
+  "annotations": {
+    "ensembl_plants_31_tair10_2017_07_18": {
+      "path": "data/acquired/reference_acquisition_v9/ensembl-plants-31-athaliana/Arabidopsis_thaliana.TAIR10.31.gtf.gz",
+      "sha256": "d5c3117d09b27147422791f0f3ca7163acafeedd4e4827bd8446e893de2d8d5b"
+    },
+    "genark_ncbiRefSeq_2025_06_09": {
+      "path": "data/acquired/reference_acquisition_v6/ucsc-genark-tair10/GCF_000001735.4_TAIR10.1.ncbiRefSeq.gtf.gz",
+      "sha256": "f51fe7d49d9fccb60357d56ee7be47ae27b4bf71597e70f4918c5bd58a0d671a"
+    },
+    "ncbi_gcf3_gff_2018_04_02": {
+      "path": "data/acquired/reference_acquisition_v8/ncbi-tair10-gcf3/GCF_000001735.3_TAIR10_genomic.gff.gz",
+      "sha256": "09ad6244ac4a37d96adbbf7724f0beda2ec238a0d20d328ea8af35618ddced96"
+    },
+    "ncbi_gcf4_gff_2023_06_16": {
+      "path": "data/acquired/reference_acquisition_v8/ncbi-tair10-gcf4/GCF_000001735.4_TAIR10.1_genomic.gff.gz",
+      "sha256": "d6a3aa3c00df97cf0a458608572fbe721424a4740e64e9ddef9398c4eef7db5f"
+    }
+  },
+  "by_annotation": {
+    "ensembl_plants_31_tair10_2017_07_18": {
+      "exact": 41539,
+      "inside_transcript_far": 3,
+      "no_transcript_on_strand": 35,
+      "outside_transcript_far": 2,
+      "within_10": 2,
+      "within_100": 5,
+      "within_500": 5
+    },
+    "genark_ncbiRefSeq_2025_06_09": {
+      "exact": 22970,
+      "inside_transcript_far": 394,
+      "outside_transcript_far": 379,
+      "within_10": 1913,
+      "within_100": 9655,
+      "within_500": 6280
+    },
+    "ncbi_gcf3_gff_2018_04_02": {
+      "exact": 22879,
+      "inside_transcript_far": 393,
+      "no_transcript_on_strand": 35,
+      "outside_transcript_far": 459,
+      "within_10": 1916,
+      "within_100": 9632,
+      "within_500": 6277
+    },
+    "ncbi_gcf4_gff_2023_06_16": {
+      "exact": 22980,
+      "inside_transcript_far": 390,
+      "outside_transcript_far": 388,
+      "within_10": 1917,
+      "within_100": 9632,
+      "within_500": 6284
+    }
+  },
+  "canonical_sha256": "4d95d569f91d4524e080edd1874a188e85f0d0180beb96bacc102f33fd05c534",
+  "canonical_table": "bhandari-history-arabidopsis.csv.gz",
+  "definition": "1-based TSS = locus start + 701 on '+', locus start + length - 700 on '-'; annotated TSS = 5' end of a transcript feature on the same contig and strand; distance signed along transcription (negative = annotated TSS upstream)",
+  "evidence_file": "data/interim/bhandari_history/arabidopsis_tss_evidence.csv",
+  "evidence_sha256": "aeb64c845964408b4474a2c1a5a05b993077b082b84c3e1f019e230037f3021a",
+  "exact_agreement_sets": {
+    "ensembl_plants_31_tair10_2017_07_18": 18569,
+    "genark_ncbiRefSeq_2025_06_09": 1,
+    "genark_ncbiRefSeq_2025_06_09+ensembl_plants_31_tair10_2017_07_18": 7,
+    "genark_ncbiRefSeq_2025_06_09+ncbi_gcf4_gff_2023_06_16": 18,
+    "genark_ncbiRefSeq_2025_06_09+ncbi_gcf4_gff_2023_06_16+ensembl_plants_31_tair10_2017_07_18": 85,
+    "genark_ncbiRefSeq_2025_06_09+ncbi_gcf4_gff_2023_06_16+ncbi_gcf3_gff_2018_04_02": 1,
+    "genark_ncbiRefSeq_2025_06_09+ncbi_gcf4_gff_2023_06_16+ncbi_gcf3_gff_2018_04_02+ensembl_plants_31_tair10_2017_07_18": 22858,
+    "ncbi_gcf3_gff_2018_04_02+ensembl_plants_31_tair10_2017_07_18": 2,
+    "ncbi_gcf4_gff_2023_06_16+ncbi_gcf3_gff_2018_04_02+ensembl_plants_31_tair10_2017_07_18": 18,
+    "none": 32
+  },
+  "near_miss_direction": {
+    "ensembl_plants_31_tair10_2017_07_18": {
+      "downstream": 5,
+      "upstream": 7
+    },
+    "genark_ncbiRefSeq_2025_06_09": {
+      "downstream": 1156,
+      "upstream": 16692
+    },
+    "ncbi_gcf3_gff_2018_04_02": {
+      "downstream": 1171,
+      "upstream": 16654
+    },
+    "ncbi_gcf4_gff_2023_06_16": {
+      "downstream": 1177,
+      "upstream": 16656
+    }
+  },
+  "observed_at": "2026-10-30T00:27:51+00:00",
+  "schema_version": 1,
+  "scope": {
+    "evaluated": 41591,
+    "not_full_length": 3,
+    "not_located": 77
+  },
+  "window_tss_index": 700
+}
