@@ -113,7 +113,11 @@ statement about plants. The earlier file can be used to repeat the published
 procedure on the data the publication describes. Such a repetition remains
 qualified: the random seed and the shuffled negatives are not available, and
 the released notebook selects the first records of each class where the text
-describes a random selection. Whether the published plant results were
+describes a random selection. Removing identical sequences, as the notebook does,
+also leaves overlapping windows: 13{,}888 of the 37{,}881 distinct located
+windows share at least 500 bases with another window, mostly alternative start
+sites of one gene, so a random split places overlapping regions in both
+training and test sets. Whether the published plant results were
 computed on this earlier file is not established, because no output of a plant
 run was released. In addition, the 77 sequences not found in the current
 reference all occur exactly in the earlier mitochondrial genome sequence, which

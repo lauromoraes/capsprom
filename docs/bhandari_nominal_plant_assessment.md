@@ -163,6 +163,19 @@ released-condition use of the *A. thaliana* file. Its contract fixes:
 | Not allowed | replacing a sequence or a window by one extracted from TAIR10 or TAIR10.1, re-centring, re-orienting, merging with the Drive files |
 | Acceptance | release count 41,671; every row has the declared label; rows rebuilt as `label,sequence` + CRLF reproduce the acquired bytes; IDs contiguous; SHA-1 valid. All passed (F-075) |
 
+Replay contract decisions (`orig-pub-v1`, not yet frozen):
+
+| Element | Decision |
+| --- | --- |
+| Selection | random selection of the per-class sample, as the publication states, with a declared seed; the notebook's first-N selection (F-070) is not used, because file order is genomic order and would bias the sample by chromosome |
+| Software | the project's current stack (Python 3.13, current PyTorch/scikit-learn); legacy Keras code is reimplemented, not run, so every result is at best `qualified` |
+| Kept from the published procedure | length filter (1,000 nt), exact deduplication after concatenating promoters and shuffles, 1:1 mononucleotide shuffles (`k_let = 1`), 4-mer tokens, 81/9/10 split, the published CNN and LSTM architectures |
+| Corrected and declared as deviations (F-080) | tokenizer fitted on the training partition only; validation partition passed to training so early stopping works; stratified split; evaluation on the test partition only (the extra human file is unreleased) |
+| Reported, not corrected, in `pub` | the per-position `Dense` layers of the CNN, as published, with the corrected `Flatten` order as a declared variant |
+| Leakage measurement | for each seed, count test records with an exact duplicate, a reverse complement, a >= 500 bp genomic overlap (F-082), or their shuffled partner (F-083) in training; reported beside the metrics, without changing the split |
+| Independence | the contract uses only the canonical table (F-075); it does not depend on the TSS classes, on F-078 or F-079, or on R-1 to R-5, which concern the reconstructed condition only. The 77 records on the earlier mitochondrion and the 52 outside nuclear transcript starts stay in the data, because the published procedure keeps them |
+| Still to fix before freezing | number of seeds and what they vary; sample size per class (the publication's "35,000" is not the 37,957 unique records, F-081); the published values and tolerance that define a successful reproduction |
+
 Filters a published-protocol replay may declare, each counted per class and per
 partition: records not of length 1,000 (3; the authors' code drops them,
 F-070), exact duplicates after concatenation with the shuffles (the authors'
@@ -180,7 +193,7 @@ the requirements are in §7 (R-1 to R-5).
 
 | Use | Identifier | Condition / protocol | Requirements | Comparability with the publication |
 | --- | --- | --- | --- | --- |
-| Replay of the published pipeline on the *A. thaliana* repository file | `bhandari-history-arabidopsis.orig-pub-v1` | released / published | canonical collection `bhandari-history-arabidopsis` (done, F-075); declared assumptions: `k_let = 1`, first-N selection (F-070) or the text's random selection as a separate variant, a fixed seed | `qualified`: seed and shuffle stream unknown, notebook and text disagree |
+| Replay of the published pipeline on the *A. thaliana* repository file | `bhandari-history-arabidopsis.orig-pub-v1` | released / published | canonical collection `bhandari-history-arabidopsis` (done, F-075); decisions in the table above (random selection, current stack, F-080 deviations declared) | `qualified`: seed and shuffle stream unknown, notebook and text disagree |
 | Mouse benchmark from the Drive file | `bhandari-nominal-plant.orig-common-v1` | released / common | filters by rule (duplicates F-014, short windows F-037); P-4 before cross-source use | not comparable (another organism) |
 | Replay of the published pipeline on the Drive file | `bhandari-nominal-plant.orig-pub-v1` | released / published | as above | `not_comparable` to the *A. thaliana* column; useful only as a diagnostic |
 | *A. thaliana* benchmark, project protocol | `bhandari-history-arabidopsis.orig-common-v1` | released / common | canonical collection; filters by rule; the 77 records on the earlier mitochondrion (F-074) kept or filtered by a declared rule | within-project only |
@@ -254,6 +267,7 @@ yields conclusions about the benchmark, not necessarily about promoter biology.
 | P-5 | Annotation for the untested TSS (F-056, F-068) | larger reconstructions | open |
 | P-6 | Canonical collection for `bh-hist-v1` under a new canonicalization contract | any build from the repository file | **done**: `bh-can-v1`, all acceptance criteria passed (F-075) |
 | P-7 | The 77 unlocated *A. thaliana* records against the earlier mitochondrial sequence | F-067 | **done**: 77/77 exact in Y08501.2 (F-074) |
+| P-9 | Genomic-overlap and pair-leakage counts per seed for the `orig-pub` split (F-082, F-083) | interpretation of any `orig-pub` metric | open; counts without a split are in F-081, F-082 |
 | P-8 | Restore the text of `configs/reference_acquisition_v7.yaml` (overwritten by another session, log R-025) so that its SHA-256 equals the manifest's `d9d38d57…` | integrity of `ref-acq-v7` | **done**: restored by the session that wrote it; SHA-256 equals the manifest (`d9d38d57…`) |
 
 Requirements for a future *A. thaliana* reconstruction (not started):

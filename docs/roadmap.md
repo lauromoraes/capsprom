@@ -867,9 +867,9 @@ Current state:
   TAIR10 gene models (41,671 transcripts) match 41,539 (F-076, F-077). No
   dataset was built, no partition generated, and no gate changed.
 - Next (each a separate authorization): freeze the
-  `bhandari-history-arabidopsis.orig-pub-v1` replay contract (declared
-  assumptions: `k_let = 1`, first-N selection versus the text's random
-  selection, seed, filters); P-4 for the mouse file. An *A. thaliana* reconstruction waits for
+  `bhandari-history-arabidopsis.orig-pub-v1` replay contract (decided: random selection, current stack, corrected
+  deviations of F-080; to fix: seeds, sample size, reproduction criterion;
+  review and overlap counts in F-080 to F-083, log R-026); P-4 for the mouse file. An *A. thaliana* reconstruction waits for
   R-1 to R-5 of `docs/bhandari_nominal_plant_assessment.md`.
 
 ## Phase 5: Interpretability and Thesis Artifacts

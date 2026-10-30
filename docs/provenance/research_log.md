@@ -524,3 +524,20 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **Addendum (incident).** The session that wrote `ref-acq-v7` restored its
   config byte for byte; its SHA-256 equals the manifest's `config_sha256`
   (`d9d38d578e7c5c0c…`), checked here with `sha256sum`.
+
+## R-026 · 2026-10-29 · Review of `Code.ipynb` and duplicate structure before the replay contract
+
+- **Commit.** The data-condition and P-6 work was committed as `6e4922c`;
+  files of other sessions (substitution sensitivity, pipeline figure) were left
+  unstaged.
+- **Review.** Every cell of `Code.ipynb` was read; defects and their effect on
+  the published numbers are in F-080 and F-083. The legacy code is treated as a
+  description of the published procedure, not as a correct implementation.
+- **Counts.** Exact duplicates under the notebook's filters (F-081) and genomic
+  overlap of the unique windows (F-082) were computed from the canonical
+  collection and the `bhandari-history` loci with scratch scripts; nothing was
+  written under `data/` and no dataset or partition was built.
+- **Decisions by the researcher.** Random selection (not first-N) in the
+  project's experiments; the current software stack for any replay, including
+  legacy code. Recorded in `docs/bhandari_nominal_plant_assessment.md` §5.
+- **Findings.** F-080 to F-083.
