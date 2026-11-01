@@ -216,6 +216,12 @@ for that eligible scope. `evaluation_protocol_v3.yaml` and
 `capsprom_basic_canonical_gpu_execution_v3.yaml` bind future 50-epoch,
 patience-15 work to these manifests; every real execution gate remains closed.
 
+`dataset_dependency_manifest_v3.yaml` supersedes v2 with 12 clusters. It adds
+alignment overlap (F-114) to the cluster rule, joining *K. pneumoniae* to the
+enteric cluster and CDBProm *B. amyloliquefaciens* to CNNProm *B. subtilis*.
+`evaluation_protocol_v3.yaml` still binds v2; adopting v3 requires a new
+evaluation protocol version.
+
 `capsprom_basic_canonical_gpu_execution_v4.yaml` is the execution-enabled
 successor for the same 18-dataset, 50-epoch design. It has new tracking and
 output identities and keeps final-fit, external-test, and embedding gates

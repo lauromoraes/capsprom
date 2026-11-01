@@ -131,8 +131,9 @@ comparisons are exploratory and must not influence model selection.
 - Kapoor, S. and Narayanan, A. (2023). Leakage and the reproducibility crisis
   in machine-learning-based science. *Patterns* 4(9):100804.
   doi:10.1016/j.patter.2023.100804
-- Su, W., Lyu, H., Lin, H. et al. (2025). iPro-MP. Study key `su2025ipro`
-  in `configs/source_acquisition_v1.yaml`; not yet in `references.bib`.
+- Su, W. et al. (2025). iPro-MP: a BERT-based model to predict multiple
+  prokaryotic promoters. *Genome Biology* 26(1):353.
+  doi:10.1186/s13059-025-03819-9 (`su2025ipro`).
 - Zabihi et al. (2026). EDEN: multiscale expected density of nucleotide
   encoding for enhanced DNA sequence classification with hybrid deep learning.
   *BMC Bioinformatics* 27:40. doi:10.1186/s12859-026-06367-6

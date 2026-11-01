@@ -676,3 +676,25 @@ SHA-256 of the module that ran, when the change was not yet committed.
   script `mm_overlap.sh`; hit tables SHA-256 `01dab3ecd4749f94…` (iPro-MP) and
   `635df7d68e420d66…` (GUE). Findings F-108, F-109; hypotheses F-110 to
   F-113. Thesis discussion: `docs/external_resource_leakage_finding.md`.
+
+## R-033 · 2026-11-01 · Alignment-based dependence between eligible datasets
+
+- **Question.** Does the exact-overlap rule of
+  `configs/dataset_dependency_manifest_v2.yaml` miss dependence between
+  datasets? Raised by F-108, which showed shared promoters across sources.
+- **Procedure.** All train and test records of the 18 eligible v3 datasets in
+  one FASTA, MMseqs2 `easy-search` all-vs-all with the R-032 tool and F-084
+  settings (`-c 0.8 --cov-mode 0 --min-seq-id 0.8`); same-dataset hits dropped.
+  Scratch script `mm_cross.sh`; hit table SHA-256 `dda11bbfbca06e11…`, not kept.
+- **Findings.** F-114.
+- **Implication.** A v3 manifest would join *K. pneumoniae* to
+  `enteric-cross-source` and CDBProm *B. amyloliquefaciens* to CNNProm
+  *B. subtilis*, reducing 14 clusters to 12. Not done: the cluster rule is a
+  statistical-protocol decision for the researcher.
+- **Addendum (2026-11-01).** At the researcher's request, created
+  `configs/dataset_dependency_manifest_v3.yaml` with 12 clusters (rule: exact
+  or alignment overlap, more than 10 records per pair). v2 is unchanged and
+  still bound by `evaluation_protocol_v3.yaml`. Figure:
+  `docs/thesis/figures/dependency_clusters.{py,svg,pdf,png}`. Added
+  `su2025ipro` to `references.bib` from PubMed 41083998
+  (doi:10.1186/s13059-025-03819-9).
