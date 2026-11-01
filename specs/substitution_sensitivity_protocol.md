@@ -76,6 +76,12 @@ per sequence and an `81 x 4` effect matrix per model, with zero at the
 reference nucleotide. Positional summaries are the mean and the maximum
 effect across the three alternatives.
 
+ISM is computed separately for promoters and non-promoters. The promoter
+matrix measures loss of score; the non-promoter matrix measures score gained
+by single substitutions and shows whether a nucleotide-composition preference
+(for example, A/T raising the score at every position) is class-independent.
+Both matrices are descriptive and do not enter the predeclared contrasts.
+
 ISM resolves which base and which nucleotide matter. It can understate
 redundant or distributed elements that survive one substitution but not the
 destruction of a whole window; window substitution covers that case. Neither

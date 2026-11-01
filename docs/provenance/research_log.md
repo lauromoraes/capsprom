@@ -541,3 +541,138 @@ SHA-256 of the module that ran, when the change was not yet committed.
   project's experiments; the current software stack for any replay, including
   legacy code. Recorded in `docs/bhandari_nominal_plant_assessment.md` §5.
 - **Findings.** F-080 to F-083.
+- **Addendum (2026-10-30, decisions by the researcher).** 10 seeds; 35,000
+  records per class in `orig-pub`, all unique records in `orig-common` and
+  cross-source work; a value is reproduced when it lies within the 10-seed
+  range; leakage is measured at the length the model sees, after cropping.
+
+## R-027 · 2026-10-30 · Alignment audit of train/test overlap; CNNProm negative construction
+
+- **Question.** Does dependence beyond exact identity cross the regenerated-v3
+  train/test split? Raised while deciding partition and inference policy.
+- **Tool.** MMseqs2 static release `mmseqs-linux-avx2.tar.gz` (SHA-256
+  `bd9b0234da5949ad…`, version `8cc5ce367b5638c4…`), downloaded with the
+  researcher's authorisation from the official GitHub release and run in WSL
+  Ubuntu 24.04. Not installed in the project environment.
+- **Procedure.** For all 26 v3 pairs: `easy-search` test vs train,
+  `--search-type 3 --strand 2 -k 11 -c 0.8 --cov-mode 0 --max-seqs 1000`, at
+  `--min-seq-id` 0.80/0.90/0.95, plus `easy-cluster` of train+test. Scratch
+  script SHA-256 `d01d6960d95b70b4…`; results JSON `a8671d48f6eb2523…`. Neither
+  is kept in the repository. Follow-up scratch scripts mapped hits to raw
+  CNNProm headers, coordinates, and clones, and counted Alu consensus 15-mers.
+- **Corrections during the run.** Default k-mer size exceeded WSL memory; `-k 11`
+  and `--split-memory-limit 3G` were used. `--search-type` is not accepted
+  by `easy-cluster`.
+- **Scope note.** 81-nt v3 windows, not the 251-nt eukaryotic window of the
+  sequence window policy. Exploratory; nothing written under `data/`.
+- **Findings.** F-084 to F-089. Thesis discussion:
+  `docs/cnnprom_overlap_leakage_finding.md`. Pipeline stage defined in
+  `specs/homology_grouping_protocol.md` and `configs/homology_grouping_v1.yaml`
+  (design, not executed).
+- **Addendum (2026-10-30, Hamming recall check).** Exact Hamming neighbours
+  (≤8 and ≤16) were recomputed with the pigeonhole scheme of
+  `near_duplicate_audit.py` and compared with the MMseqs2 hits; `-k 9` was
+  run on the three pairs with misses. Finding F-090.
+
+## R-028 · 2026-10-31 · Bacterial reference acquisition and exact-search pilot
+
+- **Scope (researcher's choice).** Eligible bacterial collections first: 11
+  CDBProm and CNNProm *E. coli* and *B. subtilis*. NCBI downloads authorised by
+  the researcher.
+- **Acquisition.** `configs/reference_acquisition_v10.yaml` (FASTA, GFF3,
+  assembly report per assembly; MD5 from each directory's `md5checksums.txt`)
+  run with `scripts/acquire_sources.py --execute`: 39/39 files verified.
+  Manifest snapshot in `manifests/provenance/reference_acquisition_v10/`.
+- **Code.** `src/capsprom/data/exact_mapping.py` (FASTA reader, complete
+  both-strand exact matcher with overlapping and palindromic hits, round-trip
+  extraction) with synthetic tests in `tests/test_exact_mapping.py`. IUPAC
+  compatibility, record/locus persistence, manifest and resumption (plan steps
+  3–4) are not implemented yet.
+- **Pilot.** Scratch script (SHA-256 `5c96dbe6bf5522bf…`) mapped every canonical
+  record of the 13 collections; summary SHA-256 `ab4a311a2daf5fb2…`. Outputs
+  stayed in the scratch directory; nothing was written under `data/coordinates/`.
+- **Findings.** F-091 to F-095.
+- **Next.** Persisted mapping v1 (record and locus tables, manifest), then
+  NC_000913.2 and RegulonDB 9.0 to test F-095, and B3 characterisation of the
+  CDBProm unmapped records.
+
+## R-029 · 2026-10-31 · Strain tests, NC_000913.2, and persisted mapping v1
+
+- **Acquisition.** `configs/reference_acquisition_v11.yaml` (config SHA-256
+  `1cd5ed86b6cca7e7…`): six earlier or alternative strain assemblies and
+  NC_000913.2 via efetch; 7/7 files verified. Manifest snapshot SHA-256
+  `1a5956f8eebe981b…`.
+- **Tests.** Exploratory scratch scripts. Unmapped CDBProm records were first
+  aligned with MMseqs2 to their `v10` assembly (most are full length with ≤5
+  differences), then searched exactly in the `v11` assemblies. All CNNProm
+  *E. coli* records were mapped to NC_000913.2.
+- **Code.** `exact_mapping.py` gains IUPAC-compatible reference matching
+  (H. pylori and P. aeruginosa `v10` assemblies contain 42 and 60 non-ACGT
+  bases). New `coordinate_mapping.py` and `scripts/map_coordinates.py` write
+  record and locus tables, a manifest after each shard, and `runs[]`
+  (failed runs included since the fix). `/data/coordinates/` was added to
+  `.gitignore`, as the protocol requires.
+- **Run.** `scripts/map_coordinates.py --config configs/reference_coordinate_mapping_v1.yaml`
+  in two runs (the first stopped at non-ACGT records); outputs under
+  `data/coordinates/reference_coordinate_mapping_v1/`, manifest snapshot
+  committed.
+- **Findings.** F-096 to F-100.
+- **Open decision.** Whether a `v2` mapping uses the earlier sequences of F-096
+  and NC_000913.2 as the references of record.
+- **Addendum (2026-10-31, mapping v2, researcher's decision).**
+  `configs/reference_coordinate_mapping_v2.yaml` re-references five CDBProm
+  collections to the F-096 sequences and CNNProm *E. coli* to NC_000913.2, with
+  assembly evidence `verified` conditional on no unmapped strict-DNA record.
+  The runner gained an explicit `reference_file` for non-assembly FASTA. One
+  completed run, 13/13 shards, 0 unmapped. Finding F-101. v1 stays as recorded.
+  Still open for acceptance: B1, B3, the sample audit, and the R-011 replacement
+  evidence of Anabaena, S. Typhimurium and S. coelicolor.
+
+## R-030 · 2026-11-01 · CDBProm declared accessions
+
+- **Procedure.** Read Table 1 of the CDBProm publication (doi:10.1093/nargab/lqae018)
+  and queried NCBI esummary for CP034058.1, CP133487.1, AL939104.1, AL645882.2,
+  NC_003888.3 and CP002927.1. Metadata only; nothing downloaded or mapped.
+- **Findings.** F-102 to F-104. This closes the "publication's accession list
+  not checked" item of R-011.
+- **Implication.** A mapping v3 could set *S. coelicolor* to `declared` (same
+  genome as the declared segment) and *Anabaena* and S. Typhimurium to
+  `conflicting`. Under the current status rule, *S. coelicolor* records would
+  become `verified`; the other two stay `inconsistent` with an added reason.
+  Done in R-031.
+
+## R-031 · 2026-11-01 · Coordinate mapping v3
+
+- **Procedure.** Created `configs/reference_coordinate_mapping_v3.yaml` from v2
+  with the R-030 evidence levels (*S. coelicolor* `declared`; *Anabaena* and
+  S. Typhimurium `conflicting`). `record_status` now gives `conflicting`
+  evidence the reason `assembly_conflicting` instead of `assembly_mismatch`.
+  Ran `scripts/map_coordinates.py` in WSL; manifest snapshot in
+  `manifests/provenance/reference_coordinate_mapping_v3/`. `make check`: 222 passed.
+- **Findings.** F-105. v1 and v2 stay as recorded.
+- **Still open.** B1, B3 and the stratified sample audit.
+
+## R-032 · 2026-11-01 · Overlap of iPro-MP data with the eligible test sets
+
+- **Question.** Can iPro-MP's released weights or data be used against the 18
+  eligible test sets without leakage? Raised while defining baseline fidelity
+  and fairness.
+- **Procedure.** Every strict-DNA iPro-MP record of `source_canonicalization_v1`
+  (train and test, 23 species) against each eligible regenerated-v3 test CSV,
+  both strands: exact identity, Hamming ≤8 (pigeonhole, nine 9-nt blocks), and
+  any shared exact 40-nt substring. Python 3 in WSL; scratch script SHA-256
+  `91e2af42b89f33d6…`, results JSON `dcbd9275441150bf…`, not kept in the
+  repository. MMseqs2 was not used: the R-027 binary was not retained.
+- **Findings.** F-106, F-107.
+- **Addendum (2026-11-01, MMseqs2 and GUE).** With the researcher's
+  authorisation, re-downloaded the MMseqs2 static release (SHA-256
+  `bd9b0234da5949ad…`, identical to R-027) and the official GUE archive from
+  the DNABERT-2 README Google Drive link (`GUE.zip`, SHA-256
+  `581ba5a69843769f…`), both in WSL `~/dl/`, outside the repository. `easy-search`
+  of the 30,121 eligible test records against 321,850 iPro-MP records
+  (`-c 0.8 --cov-mode 0`) and against 118,392 GUE `prom_300_all` and
+  `prom_core_all` records (`-c 0.8 --cov-mode 2`, since GUE windows are 300 and
+  70 nt), with `--search-type 3 --strand 2 -k 11 --min-seq-id 0.8`. Scratch
+  script `mm_overlap.sh`; hit tables SHA-256 `01dab3ecd4749f94…` (iPro-MP) and
+  `635df7d68e420d66…` (GUE). Findings F-108, F-109; hypotheses F-110 to
+  F-113. Thesis discussion: `docs/external_resource_leakage_finding.md`.

@@ -1,0 +1,23 @@
+acquisition:
+  name: reference-acquisition-v7
+  version: 1.0.0
+  protocol: specs/reference_coordinate_mapping_protocol.md
+  audit: docs/bhandari_nominal_plant_assessment.md
+  root: data/acquired/reference_acquisition_v7
+  frozen_on: 2026-10-29
+  policy: >-
+    Earlier Arabidopsis thaliana mitochondrial genome (Y08501.2, 366,924 bp;
+    its RefSeq copy NC_001284.2 was suppressed in 2018 and replaced by
+    NC_037304.1 in TAIR10.1). Used to test hypothesis F-067 for the 77
+    historical Bhandari A. thaliana records not found in TAIR10.1. NCBI efetch
+    publishes no digest; the file is recorded on first acquisition.
+
+sources:
+  - source_id: ncbi-athaliana-mito-y08501
+    kind: url_list
+    study: ncbi_nuccore
+    landing_page: https://www.ncbi.nlm.nih.gov/nuccore/Y08501.2
+    release: Y08501.2
+    files:
+      - path: Y08501.2.fasta
+        url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=Y08501.2&rettype=fasta&retmode=text

@@ -1,0 +1,82 @@
+protocol:
+  name: capsprom-homology-grouping
+  version: 1.0.0
+  status: design_locked_execution_blocked
+  specification: specs/homology_grouping_protocol.md
+  modifies_active_confirmatory_scope: false
+  binding_requires: evaluation_protocol_v4
+
+scope:
+  dataset_manifest: configs/dataset_eligibility_manifest_v1.yaml
+  dataset_count: 18
+  sequence_source: domain_window_after_crop
+  unit: dataset_pair
+  label_blind: true
+  pipeline_position: after_strict_dna_before_group_safe_split
+
+tool:
+  name: mmseqs2
+  mode: easy-search
+  all_versus_all: true
+  drop_self_hits: true
+  record_binary_sha256: true
+  record_command_line: true
+
+search:
+  search_type: 3
+  strand: 2
+  min_seq_id: 0.80
+  coverage: 0.80
+  cov_mode: 0
+  kmer_size: 9
+  e_value: 0.001
+  max_seqs: 1000
+  fail_if_max_seqs_reached: true
+  split_memory_limit: 3G
+
+grouping:
+  edge_rule: union_of_alignment_hamming_and_genomic_overlap
+  alignment_edge: min_seq_id_and_coverage
+  hamming_edge:
+    max_mismatch_fraction: 0.20
+    max_distance_rule: floor_fraction_times_window_length
+    max_distance_examples: {81: 16, 251: 50}
+    equal_length_only: true
+    strands: [forward, reverse_complement]
+    method: exact_pigeonhole_index
+  genomic_overlap_edge:
+    required_by_condition: {recon: true, orig_common: false}
+    enabled_per_dataset: where_coordinates_verified
+    coordinate_requirement: unique_exact_both_strand_match_with_fact_finding
+    multi_locus_records: sequence_edges_only
+    rule: window_intervals_overlap_any_strand
+    same_assembly_required: true
+    proximity_margin_sensitivity_nt: window_length
+  never_replaces_sequence_edges: true
+  report_edges_by_source: [alignment, hamming, genomic_overlap, overlaps_between_sources]
+  report_coordinate_coverage_per_dataset: true
+  group_definition: connected_components
+  keep_all_records: true
+  mixed_label_components: keep_intact_and_report
+  max_component_fraction: 0.20
+  oversized_component_action: block_and_review
+
+partition:
+  test_fraction: 0.20
+  assignment: shuffled_whole_groups_class_targeted
+  random_seed: 42
+  inner_folds: stratified_group_k_fold
+  folds: 5
+  fold_seed: 42
+  required_cross_partition_edges: 0
+
+uncertainty:
+  bootstrap_unit: homology_group
+
+sensitivity:
+  - {min_seq_id: 0.90, coverage: 0.80}
+  - {min_seq_id: 0.95, coverage: 0.80}
+  - {min_seq_id: 0.80, coverage: 0.50}
+  - {comparison: record_level_v3_vs_grouped}
+
+reports: [group_table, component_size_distribution, mixed_label_components, realised_partition_fractions, cross_partition_edge_count, hit_table_sha256]

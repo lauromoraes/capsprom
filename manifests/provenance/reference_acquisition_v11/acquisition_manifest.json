@@ -1,0 +1,181 @@
+{
+  "acquisition": "reference-acquisition-v11",
+  "config_sha256": "1cd5ed86b6cca7e7b12bc5b06529d7f5eb1d7f04371e7fd72b24c5e6c9bd12d4",
+  "files": {
+    "alt-corynebacterium-glutamicum-bielefeld/GCF_000196335.1_ASM19633v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T01:18:55+00:00",
+      "expected": {
+        "md5": "4ddbeff162e0c6f89e18dbb4b16a81f9"
+      },
+      "git_blob_sha1": "03e64f300e4a0efebe9394b38d7fae0ba1e31183",
+      "md5": "4ddbeff162e0c6f89e18dbb4b16a81f9",
+      "path": "GCF_000196335.1_ASM19633v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "979064",
+        "content-type": "application/x-gzip",
+        "last-modified": "Tue, 22 Dec 2020 02:07:58 GMT"
+      },
+      "sha256": "764a2da6ee95e744e7923a9822b6f5ecba31ab97b54e80b9bf278b25feaa9fa2",
+      "size_bytes": 979064,
+      "source_id": "alt-corynebacterium-glutamicum-bielefeld",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/196/335/GCF_000196335.1_ASM19633v1/GCF_000196335.1_ASM19633v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "alt-helicobacter-pylori-26695-1997/GCF_000008525.1_ASM852v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T01:18:51+00:00",
+      "expected": {
+        "md5": "00a24145eb554da2ebf6eaad9081d129"
+      },
+      "git_blob_sha1": "6599b87978b12f80e2bfddbf6a8664db174ebf2a",
+      "md5": "00a24145eb554da2ebf6eaad9081d129",
+      "path": "GCF_000008525.1_ASM852v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "481896",
+        "content-type": "application/x-gzip",
+        "last-modified": "Sun, 08 Mar 2020 22:04:29 GMT"
+      },
+      "sha256": "da612556546f9704dabaa8a394b6687bd75acbb2c631d2fb0bebbf489d537425",
+      "size_bytes": 481896,
+      "source_id": "alt-helicobacter-pylori-26695-1997",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/525/GCF_000008525.1_ASM852v1/GCF_000008525.1_ASM852v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "alt-mycobacterium-tuberculosis-h37rv/GCF_000195955.2_ASM19595v2_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T01:18:53+00:00",
+      "expected": {
+        "md5": "f93726a0a6e57af2bf1173998fbeb546"
+      },
+      "git_blob_sha1": "70de2eb98dad0e537618f1e429542f91337840f3",
+      "md5": "f93726a0a6e57af2bf1173998fbeb546",
+      "path": "GCF_000195955.2_ASM19595v2_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1277508",
+        "content-type": "application/x-gzip",
+        "last-modified": "Sat, 21 May 2016 02:28:56 GMT"
+      },
+      "sha256": "35911742cea55cd556d54948f56e3efa757e40d44e18ebc8742cacc59b2a976e",
+      "size_bytes": 1277508,
+      "source_id": "alt-mycobacterium-tuberculosis-h37rv",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/195/955/GCF_000195955.2_ASM19595v2/GCF_000195955.2_ASM19595v2_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "alt-pseudomonas-aeruginosa-pa14-2006/GCF_000014625.1_ASM1462v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T01:18:49+00:00",
+      "expected": {
+        "md5": "e85e904d10348b4521a88b17747824f1"
+      },
+      "git_blob_sha1": "4a1094da3484c4463e8f498eb0caa12b3e824ccb",
+      "md5": "e85e904d10348b4521a88b17747824f1",
+      "path": "GCF_000014625.1_ASM1462v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1868144",
+        "content-type": "application/x-gzip",
+        "last-modified": "Thu, 03 Sep 2020 13:47:06 GMT"
+      },
+      "sha256": "1d17779cd3bf5cfb32240d2c9ee5a1842fbda13ea03e385b37adf197e79ab621",
+      "size_bytes": 1868144,
+      "source_id": "alt-pseudomonas-aeruginosa-pa14-2006",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/014/625/GCF_000014625.1_ASM1462v1/GCF_000014625.1_ASM1462v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "alt-pseudomonas-aeruginosa-pao1/GCF_000006765.1_ASM676v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T01:18:47+00:00",
+      "expected": {
+        "md5": "c859ec5a25506367506bce972788aca8"
+      },
+      "git_blob_sha1": "411e0ecee3daf8eb17f8dc624327712e71c1f725",
+      "md5": "c859ec5a25506367506bce972788aca8",
+      "path": "GCF_000006765.1_ASM676v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1787220",
+        "content-type": "application/x-gzip",
+        "last-modified": "Sat, 02 Mar 2019 07:58:06 GMT"
+      },
+      "sha256": "9433cb94b3f21fa40e94d0d9454996fcca39da1d49074b9b22b6a459e63ca510",
+      "size_bytes": 1787220,
+      "source_id": "alt-pseudomonas-aeruginosa-pao1",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/765/GCF_000006765.1_ASM676v1/GCF_000006765.1_ASM676v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "alt-synechocystis-kazusa/GCF_000009725.1_ASM972v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T01:18:57+00:00",
+      "expected": {
+        "md5": "8375992df36de6eef5a62456e7ddf03c"
+      },
+      "git_blob_sha1": "b75b38313dc09d2997384bdcafcb42fd8fc23f11",
+      "md5": "8375992df36de6eef5a62456e7ddf03c",
+      "path": "GCF_000009725.1_ASM972v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1169667",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 18 Dec 2020 23:26:28 GMT"
+      },
+      "sha256": "cfaccf8f61d32314e91d1c6258ecc266f3d458d6dae21c15d2c9b736a0502577",
+      "size_bytes": 1169667,
+      "source_id": "alt-synechocystis-kazusa",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/725/GCF_000009725.1_ASM972v1/GCF_000009725.1_ASM972v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "ncbi-ecoli-k12-nc000913-2/NC_000913.2.fasta": {
+      "acquired_at": "2026-11-01T01:19:01+00:00",
+      "expected": {},
+      "git_blob_sha1": "b2558f576d19542f2e8575ca2cabd3d92fb56b50",
+      "md5": "49c3c92b11a87330e756b6c8a52081ce",
+      "path": "NC_000913.2.fasta",
+      "response_headers": {
+        "content-type": "text/plain"
+      },
+      "sha256": "2a8e2f78bc145fa82fa325acf7d34dc944612795cee74f793045dc64d782176c",
+      "size_bytes": 4706030,
+      "source_id": "ncbi-ecoli-k12-nc000913-2",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_000913.2&rettype=fasta&retmode=text",
+      "verified_against": []
+    }
+  },
+  "resolved_listings": {},
+  "runs": [
+    {
+      "command": [
+        "python",
+        "scripts/acquire_sources.py",
+        "--config",
+        "configs/reference_acquisition_v11.yaml",
+        "--execute"
+      ],
+      "finished_at": "2026-11-01T01:19:01+00:00",
+      "only_sources": null,
+      "started_at": "2026-11-01T01:18:43+00:00",
+      "status": "completed",
+      "summary": {
+        "declared_files": 7,
+        "downloaded": 7,
+        "planned": 7,
+        "recorded_files": 7,
+        "skipped_verified": 0
+      },
+      "tool": {
+        "code": {
+          "commit": "9d15f90eda165980e549b1ea986863a1ef6a8bd0",
+          "worktree_clean": false
+        },
+        "module_sha256": "a8e71e40ff7889c369afaa583f7e94605216a0494e3f9cdd084a07525d4b27a4",
+        "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.13.11",
+        "user_agent": "capsprom-source-acquisition/1"
+      }
+    }
+  ],
+  "schema_version": 1
+}

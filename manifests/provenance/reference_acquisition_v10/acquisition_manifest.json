@@ -1,0 +1,859 @@
+{
+  "acquisition": "reference-acquisition-v10",
+  "config_sha256": "5a6f929638ac28b8858dc7d5bd6fe0449a2ef314c7c3a0e71365704a028a96b1",
+  "files": {
+    "cdbprom-anabaena-sp/GCF_000009705.1_ASM970v1_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:29:18+00:00",
+      "expected": {
+        "md5": "c08c156359943ad97f3b2e873a878b2e"
+      },
+      "git_blob_sha1": "d023c124955c41fd74494177a81edf1495109d4f",
+      "md5": "c08c156359943ad97f3b2e873a878b2e",
+      "path": "GCF_000009705.1_ASM970v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1782",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Tue, 01 Apr 2025 02:10:37 GMT"
+      },
+      "sha256": "edd9fb325f64388175766de052abe988822192179e4353e9e579b2c3d78c5dd3",
+      "size_bytes": 1782,
+      "source_id": "cdbprom-anabaena-sp",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/705/GCF_000009705.1_ASM970v1/GCF_000009705.1_ASM970v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-anabaena-sp/GCF_000009705.1_ASM970v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:29:15+00:00",
+      "expected": {
+        "md5": "3e9b8f73bf79e4555b874e54f5118d49"
+      },
+      "git_blob_sha1": "2776fdd668f12606cecd1bb7d58a292599d2aefc",
+      "md5": "3e9b8f73bf79e4555b874e54f5118d49",
+      "path": "GCF_000009705.1_ASM970v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "2137879",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 18 Dec 2020 23:28:16 GMT"
+      },
+      "sha256": "afff1e4da3f0816a22c2510b0a82217ada02ae81148367abd327435b52657e12",
+      "size_bytes": 2137879,
+      "source_id": "cdbprom-anabaena-sp",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/705/GCF_000009705.1_ASM970v1/GCF_000009705.1_ASM970v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-anabaena-sp/GCF_000009705.1_ASM970v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:29:17+00:00",
+      "expected": {
+        "md5": "ee99025abcb5d6cf04c5b819b6392a52"
+      },
+      "git_blob_sha1": "fb77c97f353276a1a682de59b1e54348362f127a",
+      "md5": "ee99025abcb5d6cf04c5b819b6392a52",
+      "path": "GCF_000009705.1_ASM970v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "499235",
+        "content-type": "application/x-gzip",
+        "last-modified": "Thu, 12 Jun 2025 21:22:28 GMT"
+      },
+      "sha256": "5d5d75fbc31935446356c3118983ed51045ff1d0b9eaa0e3ee5647cc05d3d3ef",
+      "size_bytes": 499235,
+      "source_id": "cdbprom-anabaena-sp",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/705/GCF_000009705.1_ASM970v1/GCF_000009705.1_ASM970v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-bacillus-amyloliquefaciens/GCF_000221645.1_ASM22164v1_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:29:48+00:00",
+      "expected": {
+        "md5": "e24c6e12f87f75cc21b32004b051dd15"
+      },
+      "git_blob_sha1": "47d4d04eca39ab2d902c6bb94438c522a16d84c8",
+      "md5": "e24c6e12f87f75cc21b32004b051dd15",
+      "path": "GCF_000221645.1_ASM22164v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1081",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Fri, 21 Aug 2026 00:05:12 GMT"
+      },
+      "sha256": "010f18603e3ea819a82019f8ed581e29754d2f2ebba15b707ed4a8108b6d50c3",
+      "size_bytes": 1081,
+      "source_id": "cdbprom-bacillus-amyloliquefaciens",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/221/645/GCF_000221645.1_ASM22164v1/GCF_000221645.1_ASM22164v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-bacillus-amyloliquefaciens/GCF_000221645.1_ASM22164v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:29:45+00:00",
+      "expected": {
+        "md5": "6c7c06ec8ddd64c6aafb5f8f0c298bec"
+      },
+      "git_blob_sha1": "49089bea76b3902b74abf3eb29d050a865352cfc",
+      "md5": "6c7c06ec8ddd64c6aafb5f8f0c298bec",
+      "path": "GCF_000221645.1_ASM22164v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1165020",
+        "content-type": "application/x-gzip",
+        "last-modified": "Mon, 03 Feb 2020 06:28:56 GMT"
+      },
+      "sha256": "39554a451cfbf2c2d7e9d415df185aba9abc903be47797cd0f89dfa159c28e91",
+      "size_bytes": 1165020,
+      "source_id": "cdbprom-bacillus-amyloliquefaciens",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/221/645/GCF_000221645.1_ASM22164v1/GCF_000221645.1_ASM22164v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-bacillus-amyloliquefaciens/GCF_000221645.1_ASM22164v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:29:47+00:00",
+      "expected": {
+        "md5": "c1b3d89fd9230e4792d59ff255cc4eb6"
+      },
+      "git_blob_sha1": "be8c17ede51af9b4b3d3a2b666ad80ea322080b5",
+      "md5": "c1b3d89fd9230e4792d59ff255cc4eb6",
+      "path": "GCF_000221645.1_ASM22164v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "352759",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 21 Aug 2026 00:05:12 GMT"
+      },
+      "sha256": "27fcbd4d6f2aaff0cc1acfb9aa5600357cd2fb05edeec023aca5a4feed88044a",
+      "size_bytes": 352759,
+      "source_id": "cdbprom-bacillus-amyloliquefaciens",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/221/645/GCF_000221645.1_ASM22164v1/GCF_000221645.1_ASM22164v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-chlamydophila-pneumoniae/GCF_000008745.1_ASM874v1_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:29:12+00:00",
+      "expected": {
+        "md5": "b720900aa2046e23f262b8166923aaa8"
+      },
+      "git_blob_sha1": "85fbadf5c49d8ead88e5a2107929dc45979cd9fc",
+      "md5": "b720900aa2046e23f262b8166923aaa8",
+      "path": "GCF_000008745.1_ASM874v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1139",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Tue, 01 Apr 2025 02:10:05 GMT"
+      },
+      "sha256": "c4f32814bead228d01e51773b91c20f6ad7c21096367e5c5492ea6e4108b0208",
+      "size_bytes": 1139,
+      "source_id": "cdbprom-chlamydophila-pneumoniae",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-chlamydophila-pneumoniae/GCF_000008745.1_ASM874v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:29:10+00:00",
+      "expected": {
+        "md5": "521395704b9dd38f44e9b86d1817062e"
+      },
+      "git_blob_sha1": "e476d231dff9bf977a6ad96dfbaf3d8ee3ebedb9",
+      "md5": "521395704b9dd38f44e9b86d1817062e",
+      "path": "GCF_000008745.1_ASM874v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "366406",
+        "content-type": "application/x-gzip",
+        "last-modified": "Sun, 08 Mar 2020 22:07:05 GMT"
+      },
+      "sha256": "24eaad00c46a7eb87a60025dcc1f2f7d7da370c6ddd9348d0b8da7746419d432",
+      "size_bytes": 366406,
+      "source_id": "cdbprom-chlamydophila-pneumoniae",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-chlamydophila-pneumoniae/GCF_000008745.1_ASM874v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:29:11+00:00",
+      "expected": {
+        "md5": "dff7b2ce133e186dca5cb866195dbe16"
+      },
+      "git_blob_sha1": "6ab66f814a526d081a2a191bdc6e7163342ef217",
+      "md5": "dff7b2ce133e186dca5cb866195dbe16",
+      "path": "GCF_000008745.1_ASM874v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "93738",
+        "content-type": "application/x-gzip",
+        "last-modified": "Thu, 12 Jun 2025 21:22:11 GMT"
+      },
+      "sha256": "d884b9156585fb6f9cce68cc2855fa4d12ee4e0b13a4fdb65cfccb67e943d9d3",
+      "size_bytes": 93738,
+      "source_id": "cdbprom-chlamydophila-pneumoniae",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-corynebacterium-glutamicum/GCF_000011325.1_ASM1132v1_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:29:23+00:00",
+      "expected": {
+        "md5": "9874c0491c095fe1a3a0d14a5956c162"
+      },
+      "git_blob_sha1": "dceaa297063881166817648394fe648a636b4ed7",
+      "md5": "9874c0491c095fe1a3a0d14a5956c162",
+      "path": "GCF_000011325.1_ASM1132v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1280",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Tue, 01 Apr 2025 02:11:20 GMT"
+      },
+      "sha256": "a7c3ec1fbe7588f5d5cefa2192a7cfcdc80b6adc7225b1dbb548d4ca9a2d7a82",
+      "size_bytes": 1280,
+      "source_id": "cdbprom-corynebacterium-glutamicum",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/011/325/GCF_000011325.1_ASM1132v1/GCF_000011325.1_ASM1132v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-corynebacterium-glutamicum/GCF_000011325.1_ASM1132v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:29:20+00:00",
+      "expected": {
+        "md5": "23237d832882f17ccab0e542f96fabef"
+      },
+      "git_blob_sha1": "7e46fa8381d8f3896468c5de28fecb10e3a37d24",
+      "md5": "23237d832882f17ccab0e542f96fabef",
+      "path": "GCF_000011325.1_ASM1132v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "986310",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 18 Dec 2020 23:29:56 GMT"
+      },
+      "sha256": "8aff3c6bb0d772337e40f1790722e5c71eb92dd3be2d24faf1b959c6b3bca9ec",
+      "size_bytes": 986310,
+      "source_id": "cdbprom-corynebacterium-glutamicum",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/011/325/GCF_000011325.1_ASM1132v1/GCF_000011325.1_ASM1132v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-corynebacterium-glutamicum/GCF_000011325.1_ASM1132v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:29:22+00:00",
+      "expected": {
+        "md5": "2e718bf4c5b6ff1785ec0d72646676b7"
+      },
+      "git_blob_sha1": "0f6970ae381e4dd9b811e15a26cc82251ca222db",
+      "md5": "2e718bf4c5b6ff1785ec0d72646676b7",
+      "path": "GCF_000011325.1_ASM1132v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "266041",
+        "content-type": "application/x-gzip",
+        "last-modified": "Thu, 12 Jun 2025 21:22:50 GMT"
+      },
+      "sha256": "b19bed9cb77d6291fe97c0a409ded73d0a80abf024ebc49f539794cd47cf43f9",
+      "size_bytes": 266041,
+      "source_id": "cdbprom-corynebacterium-glutamicum",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/011/325/GCF_000011325.1_ASM1132v1/GCF_000011325.1_ASM1132v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-helicobacter-pylori/GCF_000307795.1_ASM30779v1_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:29:56+00:00",
+      "expected": {
+        "md5": "b6a5a351fce21105c18247d059c9b864"
+      },
+      "git_blob_sha1": "5db38e9ee661a0b1cd40be1ebc04a2b34aed7121",
+      "md5": "b6a5a351fce21105c18247d059c9b864",
+      "path": "GCF_000307795.1_ASM30779v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1147",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Mon, 29 Aug 2022 21:46:24 GMT"
+      },
+      "sha256": "15f62735e91ba0516998d1f629ace796c6a19ffd4230bca1a1786d5b732a254a",
+      "size_bytes": 1147,
+      "source_id": "cdbprom-helicobacter-pylori",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/307/795/GCF_000307795.1_ASM30779v1/GCF_000307795.1_ASM30779v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-helicobacter-pylori/GCF_000307795.1_ASM30779v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:29:54+00:00",
+      "expected": {
+        "md5": "cf929d66889f3f78b04785958cb37a4f"
+      },
+      "git_blob_sha1": "0ea43871aa8994cade7149cae643501348118d1d",
+      "md5": "cf929d66889f3f78b04785958cb37a4f",
+      "path": "GCF_000307795.1_ASM30779v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "481990",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 18 Dec 2020 14:02:17 GMT"
+      },
+      "sha256": "539abbc4833b1a9db079061d3cef33ab8e1ac94b0bd85222cb5c2dda36bc5825",
+      "size_bytes": 481990,
+      "source_id": "cdbprom-helicobacter-pylori",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/307/795/GCF_000307795.1_ASM30779v1/GCF_000307795.1_ASM30779v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-helicobacter-pylori/GCF_000307795.1_ASM30779v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:29:55+00:00",
+      "expected": {
+        "md5": "e5ebdc3dc799e87f40d91c780eca1539"
+      },
+      "git_blob_sha1": "378466afc07ad1b89e812bcf1d14bf762302fcb6",
+      "md5": "e5ebdc3dc799e87f40d91c780eca1539",
+      "path": "GCF_000307795.1_ASM30779v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "151456",
+        "content-type": "application/x-gzip",
+        "last-modified": "Sun, 11 Jan 2026 22:12:16 GMT"
+      },
+      "sha256": "24f97d35abac941f9f10fbe2f50819454161b72f12bf16f455aa9a2d168d1357",
+      "size_bytes": 151456,
+      "source_id": "cdbprom-helicobacter-pylori",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/307/795/GCF_000307795.1_ASM30779v1/GCF_000307795.1_ASM30779v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-klebsiella-pneumoniae/GCF_000016305.1_ASM1630v1_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:29:33+00:00",
+      "expected": {
+        "md5": "417005779fa41970869ac651554ac91d"
+      },
+      "git_blob_sha1": "6b73039c82138fb904952c1a249b04a80f0d8db9",
+      "md5": "417005779fa41970869ac651554ac91d",
+      "path": "GCF_000016305.1_ASM1630v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1683",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Sun, 03 Jul 2022 21:29:23 GMT"
+      },
+      "sha256": "4b6c1ffff67d71cd2ed1a1fbe4d61dd1cfe831eb7f9de7cf4b5a3f5d0a5528ae",
+      "size_bytes": 1683,
+      "source_id": "cdbprom-klebsiella-pneumoniae",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/016/305/GCF_000016305.1_ASM1630v1/GCF_000016305.1_ASM1630v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-klebsiella-pneumoniae/GCF_000016305.1_ASM1630v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:29:30+00:00",
+      "expected": {
+        "md5": "72aa2c4f2ce71179f4619a1b538990e8"
+      },
+      "git_blob_sha1": "3d14875803dc94c744383519466038db2bd41b7a",
+      "md5": "72aa2c4f2ce71179f4619a1b538990e8",
+      "path": "GCF_000016305.1_ASM1630v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1679405",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 04 Feb 2022 14:30:12 GMT"
+      },
+      "sha256": "b7592666d5ee63aa83517c94885c25a57079496754a7504cb591086a7ac0e8ae",
+      "size_bytes": 1679405,
+      "source_id": "cdbprom-klebsiella-pneumoniae",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/016/305/GCF_000016305.1_ASM1630v1/GCF_000016305.1_ASM1630v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-klebsiella-pneumoniae/GCF_000016305.1_ASM1630v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:29:32+00:00",
+      "expected": {
+        "md5": "435d2c33b56f745e7d46f70a4946993b"
+      },
+      "git_blob_sha1": "898754055cd2d06d7f0ba7526a220ca231a93bab",
+      "md5": "435d2c33b56f745e7d46f70a4946993b",
+      "path": "GCF_000016305.1_ASM1630v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "496832",
+        "content-type": "application/x-gzip",
+        "last-modified": "Mon, 31 Mar 2025 16:27:41 GMT"
+      },
+      "sha256": "d2b4bf27bc40e6451b23d85bff907064a9d20afb7b9cc7accfa4c18b84b62a12",
+      "size_bytes": 496832,
+      "source_id": "cdbprom-klebsiella-pneumoniae",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/016/305/GCF_000016305.1_ASM1630v1/GCF_000016305.1_ASM1630v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-mycobacterium-tuberculosis/GCF_026185275.1_ASM2618527v1_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:30:06+00:00",
+      "expected": {
+        "md5": "1c9e7bde7b1470bc8d1f5057d5ff7fed"
+      },
+      "git_blob_sha1": "43043f0864bd5ee3db3715b620e2576a5ed9cc27",
+      "md5": "1c9e7bde7b1470bc8d1f5057d5ff7fed",
+      "path": "GCF_026185275.1_ASM2618527v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1340",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Sat, 19 Nov 2022 13:10:00 GMT"
+      },
+      "sha256": "4e624cbbc041adc8adc5325700f414afc4d7819f73741aba36f4c4490d1475ea",
+      "size_bytes": 1340,
+      "source_id": "cdbprom-mycobacterium-tuberculosis",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/026/185/275/GCF_026185275.1_ASM2618527v1/GCF_026185275.1_ASM2618527v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-mycobacterium-tuberculosis/GCF_026185275.1_ASM2618527v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:30:03+00:00",
+      "expected": {
+        "md5": "99e696bd877e83259e48ced4ff38e48a"
+      },
+      "git_blob_sha1": "03fb1375abb3dd683c8da7b67d262615db29ea24",
+      "md5": "99e696bd877e83259e48ced4ff38e48a",
+      "path": "GCF_026185275.1_ASM2618527v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1278209",
+        "content-type": "application/x-gzip",
+        "last-modified": "Sat, 19 Nov 2022 13:10:00 GMT"
+      },
+      "sha256": "89265f219a88135c7eed7c027bf849adda7d1633143c0e19735585235e56af5d",
+      "size_bytes": 1278209,
+      "source_id": "cdbprom-mycobacterium-tuberculosis",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/026/185/275/GCF_026185275.1_ASM2618527v1/GCF_026185275.1_ASM2618527v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-mycobacterium-tuberculosis/GCF_026185275.1_ASM2618527v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:30:05+00:00",
+      "expected": {
+        "md5": "d0d8d9f91743a478f67c1b8b5d02d2d1"
+      },
+      "git_blob_sha1": "a02d2332660d556e7089ee5461365eee7b981fe1",
+      "md5": "d0d8d9f91743a478f67c1b8b5d02d2d1",
+      "path": "GCF_026185275.1_ASM2618527v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "333529",
+        "content-type": "application/x-gzip",
+        "last-modified": "Thu, 20 Feb 2025 06:36:51 GMT"
+      },
+      "sha256": "9eb7d0e7acf46392d3e45207ab0c0b4f1e2d88ed41758288c98cd268728fde68",
+      "size_bytes": 333529,
+      "source_id": "cdbprom-mycobacterium-tuberculosis",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/026/185/275/GCF_026185275.1_ASM2618527v1/GCF_026185275.1_ASM2618527v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-pseudomonas-aeruginosa/GCF_006974045.1_ASM697404v1_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:30:01+00:00",
+      "expected": {
+        "md5": "56058ea25e4954993c64b59c597959cc"
+      },
+      "git_blob_sha1": "97a79be6b3041dc6a63d03934fc78788da36999a",
+      "md5": "56058ea25e4954993c64b59c597959cc",
+      "path": "GCF_006974045.1_ASM697404v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1251",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Tue, 15 Sep 2026 06:07:58 GMT"
+      },
+      "sha256": "1ddd19d3dc91db651efba4d59551be8ebaf24f8948300f53f8cd7d67058be61a",
+      "size_bytes": 1251,
+      "source_id": "cdbprom-pseudomonas-aeruginosa",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/006/974/045/GCF_006974045.1_ASM697404v1/GCF_006974045.1_ASM697404v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-pseudomonas-aeruginosa/GCF_006974045.1_ASM697404v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:29:58+00:00",
+      "expected": {
+        "md5": "972fd4368b6dbd73f5fb177601c20f8f"
+      },
+      "git_blob_sha1": "a78c69513240f0740e2d145ab92842429c799058",
+      "md5": "972fd4368b6dbd73f5fb177601c20f8f",
+      "path": "GCF_006974045.1_ASM697404v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1867988",
+        "content-type": "application/x-gzip",
+        "last-modified": "Wed, 09 Oct 2019 10:23:29 GMT"
+      },
+      "sha256": "fc96ec5581c5bfd3da2a96bbaf658c91a993d84c26e653efdc448e5c98b06775",
+      "size_bytes": 1867988,
+      "source_id": "cdbprom-pseudomonas-aeruginosa",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/006/974/045/GCF_006974045.1_ASM697404v1/GCF_006974045.1_ASM697404v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-pseudomonas-aeruginosa/GCF_006974045.1_ASM697404v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:30:00+00:00",
+      "expected": {
+        "md5": "215850dab9b736015b72797c2d6febdb"
+      },
+      "git_blob_sha1": "79cda2fbd2a7d8ac29893200d8803ce1d7900a18",
+      "md5": "215850dab9b736015b72797c2d6febdb",
+      "path": "GCF_006974045.1_ASM697404v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "520568",
+        "content-type": "application/x-gzip",
+        "last-modified": "Tue, 15 Sep 2026 06:07:58 GMT"
+      },
+      "sha256": "a1fcb3d6800194ce32d968d1ebeb5198ac7052b5d183a58e177f4a9957927049",
+      "size_bytes": 520568,
+      "source_id": "cdbprom-pseudomonas-aeruginosa",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/006/974/045/GCF_006974045.1_ASM697404v1/GCF_006974045.1_ASM697404v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-salmonella-typhimurium/GCF_000210855.2_ASM21085v2_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:29:43+00:00",
+      "expected": {
+        "md5": "a930ab663258bdd7cd02273419ac0e4e"
+      },
+      "git_blob_sha1": "7da84012e1dba5b98b57e13e206ef9d4e23fa1ae",
+      "md5": "a930ab663258bdd7cd02273419ac0e4e",
+      "path": "GCF_000210855.2_ASM21085v2_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1540",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Mon, 29 Aug 2022 21:10:16 GMT"
+      },
+      "sha256": "0d7fd89bc534776505409530eb5cec7d294205c3165a4f2cc4eaddb53d30c325",
+      "size_bytes": 1540,
+      "source_id": "cdbprom-salmonella-typhimurium",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/210/855/GCF_000210855.2_ASM21085v2/GCF_000210855.2_ASM21085v2_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-salmonella-typhimurium/GCF_000210855.2_ASM21085v2_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:29:40+00:00",
+      "expected": {
+        "md5": "9d5745b560b8dcf54374e182111f0663"
+      },
+      "git_blob_sha1": "0a4ab19ad8e80029d676e52480c111262b3e6c08",
+      "md5": "9d5745b560b8dcf54374e182111f0663",
+      "path": "GCF_000210855.2_ASM21085v2_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1506586",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 18 Dec 2020 23:44:17 GMT"
+      },
+      "sha256": "87c281d60099c40f014bb1a1e369f9676182f51618c414650c0d3cb223ac86ea",
+      "size_bytes": 1506586,
+      "source_id": "cdbprom-salmonella-typhimurium",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/210/855/GCF_000210855.2_ASM21085v2/GCF_000210855.2_ASM21085v2_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-salmonella-typhimurium/GCF_000210855.2_ASM21085v2_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:29:42+00:00",
+      "expected": {
+        "md5": "a0322ef6c5c7d6567ce55818695a75f9"
+      },
+      "git_blob_sha1": "9549062be9b74f637aefa94975a12d8f300aec4e",
+      "md5": "a0322ef6c5c7d6567ce55818695a75f9",
+      "path": "GCF_000210855.2_ASM21085v2_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "467302",
+        "content-type": "application/x-gzip",
+        "last-modified": "Sun, 16 Mar 2025 13:12:21 GMT"
+      },
+      "sha256": "1862317305c4a4cdf529b22ff1c86a6fd4b7c8e6416f4f110a56189e81975c89",
+      "size_bytes": 467302,
+      "source_id": "cdbprom-salmonella-typhimurium",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/210/855/GCF_000210855.2_ASM21085v2/GCF_000210855.2_ASM21085v2_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-streptomyces-coelicolor/GCF_000203835.1_ASM20383v1_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:29:38+00:00",
+      "expected": {
+        "md5": "721a6e7e97af357386e754227e3ff93e"
+      },
+      "git_blob_sha1": "b5119ffb1aaf4d03e950253612afc69ef86ffdd8",
+      "md5": "721a6e7e97af357386e754227e3ff93e",
+      "path": "GCF_000203835.1_ASM20383v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1354",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Mon, 02 Jun 2025 21:56:34 GMT"
+      },
+      "sha256": "bc75a4c7819c1d42254c386d0429b3994aae66877acd9cb78fed88a59ddd4f5e",
+      "size_bytes": 1354,
+      "source_id": "cdbprom-streptomyces-coelicolor",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/203/835/GCF_000203835.1_ASM20383v1/GCF_000203835.1_ASM20383v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-streptomyces-coelicolor/GCF_000203835.1_ASM20383v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:29:35+00:00",
+      "expected": {
+        "md5": "de68b1930d730c88bcc47612ff8479dc"
+      },
+      "git_blob_sha1": "3289408206966f627a5ccf0bcfdc46881afa7363",
+      "md5": "de68b1930d730c88bcc47612ff8479dc",
+      "path": "GCF_000203835.1_ASM20383v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "2532350",
+        "content-type": "application/x-gzip",
+        "last-modified": "Mon, 09 Jun 2025 05:30:43 GMT"
+      },
+      "sha256": "a4fe6af87988f85040c3cda3695828b7bc6b306eada9f0177971c2a61540b97c",
+      "size_bytes": 2532350,
+      "source_id": "cdbprom-streptomyces-coelicolor",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/203/835/GCF_000203835.1_ASM20383v1/GCF_000203835.1_ASM20383v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-streptomyces-coelicolor/GCF_000203835.1_ASM20383v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:29:37+00:00",
+      "expected": {
+        "md5": "48006bf1ad03dc40315cfe287c47912d"
+      },
+      "git_blob_sha1": "58c086a94beffbfbdca20ad260a16173c6a65d67",
+      "md5": "48006bf1ad03dc40315cfe287c47912d",
+      "path": "GCF_000203835.1_ASM20383v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "652554",
+        "content-type": "application/x-gzip",
+        "last-modified": "Wed, 07 Jan 2026 06:12:38 GMT"
+      },
+      "sha256": "6d8404c3612106385c1d51728ba38abc4bbee622ffb2671b26590f1cf85b9035",
+      "size_bytes": 652554,
+      "source_id": "cdbprom-streptomyces-coelicolor",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/203/835/GCF_000203835.1_ASM20383v1/GCF_000203835.1_ASM20383v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-synechocystis/GCF_000284135.1_ASM28413v1_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:29:52+00:00",
+      "expected": {
+        "md5": "30aa2be2c4fe9dc87dbe295e0b02b086"
+      },
+      "git_blob_sha1": "a750aa48f1a2fea7e07c7b84980372ea5e18e8c5",
+      "md5": "30aa2be2c4fe9dc87dbe295e0b02b086",
+      "path": "GCF_000284135.1_ASM28413v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1325",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Mon, 01 Jul 2024 23:51:28 GMT"
+      },
+      "sha256": "938b4ccabe189b5d8490f92056994e8bc1274cee37a14ec7e56f7a523ec89c4c",
+      "size_bytes": 1325,
+      "source_id": "cdbprom-synechocystis",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/284/135/GCF_000284135.1_ASM28413v1/GCF_000284135.1_ASM28413v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-synechocystis/GCF_000284135.1_ASM28413v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:29:50+00:00",
+      "expected": {
+        "md5": "af3c5bc3dced7ef01bdf8ae1d4067254"
+      },
+      "git_blob_sha1": "54894ad5d71cc70315e72d8d5dbca710eb756503",
+      "md5": "af3c5bc3dced7ef01bdf8ae1d4067254",
+      "path": "GCF_000284135.1_ASM28413v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1058784",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 18 Dec 2020 23:43:16 GMT"
+      },
+      "sha256": "dd2e41cc466404470e81bdd8134c2ee793fec043bf02a2dd0ae2b1fe32209fa1",
+      "size_bytes": 1058784,
+      "source_id": "cdbprom-synechocystis",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/284/135/GCF_000284135.1_ASM28413v1/GCF_000284135.1_ASM28413v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cdbprom-synechocystis/GCF_000284135.1_ASM28413v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:29:51+00:00",
+      "expected": {
+        "md5": "bea917065c09cb5c293f59c06a2e2566"
+      },
+      "git_blob_sha1": "041f018456d548a5327061114e81a8baec33f39c",
+      "md5": "bea917065c09cb5c293f59c06a2e2566",
+      "path": "GCF_000284135.1_ASM28413v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "273911",
+        "content-type": "application/x-gzip",
+        "last-modified": "Tue, 13 Aug 2024 13:14:51 GMT"
+      },
+      "sha256": "8f9d8ac4daa9abdec6fc7c354ab34e1f49e011b46b0bc7c1f6f7cfa060c4c7dc",
+      "size_bytes": 273911,
+      "source_id": "cdbprom-synechocystis",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/284/135/GCF_000284135.1_ASM28413v1/GCF_000284135.1_ASM28413v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cnnprom-bacillus-subtilis-168/GCF_000009045.1_ASM904v1_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:30:15+00:00",
+      "expected": {
+        "md5": "a0f5297942bdd4743b0594ee0dfd5f94"
+      },
+      "git_blob_sha1": "1e0be24b5eccd7dfb1ed9ef63f630790c6111267",
+      "md5": "a0f5297942bdd4743b0594ee0dfd5f94",
+      "path": "GCF_000009045.1_ASM904v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1318",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Tue, 01 Apr 2025 02:09:59 GMT"
+      },
+      "sha256": "2db5c1fe3c907e9ee6e4a85ffce4b94b7325464313761dc5e3f60501d3a44836",
+      "size_bytes": 1318,
+      "source_id": "cnnprom-bacillus-subtilis-168",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/045/GCF_000009045.1_ASM904v1/GCF_000009045.1_ASM904v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cnnprom-bacillus-subtilis-168/GCF_000009045.1_ASM904v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:30:12+00:00",
+      "expected": {
+        "md5": "87378255941a61ec4b4384af8ba28ff5"
+      },
+      "git_blob_sha1": "710a9668e506bcd3ef534fc300d7b8a94317c83a",
+      "md5": "87378255941a61ec4b4384af8ba28ff5",
+      "path": "GCF_000009045.1_ASM904v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1248396",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 21 Sep 2018 04:31:16 GMT"
+      },
+      "sha256": "1a9e4f66533db783e9ecb6727355993a16a00ef36fa512dcac2de39eff1ae8c5",
+      "size_bytes": 1248396,
+      "source_id": "cnnprom-bacillus-subtilis-168",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/045/GCF_000009045.1_ASM904v1/GCF_000009045.1_ASM904v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cnnprom-bacillus-subtilis-168/GCF_000009045.1_ASM904v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:30:14+00:00",
+      "expected": {
+        "md5": "fac0e3479a5522113eaaa55ec7740ae8"
+      },
+      "git_blob_sha1": "3056101682e5f7eda2af472999f439f23950aff7",
+      "md5": "fac0e3479a5522113eaaa55ec7740ae8",
+      "path": "GCF_000009045.1_ASM904v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "550736",
+        "content-type": "application/x-gzip",
+        "last-modified": "Mon, 27 Oct 2025 19:26:50 GMT"
+      },
+      "sha256": "a3e6d29c34ac0d4b7581e17902f9efc1d7737726ec3d5c1896d8ed40eaa0a881",
+      "size_bytes": 550736,
+      "source_id": "cnnprom-bacillus-subtilis-168",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/045/GCF_000009045.1_ASM904v1/GCF_000009045.1_ASM904v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cnnprom-ecoli-k12/GCF_000005845.2_ASM584v2_assembly_report.txt": {
+      "acquired_at": "2026-11-01T00:30:10+00:00",
+      "expected": {
+        "md5": "412317ea727482fc007c07d2d01c09ba"
+      },
+      "git_blob_sha1": "dab941a2fedd0d504d99e0c9c61a8067591556f8",
+      "md5": "412317ea727482fc007c07d2d01c09ba",
+      "path": "GCF_000005845.2_ASM584v2_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1112",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Fri, 04 Sep 2026 21:13:05 GMT"
+      },
+      "sha256": "ca161bcfe8d1842b2160ca3fa20b480956d8242895115c53f5f819a11e895362",
+      "size_bytes": 1112,
+      "source_id": "cnnprom-ecoli-k12",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cnnprom-ecoli-k12/GCF_000005845.2_ASM584v2_genomic.fna.gz": {
+      "acquired_at": "2026-11-01T00:30:08+00:00",
+      "expected": {
+        "md5": "c13d459b5caa702ff7e1f26fe44b8ad7"
+      },
+      "git_blob_sha1": "e21b3e7cb026c3181f34628abe473ff378b93116",
+      "md5": "c13d459b5caa702ff7e1f26fe44b8ad7",
+      "path": "GCF_000005845.2_ASM584v2_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1379902",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 31 Oct 2014 23:59:39 GMT"
+      },
+      "sha256": "a96d3cfa58c88d477013c768f90a11d2386d42a70d566abfb6d9013dcbd24255",
+      "size_bytes": 1379902,
+      "source_id": "cnnprom-ecoli-k12",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "cnnprom-ecoli-k12/GCF_000005845.2_ASM584v2_genomic.gff.gz": {
+      "acquired_at": "2026-11-01T00:30:09+00:00",
+      "expected": {
+        "md5": "0f52ffc94af5ddf544ff89cc6f546b0c"
+      },
+      "git_blob_sha1": "aeefe41c4eafa6ab5da30b4b7b093c09f8931a4e",
+      "md5": "0f52ffc94af5ddf544ff89cc6f546b0c",
+      "path": "GCF_000005845.2_ASM584v2_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "387627",
+        "content-type": "application/x-gzip",
+        "last-modified": "Fri, 04 Sep 2026 21:13:05 GMT"
+      },
+      "sha256": "afdf03dc1d06e423d874ee29d9e0df14f5d32baf893f4da9f93aa721eb5f495e",
+      "size_bytes": 387627,
+      "source_id": "cnnprom-ecoli-k12",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    }
+  },
+  "resolved_listings": {},
+  "runs": [
+    {
+      "command": [
+        "python",
+        "scripts/acquire_sources.py",
+        "--config",
+        "configs/reference_acquisition_v10.yaml",
+        "--execute"
+      ],
+      "finished_at": "2026-11-01T00:30:15+00:00",
+      "only_sources": null,
+      "started_at": "2026-11-01T00:29:07+00:00",
+      "status": "completed",
+      "summary": {
+        "declared_files": 39,
+        "downloaded": 39,
+        "planned": 39,
+        "recorded_files": 39,
+        "skipped_verified": 0
+      },
+      "tool": {
+        "code": {
+          "commit": "9d15f90eda165980e549b1ea986863a1ef6a8bd0",
+          "worktree_clean": false
+        },
+        "module_sha256": "a8e71e40ff7889c369afaa583f7e94605216a0494e3f9cdd084a07525d4b27a4",
+        "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.13.11",
+        "user_agent": "capsprom-source-acquisition/1"
+      }
+    }
+  ],
+  "schema_version": 1
+}

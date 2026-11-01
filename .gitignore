@@ -222,6 +222,7 @@ __marimo__/
 /data/interim/
 /data/processed/
 /data/acquired/
+/data/coordinates/
 /data/canonical/
 /data/*.ipynb
 /mlruns/

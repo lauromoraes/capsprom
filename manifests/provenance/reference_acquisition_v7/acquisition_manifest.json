@@ -1,0 +1,55 @@
+{
+  "acquisition": "reference-acquisition-v7",
+  "config_sha256": "d9d38d578e7c5c0cdb7f3f13b4031bba8fa1e33d8266856bdfb675cc22b36204",
+  "files": {
+    "ncbi-athaliana-mito-y08501/Y08501.2.fasta": {
+      "acquired_at": "2026-10-29T23:49:54+00:00",
+      "expected": {},
+      "git_blob_sha1": "148085859d05f0f4f84aa5cedad594aff4d9b37b",
+      "md5": "26c50afee3cf9e09b977892c50a3d33e",
+      "path": "Y08501.2.fasta",
+      "response_headers": {
+        "content-type": "text/plain"
+      },
+      "sha256": "f157a240196edbd554ae057427ae876ec1d9e773652f1cf6f4bf3b6ae3327ad1",
+      "size_bytes": 372219,
+      "source_id": "ncbi-athaliana-mito-y08501",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=Y08501.2&rettype=fasta&retmode=text",
+      "verified_against": []
+    }
+  },
+  "resolved_listings": {},
+  "runs": [
+    {
+      "command": [
+        "python",
+        "scripts/acquire_sources.py",
+        "--config",
+        "configs/reference_acquisition_v7.yaml",
+        "--execute"
+      ],
+      "finished_at": "2026-10-29T23:49:54+00:00",
+      "only_sources": null,
+      "started_at": "2026-10-29T23:49:51+00:00",
+      "status": "completed",
+      "summary": {
+        "declared_files": 1,
+        "downloaded": 1,
+        "planned": 1,
+        "recorded_files": 1,
+        "skipped_verified": 0
+      },
+      "tool": {
+        "code": {
+          "commit": "3cc36186b49dfa5f10f7eba261719f48d3e188a6",
+          "worktree_clean": false
+        },
+        "module_sha256": "a8e71e40ff7889c369afaa583f7e94605216a0494e3f9cdd084a07525d4b27a4",
+        "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.13.11",
+        "user_agent": "capsprom-source-acquisition/1"
+      }
+    }
+  ],
+  "schema_version": 1
+}

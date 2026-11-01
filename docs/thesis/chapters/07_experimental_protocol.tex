@@ -75,6 +75,30 @@ receive an explicitly comparable search budget. Test outcomes are not used for
 feature selection, early stopping, threshold selection, calibration, or
 hyperparameter optimization.
 
+Figure~\ref{fig:protocol-pipeline-overview} summarizes this workflow for a
+neural classifier. Sequence preparation and the fixed benchmark train--test
+split precede any model fitting. Optimization and model selection use only the
+five-fold stratified folds of the training partition, after which the selected
+configuration is refitted on the full training set. The independent test set
+bypasses every development step and is used once, with the fixed 0.5 decision
+threshold, for final evaluation.
+
+\begin{sidewaysfigure}
+\centering
+\includegraphics[width=\textheight]{figures/promoter_dl_pipeline.pdf}
+\caption{Schematic overview of the promoter classification workflow.
+(A)~Labeled promoter and non-promoter DNA windows. (B)~Quality control,
+window standardization, redundancy checks, and the fixed benchmark train--test
+split. (C)~One-hot encoding into a $4\times L$ numerical matrix. (D)~Generic
+modular deep learning classifier. (E)~Gradient-based training with model
+selection by five-fold stratified cross-validation within the training set,
+followed by a full-training refit. (F)~Prediction and single final evaluation
+on the isolated test set. The dashed path marks held-out test data, which take
+no part in optimization or selection. The sequences, split proportions, and
+curves are illustrative and do not represent experimental results.}
+\label{fig:protocol-pipeline-overview}
+\end{sidewaysfigure}
+
 \section{Data Conditions and Comparability}\label{sec:protocol-data-conditions}
 
 Two data conditions are distinguished, because they answer different

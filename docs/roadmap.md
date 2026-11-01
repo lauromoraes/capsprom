@@ -868,7 +868,7 @@ Current state:
   dataset was built, no partition generated, and no gate changed.
 - Next (each a separate authorization): freeze the
   `bhandari-history-arabidopsis.orig-pub-v1` replay contract (decided: random selection, current stack, corrected
-  deviations of F-080; to fix: seeds, sample size, reproduction criterion;
+  deviations of F-080; 10 seeds, 35,000 per class, published value within the 10-seed range;
   review and overlap counts in F-080 to F-083, log R-026); P-4 for the mouse file. An *A. thaliana* reconstruction waits for
   R-1 to R-5 of `docs/bhandari_nominal_plant_assessment.md`.
 

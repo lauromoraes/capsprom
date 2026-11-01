@@ -174,7 +174,10 @@ Replay contract decisions (`orig-pub-v1`, not yet frozen):
 | Reported, not corrected, in `pub` | the per-position `Dense` layers of the CNN, as published, with the corrected `Flatten` order as a declared variant |
 | Leakage measurement | for each seed, count test records with an exact duplicate, a reverse complement, a >= 500 bp genomic overlap (F-082), or their shuffled partner (F-083) in training; reported beside the metrics, without changing the split |
 | Independence | the contract uses only the canonical table (F-075); it does not depend on the TSS classes, on F-078 or F-079, or on R-1 to R-5, which concern the reconstructed condition only. The 77 records on the earlier mitochondrion and the 52 outside nuclear transcript starts stay in the data, because the published procedure keeps them |
-| Still to fix before freezing | number of seeds and what they vary; sample size per class (the publication's "35,000" is not the 37,957 unique records, F-081); the published values and tolerance that define a successful reproduction |
+| Seeds | 10 seeds, fixed in the contract; each seed drives the per-class sample, the shuffles, and the split; metrics are reported as mean, standard deviation, and the min–max range over the 10 runs |
+| Sample size | 35,000 per class drawn at random from the 37,957 unique records (the publication's figure, F-081); all unique records are used only in `orig-common` and later cross-source experiments, never in `orig-pub` |
+| Reproduction criterion | a published value is reproduced when it lies within the min–max range of the 10 seeds, fixed before any run |
+| Leakage at the model's length | the counts above are taken on the 1,000-nt windows of `orig-pub`. For `orig-common` and cross-source builds cropped to 251 nt or 81 nt, exact and reverse-complement duplicates and genomic overlap are recomputed on the cropped windows, and groups for splitting are formed after cropping; counts before cropping only describe the source |
 
 Filters a published-protocol replay may declare, each counted per class and per
 partition: records not of length 1,000 (3; the authors' code drops them,

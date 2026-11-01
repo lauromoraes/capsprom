@@ -1,0 +1,250 @@
+acquisition:
+  name: reference-acquisition-v10
+  version: 1.0.0
+  protocol: specs/reference_coordinate_mapping_protocol.md
+  root: data/acquired/reference_acquisition_v10
+  frozen_on: 2026-10-31
+  policy: >-
+    Bacterial reference genomes for coordinate mapping of the eligible
+    prokaryotic collections: the 11 CDBProm assemblies of R-011 (including the
+    two replacements; the rejected accessions stay recorded in
+    data/raw/references/cdbprom_genomes_v1/manifest.json) and the CNNProm
+    E. coli K-12 MG1655 and B. subtilis 168 assemblies. Brings into an
+    acquisition manifest the genomes that F-027 lists as raw-only. MD5 digests
+    are from each NCBI directory's md5checksums.txt, read on 2026-10-31.
+
+sources:
+  - source_id: cdbprom-chlamydophila-pneumoniae
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/
+    release: GCF_000008745.1
+    organism: Chlamydia pneumoniae CWL029
+    note: CDBProm, declared and mapped in R-011
+    files:
+      - path: GCF_000008745.1_ASM874v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_genomic.fna.gz
+        expected: {md5: 521395704b9dd38f44e9b86d1817062e}
+      - path: GCF_000008745.1_ASM874v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_genomic.gff.gz
+        expected: {md5: dff7b2ce133e186dca5cb866195dbe16}
+      - path: GCF_000008745.1_ASM874v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_assembly_report.txt
+        expected: {md5: b720900aa2046e23f262b8166923aaa8}
+
+  - source_id: cdbprom-anabaena-sp
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/705/GCF_000009705.1_ASM970v1/
+    release: GCF_000009705.1
+    organism: Nostoc sp. PCC 7120
+    note: CDBProm, replaces declared GCF_009498015.1 (R-011)
+    files:
+      - path: GCF_000009705.1_ASM970v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/705/GCF_000009705.1_ASM970v1/GCF_000009705.1_ASM970v1_genomic.fna.gz
+        expected: {md5: 3e9b8f73bf79e4555b874e54f5118d49}
+      - path: GCF_000009705.1_ASM970v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/705/GCF_000009705.1_ASM970v1/GCF_000009705.1_ASM970v1_genomic.gff.gz
+        expected: {md5: ee99025abcb5d6cf04c5b819b6392a52}
+      - path: GCF_000009705.1_ASM970v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/705/GCF_000009705.1_ASM970v1/GCF_000009705.1_ASM970v1_assembly_report.txt
+        expected: {md5: c08c156359943ad97f3b2e873a878b2e}
+
+  - source_id: cdbprom-corynebacterium-glutamicum
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/011/325/GCF_000011325.1_ASM1132v1/
+    release: GCF_000011325.1
+    organism: Corynebacterium glutamicum ATCC 13032
+    note: CDBProm, R-011
+    files:
+      - path: GCF_000011325.1_ASM1132v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/011/325/GCF_000011325.1_ASM1132v1/GCF_000011325.1_ASM1132v1_genomic.fna.gz
+        expected: {md5: 23237d832882f17ccab0e542f96fabef}
+      - path: GCF_000011325.1_ASM1132v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/011/325/GCF_000011325.1_ASM1132v1/GCF_000011325.1_ASM1132v1_genomic.gff.gz
+        expected: {md5: 2e718bf4c5b6ff1785ec0d72646676b7}
+      - path: GCF_000011325.1_ASM1132v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/011/325/GCF_000011325.1_ASM1132v1/GCF_000011325.1_ASM1132v1_assembly_report.txt
+        expected: {md5: 9874c0491c095fe1a3a0d14a5956c162}
+
+  - source_id: cdbprom-klebsiella-pneumoniae
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/016/305/GCF_000016305.1_ASM1630v1/
+    release: GCF_000016305.1
+    organism: Klebsiella pneumoniae MGH 78578
+    note: CDBProm, R-011
+    files:
+      - path: GCF_000016305.1_ASM1630v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/016/305/GCF_000016305.1_ASM1630v1/GCF_000016305.1_ASM1630v1_genomic.fna.gz
+        expected: {md5: 72aa2c4f2ce71179f4619a1b538990e8}
+      - path: GCF_000016305.1_ASM1630v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/016/305/GCF_000016305.1_ASM1630v1/GCF_000016305.1_ASM1630v1_genomic.gff.gz
+        expected: {md5: 435d2c33b56f745e7d46f70a4946993b}
+      - path: GCF_000016305.1_ASM1630v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/016/305/GCF_000016305.1_ASM1630v1/GCF_000016305.1_ASM1630v1_assembly_report.txt
+        expected: {md5: 417005779fa41970869ac651554ac91d}
+
+  - source_id: cdbprom-streptomyces-coelicolor
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/203/835/GCF_000203835.1_ASM20383v1/
+    release: GCF_000203835.1
+    organism: Streptomyces coelicolor A3(2)
+    note: CDBProm, R-011
+    files:
+      - path: GCF_000203835.1_ASM20383v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/203/835/GCF_000203835.1_ASM20383v1/GCF_000203835.1_ASM20383v1_genomic.fna.gz
+        expected: {md5: de68b1930d730c88bcc47612ff8479dc}
+      - path: GCF_000203835.1_ASM20383v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/203/835/GCF_000203835.1_ASM20383v1/GCF_000203835.1_ASM20383v1_genomic.gff.gz
+        expected: {md5: 48006bf1ad03dc40315cfe287c47912d}
+      - path: GCF_000203835.1_ASM20383v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/203/835/GCF_000203835.1_ASM20383v1/GCF_000203835.1_ASM20383v1_assembly_report.txt
+        expected: {md5: 721a6e7e97af357386e754227e3ff93e}
+
+  - source_id: cdbprom-salmonella-typhimurium
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/210/855/GCF_000210855.2_ASM21085v2/
+    release: GCF_000210855.2
+    organism: Salmonella Typhimurium SL1344
+    note: CDBProm, replaces declared GCF_031197025.1 (R-011)
+    files:
+      - path: GCF_000210855.2_ASM21085v2_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/210/855/GCF_000210855.2_ASM21085v2/GCF_000210855.2_ASM21085v2_genomic.fna.gz
+        expected: {md5: 9d5745b560b8dcf54374e182111f0663}
+      - path: GCF_000210855.2_ASM21085v2_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/210/855/GCF_000210855.2_ASM21085v2/GCF_000210855.2_ASM21085v2_genomic.gff.gz
+        expected: {md5: a0322ef6c5c7d6567ce55818695a75f9}
+      - path: GCF_000210855.2_ASM21085v2_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/210/855/GCF_000210855.2_ASM21085v2/GCF_000210855.2_ASM21085v2_assembly_report.txt
+        expected: {md5: a930ab663258bdd7cd02273419ac0e4e}
+
+  - source_id: cdbprom-bacillus-amyloliquefaciens
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/221/645/GCF_000221645.1_ASM22164v1/
+    release: GCF_000221645.1
+    organism: Bacillus amyloliquefaciens XH7
+    note: CDBProm, R-011
+    files:
+      - path: GCF_000221645.1_ASM22164v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/221/645/GCF_000221645.1_ASM22164v1/GCF_000221645.1_ASM22164v1_genomic.fna.gz
+        expected: {md5: 6c7c06ec8ddd64c6aafb5f8f0c298bec}
+      - path: GCF_000221645.1_ASM22164v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/221/645/GCF_000221645.1_ASM22164v1/GCF_000221645.1_ASM22164v1_genomic.gff.gz
+        expected: {md5: c1b3d89fd9230e4792d59ff255cc4eb6}
+      - path: GCF_000221645.1_ASM22164v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/221/645/GCF_000221645.1_ASM22164v1/GCF_000221645.1_ASM22164v1_assembly_report.txt
+        expected: {md5: e24c6e12f87f75cc21b32004b051dd15}
+
+  - source_id: cdbprom-synechocystis
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/284/135/GCF_000284135.1_ASM28413v1/
+    release: GCF_000284135.1
+    organism: Synechocystis sp. PCC 6803 GT-I
+    note: CDBProm, R-011
+    files:
+      - path: GCF_000284135.1_ASM28413v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/284/135/GCF_000284135.1_ASM28413v1/GCF_000284135.1_ASM28413v1_genomic.fna.gz
+        expected: {md5: af3c5bc3dced7ef01bdf8ae1d4067254}
+      - path: GCF_000284135.1_ASM28413v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/284/135/GCF_000284135.1_ASM28413v1/GCF_000284135.1_ASM28413v1_genomic.gff.gz
+        expected: {md5: bea917065c09cb5c293f59c06a2e2566}
+      - path: GCF_000284135.1_ASM28413v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/284/135/GCF_000284135.1_ASM28413v1/GCF_000284135.1_ASM28413v1_assembly_report.txt
+        expected: {md5: 30aa2be2c4fe9dc87dbe295e0b02b086}
+
+  - source_id: cdbprom-helicobacter-pylori
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/307/795/GCF_000307795.1_ASM30779v1/
+    release: GCF_000307795.1
+    organism: Helicobacter pylori 26695
+    note: CDBProm, R-011
+    files:
+      - path: GCF_000307795.1_ASM30779v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/307/795/GCF_000307795.1_ASM30779v1/GCF_000307795.1_ASM30779v1_genomic.fna.gz
+        expected: {md5: cf929d66889f3f78b04785958cb37a4f}
+      - path: GCF_000307795.1_ASM30779v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/307/795/GCF_000307795.1_ASM30779v1/GCF_000307795.1_ASM30779v1_genomic.gff.gz
+        expected: {md5: e5ebdc3dc799e87f40d91c780eca1539}
+      - path: GCF_000307795.1_ASM30779v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/307/795/GCF_000307795.1_ASM30779v1/GCF_000307795.1_ASM30779v1_assembly_report.txt
+        expected: {md5: b6a5a351fce21105c18247d059c9b864}
+
+  - source_id: cdbprom-pseudomonas-aeruginosa
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/006/974/045/GCF_006974045.1_ASM697404v1/
+    release: GCF_006974045.1
+    organism: Pseudomonas aeruginosa UCBPP-PA14
+    note: CDBProm, R-011
+    files:
+      - path: GCF_006974045.1_ASM697404v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/006/974/045/GCF_006974045.1_ASM697404v1/GCF_006974045.1_ASM697404v1_genomic.fna.gz
+        expected: {md5: 972fd4368b6dbd73f5fb177601c20f8f}
+      - path: GCF_006974045.1_ASM697404v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/006/974/045/GCF_006974045.1_ASM697404v1/GCF_006974045.1_ASM697404v1_genomic.gff.gz
+        expected: {md5: 215850dab9b736015b72797c2d6febdb}
+      - path: GCF_006974045.1_ASM697404v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/006/974/045/GCF_006974045.1_ASM697404v1/GCF_006974045.1_ASM697404v1_assembly_report.txt
+        expected: {md5: 56058ea25e4954993c64b59c597959cc}
+
+  - source_id: cdbprom-mycobacterium-tuberculosis
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/026/185/275/GCF_026185275.1_ASM2618527v1/
+    release: GCF_026185275.1
+    organism: Mycobacterium tuberculosis H37Rv-1
+    note: CDBProm, R-011
+    files:
+      - path: GCF_026185275.1_ASM2618527v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/026/185/275/GCF_026185275.1_ASM2618527v1/GCF_026185275.1_ASM2618527v1_genomic.fna.gz
+        expected: {md5: 99e696bd877e83259e48ced4ff38e48a}
+      - path: GCF_026185275.1_ASM2618527v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/026/185/275/GCF_026185275.1_ASM2618527v1/GCF_026185275.1_ASM2618527v1_genomic.gff.gz
+        expected: {md5: d0d8d9f91743a478f67c1b8b5d02d2d1}
+      - path: GCF_026185275.1_ASM2618527v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/026/185/275/GCF_026185275.1_ASM2618527v1/GCF_026185275.1_ASM2618527v1_assembly_report.txt
+        expected: {md5: 1c9e7bde7b1470bc8d1f5057d5ff7fed}
+
+  - source_id: cnnprom-ecoli-k12
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/
+    release: GCF_000005845.2
+    organism: Escherichia coli K-12 MG1655 (NC_000913.3)
+    note: CNNProm declares NC_000913; version inferred from RegulonDB 9.0 era
+    files:
+      - path: GCF_000005845.2_ASM584v2_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz
+        expected: {md5: c13d459b5caa702ff7e1f26fe44b8ad7}
+      - path: GCF_000005845.2_ASM584v2_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gff.gz
+        expected: {md5: 0f52ffc94af5ddf544ff89cc6f546b0c}
+      - path: GCF_000005845.2_ASM584v2_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_assembly_report.txt
+        expected: {md5: 412317ea727482fc007c07d2d01c09ba}
+
+  - source_id: cnnprom-bacillus-subtilis-168
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/045/GCF_000009045.1_ASM904v1/
+    release: GCF_000009045.1
+    organism: Bacillus subtilis 168 (NC_000964.3)
+    note: CNNProm declares NC_000964; version inferred
+    files:
+      - path: GCF_000009045.1_ASM904v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/045/GCF_000009045.1_ASM904v1/GCF_000009045.1_ASM904v1_genomic.fna.gz
+        expected: {md5: 87378255941a61ec4b4384af8ba28ff5}
+      - path: GCF_000009045.1_ASM904v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/045/GCF_000009045.1_ASM904v1/GCF_000009045.1_ASM904v1_genomic.gff.gz
+        expected: {md5: fac0e3479a5522113eaaa55ec7740ae8}
+      - path: GCF_000009045.1_ASM904v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/045/GCF_000009045.1_ASM904v1/GCF_000009045.1_ASM904v1_assembly_report.txt
+        expected: {md5: a0f5297942bdd4743b0594ee0dfd5f94}
+

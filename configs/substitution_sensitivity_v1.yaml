@@ -31,6 +31,7 @@ window_substitution:
 in_silico_mutagenesis:
   enabled: true
   alternatives_per_position: 3
+  classes: [promoter, nonpromoter]
   positional_summaries: [mean, max]
   inferential_use: false
 

@@ -1,0 +1,261 @@
+{
+  "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+  "mapping": "reference-coordinate-mapping-v1",
+  "runs": [
+    {
+      "built": [
+        "cdbprom-helicobacter-pylori",
+        "cdbprom-klebisiella-pneumoniae",
+        "cdbprom-mycrobacterium-tuberculosis",
+        "cdbprom-pseudonomas-aeruginosa",
+        "cdbprom-salmonella-typhimurium",
+        "cdbprom-streptomyces-coelicolor",
+        "cdbprom-synechocistis",
+        "cnnprom-ecoli-sigma70",
+        "cnnprom-bacillus-subtilis"
+      ],
+      "code": {
+        "clean": false,
+        "commit": "9d15f90eda165980e549b1ea986863a1ef6a8bd0",
+        "exact_mapping_sha256": "f7b08c3acd754124e0ce135de370cb2e3426e384edfb4a7ae74609bb1a83494c",
+        "module_sha256": "28cffffd3b2ead901d30d8785bd778c57073e0f7287273b0e4668f9b33fa7144"
+      },
+      "finished_utc": "2026-11-01T02:04:33+00:00",
+      "shard_filter": null,
+      "skipped": [
+        "cdbprom-anabaena-sp",
+        "cdbprom-bacillus-amyloliquefaciens",
+        "cdbprom-chlamydophila-pneumoniae",
+        "cdbprom-corynebacterium-glutamicum"
+      ],
+      "started_utc": "2026-11-01T01:29:16+00:00"
+    }
+  ],
+  "shards": {
+    "cdbprom-anabaena-sp": {
+      "assembly": "GCF_000009705.1",
+      "inputs": {
+        "canonical_sha256": "7332fea17b24a98a3d633abb6749ed5d8635082af9e71c877ae0a16679e71204",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "afff1e4da3f0816a22c2510b0a82217ada02ae81148367abd327435b52657e12"
+      },
+      "loci": 5113,
+      "loci_sha256": "8da3b80cf9c53d68469fb02fcff905fecf33d3e42a4e4d795a973987e83d2f1e",
+      "records": 5034,
+      "records_sha256": "c1d1319fc6c8c7867f65c0f6e54c9f880f0c7e33f43dfd92601bda0416db223f",
+      "reference_file": "cdbprom-anabaena-sp/GCF_000009705.1_ASM970v1_genomic.fna.gz",
+      "status_counts": {
+        "ambiguous": 22,
+        "inconsistent": 5012
+      }
+    },
+    "cdbprom-bacillus-amyloliquefaciens": {
+      "assembly": "GCF_000221645.1",
+      "inputs": {
+        "canonical_sha256": "c1fc6569affe1aa8767d71ca273391b3106333c8b90e6dd92816852f13a133d2",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "39554a451cfbf2c2d7e9d415df185aba9abc903be47797cd0f89dfa159c28e91"
+      },
+      "loci": 2118,
+      "loci_sha256": "78d1f1f06006b1cd37c15224d9abd4e2d95f5d3384039b971a7a67adbe251796",
+      "records": 2118,
+      "records_sha256": "5823dc12599bd802fdf688283f8d10211fb10cbc4832a711c7f3e351bc9713e9",
+      "reference_file": "cdbprom-bacillus-amyloliquefaciens/GCF_000221645.1_ASM22164v1_genomic.fna.gz",
+      "status_counts": {
+        "verified": 2118
+      }
+    },
+    "cdbprom-chlamydophila-pneumoniae": {
+      "assembly": "GCF_000008745.1",
+      "inputs": {
+        "canonical_sha256": "56b202c39f30fef7ef103ec033979a9126a81bff59a86db051a99b292f71b2c5",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "24eaad00c46a7eb87a60025dcc1f2f7d7da370c6ddd9348d0b8da7746419d432"
+      },
+      "loci": 809,
+      "loci_sha256": "6330de8767f288de80a36001415210249e9740a9228f33ee722e804a53f7cf70",
+      "records": 808,
+      "records_sha256": "3886e22d7facaefc5ebe05fcb3369cc930e3a9d8f5ed90b560bce883d9e38f0c",
+      "reference_file": "cdbprom-chlamydophila-pneumoniae/GCF_000008745.1_ASM874v1_genomic.fna.gz",
+      "status_counts": {
+        "ambiguous": 1,
+        "verified": 807
+      }
+    },
+    "cdbprom-corynebacterium-glutamicum": {
+      "assembly": "GCF_000011325.1",
+      "inputs": {
+        "canonical_sha256": "d51298e879ba4175785991f9a875bcce128f0f37a299b863d0966d190d6056fd",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "8aff3c6bb0d772337e40f1790722e5c71eb92dd3be2d24faf1b959c6b3bca9ec"
+      },
+      "loci": 1129,
+      "loci_sha256": "9c23c0ca221c2ff6cc58e78843867e8b64e6e0730e89b273024e178671294419",
+      "records": 1150,
+      "records_sha256": "fca3f245f0a805393b124b8fc96b2fd88350055af6c2bfbc13756b63a7668033",
+      "reference_file": "cdbprom-corynebacterium-glutamicum/GCF_000011325.1_ASM1132v1_genomic.fna.gz",
+      "status_counts": {
+        "ambiguous": 5,
+        "unmapped": 26,
+        "verified": 1119
+      }
+    },
+    "cdbprom-helicobacter-pylori": {
+      "assembly": "GCF_000307795.1",
+      "inputs": {
+        "canonical_sha256": "427e2e842d702552f6b1a709ca17e8f0d00c14eb1e9f28dbe74fc13c5e20cad0",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "539abbc4833b1a9db079061d3cef33ab8e1ac94b0bd85222cb5c2dda36bc5825"
+      },
+      "loci": 1474,
+      "loci_sha256": "ce71e363a967a2b6d217634d84281b9b4f95f47cce6ac597bfeffb57c2daf64c",
+      "records": 1428,
+      "records_sha256": "a5ec9e7362504f4771388beec385af58aea2be36c48762033d34225bdd3a2c01",
+      "reference_file": "cdbprom-helicobacter-pylori/GCF_000307795.1_ASM30779v1_genomic.fna.gz",
+      "status_counts": {
+        "ambiguous": 39,
+        "not_evaluated": 8,
+        "unmapped": 40,
+        "verified": 1341
+      }
+    },
+    "cdbprom-klebisiella-pneumoniae": {
+      "assembly": "GCF_000016305.1",
+      "inputs": {
+        "canonical_sha256": "07163862f91c74ef6428c488620fbbd51a16ab4537c45d832a7a3882e2896c36",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "b7592666d5ee63aa83517c94885c25a57079496754a7504cb591086a7ac0e8ae"
+      },
+      "loci": 2665,
+      "loci_sha256": "65321e407a2aecd340fcbf258f5017f93807021beb1ba58e1145550a7aaf3230",
+      "records": 2658,
+      "records_sha256": "b2afa2cffe958a2f41c69c1df30d581dc7b089ee40ae9d092d1bda1c1ee75517",
+      "reference_file": "cdbprom-klebsiella-pneumoniae/GCF_000016305.1_ASM1630v1_genomic.fna.gz",
+      "status_counts": {
+        "ambiguous": 5,
+        "verified": 2653
+      }
+    },
+    "cdbprom-mycrobacterium-tuberculosis": {
+      "assembly": "GCF_026185275.1",
+      "inputs": {
+        "canonical_sha256": "ac901fc2cbc4724b50bc2c3d09e620fd5a67a51d1d43c35dfac0371553bb2fb0",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "89265f219a88135c7eed7c027bf849adda7d1633143c0e19735585235e56af5d"
+      },
+      "loci": 3554,
+      "loci_sha256": "8333fc92dc810839feb2af81bbc93829800f6b1e11ed0a64799e0273e3c9f582",
+      "records": 3544,
+      "records_sha256": "7982a8c8f69c35a5910222fc9261940aec0635b45066da2651a3295cfe2d6776",
+      "reference_file": "cdbprom-mycobacterium-tuberculosis/GCF_026185275.1_ASM2618527v1_genomic.fna.gz",
+      "status_counts": {
+        "ambiguous": 20,
+        "unmapped": 27,
+        "verified": 3497
+      }
+    },
+    "cdbprom-pseudonomas-aeruginosa": {
+      "assembly": "GCF_006974045.1",
+      "inputs": {
+        "canonical_sha256": "0e52ef879ce0eef78f8c1b5f3fdd82b2010dbab7fedd51d91ac45609c3e82cb0",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "fc96ec5581c5bfd3da2a96bbaf658c91a993d84c26e653efdc448e5c98b06775"
+      },
+      "loci": 4084,
+      "loci_sha256": "4ce0669fd1c179aa3cf04d71c3e932cad3d8e80a5ac6fbe98a665063fe116d9c",
+      "records": 4110,
+      "records_sha256": "8d6bf03fc7f98ddd5173573c6ff22d6678090c650be3ddf53d992c1444df34b0",
+      "reference_file": "cdbprom-pseudomonas-aeruginosa/GCF_006974045.1_ASM697404v1_genomic.fna.gz",
+      "status_counts": {
+        "ambiguous": 14,
+        "not_evaluated": 2,
+        "unmapped": 54,
+        "verified": 4040
+      }
+    },
+    "cdbprom-salmonella-typhimurium": {
+      "assembly": "GCF_000210855.2",
+      "inputs": {
+        "canonical_sha256": "852672f1405241c91e01ab2a3404546cca99bf99c8cea0d603fa3a4b538c5a84",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "87c281d60099c40f014bb1a1e369f9676182f51618c414650c0d3cb223ac86ea"
+      },
+      "loci": 1962,
+      "loci_sha256": "a3fd24a485231be1e003f245e6aa8d61f0f44459ae54f494c224e222b610f670",
+      "records": 1962,
+      "records_sha256": "1e83760ad99ad60b5952f2b9621c40862eb230102902ad8d80bd713938bfb072",
+      "reference_file": "cdbprom-salmonella-typhimurium/GCF_000210855.2_ASM21085v2_genomic.fna.gz",
+      "status_counts": {
+        "inconsistent": 1962
+      }
+    },
+    "cdbprom-streptomyces-coelicolor": {
+      "assembly": "GCF_000203835.1",
+      "inputs": {
+        "canonical_sha256": "452f36aa30ae990b30f5030e33aee6fac3512993c76ee25873a0437a5b4452e6",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "a4fe6af87988f85040c3cda3695828b7bc6b306eada9f0177971c2a61540b97c"
+      },
+      "loci": 5238,
+      "loci_sha256": "f5034b5fd3d796d985f898ea09e738d01edfc8d4c659624a514fec4e74a91894",
+      "records": 5222,
+      "records_sha256": "9514170262a9bf5e6152171898a98b57a49df9d222b45b56aa31b7c53c3f2f7c",
+      "reference_file": "cdbprom-streptomyces-coelicolor/GCF_000203835.1_ASM20383v1_genomic.fna.gz",
+      "status_counts": {
+        "ambiguous": 9,
+        "inconsistent": 5213
+      }
+    },
+    "cdbprom-synechocistis": {
+      "assembly": "GCF_000284135.1",
+      "inputs": {
+        "canonical_sha256": "87bf519542233f0e6da8addde37148f8b972a802cbc40baebc62576bec392625",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "dd2e41cc466404470e81bdd8134c2ee793fec043bf02a2dd0ae2b1fe32209fa1"
+      },
+      "loci": 3423,
+      "loci_sha256": "77f0964bcb5f6aaed0a504b2eed2c96ce6d0ccc2adc3c6d1d8dac6b32eee393c",
+      "records": 3278,
+      "records_sha256": "f872576944ffd488d174c3b391d8d8c3e022a6733a985a067355db73ad77268b",
+      "reference_file": "cdbprom-synechocystis/GCF_000284135.1_ASM28413v1_genomic.fna.gz",
+      "status_counts": {
+        "ambiguous": 17,
+        "unmapped": 22,
+        "verified": 3239
+      }
+    },
+    "cnnprom-bacillus-subtilis": {
+      "assembly": "GCF_000009045.1",
+      "inputs": {
+        "canonical_sha256": "656d5e9ace9fee695595d7bda0f02694fd6449e61fb276c0d68068bde4f62d85",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "1a9e4f66533db783e9ecb6727355993a16a00ef36fa512dcac2de39eff1ae8c5"
+      },
+      "loci": 1373,
+      "loci_sha256": "6739799fd55893f954201325fd09cbb879726d24fde30ca5652a95a4e788989a",
+      "records": 1373,
+      "records_sha256": "6b651abdc360eb41216759cad5cb50b38d2ac8f7b65990e176a64d70c2186dc9",
+      "reference_file": "cnnprom-bacillus-subtilis-168/GCF_000009045.1_ASM904v1_genomic.fna.gz",
+      "status_counts": {
+        "verified": 1373
+      }
+    },
+    "cnnprom-ecoli-sigma70": {
+      "assembly": "GCF_000005845.2",
+      "inputs": {
+        "canonical_sha256": "f58a080c9caf9f5b978e74092c93ecb5a9b904d671d5bbcc287b8566eee1f447",
+        "config_sha256": "9dfe248421a0e611145bc214bf644d73978e4ac1a97112f43dcd657f0c82b0ea",
+        "reference_sha256": "a96d3cfa58c88d477013c768f90a11d2386d42a70d566abfb6d9013dcbd24255"
+      },
+      "loci": 3915,
+      "loci_sha256": "de068d6c57eac9dc1aa22662fc10a9cac8afb06409024a397789dfb743550198",
+      "records": 3839,
+      "records_sha256": "882baa7faf9d66e917b63162ae5106174e5ae2308571992c75e37d1e8d13916e",
+      "reference_file": "cnnprom-ecoli-k12/GCF_000005845.2_ASM584v2_genomic.fna.gz",
+      "status_counts": {
+        "ambiguous": 28,
+        "verified": 3811
+      }
+    }
+  }
+}

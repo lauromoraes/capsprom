@@ -1,0 +1,90 @@
+acquisition:
+  name: reference-acquisition-v11
+  version: 1.0.0
+  protocol: specs/reference_coordinate_mapping_protocol.md
+  root: data/acquired/reference_acquisition_v11
+  frozen_on: 2026-10-31
+  policy: >-
+    Alternative strain and version assemblies used to test why 180 CDBProm
+    records have no exact locus on the ref-acq-v10 assemblies (F-092, F-093),
+    and the earlier E. coli K-12 sequence NC_000913.2 used to test F-095.
+    Candidates only; none is assumed to be the source genome. MD5 digests from
+    each NCBI directory's md5checksums.txt, read on 2026-10-31. NCBI efetch
+    publishes no digest for NC_000913.2; it is recorded on first acquisition.
+
+sources:
+  - source_id: alt-pseudomonas-aeruginosa-pao1
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/765/GCF_000006765.1_ASM676v1/
+    release: GCF_000006765.1
+    organism: Pseudomonas aeruginosa PAO1
+    files:
+      - path: GCF_000006765.1_ASM676v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/765/GCF_000006765.1_ASM676v1/GCF_000006765.1_ASM676v1_genomic.fna.gz
+        expected: {md5: c859ec5a25506367506bce972788aca8}
+
+  - source_id: alt-pseudomonas-aeruginosa-pa14-2006
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/014/625/GCF_000014625.1_ASM1462v1/
+    release: GCF_000014625.1
+    organism: Pseudomonas aeruginosa UCBPP-PA14 (NC_008463.1)
+    files:
+      - path: GCF_000014625.1_ASM1462v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/014/625/GCF_000014625.1_ASM1462v1/GCF_000014625.1_ASM1462v1_genomic.fna.gz
+        expected: {md5: e85e904d10348b4521a88b17747824f1}
+
+  - source_id: alt-helicobacter-pylori-26695-1997
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/525/GCF_000008525.1_ASM852v1/
+    release: GCF_000008525.1
+    organism: Helicobacter pylori 26695 (NC_000915.1)
+    files:
+      - path: GCF_000008525.1_ASM852v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/525/GCF_000008525.1_ASM852v1/GCF_000008525.1_ASM852v1_genomic.fna.gz
+        expected: {md5: 00a24145eb554da2ebf6eaad9081d129}
+
+  - source_id: alt-mycobacterium-tuberculosis-h37rv
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/195/955/GCF_000195955.2_ASM19595v2/
+    release: GCF_000195955.2
+    organism: Mycobacterium tuberculosis H37Rv (NC_000962.3)
+    files:
+      - path: GCF_000195955.2_ASM19595v2_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/195/955/GCF_000195955.2_ASM19595v2/GCF_000195955.2_ASM19595v2_genomic.fna.gz
+        expected: {md5: f93726a0a6e57af2bf1173998fbeb546}
+
+  - source_id: alt-corynebacterium-glutamicum-bielefeld
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/196/335/GCF_000196335.1_ASM19633v1/
+    release: GCF_000196335.1
+    organism: Corynebacterium glutamicum ATCC 13032 (NC_006958.1)
+    files:
+      - path: GCF_000196335.1_ASM19633v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/196/335/GCF_000196335.1_ASM19633v1/GCF_000196335.1_ASM19633v1_genomic.fna.gz
+        expected: {md5: 4ddbeff162e0c6f89e18dbb4b16a81f9}
+
+  - source_id: alt-synechocystis-kazusa
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/725/GCF_000009725.1_ASM972v1/
+    release: GCF_000009725.1
+    organism: Synechocystis sp. PCC 6803 (Kazusa, NC_000911.1)
+    files:
+      - path: GCF_000009725.1_ASM972v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/725/GCF_000009725.1_ASM972v1/GCF_000009725.1_ASM972v1_genomic.fna.gz
+        expected: {md5: 8375992df36de6eef5a62456e7ddf03c}
+
+  - source_id: ncbi-ecoli-k12-nc000913-2
+    kind: url_list
+    study: ncbi_nuccore
+    landing_page: https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.2
+    release: NC_000913.2
+    organism: Escherichia coli K-12 MG1655 (earlier sequence version)
+    files:
+      - path: NC_000913.2.fasta
+        url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_000913.2&rettype=fasta&retmode=text

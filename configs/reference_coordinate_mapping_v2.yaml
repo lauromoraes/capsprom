@@ -1,0 +1,36 @@
+mapping:
+  name: reference-coordinate-mapping-v2
+  version: 1.0.0
+  protocol: specs/reference_coordinate_mapping_protocol.md
+  canonical_root: data/canonical/source_canonicalization_v1
+  canonical_manifest: data/canonical/source_canonicalization_v1/canonical_manifest.json
+  output_dir: data/coordinates/reference_coordinate_mapping_v2
+  frozen_on: 2026-10-31
+  methods: [exact_search]
+  policy: >-
+    Stage B2 exact both-strand search, with IUPAC-compatible reference bases,
+    of every canonical record of the eligible bacterial collections against one
+    reference assembly each. Declared coordinates (B1) and alignment (B3) are
+    not part of this version. A record whose assembly contradicts the declared
+    assembly is `inconsistent` (`assembly_mismatch`) even when it maps once.
+    Version 2 replaces the references of five CDBProm collections with the
+    earlier strain sequences of F-096 and of CNNProm E. coli with NC_000913.2
+    (F-098). Their assembly evidence is `verified` under the protocol's
+    definition (sequences uniquely mapped to the reference); the promotion is
+    void, and must be reported, if any strict-DNA record of the collection is
+    unmapped in this run. The three R-011 replacements keep `inferred`.
+
+collections:
+  - {collection_id: cdbprom-anabaena-sp, acquisition: reference_acquisition_v10, source_id: cdbprom-anabaena-sp, assembly: GCF_000009705.1, assembly_evidence: inferred, declared_assembly: CP034058.1, note: "R-011 replacement; declared accession does not contain the released sequences"}
+  - {collection_id: cdbprom-bacillus-amyloliquefaciens, acquisition: reference_acquisition_v10, source_id: cdbprom-bacillus-amyloliquefaciens, assembly: GCF_000221645.1, assembly_evidence: declared, declared_assembly: CP002927.1}
+  - {collection_id: cdbprom-chlamydophila-pneumoniae, acquisition: reference_acquisition_v10, source_id: cdbprom-chlamydophila-pneumoniae, assembly: GCF_000008745.1, assembly_evidence: declared, declared_assembly: AE001363.1}
+  - {collection_id: cdbprom-corynebacterium-glutamicum, acquisition: reference_acquisition_v11, source_id: alt-corynebacterium-glutamicum-bielefeld, assembly: GCF_000196335.1, assembly_evidence: verified, declared_assembly: BA000036.3, note: "earlier strain sequence, F-096"}
+  - {collection_id: cdbprom-helicobacter-pylori, acquisition: reference_acquisition_v11, source_id: alt-helicobacter-pylori-26695-1997, assembly: GCF_000008525.1, assembly_evidence: verified, declared_assembly: CP003904.1, note: "earlier strain sequence, F-096"}
+  - {collection_id: cdbprom-klebisiella-pneumoniae, acquisition: reference_acquisition_v10, source_id: cdbprom-klebsiella-pneumoniae, assembly: GCF_000016305.1, assembly_evidence: declared, declared_assembly: CP000647.1}
+  - {collection_id: cdbprom-mycrobacterium-tuberculosis, acquisition: reference_acquisition_v11, source_id: alt-mycobacterium-tuberculosis-h37rv, assembly: GCF_000195955.2, assembly_evidence: verified, declared_assembly: CP110619.1, note: "earlier strain sequence, F-096"}
+  - {collection_id: cdbprom-pseudonomas-aeruginosa, acquisition: reference_acquisition_v11, source_id: alt-pseudomonas-aeruginosa-pa14-2006, assembly: GCF_000014625.1, assembly_evidence: verified, declared_assembly: CP034244.1, note: "earlier strain sequence, F-096"}
+  - {collection_id: cdbprom-salmonella-typhimurium, acquisition: reference_acquisition_v10, source_id: cdbprom-salmonella-typhimurium, assembly: GCF_000210855.2, assembly_evidence: inferred, declared_assembly: CP133487.1, note: "R-011 replacement; declared strain 94 assembly maps 834/981 positives"}
+  - {collection_id: cdbprom-streptomyces-coelicolor, acquisition: reference_acquisition_v10, source_id: cdbprom-streptomyces-coelicolor, assembly: GCF_000203835.1, assembly_evidence: inferred, declared_assembly: AL939104.1, note: "AL939104.1 is listed as wrong in R-011; the publication's accession list is unchecked"}
+  - {collection_id: cdbprom-synechocistis, acquisition: reference_acquisition_v11, source_id: alt-synechocystis-kazusa, assembly: GCF_000009725.1, assembly_evidence: verified, declared_assembly: AP012276.1, note: "earlier strain sequence, F-096"}
+  - {collection_id: cnnprom-ecoli-sigma70, acquisition: reference_acquisition_v11, source_id: ncbi-ecoli-k12-nc000913-2, reference_file: ncbi-ecoli-k12-nc000913-2/NC_000913.2.fasta, assembly: NC_000913.2, assembly_evidence: verified, declared_assembly: NC_000913, note: "version established by F-098"}
+  - {collection_id: cnnprom-bacillus-subtilis, acquisition: reference_acquisition_v10, source_id: cnnprom-bacillus-subtilis-168, assembly: GCF_000009045.1, assembly_evidence: declared, declared_assembly: NC_000964, note: "accession declared without version"}
