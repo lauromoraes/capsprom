@@ -7,6 +7,7 @@ independently supplied reference sequences and transcription start sites.
 
 from __future__ import annotations
 
+import bisect
 import hashlib
 import math
 import random
@@ -227,15 +228,20 @@ def reconstruct_genomic_controls(
     gc_tolerance: float = 0.05,
     seed: int = 20261021,
     max_attempts_per_locus: int = 100_000,
-    exclusion_loci: Sequence[TssLocus] | None = None,
+    exclusion_loci: Sequence[TssLocus],
 ) -> list[ReconstructedPair]:
     """Build TSS windows and deterministic, GC-matched genomic controls.
 
     Each control has the same length and strand as its paired positive.  Its
     genomic interval cannot overlap any known TSS exclusion interval or an
     already selected control, and its oriented sequence cannot equal any
-    positive or previously selected control.  Coordinates are zero-based,
-    half-open in the returned metadata.
+    positive or previously selected control.  A rejected candidate is replaced
+    by the next candidate of the deterministic permutation.  Coordinates are
+    zero-based, half-open in the returned metadata.
+
+    ``exclusion_loci`` is required and must hold every known TSS of the source,
+    of any class and on either strand, not only the selected positives.  Every
+    accepted control is re-verified against it before the result is returned.
     """
 
     if exclusion_radius < 0 or not 0 <= gc_tolerance <= 1:
@@ -249,7 +255,12 @@ def reconstruct_genomic_controls(
     forbidden_sequences = positive_sequences | {
         reverse_complement(sequence) for sequence in positive_sequences
     }
-    forbidden = _tss_exclusions(exclusion_loci if exclusion_loci is not None else loci, exclusion_radius)
+    missing = {(locus.contig, locus.tss, locus.strand) for locus in loci} - {
+        (locus.contig, locus.tss, locus.strand) for locus in exclusion_loci
+    }
+    if missing:
+        raise ValueError(f"{len(missing)} positive TSS loci are missing from exclusion_loci")
+    forbidden = _tss_exclusions(exclusion_loci, exclusion_radius)
     selected_intervals: dict[str, list[tuple[int, int]]] = {}
     selected_sequences: set[str] = set()
     results: list[ReconstructedPair] = []
@@ -336,7 +347,35 @@ def reconstruct_genomic_controls(
                 rejected_gc_distance=rejection_counts["gc_distance"],
             )
         )
+    violations = find_control_exclusion_violations(results, exclusion_loci, exclusion_radius)
+    if violations:
+        raise AssertionError(f"accepted controls violate TSS exclusions: {violations[:5]}")
     return results
+
+
+def find_control_exclusion_violations(
+    pairs: Sequence[ReconstructedPair], exclusion_loci: Sequence[TssLocus], exclusion_radius: int
+) -> list[tuple[str, str]]:
+    """Independently list controls that overlap a known TSS exclusion interval.
+
+    Returns ``(control identifier, TSS identifier)`` pairs; an empty list means
+    every control lies outside the radius of every known TSS on both strands.
+    """
+
+    by_contig: dict[str, list[tuple[int, str]]] = {}
+    for locus in exclusion_loci:
+        by_contig.setdefault(locus.contig, []).append((locus.tss, locus.identifier))
+    for entries in by_contig.values():
+        entries.sort()
+    violations: list[tuple[str, str]] = []
+    for pair in pairs:
+        entries = by_contig.get(pair.positive_locus.contig, [])
+        first = bisect.bisect_left(entries, (pair.negative_start - exclusion_radius, ""))
+        for tss, identifier in entries[first:]:
+            if tss - exclusion_radius >= pair.negative_end:
+                break
+            violations.append((pair.negative.identifier, identifier))
+    return violations
 
 
 def filter_reconstructed_pairs(pairs: Sequence[ReconstructedPair]) -> PairFilterResult:

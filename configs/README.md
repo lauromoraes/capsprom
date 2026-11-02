@@ -383,6 +383,20 @@ without changing or deleting any earlier versioned contract or artifact. The
 active confirmatory scope is limited to the 18 eligible CDBProm/CNNProm
 datasets.
 
+`graphpro_deferral_policy_v2.yaml` supersedes v1 and resumes the reconstructed
+GraphPro line (log R-037). It reopens audit, reconstruction, control, and split
+work per organism for Cje, Cpne, Lint, Bacillus, Rhodobacter, Human, and Mouse;
+E. coli is excluded and no pAA identity is built (log R-040). Training and
+confirmatory use remain closed until per-organism eligibility is approved.
+
+`cds_negative_control_v1.yaml` freezes the CDS-derived negative-control design
+of `specs/cds_negative_control_protocol.md` with every gate closed (log R-038).
+`cds_negative_control_v2.yaml` is identical except that it opens reference
+acquisition and the model-free feasibility inventory (log R-041); generation,
+split, training, and test gates stay closed. `reference_acquisition_v12.yaml`
+pins the RefSeq GFF3, FASTA, and assembly report of the three bacterial TSS
+assemblies used by that inventory.
+
 `source_acquisition_v1.yaml` pins every upstream file used to rebuild future
 datasets (GitHub commits, URLs, and digests), and
 `source_canonicalization_v1.yaml` declares how those files become validated

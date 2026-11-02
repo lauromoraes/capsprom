@@ -35,3 +35,20 @@ def test_graphpro_deferral_keeps_every_execution_gate_closed() -> None:
     assert policy["policy"]["mutates_existing_graphpro_contracts"] is False
     assert policy["scope"]["active_confirmatory_dataset_count"] == 18
     assert all(value is False for value in policy["execution_gates"].values())
+
+
+def test_graphpro_resumption_keeps_training_and_confirmatory_gates_closed() -> None:
+    root = Path(__file__).resolve().parents[1]
+    policy = yaml.safe_load(
+        (root / "configs/graphpro_deferral_policy_v2.yaml").read_text(encoding="utf-8")
+    )
+
+    assert policy["policy"]["supersedes"] == "configs/graphpro_deferral_policy_v1.yaml"
+    assert policy["policy"]["mutates_existing_graphpro_contracts"] is False
+    assert policy["execution_gates"]["graphpro_training_enabled"] is False
+    assert policy["execution_gates"]["graphpro_confirmatory_use_enabled"] is False
+    assert policy["requirements"]["tss_exclusion_radius_nt"] == {
+        "prokaryota": 100,
+        "eukaryota": 250,
+    }
+    assert policy["scope"]["organisms"]["ecol"]["status"] == "excluded"

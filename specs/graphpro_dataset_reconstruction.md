@@ -63,6 +63,51 @@ cannot be repaired by renaming its already extracted sequences. A successor
 must extract new windows from `NC_018666.1` under a new pAA-specific dataset
 identity and repeat every downstream audit and split.
 
+### TSS classes of bacterial positives
+
+dRNA-seq TSS maps classify each TSS by its position relative to annotated
+genes: primary (P) and secondary (S) TSSs lie upstream of a gene on the same
+strand; internal (I) TSSs lie inside a coding region on the same strand;
+antisense (A) TSSs lie inside or near a gene on the opposite strand; orphan
+(O) TSSs have no associated gene. One TSS can hold several classes. The class
+set defines what "promoter" means for a dataset, so it is declared per
+organism in the build config before any build or model result, and is never
+tuned against model outcomes.
+
+The Promotech BED files do not apply one class rule. The inventory
+`scripts/inventory_graphpro_tss_classes.py` (log R-035, F-115 to F-117) joins
+every BED row to its primary table:
+
+| Organism | Promotech positives | Classes present |
+| --- | --- | --- |
+| *E. coli* pAA | all 248 TSSs of Dataset S1 | 51 gene-associated (P or S), 58 internal, 111 antisense, 47 orphan; 100 are antisense only |
+| *C. jejuni* NCTC 11168 | all 1,905 TSSs of Table S4 | 675 P, 180 S, 653 I, 843 A, 17 O |
+| *C. pneumoniae* | 530 primary TSSs; the 41 second TSSs are omitted | P only |
+| *L. interrogans* | the 2,791 TSSs classed primary at 30 °C (F-118; not 37 °C) | all P; 905 also I at the other temperature |
+| *B. amyloliquefaciens*, *R. capsulatus* | not inventoried | primary table not available |
+
+Rules:
+
+1. Positive classes are declared per organism. The conservative default is P
+   plus S (gene-associated TSSs); any other set is a separate, versioned
+   condition. A TSS is positive when its class set contains P or S, whatever
+   other classes it also holds (log R-039). Positives are taken from the
+   verified primary table, not limited to the Promotech BED rows. Declared
+   sets:
+
+   | Organism | Positive classes | Positives |
+   | --- | --- | ---: |
+   | *C. jejuni* | contains P or S | 855 |
+   | *C. pneumoniae* | contains P or S (530 P plus the 41 S omitted by Promotech) | 571 |
+   | *L. interrogans* | contains P or S at 30 °C (log R-042); exclusion uses both temperatures | 5,143 |
+   | *B. amyloliquefaciens*, *R. capsulatus* | declared after their primary tables are verified | — |
+   | *E. coli* pAA | excluded; no pAA identity is built (log R-040) | — |
+2. Every positive keeps its full class set in the pair ledger, so results can
+   be stratified by class.
+3. The control exclusion set is the complete primary TSS table of the source,
+   all classes, both strands, not only the selected positives
+   (see Negative-set reconstruction).
+
 ### Human and mouse datasets
 
 The `FP` identifiers must first be resolved against a dated Eukaryotic Promoter
@@ -80,7 +125,8 @@ positive, sampled from the same assembly and matched to window length, strand
 distribution, and GC content. A candidate must:
 
 - lie outside the frozen exclusion radius around every known TSS in the source
-  inventory;
+  inventory, on either strand. The source inventory is the complete primary
+  TSS table (all classes), never only the selected positives;
 - not overlap another selected control;
 - contain strict DNA only;
 - not equal a positive or another negative in either orientation; and
@@ -93,6 +139,38 @@ This exclusion applies to the control only: it neither proves that the external
 label is biologically correct nor authorizes relabeling either source. The
 external dataset identity, label, orientation, input hashes, and excluded
 control identifier must be retained in the filtering ledger.
+
+Each candidate is checked against all of these conditions before it is
+accepted. A candidate that fails any of them is discarded and the next
+candidate of the deterministic permutation is drawn, until a valid control is
+found or the attempt ceiling is reached; the rejection reasons are counted per
+positive. After selection, every accepted control is verified again,
+independently, against the complete exclusion set, and the build fails if any
+control is inside a TSS margin (`reconstruct_genomic_controls`,
+`find_control_exclusion_violations`). The builder requires the exclusion set
+explicitly and refuses one that omits a positive.
+
+The exclusion radius depends on the domain window of
+`specs/sequence_window_policy.md`. The exclusion is symmetric and applies to
+both strands, so a radius `r` keeps a control clear of the interval
+`[TSS - r, TSS + r]` of every known TSS. To prevent a control from sharing bases
+with the promoter window of any known TSS, whichever strand that TSS is on,
+`r` must be at least the upstream length `U` of the domain window. A margin
+`m` is added on top of `U` for TSS mapping imprecision and nearby alternative
+TSSs. The eukaryotic margin is wider because broad eukaryotic promoters spread
+initiation over tens of nucleotides around the annotated representative TSS:
+
+| Domain | Window | `U` | Margin `m` | Radius `r = U + m` |
+| --- | --- | ---: | ---: | ---: |
+| Prokaryota | -60..+20, 81 nt | 60 | 40 | 100 |
+| Eukaryota | -200..+50, 251 nt | 200 | 50 | 250 |
+
+The prokaryotic radius is unchanged, so the existing bacterial contracts
+already satisfy the rule. The 100-nt margin of the 81-nt Human/Mouse
+contracts, through `configs/graphpro_epd_gc_matched_reconstruction_v5.yaml`,
+was adequate for that window. Those contracts remain valid provenance, but no
+251-nt eukaryotic build may use them. A 251-nt Human/Mouse successor uses
+`r = 250` (log R-036).
 
 The exact exclusion radius, GC tolerance, sampling seed, attempt ceiling, and
 eligible genomic masks are frozen before model evaluation. Random genomic

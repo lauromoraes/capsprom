@@ -698,3 +698,182 @@ SHA-256 of the module that ran, when the change was not yet committed.
   `docs/thesis/figures/dependency_clusters.{py,svg,pdf,png}`. Added
   `su2025ipro` to `references.bib` from PubMed 41083998
   (doi:10.1186/s13059-025-03819-9).
+
+## R-034 · 2026-11-01 · Eligibility documentation and four-study figure
+
+- **Question.** Which criteria actually decide dataset eligibility, in which
+  data condition, and which of them are verified, defined only, or pending?
+- **Procedure.** Consolidated the integrity spec, the condition policy, the
+  eligibility manifest, the source label semantics audit, the GraphPro
+  reconstruction reports, the homology grouping protocol, and the builder code
+  (`dataset_builders.py`) into `docs/dataset_eligibility.md`. No rule was added
+  and no data changed.
+- **Gaps recorded.** Condition labels are not yet applied to any build; there
+  is no recorded accession check for the 18 eligible datasets; the length
+  exclusion and similarity grouping are defined but not applied; the CDBProm
+  TSS index is unverified (F-018); reconstruction gates R1 and R7 are open.
+- **Figure.** `docs/thesis/figures/dependency_clusters_studies.{py,svg,pdf,png}`
+  shows the eligible clusters, the eight excluded GraphPro datasets, and the
+  iPro-MP and GUE overlap with the eligible test sets (F-108, F-109, F-114).
+
+## R-035 · 2026-11-01 · TSS classes of GraphPro bacterial positives and control exclusion
+
+- **Question.** Which dRNA-seq TSS classes do the Promotech positives contain,
+  and does the control exclusion cover every known TSS?
+- **Procedure.** `scripts/inventory_graphpro_tss_classes.py` joins every row
+  of the five acquired Promotech BEDs to its primary table (one-based position
+  = BED start + 1, same strand) and counts classes; it checks the existing
+  reconstructed-v2 controls against the complete primary tables with a 100-nt
+  margin. Output `outputs/reports/graphpro_tss_class_inventory_v1/summary.json`
+  (SHA-256 `878c8933ff9e5ea2b9b7752ec0b4beb17abaa71c09f0061bd15ed3b092d615db`).
+  Bacillus and Rhodobacter were not inventoried (no primary table). No model
+  outcome was used and no dataset changed.
+- **Findings.** F-115, F-116, F-117.
+- **Implication.** The v2 *L. interrogans* controls are not valid genomic
+  non-promoter controls under the specification and must not be reused; v2 is
+  kept as provenance. `reconstruct_genomic_controls` now requires an explicit
+  exclusion set, refuses one that omits a positive, and re-verifies every
+  accepted control (`find_control_exclusion_violations`); rejected candidates
+  are replaced by the next permutation candidate, as before. The class policy
+  is recorded in `specs/graphpro_dataset_reconstruction.md`; the choice of
+  positive classes per organism (default P+S) awaits the researcher's
+  confirmation before a successor build contract.
+
+## R-036 · 2026-11-01 · Control exclusion radius for the 251-nt eukaryotic window
+
+- **Question.** Is the 100-nt TSS exclusion radius sufficient for genomic
+  controls once eukaryotic windows are 251 nt (-200..+50, R-021)?
+- **Finding.** No. The exclusion is symmetric and strand-agnostic. A control
+  that starts 101 nt from a TSS can share up to 100 nt with that TSS's
+  -200..-101 promoter region, so the same sequence would carry opposite
+  labels. At 81 nt (U = 60) the 100-nt radius is sufficient.
+- **Decision (project owner).** Redefine the radius per domain as
+  `r = U + m`, where `U` is the upstream length of the domain window and `m`
+  a margin for TSS imprecision: 40 nt for prokaryotes (r = 100, unchanged)
+  and 50 nt for eukaryotes (r = 250), wider because broad eukaryotic
+  promoters spread initiation around the representative TSS. Recorded in
+  `specs/graphpro_dataset_reconstruction.md`. Existing contracts are
+  immutable and remain valid for their 81-nt windows; a 251-nt Human/Mouse
+  successor must freeze `r = 250`. No data or model outcome was used.
+
+## R-037 · 2026-11-01 · Resumption of the reconstructed GraphPro line
+
+- **Decision (project owner).** Reverse the deferral of
+  `configs/graphpro_deferral_policy_v1.yaml` for the reconstructed condition.
+  The successor `configs/graphpro_deferral_policy_v2.yaml` opens audit,
+  reconstruction, control, and split gates; training and confirmatory use stay
+  closed until per-organism eligibility is approved.
+- **Scope.** Cje, Cpne, Lint, Human, Mouse; Bacillus (no coordinate-level
+  primary supplement yet) and Rhodobacter (GSE117537 has 4,045 rows, not
+  5,374) resume with explicit blockers. E. coli is pending: its TSS rows
+  belong to plasmid pAA (`NC_018666.1`, 248 unique TSS); the owner decides
+  between exclusion and an exploratory pAA identity.
+- **Requirements.** Homology grouping v1 with genomic-overlap edges; the
+  bacterial split v1 (Hamming ≤ 8) is not reused. Human/Mouse are rebuilt at
+  -200..+50 (251 nt) with r = 250 (R-036). Released GraphPro files stay
+  exploratory provenance; no artifact is deleted or relabeled.
+
+## R-038 · 2026-11-02 · CDS-derived negative-control contract
+
+- **Decision (project owner).** Freeze the design of the `cds_derived`
+  condition in `specs/cds_negative_control_protocol.md` and
+  `configs/cds_negative_control_v1.yaml`. Scope: prokaryotic reconstructed
+  datasets only (Cje, Cpne, Lint; Bacillus and Rhodobacter after their source
+  gates). RefSeq GFF of the TSS assembly; eligible CDS are at least 201 nt,
+  non-pseudo, exact, single-segment. Controls are 81 nt on the CDS sense
+  strand, same replicon, uniform frame cycle 0/1/2, at least 60 nt from start
+  and stop, outside 100 nt of any TSS on either strand, not touching another
+  CDS or RNA, GC within four bases, paired 1:1. The TSS exclusion set is the
+  complete primary table, all classes (R-035); positives, classes, and groups
+  come from the genomic successor build, never from reconstructed v2.
+- **Sampling and failures.** Seed 20261102, 100,000 random probes, then a
+  deterministic exhaustive scan. A positive without a viable control leaves
+  the CDS panel only.
+- **Inference.** Within-panel paired bootstrap. Whenever the CDS and genomic
+  panels hold different positives, cross-panel comparison uses only their
+  intersection, fixed before model evaluation.
+- No data, reference, or model outcome was used; all execution gates are
+  false.
+
+## R-039 · 2026-11-02 · Positive TSS classes of the reconstructed bacteria
+
+- **Decision (project owner).** A bacterial positive is a TSS whose class set
+  contains primary (P) or secondary (S), whatever other classes it holds.
+  Positives come from the verified primary table, not only the Promotech BED.
+  *C. jejuni*: 855 of 1,905 (internal-, antisense-, and orphan-only TSSs
+  excluded). *C. pneumoniae*: 571 (530 P plus 41 S omitted by Promotech).
+  *L. interrogans*: 2,791, primary at 30 °C or 37 °C. Bacillus and
+  Rhodobacter wait for their primary tables; pAA waits for its identity
+  decision. Counts from the R-035 inventory (summary SHA-256
+  `878c8933ff9e5ea2b9b7752ec0b4beb17abaa71c09f0061bd15ed3b092d615db`).
+- **Consequence.** Every successor build contract declares these sets before
+  any build; full class sets stay in the pair ledgers for stratification. An
+  all-classes variant is not predeclared now (owner decision); it may be
+  added as a separate identity only before any confirmatory result. No data
+  or model outcome was used.
+
+## R-040 · 2026-11-02 · Exclusion of GraphPro E. coli and pAA
+
+- **Decision (project owner).** Exclude GraphPro E. coli from the
+  reconstructed line and build no pAA (`NC_018666.1`) identity, exploratory or
+  confirmatory. Reasons: the Promotech rows are the 248 TSSs of plasmid pAA of
+  *E. coli* O104:H4, not of the E. coli genome; only 51 are gene-associated
+  (P or S, R-039), too few for a test panel. Space for controls was not the
+  reason (F-117).
+- **Records.** `configs/graphpro_deferral_policy_v2.yaml` marks `ecol` as
+  excluded. The nominal MG1655 reconstruction, the pAA source audit, and the
+  released files remain provenance; nothing is deleted or relabeled.
+
+## R-041 · 2026-11-02 · CDS annotation acquisition and feasibility inventory
+
+- **Decision (project owner).** Open reference acquisition and a model-free
+  feasibility inventory for the CDS-derived condition. Successor contract
+  `configs/cds_negative_control_v2.yaml` changes only those two gates;
+  generation, split, training, and test gates stay false.
+- **Acquisition.** `configs/reference_acquisition_v12.yaml`: RefSeq GFF3,
+  genomic FASTA, and assembly report of GCF_000009085.1 (*C. jejuni*,
+  NC_002163.1), GCF_000008745.1 (*C. pneumoniae*, NC_000922.1; annotation
+  RS_2024_11_20), and GCF_900236655.1 (*L. interrogans*, NZ_LT962963.1;
+  annotation RS_2026_02_15). On 2026-11-02 NCBI esummary reported each
+  accession.version live and not replaced. `scripts/acquire_sources.py
+  --execute`: 9/9 files verified against the NCBI MD5 digests. Manifest
+  snapshot in `manifests/provenance/reference_acquisition_v12/`. Each RefSeq
+  sequence is byte-identical to the Promotech FASTA that carries the TSS
+  coordinates, so no coordinate conversion is needed.
+- **Code.** `src/capsprom/data/cds_controls.py` (GFF reader, CDS eligibility
+  with pseudo-by-parent and Note frameshift rules, admissible-window
+  enumeration with end margins, both-strand TSS radius, and CDS/RNA overlap)
+  with synthetic tests in `tests/test_cds_controls.py`;
+  `scripts/inventory_cds_control_feasibility.py`. Output
+  `outputs/reports/cds_control_feasibility_v1/summary.json` (SHA-256
+  `5c299b3839fac8a0e573534130719878244127cf389a7de03679f28e7dabfde7`). No
+  control was sampled; exact-identity and selected-control exclusions are not
+  applied by an inventory.
+- **Findings.** F-118, F-119.
+- **Open decision.** The *L. interrogans* positive set of R-039 (2,791) rests
+  on the F-115 description, which F-118 corrects. Applying the R-039 rule (P or
+  S) to both temperature sheets gives 9,516 positives; primary at either
+  temperature gives 4,572; the Promotech set is primary at 30 °C only (2,791).
+  The successor build contract waits for the owner's choice. The inventory is
+  feasible under every variant.
+
+## R-042 · 2026-11-02 · *L. interrogans* positive set
+
+- **Decision (project owner).** The *L. interrogans* positives are the TSSs
+  classed primary or secondary in the 30 °C sheet (`TSS-30_all`) of the
+  primary table: 5,143 position–strand pairs. This applies the R-039 rule
+  within one experimental condition and replaces the 2,791 stated in R-039,
+  which rested on the F-115 description corrected by F-118. The control
+  exclusion set stays the complete table, both temperatures and all classes
+  (45,562 pairs). Chosen without data beyond the class counts and without any
+  model outcome.
+- **Inventory.** `scripts/inventory_cds_control_feasibility.py` now reads the
+  *L. interrogans* positives from that sheet and writes
+  `outputs/reports/cds_control_feasibility_v2/summary.json` (SHA-256
+  `d351fdd5d5a28e5e93f60ea310832e2fd3ccaf5c554ee087969a4752f1d26ed5`); v1
+  stays as the record of R-041. *L. interrogans*: 19 of 5,143 positive windows
+  are not strict DNA or out of bounds; none of the remaining 5,124 lacks an
+  in-frame candidate (minimum 60). *C. jejuni* and *C. pneumoniae* are
+  unchanged (F-119).
+- **Next.** Freeze the genomic successor build contracts for Cje (855),
+  Cpne (571), and Lint (5,143).

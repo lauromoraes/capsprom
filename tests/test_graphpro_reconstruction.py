@@ -8,6 +8,7 @@ from capsprom.data.graphpro_reconstruction import (
     audit_promotech_source,
     deduplicate_tss_loci,
     filter_reconstructed_pairs,
+    find_control_exclusion_violations,
     audit_graphpro_pair,
     reconstruct_genomic_controls,
     read_bed_tss,
@@ -53,8 +54,8 @@ def test_reconstruction_is_deterministic_strand_matched_and_excludes_tss_regions
         "seed": 7,
     }
 
-    first = reconstruct_genomic_controls({"chr": reference}, loci, **kwargs)
-    second = reconstruct_genomic_controls({"chr": reference}, loci, **kwargs)
+    first = reconstruct_genomic_controls({"chr": reference}, loci, exclusion_loci=loci, **kwargs)
+    second = reconstruct_genomic_controls({"chr": reference}, loci, exclusion_loci=loci, **kwargs)
 
     assert first == second
     assert [pair.negative_strand for pair in first] == ["+", "-"]
@@ -80,21 +81,85 @@ def test_minus_strand_tss_window_is_oriented_five_prime_to_three_prime():
         exclusion_radius=5,
         gc_tolerance=1.0,
         seed=1,
+        exclusion_loci=[locus],
     )[0]
     genomic = (reference + "CG" * 100)[23:27]
     assert pair.positive.sequence == reverse_complement(genomic)
 
 
 def test_reconstruction_fails_when_no_independent_control_exists():
+    only = TssLocus("only", "chr", 15, "+")
     with pytest.raises(ValueError, match="no eligible control"):
         reconstruct_genomic_controls(
             {"chr": "A" * 30},
-            [TssLocus("only", "chr", 15, "+")],
+            [only],
             upstream=2,
             downstream=2,
             exclusion_radius=30,
             gc_tolerance=1.0,
             seed=1,
+            exclusion_loci=[only],
+        )
+
+
+def test_controls_resample_away_from_every_known_tss_class_and_strand():
+    import random
+
+    rng = random.Random(5)
+    reference = "".join(rng.choice("ACGT") for _ in range(2000))
+    primary = [TssLocus("P1", "chr", 300, "+"), TssLocus("P2", "chr", 1500, "-")]
+    # Non-positive TSSs tile the genome except a free gap at 1701..1899.
+    others = [
+        TssLocus(f"{kind}{position}", "chr", position, strand)
+        for position in range(0, 2000, 30)
+        if not 1700 < position < 1900
+        for kind, strand in (("internal", "+"), ("antisense", "-"))
+    ]
+    exclusion = primary + others
+
+    pairs = reconstruct_genomic_controls(
+        {"chr": reference},
+        primary,
+        upstream=6,
+        downstream=2,
+        exclusion_radius=20,
+        gc_tolerance=1.0,
+        seed=11,
+        exclusion_loci=exclusion,
+    )
+
+    assert find_control_exclusion_violations(pairs, exclusion, 20) == []
+    assert sum(pair.rejected_tss_overlap for pair in pairs) > 0
+    assert all(1701 <= pair.negative_start and pair.negative_end <= 1900 for pair in pairs)
+
+
+def test_violation_check_reports_control_inside_a_non_positive_tss_margin():
+    primary = TssLocus("P1", "chr", 50, "+")
+    pair = reconstruct_genomic_controls(
+        {"chr": "ACGT" * 100},
+        [primary],
+        upstream=2,
+        downstream=1,
+        exclusion_radius=5,
+        gc_tolerance=1.0,
+        seed=2,
+        exclusion_loci=[primary],
+    )[0]
+    hidden = TssLocus("orphan", "chr", pair.negative_start + 1, "-")
+
+    assert find_control_exclusion_violations([pair], [primary, hidden], 5) == [
+        (pair.negative.identifier, "orphan")
+    ]
+
+
+def test_reconstruction_rejects_exclusion_set_missing_a_positive():
+    with pytest.raises(ValueError, match="missing from exclusion_loci"):
+        reconstruct_genomic_controls(
+            {"chr": "ACGT" * 100},
+            [TssLocus("P1", "chr", 50, "+")],
+            upstream=2,
+            downstream=1,
+            exclusion_loci=[],
         )
 
 
@@ -175,6 +240,7 @@ def test_pair_filter_removes_whole_pair_for_strand_invariant_duplicates():
         exclusion_radius=5,
         gc_tolerance=1.0,
         seed=3,
+        exclusion_loci=[TssLocus("first", "chr", 100, "+")],
     )[0]
     duplicate = replace(
         pair,

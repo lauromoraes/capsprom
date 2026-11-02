@@ -51,7 +51,8 @@ versioned organism, assembly, strand, frame, overlap, length, and GC policy.
 This is a separate sensitivity condition because it asks the model to
 distinguish promoters from coding background and can introduce codon,
 periodicity, and composition shortcuts. CDS controls are never treated as
-interchangeable with general genomic controls.
+interchangeable with general genomic controls. The version-1 construction
+rules are specified in `specs/cds_negative_control_protocol.md`.
 
 ### Multi-negative training (`multi_negative`)
 

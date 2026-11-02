@@ -701,6 +701,31 @@ Current state:
   active. The deferral is recorded in
   `configs/graphpro_deferral_policy_v1.yaml` and can be reversed only by a new
   explicit project decision.
+- Decision (2026-11-01): resume the reconstructed GraphPro line under
+  `configs/graphpro_deferral_policy_v2.yaml` (R-037). Cje, Cpne, Lint, Human,
+  and Mouse resume; Bacillus and Rhodobacter resume with their source blockers
+  open; E. coli (pAA plasmid) awaits the owner decision. Splits follow
+  `configs/homology_grouping_v1.yaml`; eukaryotic rebuilds use the 251-nt
+  window and a 250-nt control exclusion radius (R-036). Training and
+  confirmatory gates stay closed until per-organism eligibility is approved.
+- Decision (2026-11-02): exclude GraphPro E. coli and build no pAA identity
+  (R-040). Freeze the CDS-derived control design
+  (`configs/cds_negative_control_v1.yaml`, R-038) and the P-or-S positive
+  class rule (R-039).
+- Completed: acquire the RefSeq GFF3/FASTA of the three bacterial TSS
+  assemblies (`configs/reference_acquisition_v12.yaml`, 9/9 MD5-verified;
+  sequences byte-identical to the TSS FASTA) and run the model-free CDS
+  feasibility inventory under `configs/cds_negative_control_v2.yaml` (R-041).
+  All three are feasible; 11 AT-rich *C. pneumoniae* positives have no in-frame
+  candidate and would leave the CDS panel only (F-119). The Promotech
+  *L. interrogans* set is primary at 30 °C only (F-118), so its positive set
+  needs the owner's choice before the successor build contract.
+- Decision (2026-11-02): *L. interrogans* positives are primary or secondary
+  TSSs at 30 °C, 5,143 (R-042).
+- Next: freeze the genomic successor
+  build contracts for Cje, Cpne, and Lint (P/S classes, complete-table TSS
+  exclusion, homology grouping v1); then implement the CDS builder. Evaluation
+  protocol v4 must adopt homology grouping before confirmatory use.
 - Completed: freeze and execute the active classical-baseline consolidation
   for the 18 eligible CDBProm/CNNProm datasets. It reuses completed logistic
   and ten-seed XGBoost results, excludes GraphPro by the independently defined

@@ -24,7 +24,7 @@ def collect_project_status(root: Path | None = None) -> dict[str, Any]:
         "active_dataset_eligibility_manifest": "configs/dataset_eligibility_manifest_v1.yaml",
         "active_confirmatory_dataset_count": 18,
         "active_evaluation_protocol": "configs/evaluation_protocol_v3.yaml",
-        "graphpro_policy": "configs/graphpro_deferral_policy_v1.yaml",
+        "graphpro_policy": "configs/graphpro_deferral_policy_v2.yaml",
         "experiments": {},
         "remote_jobs": _remote_job_status(project_root),
     }

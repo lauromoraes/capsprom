@@ -96,3 +96,8 @@ The reinstatement path is now defined in
 `configs/graphpro_reconstruction_v1.yaml`. Reconstructed datasets receive new
 identities and may pass eligibility one organism at a time. The original eight
 pairs remain unchanged and exploratory.
+
+## Eligibility summary
+
+The criteria, their verification status, and the ordered processing stages for
+both data conditions are summarized in `docs/dataset_eligibility.md`.

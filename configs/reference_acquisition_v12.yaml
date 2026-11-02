@@ -1,0 +1,68 @@
+acquisition:
+  name: reference-acquisition-v12
+  version: 1.0.0
+  protocol: specs/cds_negative_control_protocol.md
+  root: data/acquired/reference_acquisition_v12
+  frozen_on: 2026-11-02
+  policy: >-
+    RefSeq annotation (GFF3), genomic FASTA, and assembly report of the exact
+    assemblies that carry the reconstructed GraphPro TSS coordinates of
+    C. jejuni (NC_002163.1), C. pneumoniae (NC_000922.1), and L. interrogans
+    (NZ_LT962963.1), for the CDS-derived negative-control condition
+    (configs/cds_negative_control_v2.yaml). On 2026-11-02 NCBI esummary
+    reported each accession.version as live and not replaced. MD5 digests from
+    each NCBI directory's md5checksums.txt, read on 2026-11-02. The
+    GCF_000009085.1 GFF has no annotation-date header; its HTTP Last-Modified
+    is recorded in the manifest.
+
+sources:
+  - source_id: refseq-campylobacter-jejuni-nctc11168
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/085/GCF_000009085.1_ASM908v1/
+    release: GCF_000009085.1
+    organism: Campylobacter jejuni subsp. jejuni NCTC 11168 (NC_002163.1)
+    files:
+      - path: GCF_000009085.1_ASM908v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/085/GCF_000009085.1_ASM908v1/GCF_000009085.1_ASM908v1_genomic.gff.gz
+        expected: {md5: ae2b2e77a301299708e24915dc35ee61}
+      - path: GCF_000009085.1_ASM908v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/085/GCF_000009085.1_ASM908v1/GCF_000009085.1_ASM908v1_genomic.fna.gz
+        expected: {md5: 8ca10c4de92c0c3fb2be58c9f81e32e9}
+      - path: GCF_000009085.1_ASM908v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/085/GCF_000009085.1_ASM908v1/GCF_000009085.1_ASM908v1_assembly_report.txt
+        expected: {md5: 47512100000c540793d6ac9fa41712cd}
+
+  - source_id: refseq-chlamydia-pneumoniae-cwl029
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/
+    release: GCF_000008745.1 (annotation GCF_000008745.1-RS_2024_11_20)
+    organism: Chlamydia pneumoniae CWL029 (NC_000922.1)
+    files:
+      - path: GCF_000008745.1_ASM874v1_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_genomic.gff.gz
+        expected: {md5: dff7b2ce133e186dca5cb866195dbe16}
+      - path: GCF_000008745.1_ASM874v1_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_genomic.fna.gz
+        expected: {md5: 521395704b9dd38f44e9b86d1817062e}
+      - path: GCF_000008745.1_ASM874v1_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_assembly_report.txt
+        expected: {md5: b720900aa2046e23f262b8166923aaa8}
+
+  - source_id: refseq-leptospira-interrogans-manilae-l495
+    kind: url_list
+    study: ncbi_refseq_assembly
+    landing_page: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/236/655/GCF_900236655.1_LMAN_assembly/
+    release: GCF_900236655.1 (annotation GCF_900236655.1-RS_2026_02_15)
+    organism: Leptospira interrogans serovar Manilae L495 (NZ_LT962963.1)
+    files:
+      - path: GCF_900236655.1_LMAN_assembly_genomic.gff.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/236/655/GCF_900236655.1_LMAN_assembly/GCF_900236655.1_LMAN_assembly_genomic.gff.gz
+        expected: {md5: 453f7fb0d9f96c1871fd1056d24bd054}
+      - path: GCF_900236655.1_LMAN_assembly_genomic.fna.gz
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/236/655/GCF_900236655.1_LMAN_assembly/GCF_900236655.1_LMAN_assembly_genomic.fna.gz
+        expected: {md5: a927dbcd61cde60fa4224416586923f4}
+      - path: GCF_900236655.1_LMAN_assembly_assembly_report.txt
+        url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/236/655/GCF_900236655.1_LMAN_assembly/GCF_900236655.1_LMAN_assembly_assembly_report.txt
+        expected: {md5: 61b363de0b3713d0b617ae3bcab7cea8}

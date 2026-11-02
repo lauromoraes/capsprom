@@ -1,0 +1,229 @@
+{
+  "acquisition": "reference-acquisition-v12",
+  "config_sha256": "2417f194eac27110944e541bf9d7abf10164483a961be1ebbab2d665c1d16cfe",
+  "files": {
+    "refseq-campylobacter-jejuni-nctc11168/GCF_000009085.1_ASM908v1_assembly_report.txt": {
+      "acquired_at": "2026-11-02T16:50:27+00:00",
+      "expected": {
+        "md5": "47512100000c540793d6ac9fa41712cd"
+      },
+      "git_blob_sha1": "9c571a6830ac88cb628b66d845574a5a3d6e959c",
+      "md5": "47512100000c540793d6ac9fa41712cd",
+      "path": "GCF_000009085.1_ASM908v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1133",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Fri, 22 May 2026 03:07:00 GMT"
+      },
+      "sha256": "6cfed0c26f4b13396fbcb92a9651337dee393d0d74f919bc981f69080bf73958",
+      "size_bytes": 1133,
+      "source_id": "refseq-campylobacter-jejuni-nctc11168",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/085/GCF_000009085.1_ASM908v1/GCF_000009085.1_ASM908v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "refseq-campylobacter-jejuni-nctc11168/GCF_000009085.1_ASM908v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-02T16:50:26+00:00",
+      "expected": {
+        "md5": "8ca10c4de92c0c3fb2be58c9f81e32e9"
+      },
+      "git_blob_sha1": "54082745f81f80dbc6cbf5db03f43dc66a7f38e5",
+      "md5": "8ca10c4de92c0c3fb2be58c9f81e32e9",
+      "path": "GCF_000009085.1_ASM908v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "465720",
+        "content-type": "application/x-gzip",
+        "last-modified": "Wed, 01 Jun 2016 00:03:55 GMT"
+      },
+      "sha256": "1a0c7e733310de29a6c715cf5e6825727f9ba3c9718b504cd5f5af03591599d9",
+      "size_bytes": 465720,
+      "source_id": "refseq-campylobacter-jejuni-nctc11168",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/085/GCF_000009085.1_ASM908v1/GCF_000009085.1_ASM908v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "refseq-campylobacter-jejuni-nctc11168/GCF_000009085.1_ASM908v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-02T16:50:22+00:00",
+      "expected": {
+        "md5": "ae2b2e77a301299708e24915dc35ee61"
+      },
+      "git_blob_sha1": "fa6be972470ce7ca4556dda4bbaf83359f130223",
+      "md5": "ae2b2e77a301299708e24915dc35ee61",
+      "path": "GCF_000009085.1_ASM908v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "248111",
+        "content-type": "application/x-gzip",
+        "last-modified": "Sun, 18 Jun 2023 12:38:01 GMT"
+      },
+      "sha256": "592fae15135b0ca61d29b40c06f21fcc0f16bb1e37dbb85da78ecb6760b8a7e1",
+      "size_bytes": 248111,
+      "source_id": "refseq-campylobacter-jejuni-nctc11168",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/085/GCF_000009085.1_ASM908v1/GCF_000009085.1_ASM908v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "refseq-chlamydia-pneumoniae-cwl029/GCF_000008745.1_ASM874v1_assembly_report.txt": {
+      "acquired_at": "2026-11-02T16:50:31+00:00",
+      "expected": {
+        "md5": "b720900aa2046e23f262b8166923aaa8"
+      },
+      "git_blob_sha1": "85fbadf5c49d8ead88e5a2107929dc45979cd9fc",
+      "md5": "b720900aa2046e23f262b8166923aaa8",
+      "path": "GCF_000008745.1_ASM874v1_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1139",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Tue, 01 Apr 2025 02:10:05 GMT"
+      },
+      "sha256": "c4f32814bead228d01e51773b91c20f6ad7c21096367e5c5492ea6e4108b0208",
+      "size_bytes": 1139,
+      "source_id": "refseq-chlamydia-pneumoniae-cwl029",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "refseq-chlamydia-pneumoniae-cwl029/GCF_000008745.1_ASM874v1_genomic.fna.gz": {
+      "acquired_at": "2026-11-02T16:50:30+00:00",
+      "expected": {
+        "md5": "521395704b9dd38f44e9b86d1817062e"
+      },
+      "git_blob_sha1": "e476d231dff9bf977a6ad96dfbaf3d8ee3ebedb9",
+      "md5": "521395704b9dd38f44e9b86d1817062e",
+      "path": "GCF_000008745.1_ASM874v1_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "366406",
+        "content-type": "application/x-gzip",
+        "last-modified": "Sun, 08 Mar 2020 22:07:05 GMT"
+      },
+      "sha256": "24eaad00c46a7eb87a60025dcc1f2f7d7da370c6ddd9348d0b8da7746419d432",
+      "size_bytes": 366406,
+      "source_id": "refseq-chlamydia-pneumoniae-cwl029",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "refseq-chlamydia-pneumoniae-cwl029/GCF_000008745.1_ASM874v1_genomic.gff.gz": {
+      "acquired_at": "2026-11-02T16:50:28+00:00",
+      "expected": {
+        "md5": "dff7b2ce133e186dca5cb866195dbe16"
+      },
+      "git_blob_sha1": "6ab66f814a526d081a2a191bdc6e7163342ef217",
+      "md5": "dff7b2ce133e186dca5cb866195dbe16",
+      "path": "GCF_000008745.1_ASM874v1_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "93738",
+        "content-type": "application/x-gzip",
+        "last-modified": "Thu, 12 Jun 2025 21:22:11 GMT"
+      },
+      "sha256": "d884b9156585fb6f9cce68cc2855fa4d12ee4e0b13a4fdb65cfccb67e943d9d3",
+      "size_bytes": 93738,
+      "source_id": "refseq-chlamydia-pneumoniae-cwl029",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/745/GCF_000008745.1_ASM874v1/GCF_000008745.1_ASM874v1_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "refseq-leptospira-interrogans-manilae-l495/GCF_900236655.1_LMAN_assembly_assembly_report.txt": {
+      "acquired_at": "2026-11-02T16:50:42+00:00",
+      "expected": {
+        "md5": "61b363de0b3713d0b617ae3bcab7cea8"
+      },
+      "git_blob_sha1": "2f25a3682b27b7fb4f906c20efedfffff7ded8e9",
+      "md5": "61b363de0b3713d0b617ae3bcab7cea8",
+      "path": "GCF_900236655.1_LMAN_assembly_assembly_report.txt",
+      "response_headers": {
+        "content-length": "1299",
+        "content-type": "text/plain; charset=utf-8",
+        "last-modified": "Sun, 15 Feb 2026 22:23:31 GMT"
+      },
+      "sha256": "051b128f5ffc3043033b51af0eba6573d8d5c6f74cb3bd51de5ee6a4b7c41c13",
+      "size_bytes": 1299,
+      "source_id": "refseq-leptospira-interrogans-manilae-l495",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/236/655/GCF_900236655.1_LMAN_assembly/GCF_900236655.1_LMAN_assembly_assembly_report.txt",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "refseq-leptospira-interrogans-manilae-l495/GCF_900236655.1_LMAN_assembly_genomic.fna.gz": {
+      "acquired_at": "2026-11-02T16:50:41+00:00",
+      "expected": {
+        "md5": "a927dbcd61cde60fa4224416586923f4"
+      },
+      "git_blob_sha1": "6b6da47ec50b6ee56f8c127e6a460be1acfb2d75",
+      "md5": "a927dbcd61cde60fa4224416586923f4",
+      "path": "GCF_900236655.1_LMAN_assembly_genomic.fna.gz",
+      "response_headers": {
+        "content-length": "1341142",
+        "content-type": "application/x-gzip",
+        "last-modified": "Thu, 11 Jan 2018 23:16:51 GMT"
+      },
+      "sha256": "12b2de0edfefdfe0fbeee650e54340e4c774378085edfd0dc2d3cc6ac28fe4b4",
+      "size_bytes": 1341142,
+      "source_id": "refseq-leptospira-interrogans-manilae-l495",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/236/655/GCF_900236655.1_LMAN_assembly/GCF_900236655.1_LMAN_assembly_genomic.fna.gz",
+      "verified_against": [
+        "md5"
+      ]
+    },
+    "refseq-leptospira-interrogans-manilae-l495/GCF_900236655.1_LMAN_assembly_genomic.gff.gz": {
+      "acquired_at": "2026-11-02T16:50:32+00:00",
+      "expected": {
+        "md5": "453f7fb0d9f96c1871fd1056d24bd054"
+      },
+      "git_blob_sha1": "ced4d5374d92f1337b1e8fc92e69128470b93740",
+      "md5": "453f7fb0d9f96c1871fd1056d24bd054",
+      "path": "GCF_900236655.1_LMAN_assembly_genomic.gff.gz",
+      "response_headers": {
+        "content-length": "332855",
+        "content-type": "application/x-gzip",
+        "last-modified": "Sun, 15 Feb 2026 22:23:31 GMT"
+      },
+      "sha256": "ea3ef397875bf7ce6c72ff7353472fd6deb975b34055e7315e709a74af7fd392",
+      "size_bytes": 332855,
+      "source_id": "refseq-leptospira-interrogans-manilae-l495",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/236/655/GCF_900236655.1_LMAN_assembly/GCF_900236655.1_LMAN_assembly_genomic.gff.gz",
+      "verified_against": [
+        "md5"
+      ]
+    }
+  },
+  "resolved_listings": {},
+  "runs": [
+    {
+      "command": [
+        "python",
+        "scripts/acquire_sources.py",
+        "--config",
+        "configs/reference_acquisition_v12.yaml",
+        "--execute"
+      ],
+      "finished_at": "2026-11-02T16:50:42+00:00",
+      "only_sources": null,
+      "started_at": "2026-11-02T16:50:18+00:00",
+      "status": "completed",
+      "summary": {
+        "declared_files": 9,
+        "downloaded": 9,
+        "planned": 9,
+        "recorded_files": 9,
+        "skipped_verified": 0
+      },
+      "tool": {
+        "code": {
+          "commit": "fe1f3dc51dc2a8a97e34ed25201078a0359304b8",
+          "worktree_clean": false
+        },
+        "module_sha256": "a8e71e40ff7889c369afaa583f7e94605216a0494e3f9cdd084a07525d4b27a4",
+        "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "python": "3.13.11",
+        "user_agent": "capsprom-source-acquisition/1"
+      }
+    }
+  ],
+  "schema_version": 1
+}

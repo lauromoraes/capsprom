@@ -1,0 +1,95 @@
+protocol:
+  name: capsprom-cds-negative-control-v1
+  version: 1.0.0
+  status: design_locked_execution_blocked
+  specification: specs/cds_negative_control_protocol.md
+  parent_protocol: configs/negative_control_evaluation_v1.yaml
+  condition: cds_derived
+  role: coding_background_sensitivity
+  modifies_active_confirmatory_scope: false
+
+scope:
+  domain: prokaryota
+  datasets: [graphpro-cje, graphpro-cpne, graphpro-lint]
+  pending_source_gates: [graphpro-bamy, graphpro-rcap]
+  eukaryotic_datasets_included: false
+  dataset_identity_pattern: "<collection_id>.recon-cds-v1"
+
+annotation:
+  source: refseq_gff
+  assembly: same_accession_and_version_as_positive_tss
+  record_release_date: true
+  record_sha256: true
+  feature_type: CDS
+  exclude_pseudo: true
+  min_cds_length_nt: 201
+  exclude_partial_or_fuzzy: true
+  exclude_multi_segment: true
+  exclude_frameshift_slippage_or_translation_exception: true
+
+window:
+  length_nt: 81
+  strand: cds_sense
+  orientation: translation_5_to_3
+  replicon: same_as_positive
+  frame_policy: uniform_cycle_0_1_2_over_stable_source_order
+  record_frame: true
+  min_distance_from_start_codon_nt: 60
+  min_distance_from_stop_codon_nt: 60
+  fixed_frame_diagnostic_panel: false
+
+exclusions:
+  known_tss_radius_nt: 100
+  known_tss_radius_strands: both
+  known_tss_exclusion_set: complete_primary_tss_table_all_classes
+  annotated_cds_or_rna_overlap: reject_any_strand
+  selected_control_overlap: reject_across_conditions
+  strict_dna_only: true
+  exact_identity_with_positive_or_control: reject_forward_and_reverse_complement
+  gc_caliper_bases: 4
+
+pairing:
+  controls_per_positive: 1
+  pair_is_indivisible: true
+
+sampling:
+  seed: 20261102
+  random_probe_ceiling: 100000
+  exhaustive_fallback: deterministic_scan_reservoir_sampling
+  separate_probe_and_scan_counters: true
+
+failure_policy:
+  action: drop_pair_from_cds_panel_only
+  positive_kept_in_genomic_panel: true
+  record: [positive_id, positive_gc_count, probe_counter, scan_counter]
+  relax_caliper_requires_successor_contract: true
+
+grouping:
+  positives_and_groups: reuse_genomic_gc_matched_successor_build
+  positive_tss_classes: inherited_from_genomic_successor_build
+  reconstructed_v2_basis_allowed: false
+  control_inherits_positive_group: true
+  homology_grouping: configs/homology_grouping_v1.yaml
+  cross_partition_link: drop_pair_from_cds_panel_only
+  genomic_split_modified: false
+
+statistics:
+  within_panel: paired_bootstrap_shared_test_indices
+  cross_panel_when_positive_sets_differ: intersection_of_test_positives
+  intersection_fixed_before_model_evaluation: true
+  pooled_mcc_with_other_panels: false
+  used_for_selection: false
+
+diagnostics:
+  - three_nt_periodicity_spectrum_per_class
+  - realized_frame_proportions
+  - gc_distribution_per_class
+  - distance_to_nearest_tss_and_cds_boundary
+  - failure_count_and_failed_positive_gc
+
+execution_gates:
+  reference_acquisition_enabled: false
+  control_generation_enabled: false
+  split_enabled: false
+  training_enabled: false
+  test_evaluation_enabled: false

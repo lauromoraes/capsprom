@@ -1,0 +1,74 @@
+policy:
+  name: graphpro-deferral-policy-v2
+  version: 2.0.0
+  status: active_resumed
+  effective_date: 2026-11-01
+  supersedes: configs/graphpro_deferral_policy_v1.yaml
+  decision: project_owner_resumes_reconstructed_graphpro
+  research_log: R-037
+  preserves_existing_artifacts: true
+  mutates_existing_graphpro_contracts: false
+
+scope:
+  resumed_condition: recon
+  released_graphpro_confirmatory_use: false
+  organisms:
+    cje:
+      source_key: CJEJUNI_2
+      status: resumed
+      blockers: []
+    cpne:
+      source_key: CPNEUMONIAE
+      status: resumed
+      blockers: [shared_dependency_cluster_with_cdbprom_chlamydophila]
+    lint:
+      source_key: LINTERROGANS
+      status: resumed
+      blockers: [v2_controls_invalid_under_complete_tss_exclusion]
+    bamy:
+      source_key: BACILLUS
+      status: resumed_blocked
+      blockers: [coordinate_level_primary_supplement_not_acquired]
+    rcap:
+      source_key: RHODOBACTER_1
+      status: resumed_blocked
+      blockers: [no_primary_source_matching_promotech_row_count]
+    human:
+      source_key: epd_hsnc_v001_hg38
+      status: resumed
+      blockers: [rebuild_at_251_nt_window]
+    mouse:
+      source_key: epd_mmnc_v001_mm10
+      status: resumed
+      blockers: [rebuild_at_251_nt_window]
+    ecol:
+      source_key: ECOLI
+      status: excluded
+      note: TSS rows belong to plasmid pAA NC_018666.1, not E. coli MG1655
+      decision: owner_excluded_no_paa_identity_log_R-040
+      blockers: []
+
+requirements:
+  window_policy: specs/sequence_window_policy.md
+  tss_exclusion_radius_nt:
+    prokaryota: 100
+    eukaryota: 250
+  homology_grouping: configs/homology_grouping_v1.yaml
+  genomic_overlap_edges_required: true
+  existing_split_reuse_allowed: false
+  eligibility_gates: specs/graphpro_dataset_reconstruction.md#eligibility-gates
+  per_organism_reinstatement: true
+  new_versioned_contract_per_rebuild: true
+
+artifact_policy:
+  delete_or_relabel_existing_artifacts: false
+  historical_results_are_confirmatory: false
+  historical_results_role: exploratory_provenance_only
+
+execution_gates:
+  graphpro_audit_enabled: true
+  graphpro_reconstruction_enabled: true
+  graphpro_control_generation_enabled: true
+  graphpro_split_enabled: true
+  graphpro_training_enabled: false
+  graphpro_confirmatory_use_enabled: false
