@@ -727,8 +727,9 @@ Current state:
   (5,143): primary-table positives, RefSeq v12 reference, complete-table TSS
   exclusion, exhaustive-scan fallback, homology grouping v1 (R-043). All
   execution gates are false.
-- Next: implement the homology-grouping stage (MMseqs2, Hamming, genomic
-  overlap) and the v3 builder with fixtures; then open extraction and control
+- Completed: implement and fixture-test the homology-grouping stage (R-044);
+  the MMseqs2 integration test passes with the R-027 binary.
+- Next: implement the v3 builder with fixtures; then open extraction and control
   generation by explicit decision. Evaluation protocol v4 must adopt homology
   grouping before confirmatory use.
 - Completed: freeze and execute the active classical-baseline consolidation

@@ -900,3 +900,30 @@ SHA-256 of the module that ran, when the change was not yet committed.
   generation is a separate decision; confirmatory use also needs evaluation
   protocol v4 to adopt homology grouping, whose MMseqs2 stage is not yet
   implemented. No data or model outcome was used.
+
+## R-044 · 2026-11-02 · Implementation of the homology-grouping stage
+
+- **Code.** `src/capsprom/data/homology_grouping.py` implements
+  `specs/homology_grouping_protocol.md` §3: unit edges (indivisible pairs),
+  MMseqs2 `easy-search` alignment edges with thresholds re-applied and a hard
+  failure when a query reaches `max_seqs`, exact strand-invariant Hamming
+  edges at `floor(0.20 × L)` (pigeonhole index), and genomic-overlap edges on
+  the same contig. Groups are connected components; the report counts edges by
+  source and source combination, mixed-label groups, the largest group, and
+  the oversize flag (> 20%). Partitioning shuffles whole groups with seed 42,
+  adds a group to test when it lowers the summed per-class deviation from the
+  20% targets, and assigns stratified group 5-fold inner folds (seed 42);
+  cross-partition edges are counted and must be zero. Settings load from
+  `configs/homology_grouping_v1.yaml`.
+- **Tool.** The MMseqs2 binary of R-027 in WSL (`mmseqs-linux-avx2.tar.gz`
+  SHA-256 `bd9b0234…`, version `8cc5ce367b5638c4…`, binary SHA-256
+  `b7ef6e0e33df5dd4…`); each run records the binary hash, version, and full
+  command line.
+- **Tests.** `tests/test_homology_grouping.py`: synthetic fixtures for every
+  edge source, the hit cap, components, oversize, class-targeted partition,
+  zero cross-partition edges, and determinism. An integration test runs the
+  real binary when `CAPSPROM_MMSEQS` is set; it recovered a 10-nt shifted copy
+  and a reverse-complement copy and joined no unrelated window.
+- **Not done.** No dataset was grouped. The stage binds confirmatory data only
+  through evaluation protocol v4, and the v3 builder that feeds it is not yet
+  implemented. No data or model outcome was used.
