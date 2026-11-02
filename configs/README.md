@@ -397,6 +397,13 @@ split, training, and test gates stay closed. `reference_acquisition_v12.yaml`
 pins the RefSeq GFF3, FASTA, and assembly report of the three bacterial TSS
 assemblies used by that inventory.
 
+`graphpro_reconstruction_v3.yaml` is the genomic successor build contract for
+the reconstructed *C. jejuni*, *C. pneumoniae*, and *L. interrogans* datasets
+(log R-043). It takes positives from the verified primary tables, uses the
+`reference_acquisition_v12` assemblies, excludes controls around every
+primary-table TSS, and partitions by `homology_grouping_v1.yaml`. It reuses no
+v2 artifact, and every execution gate is closed.
+
 `source_acquisition_v1.yaml` pins every upstream file used to rebuild future
 datasets (GitHub commits, URLs, and digests), and
 `source_canonicalization_v1.yaml` declares how those files become validated

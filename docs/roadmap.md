@@ -722,10 +722,15 @@ Current state:
   needs the owner's choice before the successor build contract.
 - Decision (2026-11-02): *L. interrogans* positives are primary or secondary
   TSSs at 30 °C, 5,143 (R-042).
-- Next: freeze the genomic successor
-  build contracts for Cje, Cpne, and Lint (P/S classes, complete-table TSS
-  exclusion, homology grouping v1); then implement the CDS builder. Evaluation
-  protocol v4 must adopt homology grouping before confirmatory use.
+- Completed: freeze the genomic successor build contract
+  `configs/graphpro_reconstruction_v3.yaml` for Cje (855), Cpne (571), and Lint
+  (5,143): primary-table positives, RefSeq v12 reference, complete-table TSS
+  exclusion, exhaustive-scan fallback, homology grouping v1 (R-043). All
+  execution gates are false.
+- Next: implement the homology-grouping stage (MMseqs2, Hamming, genomic
+  overlap) and the v3 builder with fixtures; then open extraction and control
+  generation by explicit decision. Evaluation protocol v4 must adopt homology
+  grouping before confirmatory use.
 - Completed: freeze and execute the active classical-baseline consolidation
   for the 18 eligible CDBProm/CNNProm datasets. It reuses completed logistic
   and ten-seed XGBoost results, excludes GraphPro by the independently defined

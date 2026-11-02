@@ -877,3 +877,26 @@ SHA-256 of the module that ran, when the change was not yet committed.
   unchanged (F-119).
 - **Next.** Freeze the genomic successor build contracts for Cje (855),
   Cpne (571), and Lint (5,143).
+
+## R-043 · 2026-11-02 · Genomic successor build contract for the reconstructed bacteria
+
+- **Decision (project owner).** Freeze `configs/graphpro_reconstruction_v3.yaml`
+  for *C. jejuni* (855 positives), *C. pneumoniae* (571), and
+  *L. interrogans* (5,143). Positives come from the verified primary tables
+  under the P-or-S rule (R-039, R-042); the Promotech BED only corroborates.
+  The reference is the RefSeq FASTA of `ref-acq-v12`, byte-identical to the
+  Promotech FASTA (R-041). One same-strand genomic control per positive, GC
+  within four bases, outside 100 nt of every primary-table TSS on both
+  strands (R-035, R-036), not matching an active external positive. Sampling
+  seed 20261021, as in v2 (owner's choice); after 100,000 random probes a
+  deterministic exhaustive replicon scan selects by reservoir sampling (owner's
+  choice), as in the CDS contract and EPD v5. Pairs are indivisible;
+  partitioning follows homology grouping v1 with genomic-overlap edges, test
+  fraction 0.20, seed 42, five inner folds.
+- **Scope.** v3 reuses no v2 sequence, control, or split. Bacillus and
+  Rhodobacter stay blocked; E. coli is excluded (R-040); Human and Mouse get a
+  separate 251-nt successor.
+- **Gates.** Every execution gate is false. Opening extraction and control
+  generation is a separate decision; confirmatory use also needs evaluation
+  protocol v4 to adopt homology grouping, whose MMseqs2 stage is not yet
+  implemented. No data or model outcome was used.

@@ -52,3 +52,27 @@ def test_graphpro_resumption_keeps_training_and_confirmatory_gates_closed() -> N
         "eukaryota": 250,
     }
     assert policy["scope"]["organisms"]["ecol"]["status"] == "excluded"
+
+
+def test_graphpro_v3_contract_is_bound_to_hashed_sources_and_stays_blocked() -> None:
+    root = Path(__file__).resolve().parents[1]
+    contract = yaml.safe_load(
+        (root / "configs/graphpro_reconstruction_v3.yaml").read_text(encoding="utf-8")
+    )
+    acquisition = yaml.safe_load(
+        (root / contract["reference"]["acquisition"]).read_text(encoding="utf-8")
+    )
+    reference_ids = {source["source_id"] for source in acquisition["sources"]}
+
+    assert all(value is False for value in contract["execution_gates"].values())
+    assert contract["reconstruction"]["reuses_v2_sequences_controls_or_split"] is False
+    assert contract["negative_policy"]["exclusion_set"] == "complete_primary_tss_table_all_classes"
+    assert contract["negative_policy"]["exclusion_radius_nt"] == 100
+    assert contract["grouping_and_split"]["protocol"] == "configs/homology_grouping_v1.yaml"
+    assert {item["declared_positives"] for item in contract["organisms"]} == {855, 571, 5143}
+    for organism in contract["organisms"]:
+        assert organism["reference_source_id"] in reference_ids
+        table = organism["primary_table"]
+        path = root / table["path"]
+        if path.exists():
+            assert hashlib.sha256(path.read_bytes()).hexdigest() == table["sha256"]

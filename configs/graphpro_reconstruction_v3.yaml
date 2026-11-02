@@ -1,0 +1,170 @@
+reconstruction:
+  name: graphpro-reconstructed-v3
+  version: 3.0.0
+  supersedes_for_scope: configs/graphpro_reconstruction_v2.yaml
+  status: design_locked_execution_blocked
+  specification: specs/graphpro_dataset_reconstruction.md
+  policy: configs/graphpro_deferral_policy_v2.yaml
+  research_log: R-043
+  condition: recon
+  domain: prokaryota
+  original_labels_modified: false
+  output_is_new_derived_dataset: true
+  reuses_v2_sequences_controls_or_split: false
+  confirmatory_use_enabled: false
+  rationale: >-
+    v2 took positives from the Promotech BED and excluded only BED loci, so its
+    L. interrogans controls fall inside primary-table TSS margins (F-116) and
+    its split predates homology grouping. v3 takes positives from the verified
+    primary tables under the P-or-S rule (R-039, R-042), excludes controls
+    around every primary-table TSS, and partitions by homology groups.
+
+reference:
+  acquisition: configs/reference_acquisition_v12.yaml
+  manifest: manifests/provenance/reference_acquisition_v12/acquisition_manifest.json
+  file: refseq_genomic_fna
+  identity_check: byte_identical_to_promotech_fasta_log_R-041
+
+window:
+  policy: specs/sequence_window_policy.md
+  upstream: 60
+  include_tss_base: true
+  downstream: 20
+  length: 81
+  orientation: transcription_five_prime_to_three_prime
+
+positive_policy:
+  source: verified_primary_tss_table
+  promotech_bed_role: corroboration_only
+  coordinate_convention: primary_one_based_to_zero_based_tss
+  class_rule: class_set_contains_primary_or_secondary
+  keep_full_class_set_in_ledger: true
+  biological_identity: [contig, zero_based_tss, strand]
+  repeated_table_rows: keep_one_identity_and_record_multiplicity
+  invalid_window: exclude_and_count
+  invalid_window_definition: [non_acgt_base, outside_replicon_bounds]
+  stable_source_order: zero_based_tss_then_strand
+
+negative_policy:
+  primary_condition: same_assembly_gc_matched_genomic_control
+  controls_per_positive: 1
+  control_strand: same_as_positive
+  sampling_seed: 20261021
+  max_attempts_per_positive: 100000
+  exhaustive_fallback: deterministic_replicon_scan_reservoir_sampling
+  separate_probe_and_scan_counters: true
+  maximum_gc_count_difference: 4
+  exclusion_radius_nt: 100
+  exclusion_radius_rule: r_equals_upstream_60_plus_margin_40_log_R-036
+  exclusion_strands: both
+  exclusion_set: complete_primary_tss_table_all_classes
+  strict_dna_only: true
+  selected_control_overlap: reject
+  identity_with_positive_or_control: reject_forward_and_reverse_complement
+  external_active_positive_identity:
+    rule: reject_control_matching_active_external_positive
+    manifest: configs/dataset_eligibility_manifest_v1.yaml
+    orientation: forward_and_reverse_complement
+    external_labels_modified: false
+  failure_policy: drop_positive_after_exhaustive_scan_and_record
+  rejection_counters_per_positive: true
+  independent_reverification: find_control_exclusion_violations
+  sensitivity_conditions:
+    - configs/cds_negative_control_v2.yaml
+
+post_generation_filter:
+  identity: strand_invariant_exact_sequence
+  cross_label_collision_policy: remove_every_affected_pair
+  within_positive_duplicate_policy: retain_first_pair_in_stable_source_order
+  within_negative_duplicate_policy: retain_first_pair_in_stable_source_order
+  pair_integrity: always_remove_positive_and_control_together
+
+grouping_and_split:
+  protocol: configs/homology_grouping_v1.yaml
+  pair_is_indivisible: true
+  genomic_overlap_edges: required
+  genomic_overlap_basis: build_coordinates_on_reference_assembly
+  unit: dataset
+  label_blind: true
+  test_fraction: 0.20
+  assignment_seed: 42
+  inner_folds: 5
+  inner_fold_seed: 42
+  required_cross_partition_edges: 0
+  oversized_component_action: block_and_review
+  confirmatory_binding_requires: evaluation_protocol_v4
+
+organisms:
+  - dataset_id: graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni
+    collection_id: graphpro-cje
+    source_designation: Cje
+    verified_organism: Campylobacter jejuni subsp. jejuni NCTC 11168
+    assembly: NC_002163.1
+    reference_source_id: refseq-campylobacter-jejuni-nctc11168
+    primary_source_pmid: 23696746
+    primary_table:
+      path: data/raw/references/graphpro_primary_tss_sources_v1/campylobacter_table_s4.xlsx
+      sha256: 067fc81dbc218a7e7e5df6a13b4d859b60be369aec23585c1c0681df4d76d98f
+      positive_sheets: [NCTC11168]
+      exclusion_sheets: [NCTC11168]
+    declared_positives: 855
+    exclusion_set_size: 1905
+    known_dependencies: []
+  - dataset_id: graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae
+    collection_id: graphpro-cpne
+    source_designation: Cpne
+    verified_organism: Chlamydia pneumoniae CWL029
+    assembly: NC_000922.1
+    reference_source_id: refseq-chlamydia-pneumoniae-cwl029
+    primary_source_pmid: 21989159
+    primary_table:
+      path: data/raw/references/graphpro_primary_tss_sources_v1/chlamydia_table_s2.xlsx
+      sha256: 4e2839a6664eba3fbb8dadf15c4984a36cca4c8689601d7e4e83c7eb90b9d69d
+      positive_sheets: [TSS]
+      exclusion_sheets: [TSS]
+    declared_positives: 571
+    exclusion_set_size: 571
+    known_dependencies: [shared_positives_with_cdbprom_chlamydophila_dependency_cluster_required]
+  - dataset_id: graphpro-reconstructed-v3-prokaryotic-leptospira_interrogans
+    collection_id: graphpro-lint
+    source_designation: Lint
+    verified_organism: Leptospira interrogans serovar Manilae L495
+    assembly: NZ_LT962963.1
+    reference_source_id: refseq-leptospira-interrogans-manilae-l495
+    primary_source_pmid: 28154810
+    primary_table:
+      path: data/raw/references/graphpro_primary_tss_sources_v1/leptospira_table_s4.xlsx
+      archive: leptospira_supplementary_files.zip
+      archive_sha256: 5e2eb34a1dcf32da70c1d09cf2a3a1203596fb74d9110a169b612fff159050a8
+      sha256: 4633cd5dc4eea129b51faca205e0d97adea37e63687942c2f04d67e328c32dc9
+      positive_sheets: [TSS-30_all]
+      exclusion_sheets: [TSS-30_all, TSS_37_all]
+    declared_positives: 5143
+    exclusion_set_size: 45562
+    known_dependencies: []
+
+out_of_scope:
+  bacillus_amyloliquefaciens: primary_coordinate_supplement_not_acquired
+  rhodobacter_capsulatus: no_primary_table_matching_promotech_rows
+  escherichia_coli_paa: excluded_log_R-040
+  human_and_mouse: separate_251_nt_eukaryotic_successor
+
+required_outputs:
+  - positive_ledger_with_class_sets_and_source_rows
+  - pair_ledger_with_rejection_counters
+  - failure_ledger
+  - filtering_ledger
+  - exclusion_reverification_report
+  - homology_group_table_and_edge_report
+  - group_safe_split_manifest
+  - exact_and_near_duplicate_audits
+  - distribution_report
+  - file_hash_manifest
+
+execution_gates:
+  positive_extraction_enabled: false
+  control_generation_enabled: false
+  grouping_enabled: false
+  split_enabled: false
+  training_enabled: false
+  confirmatory_use_enabled: false
