@@ -63,7 +63,10 @@ negative_policy:
   identity_with_positive_or_control: reject_forward_and_reverse_complement
   external_active_positive_identity:
     rule: reject_control_matching_active_external_positive
-    manifest: configs/dataset_eligibility_manifest_v1.yaml
+    dependency_manifest: configs/dataset_dependency_manifest_v3.yaml
+    dependency_manifest_sha256: 70a24063281b4d39958f8f9e76a3fdf346cc8d3c38a808ba3d90851e22f8c806
+    dataset_count: 18
+    processed_root: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna
     orientation: forward_and_reverse_complement
     external_labels_modified: false
   failure_policy: drop_positive_after_exhaustive_scan_and_record

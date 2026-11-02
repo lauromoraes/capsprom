@@ -729,7 +729,9 @@ Current state:
   execution gates are false.
 - Completed: implement and fixture-test the homology-grouping stage (R-044);
   the MMseqs2 integration test passes with the R-027 binary.
-- Next: implement the v3 builder with fixtures; then open extraction and control
+- Completed: implement the v3 builder and its gated script (R-045); the plan
+  run reproduces every declared count and writes nothing.
+- Next: open extraction and control
   generation by explicit decision. Evaluation protocol v4 must adopt homology
   grouping before confirmatory use.
 - Completed: freeze and execute the active classical-baseline consolidation

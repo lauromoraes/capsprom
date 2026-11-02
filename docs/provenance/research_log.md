@@ -927,3 +927,33 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **Not done.** No dataset was grouped. The stage binds confirmatory data only
   through evaluation protocol v4, and the v3 builder that feeds it is not yet
   implemented. No data or model outcome was used.
+
+## R-045 · 2026-11-02 · Builder for graphpro-reconstructed-v3
+
+- **Contract amendment before first use.** The external-positive rule of
+  `configs/graphpro_reconstruction_v3.yaml` now names the source of the active
+  positive sequences as in the EPD v5 builder:
+  `configs/dataset_dependency_manifest_v3.yaml` (SHA-256 `70a24063…`, 18
+  datasets) and the regenerated-v3 strict-DNA processed root. No state, output,
+  or run of v3 existed; contract SHA-256 is now `b18a00ad…`.
+- **Code.** `src/capsprom/data/primary_tss_tables.py` holds the primary-table
+  readers, moved from the R-035 script (its summary and the CDS inventory v2
+  summary reproduce byte-for-byte: `878c8933…`, `d351fdd5…`).
+  `src/capsprom/data/bacterial_reconstruction.py` selects P-or-S loci in stable
+  order, builds the complete-table exclusion set, and generates same-strand
+  controls with GC count within four, random probes then the shared EPD
+  exhaustive scan with reservoir sampling, external-positive rejection, and
+  independent re-verification; a positive without any admissible control is
+  recorded as a failure. `scripts/build_graphpro_reconstruction_v3.py` plans
+  by default (hash checks, declared versus observed counts, window screening;
+  writes nothing) and, with `--execute`, runs only the gated stages and writes
+  each dataset once, atomically, under `data/interim/graphpro_reconstructed_v3/`.
+- **Tests.** `tests/test_bacterial_reconstruction.py`: class selection and
+  order, exclusion of non-positive TSS classes on both strands, strand and GC
+  rules, non-overlap, determinism, exhaustive fallback, recorded failure,
+  external-positive rejection, refusal of an incomplete known set, grouping
+  coordinates.
+- **Plan run.** Observed counts equal the declared ones (855/1,905; 571/571;
+  5,143/45,562). Screening rejects 1 *C. pneumoniae* and 19 *L. interrogans*
+  windows, as in F-119. `--execute` refuses while the gates are closed; nothing
+  was written and no control was generated. No model outcome was used.

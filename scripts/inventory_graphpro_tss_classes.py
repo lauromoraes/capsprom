@@ -14,50 +14,22 @@ import bisect
 import collections
 import csv
 import json
-import re
-import zipfile
 from pathlib import Path
-from xml.etree import ElementTree as ET
 
 import xlrd
+
+from capsprom.data import primary_tss_tables as tables
+from capsprom.data.primary_tss_tables import clean_strand, read_xlsx  # noqa: F401
 
 SOURCES = Path("data/raw/references/graphpro_primary_tss_sources_v1")
 BEDS = Path("data/raw/references/promotech_primary_audit_v1")
 CONTROLS = Path("data/interim/graphpro_reconstructed_v2")
 OUTPUT = Path("outputs/reports/graphpro_tss_class_inventory_v1/summary.json")
 RADIUS = 100
-_M = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
-_R = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"
-
-
-def read_xlsx(path: Path, sheet: str) -> list[dict[str, str]]:
-    archive = zipfile.ZipFile(path)
-    shared = [
-        "".join(node.text or "" for node in item.iter(_M + "t"))
-        for item in ET.fromstring(archive.read("xl/sharedStrings.xml")).findall(_M + "si")
-    ]
-    rels = ET.fromstring(archive.read("xl/_rels/workbook.xml.rels"))
-    targets = {rel.get("Id"): rel.get("Target") for rel in rels}
-    workbook = ET.fromstring(archive.read("xl/workbook.xml"))
-    member = {
-        node.get("name"): "xl/" + targets[node.get(_R + "id")].lstrip("/").removeprefix("xl/")
-        for node in workbook.iter(_M + "sheet")
-    }[sheet]
-    rows = []
-    for row in ET.fromstring(archive.read(member)).iter(_M + "row"):
-        values = {}
-        for cell in row.findall(_M + "c"):
-            node = cell.find(_M + "v")
-            value = node.text if node is not None else ""
-            if cell.get("t") == "s":
-                value = shared[int(value)]
-            values[re.sub(r"\d", "", cell.get("r"))] = value
-        rows.append(values)
-    return rows
 
 
 def strand(value: str) -> str:
-    return value.strip().strip("'")
+    return clean_strand(value)
 
 
 def paa_classes() -> dict[tuple[int, str], set[str]]:
@@ -75,36 +47,15 @@ def paa_classes() -> dict[tuple[int, str], set[str]]:
 
 
 def campylobacter_classes() -> dict[tuple[int, str], set[str]]:
-    rows = read_xlsx(SOURCES / "campylobacter_table_s4.xlsx", "NCTC11168")
-    column = {name: letter for letter, name in rows[2].items()}
-    flags = ("Primary", "Secondary", "Internal", "Antisense", "Putative sRNA")
-    classes: dict[tuple[int, str], set[str]] = collections.defaultdict(set)
-    for row in rows[3:]:
-        if not row.get(column["Pos"]):
-            continue
-        key = (int(row[column["Pos"]]), strand(row[column["Strand"]]))
-        found = [name.lower() for name in flags if row.get(column[name]) == "1"]
-        classes[key].update(found or ["orphan"])
-    return classes
+    return tables.campylobacter_classes(SOURCES / "campylobacter_table_s4.xlsx")
 
 
 def chlamydophila_classes() -> dict[tuple[int, str], set[str]]:
-    classes: dict[tuple[int, str], set[str]] = collections.defaultdict(set)
-    for row in read_xlsx(SOURCES / "chlamydia_table_s2.xlsx", "TSS")[1:]:
-        for column, name in (("B", "primary"), ("C", "secondary")):
-            value = row.get(column, "").strip()
-            if value.isdigit():
-                classes[(int(value), strand(row.get("G", "")))].add(name)
-    return classes
+    return tables.chlamydophila_classes(SOURCES / "chlamydia_table_s2.xlsx")
 
 
 def leptospira_classes() -> dict[tuple[int, str], set[str]]:
-    classes: dict[tuple[int, str], set[str]] = collections.defaultdict(set)
-    for sheet in ("TSS-30_all", "TSS_37_all"):
-        for row in read_xlsx(SOURCES / "leptospira_table_s4.xlsx", sheet)[1:]:
-            if row.get("B", "").isdigit():
-                classes[(int(row["B"]), strand(row["C"]))].add(row.get("E", "unknown"))
-    return classes
+    return tables.leptospira_classes(SOURCES / "leptospira_table_s4.xlsx")
 
 
 def bed_keys(name: str) -> list[tuple[int, str]]:
