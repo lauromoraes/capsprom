@@ -105,6 +105,24 @@ different background. Reporting both as separate, predeclared conditions is
 more informative than pooling them or choosing the condition with the better
 MCC.
 
+The nominal E. coli identity was excluded rather than reconstructed as a
+pAA-specific dataset, for three reasons. First, a pAA dataset would not
+represent the E. coli genome or the released GraphPro class files; it would
+describe the promoters of one 74-kb plasmid of strain O104:H4 and would answer
+a different question. Second, under the gene-associated class rule only 51 TSSs
+would qualify, so a test partition of about ten pairs could not support a
+useful confidence interval. In a cluster-level analysis it would also carry the
+same weight as datasets with thousands of pairs. Third, its dense TSS map
+raises the chance that a sampled control contains an unannotated promoter. The
+exclusion has three consequences for this thesis. The reconstructed bacterial
+line covers at most five organisms instead of six. No E. coli result can be
+compared with GraphPro, so E. coli enters the thesis only through the
+independently built CNNProm dataset. A plasmid-transfer analysis, training on
+chromosomal E. coli and testing on pAA, is left to future work. The finding
+itself is retained: an assembly misassignment in a published training resource
+went unnoticed until primary-source resolution, which supports accession
+validation as a gate that precedes sequence generation.
+
 The similarity-aware partitioning result reduces a second threat: closely
 related windows cannot be divided between training and testing merely because
 their strings are not identical. Grouping connected components through eight

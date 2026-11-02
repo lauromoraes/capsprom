@@ -1,0 +1,147 @@
+% Draft: selection of positive TSS classes (P+S)
+% Target: Chapter 4 (Materials and Methods), dataset reconstruction;
+%         short justification in Chapter 7 (Experimental Protocol).
+% Status: draft v1, 2026-11-02. References checked against Crossref DOIs.
+% Project sources: specs/graphpro_dataset_reconstruction.md (TSS classes),
+%   docs/provenance/research_log.md (R-035), findings F-115 to F-117.
+
+\section{Selection of Positive TSS Classes}\label{draft:tss-class-selection}
+
+\draftmeta{Chapter~4 (dataset reconstruction); summary in Chapter~7}
+{Draft v1 --- references verified; positive-class rule awaiting owner approval}
+{\texttt{specs/graphpro\_dataset\_reconstruction.md}; log R-035; F-115--F-117}
+
+\subsection{TSS maps are not promoter lists}
+
+\citet{sharma2010primary} introduced differential RNA-seq (dRNA-seq) to map the
+primary transcriptome of \textit{Helicobacter pylori} and classified every
+transcription start site (TSS) by its position relative to annotated genes:
+\begin{itemize}
+  \item \textbf{primary (P):} the main TSS upstream of a gene, on the same
+    strand;
+  \item \textbf{secondary (S):} additional TSSs upstream of the same gene,
+    with weaker support;
+  \item \textbf{internal (I):} inside a coding sequence, on the sense strand;
+  \item \textbf{antisense (A):} on the opposite strand, inside or near a gene;
+  \item \textbf{orphan (O):} not associated with any annotated gene.
+\end{itemize}
+The classes are not mutually exclusive. Later dRNA-seq studies adopted the
+scheme with study-specific distance thresholds; \citet{dugar2013campylobacter},
+for example, assign a TSS to P or S when it lies at most 300~bp upstream of a
+gene, and to A when it lies inside a gene or within 100~bp on the opposite
+strand. Maps built this way exist for \textit{Escherichia coli}
+\citep{thomason2015ecoli}, \textit{Campylobacter jejuni}
+\citep{dugar2013campylobacter}, \textit{Chlamydia pneumoniae}
+\citep{albrecht2011chlamydia}, and \textit{Leptospira interrogans}
+\citep{zhukova2017leptospira}.
+
+A dRNA-seq map is therefore an inventory of heterogeneous transcription
+initiation events, not a list of promoters. In \textit{E.~coli}, 5,574 of
+14,868 TSS candidates were internal to annotated genes and 5,495 corresponded
+to potential antisense transcripts \citep{thomason2015ecoli}. The set of
+classes accepted as positive is part of the definition of the prediction task:
+two datasets built from the same organism and experiment but with different
+class sets measure different things. The protocol therefore declares the
+positive class set for each organism before any dataset is built or any model
+is trained, and never tunes it against model performance.
+
+\subsection{Rationale for P+S}
+
+\paragraph{Construct validity.}
+In the canonical molecular definition, a promoter is the DNA region where RNA
+polymerase, guided by a $\sigma$ factor, initiates and regulates the
+transcription of a gene \citep{browning2016regulation}. P and S are exactly the
+classes defined by this relationship: they lie upstream of a gene, on its
+strand. Restricting positives to P+S makes the positive label denote one
+biological construct rather than the mixture of initiation events in a
+complete map.
+
+\paragraph{Homogeneity of the signal and avoidance of compositional shortcuts.}
+Internal TSSs, and many antisense TSSs, lie inside protein-coding sequences.
+Their windows inherit coding-sequence statistics, such as codon periodicity and
+position-specific base composition, which identify coding regions on their own
+\citep{fickett1982coding}. Mixed into the positive class, they would let a
+classifier separate the classes by learning ``coding versus non-coding''
+instead of ``promoter versus non-promoter''. This is a shortcut: a decision
+rule that succeeds on the benchmark but does not transfer to the intended task
+\citep{geirhos2020shortcut}. It would also contradict any negative condition
+derived from coding sequences, where the same kind of sequence would carry the
+opposite label. P+S keeps the positives in the upstream region where the
+canonical promoter elements reside \citep{browning2016regulation}.
+
+\paragraph{Strength and stability of the evidence.}
+Antisense and orphan TSSs include a large share of pervasive, low-level
+transcription whose function is debated \citep{wade2014pervasive}. Across 20
+bacterial species, the number of antisense RNAs increases with genomic AT
+content, and most antisense transcripts are consistent with initiation at
+spurious promoters, that is, transcriptional noise
+\citep{llorensrico2016antisense}. Gene-associated TSSs are also the most
+reproducible across strains \citep{dugar2013campylobacter} and growth
+conditions \citep{zhukova2017leptospira}. Anchoring the positive class in
+gene-associated TSSs reduces label noise without requiring any judgement on
+whether the other classes are biologically functional.
+
+\paragraph{Why S is included and the class is not restricted to P.}
+The distinction between P and S ranks the TSSs of one gene by the signal
+measured under the conditions of the experiment; it is not a biological
+category. Genes are frequently transcribed from several promoters, used
+differently across conditions and $\sigma$ factors
+\citep{cho2009transcription,mendozavargas2009genome}, so a secondary TSS in one
+condition may be the dominant TSS in another. A P-only definition would encode
+an artefact of the experimental condition and concentrate the positive class on
+the strongest promoters. Evaluating on such a narrow spectrum of cases tends to
+overstate performance relative to the full population, as described for
+diagnostic tests \citep{ransohoff1978spectrum}. Including S preserves the
+natural diversity of gene-associated promoters and increases the sample size
+without mixing constructs.
+
+\paragraph{Comparability across organisms and sources.}
+Because P and S are defined relative to the annotated gene, they are the classes
+most consistently present across dRNA-seq studies that follow the scheme of
+\citet{sharma2010primary}
+\citep{albrecht2011chlamydia,dugar2013campylobacter,thomason2015ecoli,zhukova2017leptospira}.
+Applying one rule to each primary table yields datasets whose labels have the
+same meaning across organisms. This is a precondition for cross-dataset
+inference: comparing effects across datasets is meaningful only if the positive
+label denotes the same construct in each. The point also applies to released
+benchmarks; the Promotech training inventory
+\citep{chevezguardado2021promotech} applies no common class rule across
+organisms (finding F-115).
+
+\paragraph{Coherence with negative construction.}
+TSSs outside the selected classes are not used as negatives. Genomic controls
+are excluded from the neighbourhood of every TSS in the complete primary table,
+for all classes and on both strands, so no control contains a known initiation
+site, and the I, A, and O events are removed from both classes instead of
+contaminating the negative class. This is what makes restricting the positive
+class defensible. Random genomic controls remain unlabelled rather than
+verified negatives, and this residual uncertainty is reported as a
+positive--unlabelled setting \citep{elkan2008pu}.
+
+\subsection{Operational rules}
+
+\begin{enumerate}
+  \item A TSS is positive if it holds at least one of the classes P or S,
+    regardless of any other class it also holds.
+  \item Classes are taken from the primary table of the source study, never
+    from derived subsets.
+  \item The full class set of every positive is retained in the pair ledger,
+    so results can be stratified by class.
+  \item Alternative class sets (P only, P+S+I, all classes) are run only as
+    separate, versioned sensitivity conditions and are never pooled with the
+    primary condition.
+  \item Class assignment depends on the genome annotation used by the source
+    study; that annotation version is recorded as provenance.
+\end{enumerate}
+
+\subsection{Limitations}
+
+P+S inherits annotation errors: a promoter of an unannotated gene is
+classified as orphan and excluded. The definition also excludes genuine
+promoters of antisense and intragenic transcripts, some of which are functional
+\citep{wade2014pervasive}; the task is therefore explicitly gene-associated
+promoter prediction, not prediction of all transcription initiation. When a
+source releases only primary TSSs, P+S reduces to P, and this asymmetry between
+sources must be reported. Distance thresholds for P/S assignment differ between
+studies \citep[e.g.][]{dugar2013campylobacter}, so the threshold applied by each
+source is recorded.

@@ -1,0 +1,48 @@
+% CapsProm thesis drafts: a staging collection of text intended for the final
+% thesis. Each draft lives in sections/ and is registered in README.md.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+% Draft metadata box: target location, status, project sources.
+\newcommand{\draftmeta}[3]{%
+  \begin{center}\small
+  \fcolorbox{gray!60}{gray!8}{\parbox{0.92\linewidth}{%
+    \textbf{Target:} #1\\
+    \textbf{Status:} #2\\
+    \textbf{Project sources:} #3}}
+  \end{center}}
+
+\title{CapsProm Thesis Drafts}
+\author{Lauro Moraes}
+\date{Collection started 2 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document collects draft text for the CapsProm doctoral thesis. Each
+section is a self-contained draft that states its target chapter, its status,
+and the project records it relies on. Drafts are not final thesis text; they
+are moved into \texttt{docs/thesis/chapters/} after review, and their
+bibliography entries are merged into \texttt{docs/thesis/references.bib} at
+that point.
+\end{abstract}
+
+\tableofcontents
+
+\input{sections/tss_class_selection}
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}

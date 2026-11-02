@@ -257,3 +257,4 @@ docs/thesis/*.out
 docs/thesis/*.pdf
 docs/thesis/*.synctex.gz
 docs/thesis/*.toc
+docs/thesis/drafts/build/

@@ -229,7 +229,12 @@ Table~\ref{tab:results-graphpro-reconstruction-feasibility} and all derived
 controls, partitions, similarity results, distribution statistics, and
 cross-dataset overlaps are invalid provenance artifacts. They cannot be
 repaired by renaming because their sequences were extracted from the wrong
-molecule.
+molecule. The identity was therefore excluded from the reconstructed line, and
+no pAA-specific dataset was built. Of the 248 pAA TSSs, only 51 carry a primary
+or secondary class; the others are internal, antisense, or orphan TSSs. The
+exclusion did not follow from insufficient control space, since a
+both-strand 100-nt TSS margin still leaves 453 non-overlapping 81-nt windows
+per strand against 124 required.
 
 Before this source error was known, the infrastructure exercise generated
 11,903 positive--control pairs. It collapsed 30 repeated nominal E. coli and 74
