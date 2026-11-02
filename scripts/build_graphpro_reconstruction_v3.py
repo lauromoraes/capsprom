@@ -59,12 +59,16 @@ def main() -> None:
     parser.add_argument("--dataset", action="append", help="restrict to a collection_id (repeatable)")
     args = parser.parse_args()
     config_sha256 = sha256_file(args.config)
-    contract = yaml.safe_load(args.config.read_text(encoding="utf-8"))
+    contract = _load_contract(args.config)
     gates = contract["execution_gates"]
     if args.execute and not (gates["positive_extraction_enabled"] and gates["control_generation_enabled"]):
         raise SystemExit("extraction and control-generation gates are closed")
-    if args.execute and gates["grouping_enabled"] and args.mmseqs is None:
-        raise SystemExit("grouping is enabled: pass --mmseqs")
+    if args.execute and gates["grouping_enabled"]:
+        if args.mmseqs is None:
+            raise SystemExit("grouping is enabled: pass --mmseqs")
+        expected = contract.get("execution", {}).get("mmseqs2", {}).get("binary_sha256")
+        if expected and sha256_file(args.mmseqs) != expected:
+            raise SystemExit("MMseqs2 binary hash differs from the execution contract")
     references = _verified_references(contract["reference"])
     external = _external_positives(contract["negative_policy"]["external_active_positive_identity"]) if args.execute else []
     summary = {"contract": str(args.config), "contract_sha256": config_sha256, "execute": args.execute, "datasets": {}}
@@ -188,6 +192,22 @@ def _group(pairs, contract, gates, split, staging, mmseqs) -> dict:
     )
     write_json_atomic(staging / "grouping_report.json", {**report, "mmseqs": search})
     return {"grouping": report}
+
+
+def _load_contract(path: Path) -> dict:
+    """Load a contract; an ``extends`` base must match its declared SHA-256."""
+
+    contract = yaml.safe_load(path.read_text(encoding="utf-8"))
+    base = contract.pop("extends", None)
+    if base is None:
+        return contract
+    if sha256_file(Path(base["path"])) != base["sha256"]:
+        raise ValueError(f"base contract hash mismatch: {base['path']}")
+    merged = _load_contract(Path(base["path"]))
+    for key, value in contract.items():
+        merged[key] = {**merged[key], **value} if isinstance(value, dict) and isinstance(merged.get(key), dict) else value
+    merged["base_contract_sha256"] = base["sha256"]
+    return merged
 
 
 def _ledger_row(pair, classes) -> dict:

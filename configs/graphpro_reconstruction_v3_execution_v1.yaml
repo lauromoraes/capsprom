@@ -1,0 +1,24 @@
+extends:
+  path: configs/graphpro_reconstruction_v3.yaml
+  sha256: b18a00adbe2cdfb3519527353c8e619adfdf6e89ebfd002e90952ee39901c031
+
+execution:
+  name: graphpro-reconstructed-v3-execution-v1
+  version: 1.0.0
+  decision: project_owner_opens_generation_grouping_and_split
+  research_log: R-046
+  date: 2026-11-02
+  changes_from_base: execution_gates_only
+  mmseqs2:
+    release_archive: mmseqs-linux-avx2.tar.gz
+    release_archive_sha256: bd9b0234da5949ad528d5b5f9ea4cda9c1e23dce14b46c0791d4d919a76e61ce
+    binary_sha256: b7ef6e0e33df5dd4fa9cf988cbd8b4988c11a3a1255d2c377f13e1bb40c157fb
+    version: 8cc5ce367b5638c4306c2d7cfc652dd099a4643f
+
+execution_gates:
+  positive_extraction_enabled: true
+  control_generation_enabled: true
+  grouping_enabled: true
+  split_enabled: true
+  training_enabled: false
+  confirmatory_use_enabled: false

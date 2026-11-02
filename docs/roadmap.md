@@ -731,9 +731,13 @@ Current state:
   the MMseqs2 integration test passes with the R-027 binary.
 - Completed: implement the v3 builder and its gated script (R-045); the plan
   run reproduces every declared count and writes nothing.
-- Next: open extraction and control
-  generation by explicit decision. Evaluation protocol v4 must adopt homology
-  grouping before confirmatory use.
+- Completed: build graphpro-reconstructed-v3 for Cje (849 pairs), Cpne (570),
+  and Lint (5,123) under the execution contract (R-046). All integrity checks
+  pass; the Lint grouping has one chained group of 11.3% in a single inner fold
+  (F-120).
+- Next: decide how the F-120 chained group is handled; then the CDS builder,
+  distribution and dependency audits, and evaluation protocol v4 before any
+  confirmatory use.
 - Completed: freeze and execute the active classical-baseline consolidation
   for the 18 eligible CDBProm/CNNProm datasets. It reuses completed logistic
   and ten-seed XGBoost results, excludes GraphPro by the independently defined

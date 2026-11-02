@@ -957,3 +957,33 @@ SHA-256 of the module that ran, when the change was not yet committed.
   5,143/45,562). Screening rejects 1 *C. pneumoniae* and 19 *L. interrogans*
   windows, as in F-119. `--execute` refuses while the gates are closed; nothing
   was written and no control was generated. No model outcome was used.
+
+## R-046 · 2026-11-02 · Execution of graphpro-reconstructed-v3
+
+- **Decision (project owner).** Open extraction, control generation,
+  grouping, and split for v3. `configs/graphpro_reconstruction_v3_execution_v1.yaml`
+  (SHA-256 `83da8e0b…`) extends the v3 contract by hash (`b18a00ad…`), changes
+  only the gates, and pins the MMseqs2 binary of R-027 (`b7ef6e0e…`), which the
+  script verifies. Training and confirmatory use stay closed.
+- **Run.** `scripts/build_graphpro_reconstruction_v3.py --execute` in WSL; the
+  script now resolves hash-bound `extends`. Outputs under
+  `data/interim/graphpro_reconstructed_v3/` (not committed); build manifest,
+  pair ledger, group table, and MMseqs2 hit table SHA-256 prefixes:
+
+  | Dataset | Pairs | Manifest | Pair ledger | Group table | Hits |
+  | --- | ---: | --- | --- | --- | --- |
+  | *C. jejuni* | 849 | `2ca8f3d3…` | `cab3ce1c…` | `32e3108e…` | `3718c19f…` |
+  | *C. pneumoniae* | 570 | `3e73b6b3…` | `17727d0f…` | `f22f0555…` | `ce5aef23…` |
+  | *L. interrogans* | 5,123 | `8ec1a64b…` | `f5c659a5…` | `03aa0b93…` | `e34ece9f…` |
+
+- **Results.** No control failure and no exhaustive fallback. The
+  post-generation filter removed 6 (*C. jejuni*) and 1 (*L. interrogans*)
+  pairs whose positive window repeats another positive. An independent scratch
+  audit of the written files found 0 controls within 100 nt of any
+  primary-table TSS, every GC difference within four bases, every control on
+  its positive's strand, no duplicate strand-invariant identity, no pair split
+  across partitions, and 0 cross-partition edges. Test sets are 20% of each
+  class (170/170, 114/114, 1,025/1,025 pairs). Mean control-minus-positive GC
+  count: +1.88, +1.57, and +0.01. Finding F-120 concerns the
+  *L. interrogans* grouping.
+- No model was trained and no test outcome exists.
