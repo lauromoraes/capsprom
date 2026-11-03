@@ -1081,3 +1081,15 @@ SHA-256 of the module that ran, when the change was not yet committed.
   (Cpne in `cdbprom-chlamydophila`, Cje and Lint as own clusters) is part of
   the eligibility gate; the residual GC gap of F-124 needs a reporting or
   construction decision before confirmatory use.
+
+## R-052 · 2026-11-03 · Residual GC gap reported as a limitation
+
+- **Decision (project owner).** Keep the v3 genomic and CDS panels unchanged
+  and report the F-124 GC gap as a limitation, instead of rebuilding with a
+  narrower caliper (which would drop AT-extreme *C. jejuni* promoters).
+- **Reference baseline.** `configs/graphpro_v3_gc_only_reference_v1.yaml`
+  freezes a one-feature GC logistic regression, fitted on training only, whose
+  test MCC is reported beside every model on the five panels with a paired
+  bootstrap on shared test indices. It is descriptive and never used for
+  selection. Its gates are closed until model training opens. No model
+  outcome existed.

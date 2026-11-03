@@ -1,0 +1,38 @@
+analysis:
+  name: graphpro-v3-gc-only-reference-v1
+  version: 1.0.0
+  status: frozen_before_any_model_result
+  research_log: R-052
+  evidence: [F-124]
+  role: reference_baseline_for_composition_shortcut
+  used_for_selection: false
+  rationale: >-
+    Controls of the reconstructed C. jejuni and C. pneumoniae panels are 2-3 GC
+    points richer than their positives (F-124). The owner chose to keep the
+    data and report the gap as a limitation; this reference baseline measures
+    how much of any model's performance GC content alone explains.
+
+scope:
+  panels:
+    - graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni.genomic
+    - graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae.genomic
+    - graphpro-reconstructed-v3-prokaryotic-leptospira_interrogans.genomic
+    - graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni.cds
+    - graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae.cds
+
+model:
+  feature: gc_fraction_of_the_81_nt_window
+  classifier: logistic_regression_one_feature_with_intercept
+  fitted_on: training_partition_only
+  threshold: 0.5
+  deterministic: true
+
+reporting:
+  outcome: mcc_on_the_same_test_records_as_every_compared_model
+  inference: paired_bootstrap_shared_test_indices
+  statement: every model result on these panels is reported next to the gc_only_mcc and the paired difference
+  interpretation: descriptive_not_a_model_comparison_hypothesis
+
+execution_gates:
+  training_enabled: false
+  test_evaluation_enabled: false

@@ -747,6 +747,10 @@ Current state:
 - Completed: distribution and dependency audit of the v3 panels (R-051).
   Cpne joins `cdbprom-chlamydophila`; Cje and Lint are independent (F-125).
   Controls are 2–3 GC points richer than positives in Cje and Cpne (F-124).
+- Decision (2026-11-03): report the GC gap as a limitation with a frozen
+  GC-only reference baseline (R-052).
+- Next: dependency manifest v4 with the v3 datasets, evaluation protocol v4,
+  and the per-organism manual sample review.
 - Next: the CDS builder,
   distribution and dependency audits, and evaluation protocol v4 before any
   confirmatory use.
