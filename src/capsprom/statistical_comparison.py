@@ -189,8 +189,16 @@ def paired_stratified_bootstrap_mcc(
     resamples: int,
     random_seed: int,
     confidence_level: float = 0.95,
-) -> dict[str, float | list[float]]:
-    """Bootstrap the median paired-seed MCC effect with shared record indices."""
+    groups: Sequence[object] | None = None,
+) -> dict[str, float | list[float] | str]:
+    """Bootstrap the median paired-seed MCC effect with shared record indices.
+
+    Without ``groups`` records are resampled within each class.  With
+    ``groups`` (one identifier per record, e.g. a homology group) whole groups
+    are resampled with replacement, as many as there are groups, so dependent
+    records enter or leave a resample together; a draw lacking either class
+    is redrawn.  The same indices serve every model and seed.
+    """
 
     from sklearn.metrics import matthews_corrcoef
 
@@ -209,12 +217,27 @@ def paired_stratified_bootstrap_mcc(
             raise ValueError("every prediction vector must be binary and match labels")
 
     class_indices = [np.flatnonzero(y_true == label) for label in (0, 1)]
+    members: list[np.ndarray] = []
+    if groups is not None:
+        if len(groups) != y_true.size:
+            raise ValueError("groups must give one identifier per record")
+        by_group: dict[object, list[int]] = defaultdict(list)
+        for position, group in enumerate(groups):
+            by_group[group].append(position)
+        members = [np.asarray(indices) for _, indices in sorted(by_group.items(), key=lambda item: item[1][0])]
     rng = np.random.default_rng(random_seed)
     bootstrap_effects = np.empty(resamples, dtype=float)
     for index in range(resamples):
-        sampled = np.concatenate(
-            [rng.choice(indices, size=len(indices), replace=True) for indices in class_indices]
-        )
+        if groups is None:
+            sampled = np.concatenate(
+                [rng.choice(indices, size=len(indices), replace=True) for indices in class_indices]
+            )
+        else:
+            while True:
+                chosen = rng.integers(0, len(members), size=len(members))
+                sampled = np.concatenate([members[i] for i in chosen])
+                if len(np.unique(y_true[sampled])) == 2:
+                    break
         seed_effects = [
             matthews_corrcoef(y_true[sampled], arrays_a[seed][sampled])
             - matthews_corrcoef(y_true[sampled], arrays_b[seed][sampled])
@@ -234,4 +257,5 @@ def paired_stratified_bootstrap_mcc(
         "confidence_level": float(confidence_level),
         "bootstrap_resamples": int(resamples),
         "bootstrap_interval": [float(interval[0]), float(interval[1])],
+        "bootstrap_unit": "record_within_class" if groups is None else "group",
     }

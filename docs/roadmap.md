@@ -755,8 +755,10 @@ Current state:
   eligibility manifest.
 - Completed: homology-grouped domain-window builds of the 18 eligible datasets
   (R-055, F-126); all audits pass.
-- Next: a group-bootstrap fixture and the per-organism manual sample review of
-  the GraphPro v3 candidates.
+- Completed: group-bootstrap fixture (R-056).
+- Next: the per-organism manual sample review of the GraphPro v3 candidates,
+  then an evaluation-protocol-v4 execution successor that records both
+  satisfied gates.
 - Next: the CDS builder,
   distribution and dependency audits, and evaluation protocol v4 before any
   confirmatory use.

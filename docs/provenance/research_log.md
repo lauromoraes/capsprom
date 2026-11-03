@@ -1149,3 +1149,22 @@ SHA-256 of the module that ran, when the change was not yet committed.
   No group exceeded the 20% review limit. Finding F-126.
 - The v4 gate `grouped_domain_window_builds_complete` is satisfied; it will be
   set in an execution successor of the protocol, not by editing v4.
+
+## R-056 · 2026-11-03 · Group-bootstrap fixture
+
+- **Code.** `paired_stratified_bootstrap_mcc` in
+  `src/capsprom/statistical_comparison.py` gains an optional `groups` vector.
+  With it, whole groups (homology groups under evaluation protocol v4) are
+  resampled with replacement, as many as there are groups, with shared indices
+  for every model and seed; a draw lacking either class is redrawn. The result
+  states its `bootstrap_unit`. Without `groups` the record-within-class
+  behaviour is unchanged.
+- **Fixture.** `tests/test_statistical_comparison.py`: 20 groups of 10
+  identical records with perfectly correlated errors give the same point effect
+  (0.40) but a 95% interval of [0.261, 0.540] at record level and
+  [−0.038, 0.861] at group level, so record resampling understates uncertainty
+  when records are dependent; also reproducibility, singleton groups, and
+  input validation.
+- The v4 gate `group_bootstrap_fixture_validated` is satisfied; like the build
+  gate, it is set in an execution successor of the protocol. No data or model
+  outcome was used.

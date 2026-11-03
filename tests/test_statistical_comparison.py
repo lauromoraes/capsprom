@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 
 from capsprom.statistical_comparison import (
@@ -86,3 +87,53 @@ def test_holm_adjustment_is_monotone_in_sorted_p_values() -> None:
     adjusted = holm_adjust({"a": 0.01, "b": 0.04, "c": 0.03})
 
     assert adjusted == pytest.approx({"a": 0.03, "b": 0.06, "c": 0.06})
+
+
+def _clustered_panel():
+    # 20 groups of 10 identical records: errors are perfectly correlated within a group.
+    rng = np.random.default_rng(7)
+    labels, a, b, groups = [], [], [], []
+    for group in range(20):
+        label = group % 2
+        hit_a = rng.random() < 0.8
+        hit_b = rng.random() < 0.6
+        for _ in range(10):
+            labels.append(label)
+            a.append(label if hit_a else 1 - label)
+            b.append(label if hit_b else 1 - label)
+            groups.append(f"g{group}")
+    return labels, {13: a}, {13: b}, groups
+
+
+def test_group_bootstrap_widens_the_interval_when_errors_cluster() -> None:
+    labels, a, b, groups = _clustered_panel()
+
+    record = paired_stratified_bootstrap_mcc(labels, a, b, resamples=2000, random_seed=20260715)
+    grouped = paired_stratified_bootstrap_mcc(labels, a, b, resamples=2000, random_seed=20260715, groups=groups)
+
+    def width(result):
+        return result["bootstrap_interval"][1] - result["bootstrap_interval"][0]
+
+    assert record["bootstrap_unit"] == "record_within_class"
+    assert grouped["bootstrap_unit"] == "group"
+    assert grouped["median_paired_seed_effect"] == record["median_paired_seed_effect"]
+    assert width(grouped) > 2 * width(record)
+
+
+def test_group_bootstrap_with_singleton_groups_is_reproducible_and_valid() -> None:
+    labels = [0, 0, 0, 0, 1, 1, 1, 1]
+    a = {13: [0, 0, 0, 1, 1, 1, 1, 1], 29: [0, 0, 0, 0, 0, 1, 1, 1]}
+    b = {13: [0, 1, 1, 1, 1, 1, 1, 1], 29: [0, 0, 1, 1, 0, 0, 1, 1]}
+    groups = list(range(8))
+
+    first = paired_stratified_bootstrap_mcc(labels, a, b, resamples=200, random_seed=1, groups=groups)
+    second = paired_stratified_bootstrap_mcc(labels, a, b, resamples=200, random_seed=1, groups=groups)
+
+    assert first == second
+    low, high = first["bootstrap_interval"]
+    assert -2.0 <= low <= high <= 2.0
+
+
+def test_group_bootstrap_rejects_mismatched_group_vector() -> None:
+    with pytest.raises(ValueError, match="one identifier per record"):
+        paired_stratified_bootstrap_mcc([0, 1], {13: [0, 1]}, {13: [0, 1]}, resamples=5, random_seed=1, groups=["g"])
