@@ -1026,3 +1026,30 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **Output.** `scripts/assign_repeat_strata_v3.py` wrote
   `data/interim/graphpro_reconstructed_v3_repeat_strata_v1/` (not committed;
   summary SHA-256 `bf3fb32f…`). No build or split changed.
+
+## R-049 · 2026-11-03 · CDS-derived control panels on graphpro-reconstructed-v3
+
+- **Decision (project owner).** Build the CDS panel from the v3 genomic
+  build. `configs/cds_negative_control_v3.yaml` (SHA-256 `b280eed0…`) extends
+  v2 by hash, pins the three v3 build manifests and the MMseqs2 binary, and
+  opens control generation and split inheritance; training and test
+  evaluation stay closed.
+- **Code.** `sample_cds_controls` in `src/capsprom/data/cds_controls.py`
+  (frame cycle, GC caliper, random probes then a full frame scan with
+  reservoir sampling, non-overlap with v3 controls and selected CDS controls,
+  strand-invariant identity exclusion of v3 records and active external
+  positives) with fixture tests; `scripts/build_cds_controls_v3.py` (v3
+  partitions and groups inherited, homology edges of CDS controls against all
+  v3 records, cross-partition drops, test intersection, diagnostics). Outputs
+  under `data/interim/graphpro_reconstructed_v3_cds_v1/` (not committed);
+  manifests `7e42d499…` (Cje), `49f8d494…` (Cpne), `ded18af1…` (Lint).
+- **Results.** *C. jejuni*: 827 of 849 pairs (19 failures, median positive GC
+  6 of 81; 3 cross-partition drops), test intersection 164 of 170.
+  *C. pneumoniae*: 536 of 570 (34 failures, median GC 11), intersection 110 of
+  114. Frame proportions are uniform; controls are 1.7–2.3 G/C bases richer
+  than their positives on average. *L. interrogans*: 1,421 of 5,123 (3,679
+  failures), intersection 278 of 1,025 (finding F-123).
+- **Status.** The *L. interrogans* CDS panel is not usable: its failures
+  follow sampling order, which is genomic position, so the retained positives
+  are positionally biased. It is kept as provenance. The *C. jejuni* and
+  *C. pneumoniae* panels behave as the protocol foresees. No model was trained.

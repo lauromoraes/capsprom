@@ -1,0 +1,37 @@
+extends:
+  path: configs/cds_negative_control_v2.yaml
+  sha256: 2e7b46f81f87ad747a4b93bfde3573238be1fe1123a34436e2194c6dcbd36bb9
+
+protocol:
+  name: capsprom-cds-negative-control-v3
+  version: 3.0.0
+  status: generation_and_split_open
+  predecessor: configs/cds_negative_control_v2.yaml
+  changes_from_predecessor: binds the genomic basis and opens control generation and split inheritance (log R-049)
+
+genomic_basis:
+  contract: configs/graphpro_reconstruction_v3_execution_v1.yaml
+  build_root: data/interim/graphpro_reconstructed_v3
+  datasets:
+    graphpro-cje:
+      dataset_id: graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni
+      build_manifest_sha256: 2ca8f3d383a4c09760aa320c656e4467458c287104b637ca38bf5651152b8155
+    graphpro-cpne:
+      dataset_id: graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae
+      build_manifest_sha256: 3e73b6b384e495909d65f5943a1e9a0680fe29ad47f353d83be95bd95c314305
+    graphpro-lint:
+      dataset_id: graphpro-reconstructed-v3-prokaryotic-leptospira_interrogans
+      build_manifest_sha256: 8ec1a64b9967aa5b6a822ef5ce4570f3af33372bedc03bfbb3017a80bd83b7ab
+  occupied_intervals: genomic_v3_controls
+  forbidden_identities: [v3_positives, v3_genomic_controls, active_external_positives]
+  mmseqs2_binary_sha256: b7ef6e0e33df5dd4fa9cf988cbd8b4988c11a3a1255d2c377f13e1bb40c157fb
+
+output_root: data/interim/graphpro_reconstructed_v3_cds_v1
+
+execution_gates:
+  reference_acquisition_enabled: true
+  feasibility_inventory_enabled: true
+  control_generation_enabled: true
+  split_enabled: true
+  training_enabled: false
+  test_evaluation_enabled: false

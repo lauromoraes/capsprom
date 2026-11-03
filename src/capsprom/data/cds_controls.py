@@ -3,15 +3,17 @@
 Implements the annotation and window rules of
 ``specs/cds_negative_control_protocol.md``.  Coordinates are zero-based and
 half-open.  A window is 81 nt on the CDS sense strand; its frame is its offset
-from the first base of the start codon modulo three.  Nothing here samples a
-control; the functions enumerate every admissible window so that feasibility
-can be inventoried before any construction.
+from the first base of the start codon modulo three.  `enumerate_windows` lists
+every admissible window (used by the feasibility inventory); `sample_cds_controls`
+draws one control per positive from them.
 """
 
 from __future__ import annotations
 
 import collections
+import hashlib
 import gzip
+import random
 import urllib.parse
 from dataclasses import dataclass
 from pathlib import Path
@@ -249,3 +251,114 @@ def matched_candidates(histogram: np.ndarray, gc_count: int, frame: int, caliper
 
     low, high = max(0, gc_count - caliper), min(histogram.shape[1] - 1, gc_count + caliper)
     return int(histogram[frame, low : high + 1].sum())
+
+
+@dataclass(frozen=True)
+class CdsControl:
+    pair_id: str
+    genomic_start: int
+    strand: str
+    frame: int
+    gc_count: int
+    sequence: str
+    cds_identifier: str
+    search_mode: str
+    random_probes: int
+    exhaustive_windows_scanned: int
+
+
+@dataclass(frozen=True)
+class CdsControlFailure:
+    pair_id: str
+    frame: int
+    positive_gc_count: int
+    random_probes: int
+    exhaustive_windows_scanned: int
+
+
+def sample_cds_controls(
+    sequence: str,
+    cds: Sequence[CdsFeature],
+    table: WindowTable,
+    positives: Sequence[tuple[str, str]],
+    *,
+    occupied: Iterable[tuple[int, int]] = (),
+    forbidden_sequences: Iterable[str] = (),
+    caliper: int = 4,
+    seed: int = 20261102,
+    max_probes: int = 100_000,
+    length: int = 81,
+) -> tuple[list[CdsControl], list[CdsControlFailure]]:
+    """Draw one CDS control per positive in the predeclared frame cycle.
+
+    ``positives`` are ``(pair_id, sequence)`` in stable source order; the
+    i-th receives frame ``i % 3``.  Candidates are admissible windows of that
+    frame.  Random probes over the frame's windows come first; after
+    ``max_probes`` a full scan of the frame selects one eligible window by
+    reservoir sampling.  A candidate is eligible when its GC count is within
+    ``caliper`` of the positive, it overlaps no ``occupied`` interval or
+    selected control, and its strand-invariant identity differs from every
+    forbidden sequence and selected control.
+    """
+
+    def key(value: str) -> str:
+        reverse = value.translate(_COMPLEMENT)[::-1]
+        return min(value, reverse)
+
+    forbidden = {key(value.upper()) for value in forbidden_sequences}
+    forbidden.update(key(value.upper()) for _, value in positives)
+    taken = np.zeros(len(sequence) + 1, dtype=np.int32)
+    for start, end in occupied:
+        taken[max(0, start)] += 1
+        taken[min(len(sequence), end)] -= 1
+    blocked = np.cumsum(taken[: len(sequence)]) > 0
+    by_frame = [np.flatnonzero(table.frame == frame) for frame in range(3)]
+    controls, failures = [], []
+
+    def eligible(row: int, gc_target: int) -> str | None:
+        if abs(int(table.gc_count[row]) - gc_target) > caliper:
+            return None
+        start = int(table.genomic_start[row])
+        if blocked[start : start + length].any():
+            return None
+        candidate = window_sequence(sequence, start, str(table.strand[row]), length)
+        return None if key(candidate) in forbidden else candidate
+
+    for index, (pair_id, positive) in enumerate(positives):
+        frame = index % 3
+        pool = by_frame[frame]
+        gc_target = positive.count("G") + positive.count("C")
+        material = f"{seed}:{pair_id}".encode()
+        generator = random.Random(int.from_bytes(hashlib.sha256(material).digest()[:8], "big"))
+        chosen, mode, probes, scanned = None, "random", 0, 0
+        if len(pool):
+            for probes in range(1, min(max_probes, len(pool)) + 1):
+                row = int(pool[generator.randrange(len(pool))])
+                found = eligible(row, gc_target)
+                if found is not None:
+                    chosen = (row, found)
+                    break
+        if chosen is None:
+            mode, seen = "exhaustive_fallback", 0
+            fallback = random.Random(int.from_bytes(hashlib.sha256(b"scan:" + material).digest()[:8], "big"))
+            for row in pool.tolist():
+                scanned += 1
+                found = eligible(row, gc_target)
+                if found is not None:
+                    seen += 1
+                    if fallback.randrange(seen) == 0:
+                        chosen = (row, found)
+        if chosen is None:
+            failures.append(CdsControlFailure(pair_id, frame, gc_target, probes, scanned))
+            continue
+        row, found = chosen
+        start = int(table.genomic_start[row])
+        blocked[start : start + length] = True
+        forbidden.add(key(found))
+        controls.append(
+            CdsControl(
+                pair_id, start, str(table.strand[row]), frame, int(table.gc_count[row]), found,
+                cds[int(table.cds_index[row])].identifier, mode, probes, scanned,
+            )
+        )
+    return controls, failures

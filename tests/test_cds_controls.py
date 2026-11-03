@@ -113,3 +113,46 @@ def test_blocking_intervals_keep_cds_and_rna_but_not_genes(tmp_path: Path):
     features = read_gff(_write_gff(tmp_path / "b.gff.gz", rows))
 
     assert blocking_intervals(features, "c") == [(0, 300), (399, 470)]
+
+
+def _coding_sequence(seed: int, length: int) -> str:
+    import random
+
+    rng = random.Random(seed)
+    return "".join(rng.choice("ACGT") for _ in range(length))
+
+
+def test_sampler_follows_frame_cycle_gc_caliper_and_non_overlap():
+    from capsprom.data.cds_controls import sample_cds_controls
+
+    sequence = _coding_sequence(11, 6000)
+    cds = [CdsFeature("c1", "c", 0, 3000, "+"), CdsFeature("c2", "c", 3000, 6000, "-")]
+    table = enumerate_windows(sequence, cds, [(0, 3000), (3000, 6000)], [])
+    positives = [(f"p{i}", _coding_sequence(100 + i, 81)) for i in range(9)]
+
+    controls, failures = sample_cds_controls(sequence, cds, table, positives, occupied=[(100, 400)])
+    again, _ = sample_cds_controls(sequence, cds, table, positives, occupied=[(100, 400)])
+
+    assert not failures and controls == again
+    assert [c.frame for c in controls] == [i % 3 for i in range(9)]
+    for control, (_, positive) in zip(controls, positives):
+        assert abs(control.gc_count - (positive.count("G") + positive.count("C"))) <= 4
+        assert control.sequence == window_sequence(sequence, control.genomic_start, control.strand)
+        assert not (control.genomic_start < 400 and 100 < control.genomic_start + 81)
+    spans = sorted((c.genomic_start, c.genomic_start + 81) for c in controls)
+    assert all(a_end <= b_start for (_, a_end), (b_start, _) in zip(spans, spans[1:]))
+
+
+def test_sampler_scans_exhaustively_then_records_failure():
+    from capsprom.data.cds_controls import sample_cds_controls
+
+    sequence = "AT" * 1500
+    cds = [CdsFeature("c1", "c", 0, 3000, "+")]
+    table = enumerate_windows(sequence, cds, [(0, 3000)], [])
+    gc_rich = "GC" * 40 + "G"
+
+    controls, failures = sample_cds_controls(sequence, cds, table, [("p0", gc_rich)], max_probes=5)
+
+    assert controls == []
+    assert failures[0].positive_gc_count == 81
+    assert failures[0].exhaustive_windows_scanned == int((table.frame == 0).sum())
