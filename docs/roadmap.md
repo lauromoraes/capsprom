@@ -744,6 +744,9 @@ Current state:
   (827 and 536 pairs); the Lint panel exhausts its coding space and is
   positionally biased (F-123), and is excluded from the CDS condition
   (R-050, `configs/cds_negative_control_v4.yaml`).
+- Completed: distribution and dependency audit of the v3 panels (R-051).
+  Cpne joins `cdbprom-chlamydophila`; Cje and Lint are independent (F-125).
+  Controls are 2–3 GC points richer than positives in Cje and Cpne (F-124).
 - Next: the CDS builder,
   distribution and dependency audits, and evaluation protocol v4 before any
   confirmatory use.

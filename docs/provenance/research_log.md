@@ -1062,3 +1062,22 @@ SHA-256 of the module that ran, when the change was not yet committed.
   panels (manifests `7e42d499…`, `49f8d494…`) as the valid ones, and closes
   generation; nothing is rebuilt. The *L. interrogans* CDS panel stays as
   provenance only; its genomic panel is unaffected. No model outcome existed.
+
+## R-051 · 2026-11-03 · Distribution and dependency audit of the v3 panels
+
+- **Procedure.** `scripts/audit_graphpro_v3_distribution_dependency.py` with
+  `configs/graphpro_v3_distribution_dependency_audit_v1.yaml` (SHA-256
+  `e48a530d…`; v3 and CDS manifests, dependency manifest v3, and MMseqs2
+  binary pinned). Per panel: GC and positional composition (all and test),
+  two-sided Mann–Whitney and KS on GC with Holm across the five panels.
+  Dependency: exact strand-invariant sharing and an all-versus-all MMseqs2
+  search (homology-grouping settings) of the three v3 genomic datasets against
+  each other and the 18 eligible datasets, with the manifest-v3 join rule
+  (more than 10 records with a cross-dataset neighbour). Outputs in
+  `outputs/reports/graphpro_v3_distribution_dependency_v1/` (manifest
+  `220f7ce7…`; not committed). Descriptive; no model output read.
+- **Findings.** F-124, F-125.
+- **Open decisions.** A dependency manifest v4 that adds the v3 datasets
+  (Cpne in `cdbprom-chlamydophila`, Cje and Lint as own clusters) is part of
+  the eligibility gate; the residual GC gap of F-124 needs a reporting or
+  construction decision before confirmatory use.

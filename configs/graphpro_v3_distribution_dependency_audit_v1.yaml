@@ -1,0 +1,39 @@
+audit:
+  name: graphpro-v3-distribution-dependency-v1
+  version: 1.0.0
+  status: descriptive_release_gate_audit
+  research_log: R-051
+  model_training_enabled: false
+  confirmatory_use_enabled: false
+
+inputs:
+  panels:
+    - {panel_id: graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni.genomic, collection_id: graphpro-cje, ledger: data/interim/graphpro_reconstructed_v3/graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni/pair_ledger.csv, negative_column: negative_sequence, manifest: data/interim/graphpro_reconstructed_v3/graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni/build_manifest.json, manifest_sha256: 2ca8f3d383a4c09760aa320c656e4467458c287104b637ca38bf5651152b8155}
+    - {panel_id: graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae.genomic, collection_id: graphpro-cpne, ledger: data/interim/graphpro_reconstructed_v3/graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae/pair_ledger.csv, negative_column: negative_sequence, manifest: data/interim/graphpro_reconstructed_v3/graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae/build_manifest.json, manifest_sha256: 3e73b6b384e495909d65f5943a1e9a0680fe29ad47f353d83be95bd95c314305}
+    - {panel_id: graphpro-reconstructed-v3-prokaryotic-leptospira_interrogans.genomic, collection_id: graphpro-lint, ledger: data/interim/graphpro_reconstructed_v3/graphpro-reconstructed-v3-prokaryotic-leptospira_interrogans/pair_ledger.csv, negative_column: negative_sequence, manifest: data/interim/graphpro_reconstructed_v3/graphpro-reconstructed-v3-prokaryotic-leptospira_interrogans/build_manifest.json, manifest_sha256: 8ec1a64b9967aa5b6a822ef5ce4570f3af33372bedc03bfbb3017a80bd83b7ab}
+    - {panel_id: graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni.cds, collection_id: graphpro-cje, ledger: data/interim/graphpro_reconstructed_v3_cds_v1/graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni/cds_pair_ledger.csv, negative_column: sequence, positive_ledger: data/interim/graphpro_reconstructed_v3/graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni/pair_ledger.csv, manifest: data/interim/graphpro_reconstructed_v3_cds_v1/graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni/build_manifest.json, manifest_sha256: 7e42d4993c3a386bb8d36de4a27143ebbec97923817cb5db509c30005809eb15}
+    - {panel_id: graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae.cds, collection_id: graphpro-cpne, ledger: data/interim/graphpro_reconstructed_v3_cds_v1/graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae/cds_pair_ledger.csv, negative_column: sequence, positive_ledger: data/interim/graphpro_reconstructed_v3/graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae/pair_ledger.csv, manifest: data/interim/graphpro_reconstructed_v3_cds_v1/graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae/build_manifest.json, manifest_sha256: 49f8d494ae85ca7b32f465a00b226d3ab45413c78768b039a9dd2754fbdd926d}
+  confirmatory_root: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna
+  dependency_manifest: configs/dataset_dependency_manifest_v3.yaml
+  dependency_manifest_sha256: 70a24063281b4d39958f8f9e76a3fdf346cc8d3c38a808ba3d90851e22f8c806
+  mmseqs2_binary_sha256: b7ef6e0e33df5dd4fa9cf988cbd8b4988c11a3a1255d2c377f13e1bb40c157fb
+
+distribution:
+  sequence_length: 81
+  coordinate_start: -60
+  partitions: [all, test]
+  tests: [two_sided_mann_whitney_gc, two_sided_ks_gc]
+  multiplicity: holm_within_test_family_over_panels
+  interpretation: descriptive_not_model_selection
+
+dependency:
+  exact: minimum_lexicographic_forward_or_reverse_complement
+  alignment:
+    rule_from: configs/dataset_dependency_manifest_v3.yaml
+    search: configs/homology_grouping_v1.yaml
+    min_seq_id: 0.80
+    coverage_both: 0.80
+    pair_join_threshold_records: 10
+  comparison_scope: v3_genomic_panels_against_each_other_and_the_18_eligible_datasets
+  output: proposed_dependency_cluster_per_v3_dataset
+  limitation: exact_or_alignment_non_overlap_does_not_prove_biological_independence
