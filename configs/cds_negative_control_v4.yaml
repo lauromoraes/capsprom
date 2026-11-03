@@ -1,0 +1,28 @@
+extends:
+  path: configs/cds_negative_control_v3.yaml
+  sha256: b280eed0eb2d22123c2341f93c1dde91577dc4b3c5da65cac50cbe6a932b4efb
+
+protocol:
+  name: capsprom-cds-negative-control-v4
+  version: 4.0.0
+  status: scope_restricted_no_rebuild
+  predecessor: configs/cds_negative_control_v3.yaml
+  changes_from_predecessor: removes graphpro-lint from the CDS condition (log R-050, F-123)
+
+scope:
+  datasets: [graphpro-cje, graphpro-cpne]
+  excluded_datasets:
+    graphpro-lint:
+      reason: admissible_coding_space_exhausted_and_retained_positives_positionally_biased
+      finding: F-123
+      genomic_panel_unaffected: true
+      v3_cds_panel_role: provenance_only
+  valid_panels_from_predecessor_build:
+    graphpro-cje: 7e42d4993c3a386bb8d36de4a27143ebbec97923817cb5db509c30005809eb15
+    graphpro-cpne: 49f8d494ae85ca7b32f465a00b226d3ab45413c78768b039a9dd2754fbdd926d
+
+execution_gates:
+  control_generation_enabled: false
+  split_enabled: false
+  training_enabled: false
+  test_evaluation_enabled: false

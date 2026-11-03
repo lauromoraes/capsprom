@@ -416,3 +416,12 @@ records are in `manifests/provenance/source_acquisition_v1/`.
 the completed classical results and the current eligibility manifest. It
 reports only the 18 eligible CDBProm/CNNProm datasets, excludes GraphPro, and
 does not authorize or execute new model fits.
+
+`cds_negative_control_v3.yaml` binds the CDS condition to the
+graphpro-reconstructed-v3 build and opened generation (log R-049).
+`cds_negative_control_v4.yaml` restricts the condition to *C. jejuni* and
+*C. pneumoniae* and closes generation; *L. interrogans* is excluded because
+its coding space cannot hold an unbiased panel (log R-050, F-123).
+`graphpro_reconstruction_v3_execution_v1.yaml` opened the v3 build (R-046), and
+`graphpro_reconstruction_v3_repeat_strata_v1.yaml` freezes the repeat-linked
+secondary strata (R-048).

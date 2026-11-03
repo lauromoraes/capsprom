@@ -1053,3 +1053,12 @@ SHA-256 of the module that ran, when the change was not yet committed.
   follow sampling order, which is genomic position, so the retained positives
   are positionally biased. It is kept as provenance. The *C. jejuni* and
   *C. pneumoniae* panels behave as the protocol foresees. No model was trained.
+
+## R-050 · 2026-11-03 · *L. interrogans* excluded from the CDS condition
+
+- **Decision (project owner).** Remove *L. interrogans* from the CDS-derived
+  condition (F-123). `configs/cds_negative_control_v4.yaml` extends v3 by hash,
+  restricts the scope to *C. jejuni* and *C. pneumoniae*, pins their v3-built
+  panels (manifests `7e42d499…`, `49f8d494…`) as the valid ones, and closes
+  generation; nothing is rebuilt. The *L. interrogans* CDS panel stays as
+  provenance only; its genomic panel is unaffected. No model outcome existed.

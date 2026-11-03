@@ -742,7 +742,8 @@ Current state:
   model result (R-048, F-122).
 - Completed: build CDS-derived panels on v3 (R-049). Cje and Cpne are usable
   (827 and 536 pairs); the Lint panel exhausts its coding space and is
-  positionally biased (F-123), awaiting an owner decision.
+  positionally biased (F-123), and is excluded from the CDS condition
+  (R-050, `configs/cds_negative_control_v4.yaml`).
 - Next: the CDS builder,
   distribution and dependency audits, and evaluation protocol v4 before any
   confirmatory use.
