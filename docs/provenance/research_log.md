@@ -1093,3 +1093,15 @@ SHA-256 of the module that ran, when the change was not yet committed.
   bootstrap on shared test indices. It is descriptive and never used for
   selection. Its gates are closed until model training opens. No model
   outcome existed.
+
+## R-053 · 2026-11-03 · Dependency manifest v4
+
+- **Decision (project owner).** Create `configs/dataset_dependency_manifest_v4.yaml`
+  from v3 by the unchanged manifest-v3 rule and F-125: the 18 eligible
+  datasets keep their 12 clusters; *C. pneumoniae* v3 joins
+  `cdbprom-chlamydophila`; *C. jejuni* and *L. interrogans* v3 form
+  `graphpro-v3-campylobacter` and `graphpro-v3-leptospira` (21 datasets, 14
+  clusters). The three v3 datasets are marked
+  `candidate_pending_eligibility`; listing them assigns clusters only, and
+  their CDS panels share their cluster. v3 stays bound by its existing users.
+  A test checks that no eligible cluster changed and that the counts agree.

@@ -76,3 +76,18 @@ def test_graphpro_v3_contract_is_bound_to_hashed_sources_and_stays_blocked() -> 
         path = root / table["path"]
         if path.exists():
             assert hashlib.sha256(path.read_bytes()).hexdigest() == table["sha256"]
+
+
+def test_dependency_manifest_v4_adds_graphpro_v3_candidates_without_changing_eligible_clusters() -> None:
+    root = Path(__file__).resolve().parents[1]
+    v3 = yaml.safe_load((root / "configs/dataset_dependency_manifest_v3.yaml").read_text(encoding="utf-8"))
+    v4 = yaml.safe_load((root / "configs/dataset_dependency_manifest_v4.yaml").read_text(encoding="utf-8"))
+    old = {d["dataset_id"]: d["dependency_cluster_id"] for d in v3["datasets"]}
+    new = {d["dataset_id"]: d["dependency_cluster_id"] for d in v4["datasets"]}
+    candidates = [d for d in v4["datasets"] if d.get("status") == "candidate_pending_eligibility"]
+
+    assert {k: new[k] for k in old} == old
+    assert len(new) == v4["manifest"]["dataset_count"] == 21
+    assert len(set(new.values())) == v4["manifest"]["dependency_cluster_count"] == 14
+    assert len(candidates) == v4["manifest"]["candidate_dataset_count"] == 3
+    assert new["graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae"] == "cdbprom-chlamydophila"

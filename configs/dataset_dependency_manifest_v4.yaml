@@ -1,0 +1,72 @@
+manifest:
+  name: confirmatory-eligible-v3-plus-graphpro-v3-dependency-v4
+  status: reviewed_complete_for_eligible_scope_plus_candidates
+  supersedes: configs/dataset_dependency_manifest_v3.yaml
+  eligibility_manifest: configs/dataset_eligibility_manifest_v1.yaml
+  dataset_count: 21
+  eligible_dataset_count: 18
+  candidate_dataset_count: 3
+  dependency_cluster_count: 14
+  cluster_rule: shared_source_pool_or_observed_exact_or_alignment_overlap
+  alignment_criterion: >-
+    MMseqs2 nucleotide search, both strands, identity >= 0.80 and coverage
+    >= 0.80 of both 81-nt sequences (F-084 settings), train and test pooled.
+    A dataset pair with more than 10 records having a cross-dataset neighbour
+    is joined into one cluster.
+  evidence: [F-114, R-033, F-125, R-051]
+  changes_from_v3:
+    - graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae joins cdbprom-chlamydophila (404 exact and 419 alignment-linked shared positives, all same label)
+    - graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni forms its own cluster (no exact or alignment neighbour)
+    - graphpro-reconstructed-v3-prokaryotic-leptospira_interrogans forms its own cluster (no exact or alignment neighbour)
+  candidate_status: >-
+    The three graphpro-reconstructed-v3 datasets are candidates, not eligible
+    datasets; listing them assigns clusters only. Their CDS-derived panels are
+    conditions of the same dataset and share its cluster.
+  limitations:
+    - Exact or alignment non-overlap does not prove biological independence.
+    - Pairs with at most 6 records having a neighbour remain separate clusters.
+    - Dataset-level effects within one dependency cluster are aggregated before inference.
+
+datasets:
+  - {dataset_id: cdbprom-prokaryotic-anabaena_sp, dependency_cluster_id: cdbprom-anabaena}
+  - {dataset_id: cdbprom-prokaryotic-bacillus_amyloliquefaciens, dependency_cluster_id: bacillus-cross-source}
+  - {dataset_id: cdbprom-prokaryotic-chlamydophila_pneumoniae, dependency_cluster_id: cdbprom-chlamydophila}
+  - {dataset_id: cdbprom-prokaryotic-corynebacterium_glutamicum, dependency_cluster_id: cdbprom-corynebacterium}
+  - {dataset_id: cdbprom-prokaryotic-helicobacter_pylori, dependency_cluster_id: cdbprom-helicobacter}
+  - {dataset_id: cdbprom-prokaryotic-klebisiella_pneumoniae, dependency_cluster_id: enteric-cross-source}
+  - {dataset_id: cdbprom-prokaryotic-mycrobacterium_tuberculosis, dependency_cluster_id: cdbprom-mycobacterium}
+  - {dataset_id: cdbprom-prokaryotic-pseudonomas_aeruginosa, dependency_cluster_id: cdbprom-pseudomonas}
+  - {dataset_id: cdbprom-prokaryotic-salmonella_typhimurium, dependency_cluster_id: enteric-cross-source}
+  - {dataset_id: cdbprom-prokaryotic-streptomyces_coelicolor, dependency_cluster_id: cdbprom-streptomyces}
+  - {dataset_id: cdbprom-prokaryotic-synechocistis, dependency_cluster_id: cdbprom-synechocystis}
+  - {dataset_id: cnnprom-eukaryotic-Arabidopsis_non_tata, dependency_cluster_id: cnnprom-arabidopsis}
+  - {dataset_id: cnnprom-eukaryotic-Arabidopsis_tata, dependency_cluster_id: cnnprom-arabidopsis}
+  - {dataset_id: cnnprom-eukaryotic-Human_non_tata, dependency_cluster_id: cnnprom-mammal}
+  - {dataset_id: cnnprom-eukaryotic-Mouse_non_tata, dependency_cluster_id: cnnprom-mammal}
+  - {dataset_id: cnnprom-eukaryotic-Mouse_tata, dependency_cluster_id: cnnprom-mammal}
+  - {dataset_id: cnnprom-prokaryotic-Bacillus, dependency_cluster_id: bacillus-cross-source}
+  - {dataset_id: cnnprom-prokaryotic-Ecoli, dependency_cluster_id: enteric-cross-source}
+  - {dataset_id: graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni, dependency_cluster_id: graphpro-v3-campylobacter, status: candidate_pending_eligibility}
+  - {dataset_id: graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae, dependency_cluster_id: cdbprom-chlamydophila, status: candidate_pending_eligibility}
+  - {dataset_id: graphpro-reconstructed-v3-prokaryotic-leptospira_interrogans, dependency_cluster_id: graphpro-v3-leptospira, status: candidate_pending_eligibility}
+
+
+observed_exact_overlaps_within_eligible_scope:
+  - {left: cdbprom-prokaryotic-salmonella_typhimurium, right: cnnprom-prokaryotic-Ecoli, total: 1, same_label: 1, opposite_label: 0}
+  - {left: cnnprom-eukaryotic-Arabidopsis_non_tata, right: cnnprom-eukaryotic-Arabidopsis_tata, total: 1, same_label: 1, opposite_label: 0}
+  - {left: cnnprom-eukaryotic-Human_non_tata, right: cnnprom-eukaryotic-Mouse_non_tata, total: 25, same_label: 25, opposite_label: 0}
+  - {left: cnnprom-eukaryotic-Mouse_non_tata, right: cnnprom-eukaryotic-Mouse_tata, total: 5, same_label: 5, opposite_label: 0}
+
+observed_alignment_overlaps_within_eligible_scope:
+  # records: query records with a neighbour in the other dataset (R-033)
+  - {left: cnnprom-eukaryotic-Human_non_tata, right: cnnprom-eukaryotic-Mouse_non_tata, records: 3630, same_label_hits: 4447, opposite_label_hits: 53}
+  - {left: cnnprom-eukaryotic-Mouse_non_tata, right: cnnprom-eukaryotic-Mouse_tata, records: 1366, same_label_hits: 5182, opposite_label_hits: 7}
+  - {left: cdbprom-prokaryotic-salmonella_typhimurium, right: cnnprom-prokaryotic-Ecoli, records: 294, same_label_hits: 289, opposite_label_hits: 16}
+  - {left: cdbprom-prokaryotic-klebisiella_pneumoniae, right: cdbprom-prokaryotic-salmonella_typhimurium, records: 214, same_label_hits: 215, opposite_label_hits: 2}
+  - {left: cdbprom-prokaryotic-klebisiella_pneumoniae, right: cnnprom-prokaryotic-Ecoli, records: 173, same_label_hits: 175, opposite_label_hits: 4}
+  - {left: cnnprom-eukaryotic-Arabidopsis_non_tata, right: cnnprom-eukaryotic-Arabidopsis_tata, records: 149, same_label_hits: 152, opposite_label_hits: 2}
+  - {left: cdbprom-prokaryotic-bacillus_amyloliquefaciens, right: cnnprom-prokaryotic-Bacillus, records: 72, same_label_hits: 77, opposite_label_hits: 0}
+  - {left: cnnprom-eukaryotic-Human_non_tata, right: cnnprom-eukaryotic-Mouse_tata, records: 63, same_label_hits: 62, opposite_label_hits: 2}
+
+observed_overlaps_involving_candidates:
+  - {left: cdbprom-prokaryotic-chlamydophila_pneumoniae, right: graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae, exact_total: 404, exact_same_label: 404, exact_opposite_label: 0, alignment_records: 419}
