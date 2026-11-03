@@ -1,0 +1,84 @@
+% Draft: case study of an assembly attribution error in a released benchmark
+% (GraphPro "E. coli" = E. coli O104:H4 pAA plasmid TSSs).
+% Target: Chapter 4 (data provenance) or Chapter 9 (Discussion, benchmark
+%   reliability).
+% Status: draft v1, 2026-11-02. References checked against Crossref DOIs.
+% Project sources: docs/graphpro_derived_artifact_impact.md,
+%   scripts/audit_graphpro_ecoli_paa_source.py,
+%   configs/graphpro_ecoli_paa_source_audit_v1.yaml, F-013, F-115, F-117.
+
+\section{Case Study: An Assembly Attribution Error in a Released Benchmark}\label{draft:paa-case}
+
+\draftmeta{Chapter~4 (data provenance) or Chapter~9 (benchmark reliability)}
+{Draft v1 --- facts audited; exclusion decided by the project owner (log R-040)}
+{\texttt{docs/graphpro\_derived\_artifact\_impact.md};
+\texttt{configs/graphpro\_ecoli\_paa\_source\_audit\_v1.yaml}; log R-040; F-013, F-115, F-117}
+
+\subsection{What was found}
+
+The GraphPro benchmark \citep{zhang2024graphpro} releases an
+\textit{Escherichia coli} promoter set without a construction script. Its
+released class files already showed a label problem: 1,345 sequences occur
+identically in both the positive and the negative file (F-013). The project
+therefore attempted to rebuild the set from independent sources, starting
+from the Promotech training inventory \citep{chevezguardado2021promotech}, whose
+\texttt{ECOLI.bed} file declares the chromosome of \textit{E.~coli} K-12
+MG1655 (\texttt{NC\_000913.3}).
+
+A row-level audit traced the 278 rows of that file to Supplementary Dataset~S1
+of \citet{berger2016paa}, a dRNA-seq study of the primary transcriptome of the
+74-kb pAA plasmid of \textit{E.~coli} O104:H4. All 278 rows match the published
+table in order, position, strand and locus, and all 278 published 51-nt windows
+match the plasmid reference \texttt{NC\_018666.1}. None of them comes from the
+chromosome named in the file. The coordinates are correct; the replicon they
+are attributed to is not.
+
+\subsection{Consequences}
+
+Windows extracted at these coordinates from \texttt{NC\_000913.3} are unrelated
+chromosomal sequence, so the nominal \textit{E.~coli} reconstruction, its paired
+controls, its split, and every distribution, similarity and dependency result
+derived from it were invalidated. They are preserved only as provenance. The
+error cannot be repaired by renaming the extracted sequences: a corrected
+dataset must be extracted again from \texttt{NC\_018666.1} under a new identity,
+with every downstream audit repeated. The source files were not edited.
+
+Even with the correct replicon, the source does not define a conventional
+promoter set. Under the classification of \citet{sharma2010primary}, the
+248 distinct TSSs comprise 51 gene-associated (primary or secondary), 58
+internal, 111 antisense and 47 orphan sites, and 100 sites are antisense only
+(F-115). Applying the gene-associated rule of Section~\ref{draft:tss-class-selection}
+would leave 51 positives.
+
+\subsection{Lessons for benchmark construction}
+
+\paragraph{Coordinates do not establish identity.}
+A file's declared accession is metadata, not evidence. Here, sequence-level
+agreement with the primary publication was required to detect that the
+declared chromosome was wrong. Verifying every source window against its
+assembly before extraction is cheap compared with the cost of an invalid
+dataset propagating into training, partitioning and dependency analysis.
+
+\paragraph{Errors propagate silently through derived resources.}
+The released benchmark, the intermediate inventory and the reconstruction each
+looked internally consistent. Only an audit that returned to the primary table
+exposed the problem. This mirrors the broader observation that flaws in data
+preparation, such as leakage, are a widespread source of overoptimistic results
+in machine-learning-based science \citep{kapoor2023leakage}.
+
+\paragraph{The name of a dataset is a claim.}
+Labelling a set of plasmid TSSs, most of them non-canonical, as an
+``\textit{E.~coli} promoter'' benchmark changes what a model trained on it is
+said to recognise. Reconstruction therefore keeps the source designation
+verbatim, records the verified organism and replicon separately, and gives a
+corrected resource a new identity rather than inheriting the old name.
+
+\subsection{Status}
+
+The GraphPro \textit{E.~coli} set was excluded from the reconstructed line, and
+no pAA dataset was built, exploratory or confirmatory (log R-040). Under the
+gene-associated rule only 51 positives would remain, too few for a test panel.
+Space for genomic controls was not the reason: even with the full exclusion
+radius the plasmid leaves 453 non-overlapping slots per strand against 124
+needed (F-117). The released files, the nominal reconstruction and the source
+audit are kept as provenance; nothing was deleted or relabelled.

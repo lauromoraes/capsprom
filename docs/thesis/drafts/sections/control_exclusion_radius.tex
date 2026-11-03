@@ -1,0 +1,96 @@
+% Draft: domain-specific exclusion radius for genomic negative controls
+% Target: Chapter 4 (negative construction); one sentence in Chapter 7.
+% Status: draft v1, 2026-11-02. References checked against Crossref DOIs.
+% Project sources: log R-036, specs/graphpro_dataset_reconstruction.md,
+%   specs/sequence_window_policy.md, F-117.
+
+\section{Exclusion Radius for Genomic Negative Controls}\label{draft:exclusion-radius}
+
+\draftmeta{Chapter~4 (negative-set reconstruction); one sentence in Chapter~7}
+{Draft v1 --- decision recorded in log R-036}
+{log R-036; \texttt{specs/graphpro\_dataset\_reconstruction.md};
+\texttt{specs/sequence\_window\_policy.md}; F-117}
+
+\subsection{Purpose of the radius}
+
+Reconstructed datasets pair every promoter window with a genomic control drawn
+from the same assembly. A control is admitted only if it lies outside an
+exclusion radius $r$ around every known TSS, on both strands. The radius has
+two jobs. First, it keeps known initiation sites out of the negative class.
+Second, it prevents a control from sharing sequence with a positive window;
+otherwise the same nucleotides would carry opposite labels, the model would
+receive contradictory evidence during training, and a grouping procedure would
+have to join the two records to avoid leakage across partitions
+\citep{teufel2023graphpart,kapoor2023leakage}.
+
+\subsection{Rule}
+
+The window of a domain spans $U$ nucleotides upstream of the TSS, the TSS
+itself, and $D$ nucleotides downstream (\texttt{specs/sequence\_window\_policy.md}).
+Under a symmetric, strand-agnostic radius, a control that starts $r+1$
+nucleotides from a TSS can still overlap the upstream part of that TSS's
+window whenever $r < U$. The radius is therefore defined per domain as
+\begin{equation}
+  r = U + m,
+\end{equation}
+where $m$ is a margin for imprecision in the TSS position.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Exclusion radius per taxonomic domain.}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Domain & Window & $U$ & $m$ & $r$ \\
+    \midrule
+    Prokaryota & $-60..{+20}$ (81~nt) & 60 & 40 & 100 \\
+    Eukaryota & $-200..{+50}$ (251~nt) & 200 & 50 & 250 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Rationale}
+
+\paragraph{Why the radius must grow with the window.}
+The radius of 100~nt was adequate for the original 81-nt window, because it
+exceeds $U=60$. Once eukaryotic windows were extended to 251~nt, the same
+radius would allow a control to share up to 100~nt with the $-200..-101$ region
+of a known promoter (log R-036). Tying $r$ to $U$ removes this failure for any
+window length the protocol may adopt.
+
+\paragraph{Why the eukaryotic margin is wider.}
+Bacterial dRNA-seq maps report TSSs at single-nucleotide resolution. Mammalian
+promoters, by contrast, frequently initiate transcription over a broad region
+rather than at a single position \citep{carninci2006genome,haberle2018eukaryotic},
+so a representative TSS such as an EPD record \citep{meylan2020epd} stands for
+a distribution of start sites. A larger margin keeps controls away from that
+distribution.
+
+\paragraph{Why both strands.}
+Promoters can initiate transcription in both directions; in the human genome,
+pairs of genes on opposite strands whose start sites lie within 1~kb of each
+other are common \citep{trinklein2004abundance}. Excluding only the strand of the
+selected TSS would admit controls containing the promoter of the divergent
+transcript.
+
+\paragraph{Why the radius is not tuned.}
+A smaller radius gives more candidate positions and easier GC matching, and it
+produces harder negatives whose genomic context resembles that of promoters.
+These are real trade-offs, but the radius defines which sequences count as
+non-promoters, and hence the task itself. It is therefore frozen before any
+model is trained, never tuned against model outcomes, and any alternative is
+run as a separate, versioned sensitivity condition.
+
+\subsection{Feasibility}
+
+The rule does not exhaust the genome even in dense maps. For
+\textit{L.~interrogans}, the complete primary TSS table with a 100-nt radius on
+both strands leaves 1,029,820 of 4,614,703~bp free, enough for 10,167
+non-overlapping 81-nt controls against 2,791 needed; for the 74-kb pAA plasmid
+it leaves 41,033~bp, or 453 slots per strand against 124 needed (F-117).
+
+\subsection{Limitations}
+
+The radius protects only against known TSSs. Random genomic controls can still
+contain unannotated promoters, so the negative class remains unlabelled rather
+than verified, and this uncertainty is reported rather than hidden
+\citep{elkan2008pu}.

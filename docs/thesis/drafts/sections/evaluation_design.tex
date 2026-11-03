@@ -1,0 +1,97 @@
+% Draft: rationale of the evaluation design (fixed held-out test, nested
+% selection, seeds, paired bootstrap, cluster-level tests) versus repeated
+% cross-validation schemes such as 5x2cv.
+% Target: Chapter 7 (Experimental Protocol), replication and inference sections.
+% Status: draft v1, 2026-11-02. References checked against Crossref DOIs.
+% Project sources: specs/statistical_evaluation_protocol.md,
+%   configs/evaluation_protocol_v3.yaml, specs/homology_grouping_protocol.md.
+
+\section{Rationale of the Evaluation Design}\label{draft:evaluation-design}
+
+\draftmeta{Chapter~7 (replication and inference)}
+{Draft v1 --- describes the active protocol; group-aware folds await evaluation protocol v4}
+{\texttt{specs/statistical\_evaluation\_protocol.md};
+\texttt{specs/homology\_grouping\_protocol.md}}
+
+\subsection{Design}
+
+Each dataset is evaluated on a held-out test partition that is used once,
+after the model configuration has been locked. Within the training partition,
+a fixed five-fold stratified manifest is used only for hyperparameter and
+epoch selection. Stochastic models are trained with ten predeclared seeds;
+deterministic models are fitted once. The primary outcome is the Matthews
+correlation coefficient (MCC), which uses every cell of the confusion matrix
+and remains informative under class imbalance \citep{chicco2020mcc}. Within a
+dataset, models are compared by the median of their seed-paired MCC
+differences, with a 95\% interval from a paired bootstrap of the test records.
+Across datasets, each dependency cluster contributes one effect, and models are
+compared with the Wilcoxon signed-rank test, or the Friedman test followed by
+predeclared pairwise comparisons, with Holm correction
+\citep{demsar2006statistical}.
+
+\subsection{Why repeated cross-validation tests are not used}
+
+Repeated cross-validation schemes produce several performance estimates per
+dataset, but these estimates are not independent: training sets overlap
+between folds and between repetitions. Treating them as independent samples in
+a paired $t$-test underestimates the variance and inflates the type~I error
+\citep{dietterich1998approximate,nadeau2003inference}. Two families of
+corrections exist. The $5\times2$ cross-validation paired $t$-test
+\citep{dietterich1998approximate} and its combined $F$ variant
+\citep{alpaydin1999combined} use five repetitions of two-fold cross-validation
+and were calibrated for that exact design. The corrected resampled $t$-test
+inflates the variance estimate to account for the overlap between training sets
+\citep{nadeau2003inference}.
+
+The protocol uses neither, for four reasons that hold for any dataset it
+admits.
+\begin{enumerate}
+  \item \textbf{Comparability with published benchmarks.} Fixed released
+    partitions are preserved so that results remain comparable with the
+    literature. Re-partitioning every dataset into repeated halves would
+    discard that comparability.
+  \item \textbf{Training-set size.} Two-fold schemes train on half of the
+    data. When performance still improves with sample size, the estimate is
+    pessimistically biased \citep{efron1997improvements}. Because learning
+    curves differ between model families, the bias need not be equal for
+    capsule networks and linear baselines, and it could therefore distort
+    their comparison rather than only shift both.
+  \item \textbf{Separation of selection and evaluation.} Selecting
+    hyperparameters on the same folds used to estimate performance biases the
+    estimate optimistically \citep{varma2006bias}. Keeping selection inside the
+    training partition and evaluating once on the held-out partition removes
+    that bias without the cost of a full nested repetition.
+  \item \textbf{Unit of inference.} The claim of interest is whether one model
+    family outperforms another across promoter datasets. Statistical tests for
+    comparing classifiers over multiple datasets treat datasets as the sample
+    units \citep{demsar2006statistical}; the protocol strengthens this by
+    collapsing related datasets into one dependency cluster.
+\end{enumerate}
+
+\subsection{Roles of folds, seeds, and the bootstrap}
+
+The three sources of repetition answer different questions, and none of them
+is promoted to an independent observation.
+\begin{itemize}
+  \item \textbf{Inner folds} serve only model and epoch selection.
+  \item \textbf{Seeds} measure algorithmic instability (initialisation, sampling
+    and training order) conditional on one dataset. They are not biological
+    replicates, so seed-level differences are summarised by their median, not
+    tested as independent samples.
+  \item \textbf{The bootstrap} measures sampling uncertainty of the test set.
+    The same resampled indices are applied to every model, so that intervals
+    describe paired differences. When records are dependent, for example
+    through homologous or overlapping windows, records are resampled by group
+    rather than individually \citep{field2007bootstrapping}, and partitions and
+    inner folds are built so that no group is split
+    \citep{teufel2023graphpart,petti2022benchmark}.
+\end{itemize}
+
+\subsection{Limitations}
+
+A single held-out partition gives no estimate of variation due to the choice of
+partition itself; the bootstrap captures test-set sampling variation only.
+Seed variation captures part of the training variation but not that of a
+different training sample. Both limitations are stated alongside every
+interval, and the cross-dataset test, not any within-dataset interval, carries
+the confirmatory claim.

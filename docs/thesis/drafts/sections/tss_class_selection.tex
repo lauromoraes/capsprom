@@ -8,8 +8,8 @@
 \section{Selection of Positive TSS Classes}\label{draft:tss-class-selection}
 
 \draftmeta{Chapter~4 (dataset reconstruction); summary in Chapter~7}
-{Draft v1 --- references verified; positive-class rule awaiting owner approval}
-{\texttt{specs/graphpro\_dataset\_reconstruction.md}; log R-035; F-115--F-117}
+{Draft v1 --- references verified; rule approved by the project owner (log R-039, R-042)}
+{\texttt{specs/graphpro\_dataset\_reconstruction.md}; log R-035, R-039, R-042; F-115--F-118}
 
 \subsection{TSS maps are not promoter lists}
 
@@ -133,6 +133,16 @@ positive--unlabelled setting \citep{elkan2008pu}.
   \item Class assignment depends on the genome annotation used by the source
     study; that annotation version is recorded as provenance.
 \end{enumerate}
+
+\subsection{Application in this project}
+
+Applied to the verified primary tables, the rule gives 855 of 1,905 TSSs for
+\textit{C.~jejuni}, 571 for \textit{C.~pneumoniae} (530 primary plus 41
+secondary TSSs omitted from the Promotech file), and 5,143 for
+\textit{L.~interrogans}, taking primary or secondary TSSs within the 30~\textdegree C
+condition while excluding controls around the TSSs of both temperatures (log
+R-039, R-042; F-118). The pAA plasmid set would retain only 51 of 248 TSSs and
+was excluded (Section~\ref{draft:paa-case}).
 
 \subsection{Limitations}
 
