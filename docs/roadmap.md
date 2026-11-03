@@ -753,9 +753,10 @@ Current state:
 - Completed: freeze evaluation protocol v4 as a design (R-054): homology-grouped
   partitions for every dataset, 251-nt eukaryotic windows, entry by
   eligibility manifest.
-- Next: grouped domain-window builds of the 18 eligible datasets (251-nt
-  CNNProm eukaryotes), a group-bootstrap fixture, and the per-organism manual
-  sample review of the GraphPro v3 candidates.
+- Completed: homology-grouped domain-window builds of the 18 eligible datasets
+  (R-055, F-126); all audits pass.
+- Next: a group-bootstrap fixture and the per-organism manual sample review of
+  the GraphPro v3 candidates.
 - Next: the CDS builder,
   distribution and dependency audits, and evaluation protocol v4 before any
   confirmatory use.

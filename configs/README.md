@@ -425,3 +425,7 @@ its coding space cannot hold an unbiased panel (log R-050, F-123).
 `graphpro_reconstruction_v3_execution_v1.yaml` opened the v3 build (R-046), and
 `graphpro_reconstruction_v3_repeat_strata_v1.yaml` freezes the repeat-linked
 secondary strata (R-048).
+
+`grouped_domain_window_build_v1.yaml` builds the evaluation-protocol-v4
+partitions of the 18 eligible datasets: homology-grouped splits, 81-nt
+prokaryotic and 251-nt eukaryotic windows (log R-055).

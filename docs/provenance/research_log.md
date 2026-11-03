@@ -1124,3 +1124,28 @@ SHA-256 of the module that ran, when the change was not yet committed.
   and `group_bootstrap_fixture_validated` are false. All other inference rules
   are unchanged from v3. v3 remains the active protocol of existing results,
   which stay exploratory. No data or model outcome was used.
+
+## R-055 · 2026-11-03 · Homology-grouped domain-window builds of the 18 eligible datasets
+
+- **Decision (project owner).** Build the evaluation-protocol-v4 partitions.
+  `configs/grouped_domain_window_build_v1.yaml` (SHA-256 `58581a27…`) pins every
+  source file, the v4 protocol, homology grouping v1, and the MMseqs2 binary.
+  The 13 prokaryotic datasets pool their v3 filtered 81-nt records (train and
+  test) unchanged, so the record-level v3 partition remains a like-for-like
+  sensitivity. The 5 CNNProm eukaryotic datasets are rebuilt from their
+  canonical collections (identified by matching every v3 crop to positions
+  140–221 of one collection) at the native 251-nt window, through the v3
+  filter stages (`src/capsprom/data/grouped_builds.py`, fixture-tested).
+  Edges are MMseqs2 alignment and exact Hamming at ⌊0.20 L⌋ (16 and 50);
+  genomic overlap is not applied in the `orig` condition. Test fraction 0.20,
+  seed 42, five stratified group folds.
+- **Run.** `scripts/build_grouped_domain_window_v1.py` in WSL (resumable,
+  atomic per dataset); outputs under
+  `data/processed/assembled_datasets/grouped_domain_window_v1/` (not
+  committed; concatenated build manifests SHA-256 `e84435186b8663fe…`).
+- **Audit.** An independent scratch audit of every `records.csv` (hash checked
+  against its manifest) found 0 groups split across partitions, 20% test
+  fractions per class, only domain-window lengths, and no duplicate sequence.
+  No group exceeded the 20% review limit. Finding F-126.
+- The v4 gate `grouped_domain_window_builds_complete` is satisfied; it will be
+  set in an execution successor of the protocol, not by editing v4.
