@@ -1,0 +1,208 @@
+build:
+  name: grouped-domain-window-v1
+  version: 1.0.0
+  status: execution_enabled
+  research_log: R-055
+  evaluation_protocol: configs/evaluation_protocol_v4.yaml
+  evaluation_protocol_sha256: cad1b4daea60834c1f1400844e5046834ebb0f5e15b5727f8efb59264a92fcb2
+  condition: orig
+  dataset_identity_pattern: <dataset_id>.orig-grouped-v1
+  rationale: Repartition the 18 eligible datasets by homology grouping v1 with domain windows (R-054).
+    Prokaryotic records are the v3 filtered records pooled across train and test, so the record-level
+    v3 partition remains a like-for-like sensitivity. Eukaryotic records are rebuilt from the canonical
+    collections at the native 251-nt window.
+filters_for_canonical_sources:
+  length_exclusion: drop_length_matches_expected_false
+  strict_dna: true
+  cross_label_collision: remove_every_occurrence_in_both_classes_forward_exact_as_v3
+  within_class_duplicates: keep_first_in_record_index_order
+grouping:
+  protocol: configs/homology_grouping_v1.yaml
+  protocol_sha256: 3149853dc5cc563bd90846b844b354c8b6487c3f02f5eaa4213541d60fe46ebc
+  edges:
+  - alignment
+  - hamming
+  genomic_overlap: not_applied_no_verified_unique_coordinates_in_orig_condition
+  mmseqs2_binary_sha256: b7ef6e0e33df5dd4fa9cf988cbd8b4988c11a3a1255d2c377f13e1bb40c157fb
+  test_fraction: 0.2
+  assignment_seed: 42
+  inner_folds: 5
+  inner_fold_seed: 42
+  oversized_component_action: block_and_review
+  required_cross_partition_edges: 0
+datasets:
+- dataset_id: cdbprom-prokaryotic-anabaena_sp
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-anabaena_sp-p-2013-n-2007-train.csv
+      sha256: f27de454a145128eed742d408940e0a40f4a1e47ef89c71adf702193fb9d5a86
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-anabaena_sp-p-503-n-502-test.csv
+      sha256: 51863f15dc8f22cd164e80cabca1722961a1096909232bc7c204adfd949df9b0
+- dataset_id: cdbprom-prokaryotic-bacillus_amyloliquefaciens
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-bacillus_amyloliquefaciens-p-212-n-211-test.csv
+      sha256: 4eec5ee7d233cbab0d10675aa846ef96d6149a9aac1ebee3f946f0cdc8f0ce39
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-bacillus_amyloliquefaciens-p-847-n-845-train.csv
+      sha256: f194cf0beda613b37e77a261d76ad9b7f8c52cd549c936a8065ca4a2f93e8fdc
+- dataset_id: cdbprom-prokaryotic-chlamydophila_pneumoniae
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-chlamydophila_pneumoniae-p-323-n-323-train.csv
+      sha256: de104b9420fbf8f3a9c0897fd6aad62e99fc60906207ad0d09706bfdb2659366
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-chlamydophila_pneumoniae-p-81-n-81-test.csv
+      sha256: 4b6eb69686e62a8aadb152e783ff9fc80cf075728e729fb769c3e576bc22628e
+- dataset_id: cdbprom-prokaryotic-corynebacterium_glutamicum
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-corynebacterium_glutamicum-p-112-n-114-test.csv
+      sha256: 85d524fa106704f68e75f8da8501f154069ce5d37ea738b6d78f8bfaaf6a16f1
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-corynebacterium_glutamicum-p-448-n-458-train.csv
+      sha256: 7ff6e13f38fc8437aaadd789de8918f95b536706fee393306b0eebea049d09d2
+- dataset_id: cdbprom-prokaryotic-helicobacter_pylori
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-helicobacter_pylori-p-141-n-142-test.csv
+      sha256: 3c372c22161374c36efd7ea7c7e4682a1dab53a8b229f1cd96093da7c1e50320
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-helicobacter_pylori-p-562-n-568-train.csv
+      sha256: 24022284eb123f91beaa96a727e60673c63aa8f7149b64e00e3861c498015624
+- dataset_id: cdbprom-prokaryotic-klebisiella_pneumoniae
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-klebisiella_pneumoniae-p-1063-n-1061-train.csv
+      sha256: a4fc04f1ca8e1a9211aaa94b5c769638c001dac74272bfbc11cf490cf3a46d70
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-klebisiella_pneumoniae-p-266-n-265-test.csv
+      sha256: ebcb75d00387713bda7571d78701a014f71a3099c0b2fafdb01552d60c15dfc8
+- dataset_id: cdbprom-prokaryotic-mycrobacterium_tuberculosis
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-mycrobacterium_tuberculosis-p-1410-n-1413-train.csv
+      sha256: 7fc38f3950b14607bdf845491c83b2c3282c7a1717225b467a39775f24147f8c
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-mycrobacterium_tuberculosis-p-353-n-353-test.csv
+      sha256: 085cf3ace6b157e71a26fe598f80d0948fb480a22c9f76027d2790c1b8889151
+- dataset_id: cdbprom-prokaryotic-pseudonomas_aeruginosa
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-pseudonomas_aeruginosa-p-1642-n-1639-train.csv
+      sha256: 06839a9baa8b183c1b0f688596657e6aa47250ae1608acc97d3aa2c88b452335
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-pseudonomas_aeruginosa-p-410-n-410-test.csv
+      sha256: 288e177889c5a308ea56507f0cce9f8b4d9fa216d6ac0efabd9dd51447c26652
+- dataset_id: cdbprom-prokaryotic-salmonella_typhimurium
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-salmonella_typhimurium-p-196-n-195-test.csv
+      sha256: b5d393c3954fba093d3f059938117823a35abab24dd70f11660b0baa7c20437a
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-salmonella_typhimurium-p-785-n-779-train.csv
+      sha256: 939304a5939d471b2b6e6832ff28b34a9fb97b970b888b497d5382535ed7872a
+- dataset_id: cdbprom-prokaryotic-streptomyces_coelicolor
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-streptomyces_coelicolor-p-1931-n-2083-train.csv
+      sha256: 7ad52a4f675cc0d6b0a8c54edc7fa0188cbf73cb6fca5e77302fbb0c3f4f2240
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-streptomyces_coelicolor-p-483-n-521-test.csv
+      sha256: c1120dcfb83f5c528f47a6046cbac95980580366610bdc8c56cb814dba60059f
+- dataset_id: cdbprom-prokaryotic-synechocistis
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-synechocistis-p-1308-n-1304-train.csv
+      sha256: 882018fbc6a89ea9fa0b16368611563749255e30c0ea89534f9368fca0069811
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cdbprom-prokaryotic-synechocistis-p-327-n-326-test.csv
+      sha256: 4db822594c0415798703f9e32d385a6e85871e2447cfff43765f418f560411ea
+- dataset_id: cnnprom-eukaryotic-Arabidopsis_non_tata
+  domain: eukaryota
+  window_nt: 251
+  derivation: native
+  source:
+    canonical_collection: cnnprom-arabidopsis-non-tata
+    path: data/canonical/source_canonicalization_v1/cnnprom-arabidopsis-non-tata.csv.gz
+    sha256: 9931aa1521ccfa0625321af52092c3ee2b3d776ef1c0d5f47146947ea4eeb59f
+- dataset_id: cnnprom-eukaryotic-Arabidopsis_tata
+  domain: eukaryota
+  window_nt: 251
+  derivation: native
+  source:
+    canonical_collection: cnnprom-arabidopsis-tata
+    path: data/canonical/source_canonicalization_v1/cnnprom-arabidopsis-tata.csv.gz
+    sha256: e76f75f4ba2912a8f33faf6a0f59034b66e37d7a1aba5697be56785e2985991f
+- dataset_id: cnnprom-eukaryotic-Human_non_tata
+  domain: eukaryota
+  window_nt: 251
+  derivation: native
+  source:
+    canonical_collection: cnnprom-human-non-tata
+    path: data/canonical/source_canonicalization_v1/cnnprom-human-non-tata.csv.gz
+    sha256: e99190d77ce591ca21143ed07e14bd87cb98cba6f1a1fb01057385e20b74afea
+- dataset_id: cnnprom-eukaryotic-Mouse_non_tata
+  domain: eukaryota
+  window_nt: 251
+  derivation: native
+  source:
+    canonical_collection: cnnprom-mouse-non-tata
+    path: data/canonical/source_canonicalization_v1/cnnprom-mouse-non-tata.csv.gz
+    sha256: 6f455bed4a445197167d9c20a3fb6d259fff9226b1dad5c613d4cd8958a57da3
+- dataset_id: cnnprom-eukaryotic-Mouse_tata
+  domain: eukaryota
+  window_nt: 251
+  derivation: native
+  source:
+    canonical_collection: cnnprom-mouse-tata
+    path: data/canonical/source_canonicalization_v1/cnnprom-mouse-tata.csv.gz
+    sha256: 970759b515dfc8f4dadef9c6a8c5c171d53f523d60f40cfb4dd6a0777fe0e9b0
+- dataset_id: cnnprom-prokaryotic-Bacillus
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cnnprom-prokaryotic-Bacillus-p-298-n-800-train.csv
+      sha256: e8f77c622796a046d6e8659ebb77e652a986f19690b00e55c9c8fa1951ea816f
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cnnprom-prokaryotic-Bacillus-p-75-n-200-test.csv
+      sha256: 8e59068152f2a3ae6039033c539728033ba29255c43207cef7a2a05a50e4e695
+- dataset_id: cnnprom-prokaryotic-Ecoli
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cnnprom-prokaryotic-Ecoli-p-168-n-600-test.csv
+      sha256: 0f16af334f999bfd4700fef17ec83c0be0da3276aea69864d397479134281c1c
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cnnprom-prokaryotic-Ecoli-p-671-n-2400-train.csv
+      sha256: 11b197f4c5ff7003c2a250d144602d3d7ece101d9e3b82a2a9f606b77e2a3ae8
+output_root: data/processed/assembled_datasets/grouped_domain_window_v1
+execution_gates:
+  build_enabled: true
+  training_enabled: false
+  confirmatory_use_enabled: false
