@@ -735,7 +735,10 @@ Current state:
   and Lint (5,123) under the execution contract (R-046). All integrity checks
   pass; the Lint grouping has one chained group of 11.3% in a single inner fold
   (F-120).
-- Next: decide how the F-120 chained group is handled; then the CDS builder,
+- Decision (2026-11-03): keep homology grouping v1 unchanged; the F-120 group
+  joins real, unannotated intergenic repeat families, not composition (F-121,
+  R-047).
+- Next: the CDS builder,
   distribution and dependency audits, and evaluation protocol v4 before any
   confirmatory use.
 - Completed: freeze and execute the active classical-baseline consolidation

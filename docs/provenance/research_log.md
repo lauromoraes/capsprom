@@ -987,3 +987,21 @@ SHA-256 of the module that ran, when the change was not yet committed.
   count: +1.88, +1.57, and +0.01. Finding F-120 concerns the
   *L. interrogans* grouping.
 - No model was trained and no test outcome exists.
+
+## R-047 · 2026-11-03 · Null and annotation diagnostics for F-120
+
+- **Question.** Is the 1,154-record *L. interrogans* group of F-120 produced
+  by base composition, and which sequences carry its alignment edges?
+  Descriptive diagnostics only; no contract, build, or split changed.
+- **Null test.** Every v3 record of the three bacteria was shuffled per
+  sequence, once preserving mononucleotide and once (first-order Markov)
+  dinucleotide composition, seed 20261103, and searched with the R-046 MMseqs2
+  binary and settings. Scratch script SHA-256 `5cb5af48388962fb…`; result
+  `95bbce5343d8bb9f…`.
+- **Annotation.** The group records were intersected with the
+  `ref-acq-v12` RefSeq GFF (CDS products, RNAs, mobile and repeat features)
+  and compared with the remaining records; shared 20-mers were counted.
+  Scratch script `ac05001793996404…`; result `bb3f442b1af17078…`. Not kept in the repository.
+- **Finding.** F-121. The group is not a composition artifact, so a
+  composition-calibrated threshold would not change it; homology grouping v1
+  is kept unchanged.
