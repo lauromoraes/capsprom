@@ -110,6 +110,8 @@ seed-level effects; those repeated differences do not create additional
 independent observations. A failed technical run is reported and never replaced.
 The primary paired analysis requires all ten predeclared seed pairs; incomplete
 cases are excluded from the primary pair and reported in sensitivity analyses.
+`specs/seed_policy.md` defines the roles of all project seeds, including a
+reserve block of run seeds and the rule for activating it.
 
 ## Prediction and Threshold Contract
 

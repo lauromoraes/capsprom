@@ -929,6 +929,12 @@ Current state:
   deviations of F-080; 10 seeds, 35,000 per class, published value within the 10-seed range;
   review and overlap counts in F-080 to F-083, log R-026); P-4 for the mouse file. An *A. thaliana* reconstruction waits for
   R-1 to R-5 of `docs/bhandari_nominal_plant_assessment.md`.
+- Completed: define the project seed policy (`specs/seed_policy.md`). It keeps
+  the ten run seeds, partition seed 42, and dated sampling and resampling
+  seeds, and adds a predeclared reserve block of ten run seeds used only as a
+  whole and before test access. No contract, partition, or gate changed.
+- Next: record device, driver, and library versions in the training runners'
+  MLflow runs before the definitive runs, as the seed policy requires.
 
 ## Phase 5: Interpretability and Thesis Artifacts
 
