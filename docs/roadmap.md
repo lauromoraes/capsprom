@@ -756,7 +756,8 @@ Current state:
 - Completed: homology-grouped domain-window builds of the 18 eligible datasets
   (R-055, F-126); all audits pass.
 - Completed: group-bootstrap fixture (R-056).
-- Next: the per-organism manual sample review of the GraphPro v3 candidates,
+- Completed: freeze the manual review sample (R-057); the review is pending.
+- Next: complete the per-organism manual sample review of the GraphPro v3 candidates,
   then an evaluation-protocol-v4 execution successor that records both
   satisfied gates.
 - Next: the CDS builder,

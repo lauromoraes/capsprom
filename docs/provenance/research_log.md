@@ -1168,3 +1168,16 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - The v4 gate `group_bootstrap_fixture_validated` is satisfied; like the build
   gate, it is set in an execution successor of the protocol. No data or model
   outcome was used.
+
+## R-057 · 2026-11-03 · Manual review sample for the GraphPro v3 candidates
+
+- **Decision (project owner).** Prepare eligibility gate 7.
+  `configs/graphpro_v3_manual_review_v1.yaml` freezes 20 pairs per organism
+  (10 per strand, lowest SHA-256 rank of the pair id) and five checks:
+  positive in the primary table with P or S class, positive and control
+  sequences against NCBI, control TSS margin, and CDS-control placement.
+  `scripts/prepare_graphpro_v3_manual_review.py` wrote
+  `docs/provenance/manual_review_graphpro_v3/review_sheet.csv` (60 rows,
+  SHA-256 `5c414932…`), with instructions in the same folder. All partitions
+  are represented. The review itself is the owner's and is pending; no
+  eligibility changed.
