@@ -1005,3 +1005,24 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **Finding.** F-121. The group is not a composition artifact, so a
   composition-calibrated threshold would not change it; homology grouping v1
   is kept unchanged.
+
+## R-048 · 2026-11-03 · Frozen repeat-linked strata for reconstructed bacteria
+
+- **Decision (project owner).** Predeclare a secondary stratified report
+  before any model result: `configs/graphpro_reconstruction_v3_repeat_strata_v1.yaml`
+  (SHA-256 `3b4b6805…`). A record is `repeat_linked` when it has a non-self
+  MMseqs2 hit at the homology-grouping thresholds in its dataset's v3 hit
+  table (hashes pinned). The primary outcome is unchanged; strata are never
+  used for selection.
+- **Counts read while freezing.** Repeat-linked records are mostly positives
+  across each dataset (*L. interrogans* 869 of 1,270; *C. jejuni* 173 of 179;
+  *C. pneumoniae* 32 of 32), whereas controls dominate the largest
+  *L. interrogans* group (F-121). This corrects the earlier reading that
+  controls are more often repeat-linked overall. Because the test
+  repeat-linked strata are almost all positive (159/15, 33/0, 14/0), the
+  frozen metric is sensitivity per stratum and its paired-bootstrap contrast;
+  specificity and MCC are reported only where a stratum holds at least 30
+  negatives. The counts were read only to choose defined metrics.
+- **Output.** `scripts/assign_repeat_strata_v3.py` wrote
+  `data/interim/graphpro_reconstructed_v3_repeat_strata_v1/` (not committed;
+  summary SHA-256 `bf3fb32f…`). No build or split changed.

@@ -1,0 +1,54 @@
+analysis:
+  name: graphpro-reconstructed-v3-repeat-strata-v1
+  version: 1.0.0
+  status: frozen_before_any_model_result
+  research_log: R-048
+  evidence: [F-120, F-121]
+  role: secondary_stratified_reporting
+  modifies_build_or_split: false
+  used_for_selection: false
+  rationale: >-
+    Records with an alignment edge to another record of the same dataset are
+    mostly positives (L. interrogans 869 of 1,270; C. jejuni 173 of 179;
+    C. pneumoniae 32 of 32), while inside the largest L. interrogans group
+    controls dominate (275 of 459, F-121). Either imbalance lets a model score
+    well by recognising repeated sequence instead of promoters. Reporting
+    within strata separates the two. The rule is fixed from the build hit
+    tables before any model is trained; the counts above were read only to
+    choose metrics that are defined in each stratum.
+
+stratum_rule:
+  name: has_alignment_edge
+  definition: record has at least one non-self MMseqs2 hit to another record of the same dataset
+  thresholds_from: configs/homology_grouping_v1.yaml
+  min_seq_id: 0.80
+  coverage_both_sequences: 0.80
+  strata: [repeat_linked, not_repeat_linked]
+  label_blind: true
+
+inputs:
+  build_root: data/interim/graphpro_reconstructed_v3
+  hit_tables_sha256:
+    graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni: 3718c19f6acf964fc72fab80cb02c15aa96b94053ede53dc6865411d38a94986
+    graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae: ce5aef23491c2e1caf056e78995a306b5024818a2ed67413cab7142a390781e9
+    graphpro-reconstructed-v3-prokaryotic-leptospira_interrogans: e34ece9f56e9efb6eedb003767bbbe3388936367371b29726d2fc1e501f9bcc2
+
+reporting:
+  primary_outcome_unchanged: true
+  partitions: [test]
+  per_stratum_metrics: [sensitivity, stratum_class_counts]
+  specificity_and_mcc_reported_when_stratum_has_at_least_negatives: 30
+  contrast: sensitivity_repeat_linked_minus_not_repeat_linked
+  inference: paired_bootstrap_within_stratum_shared_indices
+  shortcut_signal: >-
+    a sensitivity contrast whose 95% interval excludes zero is reported as
+    evidence that repeated sequence contributes to positive calls; it is never
+    used to change a model, feature, epoch, or threshold
+
+known_limitations:
+  - repeat_linked_stratum_is_mostly_positive_so_specificity_is_often_undefined
+  - controls_dominate_the_largest_lint_group_f121
+  - repeat_families_unidentified_by_refseq_gff
+  - cds_and_eukaryotic_successors_must_report_the_same_distribution
+
+output_root: data/interim/graphpro_reconstructed_v3_repeat_strata_v1

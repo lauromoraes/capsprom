@@ -738,6 +738,8 @@ Current state:
 - Decision (2026-11-03): keep homology grouping v1 unchanged; the F-120 group
   joins real, unannotated intergenic repeat families, not composition (F-121,
   R-047).
+- Completed: freeze repeat-linked strata as a secondary report before any
+  model result (R-048, F-122).
 - Next: the CDS builder,
   distribution and dependency audits, and evaluation protocol v4 before any
   confirmatory use.
