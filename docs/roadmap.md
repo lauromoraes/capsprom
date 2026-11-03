@@ -750,7 +750,12 @@ Current state:
 - Decision (2026-11-03): report the GC gap as a limitation with a frozen
   GC-only reference baseline (R-052).
 - Completed: dependency manifest v4 with the three v3 candidates (R-053).
-- Next: evaluation protocol v4 and the per-organism manual sample review.
+- Completed: freeze evaluation protocol v4 as a design (R-054): homology-grouped
+  partitions for every dataset, 251-nt eukaryotic windows, entry by
+  eligibility manifest.
+- Next: grouped domain-window builds of the 18 eligible datasets (251-nt
+  CNNProm eukaryotes), a group-bootstrap fixture, and the per-organism manual
+  sample review of the GraphPro v3 candidates.
 - Next: the CDS builder,
   distribution and dependency audits, and evaluation protocol v4 before any
   confirmatory use.

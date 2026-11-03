@@ -91,3 +91,21 @@ def test_dependency_manifest_v4_adds_graphpro_v3_candidates_without_changing_eli
     assert len(set(new.values())) == v4["manifest"]["dependency_cluster_count"] == 14
     assert len(candidates) == v4["manifest"]["candidate_dataset_count"] == 3
     assert new["graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae"] == "cdbprom-chlamydophila"
+
+
+def test_evaluation_protocol_v4_binds_grouping_windows_and_manifest_v4_and_stays_blocked() -> None:
+    root = Path(__file__).resolve().parents[1]
+    protocol = yaml.safe_load((root / "configs/evaluation_protocol_v4.yaml").read_text(encoding="utf-8"))
+    scope, audit = protocol["scope"], protocol["data_audit"]
+
+    for key, path in (
+        ("dependency_manifest_sha256", scope["dependency_manifest"]),
+        ("homology_grouping_sha256", audit["homology_grouping"]),
+    ):
+        source = scope if key in scope else audit
+        assert hashlib.sha256((root / path).read_bytes()).hexdigest() == source[key]
+    assert audit["partition_policy"] == "homology_grouping_v1"
+    assert audit["sequence_length_by_domain"] == {"prokaryota": 81, "eukaryota": 251}
+    assert protocol["selection"]["method"] == "stratified_group_k_fold_over_homology_groups"
+    assert protocol["uncertainty"]["bootstrap_unit"] == "homology_group"
+    assert protocol["execution_gates"]["confirmatory_ranking_enabled"] is False

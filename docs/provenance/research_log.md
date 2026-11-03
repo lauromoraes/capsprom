@@ -1105,3 +1105,22 @@ SHA-256 of the module that ran, when the change was not yet committed.
   `candidate_pending_eligibility`; listing them assigns clusters only, and
   their CDS panels share their cluster. v3 stays bound by its existing users.
   A test checks that no eligible cluster changed and that the counts agree.
+
+## R-054 · 2026-11-03 · Evaluation protocol v4 (design)
+
+- **Decision (project owner).** Freeze `configs/evaluation_protocol_v4.yaml`
+  as the successor of v3, design-locked with confirmatory ranking closed.
+  Owner choices: (1) every dataset, including the 18 eligible ones, is
+  repartitioned by homology grouping v1 (partitions, inner folds, and the
+  bootstrap unit become homology groups); the record-level v3 partition is a
+  predeclared sensitivity reported side by side; (2) domain windows apply,
+  81 nt for prokaryotes and 251 nt for eukaryotes, so the five CNNProm
+  eukaryotic datasets must be rebuilt at 251 nt before execution; (3) datasets
+  enter only through an eligibility manifest, so the three GraphPro v3
+  candidates join after their per-organism approval.
+- **Bindings.** Dependency manifest v4 and homology grouping v1 by SHA-256;
+  secondary reports (repeat strata, GC-only reference, CDS condition v4) for
+  the reconstructed bacteria. New gates `grouped_domain_window_builds_complete`
+  and `group_bootstrap_fixture_validated` are false. All other inference rules
+  are unchanged from v3. v3 remains the active protocol of existing results,
+  which stay exploratory. No data or model outcome was used.
