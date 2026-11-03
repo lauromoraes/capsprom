@@ -22,6 +22,16 @@ dataset receives its own identity `<collection_id>.recon-cds-v1`. Eukaryotic
 datasets are excluded: coding exons are short and a 251 nt window
 (`specs/sequence_window_policy.md`) frequently crosses exon-intron boundaries.
 
+**Current scope (`configs/cds_negative_control_v4.yaml`, log R-050).** The
+condition covers *C. jejuni* and *C. pneumoniae*. *L. interrogans* is excluded:
+its complete TSS table (45,562 TSSs, 27,214 of them internal) leaves too little
+non-overlapping coding space, so only 1,421 of 5,123 positives received a
+control, and because sampling follows genomic order the retained positives
+cluster early on the chromosome (F-123). Its v3 CDS panel is kept as
+provenance only; its genomic panel is unaffected. A feasibility inventory
+must count non-overlapping capacity, not only candidate windows per
+positive, before any new dataset enters this condition.
+
 ## Annotation source
 
 CDS features come from the RefSeq GFF of the exact assembly accession and
