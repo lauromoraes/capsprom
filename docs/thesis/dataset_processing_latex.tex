@@ -1,7 +1,7 @@
 % !TEX root = main.tex
 \subsection{Dataset preprocessing and construction}
 
-Let $\mathcal{S}=\{\mathrm{Bhandari},\mathrm{CDBProm},\mathrm{CNNProm},\mathrm{GraphPro}\}$ denote the set of source studies considered in this thesis. For each source $s\in\mathcal{S}$, the experimental data are represented as a finite labeled set $\mathcal{D}_{s}=\{(x_i,y_i)\}_{i=1}^{n_s}$, where $x_i$ is a DNA sequence window and $y_i\in\{0,1\}$ is the binary class label. The positive class, $y_i=1$, denotes a promoter sequence, whereas the negative class, $y_i=0$, denotes a non-promoter sequence. After preprocessing, all sequence windows are elements of $\{A,C,G,T\}^{81}$, so the experimental unit is one fixed-length 81 bp sequence-level example.
+Let $\mathcal{S}=\{\mathrm{Bhandari},\mathrm{CDBProm},\mathrm{CNNProm},\mathrm{GraphPro}\}$ denote the set of source studies considered in this thesis. For each source $s\in\mathcal{S}$, the experimental data are represented as a finite labeled set $\mathcal{D}_{s}=\{(x_i,y_i)\}_{i=1}^{n_s}\subset\mathcal{X}_L\times\mathcal{Y}$, with the input space $\mathcal{X}_L$ and label space $\mathcal{Y}$ of Section~\ref{sec:bg-formulation}. After preprocessing, every sequence window of a dataset has the same length $L$, fixed by its biological domain (81 bp for prokaryotes and 251 bp for eukaryotes), so the experimental unit is one fixed-length sequence-level example.
 
 The four source studies differ in organism coverage, sequence-window definition,
 and negative-set construction. In particular, CDBProm, CNNProm, and GraphPro
@@ -29,7 +29,7 @@ GraphPro & GraphPro: An interpretable graph neural network-based model for ident
 \end{tabular}
 \end{table}
 
-The source descriptions also provide methodological context that affects interpretation. For example, CNNProm reports bacterial non-promoter sequences sampled from protein-coding genes on the opposite strand, whereas its promoter sets are linked to resources such as RegulonDB, DBTBS, EPDnew, and DBTSS. GraphPro includes human and mouse eukaryotic datasets and bacterial datasets for six organisms. These differences motivate source-aware evaluation, since the empirical distribution $P_s(X,Y)$ may differ across studies.
+The source descriptions also provide methodological context that affects interpretation. For example, CNNProm reports bacterial non-promoter sequences sampled from protein-coding genes on the opposite strand, whereas its promoter sets are linked to resources such as RegulonDB, DBTBS, EPDnew, and DBTSS. GraphPro includes human and mouse eukaryotic datasets and bacterial datasets for six organisms. These differences motivate source-aware evaluation, since the data-generating distribution $p_{\text{data},s}$ may differ across studies.
 
 Source labels were audited separately from sequence-level integrity.
 Deduplication can remove an observable contradiction, but it cannot establish
@@ -176,16 +176,16 @@ record sample. Only a new eligibility and dependency manifest may admit a
 reconstructed dataset to confirmatory experiments; predictive performance is
 never an eligibility criterion.
 
-Because the source studies provide heterogeneous sequence collections, all records were first mapped into a common labeled representation. Promoter sequences were assigned label $1$, whereas non-promoter sequences were assigned label $0$. For each source $s$, this step defines an initial labeled collection $\mathcal{D}^{0}_{s}=\{(z_i,y_i)\}_{i=1}^{m_s}$, where $z_i$ denotes the original sequence window before length normalization.
+Because the source studies provide heterogeneous sequence collections, all records were first mapped into a common labeled representation. Promoter sequences were assigned label $1$, whereas non-promoter sequences were assigned label $0$. For each source $s$, this step defines an initial labeled collection $\mathcal{D}^{0}_{s}=\{(\tilde x_i,y_i)\}_{i=1}^{\tilde n_s}$, where $\tilde x_i$ denotes the original sequence window before length normalization.
 
-A deterministic cropping function $c_s$ was then applied to each original sequence $z_i$ to obtain a standardized sequence $x_i=c_s(z_i)$ with $|x_i|=81$. The target window is defined relative to a source-specific transcription start site (TSS) coordinate and contains 60 bp upstream of the TSS, the TSS nucleotide itself, and 20 bp downstream. This window definition was adopted to maintain compatibility with the promoter-region representation used by the GraphPro and CNNProm studies for prokaryotic datasets, while enforcing a common input length across all sources. Because the original sequence windows differ across studies, the TSS coordinate used by $c_s$ was defined per source and original window length.
+A deterministic cropping function $\operatorname{crop}_s$ was then applied to each original sequence $\tilde x_i$ to obtain a standardized sequence $x_i=\operatorname{crop}_s(\tilde x_i)$ with $|x_i|=81$. The target window is defined relative to a source-specific transcription start site (TSS) coordinate and contains 60 bp upstream of the TSS, the TSS nucleotide itself, and 20 bp downstream. This window definition was adopted to maintain compatibility with the promoter-region representation used by the GraphPro and CNNProm studies for prokaryotic datasets, while enforcing a common input length across all sources. Because the original sequence windows differ across studies, the TSS coordinate used by $c_s$ was defined per source and original window length.
 
 Table~\ref{tab:tss-cropping-parameters} summarizes the source-specific TSS
 coordinates used to obtain the standardized 81 bp windows.
 
 \begin{table}[htbp]
 \centering
-\caption{Source-specific parameters of the deterministic cropping function $c_s$ used to map promoter and non-promoter sequences to 81 bp windows. The final window contains 60 bp upstream of the transcription start site, the TSS nucleotide, and 20 bp downstream.}
+\caption{Source-specific parameters of the deterministic cropping function $\operatorname{crop}_s$ used to map promoter and non-promoter sequences to 81 bp windows. The final window contains 60 bp upstream of the transcription start site, the TSS nucleotide, and 20 bp downstream.}
 \label{tab:tss-cropping-parameters}
 \begin{tabular}{lrrr}
 \hline
@@ -203,10 +203,10 @@ Bhandari et al. & 1000 & 700 & 81 \\
 
 After cropping, promoter and non-promoter examples from CDBProm, CNNProm, and
 GraphPro were paired within each source-defined dataset. Each resulting subset
-is represented as $\mathcal{D}_{s,k}=\mathcal{P}_{s,k}\cup\mathcal{N}_{s,k}$,
-where $\mathcal{P}_{s,k}=\{(x_i,1)\}$ and
-$\mathcal{N}_{s,k}=\{(x_i,0)\}$ denote the positive and negative examples for
-dataset $k$ from source $s$. Their corrected collections receive deterministic
+is represented as $\mathcal{D}_{s,d}=\mathcal{P}_{s,d}\cup\mathcal{N}_{s,d}$,
+where $\mathcal{P}_{s,d}=\{(x_i,1)\}$ and
+$\mathcal{N}_{s,d}=\{(x_i,0)\}$ denote the positive and negative examples for
+dataset $d$ from source $s$. Their corrected collections receive deterministic
 train/test assignments, which are then subject to integrity auditing and must
 be replaced by exact-sequence group assignments whenever row-level assignment
 produces partition overlap.
@@ -234,9 +234,9 @@ evaluation until rebuilt.
 
 Cropping can map distinct source records to the same 81 bp sequence. Therefore,
 before partitioning, the pipeline identifies the collision set
-$\mathcal{C}_{s,k}=\{x:(x,0)\in\mathcal{D}_{s,k}\land
-(x,1)\in\mathcal{D}_{s,k}\}$. Every occurrence of a sequence in
-$\mathcal{C}_{s,k}$ is removed from both classes. This bilateral policy avoids
+$\mathcal{C}_{s,d}=\{x:(x,0)\in\mathcal{D}_{s,d}\land
+(x,1)\in\mathcal{D}_{s,d}\}$. Every occurrence of a sequence in
+$\mathcal{C}_{s,d}$ is removed from both classes. This bilateral policy avoids
 arbitrary relabeling and prevents an identical input from representing opposing
 targets. A filtering manifest records, for every dataset, the row counts before
 and after cropping, collision removal, partitioning, and strict-alphabet
@@ -268,7 +268,7 @@ Generation duplicate & Output grows when the same deterministic step is rerun & 
 Same-label duplicate & Same sequence occurs more than once with one label & Retain one normalized sequence before partitioning; preserve source counts in provenance records \\
 Cross-label collision & Same sequence occurs with labels 0 and 1 & Remove every occurrence from both classes before partitioning \\
 Partition overlap & Same sequence occurs in training and test & Rebuild using indivisible sequence groups; reject the fixed split meanwhile \\
-Invalid DNA & Length differs from 81 or symbols fall outside $\{A,C,G,T\}$ & Remove before partition assignment and record the affected class \\
+Invalid DNA & Length differs from 81 or symbols fall outside $\Sigma_{\mathrm{DNA}}$ & Remove before partition assignment and record the affected class \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -276,9 +276,10 @@ Invalid DNA & Length differs from 81 or symbols fall outside $\{A,C,G,T\}$ & Rem
 \subsubsection{Quality control and final dataset definition}
 
 An alphabet filter was then applied before partitioning to define the final
-model-ready sequence pool. Let $\Sigma=\{A,C,G,T\}$ be the accepted DNA
-alphabet. The filtering operator $q$ retains an example $(x_i,y_i)$ if and only
-if $x_i\in\Sigma^{81}$ and $y_i\in\{0,1\}$. This policy ensures that all
+model-ready sequence pool. Let $\Sigma_{\mathrm{DNA}}=\{\mathrm{A},\mathrm{C},\mathrm{G},\mathrm{T}\}$ be the accepted DNA
+alphabet. The filtering predicate $\operatorname{keep}(x_i,y_i)$ is true, and the example
+is retained, if and only if $x_i\in\Sigma_{\mathrm{DNA}}^{81}$ and
+$y_i\in\mathcal{Y}$. This policy ensures that all
 subsequent encodings, including one-hot, k-mer, and physicochemical encodings,
 operate over the same unambiguous DNA alphabet. In the canonical CDBProm,
 CNNProm, and GraphPro build, this stage removed eight rows from five datasets:
@@ -305,7 +306,7 @@ The complete preprocessing workflow is summarized in Figure~\ref{fig:within-sour
 \node[process, below=of crop] (pair) {Class construction\\Use source negatives or declared Bhandari shuffles};
 \node[process, below=of pair] (collisions) {Cross-label collision filtering\\Remove every conflicting sequence from both classes};
 \node[process, below=of collisions] (deduplicate) {Within-class deduplication\\Retain one row per normalized sequence and label};
-\node[process, below=of deduplicate] (clean) {Alphabet filtering\\Retain only $x_i\in\{A,C,G,T\}^{81}$};
+\node[process, below=of deduplicate] (clean) {Alphabet filtering\\Retain only $x_i\in\Sigma_{\mathrm{DNA}}^{81}$};
 \node[process, below=of clean] (csv) {Partition definition\\Assign deterministic splits; keep exact-sequence groups indivisible};
 \node[process, below=of csv] (validate) {Constraint validation\\Check length, labels, class counts, duplicates, and overlap};
 \node[output, below=of validate] (ready) {Audited labeled partitions\\Eligible sets proceed to feature encoding and experiments};
@@ -341,7 +342,7 @@ Table~\ref{tab:graphpro-within-source-final}.
 \label{tab:within-source-final-summary}
 \begin{tabular}{lrrrr}
 \hline
-Study & Subsets & Final $P$ & Final $N$ & Final total \\
+Study & Subsets & Final $n^{+}$ & Final $n^{-}$ & Final total \\
 \hline
 Bhandari et al. & 6 & 583819 & 583819 & 1167638 \\
 CDBProm & 22 & 46959 & 62420 & 109379 \\
@@ -363,7 +364,7 @@ source-provided class distributions.
 \label{tab:within-source-class-balance}
 \begin{tabular}{lrrrr}
 \hline
-Study & Promoter (\%) & Non-promoter (\%) & $P/N$ ratio & Final total \\
+Study & Promoter (\%) & Non-promoter (\%) & $n^{+}/n^{-}$ ratio & Final total \\
 \hline
 Bhandari et al. & 50.0 & 50.0 & 1.00 & 1167638 \\
 CDBProm & 42.9 & 57.1 & 0.75 & 109379 \\
@@ -385,7 +386,7 @@ train--test boundary.
 \label{tab:bhandari-within-source-final}
 \begin{tabular}{p{0.40\textwidth}lrrr}
 \hline
-Dataset & Split & Final $P$ & Final $N$ & Final total \\
+Dataset & Split & Final $n^{+}$ & Final $n^{-}$ & Final total \\
 \hline
 eukaryotic Human\_promoter & test & 49188 & 49187 & 98375 \\
 eukaryotic Human\_promoter & train & 196756 & 196757 & 393513 \\
@@ -429,7 +430,7 @@ Table~\ref{tab:cdbprom-within-source-final} reports the final CDBProm train/test
 \label{tab:cdbprom-within-source-final}
 \begin{tabular}{p{0.40\textwidth}lrrr}
 \hline
-Dataset & Split & Final $P$ & Final $N$ & Final total \\
+Dataset & Split & Final $n^{+}$ & Final $n^{-}$ & Final total \\
 \hline
 prokaryotic anabaena\_sp & test & 1510 & 2009 & 3519 \\
 prokaryotic anabaena\_sp & train & 6041 & 8035 & 14076 \\
@@ -466,7 +467,7 @@ Table~\ref{tab:cnnprom-within-source-final} reports the final CNNProm train/test
 \label{tab:cnnprom-within-source-final}
 \begin{tabular}{p{0.40\textwidth}lrrr}
 \hline
-Dataset & Split & Final $P$ & Final $N$ & Final total \\
+Dataset & Split & Final $n^{+}$ & Final $n^{-}$ & Final total \\
 \hline
 eukaryotic Arabidopsis\_non\_tata & test & 3543 & 9167 & 12710 \\
 eukaryotic Arabidopsis\_non\_tata & train & 14172 & 36665 & 50837 \\
@@ -495,7 +496,7 @@ Table~\ref{tab:graphpro-within-source-final} reports the final GraphPro train/te
 \label{tab:graphpro-within-source-final}
 \begin{tabular}{p{0.40\textwidth}lrrr}
 \hline
-Dataset & Split & Final $P$ & Final $N$ & Final total \\
+Dataset & Split & Final $n^{+}$ & Final $n^{-}$ & Final total \\
 \hline
 eukaryotic Human & test & 1404 & 1871 & 3275 \\
 eukaryotic Human & train & 5613 & 7485 & 13098 \\

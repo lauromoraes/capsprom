@@ -14,21 +14,85 @@ Thesis-oriented mathematical text must reuse the project notation before
 introducing new symbols. Future edits, including AI-assisted edits, should check
 this section and the current thesis chapter context before adding equations.
 
-Canonical notation for the current promoter-prediction formulation:
+The problem formulation is defined once, in thesis Section
+`sec:bg-formulation` (Chapter 2, `chapters/02_background.tex`). Other chapters
+and drafts cite that section with `\ref` and do not redefine its symbols; they
+may only add domain-specific detail (for example, the sources in
+`\mathcal{D}_s`). Before submission, search the thesis for each symbol below and
+confirm that it has a single definition.
 
-- `\Sigma=\{A,C,G,T\}` denotes the strict DNA alphabet.
-- `L=81` denotes the standardized sequence length.
-- `x_i=(x_{i1},...,x_{iL})\in\Sigma^L` denotes one model-ready DNA sequence.
-- `y_i\in\{0,1\}` denotes the binary class label.
-- `\mathcal{D}=\{(x_i,y_i)\}_{i=1}^{n}` denotes a labeled dataset.
-- `k` denotes k-mer length, `\mathcal{K}_k=\Sigma^k` the k-mer vocabulary, and
-  `L_k=L-k+1` the number of overlapping k-mers in a standardized sequence.
-- `u_{it}^{(k)}` denotes the `t`-th overlapping k-mer of sequence `x_i`.
-- `\phi_j` denotes a feature mapping and `z_{ij}=\phi_j(x_i)` its output.
-- `\Phi(x_i)` denotes a combined feature representation.
-- `\rho^{(k)}` denotes a physicochemical reference mapping from k-mers to
-  selected normalized property values.
-- `\lambda` and `w` denote the PseKNC lag parameter and sequence-order weight.
+Canonical notation (approved 2026-11-04; rationale and the full collision audit
+in `docs/thesis/notation_audit.md`). One letter has one meaning at thesis
+scope; a letter may be reused only as a bound index inside a single displayed
+formula. Labels in subscripts are upright (`n_{\mathrm{boot}}`); indices are
+italic. Losses are always calligraphic (`\mathcal{L}`), never `L`.
+
+Problem formulation (defined in `sec:bg-formulation`):
+
+- `\Sigma_{\mathrm{DNA}}=\{\mathrm{A},\mathrm{C},\mathrm{G},\mathrm{T}\}`:
+  strict DNA alphabet. Never write a sum as `\Sigma`; use `\sum`.
+- `L`: window length of a dataset, fixed by domain
+  (`sequence_length_by_domain` in `configs/evaluation_protocol_v4.yaml`):
+  `L=81` for prokaryotes and `L=251` for eukaryotes.
+- `\mathcal{X}_L=\Sigma_{\mathrm{DNA}}^{L}`: input space;
+  `x_i=(x_{i1},\dots,x_{iL})\in\mathcal{X}_L`, generic position `t`
+  (`x_{it}`).
+- `\mathcal{Y}=\{0,1\}`: label space (`1`: promoter; `0`: non-promoter).
+- `\mathcal{D}=\{(x_i,y_i)\}_{i=1}^{n}`: labeled dataset drawn from
+  `p_{\text{data}}`.
+- `f(\Phi(x);\boldsymbol{\theta})\in[0,1]`: positive-class score of model `f`
+  with learned parameters `\boldsymbol{\theta}`.
+- `\hat y=h(x)=\mathbf{1}[f(\Phi(x);\boldsymbol{\theta})\ge t^{\star}]`:
+  classifier and binary decision; `t^{\star}` is the threshold (primary value
+  `0.5`).
+
+Data (Chapter 4): `s\in\mathcal{S}` source study; `d` dataset index
+(`\mathcal{D}_{s,d}`, `\mathcal{P}_{s,d}`, `\mathcal{N}_{s,d}`,
+`\mathcal{C}_{s,d}`); `p_{\text{data},s}` source distribution; raw sequence
+`\tilde x_i`, raw size `\tilde n_s`; cropping `\operatorname{crop}_s`; filter
+predicate `\operatorname{keep}`; stage counts `n^{+}_{c}`, `n^{-}_{c}`.
+
+Features (Chapter 5): `k` k-mer length, `\mathcal{K}_k=\Sigma_{\mathrm{DNA}}^{k}`,
+`L_k=L-k+1`, `u_{it}^{(k)}`; `\phi_j`, `\mathbf{z}_{ij}=\phi_j(x_i)`, `J`,
+`\Phi`; nucleotide `\nu`, counts `N_\nu(x_i)`; local window width `\omega`;
+`\rho^{(k)}` with `n_\rho` properties indexed by `q`; PseKNC highest tier
+`\lambda`, lag `\delta`, correlations `\gamma_{i,\delta}^{(k)}` (Chen et al.
+write `\theta_j`), weight `w`; `O_i^{(k)}`, `F_i^{(k)}`, `P_i^{(k)}`,
+`Q_i^{(k,\lambda,w)}`; encoder `\operatorname{enc}_{\mathrm{BERT}}`, embedding
+`\mathbf{e}_i\in\mathbb{R}^{d_{\mathrm{emb}}}`; fusion branches `\psi_j`.
+
+Models (Chapter 6): capsule symbols of Sabour et al. (`\mathbf{u}_i`,
+`\mathbf{W}_{ij}`, `\hat{\mathbf{u}}_{j\mid i}`, `b_{ij}`, `c_{ij}`,
+`\mathbf{s}_j`, `\mathbf{v}_j`); these equations describe one input, so `i,j`
+index capsules there and the section says so. Routing iterations
+`n_{\mathrm{iter}}`; margin loss with `T_{y'}`, `m^{\pm}`, down-weight `\beta`;
+reconstruction weight `\beta_{\mathrm{rec}}`; attention
+`\mathbf{Q}_{\mathrm{att}},\mathbf{K}_{\mathrm{att}},\mathbf{V}_{\mathrm{att}}`,
+`d_{\mathrm{key}}`, `n_{\mathrm{heads}}`.
+
+Protocol and statistics (Chapters 7 and 8): experiment tuple
+`(\mathcal{D},\Phi,f,\boldsymbol{\theta},\boldsymbol{\xi},E,r)` with
+hyperparameter configuration `\boldsymbol{\xi}\in\Xi`; seed `r`; learning rate
+`\epsilon`; `n_{\mathrm{batch}}`, `n_{\mathrm{epoch}}`; paired difference
+`\Delta` (`\Delta_{d,r}`, `\Delta_d`); compared models `A`, `B` (italic;
+nucleotides are upright); `n_{\mathrm{boot}}`, `n_{\mathrm{perm}}`; `\alpha`,
+`p`; Wilcoxon `T`, Friedman `\chi^2_F`; `n_{\mathcal{D}}`, `n_{\mathrm{mod}}`;
+upright `\mathrm{TP}`, `\mathrm{TN}`, `\mathrm{FP}`, `\mathrm{FN}`,
+`\operatorname{MCC}`; calibration bins `\mathcal{B}_b`, `n_{\mathrm{bin}}`;
+homology groups `\mathcal{G}`, `g`, Hamming distance `d_{\mathrm{H}}`;
+attributions `\operatorname{IG}`, `\operatorname{SHAP}` (never `\phi`).
+
+Retired symbols: score `s(x)`; `P` for the distribution; `z_i` for raw
+sequences; `c_s`; `q` as filter; `k` as dataset index; `b` as nucleotide;
+`h` as window width; `m` and `r` for physicochemical properties; `d` as PseKNC
+lag; `\theta` for PseKNC correlations or hyperparameters; `g` for fusion
+branches or the BERT encoder; `B_i`, `d_B`; `s` as seed; Sabour's `\lambda` and
+`r`.
+
+Deviations from Goodfellow et al.: examples are indexed by subscript (`x_i`,
+not `x^{(i)}`), because parenthesised superscripts denote k-mer length; sets are
+calligraphic (`\mathcal{X}`), following learning-theory usage; DNA sequences
+are strings, not real vectors, and are not bold.
 
 When a symbol already has a canonical meaning, do not reuse it for a different
 concept in the same chapter. Prefer notation commonly used in biological

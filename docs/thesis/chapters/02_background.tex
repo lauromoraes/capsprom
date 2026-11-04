@@ -21,6 +21,55 @@ For neural-network models, this thesis adopts the standard view of learned
 representations, model functions, and trainable parameters described in the
 deep-learning literature~\citep{goodfellow2016deep}.
 
+\subsection{Problem Formulation}\label{sec:bg-formulation}
+
+The symbols defined here are used throughout the thesis; later chapters refer
+to this section instead of redefining them. Let
+$\Sigma_{\mathrm{DNA}}=\{\mathrm{A},\mathrm{C},\mathrm{G},\mathrm{T}\}$ denote
+the strict DNA alphabet. The input space of a dataset is
+\begin{equation}
+  \mathcal{X}_L=\Sigma_{\mathrm{DNA}}^{L},
+  \label{eq:bg-input-space}
+\end{equation}
+where $L$ is the standardized window length of that dataset. $L$ depends on
+the biological domain: $L=81$ for prokaryotic and $L=251$ for eukaryotic
+datasets (Chapter~\ref{chap:materials-methods}). An input is a sequence
+$x_i=(x_{i1},\ldots,x_{iL})\in\mathcal{X}_L$. The label space is
+\begin{equation}
+  \mathcal{Y}=\{0,1\},
+  \label{eq:bg-label-space}
+\end{equation}
+where $y_i=1$ denotes a promoter and $y_i=0$ a non-promoter sequence. A labeled
+dataset is a finite set $\mathcal{D}=\{(x_i,y_i)\}_{i=1}^{n}\subset
+\mathcal{X}_L\times\mathcal{Y}$, whose pairs are assumed to be drawn from an
+unknown data-generating distribution $p_{\text{data}}$ over
+$\mathcal{X}_L\times\mathcal{Y}$~\citep{goodfellow2016deep}. Within a dataset,
+this assumption is weakened by homologous or overlapping sequences; the
+corresponding grouping is described in Chapter~\ref{chap:experimental-protocol}.
+
+The binary classification problem is to learn, from $\mathcal{D}$, a classifier
+$h:\mathcal{X}_L\to\mathcal{Y}$ whose predictions on new examples drawn from
+$p_{\text{data}}$ agree with the true labels, as measured by the evaluation
+outcomes of Chapter~\ref{chap:experimental-protocol}. Every classifier in this
+thesis is built in two stages. A representation $\Phi$ maps a sequence to a
+numerical input (Chapter~\ref{chap:feature-engineering}), and a model $f$ with
+learned parameters $\boldsymbol{\theta}$ maps that input to a positive-class
+score
+\begin{equation}
+  f\bigl(\Phi(x);\boldsymbol{\theta}\bigr)\in[0,1].
+  \label{eq:bg-score}
+\end{equation}
+The binary decision compares the score with a threshold $t^{\star}$:
+\begin{equation}
+  \hat y=h(x)=\mathbf{1}\bigl[f\bigl(\Phi(x);\boldsymbol{\theta}\bigr)\ge t^{\star}\bigr],
+  \label{eq:bg-decision}
+\end{equation}
+where $\mathbf{1}[\cdot]$ is the indicator function. The primary threshold is
+$t^{\star}=0.5$; how secondary thresholds are chosen is defined in
+Chapter~\ref{chap:experimental-protocol}. The score is a probability estimate
+only for models that produce one; for capsule networks it is a relative
+capsule score (Chapter~\ref{chap:models}).
+
 \section{Capsule Neural Networks}\label{sec:bg-capsules}
 
 Capsule neural networks represent groups of features as vectors or matrices and

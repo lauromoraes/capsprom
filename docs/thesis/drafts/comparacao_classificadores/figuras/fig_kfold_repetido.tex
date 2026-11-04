@@ -10,7 +10,7 @@
   \def\gx{10.3}  % origem x da grade do painel (b)
   \def\gc{0.46}  % lado da célula da grade
   % ---------------- Painel (a)
-  \node[anchor=west, font=\sffamily\small\bfseries] at (-0.1,1.45) {(a) Uma repetição ($r=1$): $K=10$ dobras};
+  \node[anchor=west, font=\sffamily\small\bfseries] at (-0.1,1.45) {(a) Uma repetição ($\ell=1$): $K=10$ dobras};
   \node[anchor=west, nota] at (-0.1,1.05) {$\pi_1$ divide $\mathcal{D}$ em $K$ subconjuntos disjuntos e estratificados};
   \foreach \m in {1,...,10} { \node[font=\sffamily\scriptsize, text=cCinza] at ({1.05+(\m-0.5)*\cw},0.55) {\m}; }
   \node[anchor=east, font=\sffamily\scriptsize, text=cCinza] at (1.0,0.55) {subconj.};
@@ -27,36 +27,36 @@
       \fi
     }
     \draw[seta] ({1.05+10*\cw+0.08},\y) -- ++(0.4,0);
-    \node[anchor=west, font=\sffamily\footnotesize] at ({1.05+10*\cw+0.5},\y) {$d_{1,\j}$};
+    \node[anchor=west, font=\sffamily\footnotesize] at ({1.05+10*\cw+0.5},\y) {$\Delta_{1,\j}$};
   }
   \draw[cTeste!70!black, line width=0.9pt, rounded corners=2pt]
     (6.48,0.25) rectangle (7.45,{-9*\rs-0.25});
   \node[nota, anchor=north west, text width=7.6cm, align=flush left] at (-0.1,{-9*\rs-0.45})
-    {Dobra $j$: treina nos $K-1$ subconjuntos de treino, em azul ($n_{\mathrm{tr}}=\tfrac{K-1}{K}n$) e testa no subconjunto $F_{1,j}$ ($n_{\mathrm{te}}=n/K$). Testes disjuntos; dois treinos compartilham $\tfrac{K-2}{K-1}=\tfrac89$ dos seus exemplos.};
+    {Dobra $j$: treina nos $K-1$ subconjuntos de treino, em azul ($n_{\mathrm{tr}}=\tfrac{K-1}{K}n$) e testa no subconjunto $\mathcal{F}_{1,j}$ ($n_{\mathrm{te}}=n/K$). Testes disjuntos; dois treinos compartilham $\tfrac{K-2}{K-1}=\tfrac89$ dos seus exemplos.};
   % ---------------- Painel (b)
   \node[anchor=west, font=\sffamily\small\bfseries] at (8.8,1.45) {(b) $R=10$ repetições $\times$ $K=10$ dobras};
-  \node[anchor=west, nota] at (8.8,1.05) {cada linha usa uma nova permutação $\pi_r$; cada célula é uma diferença $d_{rj}$};
+  \node[anchor=west, nota] at (8.8,1.05) {cada linha usa uma nova permutação $\pi_\ell$; cada célula é uma diferença $\Delta_{\ell j}$};
   \foreach \j in {1,...,10} { \node[font=\sffamily\scriptsize, text=cCinza] at ({\gx+(\j-0.5)*\gc},0.55) {\j}; }
   \node[anchor=west, font=\sffamily\scriptsize, text=cCinza] at ({\gx+10*\gc+0.05},0.55) {dobra $j$};
   \foreach \r in {1,...,10} {
     \pgfmathsetmacro{\y}{-(\r-1)*\rs}
-    \node[anchor=east, font=\sffamily\footnotesize] at ({\gx-0.05},\y) {$r=\r$};
+    \node[anchor=east, font=\sffamily\footnotesize] at ({\gx-0.05},\y) {$\ell=\r$};
     \foreach \j in {1,...,10} {
       \draw[draw=cCinza, fill=black!6, line width=0.4pt] ({\gx+(\j-1)*\gc},\y-\gc/2+0.03) rectangle ++(\gc,\gc-0.06);
     }
   }
-  % destaque da linha r=1, que corresponde ao painel (a)
+  % destaque da linha ell=1, que corresponde ao painel (a)
   \draw[cTeste!70!black, line width=0.9pt, rounded corners=1.5pt]
     ({\gx-0.03},{-\gc/2}) rectangle ({\gx+10*\gc+0.03},{\gc/2});
   \draw[seta, cTeste!70!black, draw=cTeste!70!black] (7.5,0) .. controls (8.3,0) and (8.9,0.0) .. ({\gx-0.88},0);
   % saída
   \node[anchor=north west, caixaS, text width=6.4cm, align=flush left] (saida) at (8.8,{-9*\rs-0.45})
-    {$J=RK=100$ diferenças pareadas $\{d_{rj}\}$\\
-     $\Rightarrow \bar d$ e $\hat\sigma^2$ $\Rightarrow$ $t$ reamostrado corrigido,\\
+    {$RK=100$ diferenças pareadas $\{\Delta_{\ell j}\}$\\
+     $\Rightarrow \bar\Delta$ e $\hat\sigma^2$ $\Rightarrow$ $t$ reamostrado corrigido,\\
      variância $\big(\tfrac1{RK}+\tfrac{n_{\mathrm{te}}}{n_{\mathrm{tr}}}\big)\hat\sigma^2$, referência $t_{RK-1}$};
   % rodapé
   \node[anchor=north west, nota] at (-0.1,-7.05)
-    {Por algoritmo: $RK=100$ treinamentos com $0{,}9\,n$ exemplos cada; entre repetições, testes e treinos se sobrepõem. Os dois algoritmos usam as mesmas $\pi_r$ e as mesmas dobras.};
+    {Por algoritmo: $RK=100$ treinamentos com $0{,}9\,n$ exemplos cada; entre repetições, testes e treinos se sobrepõem. Os dois algoritmos usam as mesmas $\pi_\ell$ e as mesmas dobras.};
   \draw[treino] (-0.05,-7.75) rectangle ++(0.42,0.26); \node[anchor=west, font=\sffamily\footnotesize] at (0.4,-7.62) {treino};
   \draw[teste]  (1.6,-7.75) rectangle ++(0.42,0.26); \node[anchor=west, font=\sffamily\footnotesize] at (2.05,-7.62) {teste (Te)};
 \end{tikzpicture}

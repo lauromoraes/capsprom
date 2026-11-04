@@ -15,9 +15,9 @@
 
   % Caixa de cada partição
   \node[caixaT, text width=6.0cm] (treino) at (3.6,-3.45)
-    {\textbf{Treino} $\mathcal{D}^{\mathrm{tr}}_{rj}$ ($n_{\mathrm{tr}}$ exemplos)};
+    {\textbf{Treino} $\mathcal{D}^{\mathrm{tr}}_{\ell j}$ ($n_{\mathrm{tr}}$ exemplos)};
   \node[caixaTe, text width=4.6cm] (teste) at (12.6,-3.45)
-    {\textbf{Teste} $\mathcal{D}^{\mathrm{te}}_{rj}$ ($n_{\mathrm{te}}$ exemplos)};
+    {\textbf{Teste} $\mathcal{D}^{\mathrm{te}}_{\ell j}$ ($n_{\mathrm{te}}$ exemplos)};
   \node[caixaT, text width=6.0cm, align=flush left] (selecao) at (3.6,-5.25)
     {\textbf{Seleção interna, só no treino}\\[1pt]
      \footnotesize hiperparâmetros por validação cruzada interna;\\
@@ -26,9 +26,9 @@
   \node[caixaA, text width=2.45cm] (A) at (2.1,-7.25) {\textbf{Algoritmo $A$}\\\footnotesize ajuste final};
   \node[caixaB, text width=2.45cm] (B) at (5.1,-7.25) {\textbf{Algoritmo $B$}\\\footnotesize ajuste final};
   \node[caixa, text width=4.6cm] (aval) at (12.6,-6.3)
-    {\textbf{Avaliação no mesmo teste}\\ $M^{A}_{rj}$ e $M^{B}_{rj}$ (p.\,ex., MCC)};
+    {\textbf{Avaliação no mesmo teste}\\ $M^{A}_{\ell j}$ e $M^{B}_{\ell j}$ (p.\,ex., MCC)};
   \node[caixa, text width=4.6cm] (dif) at (12.6,-7.85)
-    {\textbf{Diferença pareada}\\ $d_{rj}=M^{A}_{rj}-M^{B}_{rj}$};
+    {\textbf{Diferença pareada}\\ $\Delta_{\ell j}=M^{A}_{\ell j}-M^{B}_{\ell j}$};
   \draw[seta] (part.south -| treino.north) -- (treino.north);
   \draw[seta] (part.south -| teste.north) -- (teste.north);
   \draw[seta] (treino) -- (selecao);
@@ -45,21 +45,21 @@
   % Contêiner
   \begin{scope}[on background layer]
     \node[draw=cCinza, dashed, rounded corners=4pt, fit=(treino)(teste)(selecao)(A)(B)(dif), inner sep=7pt,
-          label={[anchor=south, font=\sffamily\small\bfseries, text=cCinza]north:para cada partição $(r,j)$}] (cont) {};
+          label={[anchor=south, font=\sffamily\small\bfseries, text=cCinza]north:para cada partição $(\ell,j)$}] (cont) {};
   \end{scope}
 
   % Coleta das diferenças e testes
   \node[caixaS, text width=8.6cm] (col) at (8,-10.1)
-    {\textbf{Conjunto das diferenças pareadas} $\{d_{rj}\}$ de um único conjunto de dados};
+    {\textbf{Conjunto das diferenças pareadas} $\{\Delta_{\ell j}\}$ de um único conjunto de dados};
   \draw[seta] (dif.south) |- ($(col.north)+(1.5,0.35)$) -- ($(col.north)+(1.5,0)$);
   \node[caixa, text width=6.6cm, align=flush left] (f) at (3.9,-12.45)
-    {\textbf{5$\times$2cv} ($R=5$, $K=2$): 10 diferenças, 5 variâncias $s_r^2$\\
+    {\textbf{5$\times$2cv} ($R=5$, $K=2$): 10 diferenças, 5 variâncias $\hat\sigma_\ell^2$\\
      $\Rightarrow$ $F$ combinado de Alpaydin, referência $F_{10,5}$\\[1pt]
-     \footnotesize relatar: $p$; $\bar d$ e as 10 diferenças (descritivo)};
+     \footnotesize relatar: $p$; $\bar\Delta$ e as 10 diferenças (descritivo)};
   \node[caixa, text width=6.6cm, align=flush left] (t) at (12.1,-12.45)
     {\textbf{$R\times K$-fold} (p.\,ex., $10\times10$): $RK$ diferenças\\
      $\Rightarrow$ $t$ reamostrado corrigido, referência $t_{RK-1}$\\[1pt]
-     \footnotesize relatar: $\bar d$, IC corrigido e $p$};
+     \footnotesize relatar: $\bar\Delta$, IC corrigido e $p$};
   \draw[seta] (col.south -| f.north) -- (f.north);
   \draw[seta] (col.south -| t.north) -- (t.north);
   \node[nota, align=flush center] at (8,-11.15) {um teste por esquema;\\não intercambiáveis};

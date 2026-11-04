@@ -15,7 +15,7 @@
 
 Reconstructed datasets pair every promoter window with a genomic control drawn
 from the same assembly. A control is admitted only if it lies outside an
-exclusion radius $r$ around every known TSS, on both strands. The radius has
+exclusion radius $L_{\mathrm{excl}}$ around every known TSS, on both strands. The radius has
 two jobs. First, it keeps known initiation sites out of the negative class.
 Second, it prevents a control from sharing sequence with a positive window;
 otherwise the same nucleotides would carry opposite labels, the model would
@@ -25,22 +25,25 @@ have to join the two records to avoid leakage across partitions
 
 \subsection{Rule}
 
-The window of a domain spans $U$ nucleotides upstream of the TSS, the TSS
-itself, and $D$ nucleotides downstream (\texttt{specs/sequence\_window\_policy.md}).
-Under a symmetric, strand-agnostic radius, a control that starts $r+1$
-nucleotides from a TSS can still overlap the upstream part of that TSS's
-window whenever $r < U$. The radius is therefore defined per domain as
+The window of a domain spans $L_{\mathrm{up}}$ nucleotides upstream of the TSS,
+the TSS itself, and $L_{\mathrm{down}}$ nucleotides downstream
+(\texttt{specs/sequence\_window\_policy.md}), so that
+$L=L_{\mathrm{up}}+1+L_{\mathrm{down}}$. Under a symmetric, strand-agnostic
+radius, a control that starts $L_{\mathrm{excl}}+1$ nucleotides from a TSS can
+still overlap the upstream part of that TSS's window whenever
+$L_{\mathrm{excl}} < L_{\mathrm{up}}$. The radius is therefore defined per
+domain as
 \begin{equation}
-  r = U + m,
+  L_{\mathrm{excl}} = L_{\mathrm{up}} + L_{\mathrm{margin}},
 \end{equation}
-where $m$ is a margin for imprecision in the TSS position.
+where $L_{\mathrm{margin}}$ is a margin for imprecision in the TSS position.
 
 \begin{table}[htbp]
   \centering
   \caption{Exclusion radius per taxonomic domain.}
   \begin{tabular}{lrrrr}
     \toprule
-    Domain & Window & $U$ & $m$ & $r$ \\
+    Domain & Window & $L_{\mathrm{up}}$ & $L_{\mathrm{margin}}$ & $L_{\mathrm{excl}}$ \\
     \midrule
     Prokaryota & $-60..{+20}$ (81~nt) & 60 & 40 & 100 \\
     Eukaryota & $-200..{+50}$ (251~nt) & 200 & 50 & 250 \\
@@ -52,9 +55,9 @@ where $m$ is a margin for imprecision in the TSS position.
 
 \paragraph{Why the radius must grow with the window.}
 The radius of 100~nt was adequate for the original 81-nt window, because it
-exceeds $U=60$. Once eukaryotic windows were extended to 251~nt, the same
+exceeds $L_{\mathrm{up}}=60$. Once eukaryotic windows were extended to 251~nt, the same
 radius would allow a control to share up to 100~nt with the $-200..-101$ region
-of a known promoter (log R-036). Tying $r$ to $U$ removes this failure for any
+of a known promoter (log R-036). Tying $L_{\mathrm{excl}}$ to $L_{\mathrm{up}}$ removes this failure for any
 window length the protocol may adopt.
 
 \paragraph{Why the eukaryotic margin is wider.}

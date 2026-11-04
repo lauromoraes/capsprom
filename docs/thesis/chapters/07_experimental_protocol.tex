@@ -3,11 +3,13 @@
 \section{Experiment Configuration}\label{sec:protocol-configuration}
 
 Each experiment is specified by a tuple
-$(\mathcal{D},\Phi,f,\theta,E,r)$, where $\mathcal{D}$ is the labeled dataset,
-$\Phi$ is the combined feature representation, $f$ is the classifier or neural
-architecture, $\theta$ is the set of training and model parameters, $E$ is the
-set of evaluation outcomes, and $r$ denotes the random seed or replication
-index. The configuration, dataset hashes, software environment, and resulting
+$(\mathcal{D},\Phi,f,\boldsymbol{\theta},\boldsymbol{\xi},E,r)$, where
+$\mathcal{D}$ is the labeled dataset, $\Phi$ is the combined feature
+representation, $f$ is the classifier or neural architecture,
+$\boldsymbol{\theta}$ are its learned parameters, $\boldsymbol{\xi}\in\Xi$ is
+the hyperparameter configuration selected from the search space $\Xi$, $E$ is
+the set of evaluation outcomes, and $r$ denotes the random seed (notation of
+Section~\ref{sec:bg-formulation}). The configuration, dataset hashes, software environment, and resulting
 artifacts are recorded through MLflow so that every reported value is traceable
 to a versioned YAML specification.
 
@@ -203,8 +205,9 @@ artificially. These restrictions avoid the optimistic tests that can result
 from treating correlated cross-validation estimates as independent
 observations~\cite{dietterich1998approximate}.
 
-Every test record receives a positive-class score and a binary prediction. The
-primary decision threshold is 0.5. A threshold selected exclusively from
+Every test record receives a positive-class score $f(\Phi(x);\boldsymbol{\theta})$ and a binary
+prediction $\hat y$ (Equations~\eqref{eq:bg-score} and~\eqref{eq:bg-decision}).
+The primary decision threshold is $t^{\star}=0.5$. A threshold selected exclusively from
 out-of-fold training predictions may be reported as a secondary analysis but is
 frozen before test evaluation. Sigmoid or isotonic calibration is likewise fit
 only from training-derived out-of-fold predictions; raw and calibrated models
@@ -258,9 +261,9 @@ record-level resampling when defensible biological or source groups are
 available; otherwise, the possible dependence between sequences is stated as a
 limitation.
 
-For models $A$ and $B$, the seed-level effect in dataset $d$ and seed $s$ is
-$\Delta_{d,s}=\mathrm{MCC}_{A,d,s}-\mathrm{MCC}_{B,d,s}$. The dataset-level
-effect is $\Delta_d=\operatorname{median}_s(\Delta_{d,s})$, that is, the median
+For models $A$ and $B$, the seed-level effect in dataset $d$ and seed $r$ is
+$\Delta_{d,r}=\operatorname{MCC}_{A,d,r}-\operatorname{MCC}_{B,d,r}$. The dataset-level
+effect is $\Delta_d=\operatorname{median}_r(\Delta_{d,r})$, that is, the median
 of paired seed differences rather than the difference between independently
 aggregated model summaries. A deterministic baseline contributes one locked
 MCC, which is subtracted from every stochastic-seed result without turning

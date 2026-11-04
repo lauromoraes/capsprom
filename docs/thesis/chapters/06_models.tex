@@ -19,9 +19,21 @@ is intentionally kept separate from the feature-engineering encoder.
 In this thesis, CapsProm denotes the basic binary capsule architecture with two
 output capsules: one represents the non-promoter class and the other represents
 the promoter class. Primary capsules can consequently distribute their coupling
-between competing class capsules, making routing-by-agreement operational. The
-class prediction is determined by the output capsule with the largest vector
-norm, and the reconstruction branch is conditioned on the true class during
+between competing class capsules, making routing-by-agreement operational. Capsule equations in this chapter
+follow the notation of \citet{sabour2017dynamic} and describe a single input,
+so the example index is omitted and $i$ and $j$ index capsules. Let
+$\mathbf{v}_0$ and $\mathbf{v}_1$ denote the non-promoter and promoter output
+capsules. The positive-class score of Equation~\eqref{eq:bg-score} is the
+relative capsule length
+\begin{equation}
+  f\bigl(\Phi(x);\boldsymbol{\theta}\bigr)=\frac{\lVert\mathbf{v}_1\rVert}{\lVert\mathbf{v}_0\rVert+\lVert\mathbf{v}_1\rVert},
+  \label{eq:models-capsule-score}
+\end{equation}
+which is set to $0.5$ when both lengths are zero. This score is not a calibrated
+probability. The class prediction is the output capsule with the largest
+vector norm, which equals the decision rule of Equation~\eqref{eq:bg-decision}
+with $t^{\star}=0.5$, except that an exact tie is assigned to the
+non-promoter class. The reconstruction branch is conditioned on the true class during
 training and on the predicted class during inference. In the canonical
 implementation, the votes used to update agreement logits in intermediate
 routing iterations are detached from the computational graph, while gradients
