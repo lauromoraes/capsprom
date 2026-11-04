@@ -1338,3 +1338,62 @@ SHA-256 of the module that ran, when the change was not yet committed.
   both panels and are excluded from positional analyses.
 - All execution gates except `open_decisions_resolved` remain false. No
   control generated, no partition changed, no model output read.
+
+## R-065 · 2026-11-04 · CNNProm E. coli pilot builder and reproduction of the five cases
+
+- **Code.** `src/capsprom/data/ecoli_genomic_pilot.py` implements the positive
+  policy of `configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml`: RegulonDB
+  union, exact placement on NC_000913.3, multi-locus resolution by PromoterSet
+  name and header coordinate, and TSS-support classes (signed distance
+  `reference − record` in transcription direction, negative = upstream).
+  Native CNNProm negatives are placed on every exact NC_000913.3 locus and
+  become blocked intervals. `scripts/build_cnnprom_ecoli_genomic_pilot.py`
+  verifies the genome and every RegulonDB response hash, places the
+  positives, checks the contract's observed cases, and writes the placement
+  summary (committed) and ledger (ignored, SHA-256 `916ebb1d…`); `--execute`
+  refuses while `contract_frozen` or `builder_fixture_tested` is false.
+- **Fixtures.** `tests/test_ecoli_genomic_pilot.py` mirrors the five
+  situations on a synthetic genome (resolved and unresolved multi-locus,
+  near on both strands, shifted, none), the exclusion of every positive locus,
+  out-of-range RegulonDB rows, and native-negative placement.
+- **Contract edits (draft, before freezing).** `multiple_loci` gains the
+  header offset rule left implicit in R-064 (offset of the nearest
+  single-locus, strand-agreeing positive) and `header_agreement_tolerance_nt:
+  2`; `negative_policy` gains `regulondb_acquisition`.
+- **Result.** All five cases reproduce (F-134). No control generated, no
+  partition changed, no model output read; all gates are unchanged.
+- **Open before freezing.** `external_active_positive_identity` names
+  dependency manifest v4 but not its SHA-256, dataset count, or the processed
+  root of the active datasets; the builder refuses to generate until they are
+  declared. Grouping and split are not yet implemented for this pilot.
+
+## R-066 · 2026-11-04 · Nearest-GC-first control selection for the E. coli pilot
+
+- **Decision (project owner).** Taken in a forked session and relayed to this
+  one; the owner's words: "Adote as recomendações: * predeclarar o 'GC mais
+  próximo primeiro', com ±4 como teto; * manter a referência só-GC de
+  qualquer forma; * medir a diferença residual como diagnóstico." This
+  supersedes R-064's `residual_gc_gap` choice.
+- **Rule.** Among windows that pass every exclusion rule (unchanged), the
+  control is the one with the smallest absolute G/C count difference to its
+  positive; four bases stay a hard ceiling. Within one distance, candidates are
+  tried in a permutation seeded by the sampling seed and the positive locus;
+  positives are processed in stable source order. The v3 bacterial panels
+  accept the first candidate within the caliper, so the two rules' GC gaps are
+  not compared as one. Rationale: F-124 (asymmetric density inside the caliper
+  for AT-rich positives) and F-133 (about 26 free slots per positive).
+- **Code.** `admissible_windows` indexes every start that passes the static
+  rules (strict DNA, the both-strand TSS radius, native-negative blocks) by GC
+  count; `select_nearest_gc_controls` applies the dynamic rules (overlap with
+  selected controls, strand-invariant identity with positives, external
+  positives, and selected controls). The builder re-verifies every control
+  with `find_control_exclusion_violations` and `blocked_violations`. The shared
+  `reconstruct_bacterial_controls` is not changed. Fixtures: brute-force
+  equality of the admissible index, minimal-distance choice, ceiling,
+  determinism and seed dependence, forbidden identities, failure, and blocked
+  re-verification.
+- **Contract.** `negative_policy.control_selection` replaces the probe and
+  exhaustive-scan fields; `residual_gc_gap` becomes a diagnostic and the
+  GC-only reference stays beside every model. Draft SHA-256 `98369f01…`.
+  Plan mode re-run: the five cases still reproduce. No control generated; all
+  gates unchanged.

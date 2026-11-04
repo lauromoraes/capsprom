@@ -63,6 +63,12 @@ positive_policy:
       promoter name as the CNNProm header and whose position agrees with the
       header coordinate under the NC_000913.2 to NC_000913.3 offset. A record
       with no such locus, or with more than one, is unresolved.
+    header_offset_rule: >-
+      The NC_000913.2 to NC_000913.3 offset at a header coordinate is that of
+      the nearest single-locus positive whose header strand agrees with its
+      locus (target 1-based TSS minus header coordinate; ties to the lower
+      coordinate).
+    header_agreement_tolerance_nt: 2
     resolved_status: multiple_resolved
     unresolved_action: exclude_from_genomic_panel_and_count
     exclusion: every_locus_of_the_record
@@ -108,13 +114,29 @@ negative_policy:
   controls_per_positive: 1
   control_strand: same_as_positive
   sampling_seed: 20261104
-  max_attempts_per_positive: 100000
-  exhaustive_fallback: deterministic_replicon_scan_reservoir_sampling
-  separate_probe_and_scan_counters: true
+  control_selection:
+    rule: nearest_gc_first
+    description: >-
+      Among windows that pass every exclusion rule below, choose the one with
+      the smallest absolute G/C count difference to its positive; the
+      four-base maximum stays a hard ceiling. Within one distance, candidates
+      are tried in a permutation seeded by sampling_seed and the positive
+      locus. Positives are processed in stable source order.
+    implementation: capsprom.data.ecoli_genomic_pilot.select_nearest_gc_controls
+    differs_from: >-
+      The v3 bacterial genomic panels accept the first candidate within the
+      caliper (configs/graphpro_reconstruction_v3.yaml). Their GC gaps and this
+      panel's are not compared as one rule.
+    rationale: >-
+      F-124: first-accepted sampling leaves controls GC-richer than AT-rich
+      positives because genome density inside the caliper is asymmetric.
+      Capacity (F-133, about 26 free slots per positive) makes nearest-first
+      selection affordable.
   maximum_gc_count_difference: 4
   exclusion_radius_nt: 100
   exclusion_radius_rule: r_equals_upstream_60_plus_margin_40_log_R-036
   exclusion_strands: both
+  regulondb_acquisition: configs/regulondb_tss_acquisition_v1.yaml
   exclusion_set:
     - regulondb_union_configs/regulondb_tss_acquisition_v1.yaml
     - every_locus_of_every_positive
@@ -131,7 +153,8 @@ negative_policy:
   failure_policy: drop_positive_from_genomic_panel_after_exhaustive_scan_and_record
   rejection_counters_per_positive: true
   independent_reverification: find_control_exclusion_violations
-  residual_gc_gap: report_as_limitation_with_gc_only_reference_R-052
+  residual_gc_gap: measured_as_diagnostic_not_a_construction_input
+  gc_only_reference: reported_beside_every_model_R-052
 
 grouping_and_split:
   protocol: configs/homology_grouping_v1.yaml
@@ -159,8 +182,14 @@ resolved_decisions:
         negative panels share no bases; native negatives are CDS-derived (F-129).
     - id: residual_gc_gap
       decision: >-
-        Report as a limitation with the GC-only reference beside every model, as
-        in R-052; the caliper is not narrowed.
+        Superseded on 2026-11-04 (log R-066): the residual positive-minus-control
+        GC gap is measured as a diagnostic, not a construction input; the
+        GC-only reference is reported beside every model regardless.
+    - id: control_selection
+      decided_on: 2026-11-04
+      decision: >-
+        Nearest GC first with the four-base caliper as a hard ceiling (log
+        R-066).
     - id: near_tolerance_nt
       decision: 2
     - id: shifted_class_in_genomic_panel
