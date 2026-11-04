@@ -1,0 +1,169 @@
+pilot:
+  name: cnnprom-ecoli-genomic-control-pilot-v1
+  version: 1.0.0-draft
+  status: design_decisions_resolved_execution_blocked
+  specification: specs/negative_control_protocol.md
+  reconstruction_rules: specs/graphpro_dataset_reconstruction.md
+  research_log: R-064
+  condition: genomic_gc_matched
+  domain: prokaryota
+  dataset_id: cnnprom-ecoli-sigma70.recon-genomic-v1
+  source_collection: cnnprom-ecoli-sigma70
+  original_labels_modified: false
+  output_is_new_derived_dataset: true
+  confirmatory_use_enabled: false
+  rationale: >-
+    First genomic GC-matched panel for a source-native dataset. CNNProm E. coli
+    native negatives are opposite-strand CDS windows (F-129), so this panel
+    adds a genome-background test beside the coding-background native panel
+    for the same positives. The complete TSS exclusion set exists (RegulonDB
+    union, F-132) and capacity does not constrain the panel (F-133).
+  execution_gates:
+    open_decisions_resolved: true
+    contract_frozen: false
+    builder_fixture_tested: false
+    controls_generated: false
+    distribution_and_dependency_audit: false
+    manual_sample_audit: false
+    eligibility_manifest_approved: false
+
+reference:
+  acquisition: configs/reference_acquisition_v10.yaml
+  genome_fasta: data/acquired/reference_acquisition_v10/cnnprom-ecoli-k12/GCF_000005845.2_ASM584v2_genomic.fna.gz
+  genome_fasta_sha256: a96d3cfa58c88d477013c768f90a11d2386d42a70d566abfb6d9013dcbd24255
+  assembly: GCF_000005845.2
+  contig: NC_000913.3
+  source_coordinate_frame: NC_000913.2_F-098
+  placement: exact_both_strand_search_of_canonical_sequence
+  placement_rationale: >-
+    Same placement as configs/ecoli_control_capacity_v1.yaml; the RegulonDB
+    union and the capacity count are on NC_000913.3, so no coordinate lift
+    from NC_000913.2 is applied.
+
+window:
+  policy: specs/sequence_window_policy.md
+  upstream: 60
+  include_tss_base: true
+  downstream: 20
+  length: 81
+  tss_index: 60
+  orientation: transcription_five_prime_to_three_prime
+
+positive_policy:
+  source: cnnprom_native_positives_mapping_v3
+  mapping_records: data/coordinates/reference_coordinate_mapping_v3/records/cnnprom-ecoli-sigma70.csv.gz
+  canonical_table: data/canonical/source_canonicalization_v1/cnnprom-ecoli-sigma70.csv.gz
+  label_change: never
+  window_recropping: never
+  stable_source_order: canonical_record_order
+  tss_support_reference: regulondb_union_same_strand
+  multiple_loci:
+    rule: >-
+      Resolve to the locus whose TSS is in the RegulonDB union with the same
+      promoter name as the CNNProm header and whose position agrees with the
+      header coordinate under the NC_000913.2 to NC_000913.3 offset. A record
+      with no such locus, or with more than one, is unresolved.
+    resolved_status: multiple_resolved
+    unresolved_action: exclude_from_genomic_panel_and_count
+    exclusion: every_locus_of_the_record
+    ledger_fields: [all_loci, resolved_locus, resolution_evidence]
+    observed_cases:
+      - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000653
+        promoter: rrsAp2
+        loci: 2
+        note: both loci are union TSSs (rrsAp2, rrsBp2); header selects rrsAp2
+      - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000300
+        promoter: gltIp1
+        loci: 11
+        note: one locus (687895, minus) is the PromoterSet gltIp1 TSS; ten have no TSS nearby
+  tss_support_classes:
+    exact: TSS position and strand in the union
+    near: same-strand union TSS within the tolerance
+    shifted: same-strand PromoterSet TSS with the same promoter name beyond the tolerance
+    none: none of the above
+  near_tolerance_nt: 2
+  class_actions:
+    exact: keep_both_panels
+    near: keep_both_panels_record_distance
+    shifted: keep_both_panels_record_distance_exclude_from_positional_analyses
+    none: keep_native_panel_only_exclude_from_genomic_panel_and_count
+  observed_cases:
+    - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000681
+      promoter: serWp
+      nearest_union_tss_offset_nt: 1
+      expected_class: near
+    - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000631
+      promoter: rplUp
+      nearest_union_tss_offset_nt: 1
+      expected_class: near
+    - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000029
+      promoter: araCp
+      nearest_union_tss_offset_nt: -18
+      expected_class: shifted
+  observed_cases_status: >-
+    Identified by an unversioned scratch script on 2026-11-04. The builder must
+    reproduce them from versioned code before the contract is frozen.
+
+negative_policy:
+  controls_per_positive: 1
+  control_strand: same_as_positive
+  sampling_seed: 20261104
+  max_attempts_per_positive: 100000
+  exhaustive_fallback: deterministic_replicon_scan_reservoir_sampling
+  separate_probe_and_scan_counters: true
+  maximum_gc_count_difference: 4
+  exclusion_radius_nt: 100
+  exclusion_radius_rule: r_equals_upstream_60_plus_margin_40_log_R-036
+  exclusion_strands: both
+  exclusion_set:
+    - regulondb_union_configs/regulondb_tss_acquisition_v1.yaml
+    - every_locus_of_every_positive
+  regulondb_out_of_range_rows: drop_and_count
+  strict_dna_only: true
+  selected_control_overlap: reject
+  native_negative_overlap: reject
+  identity_with_positive_or_control: reject_forward_and_reverse_complement
+  external_active_positive_identity:
+    rule: reject_control_matching_active_external_positive
+    dependency_manifest: configs/dataset_dependency_manifest_v4.yaml
+    orientation: forward_and_reverse_complement
+    external_labels_modified: false
+  failure_policy: drop_positive_from_genomic_panel_after_exhaustive_scan_and_record
+  rejection_counters_per_positive: true
+  independent_reverification: find_control_exclusion_violations
+  residual_gc_gap: report_as_limitation_with_gc_only_reference_R-052
+
+grouping_and_split:
+  protocol: configs/homology_grouping_v1.yaml
+  pair_is_indivisible: true
+  genomic_overlap_edges: required
+  shared_groups_with_native_panel: required
+  native_partition_preserved: true
+  cross_partition_link_action: exclude_pair_from_genomic_panel_and_record
+
+statistics:
+  panels_reported_separately: true
+  cross_panel_comparison: intersection_of_test_positives_fixed_from_build_ledgers
+  selection_use: forbidden
+
+resolved_decisions:
+  decided_on: 2026-11-04
+  decided_by: project_owner
+  all_proposals_accepted: true
+  items:
+    - id: sampling_seed
+      decision: 20261104, a new dated value distinct from every existing sampling and run seed (specs/seed_policy.md)
+    - id: native_negative_overlap
+      decision: >-
+        Reject controls overlapping a native CNNProm negative window, so the two
+        negative panels share no bases; native negatives are CDS-derived (F-129).
+    - id: residual_gc_gap
+      decision: >-
+        Report as a limitation with the GC-only reference beside every model, as
+        in R-052; the caliper is not narrowed.
+    - id: near_tolerance_nt
+      decision: 2
+    - id: shifted_class_in_genomic_panel
+      decision: >-
+        Keep araCp-type records in both panels (the label is supported) and
+        exclude them only from positional analyses; the window is not recropped.

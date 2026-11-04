@@ -1315,3 +1315,26 @@ SHA-256 of the module that ran, when the change was not yet committed.
   mapping v3. Its locus check covers the 52 single-locus rows only. No record,
   status, or gate changed; the remaining acceptance items of F-100 are
   unaffected by this review.
+
+## R-064 · 2026-11-04 · CNNProm E. coli genomic-control pilot contract (design)
+
+- **Decision (project owner).** Draft
+  `configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml` for the
+  `genomic_gc_matched` condition of CNNProm *E. coli*
+  (`cnnprom-ecoli-sigma70.recon-genomic-v1`), the pilot named in R-062.
+  Positives are placed on NC_000913.3 by exact search; the exclusion set is
+  the RegulonDB union (F-132) plus every locus of every positive, r = 100 on
+  both strands; GC caliper 4; one same-strand control per positive.
+- **Problem positives.** A scratch identification found five: rrsAp2 (2 loci,
+  both union TSSs) and gltIp1 (11 loci, one the PromoterSet gltIp1 TSS); serWp
+  and rplUp 1 nt from a union TSS; araCp 18 nt from the current RegulonDB
+  araCp TSS. The contract resolves multiple loci by union promoter name and
+  header coordinate and classes TSS support as exact, near (±2 nt), shifted,
+  or none, each with a declared action. No label is changed and no window is
+  recropped. The cases must be reproduced by versioned code before freezing.
+- **Accepted proposals.** Sampling seed 20261104; controls overlapping native
+  CNNProm negatives are rejected; the residual GC gap is reported with the
+  GC-only reference (R-052); near tolerance 2 nt; shifted records stay in
+  both panels and are excluded from positional analyses.
+- All execution gates except `open_decisions_resolved` remain false. No
+  control generated, no partition changed, no model output read.
