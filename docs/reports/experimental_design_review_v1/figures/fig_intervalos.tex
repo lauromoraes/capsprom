@@ -1,0 +1,35 @@
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\input{estilo}
+\begin{document}
+\begin{tikzpicture}[x=100cm]
+  % x axis: Delta MCC from -0.03 to 0.07 (1 unit = 100 cm, so 0.01 = 1 cm)
+  \fill[oiGreen!12] (-0.02,0.35) rectangle (0.02,-4.25);
+  \draw[black!70] (-0.03,-4.25) -- (0.07,-4.25);
+  \foreach \v/\t in {-0.03/$-0{,}03$,-0.02/$-0{,}02$,-0.01/$-0{,}01$,0/$0$,0.01/$0{,}01$,0.02/$0{,}02$,0.03/$0{,}03$,0.04/$0{,}04$,0.05/$0{,}05$,0.06/$0{,}06$,0.07/$0{,}07$} {
+    \draw[black!70] (\v,-4.25) -- (\v,-4.32);
+    \node[nota, anchor=north] at (\v,-4.32) {\t};
+  }
+  \node[nota] at (0.02,-4.95) {$\Delta$MCC (A $-$ B) com IC 95\%};
+  \draw[black!60, thick] (0,0.35) -- (0,-4.25);
+  \draw[oiGreen!70!black, dashed] (-0.02,0.35) -- (-0.02,-4.25);
+  \draw[oiGreen!70!black, dashed] (0.02,0.35) -- (0.02,-4.25);
+  \node[nota, text=oiGreen!60!black, anchor=south] at (0,0.35) {margem de relevância $\pm\delta$, com $\delta = 0{,}02$ (exemplo)};
+  \node[font=\sffamily\fsz\bfseries, text=oiVerm, anchor=west] at (0.0615,0.55) {DADOS FICTÍCIOS};
+  % scenarios: label, estimate, low, high
+  \foreach \i/\est/\lo/\hi/\rot in {
+      1/0.045/0.031/0.060/{(i) significativo e relevante},
+      2/0.008/0.004/0.012/{(ii) significativo, mas todo o IC está dentro de $\pm\delta$},
+      3/0.021/-0.004/0.046/{(iii) não significativo e inconclusivo},
+      4/0.0005/-0.008/0.009/{(iv) não significativo e equivalente dentro de $\pm\delta$}} {
+    \pgfmathsetmacro\y{-0.95*\i+0.45}
+    \draw[very thick, oiBlue] (\lo,\y) -- (\hi,\y);
+    \draw[very thick, oiBlue] (\lo,\y-0.09) -- (\lo,\y+0.09);
+    \draw[very thick, oiBlue] (\hi,\y-0.09) -- (\hi,\y+0.09);
+    \fill[oiBlue] (\est,\y) circle (2.4pt);
+    \node[nota, anchor=west] at (0.0615,\y) {\rot};
+  }
+\end{tikzpicture}
+\end{document}

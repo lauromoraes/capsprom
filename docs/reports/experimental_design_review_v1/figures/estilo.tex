@@ -1,0 +1,40 @@
+% Shared TikZ style for the report figures.
+% Colours follow the Okabe-Ito palette, which stays distinguishable under the
+% common forms of colour-vision deficiency. Every colour-coded element also
+% carries a text label, so no figure depends on colour alone.
+\usetikzlibrary{arrows.meta,positioning,fit,calc,backgrounds,decorations.pathreplacing,shapes.geometric}
+
+\definecolor{oiOrange}{HTML}{E69F00}
+\definecolor{oiSky}{HTML}{56B4E9}
+\definecolor{oiGreen}{HTML}{009E73}
+\definecolor{oiYellow}{HTML}{F0E442}
+\definecolor{oiBlue}{HTML}{0072B2}
+\definecolor{oiVerm}{HTML}{D55E00}
+\definecolor{oiPurple}{HTML}{CC79A7}
+\definecolor{oiGray}{HTML}{6E6E6E}
+
+\colorlet{corTreino}{oiBlue!22}
+\colorlet{corValid}{oiGreen!30}
+\colorlet{corTeste}{oiOrange!45}
+\colorlet{corControle}{oiPurple!35}
+
+\tikzset{
+  >=Stealth,
+  bloco/.style={draw=black!70, rounded corners=1.5pt, minimum height=0.62cm,
+    inner sep=2pt, font=\sffamily\fsz, align=center},
+  treino/.style={bloco, fill=corTreino},
+  valid/.style={bloco, fill=corValid},
+  teste/.style={bloco, fill=corTeste, thick},
+  etapa/.style={draw=black!70, rounded corners=3pt, fill=black!4,
+    text width=4.3cm, align=center, inner sep=4pt, font=\sffamily\fsz},
+  nota/.style={font=\sffamily\fsz, align=left, text=black!80},
+  titulo/.style={font=\sffamily\fst\bfseries, anchor=west},
+  seta/.style={->, thick, black!70},
+  regiao/.style={draw=black!50, dashed, rounded corners=4pt},
+}
+
+% Absolute font sizes, so a figure looks the same standalone (10 pt class) and
+% inside the 11 pt report.
+\providecommand{\fsx}{\fontsize{5.5}{6.5}\selectfont}
+\providecommand{\fsz}{\fontsize{7}{8.5}\selectfont}
+\providecommand{\fst}{\fontsize{9}{11}\selectfont}

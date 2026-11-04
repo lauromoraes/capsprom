@@ -1,0 +1,34 @@
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\input{estilo}
+\begin{document}
+\begin{tikzpicture}[
+  conf/.style={etapa, text width=6.6cm, fill=oiBlue!10},
+  expl/.style={etapa, text width=6.3cm, fill=oiYellow!25, dashed},
+  ]
+  \node[titulo] at (0,0.75) {Linha confirmatória};
+  \node[titulo] at (8.6,0.75) {Linha secundária ou exploratória};
+  \node[conf] (c0) at (3.5,0)     {\textbf{0.} Fixar decisões em contrato YAML versionado, antes de qualquer execução};
+  \node[conf] (c1) at (3.5,-1.05) {\textbf{1.} Construir positivos e controles (uma semente de amostragem por procedimento)};
+  \node[conf] (c2) at (3.5,-2.1)  {\textbf{2.} Agrupar por homologia; separar 80/20 por grupos; o teste externo fica selado};
+  \node[conf] (c3) at (3.5,-3.15) {\textbf{3.} Seleção interna: 5-fold por grupos no treino, com regra predefinida e sem teste de hipótese};
+  \node[conf] (c4) at (3.5,-4.2)  {\textbf{4.} Ajuste final no treino completo, com as 10 sementes de execução};
+  \node[conf, fill=corTeste!45] (c5) at (3.5,-5.25) {\textbf{5.} Abrir o teste externo uma única vez};
+  \node[conf] (c6) at (3.5,-6.3)  {\textbf{6.} Por dataset: $\Delta$MCC pareado e IC 95\% por bootstrap de grupos};
+  \node[conf] (c7) at (3.5,-7.35) {\textbf{7.} Entre datasets: um efeito por cluster de dependência; Wilcoxon ou Friedman, com Holm};
+  \foreach \a/\b in {c0/c1,c1/c2,c2/c3,c3/c4,c4/c5,c5/c6,c6/c7} { \draw[seta] (\a) -- (\b); }
+
+  \node[expl] (e1) at (11.95,-2.1) {\textbf{S1.} Estabilidade do procedimento: $K$-fold por grupos repetido \emph{dentro do treino}; teste $t$ corrigido ou $t$ bayesiano correlacionado, como descrição};
+  \node[expl] (e2) at (11.95,-3.55) {\textbf{S2.} 5$\times$2cv com $F$ de Alpaydin: experimento dedicado a um par de procedimentos, se o custo permitir};
+  \node[expl] (e3) at (11.95,-5.25) {\textbf{S3.} Painéis alternativos de controles (CDS, embaralhados) e diagnósticos de qualidade dos controles};
+  \node[expl] (e4) at (11.95,-6.75) {\textbf{S4.} Interação arquitetura $\times$ controles: exploratória até haver clusters independentes suficientes};
+  \draw[seta, dashed] (c2.east) -- (e1.west);
+  \draw[seta, dashed] (c2.east) to[out=0,in=180] (e2.west);
+  \draw[seta, dashed] (c5.east) -- (e3.west);
+  \draw[seta, dashed] (c6.east) to[out=0,in=180] (e4.west);
+  \node[nota, text width=6.3cm, anchor=north] at (11.95,-7.75)
+    {As análises S1 e S2 usam só a partição de treino. Nenhum resultado da linha secundária altera escolhas da linha confirmatória.};
+\end{tikzpicture}
+\end{document}

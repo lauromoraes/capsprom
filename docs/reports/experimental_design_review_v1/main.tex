@@ -1,0 +1,840 @@
+% Experimental-design review v1 (Portuguese report).
+% Build instructions are in README.md of this directory.
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{babel}
+% The local TeX installation has no Portuguese hyphenation patterns, so the
+% text is set without hyphenation instead of with foreign patterns.
+\babelprovide[import,main,hyphenrules=nohyphenation]{portuguese}
+\usepackage[a4paper,margin=2.3cm,headheight=14pt]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx,array,multirow,longtable}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usepackage{standalone}
+\usepackage{graphicx}
+\usepackage{pdflscape}
+\usepackage[font=small,labelfont=bf,labelsep=period]{caption}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage[round,authoryear]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+\input{figures/estilo}
+
+\setlength{\emergencystretch}{3em}
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+\setlist{itemsep=0.15em, topsep=0.3em}
+\renewcommand{\arraystretch}{1.18}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily CapsProm: avaliação do desenho experimental}
+\fancyhead[R]{\small\sffamily v1, 4 nov.\ 2026}
+\fancyfoot[C]{\small\thepage}
+
+% Evidence tags. Each tag carries its own word, so colour is not needed to read it.
+\newcommand{\etiqueta}[2]{\tcbox[on line, colback=#1!10, colframe=#1!75!black,
+  boxrule=0.4pt, arc=1.2pt, left=1.5pt, right=1.5pt, top=0pt, bottom=0pt,
+  fontupper=\sffamily\scriptsize\bfseries]{#2}}
+\newcommand{\lit}{\etiqueta{oiBlue}{Literatura}}
+\newcommand{\proj}{\etiqueta{oiGreen}{Projeto}}
+\newcommand{\rec}{\etiqueta{oiVerm}{Recomendação}}
+\newcommand{\fic}{\etiqueta{oiPurple}{Fictício}}
+\newcommand{\arq}[1]{\nolinkurl{#1}}
+
+\newtcolorbox{exemplo}[1]{breakable, enhanced, colback=oiPurple!4, colframe=oiPurple!70!black,
+  boxrule=0.6pt, arc=2pt, title={Exemplo fictício: #1}, fonttitle=\sffamily\bfseries\small}
+\newtcolorbox{resumo}[1][Em resumo]{breakable, enhanced, colback=oiSky!7, colframe=oiBlue!65!black,
+  boxrule=0.6pt, arc=2pt, title={#1}, fonttitle=\sffamily\bfseries\small}
+
+\newcommand{\MCC}{\mathrm{MCC}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\med}{mediana}
+
+\title{\sffamily\bfseries Avaliação crítica de um desenho experimental aninhado para o CapsProm\\[4pt]
+\large\mdseries $K$-fold repetido com teste $t$ corrigido no nível externo e 5$\times$2cv com o $F$ combinado de Alpaydin no nível interno}
+\author{\sffamily Relatório metodológico para a tese de doutorado em Ciência da Computação (UFOP)\\
+\sffamily\small Projeto CapsProm\quad·\quad elaborado com assistência do Claude (Anthropic), para revisão do autor}
+\date{\sffamily\small Versão 1, 4 de novembro de 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\begin{resumo}[Resumo executivo]
+\textbf{Pergunta.} Convém adotar, no CapsProm, um desenho em dois níveis: $K$-fold repetido com $S$ sementes e teste $t$ corrigido no nível externo, e 5$\times$2cv com o teste $F$ combinado de Alpaydin no nível interno?
+
+\textbf{Resposta curta.} Não como desenho confirmatório principal. Partes dele são úteis em papéis secundários.
+\begin{enumerate}[leftmargin=1.4em]
+\item \textbf{O nível interno não precisa de teste de hipótese.} Esse nível serve para \emph{escolher} uma configuração, e escolher é uma decisão, não uma inferência. Usar o $F$ de Alpaydin para escolher traz vários problemas:
+  \begin{itemize}[leftmargin=1.2em]
+  \item multiplica os testes;
+  \item confunde ``não significativo'' com ``equivalente'';
+  \item treina cada modelo com só metade do treino externo;
+  \item custa o dobro de um 5-fold interno.
+  \end{itemize}
+  Uma regra de seleção fixada de antemão resolve o problema por menos.
+\item \textbf{O nível externo com teste $t$ corrigido é defensável, com limites.} Ele estima o desempenho de um \emph{procedimento} de aprendizagem, não do modelo final ajustado. A correção de Nadeau e Bengio é heurística. O teste vale para um dataset por vez e exige folds formados por grupos de homologia. Ele não substitui a inferência entre datasets, que no projeto se faz por cluster de dependência.
+\item \textbf{A proposta conflita com o protocolo vigente.} Um $K$-fold externo reciclaria o conjunto de teste externo selado, que hoje é fixo, separado por grupos e aberto uma única vez. Para o $K$-fold repetido não conflitar, ele deve ficar \emph{dentro} da partição de treino, como análise de estabilidade.
+\item \textbf{Controles negativos pedem outro desenho.} O efeito da arquitetura, o efeito da estratégia de controles e a interação entre os dois exigem um desenho fatorial avaliado num painel de teste comum. Também exigem diagnósticos de qualidade dos controles: um MCC maior não indica controle melhor.
+\end{enumerate}
+\textbf{Recomendação.} Manter o protocolo confirmatório vigente (\S\ref{sec:recomendacao}). Trocar qualquer teste interno por uma regra de seleção predeclarada. Acrescentar como análises secundárias: (i) $K$-fold por grupos repetido dentro do treino, para estabilidade; (ii) 5$\times$2cv apenas em experimentos dedicados a um par de procedimentos; (iii) o desenho fatorial de controles, com diagnósticos.
+\end{resumo}
+
+\paragraph{Como ler as etiquetas.} Cada afirmação importante traz sua origem:
+\begin{itemize}[leftmargin=1.4em]
+\item \lit\ resultado publicado em fonte primária;
+\item \proj\ fato verificado nos arquivos do repositório nesta data, com o caminho do arquivo;
+\item \rec\ proposta deste relatório, que ainda não foi adotada;
+\item \fic\ número inventado só para ilustrar, sem relação com nenhum resultado do projeto.
+\end{itemize}
+Este relatório não altera o protocolo vigente e não inicia experimentos.
+
+\tableofcontents
+
+%=====================================================================
+\section{Escopo e fontes consultadas}
+%=====================================================================
+
+O relatório examina a proposta abaixo sem presumir que ela seja adequada:
+
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Nível externo:} validação cruzada $K$-fold repetida com $S$ sementes, associada a um teste $t$ corrigido para reamostragem \citep{nadeau2003,bouckaert2004}.
+\item \textbf{Nível interno:} 5$\times$2cv associado ao teste $F$ combinado de \citet{alpaydin1999}.
+\end{itemize}
+
+\proj\ Foram lidos os seguintes arquivos do repositório:
+\begin{itemize}[leftmargin=1.4em]
+\item o protocolo estatístico, \arq{specs/statistical_evaluation_protocol.md}, e seu contrato vigente, \arq{configs/evaluation_protocol_v4.yaml} (versão 4.0.0, desenho congelado e execução bloqueada);
+\item a política de sementes, \arq{specs/seed_policy.md};
+\item os protocolos de controles negativos (\arq{specs/negative_control_protocol.md} e \arq{specs/cds_negative_control_protocol.md}) e de agrupamento por homologia (\arq{specs/homology_grouping_protocol.md});
+\item o contrato do experimento canônico, \arq{specs/capsprom_canonical_experiment.md};
+\item o contrato de reconstrução genômica, \arq{configs/graphpro_reconstruction_v3.yaml};
+\item o registro de achados, \arq{docs/provenance/findings_register.md}.
+\end{itemize}
+
+\lit\ As fontes estatísticas primárias são:
+\begin{itemize}[leftmargin=1.4em]
+\item \citet{dietterich1998}, \citet{alpaydin1999}, \citet{nadeau2003} e \citet{bouckaert2004};
+\item \citet{bengio2004} e \citet{bates2024};
+\item \citet{varma2006} e \citet{cawley2010};
+\item \citet{demsar2006}, \citet{benavoli2017} e \citet{holm1979};
+\item \citet{field2007}, \citet{teufel2023} e \citet{petti2022}.
+\end{itemize}
+A fórmula do teste corrigido para $K$-fold repetido foi conferida no texto completo de \citet{bouckaert2004}.
+
+%=====================================================================
+\section{Quatro atividades que não devem ser confundidas}
+\label{sec:conceitos}
+%=====================================================================
+
+Um desenho experimental em aprendizado de máquina mistura quatro atividades. Cada uma responde a uma pergunta diferente e erra de um jeito diferente (Tabela~\ref{tab:conceitos}).
+
+\begin{table}[htbp]
+\centering\small
+\caption{As quatro atividades de um desenho experimental. A confusão entre elas é a origem da maioria dos erros discutidos neste relatório.}
+\label{tab:conceitos}
+\begin{tabularx}{\linewidth}{L{2.6cm}YYY}
+\toprule
+Atividade & Pergunta respondida & Produto & Erro típico \\
+\midrule
+Reamostragem & Como gerar várias versões de treino e teste a partir de um dataset? & Partições (folds, metades, réplicas bootstrap) & Partir pares ou homólogos entre treino e teste (vazamento) \\
+Seleção de modelos & Qual configuração usar? & Uma configuração $c^\ast$ (hiperparâmetros, épocas, limiar) & Escolher olhando o teste; tratar a escolha como teste de hipótese \\
+Estimação de generalização & Quanto o procedimento acerta em dados novos da mesma população? & Estimativa pontual e intervalo & Estimar no mesmo dado usado para escolher (viés otimista) \\
+Teste de hipóteses & A diferença observada entre A e B é compatível com o acaso? & Valor-$p$, decisão com erro tipo I controlado & Tratar folds ou sementes como observações independentes \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\lit\ \citet{varma2006} e \citet{cawley2010} mostram que usar a mesma validação cruzada para escolher e para estimar produz estimativas otimistas. A validação cruzada aninhada separa as duas coisas: o laço interno escolhe e o laço externo estima.
+
+\lit\ \citet{bates2024} mostram outra coisa. O que a validação cruzada estima é o erro médio de modelos treinados em \emph{outros} conjuntos de treino da mesma população, e não o erro do modelo ajustado nos dados em mãos. Além disso, intervalos de confiança ingênuos sobre essa estimativa cobrem menos do que o nível nominal.
+
+%=====================================================================
+\section{O desenho proposto}
+\label{sec:desenho}
+%=====================================================================
+
+\subsection{Explicação intuitiva}
+
+Imagine um concurso entre dois métodos de cozinha, A e B, julgado com os ingredientes disponíveis.
+
+No \emph{nível externo}, separamos os ingredientes em $K$ lotes. Em cada rodada, um lote fica guardado para a prova final e os outros vão para a cozinha. Repetimos a separação $S$ vezes, sorteando os lotes de novo a cada vez.
+
+No \emph{nível interno}, dentro da cozinha de cada rodada, cada método ainda precisa decidir sua receita: tempo de forno, temperos, e assim por diante. Na proposta, essa decisão sai de um mini-concurso: dividir os ingredientes da cozinha ao meio, cozinhar com uma metade, provar com a outra, inverter as metades e repetir tudo cinco vezes, aplicando um teste estatístico a cada par de receitas.
+
+A receita escolhida é então feita com todos os ingredientes da cozinha e provada no lote guardado. A diferença de nota entre A e B naquele lote é uma observação. As $KS$ observações alimentam o teste $t$ corrigido.
+
+O ponto crítico está em o que cada nível precisa entregar. O nível interno precisa de uma \emph{escolha}, não de um valor-$p$. O nível externo precisa de uma \emph{estimativa com incerteza honesta}. A Figura~\ref{fig:aninhamento} mostra a estrutura.
+
+\begin{figure}[t]
+\centering
+\includestandalone[width=\linewidth]{figures/fig_aninhamento}
+\caption{Aninhamento proposto. No nível externo, cada repetição $s$ divide os grupos de homologia em $K$ folds. O fold $k$ é o teste externo; os outros formam o treino externo $T_{k,s}$. No nível interno, o 5$\times$2cv divide $T_{k,s}$ ao meio cinco vezes e compara configurações. A configuração escolhida é reajustada em $T_{k,s}$ e avaliada uma única vez no fold $k$, gerando a diferença $x_{k,s}$. As $KS$ diferenças são combinadas pelo teste $t$ corrigido. A seta tracejada marca o único ponto em que o fold de teste é usado.}
+\label{fig:aninhamento}
+\end{figure}
+
+\subsection{Formalização}
+
+Sejam:
+\begin{itemize}[leftmargin=1.4em]
+\item $\mathcal{D}$ um dataset com $n$ registros (positivos e controles), organizados em grupos $g\in\mathcal{G}$. No projeto, um grupo é uma componente conexa do grafo de dependência: pares positivo--controle, alinhamentos e sobreposição genômica.
+\item A e B dois \emph{procedimentos} de aprendizagem. Um procedimento inclui representação, arquitetura, algoritmo de treino, espaço de busca $\mathcal{C}$ e regra de seleção.
+\item Para cada repetição $s=1,\dots,S$, os grupos são permutados com a semente de particionamento $s$ e repartidos em $K$ folds de grupos inteiros, estratificados por classe.
+\item Para cada fold $k$: $V_{k,s}$ é o fold de teste externo e $T_{k,s}=\mathcal{D}\setminus V_{k,s}$ é o treino externo, com $n_1=|T_{k,s}|$ e $n_2=|V_{k,s}|$.
+\end{itemize}
+
+Para cada célula $(k,s)$ e cada procedimento:
+\begin{enumerate}[leftmargin=1.4em]
+\item \textbf{Seleção interna.} Escolher $c^\ast_{k,s}\in\mathcal{C}$ usando só $T_{k,s}$. A proposta usa 5$\times$2cv com o $F$ de Alpaydin.
+\item \textbf{Reajuste.} Treinar $c^\ast_{k,s}$ em $T_{k,s}$ inteiro.
+\item \textbf{Avaliação.} Calcular o MCC em $V_{k,s}$:
+\begin{equation}
+\MCC=\frac{TP\cdot TN-FP\cdot FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}.
+\end{equation}
+\end{enumerate}
+A observação externa é a diferença pareada $x_{k,s}=\MCC_A(V_{k,s})-\MCC_B(V_{k,s})$. As duas parcelas são pareadas porque A e B usam o mesmo treino e o mesmo teste.
+
+\subsection{Função de cada nível e necessidade do teste interno}
+
+\paragraph{Nível externo.} Estima o desempenho de cada procedimento e a diferença entre eles. A escolha interna faz parte do procedimento avaliado, e por isso a estimativa não sofre o viés de seleção descrito por \citet{varma2006}.
+
+\paragraph{Nível interno.} Escolhe $c^\ast_{k,s}$. O teste interno \textbf{não é necessário} e, na forma proposta, atrapalha.
+
+\rec\ Há cinco razões.
+\begin{enumerate}[leftmargin=1.4em]
+\item \textbf{Escolher não é testar.} O resultado do nível interno é uma configuração, não uma afirmação científica. Uma regra como ``a de maior MCC interno médio; em empate, a mais simples'' já basta. O valor-$p$ interno nunca é reportado como evidência, porque a inferência válida é a externa.
+\item \textbf{Multiplicidade.} Com $|\mathcal{C}|=C$ configurações, comparar todos os pares exige $C(C-1)/2$ testes $F$ por célula: com $C=8$, são 28 testes em cada uma das $KS$ células. Sem correção, as decisões viram ruído. Com correção, o poder some.
+\item \textbf{``Não significativo'' não é ``equivalente''.} Uma regra do tipo ``mantenha a configuração mais simples a menos que a mais complexa seja significativamente melhor'' trata ausência de evidência como evidência de ausência. Isso só é legítimo com uma margem de equivalência declarada \citep{lakens2017}.
+\item \textbf{Metade dos dados.} No 5$\times$2cv, cada ajuste interno usa 50\% de $T_{k,s}$, ou seja, 40\% do dataset quando $K=5$. Para redes de cápsulas, isso pode mudar qual configuração é melhor, como o número de épocas ou a regularização, em relação ao reajuste com 100\% de $T_{k,s}$.
+\item \textbf{Custo.} São 10 ajustes por configuração, contra 5 num 5-fold interno (\S\ref{sec:custo}).
+\end{enumerate}
+
+\subsection{Formação dos conjuntos de treino, validação e teste}
+\label{sec:conjuntos}
+
+A Tabela~\ref{tab:conjuntos} mostra o papel de cada conjunto. A regra geral é que nenhuma decisão baseada em dados pode olhar para $V_{k,s}$.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Papel de cada conjunto no desenho proposto e no protocolo vigente do projeto.}
+\label{tab:conjuntos}
+\begin{tabularx}{\linewidth}{L{2.5cm}YY}
+\toprule
+Conjunto & Proposta & Protocolo vigente \proj \\
+\midrule
+Teste externo & Fold $V_{k,s}$; cada registro é teste $S$ vezes & 20\% dos grupos, fixo, selado até o fim (\texttt{homology\_grouping\_v1}) \\
+Treino externo & $T_{k,s}$, com $(K-1)/K$ dos grupos & 80\% dos grupos \\
+Treino interno & Metade $A_i$ ou $B_i$ de $T_{k,s}$ & 4 de 5 folds internos por grupos (semente 42) \\
+Validação interna & A outra metade & 1 de 5 folds internos \\
+Parada antecipada & Dentro de cada ajuste interno, na validação interna; no reajuste, por regra fixa de épocas & Época = mediana inferior das melhores épocas dos 5 folds (máx.\ 50, paciência 15) \\
+Limiar & Fixo em 0,5 ou escolhido em predições fora do fold dentro de $T_{k,s}$ & 0,5 primário; limiar de treino só como análise secundária \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Equações: o teste \texorpdfstring{$t$}{t} 5\texorpdfstring{$\times$}{x}2cv de Dietterich e o \texorpdfstring{$F$}{F} combinado de Alpaydin}
+\label{sec:eq5x2}
+
+\lit\ No 5$\times$2cv \citep{dietterich1998}, os dados são permutados cinco vezes ($i=1,\dots,5$) e divididos em duas metades $S_i^{(1)}$ e $S_i^{(2)}$. Na rodada $j=1$, A e B treinam em $S_i^{(1)}$ e são avaliados em $S_i^{(2)}$; na rodada $j=2$, o inverso. A Figura~\ref{fig:reamostragem}a mostra o esquema. Definimos:
+\begin{align}
+p_i^{(j)} &= \text{diferença de desempenho (A $-$ B) na rodada $j$ da replicação $i$},\\
+\bar{p}_i &= \tfrac{1}{2}\big(p_i^{(1)}+p_i^{(2)}\big),\qquad
+s_i^2=\big(p_i^{(1)}-\bar{p}_i\big)^2+\big(p_i^{(2)}-\bar{p}_i\big)^2 .
+\end{align}
+O original usa diferenças de \emph{taxa de erro}; usar diferenças de MCC é uma extensão sem validação nas simulações originais. O termo $s_i^2$ estima a variância da diferença dentro da replicação $i$. Sob $H_0$ (nenhuma diferença esperada), e supondo $p_i^{(j)}\sim\mathcal{N}(0,\sigma^2)$, cada $s_i^2/\sigma^2$ segue aproximadamente uma $\chi^2_1$.
+
+\paragraph{Teste $t$ 5$\times$2cv de Dietterich.}
+\begin{equation}
+\tilde{t}=\frac{p_1^{(1)}}{\sqrt{\tfrac{1}{5}\sum_{i=1}^{5}s_i^2}}\ \sim\ t_5\quad\text{sob }H_0 .
+\end{equation}
+O numerador usa \emph{uma única} diferença, a da primeira rodada da primeira replicação. O teste é bilateral e mantém o sinal da diferença. Seu ponto fraco é depender de qual diferença ocupa a posição $(1,1)$, que é arbitrária.
+
+\paragraph{Teste $F$ combinado de Alpaydin.}
+\begin{equation}
+f=\frac{\sum_{i=1}^{5}\sum_{j=1}^{2}\big(p_i^{(j)}\big)^2}{2\sum_{i=1}^{5}s_i^2}\ \sim\ F_{10,\,5}\quad\text{sob }H_0 .
+\end{equation}
+O numerador soma os quadrados das dez diferenças: sob $H_0$, $\sum(p_i^{(j)})^2/\sigma^2\approx\chi^2_{10}$. O denominador soma os cinco $s_i^2$: $\sum s_i^2/\sigma^2\approx\chi^2_5$. A razão de duas qui-quadrado divididas por seus graus de liberdade dá $F_{10,5}$. Rejeita-se $H_0$ para valores grandes de $f$.
+
+\lit\ \citet{alpaydin1999} relata erro tipo I menor e poder maior que o teste $t$ de Dietterich, porque o $F$ usa as dez diferenças e não depende da ordem.
+
+\paragraph{Como interpretar.} O $F$ é \emph{não direcional}: ele detecta que as diferenças se afastam de zero, mas não diz quem é melhor. O sinal vem da média das dez diferenças. Os dois testes respondem a uma pergunta sobre \emph{procedimentos} treinados com metade dos dados, num único dataset.
+
+\paragraph{Pressupostos comuns.}
+\begin{itemize}[leftmargin=1.4em]
+\item As diferenças são aproximadamente normais, com a mesma variância.
+\item O numerador e o denominador são aproximadamente independentes, o que não é exato porque as metades se reutilizam.
+\item Os registros são permutáveis entre as metades. Com grupos de homologia, a divisão precisa ser por grupos, e as metades deixam de ter tamanhos exatamente iguais.
+\end{itemize}
+
+\begin{exemplo}{Dietterich e Alpaydin com os mesmos dados}
+\fic\ Suponha as dez diferenças de MCC (A $-$ B) abaixo.
+\begin{center}\small
+\begin{tabular}{crrrr}
+\toprule
+$i$ & $p_i^{(1)}$ & $p_i^{(2)}$ & $\bar{p}_i$ & $s_i^2$\\
+\midrule
+1 & 0,020 & 0,010 & 0,0150 & 0,0000500\\
+2 & 0,015 & 0,025 & 0,0200 & 0,0000500\\
+3 & 0,030 & 0,005 & 0,0175 & 0,0003125\\
+4 & 0,010 & 0,020 & 0,0150 & 0,0000500\\
+5 & 0,025 & 0,015 & 0,0200 & 0,0000500\\
+\bottomrule
+\end{tabular}
+\end{center}
+O teste $t$ de Dietterich dá $\tilde{t}=1{,}975$ ($p=0{,}105$, 5 g.l.), e o $F$ de Alpaydin dá $f=3{,}537$ ($p=0{,}088$, 10 e 5 g.l.).
+
+Agora troque apenas $p_1^{(1)}$ por 0,002. O $t$ de Dietterich cai para $0{,}201$ ($p=0{,}85$), enquanto o $F$ quase não muda: $3{,}265$ ($p=0{,}10$).
+
+O mesmo conjunto de dados leva a conclusões diferentes no $t$ conforme a ordem das rodadas. Essa instabilidade foi o que motivou o $F$ combinado. Note também que, nos dois casos, as dez diferenças são todas positivas e nenhum teste rejeita $H_0$ a 5\%: com só cinco graus de liberdade no denominador, o poder é baixo.
+\end{exemplo}
+
+\begin{figure}[t]
+\centering
+\includestandalone[width=\linewidth]{figures/fig_5x2_kfold}
+\caption{Duas formas de reamostragem. (a) No 5$\times$2cv, cada replicação $i$ é uma nova permutação dividida em metades A e B, usadas alternadamente como treino e teste. (b) No $K$-fold repetido ($K=5$, $S=3$), o número em cada célula é o fold do registro na repetição $s$. Cada fold é teste uma vez por repetição, e cada treino contém $(K-1)/K$ dos dados. Num desenho por grupos, cada quadrado representa um grupo de homologia inteiro.}
+\label{fig:reamostragem}
+\end{figure}
+
+\subsection{O teste \texorpdfstring{$t$}{t} corrigido compatível com \texorpdfstring{$K$}{K}-fold repetido}
+\label{sec:tcorrigido}
+
+\paragraph{Por que corrigir.} Com $J=KS$ diferenças $x_{k,s}$, de média $\bar{x}$ e variância amostral $\hat{\sigma}^2$, o teste $t$ pareado ingênuo usa
+\begin{equation}
+t_{\text{ingênuo}}=\frac{\bar{x}}{\sqrt{\hat{\sigma}^2/J}},\qquad J-1\ \text{g.l.}
+\end{equation}
+
+\lit\ Esse teste supõe as $J$ diferenças independentes, e elas não são: os treinos se sobrepõem, e cada registro aparece em $S$ conjuntos de teste. \citet{bouckaert2004} relatam erro tipo I muito alto para esse teste e recomendam não usá-lo. \citet{bengio2004} provam que não existe estimador não viesado da variância do $K$-fold que valha para toda distribuição.
+
+\paragraph{A correção de Nadeau e Bengio.}
+\lit\ Suponha que cada $x_j$ tenha variância $\sigma^2$ e que a correlação entre dois deles seja $\rho$. Então:
+\begin{equation}
+\Var(\bar{x})=\sigma^2\Big(\rho+\frac{1-\rho}{J}\Big),\qquad \mathbb{E}\big[\hat{\sigma}^2\big]=(1-\rho)\,\sigma^2 .
+\end{equation}
+Combinando as duas expressões:
+\begin{equation}
+\widehat{\Var}(\bar{x})=\Big(\frac{1}{J}+\frac{\rho}{1-\rho}\Big)\hat{\sigma}^2 .
+\end{equation}
+\citet{nadeau2003} propõem a aproximação heurística $\rho\approx n_2/(n_1+n_2)$, ou seja, a fração de teste. Com ela, $\rho/(1-\rho)=n_2/n_1$.
+
+\paragraph{A forma para $K$-fold repetido.} \citet{bouckaert2004} estendem a correção ao $K$-fold repetido $r$ vezes. Com as diferenças $x_{k,s}$ para o fold $k$ da repetição $s$:
+\begin{equation}
+\boxed{\;t_{\text{corr}}=\frac{\dfrac{1}{KS}\displaystyle\sum_{k=1}^{K}\sum_{s=1}^{S}x_{k,s}}{\sqrt{\Big(\dfrac{1}{KS}+\dfrac{n_2}{n_1}\Big)\hat{\sigma}^2}},\qquad KS-1\ \text{graus de liberdade},\;}
+\end{equation}
+em que $\hat{\sigma}^2=\frac{1}{KS-1}\sum_{k,s}(x_{k,s}-\bar{x})^2$. No $K$-fold, $n_2/n_1=1/(K-1)$, ou seja, $1/4$ para $K=5$ e $1/9$ para $K=10$.
+
+\lit\ \citet{bouckaert2004} relatam que essa versão tem erro tipo I próximo do nominal e replicabilidade melhor que as alternativas que estudaram, a custo computacional comparável.
+
+\paragraph{O que muda na prática.} O termo $n_2/n_1$ domina o denominador: com $K=5$ e $S=10$, ele vale $0{,}25$, contra $1/50=0{,}02$ do termo ingênuo. Aumentar $S$ reduz só a parcela $1/(KS)$. Por isso o teste corrigido continua conservador, e repetir mais não traz poder ilimitado. O Exemplo da \S\ref{sec:exemplos} mostra o efeito em números.
+
+\paragraph{Pressupostos e limitações que permanecem.}
+\begin{enumerate}[leftmargin=1.4em]
+\item \textbf{A correlação é aproximada.} A correlação real entre as diferenças depende da estabilidade do algoritmo, e $\rho=n_2/n$ é só uma aproximação \citep{nadeau2003,bengio2004}. O teste é aproximadamente válido, não exato.
+\item \textbf{O estimando é o procedimento.} O teste compara A e B como \emph{procedimentos} treinados em conjuntos de tamanho $n_1$ daquela população, não os modelos finais \citep{bates2024}.
+\item \textbf{Grupos.} Com dependência entre registros, como pares, homólogos ou regiões sobrepostas, os folds precisam ser de grupos inteiros \citep{roberts2017,teufel2023}. Ainda assim, a correção não modela a correlação extra dentro dos grupos. A razão $n_2/n_1$ passa a ser a razão realizada, e a heurística fica menos justificada quando os grupos têm tamanhos muito desiguais, como o grupo encadeado de 1.154 registros do \emph{L.\ interrogans} (F-120).
+\item \textbf{MCC por fold.} O MCC é limitado a $[-1,1]$, não é aditivo e fica ruidoso em folds pequenos. A normalidade de $x_{k,s}$ precisa ser verificada. Uma alternativa é o MCC agregado por repetição: as predições fora do fold de cada $s$ geram $S$ valores, mas isso muda a estrutura de correlação, e a correção acima deixa de ser a mesma.
+\item \textbf{Um dataset por vez.} O teste não diz nada sobre outros datasets, organismos ou fontes. A generalização entre datasets exige uma análise por cluster de dependência \citep{demsar2006}.
+\item \textbf{Sementes de execução.} Se cada célula tiver $R$ ajustes com sementes diferentes, deve-se fazer a média dentro da célula antes do teste. Usar as $KSR$ diferenças com $J=KSR$ trataria sementes como réplicas independentes.
+\end{enumerate}
+
+\rec\ Uma alternativa com a mesma correção é o teste $t$ bayesiano correlacionado \citep{benavoli2017}. Ele produz a probabilidade posterior de que a diferença caia numa região de equivalência prática, o que conversa diretamente com a margem $\delta$ da \S\ref{sec:discussao}.
+
+\subsection{Sementes: particionamento, inicialização e amostragem de controles}
+\label{sec:sementes}
+
+Há pelo menos quatro fontes de aleatoriedade, e elas não são intercambiáveis (Tabela~\ref{tab:sementes}).
+
+\begin{table}[htbp]
+\centering\small
+\caption{Fontes de aleatoriedade, seus papéis no projeto e na proposta.}
+\label{tab:sementes}
+\begin{tabularx}{\linewidth}{L{2.4cm}YYY}
+\toprule
+Fonte & O que varia & Projeto hoje \proj & Na proposta \rec \\
+\midrule
+Particionamento ($s$) & Quais grupos caem em cada fold & Semente 42, partições materializadas e com hash; nunca regeneradas com sementes de execução & $S$ sementes de particionamento distintas, fixadas antes; cada uma gera um manifesto de folds com hash \\
+Execução ($r$) & Pesos iniciais, ordem dos lotes, dropout, subamostragem do XGBoost & 10 sementes: 13, 29, 42, 71, 101, 137, 173, 211, 251, 293; reserva só em bloco & As mesmas sementes para todos os modelos de uma comparação; média dentro da célula $(k,s)$ \\
+Amostragem de controles ($q$) & Quais janelas genômicas viram controles & Uma semente por procedimento: 20261021 (genômico) e 20261102 (CDS) & Fixa no confirmatório. Variar $q$ cria \emph{outro dataset} e entra só como sensibilidade \\
+Reamostragem ($b$) & Índices do bootstrap ou da permutação & 20260715 no protocolo v4 & Inalterada \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\rec\ Para separar as fontes de variância, o particionamento e a execução devem ser \emph{cruzados}, ou ao menos ter papéis distintos. Usar a mesma semente para as duas, como em $s=r$, \emph{confunde} os efeitos: não se sabe se uma variação veio da partição ou da inicialização.
+
+\lit\ \citet{bouthillier2021} mostram que a variação devida à amostragem dos dados costuma ser grande perto da variação devida à inicialização. Por isso, variar só as sementes de execução subestima a incerteza de um benchmark.
+
+\proj\ A política de sementes do projeto já proíbe regenerar partições com sementes de execução e trata as sementes como medida de \emph{estabilidade algorítmica}, não como unidades de replicação (\arq{specs/seed_policy.md}).
+
+\subsection{O que é pareado e qual é a unidade de análise}
+\label{sec:unidade}
+
+\paragraph{Pareamentos legítimos.}
+\begin{itemize}[leftmargin=1.4em]
+\item Dentro de cada célula $(k,s)$, A e B usam o mesmo treino e o mesmo teste, então $x_{k,s}$ é pareado.
+\item Dentro de uma semente $r$, os modelos estocásticos usam a mesma semente. Um modelo determinístico é ajustado uma vez, e seu resultado é subtraído de cada semente.
+\item Dentro de um conjunto de teste fixo, as predições recaem sobre os mesmos registros. É isso que permite o bootstrap pareado.
+\end{itemize}
+
+\paragraph{Unidades de análise.}
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Dentro de um dataset}, a unidade de amostragem é o \emph{grupo de homologia} do teste, reamostrado no bootstrap por grupos \citep{field2007}. No desenho proposto, a unidade são as $KS$ células, que são dependentes e por isso exigem a correção.
+\item \textbf{Entre datasets}, a unidade é o \emph{cluster de dependência}. \proj\ O manifesto v4 registra 12 clusters entre os 18 datasets elegíveis, e 14 com os candidatos reconstruídos.
+\end{itemize}
+
+\paragraph{Como não pseudorreplicar.}
+\begin{enumerate}[leftmargin=1.4em]
+\item Reduzir as sementes a um efeito por célula ou por dataset antes de qualquer teste.
+\item Reduzir os datasets de um mesmo cluster a um efeito por cluster.
+\item Nunca juntar folds, sementes e datasets numa única amostra para Wilcoxon ou $t$.
+\item Nunca aplicar um teste entre datasets a valores por fold.
+\end{enumerate}
+
+\subsection{Hiperparâmetros, parada antecipada e limiar sem tocar no teste externo}
+
+\rec\ Regras que valem tanto para a proposta quanto para o protocolo vigente:
+\begin{enumerate}[leftmargin=1.4em]
+\item \textbf{Só o treino decide.} Toda operação que aprende com dados fica dentro de $T_{k,s}$ (ou da partição de treino) e é refeita em cada célula externa: normalização, seleção de atributos, calibração, escolha de épocas e de limiar.
+\item \textbf{Parada antecipada em dois tempos.} Nos ajustes internos, monitora-se a validação interna. No reajuste, que não tem validação, usa-se uma regra fixa. \proj\ O projeto usa a mediana inferior das melhores épocas dos cinco folds internos.
+\item \textbf{Limiar.} O primário é fixo em 0,5. Um limiar alternativo sai de predições fora do fold \emph{dentro} do treino e é reportado como análise secundária.
+\item \textbf{Orçamento igual.} O espaço de busca e o número de ajustes por modelo são fixados antes e são iguais, ou explicitamente comparáveis, entre os modelos. \proj\ Hoje o XGBoost e a regressão logística usam hiperparâmetros fixos, e o CapsProm só seleciona a época.
+\item \textbf{Construção dos dados vem antes.} A exclusão de controles a menos de 100 nt de qualquer TSS da tabela completa usa as coordenadas de todos os positivos, inclusive os que vão para o teste. Isso é aceitável porque define a população antes da partição e não usa nenhuma predição. O dataset fica congelado antes de qualquer modelo.
+\end{enumerate}
+
+%=====================================================================
+\section{Perguntas de pesquisa e hipóteses}
+\label{sec:hipoteses}
+%=====================================================================
+
+A Tabela~\ref{tab:hipoteses} relaciona cada pergunta à hipótese, à comparação e à análise. Há uma distinção essencial:
+\begin{itemize}[leftmargin=1.4em]
+\item As \textbf{hipóteses de desempenho preditivo} (Q1 a Q8) são sobre modelos num conjunto de teste definido.
+\item As \textbf{hipóteses sobre a qualidade dos controles e do pareamento} (Q9) são sobre os \emph{dados}: balanceamento, diversidade e atalhos. Elas se testam sem treinar o modelo de interesse.
+\end{itemize}
+
+\begin{landscape}
+{\centering\scriptsize
+\captionof{table}{Perguntas, hipóteses e análises. $\Delta$ indica diferença pareada de MCC; ``cluster'' é o cluster de dependência do manifesto v4. As linhas sombreadas são perguntas que o desenho proposto, sozinho, não responde.}
+\label{tab:hipoteses}
+\begin{tabularx}{\linewidth}{L{2.6cm}L{3.6cm}YL{2.1cm}L{1.5cm}L{3.6cm}L{3.0cm}}
+\toprule
+Pergunta & $H_0$ / $H_1$ & Comparação & Unidade & Métrica & Método & Alcance da conclusão \\
+\midrule
+Q1. CapsProm supera os baselines? & $H_0$: mediana do $\Delta$ por cluster $=0$; $H_1$: $\neq0$ & CapsProm vs.\ RL, XGBoost (e CNN, se predeclarada), com os mesmos dados, folds, sementes e orçamento & Cluster (entre); grupo de teste (dentro) & MCC; secundárias: AUC, PR-AUC & $\Delta$ por dataset com IC por bootstrap de grupos; Wilcoxon sobre clusters; Holm & Datasets elegíveis, janelas 81/251 nt, controles nativos \\
+Q2. Qual variante do CapsProm é melhor? & $H_0$: as variantes têm a mesma distribuição de MCC & Básico vs.\ \emph{Embedding} vs.\ multicabeça & Cluster & MCC & Friedman, depois só os Wilcoxon predeclarados, com Holm & As variantes testadas \\
+Q3. Um componente importa (ablação)? & $H_0$: remover o componente não muda o MCC; para ``pode remover'': $H_0$: $|\Delta|\geq\delta$ & Modelo completo vs.\ sem roteamento dinâmico, sem decodificador ou com outro número de cápsulas; um fator por vez & Cluster & MCC & Wilcoxon e Hodges--Lehmann com IC; família própria de Holm; TOST com margem $\delta$ & O componente nesta arquitetura e neste treino \\
+Q4. Estabilidade à inicialização & Descritiva; ``não colapsa'' é uma afirmação de limite & 10 sementes de execução, com dados e partição fixos & Semente dentro do dataset (descritivo) & DP e IQR do MCC; taxa de colapso & IQR; limite superior exato $1-0{,}05^{1/n}$ (26\% com $n=10$) & Esses datasets e sementes \\
+\rowcolor{black!6}
+Q5. Estabilidade ao particionamento & Descritiva: variância do $\Delta$ entre partições & $K$-fold por grupos repetido \emph{dentro do treino} & Repetição $s$ (dependente) & MCC & Componentes de variância; $t$ corrigido só como descrição & O procedimento, no tamanho $n_1$ \\
+\rowcolor{black!6}
+Q6. Generaliza entre datasets, fontes e organismos? & $H_0$: a perda de desempenho fora do domínio é igual para A e B & Treinar em $a$ e testar em $b$; ou deixar um cluster de fora & Par fonte$\to$alvo, agregado por cluster-alvo & MCC & Matriz de transferência; Wilcoxon se houver $\geq10$ clusters-alvo & Pares de domínios incluídos \\
+\rowcolor{black!6}
+Q7. A estratégia de controles de treino muda o desempenho? & $H_0$: $\Delta^{\text{est}}=0$ num painel de teste comum & Treino com controles nativos vs.\ genômicos GC vs.\ multinegativo, com modelo e treino fixos & Grupo de teste; cluster & MCC por painel & Bootstrap pareado no painel comum; agregação por cluster & Só datasets com as duas estratégias (hoje 3 bactérias): exploratória \\
+\rowcolor{black!6}
+Q8. Há interação arquitetura $\times$ controles? & $H_0$: $\Delta^{\text{mod}}_G-\Delta^{\text{mod}}_N=0$ & Desenho fatorial $2\times2$ (ou maior) no painel comum & Cluster & MCC & Contraste diferença de diferenças com IC por bootstrap & Exploratória (protocolo v1 de controles) \\
+\rowcolor{black!6}
+Q9. Os controles são bem pareados e livres de atalhos? & $H_0$ de equivalência: $|\text{SMD}|\geq\tau$ (desbalanceado); atalho: MCC do classificador só-GC $\leq\epsilon$ & Controles vs.\ positivos, sem o modelo de interesse & Par ou registro, dentro do dataset & SMD de GC, JSD de $k$-mers, TV posicional, MCC do atalho & Testes de equivalência; IC do MCC do atalho; diagnósticos da \S\ref{sec:diagnosticos} & Propriedades medidas; não prova que os controles são não promotores \\
+\bottomrule
+\end{tabularx}
+}
+\end{landscape}
+
+\paragraph{O que o desenho proposto não consegue responder.} \rec\ O $K$-fold externo, com 5$\times$2cv interno, compara procedimentos \emph{dentro} de um dataset. Por isso ele não responde a:
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Generalização entre datasets ou organismos (Q6).} Todos os folds vêm da mesma população.
+\item \textbf{Superioridade geral do CapsProm (Q1).} Isso exige agregar datasets por cluster. Somar valores-$p$ ou contar vitórias por dataset não basta \citep{demsar2006}.
+\item \textbf{Equivalência.} Um teste de diferença sem margem $\delta$ não sustenta ``A e B são equivalentes'' nem ``o componente pode ser removido''.
+\item \textbf{Qualidade e validade biológica dos controles (Q9).} Nenhum valor de MCC prova que um controle é um não promotor. Os controles genômicos têm incerteza do tipo positivo-não-rotulado \citep{elkan2008}: estar ausente da tabela de TSSs não prova inatividade.
+\item \textbf{Desempenho numa varredura genômica real.} Falsos positivos por megabase exigem um painel de varredura, previsto no protocolo de controles como análise adicional.
+\item \textbf{Mecanismo.} Uma ablação mostra que retirar um componente muda o MCC naquele treino, mas não que o componente ``aprende'' um motivo biológico específico.
+\end{itemize}
+
+%=====================================================================
+\section{Separar os efeitos da arquitetura e da construção dos dados}
+\label{sec:efeitos}
+%=====================================================================
+
+\subsection{Critérios de pareamento efetivamente adotados}
+\label{sec:criterios}
+
+\proj\ Os critérios abaixo foram conferidos nos contratos e nas especificações.
+
+\paragraph{Controle genômico pareado por GC.} Fonte: \arq{configs/graphpro_reconstruction_v3.yaml} e \arq{specs/negative_control_protocol.md}.
+\begin{itemize}[leftmargin=1.4em]
+\item Um controle por TSS positivo, na mesma montagem e na mesma fita, com a mesma janela (81 nt: 60 a montante, o TSS e 20 a jusante).
+\item Exclusão de qualquer posição a menos de 100 nt de qualquer TSS da tabela primária completa, em todas as classes e nas duas fitas.
+\item Sem sobreposição com outro controle e só DNA estrito (ACGT).
+\item Sem identidade com um positivo ou com outro controle, em qualquer orientação. Também são rejeitados controles iguais a positivos ativos de outros 18 datasets.
+\item Diferença de no máximo 4 bases G/C em relação ao positivo.
+\item Amostragem com a semente 20261021: até 100.000 sondagens aleatórias e, depois disso, uma varredura exaustiva com amostragem de reservatório.
+\item O par positivo--controle é indivisível em toda filtragem e partição.
+\end{itemize}
+
+\paragraph{Controle derivado de CDS.} Fonte: \arq{specs/cds_negative_control_protocol.md}.
+\begin{itemize}[leftmargin=1.4em]
+\item Janela de 81 nt na fita senso de um CDS elegível, com fase em ciclo 0, 1, 2.
+\item Pelo menos 60 nt de distância do início e do fim do CDS.
+\item Sem sobreposição com outro CDS ou RNA anotado.
+\item As mesmas regras de exclusão de TSS e de GC do controle genômico.
+\item O \emph{L.\ interrogans} foi excluído desta condição por esgotar o espaço codificante (F-123).
+\end{itemize}
+
+\paragraph{Diagnósticos já medidos.} Apesar da tolerância por par, os controles são mais ricos em GC que os positivos em \emph{C.\ jejuni} e \emph{C.\ pneumoniae} (F-124): 2,3 e 1,9 pontos percentuais no painel genômico, e 2,8 e 2,6 no painel CDS. No \emph{L.\ interrogans} não há diferença.
+
+\paragraph{Agrupamento.} Fonte: \arq{specs/homology_grouping_protocol.md}.
+\begin{itemize}[leftmargin=1.4em]
+\item As arestas do grafo vêm de três fontes: pares; alinhamentos MMseqs2 com identidade e cobertura de pelo menos 0,80 nas duas fitas, ou distância de Hamming de até $\lfloor0{,}2L\rfloor$; e sobreposição genômica \citep{steinegger2017}.
+\item As componentes conexas nunca são divididas entre treino e teste nem entre folds internos \citep{teufel2023,petti2022}.
+\end{itemize}
+
+\paragraph{Estatística entre painéis.}
+\begin{itemize}[leftmargin=1.4em]
+\item Os painéis de controles nunca são concatenados num único MCC.
+\item As comparações entre painéis ficam restritas à interseção dos positivos de teste, e essa interseção é fixada antes de qualquer avaliação.
+\item A interação modelo $\times$ política é exploratória na versão 1.
+\end{itemize}
+
+\subsection{Desenho fatorial}
+
+\rec\ Considere três fatores:
+\begin{itemize}[leftmargin=1.4em]
+\item a arquitetura $a$ (CapsProm, baselines);
+\item a estratégia de controles \emph{de treino} $n$ (nativa, genômica GC, CDS, multinegativa);
+\item o painel \emph{de teste} $P$.
+\end{itemize}
+Seja $\mu_{a,n}(P)$ o MCC esperado no painel $P$. Os três efeitos se definem num painel fixo $P^\ast$ (Figura~\ref{fig:fatorial}):
+\begin{align}
+\text{efeito do modelo (com $n$ fixo):}\quad & \Delta^{\text{mod}}_n=\mu_{C,n}(P^\ast)-\mu_{B,n}(P^\ast),\\
+\text{efeito da estratégia (com $a$ fixo):}\quad & \Delta^{\text{est}}_a=\mu_{a,G}(P^\ast)-\mu_{a,N}(P^\ast),\\
+\text{interação:}\quad & I=\Delta^{\text{mod}}_G-\Delta^{\text{mod}}_N=\Delta^{\text{est}}_C-\Delta^{\text{est}}_B .
+\end{align}
+
+\begin{enumerate}[leftmargin=1.4em]
+\item \textbf{Efeito do modelo.} Fixe os dados, os controles de treino, os folds, as sementes, o orçamento e a regra de seleção. Mude só a arquitetura.
+\item \textbf{Efeito dos controles.} Fixe a arquitetura e todo o procedimento de modelagem. Mude só os controles \emph{de treino}, e avalie todos os modelos resultantes no \emph{mesmo} painel de teste. Faça isso em mais de um painel, como o nativo e o genômico, para ver se a conclusão depende do painel.
+\item \textbf{Interação.} Use o contraste $I$, com um IC por bootstrap pareado de grupos no painel comum, recalculando as quatro células em cada réplica. Entre datasets, agregue $I$ por cluster. Com poucos clusters, como as três bactérias reconstruídas hoje, a análise é exploratória.
+\end{enumerate}
+
+\begin{figure}[t]
+\centering
+\includestandalone[width=\linewidth]{figures/fig_fatorial}
+\caption{Separação de efeitos. (a) Desenho $2\times2$: arquitetura (CapsProm $C$ ou baseline $B$) cruzada com os controles usados no treino (nativos $N$ ou genômicos pareados por GC $G$). Todas as células são avaliadas no mesmo painel de teste $P^\ast$. As setas indicam o efeito da estratégia, dentro de uma arquitetura, e o efeito do modelo, dentro de uma estratégia. A interação é a diferença entre os efeitos do modelo nas duas estratégias. (b) Gráfico de interação com valores fictícios: linhas não paralelas indicam interação.}
+\label{fig:fatorial}
+\end{figure}
+
+\subsection{Pares e grupos no particionamento}
+
+\rec\ Para manter pares e grupos juntos (Figura~\ref{fig:pares}):
+\begin{enumerate}[leftmargin=1.4em]
+\item \textbf{Grupo global.} Antes de qualquer partição, construa o grafo com todos os registros de todas as condições: positivos e controles nativos, genômicos e CDS. Isso garante que um positivo e qualquer controle derivado dele fiquem no mesmo lado em \emph{todas} as condições. \proj\ É a regra de ``grupo global'' do protocolo de controles; o controle CDS herda o grupo do positivo.
+\item \textbf{Folds de grupos.} Use \emph{StratifiedGroupKFold} sobre os grupos, tanto no nível externo da proposta quanto no interno. No 5$\times$2cv, as metades também têm de ser de grupos inteiros.
+\item \textbf{Sobreposição de loci.} Janelas que se sobrepõem no genoma, em qualquer fita, entram como aresta. Um controle que se liga a um registro de outra partição é excluído do painel e registrado, sem mudar o split.
+\item \textbf{Grupos grandes.} Um grupo encadeado grande desequilibra os folds. \proj\ É o caso do grupo de 1.154 registros do \emph{L.\ interrogans}, que ficou inteiro no fold interno 4 (F-120). Um desequilíbrio assim aumenta a variância entre folds e merece um relatório à parte; ele é tolerado pelo limite de 20\%.
+\end{enumerate}
+
+\begin{figure}[t]
+\centering
+\includestandalone[width=\linewidth]{figures/fig_pares}
+\caption{Preservação de pares e grupos. (a) Cada positivo (círculo) se liga ao seu controle (quadrado). Alinhamentos e sobreposições genômicas unem pares em componentes conexas G1--G4. (b) No particionamento correto, cada componente vai inteira para um único bloco. (c) Na divisão por registro, o par P2--C2 e os homólogos P2--P3 ficam em lados opostos, e o modelo pode ``reconhecer'' o teste por semelhança em vez de generalizar.}
+\label{fig:pares}
+\end{figure}
+
+\subsection{Positivos comuns e conjuntos de avaliação comuns}
+
+Quando a estratégia de controles muda, o conjunto de \emph{teste} também pode mudar. Há três situações.
+\begin{enumerate}[leftmargin=1.4em]
+\item \textbf{Mesmo painel para todos.} Os modelos treinados com controles diferentes são avaliados nos mesmos registros. O pareamento é completo e o bootstrap pareado vale. \rec\ Este é o desenho preferido para Q7 e Q8.
+\item \textbf{Painéis diferentes com os mesmos positivos.} Por exemplo, o painel nativo e o genômico. A sensibilidade sobre os positivos comuns é pareada, mas a especificidade não, porque os controles são outros. O MCC mistura as duas, então uma diferença de MCC entre painéis reflete a \emph{dificuldade do painel} tanto quanto o modelo. Ela não mede a qualidade dos controles.
+\item \textbf{Positivos diferentes.} Acontece quando um positivo perde o controle num painel, como as falhas do painel CDS. \proj\ O protocolo restringe a comparação à interseção dos positivos de teste, com os identificadores fixados pelos registros de construção antes de qualquer avaliação.
+\end{enumerate}
+
+\rec\ Para um IC de uma diferença entre painéis, use um \emph{bootstrap conjunto de grupos}: cada unidade reamostrada é um ``supergrupo'' com o positivo, seus controles em todos os painéis e os homólogos ligados a eles. Assim, cada réplica recalcula os dois painéis sobre o mesmo conjunto de positivos. O pareamento é parcial, e o relatório deve dizer isso.
+
+\subsection{Por que um MCC maior não indica controle melhor, e o que medir no lugar}
+\label{sec:diagnosticos}
+
+\lit\ Controles fáceis, como sequências de composição diferente, produzem MCC alto porque o modelo aprende um \emph{atalho} \citep{geirhos2020}. \citet{krutzfeldt2020} e \citet{gonzalez2025} mostram que a escolha dos negativos muda o desempenho e o viés dos preditores de sequências regulatórias. Em particular, negativos tirados de CDS induzem um viés de GC em preditores de promotores bacterianos.
+
+\proj\ O protocolo do projeto afirma o mesmo: um MCC maior sob controles mais fáceis não é evidência de melhor detecção de promotores. A Tabela~\ref{tab:diagnosticos} reúne os diagnósticos recomendados.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Diagnósticos de qualidade dos controles e do pareamento. Nenhum depende do desempenho do modelo de interesse.}
+\label{tab:diagnosticos}
+\begin{tabularx}{\linewidth}{L{2.7cm}YL{3.4cm}L{3.0cm}}
+\toprule
+Diagnóstico & Como medir & Sinal de alerta \rec & Situação no projeto \proj \\
+\midrule
+Balanceamento de GC & Diferença padronizada de médias (SMD) e distribuição de GC por classe, global e no teste & $|\text{SMD}|>0{,}1$ ou diferença sistemática apesar da tolerância & Diferença de 1,9--2,8 p.p.\ em Cje e Cpne (F-124) \\
+Composição de $k$-mers & Divergência de Jensen--Shannon entre classes, para $k=2,3$ & Divergência acima de um limiar predeclarado & Auditoria de distribuições (R-051) \\
+Perfil posicional & Distância de variação total (TV) por posição & TV alta \emph{fora} das posições esperadas de elementos promotores & TV maior em $-8$, $-35/-34$ e 0, posições esperadas (F-124) \\
+Periodicidade de 3 nt & Espectro por classe (painel CDS) & Pico só nos controles & Exigido pelo protocolo CDS \\
+Atalho trivial & MCC de um classificador só-GC ou só-$k$-mer, com IC & MCC do atalho próximo ao do modelo & Referência só-GC congelada (R-052) \\
+Diversidade e cobertura & Número de grupos, maior grupo, distribuição dos controles no cromossomo & Grupos gigantes; controles concentrados & Grupo encadeado (F-120); viés posicional no CDS do Lint (F-123) \\
+Ruído de rótulo & TSSs não anotados entre os controles; condição experimental dos TSSs & Controles perto de TSSs de outra condição & Exclusão pelas duas temperaturas no Lint \\
+Dependência externa & Identidade ou alinhamento com outros datasets & Controles iguais a positivos de outro dataset & Manifesto de dependência v4 (F-125) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\rec\ Um bom controle é aquele que (i) se parece com os positivos nas características que \emph{não} definem promotor, como GC, comprimento, fita e região do genoma; (ii) não deixa um atalho trivial; (iii) é diverso e cobre o genoma; e (iv) tem baixa probabilidade de ser um promotor não anotado.
+
+Esses critérios são verificados \emph{antes} e \emph{fora} da comparação de modelos. Um modelo pode ter MCC menor com controles melhores, e é exatamente isso que se espera quando o atalho some.
+
+%=====================================================================
+\section{Vantagens, limitações e alternativas}
+\label{sec:alternativas}
+%=====================================================================
+
+A Tabela~\ref{tab:alternativas} compara as alternativas. Os custos usam a notação da \S\ref{sec:custo}.
+
+\begin{landscape}
+{\centering\scriptsize
+\captionof{table}{Alternativas de desenho. ``Procedimento'' inclui a seleção de hiperparâmetros. Os custos são o número de ajustes por modelo, por dataset e por semente de execução; $C$ é o número de configurações e $F$ o número de folds internos.}
+\label{tab:alternativas}
+\begin{tabularx}{\linewidth}{L{2.9cm}YYL{2.4cm}YY}
+\toprule
+Alternativa & Prós & Contras & Custo & Pressupostos & Quando usar \\
+\midrule
+(a) Proposta: $K$-fold repetido externo com $t$ corrigido; 5$\times$2cv interno com $F$ de Alpaydin & Estima o procedimento inteiro, sem viés de seleção; usa todos os dados como teste ao longo das repetições & Teste interno desnecessário, com multiplicidade e só 50\% do treino; correção heurística; um dataset por vez; recicla o teste externo selado & $SK(10C+1)$ & Grupos permutáveis; $\rho\approx n_2/n$; normalidade de $x_{k,s}$ & Datasets pequenos sem teste externo, com custo de treino baixo; não no confirmatório do CapsProm \\
+(b) CV aninhada com seleção interna sem teste de hipótese & Separa escolha e estimação \citep{varma2006,cawley2010}; seleção barata e estável & Inferência pelo $t$ corrigido ainda é aproximada; custo alto para redes & $SK(FC+1)$ & Iguais a (a), sem o teste interno & Estimar o desempenho do procedimento quando não há teste externo; estabilidade dentro do treino (S1) \\
+(c) 5$\times$2cv como experimento dedicado a dois procedimentos & Simples; erro tipo I controlado para um par \citep{dietterich1998,alpaydin1999} & Treino com 50\% dos dados; poder baixo (5 g.l.); um par e um dataset por vez; feito para taxa de erro & $10$ por procedimento (sem seleção) & Diferenças normais; metades por grupos & Uma pergunta pontual sobre dois procedimentos fixos, com treino barato \\
+(d) Teste externo fixo por grupos, com IC por bootstrap de grupos (protocolo vigente) & Teste aberto uma vez; comparável com partições publicadas; barato; IC respeita grupos \citep{field2007} & Incerteza condicionada a uma partição; não mede a variação devida ao particionamento & $FC+1$ & Grupos independentes entre si; teste representativo & Comparação confirmatória por dataset; base da agregação entre datasets \\
+(e) Múltiplos modelos e datasets: Wilcoxon e Friedman sobre clusters, com Holm; alternativa bayesiana & Inferência sobre a população de datasets; não paramétrico; controla multiplicidade \citep{demsar2006,holm1979,benavoli2017} & Precisa de clusters suficientes (o projeto exige $\geq10$); poder limitado com 12 & Sem custo de treino adicional & Clusters independentes; efeito simétrico para Wilcoxon & Conclusões gerais (Q1--Q3) \\
+\bottomrule
+\end{tabularx}
+}
+\end{landscape}
+
+\subsection{Pontos de discussão}
+\label{sec:discussao}
+
+\paragraph{Dependência entre avaliações.}
+\lit\ Folds de um mesmo $K$-fold compartilham treino. Repetições compartilham tudo. Registros homólogos são correlacionados, e datasets de uma mesma fonte também. Cada nível de dependência pede seu tratamento:
+\begin{itemize}[leftmargin=1.4em]
+\item correção de variância para folds e repetições \citep{nadeau2003,bouckaert2004};
+\item grupos para registros \citep{teufel2023,roberts2017};
+\item clusters para datasets.
+\end{itemize}
+
+\paragraph{Viés de seleção.}
+\lit\ Escolher a melhor entre muitas configurações e reportar o desempenho dela no mesmo dado infla o resultado \citep{varma2006,cawley2010,krstajic2014}. O aninhamento corrige isso no nível externo. O teste interno não acrescenta proteção.
+
+\paragraph{Poder estatístico.}
+O $F$ de Alpaydin tem 5 graus de liberdade no denominador. O $t$ corrigido é conservador por construção. Entre datasets, com 12 clusters, o menor valor-$p$ bilateral possível no Wilcoxon exato é $2/2^{12}\approx0{,}00049$, o que deixa espaço para a correção de Holm com poucas hipóteses, mas pouco poder para efeitos pequenos e inconsistentes.
+
+\rec\ O caminho para mais poder está em mais datasets independentes e em efeitos maiores, não em mais folds.
+
+\paragraph{Comparações múltiplas.}
+\proj\ O protocolo aplica Holm à família de pares de modelos predeclarados na métrica primária. As métricas secundárias são exploratórias.
+
+\rec\ As ablações devem formar uma família própria, pequena e predeclarada. O procedimento de Holm \citep{holm1979} rejeita $H_{(i)}$ enquanto $p_{(i)}\leq\alpha/(m-i+1)$, com os valores-$p$ em ordem crescente.
+
+\paragraph{Magnitude do efeito, intervalos e relevância prática.}
+\rec\ Reporte sempre $\Delta$MCC com intervalo de confiança, e declare antes uma margem mínima de relevância $\delta$. O valor de $\delta$ é uma decisão científica que o autor precisa justificar: este relatório usa $\delta=0{,}02$ só como exemplo.
+
+\proj\ O erro padrão da média de dez sementes ficou entre 0,002 e 0,0026 de MCC nas rodadas concluídas (\arq{specs/seed_policy.md}). Uma margem dessa ordem de grandeza seria dominada pela variação entre partições e entre datasets, não pela variação entre sementes.
+
+Um intervalo inteiramente dentro de $(-\delta,\delta)$ sustenta equivalência prática; um teste de equivalência (TOST) formaliza isso \citep{lakens2017}. A Figura~\ref{fig:intervalos} mostra os casos possíveis.
+
+\subsection{Número de treinamentos}
+\label{sec:custo}
+
+Notação:
+\begin{itemize}[leftmargin=1.4em]
+\item $K$: folds externos; $S$: repetições externas;
+\item $F$: folds internos ($F=5$ no projeto); o 5$\times$2cv equivale a 10 ajustes;
+\item $C$: configurações candidatas; $R$: sementes de execução por célula;
+\item $M$: modelos; $D$: datasets.
+\end{itemize}
+
+Cada célula externa faz a seleção interna e mais um reajuste. Então:
+\begin{align}
+N_{\text{proposta}} &= M\,D\,S\,K\,R\,(10\,C+1),\\
+N_{\text{aninhada}} &= M\,D\,S\,K\,R\,(F\,C+1),\\
+N_{\text{teste fixo}} &= M\,D\,R\,(F\,C+1),\\
+N_{\text{5}\times\text{2 dedicado}} &= 2\,D\,R\cdot10\quad\text{(dois procedimentos fixos)}.
+\end{align}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Número de treinamentos com $K=5$, $S=10$, $C=8$, $F=5$, $M=4$ e $D=18$. O CapsProm vigente seleciona só a época ($C=1$). Os modelos determinísticos precisariam de $R=1$, o que reduz os totais da coluna $R=10$.}
+\label{tab:custo}
+\begin{tabularx}{\linewidth}{Y>{\raggedleft\arraybackslash}p{2.3cm}rr}
+\toprule
+Desenho & Por modelo e dataset ($R=1$) & Total, $R=1$ & Total, $R=10$ \\
+\midrule
+(a) Proposta & 4.050 & 291.600 & 2.916.000 \\
+(b) Aninhada, sem teste interno & 2.050 & 147.600 & 1.476.000 \\
+(d) Teste fixo com seleção interna ($C=8$) & 41 & 2.952 & 29.520 \\
+(d) Teste fixo, como o CapsProm vigente ($C=1$) & 6 & 432 & 4.320 \\
+S1: estabilidade dentro do treino ($S'=3$, $K=5$, configuração fixa) & 15 & 1.080 & 10.800 \\
+(c) 5$\times$2cv dedicado (dois procedimentos) & 10 & 360 & 3.600 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+A proposta custa cerca de \textbf{2 vezes} a CV aninhada com 5-fold interno e cerca de \textbf{675 vezes} o protocolo vigente do CapsProm ($4.050/6$). \proj\ Para comparação, o plano canônico já soma 1.560 ajustes ($26\times10\times6$).
+
+%=====================================================================
+\section{Exemplos fictícios}
+\label{sec:exemplos}
+%=====================================================================
+
+\fic\ Todos os números desta seção foram inventados para ilustrar a interpretação. Eles não vêm de nenhuma execução do projeto.
+
+\begin{exemplo}{CapsProm vs.\ baseline num dataset}
+\textbf{(a) Teste externo fixo, como no protocolo vigente.} A mediana das dez diferenças pareadas por semente é $\Delta\MCC=+0{,}021$. O IC 95\% do bootstrap de grupos é $[-0{,}004;\ 0{,}046]$.
+\begin{itemize}[leftmargin=1.2em]
+\item O IC contém zero, então a diferença não é significativa a 5\%.
+\item O IC também ultrapassa $\delta=0{,}02$, então não é possível afirmar equivalência. A conclusão correta é ``\emph{inconclusivo}'', não ``empate''.
+\end{itemize}
+
+\textbf{(b) $K$-fold repetido.} Com $K=5$, $S=10$, média $\bar{x}=0{,}015$ e desvio $\hat{\sigma}=0{,}030$ nas 50 diferenças:
+\begin{align*}
+t_{\text{ingênuo}}&=\frac{0{,}015}{0{,}030/\sqrt{50}}=3{,}54\quad(p=0{,}0009),\\
+t_{\text{corr}}&=\frac{0{,}015}{\sqrt{(1/50+1/4)\cdot0{,}030^2}}=0{,}96\quad(p=0{,}34,\ 49\ \text{g.l.}).
+\end{align*}
+O teste ingênuo ``acha'' uma diferença que a correção não sustenta. Com esses $\hat{\sigma}$ e $K$, a média precisaria passar de cerca de $0{,}031$ para ser significativa, por maior que fosse $S$.
+\end{exemplo}
+
+\begin{exemplo}{Ablação entre variantes do CapsProm}
+A ablação compara o CapsProm completo com uma variante sem roteamento dinâmico (uma única iteração). O efeito por cluster de dependência é $\Delta=$ completo $-$ variante, nos 12 clusters:
+\[
+0{,}021;\ -0{,}005;\ 0{,}012;\ 0{,}004;\ -0{,}011;\ 0{,}018;\ 0{,}009;\ -0{,}003;\ 0{,}015;\ -0{,}008;\ 0{,}006;\ 0{,}010.
+\]
+O resultado é:
+\begin{itemize}[leftmargin=1.2em]
+\item mediana $0{,}0075$ e estimador de Hodges--Lehmann $0{,}006$, com IC 95\% $[-0{,}001;\ 0{,}0135]$;
+\item 8 vitórias e 4 derrotas;
+\item Wilcoxon $W=17$, $p=0{,}092$.
+\end{itemize}
+
+Suponha agora uma família predeclarada de três ablações, com valores-$p$ 0,004, 0,030 e 0,200. Ajustados por Holm, eles viram 0,012, 0,060 e 0,200, e só a primeira ablação sustenta efeito.
+
+A ablação do roteamento é \emph{não significativa}, mas isso \emph{não} autoriza removê-lo. Para remover, seria preciso mostrar equivalência: o IC teria de ficar dentro de $(-\delta,\delta)$. Com $\delta=0{,}02$, o IC $[-0{,}001;\ 0{,}0135]$ está dentro, e a equivalência ficaria sustentada \emph{se} $\delta$ tivesse sido declarado antes.
+\end{exemplo}
+
+\begin{exemplo}{Estratégias de controles negativos}
+O mesmo XGBoost é treinado com controles nativos ou genômicos pareados por GC e avaliado nos dois painéis:
+\begin{center}\small
+\begin{tabular}{lcc}
+\toprule
+MCC & painel nativo & painel genômico GC \\
+\midrule
+Treino com controles nativos & 0,78 & 0,41 \\
+Treino com controles genômicos GC & 0,70 & 0,62 \\
+Classificador só-GC (referência de atalho) & 0,46 & 0,04 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{itemize}[leftmargin=1.2em]
+\item \textbf{Leitura correta.} No painel genômico comum, o treino genômico supera o nativo em $0{,}21$; essa comparação é pareada. O classificador só-GC atinge 0,46 no painel nativo, de modo que boa parte do 0,78 pode vir de composição, e não de sinal promotor.
+\item \textbf{Leitura incorreta.} Comparar 0,78 com 0,62 e concluir que os controles nativos são ``melhores''. Os painéis têm controles diferentes; o número maior indica um painel mais fácil.
+\end{itemize}
+\end{exemplo}
+
+\begin{exemplo}{Significância, relevância e equivalência}
+A Figura~\ref{fig:intervalos} mostra quatro intervalos para a mesma margem $\delta=0{,}02$:
+\begin{enumerate}[label=(\roman*), leftmargin=1.6em]
+\item Diferença significativa e relevante.
+\item Diferença significativa, mas com o IC inteiro dentro de $\pm\delta$. É praticamente irrelevante: há equivalência prática \emph{e} uma diferença detectável.
+\item Diferença não significativa e inconclusiva: o IC é largo demais para dizer qualquer coisa.
+\item Diferença não significativa e equivalente: o IC é estreito e está dentro de $\pm\delta$.
+\end{enumerate}
+Só o caso (iv) autoriza ``os procedimentos são equivalentes'', e apenas porque a margem foi declarada antes.
+\end{exemplo}
+
+\begin{figure}[h]
+\centering
+\includestandalone[width=0.92\linewidth]{figures/fig_intervalos}
+\caption{Significância não é relevância, e ausência de significância não é equivalência. Cada barra é um IC 95\% fictício de $\Delta$MCC. A faixa verde é a região de equivalência $\pm\delta$, que precisa ser declarada antes da análise. Um intervalo que cruza zero mas sai da faixa, como em (iii), é inconclusivo.}
+\label{fig:intervalos}
+\end{figure}
+
+%=====================================================================
+\section{Recomendação: um protocolo viável}
+\label{sec:recomendacao}
+%=====================================================================
+
+\rec\ A Tabela~\ref{tab:recomendacao} prioriza os experimentos. A Figura~\ref{fig:protocolo} mostra o fluxo. A recomendação central é manter a linha confirmatória do protocolo v4 e tratar as peças úteis da proposta como análises secundárias, que nunca alimentam escolhas confirmatórias.
+
+\begin{figure}[t]
+\centering
+\includestandalone[width=\linewidth]{figures/fig_protocolo}
+\caption{Protocolo recomendado. À esquerda, a linha confirmatória, que coincide com o protocolo v4 do projeto, com a seleção interna feita por regra e sem teste de hipótese. À direita, as análises secundárias que aproveitam partes da proposta. S1 e S2 usam só a partição de treino e, portanto, não reciclam o teste externo selado.}
+\label{fig:protocolo}
+\end{figure}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Recomendação priorizada. ``C'' indica análise confirmatória; ``E'', exploratória; ``D'', descritiva. Uma análise só é confirmatória se estiver predeclarada num contrato versionado antes de abrir o teste.}
+\label{tab:recomendacao}
+\begin{tabularx}{\linewidth}{cL{2.7cm}YYc}
+\toprule
+\# & Pergunta & Experimento & Análise & Tipo \\
+\midrule
+1 & Q1: CapsProm vs.\ baselines & Protocolo v4: teste externo por grupos, seleção interna 5-fold por grupos, 10 sementes, mesmo orçamento & $\Delta$MCC com IC por bootstrap de grupos; Wilcoxon sobre clusters; Holm & C \\
+2 & Q3: ablações (no máximo 3 ou 4, predeclaradas) & Um fator por vez, mesmos dados, folds, sementes e orçamento & Igual a 1, com família de Holm própria; TOST com margem $\delta$ para afirmar remoção & C \\
+3 & Q9: qualidade dos controles & Diagnósticos sem modelo e classificador de atalho (Tabela~\ref{tab:diagnosticos}) & SMD, JSD, TV e MCC do atalho com IC, com limiares de alerta fixados antes & D \\
+4 & Q4: estabilidade à inicialização & As 10 sementes já previstas & IQR, DP e limite exato de colapso & D \\
+5 & Q7 e Q8: controles e interação & Fatorial com painel comum nas bactérias reconstruídas & Bootstrap pareado no painel comum; contraste de interação & E \\
+6 & Q5: estabilidade ao particionamento & S1: $K$-fold por grupos repetido \emph{dentro do treino} ($S'=3$, sementes de particionamento próprias) & Componentes de variância; $t$ corrigido ou $t$ bayesiano correlacionado como descrição & E \\
+7 & Q6: generalização entre organismos & Treino em um dataset e teste em outro, com a mesma janela; novo contrato & Matriz de transferência; Wilcoxon se houver $\geq10$ clusters-alvo & E \\
+8 & Par pontual de procedimentos & S2: 5$\times$2cv com $F$ de Alpaydin, só se a pergunta for de fato sobre um par e o custo permitir & $F_{10,5}$ e média das diferenças & E \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Decisões a fixar antes de qualquer execução}
+
+\rec\ Cada item abaixo deve constar de um contrato YAML versionado. \proj\ Pelas regras do repositório, mudar qualquer um deles depois exige uma nova versão de configuração e um novo caminho de estado.
+
+\begin{enumerate}[leftmargin=1.6em]
+\item \textbf{Escopo:} datasets elegíveis, clusters de dependência e critérios de exclusão.
+\item \textbf{Família confirmatória:} pares de modelos, ablações predeclaradas, métrica primária (MCC), limiar de 0,5 e correção de Holm.
+\item \textbf{Seleção:} espaço de busca $\mathcal{C}$, orçamento por modelo, regra de seleção sem teste de hipótese com critério de desempate, e regra de épocas.
+\item \textbf{Sementes:} particionamento, execução, amostragem de controles e reamostragem, com papéis distintos; reserva usada só em bloco.
+\item \textbf{Relevância:} margem $\delta$ e se haverá testes de equivalência, com a justificativa científica.
+\item \textbf{Incerteza:} unidade do bootstrap (grupo de homologia), número de réplicas e tratamento de réplicas sem uma das classes.
+\item \textbf{Painéis:} quais painéis de teste existem, a interseção de positivos para comparações entre painéis e a proibição de concatená-los.
+\item \textbf{Controles:} diagnósticos e limiares de alerta, e o classificador de atalho de referência.
+\item \textbf{Falhas:} sementes que falham são reportadas e nunca substituídas; casos incompletos ficam fora do par primário.
+\item \textbf{Fronteira:} o que é confirmatório e o que é exploratório, por escrito, antes de abrir o teste.
+\end{enumerate}
+
+\subsection{O que não fazer}
+\begin{itemize}[leftmargin=1.4em]
+\item Escolher hiperparâmetros com teste de hipótese no nível interno.
+\item Usar o teste $t$ ingênuo sobre folds ou sobre sementes.
+\item Aplicar Wilcoxon a folds, sementes ou datasets de um mesmo cluster.
+\item Concatenar painéis de controles num único MCC.
+\item Comparar MCC entre painéis como medida de qualidade dos controles.
+\item Afirmar equivalência sem margem predeclarada.
+\item Rodar um $K$-fold externo sobre o dataset inteiro, o que reciclaria o teste externo selado.
+\end{itemize}
+
+%=====================================================================
+\section{Limitações deste relatório}
+%=====================================================================
+
+\begin{itemize}[leftmargin=1.4em]
+\item As fórmulas de \citet{dietterich1998} e \citet{alpaydin1999} foram verificadas nas formulações publicadas e conhecidas. Apenas a de \citet{bouckaert2004} foi conferida no texto completo durante esta revisão.
+\item O comportamento dos testes com MCC e com dados agrupados não foi simulado aqui. Uma simulação com dados sintéticos agrupados, sem resultados reais, seria o passo natural para escolher entre o $t$ corrigido e o $t$ bayesiano correlacionado na análise S1.
+\item A margem $\delta$ e os limiares de diagnóstico são exemplos. Fixá-los é uma decisão do autor.
+\item Os fatos do projeto refletem os arquivos do repositório em 4 de novembro de 2026.
+\end{itemize}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
