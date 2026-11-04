@@ -1289,3 +1289,29 @@ SHA-256 of the module that ran, when the change was not yet committed.
   model output read.
 - **Open.** Manual mapping sample (criterion 8); then a pilot contract for
   CNNProm *E. coli* genomic controls (seed, attempt ceiling, GC caliper).
+
+## R-063 · 2026-11-04 · Manual sample review of mapping v3 (criterion 8)
+
+- **Review (project owner).** The filled sheet was returned on 2026-11-04 at
+  `docs/provenance/manual_review_mapping_v3/review_sheet.csv`. Its 83 rows and
+  11 data columns are identical to the frozen sheet (`ad8942ca…`, R-061); only
+  the check columns were filled. As returned (SHA-256 `a32b9011…`), every row
+  read `yes` in both checks, including the 31 rows without a single locus.
+- **Correction (project owner's instruction).** The README requires
+  `check_locus_in_ncbi = n/a` for rows with no single locus, so it was set to
+  `n/a` in the 27 `ambiguous` (`multiple_loci`) and 4 `not_evaluated`
+  (`ambiguous_bases`) rows; no other cell changed. Final sheet SHA-256
+  `725a39ec…`.
+- **Result.** No `no` and no `reviewer_notes`.
+
+  | Status | Rows | Locus in NCBI | Assembly matches source |
+  | --- | ---: | --- | --- |
+  | `verified` | 44 | 44 yes | 44 yes |
+  | `inconsistent` (`assembly_conflicting`) | 8 | 8 yes | 8 yes (documented substitute, F-104) |
+  | `ambiguous` (`multiple_loci`) | 27 | 27 n/a | 27 yes |
+  | `not_evaluated` (`ambiguous_bases`) | 4 | 4 n/a | 4 yes |
+
+- Criterion 8 of `specs/reference_coordinate_mapping_protocol.md` passes for
+  mapping v3. Its locus check covers the 52 single-locus rows only. No record,
+  status, or gate changed; the remaining acceptance items of F-100 are
+  unaffected by this review.
