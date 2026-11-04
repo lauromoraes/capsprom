@@ -258,3 +258,4 @@ docs/thesis/*.pdf
 docs/thesis/*.synctex.gz
 docs/thesis/*.toc
 docs/thesis/drafts/build/
+docs/thesis/drafts/**/_aux/

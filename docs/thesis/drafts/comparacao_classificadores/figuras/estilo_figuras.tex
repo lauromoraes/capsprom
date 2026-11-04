@@ -1,0 +1,33 @@
+% Estilo comum das figuras esquemáticas (TikZ).
+% Paleta Okabe--Ito (segura para daltonismo). A cor nunca é o único código:
+% todo bloco de treino/teste também traz o rótulo textual.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,decorations.pathreplacing,arrows.meta,fit,backgrounds}
+
+\definecolor{cTreino}{HTML}{0072B2}   % azul
+\definecolor{cTeste}{HTML}{E69F00}    % laranja
+\definecolor{cModA}{HTML}{009E73}     % verde-azulado
+\definecolor{cModB}{HTML}{CC79A7}     % púrpura-avermelhado
+\definecolor{cAlerta}{HTML}{D55E00}   % vermelhão
+\definecolor{cTinta}{HTML}{222222}
+\definecolor{cCinza}{HTML}{6B6B6B}
+
+\tikzset{
+  every picture/.style={font=\sffamily\small, line cap=round, line join=round, text=cTinta},
+  treino/.style={draw=cTreino!80!black, fill=cTreino!22, line width=0.5pt},
+  teste/.style={draw=cTeste!70!black, fill=cTeste!45, line width=0.5pt},
+  caixa/.style={draw=cTinta, rounded corners=2pt, line width=0.6pt, align=flush center,
+                inner sep=4pt, fill=white},
+  caixaA/.style={caixa, draw=cModA!80!black, fill=cModA!14},
+  caixaB/.style={caixa, draw=cModB!80!black, fill=cModB!18},
+  caixaT/.style={caixa, draw=cTreino!80!black, fill=cTreino!12},
+  caixaTe/.style={caixa, draw=cTeste!70!black, fill=cTeste!25},
+  caixaS/.style={caixa, draw=cCinza, fill=black!4},
+  seta/.style={-{Stealth[length=2.4mm]}, line width=0.6pt, draw=cTinta},
+  nota/.style={font=\sffamily\footnotesize, text=cCinza, align=flush left},
+}

@@ -1,0 +1,74 @@
+% Figura 1: esquema da validação cruzada 5x2 (Dietterich, 1998; Alpaydin, 1999).
+% Somente estrutura; nenhum valor numérico.
+\documentclass[border=3pt]{standalone}
+\input{estilo_figuras}
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\bh{0.62}   % altura das barras
+  \def\dy{1.12}   % espaçamento vertical entre repetições
+  % Cabeçalho
+  \node[anchor=west, font=\sffamily\small\bfseries] at (-0.1,2.05)
+    {Conjunto $\mathcal{D}$ com $n$ exemplos: a cada repetição $r$, uma permutação estratificada $\pi_r$ o divide em duas metades};
+  \node[anchor=west, nota] at (-0.1,1.62)
+    {$S_r^{(1)}$ e $S_r^{(2)}$, disjuntas e com $n/2$ exemplos cada; as metades mudam de uma repetição para outra.};
+  % Legenda de cores
+  \draw[treino] (12.75,1.49) rectangle ++(0.42,0.26);
+  \node[anchor=west, font=\sffamily\footnotesize] at (13.2,1.62) {treino};
+  \draw[teste]  (14.2,1.49) rectangle ++(0.42,0.26);
+  \node[anchor=west, font=\sffamily\footnotesize] at (14.65,1.62) {teste};
+  % Títulos das colunas
+  \node[font=\sffamily\small\bfseries] at (4.75,1.0) {Dobra $j=1$};
+  \node[nota, align=flush center] at (4.75,0.6) {treina em $S_r^{(1)}$, testa em $S_r^{(2)}$};
+  \node[font=\sffamily\small\bfseries] at (10.4,1.0) {Dobra $j=2$ (papéis invertidos)};
+  \node[nota, align=flush center] at (10.4,0.6) {treina em $S_r^{(2)}$, testa em $S_r^{(1)}$};
+  \node[font=\sffamily\small\bfseries, align=flush center] at (14.55,0.8) {Variância\\[-1pt]da repetição};
+
+  \foreach \r in {1,...,5} {
+    \pgfmathsetmacro{\y}{-(\r-1)*\dy}
+    % rótulo da repetição
+    \node[anchor=west, font=\sffamily\small\bfseries] at (0,\y) {$r=\r$};
+    \node[anchor=west, nota] at (0,\y-0.36) {partição $\pi_{\r}$};
+    % Dobra 1: S1 treino | S2 teste
+    \draw[treino] (2.5,\y-\bh/2) rectangle (4.75,\y+\bh/2);
+    \draw[teste]  (4.75,\y-\bh/2) rectangle (7.0,\y+\bh/2);
+    \node at (3.625,\y) {Treino $S_{\r}^{(1)}$};
+    \node at (5.875,\y) {Teste $S_{\r}^{(2)}$};
+    \draw[seta] (7.05,\y) -- (7.45,\y);
+    \node[anchor=west] (d\r1) at (7.45,\y) {$d_{\r 1}$};
+    % Dobra 2: S1 teste | S2 treino
+    \draw[teste]  (8.15,\y-\bh/2) rectangle (10.4,\y+\bh/2);
+    \draw[treino] (10.4,\y-\bh/2) rectangle (12.65,\y+\bh/2);
+    \node at (9.275,\y) {Teste $S_{\r}^{(1)}$};
+    \node at (11.525,\y) {Treino $S_{\r}^{(2)}$};
+    \draw[seta] (12.7,\y) -- (13.1,\y);
+    \node[anchor=west] (d\r2) at (13.1,\y) {$d_{\r 2}$};
+    % variância
+    \node (s\r) at (14.55,\y) {$s_{\r}^{2}$};
+  }
+  % Destaque do numerador de Dietterich
+  \draw[cAlerta, line width=1pt, rounded corners=2pt]
+    ($(d11.south west)+(-0.02,-0.02)$) rectangle ($(d11.north east)+(0.02,0.02)$);
+
+  % Chaves
+  \draw[decorate, decoration={brace, amplitude=5pt, mirror}, line width=0.6pt]
+    (2.5,-4*\dy-0.55) -- (13.75,-4*\dy-0.55)
+    node[midway, below=6pt, align=flush center, font=\sffamily\small]
+    {$5$ repetições $\times$ $2$ dobras $=10$ diferenças pareadas\\
+     $d_{rj}=M^{A}_{rj}-M^{B}_{rj}$, medidas no mesmo conjunto de teste};
+  \draw[decorate, decoration={brace, amplitude=5pt, mirror}, line width=0.6pt]
+    (14.1,-4*\dy-0.55) -- (15.0,-4*\dy-0.55)
+    node[midway, below=6pt, align=flush center, font=\sffamily\small] {$5$\\variâncias};
+
+  % Caixas das estatísticas
+  \node[caixa, draw=cAlerta, anchor=north west, text width=7.15cm, align=flush left] at (0,-6.35)
+    {\textbf{Teste $\tilde t$ 5$\times$2cv (Dietterich)}\\[1pt]
+     numerador: apenas $d_{11}$ (em destaque)\\
+     denominador: $\sqrt{\tfrac15\sum_{r} s_r^{2}}$\quad referência: $t_{5}$};
+  \node[caixa, anchor=north west, text width=7.15cm, align=flush left] at (8.15,-6.35)
+    {\textbf{Teste $F$ combinado 5$\times$2cv (Alpaydin)}\\[1pt]
+     numerador: $\sum_{r}\sum_{j} d_{rj}^{2}$ (as 10 diferenças)\\
+     denominador: $2\sum_{r} s_r^{2}$\quad referência: $F_{10,\,5}$};
+  \node[anchor=north west, nota] at (0,-7.95)
+    {Por algoritmo: $10$ treinamentos, cada um com $n/2$ exemplos ($20$ para o par $A,B$). Os dois algoritmos usam exatamente as mesmas metades.};
+\end{tikzpicture}
+\end{document}
