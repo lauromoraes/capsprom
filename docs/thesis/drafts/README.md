@@ -32,6 +32,7 @@ cd docs/thesis/drafts && latexmk -pdf -outdir=build main.tex
 | `sections/tss_class_selection.tex` | Ch. 4 (dataset reconstruction); summary in Ch. 7 | draft v1, references verified; rule approved (log R-039, R-042) | `specs/graphpro_dataset_reconstruction.md`, log R-035, R-039, R-042, F-115 to F-118 |
 | `sections/control_exclusion_radius.tex` | Ch. 4 (negative construction); one sentence in Ch. 7 | draft v1, references verified | log R-036, `specs/sequence_window_policy.md`, F-117 |
 | `sections/evaluation_design.tex` | Ch. 7 (replication and inference) | draft v1, references verified; group-aware folds await evaluation protocol v4 | `specs/statistical_evaluation_protocol.md`, `specs/homology_grouping_protocol.md` |
+| `comparacao_classificadores/main.tex` (standalone; Portuguese at the author's request) | Ch. 7 (statistical comparison alternatives) | draft v1, 2026-11-04; formulas checked against Dietterich 1998, Alpaydin IDIAP-RR 98-04, Nadeau and Bengio (NIPS 1999), Bouckaert and Frank 2004; DOIs checked; protocol unchanged | `specs/statistical_evaluation_protocol.md`, `configs/evaluation_protocol_v4.yaml` |
 | `sections/paa_provenance_case.tex` | Ch. 4 (provenance) or Ch. 9 (discussion) | draft v1, references verified; exclusion decided (log R-040) | `docs/graphpro_derived_artifact_impact.md`, log R-040, F-013, F-115, F-117 |
 
 ## Bibliography
