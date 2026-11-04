@@ -1181,3 +1181,22 @@ SHA-256 of the module that ran, when the change was not yet committed.
   SHA-256 `5c414932…`), with instructions in the same folder. All partitions
   are represented. The review itself is the owner's and is pending; no
   eligibility changed.
+
+## R-058 · 2026-11-03 · Manual review of the GraphPro v3 candidates
+
+- **Review (project owner).** The filled sheet was returned on 2026-11-03 and
+  replaces the blank one at
+  `docs/provenance/manual_review_graphpro_v3/review_sheet.csv` (SHA-256
+  `a72b0e80…`). Its 18 data columns are identical to the frozen sheet
+  (`5c414932…`, R-057); only the five check columns were filled.
+- **Result.** Every applicable check is `yes` in all 60 rows; no
+  `reviewer_notes` were needed.
+
+  | Organism | Rows | A–D | E (CDS control) | Result |
+  | --- | ---: | --- | --- | --- |
+  | *C. jejuni* | 20 | 20 yes | 18 yes, 2 n/a (no CDS control) | pass |
+  | *C. pneumoniae* | 20 | 20 yes | 20 yes | pass |
+  | *L. interrogans* | 20 | 20 yes | 20 n/a (no CDS panel) | pass |
+
+- Eligibility gate 7 (manual sample audit) passes for the three organisms. No
+  record was relabeled and no other gate changed.

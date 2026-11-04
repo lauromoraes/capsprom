@@ -104,7 +104,7 @@ datasets so far.
 
 | Criterion | Justification | Verification | Consequence for use |
 | --- | --- | --- | --- |
-| **R1. Source-supported class construction.** Positives come from verified TSS sources; negatives from a declared genomic rule. | Replaces the class semantics that the released files could not support (E6). | **Pending**: samples of the primary TSS sources and an independent manual review. Human and mouse also need dated EPD resolution. | Until it passes, the candidate cannot be used for training or confirmatory work. |
+| **R1. Source-supported class construction.** Positives come from verified TSS sources; negatives from a declared genomic rule. | Replaces the class semantics that the released files could not support (E6). | **Pending**: samples of the primary TSS sources and an independent manual review. The manual sample review passed for *C. jejuni*, *C. pneumoniae*, and *L. interrogans* v3 (R-058). Human and mouse also need dated EPD resolution. | Until it passes, the candidate cannot be used for training or confirmatory work. |
 | **R2. Labels independent of strand.** | The released defect was class = strand. | Part of R1; **pending**. | As R1. |
 | **R3. Organism verified by accession.** | As E7. | Recorded in the reconstruction contract; part of the pending manual review. | As R1. |
 | **R4. New immutable build** with hashes, a filtering ledger, and a comparison with the released records. | Keeps the reconstructed data separate from, and traceable to, the released data. | **Done** for the six bacterial candidates: a clean second build reproduced every file byte for byte. | Required before any use. |
