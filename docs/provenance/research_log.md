@@ -1221,3 +1221,22 @@ SHA-256 of the module that ran, when the change was not yet committed.
   library versions in their MLflow runs before the definitive runs; only
   `src/capsprom/feasibility.py` does so today. No contract, partition, gate,
   or outcome was used or changed.
+
+## R-060 · 2026-11-04 · Synthetic shuffle out of scope for definitive runs
+
+- **Decision (project owner).** The `synthetic_shuffle` panel of
+  `specs/negative_control_protocol.md` is not planned for the definitive runs.
+  It stays defined in the protocol and in
+  `configs/negative_control_evaluation_v1.yaml`, which is unchanged, so earlier
+  references remain traceable.
+- **Exceptions.** Workflows whose source design is a shuffle keep it: the
+  Bhandari Human leakage-controlled shuffle condition and the Bhandari
+  `orig-pub` replays. Shuffles used as audit tools, such as the
+  composition check of F-121, are unaffected.
+- **Rationale.** The panel was already optional and outside the initial
+  evaluation matrix; generating shuffles is cheap, but each extra panel adds
+  training and evaluation over models, seeds, and datasets. The GC-only
+  reference (R-052) covers the composition baseline of the definitive
+  comparison. Reinstating the panel requires a new versioned decision before
+  any test access. No data, contract, partition, gate, or outcome was used or
+  changed.

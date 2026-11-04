@@ -43,6 +43,8 @@ development or mechanistic control, not a genomic non-promoter. Every promoter
 and all shuffles derived from it form one partition group. The existing
 Bhandari Human condition remains a mononucleotide-shuffle development task;
 changing to dinucleotide shuffling requires a new dataset identity.
+The panel is out of scope for the definitive runs, except for workflows whose
+source design is a shuffle (log R-060).
 
 ### CDS-derived (`cds_derived`)
 
