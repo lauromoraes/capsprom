@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-Design (2026-11-03). This policy fixes the random seeds of the project and the
+Design (2026-11-03, log R-059). This policy fixes the random seeds of the project and the
 role of each one. It applies to every definitive run, which in this project
 means a run under a frozen contract whose external test partition may later be
 opened. Exploratory runs and diagnostics may use other seeds, as described in

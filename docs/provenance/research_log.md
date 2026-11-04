@@ -1200,3 +1200,24 @@ SHA-256 of the module that ran, when the change was not yet committed.
 
 - Eligibility gate 7 (manual sample audit) passes for the three organisms. No
   record was relabeled and no other gate changed.
+
+## R-059 · 2026-11-03 · Project seed policy
+
+- **Decision (project owner).** Fix the project seeds before the definitive
+  runs. `specs/seed_policy.md` (commit `e16ed94`) gives each seed one role:
+  the ten run seeds `13 … 293`, partition seed 42, one dated sampling seed per
+  data procedure, and one dated resampling seed per evaluation protocol
+  (`20260715` in evaluation protocol v4).
+- **Reserve block.** Ten further run seeds (`337, 379, 421, 463, 509, 547, 593,
+  631, 673, 719`, all prime) are predeclared. They are used only as a whole
+  block, activated by a new versioned protocol before any test access, for a
+  reason independent of test results.
+- **Rationale.** The SD of seed means in the completed ten-seed tranches
+  (0.006–0.008 MCC) gives a standard error of about 0.002–0.0026, enough for
+  dataset-level estimates. With zero failures the one-sided 95% upper bound
+  on a collapse rate is 0.259 with ten seeds and 0.139 with twenty, which is
+  why the reserve exists.
+- **Open requirement.** Training runners must record device, driver, and
+  library versions in their MLflow runs before the definitive runs; only
+  `src/capsprom/feasibility.py` does so today. No contract, partition, gate,
+  or outcome was used or changed.
