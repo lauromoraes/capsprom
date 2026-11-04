@@ -1,0 +1,40 @@
+acquisition:
+  name: regulondb-tss-acquisition-v1
+  version: 1.0.0
+  protocol: specs/graphpro_dataset_reconstruction.md
+  root: data/acquired/regulondb_tss_acquisition_v1
+  manifest: manifests/provenance/regulondb_tss_acquisition_v1/acquisition_manifest.json
+  frozen_on: 2026-11-04
+  endpoint: https://regulondb.ccg.unam.mx/graphql
+  policy: >-
+    Complete E. coli K-12 TSS exclusion set for the CNNProm E. coli
+    genomic-control feasibility study (owner decision, log R-062): the union of
+    every RegulonDB high-throughput TSS dataset of source REGULONDB and the
+    curated PromoterSet. The dataset list was read from
+    getDatasetsWithMetadata(datasetType "TSS", source "REGULONDB") on
+    2026-11-04 and is frozen here; a dataset added later needs a successor
+    contract. Each GraphQL response is stored byte for byte with its query and
+    SHA-256; RegulonDB publishes no digests, so integrity is trust on first
+    use. Coordinates are RegulonDB's uniformized NC_000913.3 positions. The
+    RegulonDB licence permits academic use and forbids redistribution, so raw
+    responses stay under the ignored data root.
+  page_size: 1000
+  ht_tss_datasets:
+    - RHTECOLITSD00556
+    - RHTECOLITSD00557
+    - RHTECOLITSD00558
+    - RHTECOLITSD00559
+    - RHTECOLITSD00560
+    - RHTECOLITSD00561
+    - RHTECOLITSD00562
+    - RHTECOLITSD00563
+    - RHTECOLITSD00564
+    - RHTECOLITSD00565
+    - RHTECOLITSD00566
+    - RHTECOLITSD00567
+    - RHTECOLITSD00568
+    - RHTECOLITSD00569
+    - RHTECOLITSD00570
+    - RHTECOLITSD00571
+  files:
+    - PromoterSet

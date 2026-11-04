@@ -1258,3 +1258,34 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **Open decisions (project owner).** Criterion 7 (R-011 counts do not exist,
   F-093); the manual sample review (criterion 8); whether CNNProm *E. coli*
   becomes the genomic-control pilot.
+
+## R-062 · 2026-11-04 · Mapping criterion 7, RegulonDB TSS acquisition, and E. coli control capacity
+
+- **Decisions (project owner).** (1) Criterion 7 of the mapping protocol is
+  tested against the per-category counts of the R-028 exact-search pilot
+  (F-092) in place of the unavailable R-011 counts (F-093). (2) The complete
+  *E. coli* TSS exclusion set is the union of all 16 RegulonDB
+  high-throughput TSS datasets (source REGULONDB) and the curated PromoterSet.
+- **Criterion 7.** Mapping v1 uses the same references as R-028. Pilot versus
+  v1: single locus 36,185 vs 36,185; several 159 vs 160; none 180 vs 179
+  (169 unmapped + 10 not evaluated). One record moves from none to several.
+  v1 added IUPAC-compatible matching after the pilot: one *H. pylori* negative
+  gains an IUPAC locus beside its exact one, and four *P. aeruginosa* records
+  map only through IUPAC loci. The pilot outputs stayed in scratch, so the
+  one-record accounting cannot be reconstructed exactly. Finding F-131.
+- **Acquisition.** `scripts/acquire_regulondb_tss.py` with
+  `configs/regulondb_tss_acquisition_v1.yaml`: 94 GraphQL responses stored byte
+  for byte with query and SHA-256 under ignored
+  `data/acquired/regulondb_tss_acquisition_v1/`; manifest in
+  `manifests/provenance/regulondb_tss_acquisition_v1/`. RegulonDB release 14.0
+  (PromoterSet created 2026-02-25). No upstream digest exists (trust on first
+  use); the RegulonDB licence forbids redistribution, so nothing raw is
+  committed.
+- **Capacity.** `scripts/inventory_ecoli_control_capacity.py` with
+  `configs/ecoli_control_capacity_v1.yaml` (SHA-256 `8f032077…`); summary
+  `manifests/provenance/ecoli_control_capacity_v1/capacity_summary.json`.
+  Positives are placed on NC_000913.3 by exact search instead of a coordinate
+  lift. Findings F-132, F-133. No control generated, no partition changed, no
+  model output read.
+- **Open.** Manual mapping sample (criterion 8); then a pilot contract for
+  CNNProm *E. coli* genomic controls (seed, attempt ceiling, GC caliper).

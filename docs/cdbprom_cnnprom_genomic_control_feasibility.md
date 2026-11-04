@@ -62,3 +62,15 @@ matrix descriptive.
    NC_000913.3 coordinate lift; count non-overlapping free capacity (F-123
    lesson) before freezing a pilot contract.
 3. Verify the CDBProm TSS offset per organism against its primary table.
+
+## Update (log R-062)
+
+- Criterion 7 is tested against the R-028 pilot (owner decision): reproduced
+  within one record (F-131). Mapping v3 acceptance now waits only for the
+  manual sample (criterion 8).
+- *E. coli* exclusion set acquired: RegulonDB 14.0 union of 16 HT TSS datasets
+  and PromoterSet, 34,800 TSS on NC_000913.3 (F-132). Positives were placed on
+  NC_000913.3 by exact search, so no coordinate lift is needed; 834 of 837 lie
+  on a RegulonDB TSS.
+- Capacity: 22,174 disjoint free slots for 837 positives, none without a GC
+  candidate (F-133). CNNProm *E. coli* is feasible as the genomic-control pilot.

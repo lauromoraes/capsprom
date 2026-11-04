@@ -1,0 +1,590 @@
+{
+  "config_sha256": "fc133a0c14cb2fa92ebcf92523ef9253838373b83bd325211a8cc7283c2c00a9",
+  "endpoint": "https://regulondb.ccg.unam.mx/graphql",
+  "files": [
+    {
+      "bytes": 170,
+      "path": "ht_tss/RHTECOLITSD00556/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00556\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "8d70c4e11ecd127eaca4461eb4015a50ef48c5cc66f553f23f750e1c77bdb7bd"
+    },
+    {
+      "bytes": 166170,
+      "path": "ht_tss/RHTECOLITSD00556/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "2fdb8a87215922d85df9fe0466aa04f5b426dbb3e8081c0822e94317cf0ac413"
+    },
+    {
+      "bytes": 167034,
+      "path": "ht_tss/RHTECOLITSD00556/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "1d4efe9600c98056a59e6915767fb7e96c383d23712ce9d1de327ddb3e0b5b21"
+    },
+    {
+      "bytes": 168333,
+      "path": "ht_tss/RHTECOLITSD00556/page_0002.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:2){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "52966dcdaac4d4409f16a49e67f4c2625959852dcd40c7fc137a5001c81e1484"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00556/page_0003.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:3){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "2e82ecb61aba3bb51062559579f66fbf1c2e2f80ddac98720b33562060557452"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00556/page_0004.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:4){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "55ae11d2345049ad1ecf0153a41e84a7cf6f05b81be03da1bc35049182bd39a8"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00556/page_0005.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:5){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "eb0dd4f0b4aebcb5a06d7a66d8957d9b2cb4839f7f047811eccd8095d1819ece"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00556/page_0006.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:6){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "6d070eb3bfe37202b0b4d648f44ceb17c4f016d1f8e0bfc126b48d10ac476a17"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00556/page_0007.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:7){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "b01099299a662f4f5a565cd6ef18fc10d557913b7f5f3df694ecae0c3c2d4585"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00556/page_0008.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:8){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "aa499929ec3a6a004f7d4674ef65a65fdc3b78915aa418da1dcd06e8254a0957"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00556/page_0009.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:9){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "fd36f46c7a80d1e8309eaac9565d2d1dbe5b2c7f39e742dc657eb3fbc5e371b3"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00556/page_0010.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:10){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "fe2a6db442377c1408ef322b5efbb84130424da27aebc99f808456a114d3d41d"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00556/page_0011.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:11){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "8d1cff3b767e511e112310e3f5621df09749e9b183c8092af92a61c17a42a7be"
+    },
+    {
+      "bytes": 2754,
+      "path": "ht_tss/RHTECOLITSD00556/page_0012.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00556\",limit:1000,page:12){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "9ed0ed4b2881d90e2ea35a20869255b4ff5e641e44eb5379486f3ef4a46176b1"
+    },
+    {
+      "bytes": 170,
+      "path": "ht_tss/RHTECOLITSD00557/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00557\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "c3a36bc0023f23945323899dcfbadd5f8a14f157c65da9dde33a1cfe209e4084"
+    },
+    {
+      "bytes": 166290,
+      "path": "ht_tss/RHTECOLITSD00557/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "5e3efed42d34b8b8e7995b916bef2b7935412b2d526aeaaf35c0726655ae5387"
+    },
+    {
+      "bytes": 167034,
+      "path": "ht_tss/RHTECOLITSD00557/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "d281c8e8971ae6512d27700140d9a8076cec6c051a813fdcd24054fb810cbbad"
+    },
+    {
+      "bytes": 168450,
+      "path": "ht_tss/RHTECOLITSD00557/page_0002.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:2){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "cb34dafae8b92856619535b07540b3083e7ca2d42eff276c9712b6d38af8c176"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00557/page_0003.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:3){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "fdd16398cf4a0ff544014d287a3fa9aa8505b69840ec68e6b9dc063d1a5beea8"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00557/page_0004.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:4){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "2bde044d9749f4fbaceb4c76c8674caf9066a970f86683a26e26dba5db85b5e1"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00557/page_0005.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:5){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "5ee170991b819bce1c83227da98ebdad1eab675f64e16511ecda0a5d17f30326"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00557/page_0006.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:6){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "aaf77c0fcd48d8be1eeb9aebf066588f7feba33d214b7f350f8544e72fff3bd3"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00557/page_0007.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:7){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "6912306c0f9cf7f9a922f3a8811d2884fc44d733fe7987a21927c2a5acb8ee64"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00557/page_0008.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:8){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "aff402d021b0f5c1de644e72654e584d30ba17ff9950a0d5f2f0d520d50a2dad"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00557/page_0009.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:9){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "f2305158abf22e79d64386752c999e66122367e7b026c1fbfbcd3c3193061723"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00557/page_0010.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:10){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "e84413545f5bd9214cb612aba37b24a3d333bbbc92d1dc1b32ddf208e121710b"
+    },
+    {
+      "bytes": 160684,
+      "path": "ht_tss/RHTECOLITSD00557/page_0011.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00557\",limit:1000,page:11){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "da898924b1be5fb11ffaee28464ccf0c0496660e367e8fcdd8a89f71a7668b32"
+    },
+    {
+      "bytes": 170,
+      "path": "ht_tss/RHTECOLITSD00558/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00558\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "4c63570ba4cb127eb1852f9c52590cb524ab80e7517c7eb6df46c03413333e31"
+    },
+    {
+      "bytes": 166464,
+      "path": "ht_tss/RHTECOLITSD00558/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00558\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "7093a13b84d88f67c13e703a7667c789dd6c5e97d0b3543f97c1f0444fb439ff"
+    },
+    {
+      "bytes": 167619,
+      "path": "ht_tss/RHTECOLITSD00558/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00558\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "41f1798f6383e7d09699f8c41c7d3bb04c7fdfb5088856778e6ac0e873a5f738"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00558/page_0002.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00558\",limit:1000,page:2){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "56baff47afe767a5786e7534188d313a5f123132e0a14822297d02baef1e3d98"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00558/page_0003.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00558\",limit:1000,page:3){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "61014e42b2cc08270412da6c01b2acd6273deab06f6ec2d618e526396a8dbff8"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00558/page_0004.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00558\",limit:1000,page:4){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "ca90132cc00830106171c57e696ab48a248397ef97742e97bb588f9227969bad"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00558/page_0005.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00558\",limit:1000,page:5){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "8d25ce8432eab49d31a6d66fed120f93260141b6e0ea9ad7020d836664ec59fe"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00558/page_0006.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00558\",limit:1000,page:6){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "5a7b1b5cc7f97c0a03f2ff35a86e66b0831b6a7dc81168408e0d96b4ff060873"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00558/page_0007.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00558\",limit:1000,page:7){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "03b284070a2895256e5e2310f859a7010115f86863917bc5364769b9ddbc3b90"
+    },
+    {
+      "bytes": 85714,
+      "path": "ht_tss/RHTECOLITSD00558/page_0008.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00558\",limit:1000,page:8){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "6e821d817c339f0e3fe93158ee1a657f81398e5392077a1881bac7a95eaefdb4"
+    },
+    {
+      "bytes": 171,
+      "path": "ht_tss/RHTECOLITSD00559/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00559\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "cef008b7765f56d74635fb98ce52daebc4a1d8c13cbe836173ea779e76d7a159"
+    },
+    {
+      "bytes": 166944,
+      "path": "ht_tss/RHTECOLITSD00559/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00559\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "e9c21981d3abbcc88504c10dfded2f5e16a505845c2e0b10edb59c9ec5506106"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00559/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00559\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "d1db45e555d256cfabb771f1b7df06ba196c6fc5c61a774df8436d89f8043674"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00559/page_0002.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00559\",limit:1000,page:2){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "73543e4e0dc6bda02559bca057d4a5cf1914cd6e4d2a65ca660700df720b71c3"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00559/page_0003.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00559\",limit:1000,page:3){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "d6337e10fec57a9290cc545ddd2e459608031263da026b171360f04f7d819979"
+    },
+    {
+      "bytes": 60044,
+      "path": "ht_tss/RHTECOLITSD00559/page_0004.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00559\",limit:1000,page:4){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "a30714cbe2330d92e403a95c35da0300d9766d455e98044d37012480cbead036"
+    },
+    {
+      "bytes": 171,
+      "path": "ht_tss/RHTECOLITSD00560/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00560\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "78834cd42c242c68e891d276551bf25effb0dbe05f2aff40453f7eda232f2771"
+    },
+    {
+      "bytes": 167070,
+      "path": "ht_tss/RHTECOLITSD00560/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00560\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "6ccf79608590239c089b0eb4fc11e98425bfb47e52a7a6977845aeb048dcd185"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00560/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00560\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "c40a6214a5d48046a648fef2fe62676d846be6115b9103852853b70f837de1e6"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00560/page_0002.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00560\",limit:1000,page:2){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "a8a45b4ee5fa2d69e33c0f377fa88c82d604fbd6c90f90c5ed4047c4f3123022"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00560/page_0003.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00560\",limit:1000,page:3){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "f12ea00f091ffe73951276e8f372861e6d30cc04aa6ad62c3fc10da064859362"
+    },
+    {
+      "bytes": 5644,
+      "path": "ht_tss/RHTECOLITSD00560/page_0004.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00560\",limit:1000,page:4){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "5b1ad88afbbcbfbcfbdf43e5ba19c63c51dc4198afb1b0a4a7ff2b85504cb53f"
+    },
+    {
+      "bytes": 167,
+      "path": "ht_tss/RHTECOLITSD00561/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00561\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "8212ae1882fb9c83f562abf5c5633df024d709c79cbc768127fda923b0a793d0"
+    },
+    {
+      "bytes": 168600,
+      "path": "ht_tss/RHTECOLITSD00561/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00561\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "20d0cc539d222b7a887c415558947b797cfa7634bffb7151f61269ff618dfd6f"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00561/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00561\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "4d71f12e4e946377b835cf27a9943d9f831c0e0055c6799e190407db16867a28"
+    },
+    {
+      "bytes": 20774,
+      "path": "ht_tss/RHTECOLITSD00561/page_0002.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00561\",limit:1000,page:2){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "bd7a892dced87aec290feb9cd0145224346964bd4f8b05882c7f5988f5dfebed"
+    },
+    {
+      "bytes": 171,
+      "path": "ht_tss/RHTECOLITSD00562/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00562\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "26006abeb4bb44c366935ffa01884091a9bd58b0f6e5adabb10ef07471be529c"
+    },
+    {
+      "bytes": 168453,
+      "path": "ht_tss/RHTECOLITSD00562/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00562\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "c2c8e801fff49cd1b718bc63f079d9c2721b18358b7ca40980473c17bb143e1d"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00562/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00562\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "3084ee8bcd95f95bbc83e8d849e2577aff7411c638816837a617a286d278a23c"
+    },
+    {
+      "bytes": 13124,
+      "path": "ht_tss/RHTECOLITSD00562/page_0002.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00562\",limit:1000,page:2){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "4befb01383cbfa53d15603125a1e6cbe95ccc718ccd15336e8e97501b567a586"
+    },
+    {
+      "bytes": 171,
+      "path": "ht_tss/RHTECOLITSD00563/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00563\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "8e10bda925339c40707370fc46b4e8d444b378b31eb153a0df8cc20367cd3ca4"
+    },
+    {
+      "bytes": 168729,
+      "path": "ht_tss/RHTECOLITSD00563/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00563\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "9b255e378a37bebb4a96a43a7a0e4bad2d9f0878fd50ad04ea25261ee7d94e78"
+    },
+    {
+      "bytes": 135524,
+      "path": "ht_tss/RHTECOLITSD00563/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00563\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "499e76303ed49636d07d8a12018b6b3ef4c706b7583a24772c8d22fe410c6996"
+    },
+    {
+      "bytes": 138,
+      "path": "ht_tss/RHTECOLITSD00564/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00564\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "cc46de13421119922052118adf7d827404f610b59962f41e41f23ea7be7d3949"
+    },
+    {
+      "bytes": 168978,
+      "path": "ht_tss/RHTECOLITSD00564/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00564\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "c93e5863315babc17003767d76a634d609b819848860296d81be0099b12dd55f"
+    },
+    {
+      "bytes": 79594,
+      "path": "ht_tss/RHTECOLITSD00564/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00564\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "908e5de3760ce313d0a4dc397b4eb26b0c07a1266923d225f8a1270393b2d361"
+    },
+    {
+      "bytes": 138,
+      "path": "ht_tss/RHTECOLITSD00565/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00565\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "a3476b364d115d351d29cfc6596ea0e40ad725c56bfa184f2e7a1567be995329"
+    },
+    {
+      "bytes": 50123,
+      "path": "ht_tss/RHTECOLITSD00565/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00565\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "4c22ebfcb6483d1323d081710ca0d6d3e92cafbc99f08b001cca65d4a1b56d86"
+    },
+    {
+      "bytes": 147,
+      "path": "ht_tss/RHTECOLITSD00566/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00566\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "6dcafc3f7262653c2dd70c9934e3406cc881f0b76555a3e3d09dcabfb4ae2cb0"
+    },
+    {
+      "bytes": 166428,
+      "path": "ht_tss/RHTECOLITSD00566/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00566\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "63034889fd0bc9e87e71361ba5ad3ff5fcf51ab884e5fbe456397cdf635b4e78"
+    },
+    {
+      "bytes": 169296,
+      "path": "ht_tss/RHTECOLITSD00566/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00566\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "745eb1f111b60d68ac4c83a5bd414f70b8d2c83e22b5d539fa427aee48546ec4"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00566/page_0002.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00566\",limit:1000,page:2){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "d75fa5651a452fc224fd67537b2da4808969df0f9d0152f093e9d6e82ef22d9e"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00566/page_0003.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00566\",limit:1000,page:3){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "27e9338e3e5df5758387c27182b898a7c1360eef5b092673b85ebde85b76ca46"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00566/page_0004.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00566\",limit:1000,page:4){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "8906df42b853c962f8d2c407fb06a26d166b980d8109ac7aabaac8cc5c3783d0"
+    },
+    {
+      "bytes": 33524,
+      "path": "ht_tss/RHTECOLITSD00566/page_0005.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00566\",limit:1000,page:5){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "a3c792c0fd099202f06244e0924378479af78236ace35c153aaf2553abf26a23"
+    },
+    {
+      "bytes": 129,
+      "path": "ht_tss/RHTECOLITSD00567/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00567\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "02db4f56e6608897a734e15798c898171e40cdebcd1efeaf7106358b3ac5a447"
+    },
+    {
+      "bytes": 166680,
+      "path": "ht_tss/RHTECOLITSD00567/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00567\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "fd8f98cf34dce6f7779db9f762cbf1cfdb47ef31815efff3774374baaf0c8618"
+    },
+    {
+      "bytes": 169368,
+      "path": "ht_tss/RHTECOLITSD00567/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00567\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "5aa1773c1248a7f7b6e14928369f5e75700eb231dc18d28c0e50103b87b06d8c"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00567/page_0002.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00567\",limit:1000,page:2){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "15e160beeded097e4bd025aff725bcc61b8ba6dbf1321f41fb29e0b235c78a7e"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00567/page_0003.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00567\",limit:1000,page:3){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "e51fb44f26b8e8ac3cfdc8a81dcacb517fdb9318bc6afe48082295d2596b3c1a"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00567/page_0004.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00567\",limit:1000,page:4){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "d4bb95712940865667aa52395213f1aca5d68623f9632a1fa4dcabaa3533cffc"
+    },
+    {
+      "bytes": 110024,
+      "path": "ht_tss/RHTECOLITSD00567/page_0005.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00567\",limit:1000,page:5){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "0ca5529fd672b443d354827b27166146beaecca281c7e9c30c4a3690b0638a3f"
+    },
+    {
+      "bytes": 129,
+      "path": "ht_tss/RHTECOLITSD00568/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00568\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "ed4322eec93e5c63ead76647f2053e28b99259567bcae05efe9970c2bacb34dc"
+    },
+    {
+      "bytes": 168627,
+      "path": "ht_tss/RHTECOLITSD00568/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00568\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "760114466f03235fe91cb006f86eaad5daa4ea6978e98148f159b4fb4ea1a5b6"
+    },
+    {
+      "bytes": 157454,
+      "path": "ht_tss/RHTECOLITSD00568/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00568\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "ba09a685638026394a80e4f2f3b83039dc290fafdb8b64fa4f8af0b112a11eaa"
+    },
+    {
+      "bytes": 129,
+      "path": "ht_tss/RHTECOLITSD00569/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00569\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "bf57052011320ff660946c57543d7e5d0e25313d499b2962f79acbf72935b9bb"
+    },
+    {
+      "bytes": 168372,
+      "path": "ht_tss/RHTECOLITSD00569/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00569\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "0aa208d705fec8ea10b1ecda3d2ba09fa77539fdd7279c28c78ddff6186c12f7"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00569/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00569\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "753d81701d9cefc4da2bb94c1efc71b05f9d6ad08d3dd343f43b851db18ec965"
+    },
+    {
+      "bytes": 39134,
+      "path": "ht_tss/RHTECOLITSD00569/page_0002.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00569\",limit:1000,page:2){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "65ba1ac0c6c9514e74cdcbdc96a8134c078b73f6d56111e1046bf918e0aa2df0"
+    },
+    {
+      "bytes": 129,
+      "path": "ht_tss/RHTECOLITSD00570/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00570\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "f6451acba6f31ecc17099d978c8754b31b630a6c534d0ba7b2db71848b0e4376"
+    },
+    {
+      "bytes": 168654,
+      "path": "ht_tss/RHTECOLITSD00570/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00570\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "e5d163be8777a82388476ce88f986a74ed1896b06b307f5533ded5fcc3d1db44"
+    },
+    {
+      "bytes": 153034,
+      "path": "ht_tss/RHTECOLITSD00570/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00570\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "680b4b60a282a4fb9a8c688823cb327e6998b0c3e83e408376c2e327ab903e9b"
+    },
+    {
+      "bytes": 129,
+      "path": "ht_tss/RHTECOLITSD00571/metadata.json",
+      "query": "{getDatasetByID(datasetID:\"RHTECOLITSD00571\"){_id referenceGenome publications{pmid doi title} sourceSerie{series{sourceId}} sample{title}}}",
+      "sha256": "9d1d5abbfdcdeed75d0188189f8047c30bb2e52e34a3fb0450d01f606f1d6d0e"
+    },
+    {
+      "bytes": 168138,
+      "path": "ht_tss/RHTECOLITSD00571/page_0000.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00571\",limit:1000,page:0){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "768691f3a177ed4dfab389d31a05f2746d03fceb934f2b8e80fdd3485471bc64"
+    },
+    {
+      "bytes": 170034,
+      "path": "ht_tss/RHTECOLITSD00571/page_0001.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00571\",limit:1000,page:1){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "92bc1fd7faff6442cebb524f7a1a26e929ffa10fe09d0f481be5688b1caa4be7"
+    },
+    {
+      "bytes": 90644,
+      "path": "ht_tss/RHTECOLITSD00571/page_0002.json",
+      "query": "{getAllTSSOfDataset(datasetId:\"RHTECOLITSD00571\",limit:1000,page:2){_id chromosome leftEndPosition rightEndPosition pos_1 strand datasetIds}}",
+      "sha256": "28a56d62446af522b9fa0d0a7b40b8569bd144aca92e001209b556679c6f01a2"
+    },
+    {
+      "bytes": 1021373,
+      "path": "files/PromoterSet.json",
+      "query": "{getDataOfFile(fileName:\"PromoterSet\"){fileName fileFormat version rdbVersion creationDate license citation columnsDetails content}}",
+      "sha256": "f4bab713d265972a515219895f333f11378330780bb13f32ea7110dc29539edf"
+    }
+  ],
+  "finished_utc": "2026-11-04T14:10:44+00:00",
+  "ht_tss_row_counts": {
+    "RHTECOLITSD00556": 12016,
+    "RHTECOLITSD00557": 11945,
+    "RHTECOLITSD00558": 8504,
+    "RHTECOLITSD00559": 4353,
+    "RHTECOLITSD00560": 4033,
+    "RHTECOLITSD00561": 2122,
+    "RHTECOLITSD00562": 2077,
+    "RHTECOLITSD00563": 1797,
+    "RHTECOLITSD00564": 1468,
+    "RHTECOLITSD00565": 296,
+    "RHTECOLITSD00566": 5197,
+    "RHTECOLITSD00567": 5647,
+    "RHTECOLITSD00568": 1926,
+    "RHTECOLITSD00569": 2230,
+    "RHTECOLITSD00570": 1900,
+    "RHTECOLITSD00571": 2533
+  },
+  "started_utc": "2026-11-04T14:09:05+00:00"
+}

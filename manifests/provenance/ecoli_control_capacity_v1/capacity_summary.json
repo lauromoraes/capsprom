@@ -1,0 +1,51 @@
+{
+  "config_sha256": "8f032077d3ee66caeb6357832e47cc38c4b178dd4ee60329029a03a5c041d2c2",
+  "contig": "NC_000913.3",
+  "contig_length": 4641652,
+  "exclusion_unique_positions": 34693,
+  "free_bp": 2064414,
+  "free_candidate_windows_total": 1578109,
+  "free_fraction": 0.4448,
+  "median_gc_positive": 33,
+  "non_overlapping_slots": 22174,
+  "positives": {
+    "in_regulondb_union": 834,
+    "loci_2": 2,
+    "not_in_regulondb_union": 3,
+    "single_locus": 837
+  },
+  "positives_needing_control": 837,
+  "positives_without_gc_candidate": 0,
+  "promoterset_sequence_check": {
+    "match": 3963,
+    "mismatch": 1
+  },
+  "radius": 100,
+  "slots_per_positive": 26.492,
+  "tss_chromosomes": {
+    "NC_000913.3": 68044,
+    "out_of_range": 8
+  },
+  "union_unique_tss_position_strand": 34800,
+  "union_unique_tss_positions": 34690,
+  "unique_tss_per_source": {
+    "PromoterSet": 3838,
+    "RHTECOLITSD00556": 12016,
+    "RHTECOLITSD00557": 11945,
+    "RHTECOLITSD00558": 8504,
+    "RHTECOLITSD00559": 4349,
+    "RHTECOLITSD00560": 4029,
+    "RHTECOLITSD00561": 2122,
+    "RHTECOLITSD00562": 2077,
+    "RHTECOLITSD00563": 1797,
+    "RHTECOLITSD00564": 1468,
+    "RHTECOLITSD00565": 296,
+    "RHTECOLITSD00566": 5197,
+    "RHTECOLITSD00567": 5647,
+    "RHTECOLITSD00568": 1926,
+    "RHTECOLITSD00569": 2230,
+    "RHTECOLITSD00570": 1900,
+    "RHTECOLITSD00571": 2533
+  },
+  "window": 81
+}

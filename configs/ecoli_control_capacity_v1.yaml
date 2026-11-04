@@ -1,0 +1,27 @@
+inventory:
+  name: ecoli-control-capacity-v1
+  version: 1.0.0
+  protocol: specs/graphpro_dataset_reconstruction.md
+  frozen_on: 2026-11-04
+  acquisition_config: configs/regulondb_tss_acquisition_v1.yaml
+  genome_fasta: data/acquired/reference_acquisition_v10/cnnprom-ecoli-k12/GCF_000005845.2_ASM584v2_genomic.fna.gz
+  genome_fasta_sha256: a96d3cfa58c88d477013c768f90a11d2386d42a70d566abfb6d9013dcbd24255
+  contig: NC_000913.3
+  mapping_records: data/coordinates/reference_coordinate_mapping_v3/records/cnnprom-ecoli-sigma70.csv.gz
+  canonical_table: data/canonical/source_canonicalization_v1/cnnprom-ecoli-sigma70.csv.gz
+  radius: 100
+  window: 81
+  gc_caliper: 4
+  summary_output: manifests/provenance/ecoli_control_capacity_v1/capacity_summary.json
+  policy: >-
+    Source-only feasibility count; generates no control. CNNProm E. coli
+    positives are placed on NC_000913.3 by exact both-strand search of their
+    canonical sequence (TSS at window index 60), replacing a coordinate lift
+    from NC_000913.2. Exclusion set: the RegulonDB union of
+    configs/regulondb_tss_acquisition_v1.yaml plus the placed positives, with
+    the prokaryotic radius r = 100 on both strands (log R-036). Capacity is
+    the number of disjoint 81-nt windows in the free runs (F-123 lesson). The
+    GC check counts positives with no free window within the four-base caliper;
+    it ignores competition between positives. HT rows whose pos_1 lies beyond
+    the contig end are counted as out_of_range and dropped, not wrapped. PromoterSet coordinates are
+    validated by re-extracting its 81-nt sequences from NC_000913.3.
