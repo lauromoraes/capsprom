@@ -1,0 +1,30 @@
+acceptance:
+  name: reference-coordinate-mapping-v3-acceptance-v1
+  version: 1.0.0
+  protocol: specs/reference_coordinate_mapping_protocol.md
+  frozen_on: 2026-11-04
+  mapping_config: configs/reference_coordinate_mapping_v3.yaml
+  mapping_config_sha256: a10a4c20a804b321830c683a5627f179e02bc7d12af7a2fe73069dd5f79de5b9
+  mapping_output_dir: data/coordinates/reference_coordinate_mapping_v3
+  summary_output: manifests/provenance/reference_coordinate_mapping_v3/acceptance_v1.json
+  sample_output: docs/provenance/manual_review_mapping_v3/review_sheet.csv
+  policy: >-
+    Reads the persisted v3 record and locus tables; maps nothing again and reads
+    no model output. Criteria 1-2 are recounted from the files. Stage B1 is
+    applied only where a declared-coordinate rule has evidence: CNNProm E. coli
+    header integers under the F-098 rule on NC_000913.2. CNNProm B. subtilis
+    negative integers are reported as an exploratory B1 probe with the same
+    plus-strand rule (no frozen convention). CDBProm rows carry no coordinates,
+    so B1 does not apply. B3 receives only unmapped strict-DNA records; its
+    input count is recorded. The manual-audit sample is drawn before any
+    inspection: per collection, status, and label, the records with the lowest
+    SHA-256 of record_id.
+  b1_rules:
+    cnnprom-ecoli-sigma70: cnnprom_ecoli_f098
+  b1_probes:
+    cnnprom-bacillus-subtilis: plus_strand_start_plus_60
+  sample_per_stratum: 2
+  out_of_scope_criteria:
+    criterion_7_r011: >-
+      R-011 recorded no per-collection counts (F-093); the comparison cannot be
+      made and needs an owner decision, not a silent waiver.

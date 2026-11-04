@@ -1240,3 +1240,21 @@ SHA-256 of the module that ran, when the change was not yet committed.
   comparison. Reinstating the panel requires a new versioned decision before
   any test access. No data, contract, partition, gate, or outcome was used or
   changed.
+
+## R-061 · 2026-11-04 · Mapping v3 acceptance audit and CDBProm/CNNProm control feasibility
+
+- **Procedure.** `scripts/audit_mapping_acceptance.py` with
+  `configs/reference_coordinate_mapping_v3_acceptance_v1.yaml` (SHA-256
+  `e6ce37be…`) reads the persisted v3 record and locus tables, recounts
+  criteria 1-2, applies Stage B1 to CNNProm *E. coli* (F-098 rule) and an
+  exploratory probe to CNNProm *B. subtilis* negatives, counts B3 input, and
+  freezes a manual-audit sample. Summary
+  `manifests/provenance/reference_coordinate_mapping_v3/acceptance_v1.json`;
+  sheet `docs/provenance/manual_review_mapping_v3/review_sheet.csv` (83 rows,
+  SHA-256 `ad8942ca…`). Source-only inventory of TSS exclusion sources in
+  `docs/cdbprom_cnnprom_genomic_control_feasibility.md`. No model output read;
+  nothing remapped, generated, or partitioned.
+- **Findings.** F-127 to F-130.
+- **Open decisions (project owner).** Criterion 7 (R-011 counts do not exist,
+  F-093); the manual sample review (criterion 8); whether CNNProm *E. coli*
+  becomes the genomic-control pilot.

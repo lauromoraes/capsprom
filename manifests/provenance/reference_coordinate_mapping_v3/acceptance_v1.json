@@ -1,0 +1,181 @@
+{
+  "acceptance_config_sha256": "e6ce37be57127d69c48e9dfca09e16c66664c6f78cf8d716855b3b8dad6cca77",
+  "collections": {
+    "cdbprom-anabaena-sp": {
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 5034,
+      "records_sha256": "291032eeca946dd495691ce5a9fac049dd006cfed9d030a528ae1916c7c71ac0",
+      "status_counts": {
+        "ambiguous": 22,
+        "inconsistent": 5012
+      },
+      "violations": {}
+    },
+    "cdbprom-bacillus-amyloliquefaciens": {
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 2118,
+      "records_sha256": "6fb31bc17721dbbe489a78c79601204dbfcf35a1e13d9d1701d8950cf2e94969",
+      "status_counts": {
+        "verified": 2118
+      },
+      "violations": {}
+    },
+    "cdbprom-chlamydophila-pneumoniae": {
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 808,
+      "records_sha256": "bdd4beafb3cdcc91b89af3e4ad23589e240f5cd94daf9b63ef31b5b2b50155cd",
+      "status_counts": {
+        "ambiguous": 1,
+        "verified": 807
+      },
+      "violations": {}
+    },
+    "cdbprom-corynebacterium-glutamicum": {
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 1150,
+      "records_sha256": "da27628b8316603ec73956f6b14b420a75c5784fbb0f68248031e52140a4d586",
+      "status_counts": {
+        "ambiguous": 5,
+        "verified": 1145
+      },
+      "violations": {}
+    },
+    "cdbprom-helicobacter-pylori": {
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 1428,
+      "records_sha256": "d4c8bc0fc467008632648e68ac88c332c7d9bba34bf644c0e8f88f2ecddfe3a9",
+      "status_counts": {
+        "ambiguous": 39,
+        "not_evaluated": 8,
+        "verified": 1381
+      },
+      "violations": {}
+    },
+    "cdbprom-klebisiella-pneumoniae": {
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 2658,
+      "records_sha256": "945caecae74facbe587af816ebe11a8b90812030919ac38115fd1c68f08065c0",
+      "status_counts": {
+        "ambiguous": 5,
+        "verified": 2653
+      },
+      "violations": {}
+    },
+    "cdbprom-mycrobacterium-tuberculosis": {
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 3544,
+      "records_sha256": "e3ce50704e54f92528f227fd4d740501596f2fb6343cd6dc8d220bbc87d98c56",
+      "status_counts": {
+        "ambiguous": 19,
+        "verified": 3525
+      },
+      "violations": {}
+    },
+    "cdbprom-pseudonomas-aeruginosa": {
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 4110,
+      "records_sha256": "47e6e9faa4e528d768be32b3d34881eb9b04a71b2a5e372f0273deb6103e8ec0",
+      "status_counts": {
+        "ambiguous": 14,
+        "not_evaluated": 2,
+        "verified": 4094
+      },
+      "violations": {}
+    },
+    "cdbprom-salmonella-typhimurium": {
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 1962,
+      "records_sha256": "0182a6a378298afccd053fdbe5d285eddda0c47539a1b9264ab78fd432c96072",
+      "status_counts": {
+        "inconsistent": 1962
+      },
+      "violations": {}
+    },
+    "cdbprom-streptomyces-coelicolor": {
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 5222,
+      "records_sha256": "70482ea1d9931b98740932ae1ef84df7d8322108dd18eeeb76da6732ccb5b308",
+      "status_counts": {
+        "ambiguous": 9,
+        "verified": 5213
+      },
+      "violations": {}
+    },
+    "cdbprom-synechocistis": {
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 3278,
+      "records_sha256": "2f6e1b9a66589a13d8df613f3f17237100b8b10ca799954e2f4f87b5d4a3c649",
+      "status_counts": {
+        "ambiguous": 18,
+        "verified": 3260
+      },
+      "violations": {}
+    },
+    "cnnprom-bacillus-subtilis": {
+      "b1_probe": {
+        "counts": {
+          "plus_match": 1000
+        },
+        "rule": "plus_strand_start_plus_60"
+      },
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 1373,
+      "records_sha256": "65cb97609f1ba8f893040165a9767ab51c65857f2ba4e69552a9bd5eb75acd44",
+      "status_counts": {
+        "verified": 1373
+      },
+      "violations": {}
+    },
+    "cnnprom-ecoli-sigma70": {
+      "b1": {
+        "counts": {
+          "negative_match": 2974,
+          "positive_match": 837,
+          "positive_strand_match": 837,
+          "skipped_ambiguous": 28
+        },
+        "mismatches": [],
+        "rule": "cnnprom_ecoli_f098"
+      },
+      "b3_input_records": 0,
+      "duplicate_record_ids": 0,
+      "orphan_loci_records": 0,
+      "records": 3839,
+      "records_sha256": "377db8eff73a0d89466dee1a814baaa61623c8d09082a7d9667da37d6dbee4df",
+      "status_counts": {
+        "ambiguous": 28,
+        "verified": 3811
+      },
+      "violations": {}
+    }
+  },
+  "sample": {
+    "path": "docs/provenance/manual_review_mapping_v3/review_sheet.csv",
+    "rows": 83,
+    "sha256": "ad8942ca20320fdde7e774f2f937cfb28d3a33954190b7cd443f6fdad8516eb4"
+  }
+}
