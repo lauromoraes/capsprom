@@ -1456,3 +1456,21 @@ SHA-256 of the module that ran, when the change was not yet committed.
   frozen hash; the five cases still reproduce.
 - **State.** No control generated yet; any further change needs a new
   versioned contract.
+
+## R-069 · 2026-11-05 · CNNProm E. coli genomic pilot control build
+
+- **Run.** `scripts/build_cnnprom_ecoli_genomic_pilot.py --execute` under the
+  frozen contract (SHA-256 `f68676e9…`) with the pinned MMseqs2 binary
+  (`b7ef6e0e…`, version `8cc5ce36…`). Output, ignored by git:
+  `data/interim/cnnprom_ecoli_genomic_pilot_v1/builds/cnnprom-ecoli-sigma70.recon-genomic-v1/`,
+  `build_manifest.json` SHA-256 `31fda2c70c397285d23779e4f6f2cf56e64bb7685ed411a67cf8f5a566f2d89c`,
+  `pair_ledger.csv` `9d604b2f…`.
+- **Result (F-136).** 839 controls selected, none failed, all at GC distance
+  0; independent re-verification found no TSS-radius or blocked-interval
+  violation. The pair filter removed one positive-duplicate pair (rraBp1,
+  whose window is the reverse complement of argIp's), leaving 838 pairs.
+  Grouping edges: 1,007 alignment, 7 Hamming, 156 genomic overlap; 0
+  cross-partition drops; 168 test and 670 train pairs; test intersection 168.
+- **State.** Gate `controls_generated` is satisfied by this build; the
+  contract is not edited (frozen). Next: distribution and dependency audit,
+  then the manual sample audit. No model trained, no test outcome read.
