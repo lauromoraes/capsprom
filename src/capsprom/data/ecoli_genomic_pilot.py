@@ -12,6 +12,7 @@ the first-accepted sampling of the v3 bacterial panels.
 from __future__ import annotations
 
 import bisect
+import csv
 import hashlib
 import json
 from collections.abc import Iterable, Mapping, Sequence
@@ -478,6 +479,102 @@ def blocked_violations(selections: Iterable[ControlSelection], blocked: Sequence
 
     ordered = sorted(blocked)
     return [s.pair.negative.identifier for s in selections if _overlaps(ordered, s.pair.negative_start, s.pair.negative_end)]
+
+
+def nearest_gc_capacity(windows: AdmissibleWindows, sequences: Iterable[str]) -> dict[int, int]:
+    """Count positives by the smallest GC count distance any admissible window offers.
+
+    A static check: it ignores competition between positives and identity rejection.
+    """
+
+    available = np.array(sorted(windows.starts_by_gc), dtype=np.int64)
+    counts: dict[int, int] = {}
+    for sequence in sequences:
+        target = sequence.count("G") + sequence.count("C")
+        distance = int(np.abs(available - target).min()) if len(available) else -1
+        counts[distance] = counts.get(distance, 0) + 1
+    return dict(sorted(counts.items()))
+
+
+def forbidden_admissible_windows(sequence: str, windows: AdmissibleWindows, forbidden: Iterable[str]) -> int:
+    """Number of admissible windows whose strand-invariant identity is forbidden."""
+
+    sequence = sequence.upper()
+    keys = {s.upper() for s in forbidden if len(s) == windows.window}
+    keys |= {reverse_complement(s) for s in keys}
+    return sum(
+        sequence[start : start + windows.window] in keys for starts in windows.starts_by_gc.values() for start in starts.tolist()
+    )
+
+
+def read_active_positives(path: Path, window: int = WINDOW) -> set[str]:
+    """Positive sequences of one active dataset file that can equal a ``window``-nt control.
+
+    Grouped dataset tables carry ``label`` and ``sequence``; reconstructed pair
+    ledgers carry ``positive_sequence``.
+    """
+
+    with path.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        if "positive_sequence" in (reader.fieldnames or ()):
+            values = (row["positive_sequence"] for row in reader)
+        else:
+            values = (row["sequence"] for row in reader if int(row["label"]) == 1)
+        return {s.strip().upper() for s in values if len(s.strip()) == window}
+
+
+@dataclass(frozen=True)
+class NativeAssignment:
+    record_id: str
+    group: str
+    partition: str
+
+
+def native_assignments(source_rows: Sequence[Mapping[str, str]], grouped_rows: Sequence[Mapping[str, str]]) -> dict[str, NativeAssignment]:
+    """Map each source record to its grouped-build record by (label, sequence), one to one.
+
+    Raises ``ValueError`` unless every source record matches exactly one grouped
+    record and every grouped record is matched.
+    """
+
+    def keyed(rows, name):
+        result = {}
+        for row in rows:
+            key = (str(row["label"]), row["sequence"].strip().upper())
+            if key in result:
+                raise ValueError(f"duplicate (label, sequence) in the {name} records")
+            result[key] = row
+        return result
+
+    source, grouped = keyed(source_rows, "source"), keyed(grouped_rows, "grouped")
+    if source.keys() != grouped.keys():
+        raise ValueError(
+            f"source and grouped records differ: {len(source.keys() - grouped.keys())} source-only, "
+            f"{len(grouped.keys() - source.keys())} grouped-only"
+        )
+    return {
+        row["record_id"]: NativeAssignment(grouped[key]["record_id"], grouped[key]["group"], grouped[key]["partition"])
+        for key, row in source.items()
+    }
+
+
+def cross_partition_links(partition: Mapping[str, str], controls: Iterable[str], edges: Iterable[tuple[str, str]]) -> dict[str, list[str]]:
+    """Controls with an edge to a record of another partition, with the partitions reached.
+
+    ``partition`` covers native records and controls; a control carries its
+    positive's partition.
+    """
+
+    neighbours: dict[str, set[str]] = {}
+    for left, right in edges:
+        neighbours.setdefault(left, set()).add(right)
+        neighbours.setdefault(right, set()).add(left)
+    links = {}
+    for control in controls:
+        reached = sorted({partition[n] for n in neighbours.get(control, ())} - {partition[control]})
+        if reached:
+            links[control] = reached
+    return links
 
 
 def _overlaps(intervals: Sequence[tuple[int, int]], start: int, end: int) -> bool:

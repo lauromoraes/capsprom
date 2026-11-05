@@ -1,10 +1,21 @@
 {
   "contig": "NC_000913.3",
   "contract": "configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml",
-  "contract_sha256": "98369f014c59b75891a7c5308862866dc18061ce1d04dc21ccc0ac42b05851c0",
+  "contract_sha256": "c9294b639513b430baad8e933d4c2fbf46f9d6044515245a5c2b6103a66b09cf",
   "exclusion_positions": 34813,
+  "external_active_positives": {
+    "datasets": 21,
+    "sequences_81_nt": 22765
+  },
   "genomic_panel_positives": 839,
   "header_strand_disagreements": 0,
+  "native_assignment": {
+    "positive_partitions": {
+      "test": 168,
+      "train": 671
+    },
+    "records_matched": 3839
+  },
   "native_negative_blocked_intervals": 3065,
   "native_negatives": {
     "multiple": 26,
@@ -199,6 +210,18 @@
       "RHTECOLITSD00571": 2533
     },
     "union_tss_position_strand": 34800
+  },
+  "static_capacity": {
+    "admissible_index": {
+      "admissible": 1525588,
+      "blocked_overlap": 51058,
+      "invalid_dna": 0,
+      "tss_overlap": 3064926
+    },
+    "admissible_windows_equal_to_active_external_positive": 0,
+    "genomic_panel_positives_by_nearest_available_gc_distance": {
+      "0": 839
+    }
   },
   "support_class": {
     "exact": 836,

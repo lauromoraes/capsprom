@@ -1397,3 +1397,44 @@ SHA-256 of the module that ran, when the change was not yet committed.
   GC-only reference stays beside every model. Draft SHA-256 `98369f01…`.
   Plan mode re-run: the five cases still reproduce. No control generated; all
   gates unchanged.
+
+## R-067 · 2026-11-04 · Closing the three open points of the E. coli pilot contract
+
+- **Decision (project owner).** The owner approved the three proposed
+  solutions ("Sim, implementar"); they are recorded under
+  `resolved_decisions` of `configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml`.
+- **External active-positive identity.** The scope is all 21 datasets of
+  dependency manifest v4 (SHA-256 `e46826c6…`): the 18 eligible datasets from
+  their `grouped_domain_window_v1/<dataset>/records.csv` (label 1, the records
+  evaluation protocol v4 uses) and the three graphpro-reconstructed-v3
+  candidates, which have no grouped build, from their v3 `pair_ledger.csv`
+  (`positive_sequence`). Every file is hash-pinned in the contract; the
+  builder aborts if the declared sources differ from the manifest. Only 81-nt
+  positives can match, so the 251-nt eukaryotic positives are read and cannot
+  match. 22,765 distinct 81-nt sequences are read.
+- **Grouping and split.** Each source record (positives and negatives) is
+  matched to the native grouped build `cnnprom-prokaryotic-Ecoli` by
+  (label, sequence); the builder aborts unless the match is one to one. It is:
+  3,839 records, positives 168 test and 671 train. Each control inherits its
+  positive's group and partition label (test or train fold). Under
+  `--execute`, homology grouping v1 (MMseqs2 binary pinned, alignment, Hamming,
+  and genomic-overlap edges; coordinates for controls and single-locus
+  positives only) runs on every native record plus every control, and a
+  control with an edge to another partition label is dropped with its pair and
+  written to `cross_partition_drops.csv`, as in `scripts/build_cds_controls_v3.py`.
+  The native split is never recomputed. The build writes `test_intersection.csv`.
+- **Real-data validation.** Plan mode now runs a static capacity check before
+  any control exists: 1,525,588 admissible windows (3,064,926 removed by the
+  TSS radius, 51,058 by native-negative blocks); all 839 genomic-panel
+  positives have an admissible window at GC distance 0; no admissible window
+  equals an active external positive (the two genome windows equal to
+  CDBProm *S. Typhimurium* positives are not admissible). The check ignores
+  competition between positives; real failures will appear in
+  `control_failures.csv` of the immutable build.
+- **Code.** `ecoli_genomic_pilot.py` gains `read_active_positives`,
+  `native_assignments`, `cross_partition_links`, `nearest_gc_capacity`, and
+  `forbidden_admissible_windows`, each with fixtures. Contract draft SHA-256
+  `c9294b63…`; the five observed cases still reproduce.
+- **State.** No control generated, no partition changed, no model output read.
+  `contract_frozen` and `builder_fixture_tested` stay false until the owner
+  freezes the contract.

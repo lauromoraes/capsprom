@@ -8,11 +8,16 @@ from capsprom.data.ecoli_genomic_pilot import (
     admissible_windows,
     blocked_violations,
     classify_support,
+    cross_partition_links,
     exclusion_positions,
+    forbidden_admissible_windows,
     local_offset,
+    native_assignments,
     native_negative_intervals,
+    nearest_gc_capacity,
     parse_cnnprom_header,
     place_all,
+    read_active_positives,
     regulondb_union,
     select_nearest_gc_controls,
 )
@@ -223,3 +228,45 @@ def test_support_classification_prefers_exact_then_near_then_shifted():
     assert classify_support(101, "+", "x", union, 2)[:2] == ("near", -1)
     assert classify_support(130, "+", "x", union, 2)[:2] == ("shifted", 20)
     assert classify_support(130, "-", "x", union, 2)[0] == "none"
+
+
+def test_static_capacity_reports_nearest_distance_and_forbidden_windows():
+    genome, loci = _pilot_genome()
+    index = admissible_windows(CONTIG, genome, [locus.tss for locus in loci], 100)
+    gcs = sorted(index.starts_by_gc)
+    low, high = "A" * 81, "G" * 81
+    assert nearest_gc_capacity(index, [low, high]) == {gcs[0]: 1, 81 - gcs[-1]: 1}
+    start = int(index.starts_by_gc[gcs[len(gcs) // 2]][0])
+    window = genome[start : start + 81]
+    assert forbidden_admissible_windows(genome, index, [reverse_complement(window), "ACGT"]) == genome.count(window) + genome.count(reverse_complement(window))
+
+
+def test_active_positives_read_both_layouts_and_only_the_window_length(tmp_path):
+    grouped = tmp_path / "records.csv"
+    grouped.write_text(f"record_id,label,sequence\na,1,{'a' * 81}\nb,0,{'C' * 81}\nc,1,{'G' * 251}\n", encoding="utf-8")
+    ledger = tmp_path / "pair_ledger.csv"
+    ledger.write_text(f"pair_id,positive_sequence,negative_sequence\np,{'T' * 81},{'C' * 81}\n", encoding="utf-8")
+    assert read_active_positives(grouped) == {"A" * 81}
+    assert read_active_positives(ledger) == {"T" * 81}
+
+
+def test_native_assignment_is_one_to_one_by_label_and_sequence():
+    source = [{"record_id": "s1", "label": "1", "sequence": "acgt"}, {"record_id": "s2", "label": "0", "sequence": "ACGT"}]
+    grouped = [
+        {"record_id": "g2", "label": "0", "sequence": "ACGT", "group": "7", "partition": "train:1"},
+        {"record_id": "g1", "label": "1", "sequence": "ACGT", "group": "3", "partition": "test"},
+    ]
+    result = native_assignments(source, grouped)
+    assert (result["s1"].record_id, result["s1"].group, result["s1"].partition) == ("g1", "3", "test")
+    assert result["s2"].partition == "train:1"
+    with pytest.raises(ValueError, match="differ"):
+        native_assignments(source, grouped[:1])
+    with pytest.raises(ValueError, match="duplicate"):
+        native_assignments(source + [{"record_id": "s3", "label": "1", "sequence": "ACGT"}], grouped)
+
+
+def test_cross_partition_links_flag_controls_reaching_another_fold_or_test():
+    partition = {"p1": "test", "p2": "train:0", "n1": "train:1", "c1": "test", "c2": "train:0", "c3": "train:0"}
+    edges = [("p1", "c1"), ("c2", "n1"), ("c3", "p2"), ("c3", "c1")]
+    assert cross_partition_links(partition, ["c1", "c2", "c3"], edges) == {"c1": ["train:0"], "c2": ["train:1"], "c3": ["test"]}
+    assert cross_partition_links(partition, ["c1"], [("p1", "c1")]) == {}

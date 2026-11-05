@@ -2,9 +2,12 @@
 
 Without ``--execute`` it verifies the inputs, places every positive on the
 target contig, resolves multiple loci, classes TSS support, checks the
-contract's observed cases, and writes the placement summary and ledger; it
-generates no control.  ``--execute`` additionally generates controls, only
-when the ``contract_frozen`` and ``builder_fixture_tested`` gates are open.
+contract's observed cases, matches the records to the native grouped build,
+runs the static capacity check, and writes the placement summary and ledger;
+it generates no control.  ``--execute`` additionally generates controls,
+groups them with the native records under homology grouping v1 (needs
+``--mmseqs``), and drops pairs that link across partitions, only when the
+``contract_frozen`` and ``builder_fixture_tested`` gates are open.
 """
 
 from __future__ import annotations
@@ -26,15 +29,28 @@ from capsprom.data.bacterial_reconstruction import InMemoryGenome, positive_wind
 from capsprom.data.ecoli_genomic_pilot import (
     admissible_windows,
     blocked_violations,
+    cross_partition_links,
     exclusion_positions,
+    forbidden_admissible_windows,
+    native_assignments,
     native_negative_intervals,
+    nearest_gc_capacity,
     place_all,
+    read_active_positives,
     read_regulondb_acquisition,
     regulondb_union,
     select_nearest_gc_controls,
 )
 from capsprom.data.exact_mapping import read_fasta
 from capsprom.data.graphpro_reconstruction import TssLocus, filter_reconstructed_pairs, find_control_exclusion_violations
+from capsprom.data.homology_grouping import (
+    GroupingRecord,
+    SearchSettings,
+    alignment_edges,
+    genomic_overlap_edges,
+    hamming_edges,
+    run_mmseqs_search,
+)
 from capsprom.data.loading import sha256_file
 from capsprom.state import write_json_atomic
 
@@ -47,11 +63,17 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml"))
     parser.add_argument("--execute", action="store_true")
+    parser.add_argument("--mmseqs", type=Path, help="MMseqs2 binary, required with --execute")
     args = parser.parse_args()
     contract = yaml.safe_load(args.config.read_text(encoding="utf-8"))
     gates = contract["pilot"]["execution_gates"]
     if args.execute and not (gates["contract_frozen"] and gates["builder_fixture_tested"]):
         raise SystemExit("contract_frozen and builder_fixture_tested gates must be open to generate controls")
+    grouping = contract["grouping_and_split"]
+    if args.execute and (args.mmseqs is None or sha256_file(args.mmseqs) != grouping["mmseqs2_binary_sha256"]):
+        raise SystemExit("pass --mmseqs with the MMseqs2 binary pinned by the contract")
+    if sha256_file(Path(grouping["protocol"])) != grouping["protocol_sha256"]:
+        raise SystemExit("homology grouping protocol hash mismatch")
 
     reference, positive_policy, policy = contract["reference"], contract["positive_policy"], contract["negative_policy"]
     genome_path = Path(reference["genome_fasta"])
@@ -78,6 +100,12 @@ def main() -> None:
     undeclared = Counter(p.status for p in placements if p.status not in {"single", "multiple_resolved", "multiple_unresolved"})
     blocked, native_counts = native_negative_intervals((row["sequence"].upper() for row in negatives), contigs)
     cases = _check_observed_cases(placements, positive_policy)
+    assignments = _native_assignments(grouping["native_build"], canonical)
+    external = _external_positives(policy["external_active_positive_identity"])
+    index = admissible_windows(
+        contig, contigs[contig], {tss for tss, _ in exclusion_positions(union, placements)}, policy["exclusion_radius_nt"], blocked.get(contig, ())
+    )
+    sequences = {row["record_id"]: row["sequence"].upper() for row in positives}
 
     LEDGER.parent.mkdir(parents=True, exist_ok=True)
     _write_rows(LEDGER, [_placement_row(p) for p in placements])
@@ -101,6 +129,20 @@ def main() -> None:
         "non_exact_positives": [_placement_row(p) for p in placements if p.status != "single" or p.support_class != "exact"],
         "observed_cases": cases,
         "observed_cases_reproduced": all(case["reproduced"] for case in cases),
+        "native_assignment": {
+            "records_matched": len(assignments),
+            "positive_partitions": dict(
+                sorted(Counter(assignments[row["record_id"]].partition.split(":")[0] for row in positives).items())
+            ),
+        },
+        "external_active_positives": {"datasets": len(external[1]), "sequences_81_nt": len(external[0])},
+        "static_capacity": {
+            "admissible_index": dict(index.excluded),
+            "genomic_panel_positives_by_nearest_available_gc_distance": {
+                str(k): v for k, v in nearest_gc_capacity(index, [sequences[p.record_id] for p in placements if p.in_genomic_panel]).items()
+            },
+            "admissible_windows_equal_to_active_external_positive": forbidden_admissible_windows(contigs[contig], index, external[0]),
+        },
         "undeclared_statuses": dict(undeclared),
         "placement_ledger": {"path": str(LEDGER), "sha256": sha256_file(LEDGER)},
     }
@@ -109,7 +151,7 @@ def main() -> None:
     if undeclared or not summary["observed_cases_reproduced"]:
         raise SystemExit("placement differs from the contract; see the summary")
     if args.execute:
-        _generate(contract, contigs, union, placements, blocked, positives)
+        _generate(args, contract, contigs, union, placements, blocked, index, external[0], assignments, canonical)
 
 
 def _union(acquisition_config: Path, contig: str, length: int):
@@ -153,22 +195,20 @@ def _check_observed_cases(placements, policy) -> list[dict]:
     return cases
 
 
-def _generate(contract, contigs, union, placements, blocked, positives) -> None:
-    pilot, window, policy = contract["pilot"], contract["window"], contract["negative_policy"]
+def _generate(args, contract, contigs, union, placements, blocked, index, external, assignments, canonical) -> None:
+    pilot, window, policy, grouping = contract["pilot"], contract["window"], contract["negative_policy"], contract["grouping_and_split"]
     contig = contract["reference"]["contig"]
     target = OUTPUT_ROOT / pilot["dataset_id"]
     if target.exists():
         raise FileExistsError(f"{target} exists; builds are immutable")
-    external = _external_positives(policy["external_active_positive_identity"])
     genome = InMemoryGenome(contigs)
     loci = [TssLocus(p.record_id, contig, p.tss, p.strand) for p in placements if p.in_genomic_panel]
-    sequences = {row["record_id"]: row["sequence"].upper() for row in positives}
+    rows = {row["record_id"]: row for row in canonical}
     for locus in loci:
-        if positive_window(genome, locus, window["upstream"], window["downstream"])[2] != sequences[locus.identifier]:
+        if positive_window(genome, locus, window["upstream"], window["downstream"])[2] != rows[locus.identifier]["sequence"].upper():
             raise AssertionError(f"re-extracted window differs for {locus.identifier}")
     exclusion = exclusion_positions(union, placements)
     known = [TssLocus(f"tss:{contig}:{tss}:{strand}", contig, tss, strand) for tss, strand in exclusion]
-    index = admissible_windows(contig, contigs[contig], {tss for tss, _ in exclusion}, policy["exclusion_radius_nt"], blocked.get(contig, ()))
     selections, failures = select_nearest_gc_controls(
         contigs[contig],
         loci,
@@ -186,22 +226,77 @@ def _generate(contract, contigs, union, placements, blocked, positives) -> None:
         raise AssertionError(f"accepted controls violate exclusions: {violations[:5]}")
     filtered = filter_reconstructed_pairs(pairs)
     kept = {pair.positive_locus.identifier for pair in filtered.pairs}
+    selections = [s for s in selections if s.pair.positive_locus.identifier in kept]
+    by_id = {p.record_id: p for p in placements}
+
+    # Native records keep their grouped-build identity; each control carries its positive's partition.
+    records, partition = [], {}
+    for record_id, assignment in assignments.items():
+        placement = by_id.get(record_id)
+        coordinates = (None, None, None)
+        if placement is not None and placement.status == "single":
+            start = placement.tss - window["upstream"] if placement.strand == "+" else placement.tss - window["downstream"]
+            coordinates = (contig, start, start + window["length"])
+        records.append(GroupingRecord(assignment.record_id, rows[record_id]["sequence"].upper(), int(rows[record_id]["label"]), assignment.record_id, *coordinates))
+        partition[assignment.record_id] = assignment.partition
+    control_of = {}
+    for selection in selections:
+        pair, home = selection.pair, assignments[selection.pair.positive_locus.identifier]
+        control_id = f"{home.record_id}|genomic-control"
+        control_of[control_id] = selection
+        partition[control_id] = home.partition
+        records.append(GroupingRecord(control_id, pair.negative.sequence, 0, home.record_id, contig, pair.negative_start, pair.negative_end))
+    grouping_config = yaml.safe_load(Path(grouping["protocol"]).read_text(encoding="utf-8"))
+    settings = SearchSettings.from_config(grouping_config["search"])
     OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix=f".{pilot['dataset_id']}-", dir=OUTPUT_ROOT))
     try:
-        by_id = {p.record_id: p for p in placements}
-        _write_rows(staging / "pair_ledger.csv", [_pair_row(s, by_id[s.pair.positive_locus.identifier]) for s in selections if s.pair.positive_locus.identifier in kept])
+        search = run_mmseqs_search(records, staging / "mmseqs", args.mmseqs, settings)
+        shutil.rmtree(staging / "mmseqs" / "tmp", ignore_errors=True)
+        edges = {
+            "alignment": alignment_edges(Path(search["hits"]), settings),
+            "hamming": hamming_edges(records, grouping_config["grouping"]["hamming_edge"]["max_mismatch_fraction"]),
+            "genomic_overlap": genomic_overlap_edges(records),
+        }
+        links = cross_partition_links(partition, control_of, set().union(*edges.values()))
+        retained = [(cid, s) for cid, s in control_of.items() if cid not in links]
+        _write_rows(
+            staging / "pair_ledger.csv",
+            [
+                {
+                    **_pair_row(s, by_id[s.pair.positive_locus.identifier]),
+                    "native_record_id": assignments[s.pair.positive_locus.identifier].record_id,
+                    "group": assignments[s.pair.positive_locus.identifier].group,
+                    "partition": partition[cid],
+                }
+                for cid, s in retained
+            ],
+        )
         _write_rows(staging / "control_failures.csv", [_placement_row(by_id[locus.identifier]) for locus in failures])
-        gaps = [s.pair.positive_gc - s.pair.negative_gc for s in selections if s.pair.positive_locus.identifier in kept]
+        _write_rows(
+            staging / "cross_partition_drops.csv",
+            [
+                {"record_id": control_of[cid].pair.positive_locus.identifier, "control_id": cid, "partition": partition[cid], "linked_partitions": "+".join(reached)}
+                for cid, reached in sorted(links.items())
+            ],
+        )
+        test = sorted(s.pair.positive_locus.identifier for cid, s in retained if partition[cid] == "test")
+        _write_rows(staging / "test_intersection.csv", [{"record_id": record_id} for record_id in test])
+        gaps = [s.pair.positive_gc - s.pair.negative_gc for _, s in retained]
         result = {
-            "contract_sha256": sha256_file(Path("configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml")),
+            "contract_sha256": sha256_file(args.config),
             "genomic_panel_positives": len(loci),
             "admissible_index": dict(index.excluded),
             "control_failures": len(failures),
-            "gc_distance": dict(Counter(s.gc_distance for s in selections)),
+            "gc_distance": {str(k): v for k, v in sorted(Counter(s.gc_distance for _, s in retained).items())},
             "residual_gc_gap_mean_positive_minus_control": sum(gaps) / len(gaps) if gaps else None,
             "filter": {k: v for k, v in dataclasses.asdict(filtered).items() if k != "pairs"},
-            "pairs": len(filtered.pairs),
+            "grouping_edges": {name: len(values) for name, values in edges.items()},
+            "cross_partition_drops": len(links),
+            "pairs": len(retained),
+            "pairs_by_partition": {k: v for k, v in sorted(Counter(partition[cid].split(":")[0] for cid, _ in retained).items())},
+            "test_intersection": len(test),
+            "mmseqs": {k: search[k] for k in ("binary_sha256", "version", "command_line", "hits_sha256")},
         }
         result["outputs"] = {p.name: sha256_file(p) for p in sorted(staging.iterdir()) if p.is_file()}
         write_json_atomic(staging / "build_manifest.json", result)
@@ -209,25 +304,36 @@ def _generate(contract, contigs, union, placements, blocked, positives) -> None:
     except BaseException:
         shutil.rmtree(staging, ignore_errors=True)
         raise
-    print(json.dumps(result, indent=2))
+    print(json.dumps({k: v for k, v in result.items() if k not in ("outputs", "mmseqs")}, indent=2))
 
 
-def _external_positives(scope: dict) -> list[str]:
-    missing = [key for key in ("dependency_manifest_sha256", "dataset_count", "processed_root") if key not in scope]
-    if missing:
-        raise SystemExit(f"external_active_positive_identity lacks {missing}; declare them before freezing")
+def _native_assignments(spec: dict, canonical: list[dict]):
+    path = Path(spec["records"])
+    if sha256_file(path) != spec["records_sha256"] or sha256_file(path.parent / "build_manifest.json") != spec["build_manifest_sha256"]:
+        raise SystemExit("native grouped build hash mismatch")
+    with path.open(encoding="utf-8", newline="") as handle:
+        grouped = list(csv.DictReader(handle))
+    try:
+        return native_assignments(canonical, grouped)
+    except ValueError as error:
+        raise SystemExit(f"native grouped build does not match the source records: {error}") from error
+
+
+def _external_positives(scope: dict) -> tuple[list[str], list[str]]:
     manifest = Path(scope["dependency_manifest"])
     if sha256_file(manifest) != scope["dependency_manifest_sha256"]:
         raise SystemExit("dependency manifest hash mismatch")
-    datasets = yaml.safe_load(manifest.read_text(encoding="utf-8"))["datasets"]
-    if len(datasets) != scope["dataset_count"]:
-        raise SystemExit("dependency manifest dataset count changed")
+    datasets = [d["dataset_id"] for d in yaml.safe_load(manifest.read_text(encoding="utf-8"))["datasets"]]
+    sources = {source["dataset_id"]: source for source in scope["sources"]}
+    if len(datasets) != scope["dataset_count"] or sorted(datasets) != sorted(sources):
+        raise SystemExit("declared external sources differ from the dependency manifest")
     sequences = set()
-    for dataset in datasets:
-        for path in sorted(Path(scope["processed_root"]).glob(f"{dataset['dataset_id']}*.csv")):
-            with path.open(encoding="utf-8", newline="") as handle:
-                sequences.update(row["sequence"].strip().upper() for row in csv.DictReader(handle) if int(row["label"]) == 1)
-    return sorted(sequences)
+    for dataset_id in datasets:
+        path = Path(sources[dataset_id]["path"])
+        if sha256_file(path) != sources[dataset_id]["sha256"]:
+            raise SystemExit(f"external positive source hash mismatch: {dataset_id}")
+        sequences |= read_active_positives(path, scope["window_length_nt"])
+    return sorted(sequences), datasets
 
 
 def _placement_row(p) -> dict:
