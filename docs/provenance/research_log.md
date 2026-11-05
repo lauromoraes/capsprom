@@ -1516,3 +1516,20 @@ SHA-256 of the module that ran, when the change was not yet committed.
   not resolve, so the sheet gives the promoter id and the README points to
   the gene pages and the acquired PromoterSet.
 - **State.** Review pending (owner).
+
+## R-072 · 2026-11-05 · Manual review result of the E. coli genomic pilot
+
+- **Review.** The owner reviewed the 25 frozen pairs of R-071 and reported
+  checks A, B, C, and D as `yes` on every row. No `no` was reported, and no
+  sample cell changed from the frozen sheet `e294e297…`.
+- **Sheet correction.** The owner first entered one `yes` per row in
+  `reviewer_notes` and left A to D empty. After the owner confirmed in chat
+  that each `yes` covered all four checks, the values were moved to A to D
+  and `reviewer_notes` was cleared. The filled sheet is
+  `docs/provenance/manual_review_ecoli_genomic_pilot/review_sheet.csv`,
+  SHA-256 `e4d3a269c515b0a03b2a2037905ea03a9538300cb5de07d3d67106a91bc7508b`.
+- **Result.** 25 of 25 rows pass, so the panel passes under the README
+  decision rule. This rests on the owner's review; the agent did not repeat
+  the checks against RegulonDB or NCBI.
+- **State.** Gate `manual_sample_audit` satisfied by this review (recorded
+  here; the frozen contract is not edited). Next: the eligibility manifest.
