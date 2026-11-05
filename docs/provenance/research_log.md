@@ -1499,3 +1499,20 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **State.** Gate `distribution_and_dependency_audit` satisfied by this audit
   (recorded here; the frozen contract is not edited). Next: manual sample
   audit, then the eligibility manifest.
+
+## R-071 · 2026-11-05 · Manual review sample of the E. coli genomic pilot
+
+- **Sample.** `configs/cnnprom_ecoli_genomic_pilot_manual_review_v1.yaml`
+  freezes 25 pairs of the pilot build (`31fda2c7…`): the five contract
+  observed cases plus 20 random pairs (10 per strand, lowest SHA-256 rank of
+  the record id). `scripts/prepare_cnnprom_ecoli_genomic_pilot_manual_review.py`
+  wrote `docs/provenance/manual_review_ecoli_genomic_pilot/review_sheet.csv`
+  (SHA-256 `e294e297…`), with instructions in the folder README; it refuses
+  to overwrite the sheet. No check result or model output was read.
+- **Checks.** A, positive TSS in RegulonDB by promoter id, name, strand, and
+  declared support distance; B, positive sequence against NCBI; C, control
+  sequence, strand, and G+C count against NCBI; D, no RegulonDB TSS within
+  100 nt of the control. A direct RegulonDB promoter URL was tried and does
+  not resolve, so the sheet gives the promoter id and the README points to
+  the gene pages and the acquired PromoterSet.
+- **State.** Review pending (owner).

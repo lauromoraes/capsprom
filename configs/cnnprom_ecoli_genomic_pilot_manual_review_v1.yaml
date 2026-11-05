@@ -1,0 +1,46 @@
+review:
+  name: cnnprom-ecoli-genomic-pilot-manual-sample-review-v1
+  version: 1.0.0
+  status: sample_frozen_review_pending
+  research_log: R-071
+  gate: cnnprom_ecoli_genomic_control_pilot_v1.manual_sample_audit
+  reviewer: project_owner
+  model_outcomes_used: false
+
+build:
+  ledger: data/interim/cnnprom_ecoli_genomic_pilot_v1/builds/cnnprom-ecoli-sigma70.recon-genomic-v1/pair_ledger.csv
+  manifest_sha256: 31fda2c70c397285d23779e4f6f2cf56e64bb7685ed411a67cf8f5a566f2d89c
+  canonical_table: data/canonical/source_canonicalization_v1/cnnprom-ecoli-sigma70.csv.gz
+  contig: NC_000913.3
+  output: docs/provenance/manual_review_ecoli_genomic_pilot/review_sheet.csv
+
+sampling:
+  random_pairs: 20
+  selection: lowest_sha256_rank
+  canonical_key: record_id
+  key_material: "cnnprom-ecoli-genomic-pilot-manual-review-v1:<record_id>"
+  strand_stratification: {enabled: true, target_per_strand: 10}
+  partitions: all
+  forced_records:
+    rule: every contract observed case that is in the panel, added beyond the random pairs
+    records:
+      - cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000653  # rrsAp2, multiple_resolved
+      - cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000300  # gltIp1, multiple_resolved
+      - cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000681  # serWp, near
+      - cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000631  # rplUp, near
+      - cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000029  # araCp, shifted
+  frozen_before_review: true
+
+checks:
+  A_positive_tss_in_regulondb: >-
+    The RegulonDB promoter of the CNNProm header id has the promoter name and
+    strand of the row and a TSS at tss_one_based, or at the distance the row's
+    support_class and support_distance_nt declare
+  B_positive_sequence: the positive equals the reference interval of the NCBI link, oriented on the given strand
+  C_control_sequence_and_strand: the control equals its NCBI interval on the positive's strand and has the same G+C count
+  D_control_tss_margin: no RegulonDB TSS of any evidence lies within 100 nt of the control on either strand
+
+decision_rule:
+  row_pass: every check is yes
+  panel_pass: all sampled rows pass
+  failure_policy: keep_the_panel_blocked_report_the_row_and_open_a_finding_without_relabeling
