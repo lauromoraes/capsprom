@@ -1474,3 +1474,28 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **State.** Gate `controls_generated` is satisfied by this build; the
   contract is not edited (frozen). Next: distribution and dependency audit,
   then the manual sample audit. No model trained, no test outcome read.
+
+## R-070 · 2026-11-05 · Distribution and dependency audit of the E. coli genomic pilot
+
+- **Procedure.** `scripts/audit_graphpro_v3_distribution_dependency.py` (the
+  R-051 audit, reused) with `configs/cnnprom_ecoli_genomic_pilot_audit_v1.yaml`
+  (SHA-256 `4a87a468…`). Two generalizations, behaviour-preserving for the v3
+  config: a ledger that already carries `partition` is read directly, and the
+  comparison datasets can come from the hash-pinned sources of a frozen
+  contract (here the 21 sources of the pilot contract `f68676e9…`, both
+  labels). Overlaps are reported for every audited panel, not only
+  `graphpro-` names. Output, ignored by git:
+  `outputs/reports/cnnprom_ecoli_genomic_pilot_audit_v1/`, manifest
+  `a36c6143…`. No model output read; no dataset changed.
+- **Result (F-137).** GC distributions of positives and controls are
+  identical; the largest positional total variation is 0.243 at the TSS base
+  (+1), then −11 (0.220) and −7 (0.185), the −10 region; median over
+  positions 0.050. Exact sharing: 838 positives with cnnprom-prokaryotic-Ecoli
+  (expected) and 1 positive with CDBProm *S. Typhimurium*; no control shares
+  an exact identity with any dataset. Alignment neighbours: 838 records with
+  cnnprom-prokaryotic-Ecoli, 134 with *S. Typhimurium*, 79 with *K.
+  pneumoniae*; 9 alignment edges are opposite-label (3, 4, 2). The pilot is
+  proposed into `enteric-cross-source`, the cluster of its native dataset.
+- **State.** Gate `distribution_and_dependency_audit` satisfied by this audit
+  (recorded here; the frozen contract is not edited). Next: manual sample
+  audit, then the eligibility manifest.

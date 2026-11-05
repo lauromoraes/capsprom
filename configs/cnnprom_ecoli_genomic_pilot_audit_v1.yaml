@@ -1,0 +1,46 @@
+audit:
+  name: cnnprom-ecoli-genomic-pilot-distribution-dependency-v1
+  version: 1.0.0
+  status: descriptive_release_gate_audit
+  research_log: R-070
+  gate: cnnprom_ecoli_genomic_control_pilot_v1.distribution_and_dependency_audit
+  script: scripts/audit_graphpro_v3_distribution_dependency.py
+  model_training_enabled: false
+  confirmatory_use_enabled: false
+
+inputs:
+  panels:
+    - {panel_id: cnnprom-ecoli-sigma70.recon-genomic-v1.genomic, collection_id: cnnprom-ecoli-sigma70, ledger: data/interim/cnnprom_ecoli_genomic_pilot_v1/builds/cnnprom-ecoli-sigma70.recon-genomic-v1/pair_ledger.csv, negative_column: negative_sequence, manifest: data/interim/cnnprom_ecoli_genomic_pilot_v1/builds/cnnprom-ecoli-sigma70.recon-genomic-v1/build_manifest.json, manifest_sha256: 31fda2c70c397285d23779e4f6f2cf56e64bb7685ed411a67cf8f5a566f2d89c}
+  dependency_manifest: configs/dataset_dependency_manifest_v4.yaml
+  dependency_manifest_sha256: e46826c6c5eb08acfa9acc1b3ac3b5665379fb781fe1ea34d306730178efcee0
+  sources_contract: configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml
+  sources_contract_sha256: f68676e9ae036c0452176a6628d4cd42f426a49c7fc820d61acbd4673f77be76
+  mmseqs2_binary_sha256: b7ef6e0e33df5dd4fa9cf988cbd8b4988c11a3a1255d2c377f13e1bb40c157fb
+
+distribution:
+  sequence_length: 81
+  coordinate_start: -60
+  partitions: [all, test]
+  tests: [two_sided_mann_whitney_gc, two_sided_ks_gc]
+  multiplicity: holm_within_test_family_over_panels
+  interpretation: descriptive_not_model_selection
+  note: >-
+    Controls are chosen at the nearest GC count (all at distance 0, F-136), so
+    the GC tests are expected to show no difference; positional composition
+    is the informative part.
+
+dependency:
+  exact: minimum_lexicographic_forward_or_reverse_complement
+  alignment:
+    rule_from: configs/dataset_dependency_manifest_v4.yaml
+    search: configs/homology_grouping_v1.yaml
+    min_seq_id: 0.80
+    coverage_both: 0.80
+    pair_join_threshold_records: 10
+  comparison_scope: pilot_panel_against_the_21_datasets_of_dependency_manifest_v4
+  sources: the hash-pinned files of the pilot contract (grouped builds for eligible datasets, v3 pair ledgers for candidates)
+  expected: >-
+    Full positive sharing with cnnprom-prokaryotic-Ecoli (same positives); the
+    panel is a condition of that dataset and is proposed into its cluster.
+  output: proposed_dependency_cluster_for_the_pilot_panel
+  limitation: exact_or_alignment_non_overlap_does_not_prove_biological_independence

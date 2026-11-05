@@ -1,4 +1,7 @@
-"""Distribution and cross-dataset dependency audit of graphpro-reconstructed-v3 panels.
+"""Distribution and cross-dataset dependency audit of reconstructed control panels.
+
+Written for the graphpro-reconstructed-v3 panels (R-051) and reused for the
+CNNProm E. coli genomic pilot (configs/cnnprom_ecoli_genomic_pilot_audit_v1.yaml).
 
 Descriptive release-gate audit: GC and positional composition per panel (all
 records and test only, Holm across panels), exact strand-invariant sharing,
@@ -56,7 +59,7 @@ def main() -> None:
             labelled[name] = {1: set(), 0: {r["negative"] for r in rows}}
     exact = audit_named_sequence_dependencies({**labelled, **eligible})
     exact["overlaps_involving_v3"] = [
-        row for row in exact["overlaps"] if row["left_dataset_id"].startswith("graphpro-") or row["right_dataset_id"].startswith("graphpro-")
+        row for row in exact["overlaps"] if row["left_dataset_id"] in labelled or row["right_dataset_id"] in labelled
     ]
 
     OUT = args.output_dir
@@ -96,6 +99,8 @@ def _load_panel(panel: dict) -> list[dict]:
     if sha256_file(Path(panel["manifest"])) != panel["manifest_sha256"]:
         raise ValueError(f"manifest hash mismatch: {panel['panel_id']}")
     rows = list(csv.DictReader(Path(panel["ledger"]).open(encoding="utf-8")))
+    if rows and "partition" in rows[0] and "positive_sequence" in rows[0]:  # ledger already carries the inherited partition
+        return [{"positive": r["positive_sequence"], "negative": r[panel["negative_column"]], "partition": r["partition"]} for r in rows]
     if "positive_ledger" in panel:
         positives = {r["pair_id"]: r["positive_sequence"] for r in csv.DictReader(Path(panel["positive_ledger"]).open(encoding="utf-8"))}
         return [{"positive": positives[r["pair_id"]], "negative": r[panel["negative_column"]], "partition": r["partition"]} for r in rows]
@@ -141,14 +146,33 @@ def _add_holm(rows: list[dict], column: str) -> None:
 
 def _load_eligible(inputs: dict):
     manifest = yaml.safe_load(Path(inputs["dependency_manifest"]).read_text(encoding="utf-8"))
-    datasets, clusters = {}, {}
+    datasets, clusters, sources = {}, {}, {}
+    if "sources_contract" in inputs:  # hash-pinned per-dataset files declared by a frozen contract
+        contract = Path(inputs["sources_contract"])
+        if sha256_file(contract) != inputs["sources_contract_sha256"]:
+            raise ValueError("sources contract hash mismatch")
+        scope = yaml.safe_load(contract.read_text(encoding="utf-8"))["negative_policy"]["external_active_positive_identity"]
+        sources = {source["dataset_id"]: source for source in scope["sources"]}
+        if sorted(sources) != sorted(entry["dataset_id"] for entry in manifest["datasets"]):
+            raise ValueError("declared sources differ from the dependency manifest")
     for entry in manifest["datasets"]:
         dataset_id = entry["dataset_id"]
         clusters[dataset_id] = entry["dependency_cluster_id"]
         labels = {0: set(), 1: set()}
-        for path in sorted(Path(inputs["confirmatory_root"]).glob(f"{dataset_id}-p-*-n-*-*.csv")):
+        if sources:
+            path = Path(sources[dataset_id]["path"])
+            if sha256_file(path) != sources[dataset_id]["sha256"]:
+                raise ValueError(f"dependency source hash mismatch: {dataset_id}")
+            paths = [path]
+        else:
+            paths = sorted(Path(inputs["confirmatory_root"]).glob(f"{dataset_id}-p-*-n-*-*.csv"))
+        for path in paths:
             for row in csv.DictReader(path.open(encoding="utf-8")):
-                labels[int(row["label"])].add(row["sequence"].strip().upper())
+                if "positive_sequence" in row:  # reconstructed pair ledger
+                    labels[1].add(row["positive_sequence"].strip().upper())
+                    labels[0].add(row["negative_sequence"].strip().upper())
+                else:
+                    labels[int(row["label"])].add(row["sequence"].strip().upper())
         datasets[dataset_id] = labels
     return datasets, clusters
 
