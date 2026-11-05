@@ -1,7 +1,7 @@
 {
   "contig": "NC_000913.3",
   "contract": "configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml",
-  "contract_sha256": "c9294b639513b430baad8e933d4c2fbf46f9d6044515245a5c2b6103a66b09cf",
+  "contract_sha256": "f68676e9ae036c0452176a6628d4cd42f426a49c7fc820d61acbd4673f77be76",
   "exclusion_positions": 34813,
   "external_active_positives": {
     "datasets": 21,

@@ -1438,3 +1438,21 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **State.** No control generated, no partition changed, no model output read.
   `contract_frozen` and `builder_fixture_tested` stay false until the owner
   freezes the contract.
+
+## R-068 · 2026-11-05 · CNNProm E. coli genomic pilot contract frozen
+
+- **Decision (project owner).** Freeze `configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml`
+  in place rather than in a v2 successor: no state file or build exists for
+  it, and no other contract or spec cites its draft hashes (checked with
+  `git grep`; only R-066/R-067 and the regenerated placement summary do).
+  The spec's "successor contract" is the pilot contract after the
+  feasibility inventory, which v1 is.
+- **Edits.** `version: 1.0.0`, `status: frozen_before_any_model_result`,
+  `contract_frozen` and `builder_fixture_tested` set to true (fixtures in
+  `tests/test_ecoli_genomic_pilot.py`, R-065 to R-067), and
+  `observed_cases_status` now cites the versioned reproduction. No scientific
+  parameter changed. Frozen SHA-256 `f68676e9ae036c0452176a6628d4cd42f426a49c7fc820d61acbd4673f77be76`.
+- **Plan mode re-run.** The placement summary is regenerated against the
+  frozen hash; the five cases still reproduce.
+- **State.** No control generated yet; any further change needs a new
+  versioned contract.

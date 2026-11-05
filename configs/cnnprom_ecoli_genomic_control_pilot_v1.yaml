@@ -1,7 +1,10 @@
 pilot:
   name: cnnprom-ecoli-genomic-control-pilot-v1
-  version: 1.0.0-draft
-  status: design_decisions_resolved_execution_blocked
+  version: 1.0.0
+  status: frozen_before_any_model_result
+  frozen_on: 2026-11-05
+  frozen_by: project_owner
+  frozen_log: R-068
   specification: specs/negative_control_protocol.md
   reconstruction_rules: specs/graphpro_dataset_reconstruction.md
   research_log: R-064
@@ -20,8 +23,8 @@ pilot:
     union, F-132) and capacity does not constrain the panel (F-133).
   execution_gates:
     open_decisions_resolved: true
-    contract_frozen: false
-    builder_fixture_tested: false
+    contract_frozen: true
+    builder_fixture_tested: true
     controls_generated: false
     distribution_and_dependency_audit: false
     manual_sample_audit: false
@@ -107,8 +110,8 @@ positive_policy:
       nearest_union_tss_offset_nt: -18
       expected_class: shifted
   observed_cases_status: >-
-    Identified by an unversioned scratch script on 2026-11-04. The builder must
-    reproduce them from versioned code before the contract is frozen.
+    First identified by an unversioned scratch script on 2026-11-04 (R-064);
+    reproduced by the versioned builder and fixtures (R-065, F-134).
 
 negative_policy:
   controls_per_positive: 1
