@@ -1325,10 +1325,9 @@ SHA-256 of the module that ran, when the change was not yet committed.
   Positives are placed on NC_000913.3 by exact search; the exclusion set is
   the RegulonDB union (F-132) plus every locus of every positive, r = 100 on
   both strands; GC caliper 4; one same-strand control per positive.
-- **Problem positives.** A scratch identification found five: rrsAp2 (2 loci,
-  both union TSSs) and gltIp1 (11 loci, one the PromoterSet gltIp1 TSS); serWp
-  and rplUp 1 nt from a union TSS; araCp 18 nt from the current RegulonDB
-  araCp TSS. The contract resolves multiple loci by union promoter name and
+- **Problem positives.** A scratch identification found five: two with multiple
+  loci, two near a union TSS, and one shifted from its named TSS; row-level detail
+  is redacted under the RegulonDB EULA (R-081). The contract resolves multiple loci by union promoter name and
   header coordinate and classes TSS support as exact, near (±2 nt), shifted,
   or none, each with a declared action. No label is changed and no window is
   recropped. The cases must be reproduced by versioned code before freezing.
@@ -1675,3 +1674,24 @@ SHA-256 of the module that ran, when the change was not yet committed.
   approval (recorded here; the frozen contract is not edited). The draft training
   contract v2 names this manifest by path and takes its hash when the owner approves
   that contract. Training still needs that approval and a separate authorization.
+
+## R-081 · 2026-11-06 · RegulonDB license review and redaction
+
+- **Trigger.** Commits pushed to the public repository on 2026-11-06 held row-level
+  RegulonDB-derived facts. The owner asked for the license to be reviewed and the
+  repository brought into line.
+- **Finding.** F-144. The EULA also bars disclosing any contained data and creating
+  derivative works, which is stricter than the note in R-062 and in
+  `configs/regulondb_tss_acquisition_v1.yaml`. The pre-push assessment of low risk
+  rested on that note, not on the license text, and it was wrong.
+- **Change.** Row-level facts left tracked files. The originals of the pilot contracts
+  v1 and v2, the manual review configuration, the placement summaries, and the filled
+  review sheet stay local, byte for byte, and are ignored by git, so every hash pin
+  still names the same content. Tracked `.public` copies and `review_summary.csv`
+  replace them. R-064, F-134, a test docstring, and the review README were redacted.
+  Rules and owner actions are in `docs/regulondb_license_compliance.md`, and
+  `tests/test_regulondb_restricted.py` guards the restricted paths.
+- **Not changed.** No dataset, control, partition, or result. Dataset identifiers,
+  hashes, query text, aggregates, and CNNProm header fields stay tracked.
+- **Open.** The redacted values remain in the public branch history until it is
+  rewritten. Written consent from CCG-UNAM is still to be requested by the owner.

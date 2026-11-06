@@ -954,6 +954,9 @@ Current state:
   audit and the panel analysis on the new training folds, and draft the successor
   eligibility manifest and training contract (R-078, R-079, F-143).
 - Completed: approve eligibility manifest v3 (R-080).
+- Completed: review the RegulonDB license and redact row-level facts (R-081, F-144).
+- Next: ask CCG-UNAM for written consent before any publication that uses the
+  controls (`docs/regulondb_license_compliance.md`).
 - Next: owner decision on the training contract v2, including open items P1 to P9
   and proposals P12 to P15.
 

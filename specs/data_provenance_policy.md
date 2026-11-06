@@ -111,3 +111,9 @@ Both draw on the same records and must not disagree with them:
   limitations, with references. It cites findings by their meaning rather than by
   transcribing logs or commands, and every number it reports must exist in a
   committed record.
+
+## Licensed data
+
+Read the full license of a source before acquiring it, and record its limits in the
+acquisition contract. Row-level values from RegulonDB stay local under the rules in
+`docs/regulondb_license_compliance.md`.

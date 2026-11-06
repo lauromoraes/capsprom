@@ -1,3 +1,5 @@
+# Public redacted copy. Original kept locally and ignored by git under the RegulonDB EULA; see docs/regulondb_license_compliance.md.
+# Hash pins name the original: sha256 f68676e9ae036c0452176a6628d4cd42f426a49c7fc820d61acbd4673f77be76
 pilot:
   name: cnnprom-ecoli-genomic-control-pilot-v1
   version: 1.0.0
@@ -76,15 +78,7 @@ positive_policy:
     unresolved_action: exclude_from_genomic_panel_and_count
     exclusion: every_locus_of_the_record
     ledger_fields: [all_loci, resolved_locus, resolution_evidence]
-    observed_cases:
-      - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000653
-        promoter: rrsAp2
-        loci: 2
-        note: both loci are union TSSs (rrsAp2, rrsBp2); header selects rrsAp2
-      - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000300
-        promoter: gltIp1
-        loci: 11
-        note: one locus (687895, minus) is the PromoterSet gltIp1 TSS; ten have no TSS nearby
+    observed_cases: redacted_regulondb_eula
   tss_support_classes:
     exact: TSS position and strand in the union
     near: same-strand union TSS within the tolerance
@@ -96,19 +90,7 @@ positive_policy:
     near: keep_both_panels_record_distance
     shifted: keep_both_panels_record_distance_exclude_from_positional_analyses
     none: keep_native_panel_only_exclude_from_genomic_panel_and_count
-  observed_cases:
-    - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000681
-      promoter: serWp
-      nearest_union_tss_offset_nt: 1
-      expected_class: near
-    - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000631
-      promoter: rplUp
-      nearest_union_tss_offset_nt: 1
-      expected_class: near
-    - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000029
-      promoter: araCp
-      nearest_union_tss_offset_nt: -18
-      expected_class: shifted
+  observed_cases: redacted_regulondb_eula
   observed_cases_status: >-
     First identified by an unversioned scratch script on 2026-11-04 (R-064);
     reproduced by the versioned builder and fixtures (R-065, F-134).
@@ -285,5 +267,5 @@ resolved_decisions:
       decision: 2
     - id: shifted_class_in_genomic_panel
       decision: >-
-        Keep araCp-type records in both panels (the label is supported) and
+        Keep shifted records in both panels (the label is supported) and
         exclude them only from positional analyses; the window is not recropped.

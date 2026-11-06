@@ -1,3 +1,8 @@
+**Access note.** `review_sheet.csv` holds RegulonDB-derived fields, so it stays
+local and ignored by git (`docs/regulondb_license_compliance.md`). The tracked
+`review_summary.csv` keeps only the sample, record identifiers, and check results.
+The filled local sheet has SHA-256 `e4d3a269…`.
+
 # Manual sample review of the CNNProm E. coli genomic pilot
 
 Gate `manual_sample_audit` of `configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml`
@@ -7,8 +12,7 @@ eligibility manifest. The sample is frozen by
 `scripts/prepare_cnnprom_ecoli_genomic_pilot_manual_review.py` from the build
 with manifest SHA-256 `31fda2c7…`. `review_sheet.csv` has 25 rows:
 
-- 5 `forced` rows, the contract's observed cases (rrsAp2 and gltIp1,
-  multiple loci resolved; serWp and rplUp, near; araCp, shifted);
+- 5 `forced` rows, the contract's observed cases;
 - 20 `random` rows, 10 per strand, with the lowest SHA-256 rank of the record id.
 
 The selection did not look at any check result or model output.

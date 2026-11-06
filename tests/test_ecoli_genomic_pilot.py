@@ -52,9 +52,9 @@ def _fixture():
     """Genome with the five contract situations, mirrored on synthetic data.
 
     - ``dup``: one window copied to a second locus; only the first is a named
-      PromoterSet TSS (rrsAp2/gltIp1 type);
-    - ``nearp``/``nearm``: TSS 1 nt from a union TSS on + and - (serWp/rplUp);
-    - ``shift``: same-name PromoterSet TSS 18 nt upstream (araCp);
+      PromoterSet TSS;
+    - ``nearp``/``nearm``: TSS 1 nt from a union TSS on + and -;
+    - ``shift``: same-name PromoterSet TSS upstream, beyond the tolerance;
     - ``orphan``: no union support at all;
     - ``a1``..``a3``: exact single-locus anchors for the header offset.
     """

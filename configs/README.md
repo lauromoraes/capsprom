@@ -450,3 +450,7 @@ contracts that pin v1 need successors before training.
 (logs R-078, R-079). `dataset_eligibility_manifest_v3.yaml` and
 `cnnprom_ecoli_pilot_training_v2.yaml` replace the versions pinned
 to build v1; eligibility v3 is approved (log R-080) and the training contract is a draft.
+
+`*.public.yaml` files are redacted copies of contracts whose originals stay local
+under the RegulonDB EULA. Hash pins name the originals, so a clean clone cannot rerun
+the pilot (`docs/regulondb_license_compliance.md`, log R-081).

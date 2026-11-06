@@ -1,0 +1,82 @@
+{
+  "contig": "NC_000913.3",
+  "contract": "configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml",
+  "contract_sha256": "f68676e9ae036c0452176a6628d4cd42f426a49c7fc820d61acbd4673f77be76",
+  "exclusion_positions": 34813,
+  "external_active_positives": {
+    "datasets": 21,
+    "sequences_81_nt": 22765
+  },
+  "genomic_panel_positives": 839,
+  "header_strand_disagreements": 0,
+  "native_assignment": {
+    "positive_partitions": {
+      "test": 168,
+      "train": 671
+    },
+    "records_matched": 3839
+  },
+  "native_negative_blocked_intervals": 3065,
+  "native_negatives": {
+    "multiple": 26,
+    "single": 2974,
+    "unplaced": 0
+  },
+  "non_exact_positives": "redacted_regulondb_eula",
+  "observed_cases": "redacted_regulondb_eula",
+  "observed_cases_reproduced": true,
+  "placement_ledger": {
+    "path": "data/interim/cnnprom_ecoli_genomic_pilot_v1/placement_ledger.csv",
+    "sha256": "916ebb1dc644e81cc39f7af3286c2387d371a1a981083e51d53d3a66ff5ce2b2"
+  },
+  "placement_status": {
+    "multiple_resolved": 2,
+    "single": 837
+  },
+  "positives": 839,
+  "public_redaction": {
+    "note": "Original kept locally and ignored by git under the RegulonDB EULA; see docs/regulondb_license_compliance.md.",
+    "original_sha256": "7df6ee1f9516c47cb955165c0b5ded881f31ae7a46cfd36bc26cbf53f2e010fc"
+  },
+  "regulondb": {
+    "out_of_range_rows_dropped": 8,
+    "per_source": {
+      "PromoterSet": 3838,
+      "RHTECOLITSD00556": 12016,
+      "RHTECOLITSD00557": 11945,
+      "RHTECOLITSD00558": 8504,
+      "RHTECOLITSD00559": 4349,
+      "RHTECOLITSD00560": 4029,
+      "RHTECOLITSD00561": 2122,
+      "RHTECOLITSD00562": 2077,
+      "RHTECOLITSD00563": 1797,
+      "RHTECOLITSD00564": 1468,
+      "RHTECOLITSD00565": 296,
+      "RHTECOLITSD00566": 5197,
+      "RHTECOLITSD00567": 5647,
+      "RHTECOLITSD00568": 1926,
+      "RHTECOLITSD00569": 2230,
+      "RHTECOLITSD00570": 1900,
+      "RHTECOLITSD00571": 2533
+    },
+    "union_tss_position_strand": 34800
+  },
+  "static_capacity": {
+    "admissible_index": {
+      "admissible": 1525588,
+      "blocked_overlap": 51058,
+      "invalid_dna": 0,
+      "tss_overlap": 3064926
+    },
+    "admissible_windows_equal_to_active_external_positive": 0,
+    "genomic_panel_positives_by_nearest_available_gc_distance": {
+      "0": 839
+    }
+  },
+  "support_class": {
+    "exact": 836,
+    "near": 2,
+    "shifted": 1
+  },
+  "undeclared_statuses": {}
+}

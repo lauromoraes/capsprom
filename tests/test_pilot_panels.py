@@ -195,7 +195,8 @@ def test_pilot_contract_keeps_training_blocked_and_pins_inherited_contracts() ->
     assert contract["contract"]["confirmatory_use_enabled"] is False
     inherited = contract["inherits"]
     for key, path in inherited.items():
-        if f"{key}_sha256" in inherited:
+        # Restricted originals are absent from a clean clone.
+        if f"{key}_sha256" in inherited and Path(path).exists():
             assert sha256_file(Path(path)) == inherited[f"{key}_sha256"]
 
 

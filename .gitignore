@@ -259,3 +259,11 @@ docs/thesis/*.synctex.gz
 docs/thesis/*.toc
 docs/thesis/drafts/build/
 docs/thesis/drafts/**/_aux/
+
+# RegulonDB-derived row-level facts stay local (EULA, docs/regulondb_license_compliance.md)
+/configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml
+/configs/cnnprom_ecoli_genomic_control_pilot_v2.yaml
+/configs/cnnprom_ecoli_genomic_pilot_manual_review_v1.yaml
+/manifests/provenance/cnnprom_ecoli_genomic_control_pilot_v1/placement_summary.json
+/manifests/provenance/cnnprom_ecoli_genomic_control_pilot_v2/placement_summary.json
+/docs/provenance/manual_review_ecoli_genomic_pilot/review_sheet.csv
