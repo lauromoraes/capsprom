@@ -8,6 +8,7 @@ import fcntl
 import json
 import os
 from pathlib import Path
+import shutil
 import statistics
 import tempfile
 from concurrent.futures import ThreadPoolExecutor
@@ -104,7 +105,13 @@ def prepare_canonical_neural_plan(config_path: Path, output_dir: Path) -> dict[s
         split = read_dataset(train_path, data_config, max_samples=None)
         manifest_path = output_dir / "fold_manifests" / f"{dataset_id}.csv"
         manifest_path.parent.mkdir(parents=True, exist_ok=True)
-        write_fold_manifest(manifest_path, split.row_ids, split.labels, folds=folds, seed=fold_seed)
+        inherited_root = protocol.get("fold_manifest_root")
+        if inherited_root is None:
+            write_fold_manifest(manifest_path, split.row_ids, split.labels, folds=folds, seed=fold_seed)
+        else:
+            inherited = root / str(inherited_root) / f"{dataset_id}.folds.csv"
+            _check_inherited_folds(inherited, split.row_ids, split.labels, folds)
+            shutil.copyfile(inherited, manifest_path)
         datasets.append(
             {
                 "dataset_id": dataset_id,
@@ -1212,6 +1219,22 @@ def _check_final_fit_release(
 
 def _final_job_key(dataset_id: str, seed: int) -> str:
     return f"{dataset_id}--seed-{seed}--final-fit-training"
+
+
+def _check_inherited_folds(
+    path: Path, row_ids: list[str], labels: list[int], folds: int
+) -> None:
+    """Group-safe folds come from a build, so they must cover the file exactly."""
+
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    observed = {row["row_id"]: (int(row["label"]), int(row["fold"])) for row in rows}
+    if len(observed) != len(rows) or set(observed) != set(row_ids):
+        raise ValueError(f"{path} does not cover the training rows exactly")
+    if any(observed[row_id][0] != label for row_id, label in zip(row_ids, labels)):
+        raise ValueError(f"{path} labels differ from the training file")
+    if {fold for _, fold in observed.values()} != set(range(folds)):
+        raise ValueError(f"{path} must use every fold from 0 to {folds - 1}")
 
 
 def _read_fold_assignments(path: Path) -> dict[str, int]:

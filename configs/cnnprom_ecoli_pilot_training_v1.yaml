@@ -1,0 +1,268 @@
+contract:
+  name: cnnprom-ecoli-pilot-training-v1
+  version: 1.0.0-draft
+  status: draft_pending_owner_approval
+  research_log: R-075
+  specification: specs/cnnprom_ecoli_pilot_training.md
+  drafted_before_visual_analysis: true
+  confirmatory_use_enabled: false
+  decision_labels:
+    established: fixed by an approved contract, spec, or log entry; cited in source
+    proposed: drafted here; binding only after owner approval
+    pending: unresolved or not implemented; blocks execution until closed
+
+inherits:
+  eligibility_manifest: configs/dataset_eligibility_manifest_v2.yaml
+  eligibility_manifest_sha256: dacf13123686c11fb7c542f713f5b0e735891ef0aea4ee022acb4d81b4e57ed8
+  negative_control_design: configs/negative_control_evaluation_v1.yaml
+  negative_control_design_sha256: 61bfd5c72f801aa2e8bdea4786a5d8bd275da8ef12da827a9876576d0881d974
+  evaluation_protocol: configs/evaluation_protocol_v4.yaml
+  evaluation_protocol_sha256: cad1b4daea60834c1f1400844e5046834ebb0f5e15b5727f8efb59264a92fcb2
+  pilot_contract: configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml
+  pilot_contract_sha256: f68676e9ae036c0452176a6628d4cd42f426a49c7fc820d61acbd4673f77be76
+  homology_grouping: configs/homology_grouping_v1.yaml
+  homology_grouping_sha256: 3149853dc5cc563bd90846b844b354c8b6487c3f02f5eaa4213541d60fe46ebc
+  capsprom_reference: configs/capsprom_basic_canonical_gpu_execution_v4.yaml
+  capsprom_reference_sha256: e2c244d8b1d2559e11c35f4eb01778439fbdb54630af912f99c3ba4b87a8cdc2
+  classical_reference: configs/real_negative_baseline_batch.yaml
+  classical_reference_sha256: 634feaa35671fa91db149e21934372f36647ae4526851f56bc07658441c870bf
+
+science:
+  established:
+    question: >-
+      Does a model that scores well against the CNNProm E. coli source-native
+      negatives keep that behaviour against genome background at equal G+C
+      content, and does the training negative definition change the answer?
+    primary_hypothesis_source: negative_control_evaluation_v1.hypothesis.primary
+    higher_single_panel_mcc_alone_is_insufficient: true
+  proposed:
+    hypotheses:
+      - id: H1
+        statement: Models trained on native negatives lose specificity on the genomic test panel relative to the native test panel.
+      - id: H2
+        statement: The specificity gap between test panels is smaller for models trained on genomic controls than for models trained on native negatives.
+      - id: H3
+        statement: CapsProm has a smaller specificity gap than the classical baselines under the same training condition.
+    comparisons:
+      - id: C1
+        kind: across_test_panels_same_fitted_model
+        rule: descriptive; recall is shared, so report specificity on each panel and no record pairing
+      - id: C2
+        kind: across_training_conditions_same_test_panel
+        rule: paired on identical test records
+      - id: C3
+        kind: across_models_same_condition_same_test_panel
+        rule: paired on identical test records and seeds
+    all_comparisons_are_exploratory: true
+
+data:
+  established:
+    dataset_id: cnnprom-ecoli-sigma70.recon-genomic-v1
+    native_dataset: cnnprom-prokaryotic-Ecoli
+    eligibility: exploratory_training_only
+    native_records: data/processed/assembled_datasets/grouped_domain_window_v1/cnnprom-prokaryotic-Ecoli/records.csv
+    native_records_sha256: 36e0901afe3f3f52e892ff1c08c3abe560639c05775d34c314aecbe131e5daf1
+    pair_ledger: data/interim/cnnprom_ecoli_genomic_pilot_v1/builds/cnnprom-ecoli-sigma70.recon-genomic-v1/pair_ledger.csv
+    pair_ledger_sha256: 9d604b2f68d5f1868a6a639ccc2aceba0490ac5d6ee59a9410e076daa579d6b9
+    test_intersection_sha256: 426618a437ed504665c4ff4fb9c0a80a85087afa73bf68861728e26c069f088a
+    window: {length_nt: 81, upstream: 60, downstream: 20, tss_index: 60}
+    native_labels_changed: false
+    native_records_unbalanced_on_purpose: source_negatives_are_retained
+    training_conditions:
+      native: {positives: 671, negatives: 2399, negative_family: native_cds}
+      genomic_gc_matched: {positives: 670, negatives: 670, negative_family: genomic_gc_matched}
+      multi_negative_native_plus_genomic: {status: see_pending}
+    test_panels:
+      native: {positives: 168, negatives: 601}
+      genomic_gc_matched: {positives: 168, negatives: 168}
+    panel_rules:
+      concatenate_test_panels_for_one_mcc: false
+      pooled_negative_families: false
+      across_panel_record_pairing_claimed: false
+      pair_is_indivisible: true
+    optional_panels_not_in_this_pilot: [synthetic_shuffle, cds_derived, genome_scale_scan]
+  proposed:
+    condition_dataset_ids:
+      native: cnnprom-ecoli-pilot-v1.native
+      genomic_gc_matched: cnnprom-ecoli-pilot-v1.genomic-gc-matched
+    materializer: src/capsprom/data/pilot_panels.py
+    materialized_root: data/interim/cnnprom_ecoli_pilot_training_v1
+    native_prevalence_rebalanced: false
+  pending:
+    multi_negative_condition: >-
+      The design lists it and the data exist, but the runner has no per-family
+      batch weighting (50% positives, the rest equal across families). Owner
+      decision: implement before the pilot, or run it as a successor.
+
+partitioning:
+  established:
+    groups_stay_together: homology_group_of_the_grouped_native_build
+    linked_by: [alignment, hamming, genomic_overlap, tss, positive_identity, control_pair]
+    partitions_inherited_from: native_records.partition
+    control_partition: partition_of_its_positive
+    test_fraction: 0.2
+    assignment_seed: 42
+    inner_folds: 5
+    inner_fold_seed: 42
+    cross_partition_edges: 0
+    test_used_for_selection: false
+    feature_fitting_threshold_and_selection: training_data_only
+  proposed:
+    fold_manifest_source: fold_column_of_the_materialized_condition
+    runner_key: protocol.fold_manifest_root
+    rationale: runner.write_fold_manifest stratifies by record and ignores homology groups, so it is not used here
+    leakage_guards:
+      - genomic_records stops when a ledger row differs from the native sequence, group, or partition
+      - write_condition stops when a homology group spans partitions
+      - the plan stops when inherited folds do not cover the training rows exactly
+      - test files are named per condition and read only by the gated inference job
+
+seeds:
+  established:
+    run_seeds: [13, 29, 42, 71, 101, 137, 173, 211, 251, 293]
+    partition_seed: 42
+    negative_sampling_seed: 20261104
+    bootstrap_seed: 20260715
+    failed_seed_policy: report_do_not_replace
+    deterministic_models_run_once: true
+  proposed:
+    reserve_block_activated: false
+    all_ten_run_seeds_in_the_pilot: true
+
+models:
+  established:
+    capsprom_basic:
+      input: {encoding: one_hot, k: 1, sequence_length: 81, channels: 4}
+      architecture:
+        convolution_filters: 256
+        convolution_kernel: 9
+        primary_channels: 32
+        primary_dim: 8
+        primary_kernel: 9
+        primary_stride: 2
+        output_capsules: 2
+        output_dim: 16
+        routing_iterations: 3
+        routing_mode: dynamic
+        routing_gradient_mode: final_iteration
+        decoder_mode: disabled
+      decision: raw_score_argmax
+      exact_tie_class: 0
+    gc_only_reference:
+      feature: gc_fraction_of_the_81_nt_window
+      classifier: logistic_regression_one_feature_with_intercept
+      fitted_on: training_partition_only
+      role: reported_beside_every_model_not_a_hypothesis
+      source: R-052
+  proposed:
+    logistic_regression:
+      features: [kmer_frequency_3_normalized, gc_content_skew_global]
+      hyperparameters: {solver: liblinear, max_iter: 500, class_weight: balanced}
+    xgboost:
+      features: [kmer_frequency_3_normalized, gc_content_skew_global]
+      hyperparameters: {n_estimators: 300, max_depth: 4, learning_rate: 0.05, subsample: 0.9, colsample_bytree: 0.9, tree_method: hist}
+    hyperparameter_search: none
+    class_weighting_note: logistic uses balanced weights, XGBoost and CapsProm use none, as in their reference contracts; the difference is reported, not corrected
+  pending:
+    gc_only_on_the_genomic_panel: >-
+      Controls equal their positives in G+C count, so the feature carries no
+      class signal there by construction. Reported as such; a panel-specific
+      GC-only config is still needed (the R-052 config lists other panels).
+
+training:
+  established:
+    capsprom_basic:
+      runner: src/capsprom/canonical_neural.py
+      device: cuda
+      batch_size: 64
+      optimizer: adam
+      learning_rate: 0.0001
+      learning_rate_schedule: fixed
+      reconstruction_weight: 0.0
+      maximum_epochs: 50
+      patience: 15
+      selection_metric: inner_validation_mcc
+      epoch_rule: lower_median_fold_best_epoch
+      epoch_rule_scope: dataset_model_configuration_seed
+      final_fit: fixed_selected_epoch_on_all_training_rows
+    checkpoints: best_and_latest_per_job_written_atomically
+    resume: plan_state_json_with_file_lock_updated_after_each_job
+    new_state_path_on_any_contract_change: true
+  proposed:
+    planned_fits:
+      capsprom_basic: 120 (2 conditions x 10 seeds x (5 folds + 1 final))
+      xgboost: 20 (2 conditions x 10 seeds)
+      logistic_regression: 2
+      gc_only_reference: 2
+    execution: bounded_release_under_configs/capsprom_remote_usage_policy_v3.yaml
+    classical_out_of_fold_predictions: inherited_folds_training_diagnostics_only
+
+evaluation:
+  established:
+    primary_metric: matthews_corrcoef_per_test_panel
+    secondary_metrics: [roc_auc, average_precision, specificity, balanced_accuracy, accuracy, precision, recall, f1]
+    calibration_metrics: [brier_score, log_loss, expected_calibration_error]
+    primary_threshold: 0.5
+    bootstrap: {resamples: 10000, unit: homology_group, confidence_level: 0.95}
+    persist_row_predictions: true
+    across_dataset_inference: withheld_single_dataset
+    selection_use_of_panel_results: forbidden
+    collapse_reporting: report_single_class_prediction_per_seed
+  proposed:
+    prevalence_note: >-
+      Test prevalence is 0.218 on the native panel and 0.500 on the genomic
+      panel, so raw MCC is not comparable across panels.
+    cross_panel_summary:
+      - recall on the shared 168 positives
+      - specificity per panel
+      - MCC at prevalence 0.5 computed from recall and specificity
+    success_criteria:
+      operational:
+        - every planned job finishes or its failure is reported, with no seed replaced
+        - no job reads a test file before test_evaluation_enabled is true
+        - all pinned hashes verify at plan creation and at inference
+      interpretive:
+        - a model improves on the GC-only reference only if the group-bootstrap interval of the paired MCC difference excludes zero on that panel
+        - H1 to H3 are supported only descriptively, by the sign of the seed-median gap with its interval
+        - no claim of genomic promoter detection follows from this pilot, whatever the result
+
+tracking:
+  established:
+    backend: mlflow
+    parent_child_runs: true
+    required_artifacts: [protocol_yaml, eligibility_manifest, data_audit_report, dataset_dependency_manifest, filtering_manifest, fold_manifest, test_predictions, metrics, comparison_report, fitted_model]
+    required_hardware_record: [device, driver, library_versions]
+  proposed:
+    experiment_name: capsprom-cnnprom-ecoli-pilot-v1
+    parent_tags: [contract_sha256, eligibility_manifest_sha256, condition, git_commit]
+    child_params: [condition, model, seed, fold, train_sha256, fold_manifest_sha256]
+    child_metrics: [best_inner_validation_mcc, best_epoch, epochs_completed]
+    panel_metric_prefix: test_panel_name
+
+open_items:
+  - id: P1
+    item: owner approval of this contract (hypotheses, comparisons, models, criteria)
+  - id: P2
+    item: multi-negative condition, implement or defer
+  - id: P3
+    item: successor of negative_control_evaluation_v1, which still has selected_dataset null, pilot_frozen false, graphpro_manual_audit_complete false, and model_training_enabled false
+  - id: P4
+    item: GraphPro Human/Mouse manual source audit, step 1 of the protocol's execution order; complete it or have the owner waive it for this pilot
+  - id: P5
+    item: group-aware classical runner with inherited folds and per-panel prediction files
+  - id: P6
+    item: GC-only reference config and runner for these panels
+  - id: P7
+    item: device, driver, and library versions in the training runners' MLflow runs
+  - id: P8
+    item: per-panel external inference and the cross-panel summary; the current job evaluates one test file
+  - id: P9
+    item: runner-format execution contract per condition, materialized panels, and a bounded release
+
+execution_gates:
+  owner_contract_approval: false
+  group_fold_integration_fixture_validated: true
+  panel_materialization_enabled: false
+  training_enabled: false
+  final_fits_enabled: false
+  test_evaluation_enabled: false

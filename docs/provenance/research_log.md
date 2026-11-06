@@ -1564,3 +1564,20 @@ SHA-256 of the module that ran, when the change was not yet committed.
   (recorded here; the frozen contract is not edited). All seven gates of the
   pilot contract are now satisfied. Training still needs its own versioned
   contract and authorization.
+
+## R-075 · 2026-11-05 · Pilot training contract draft
+
+- **Draft.** `configs/cnnprom_ecoli_pilot_training_v1.yaml` (SHA-256
+  `01049588…`) and `specs/cnnprom_ecoli_pilot_training.md` define the question,
+  hypotheses, panels, grouping, seeds, models, budget, metrics, and tracking of
+  the pilot. Each section separates established, proposed, and pending
+  decisions. Status: draft, pending owner approval. All execution gates that
+  allow data materialization, training, final fits, or test access are false.
+- **Integration.** `src/capsprom/data/pilot_panels.py` builds condition files
+  from the native build and the pair ledger. `protocol.fold_manifest_root` lets
+  the canonical plan use inherited group-safe folds in place of
+  `write_fold_manifest`, which ignores homology groups; contracts without that
+  key behave as before. `tests/test_pilot_panels.py` ran one CPU inner fold on a
+  fixture. No real panel was materialized.
+- **Open.** Nine items, including the negative-control design successor and the
+  GraphPro Human/Mouse audit gate. No model run.
