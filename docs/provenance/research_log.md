@@ -1533,3 +1533,34 @@ SHA-256 of the module that ran, when the change was not yet committed.
   the checks against RegulonDB or NCBI.
 - **State.** Gate `manual_sample_audit` satisfied by this review (recorded
   here; the frozen contract is not edited). Next: the eligibility manifest.
+
+## R-073 · 2026-11-05 · Eligibility manifest v2 draft for the E. coli genomic pilot
+
+- **Draft.** `configs/dataset_eligibility_manifest_v2.yaml` extends v1 by
+  hash with a development tier. Its only panel is
+  `cnnprom-ecoli-sigma70.recon-genomic-v1`, for exploratory training only.
+  The confirmatory scope stays at 18 datasets, and v1 is not edited.
+- **Checks.** Read from the pair ledger: 838 pairs, 81 nt of A, C, G, and T;
+  838 unique positives and 838 unique controls, also under reverse
+  complement; no identity shared across labels; 797 homology groups, none
+  across partitions; 168 test pairs and 670 training pairs. Every SHA-256
+  pinned in the manifest was recomputed from the file.
+- **Dependency.** The panel is declared in `enteric-cross-source` (F-137).
+  Dependency manifest v4 stays unchanged; cluster-aggregated inference over
+  this panel needs a successor.
+- **State.** Draft. Gate `eligibility_manifest_approved` is not satisfied
+  until the owner approves. No training contract, no model run.
+
+## R-074 · 2026-11-05 · Eligibility manifest v2 approved
+
+- **Decision (project owner).** Approve
+  `configs/dataset_eligibility_manifest_v2.yaml` as drafted in R-073,
+  SHA-256 `dacf13123686c11fb7c542f713f5b0e735891ef0aea4ee022acb4d81b4e57ed8`. Only the status, approval, and decision fields changed
+  from the draft.
+- **Effect.** `cnnprom-ecoli-sigma70.recon-genomic-v1` is eligible for
+  exploratory training only. The confirmatory scope stays at the 18 datasets
+  of v1, and `project_status.py` keeps pointing to v1.
+- **State.** Gate `eligibility_manifest_approved` satisfied by this approval
+  (recorded here; the frozen contract is not edited). All seven gates of the
+  pilot contract are now satisfied. Training still needs its own versioned
+  contract and authorization.
