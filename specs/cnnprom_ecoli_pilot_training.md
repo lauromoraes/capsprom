@@ -2,10 +2,11 @@
 
 ## Status and scope
 
-Draft (2026-11-05, log R-075). The machine-readable contract is
-`configs/cnnprom_ecoli_pilot_training_v1.yaml`. It was drafted before the
-panel visual analysis, and no visual result changes it. It authorizes no
-materialization, training, final fit, or test access; every such gate is false.
+Draft (2026-11-06, log R-079). The machine-readable contract is
+`configs/cnnprom_ecoli_pilot_training_v2.yaml`. Version 1 was drafted before the
+panel visual analysis. Version 2 changes only data pins, counts, partitions, and
+open items after the regrouping of F-142. It authorizes no materialization,
+training, final fit, or test access; every such gate is false.
 
 The pilot compares training and test negative definitions for one dataset,
 CNNProm *E. coli*, at 81 nt. Results are exploratory and never enter the
@@ -15,12 +16,13 @@ confirmatory scope.
 
 | Panel | Positives | Negatives | Meaning of the negatives |
 | --- | --- | --- | --- |
-| `native` | 671 train, 168 test | 2,399 train, 601 test | CNNProm source negatives, opposite-strand CDS windows (F-129) |
-| `genomic_gc_matched` | 670 train, 168 test | 670 train, 168 test | One same-strand NC_000913.3 window per positive at equal G+C count, 100 nt or more from every known TSS (F-136) |
+| `native` | 671 train, 168 test | 2,400 train, 600 test | CNNProm source negatives, opposite-strand CDS windows (F-129) |
+| `genomic_gc_matched` | 668 train, 168 test | 668 train, 168 test | One same-strand NC_000913.3 window per positive at equal G+C count, 100 nt or more from every known TSS (F-136) |
 
-Both panels use the same positives, except that the build removed rraBp1 from
-the genomic panel because its window is the reverse complement of argIp. The
-168 test positives are the same records in both panels.
+Both panels use the same positives, except for three removed from the genomic
+panel: rraBp1, whose window is the reverse complement of argIp, and two whose
+controls link to another partition (R-078). The 168 test positives are the same
+records in both panels.
 
 ## Decisions
 
@@ -46,7 +48,8 @@ Each contract section separates three labels.
 
 ## Leakage rules
 
-1. Every record keeps the homology group of the grouped native build. A
+1. Every record keeps the homology group of grouped build v2, which joins
+   overlapping windows by unique genomic coordinates (F-142). A
    control takes the group and partition of its positive, and a pair is
    indivisible.
 2. Inner folds come from the build's `train:k` labels. The runner's stratified
@@ -60,7 +63,7 @@ Each contract section separates three labels.
 
 ## Reading the panels together
 
-The native test panel has prevalence 0.218 and the genomic one 0.500, so raw
+The native test panel has prevalence 0.219 and the genomic one 0.500, so raw
 MCC is not comparable across panels. For one fitted model the two panels share
 all positives, so recall is identical and every difference comes from the
 negatives and the prevalence. The contract reports recall, specificity per

@@ -1624,3 +1624,54 @@ SHA-256 of the module that ran, when the change was not yet committed.
   overlap edges. Most of the new test partition was training data in R-076, so
   that analysis must be rerun on the new training folds before it informs any
   decision. No model output exists, so no test outcome was seen.
+
+## R-078 · 2026-11-06 · E. coli pilot rebuilt on grouped build v2
+
+- **Decision (project owner).** Rebuild the pilot chain on build v2.
+- **Contract.** `configs/cnnprom_ecoli_genomic_control_pilot_v2.yaml` (SHA-256
+  `a0537ea8…`, frozen before any model result) changes only the native build and
+  the dataset identity, now `cnnprom-ecoli-sigma70.recon-genomic-v2`.
+- **Build.** Manifest `18f815a5…`, ledger `d59af431…`. 839 controls selected, 0
+  failures, all at G+C distance 0, and the same filter removal as before. 2 pairs
+  were dropped for cross-partition links, leaving 836 (168 test, 668 train).
+- **Equivalence.** All 836 pairs have the same positive, control sequence, and
+  coordinates as build v1, so only partitions and groups changed.
+- **Audit.** `configs/cnnprom_ecoli_genomic_pilot_audit_v2.yaml` (`6af11ae4…`),
+  manifest `f3cbf225…`, ignored output
+  `outputs/reports/cnnprom_ecoli_genomic_pilot_audit_v2/`. No control shares an
+  exact identity with any dataset; opposite-label alignment edges remain 9 (3, 4, 2)
+  and the proposed cluster stays `enteric-cross-source`.
+- **Manual review.** Not repeated. All 25 reviewed pairs have identical sequences in
+  build v2, and checks A to D do not depend on partition, so the R-072 result
+  carries over. The `partition` column of the sheet is historical.
+- **State.** Gates of pilot v2 are satisfied by these entries, except the eligibility
+  manifest. No model output read.
+
+## R-079 · 2026-11-06 · Successor drafts and panel analysis v3
+
+- **Drafts.** `configs/dataset_eligibility_manifest_v3.yaml` supersedes the approved
+  v2, which pinned the leaky partition; it is pending owner approval.
+  `configs/cnnprom_ecoli_pilot_training_v2.yaml` (`11c5267f…`) changes only data
+  pins, counts, partitions, and open items, and still has every gate closed. Unlike
+  v1 it was written after a visual analysis, and it says so.
+- **Analysis.** `configs/cnnprom_ecoli_panel_analysis_v3.yaml` (`3fcbfb07…`) reruns
+  the same method on the new training folds. Output, ignored by git:
+  `outputs/reports/cnnprom_ecoli_panel_analysis_v3/`, manifest `440e35c5…`. Report:
+  `docs/reports/cnnprom_ecoli_panel_analysis_v3/README.md`. The conclusions of
+  R-076 hold; numbers changed slightly.
+- **Residual.** F-143. The owner decides whether multi-locus records need more (P15).
+- **State.** No model output read, no panel materialized, no training gate opened.
+
+## R-080 · 2026-11-06 · Eligibility manifest v3 approved
+
+- **Decision (project owner).** Approve `configs/dataset_eligibility_manifest_v3.yaml`
+  as drafted in R-079, SHA-256 `9dd18eb8eec768cbadd099878e48ffc1e63a0966c578eda6eb96b783041b2c43`. Only the status, approval, and decision
+  fields changed from the draft.
+- **Effect.** `cnnprom-ecoli-sigma70.recon-genomic-v2` is eligible for exploratory
+  training only. It replaces the approval of v2 (R-074), which pinned the leaky
+  partition. The confirmatory scope stays at the 18 datasets of v1, and
+  `project_status.py` keeps pointing to v1.
+- **State.** Gate `eligibility_manifest_approved` of pilot v2 is satisfied by this
+  approval (recorded here; the frozen contract is not edited). The draft training
+  contract v2 names this manifest by path and takes its hash when the owner approves
+  that contract. Training still needs that approval and a separate authorization.

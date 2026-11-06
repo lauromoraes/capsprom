@@ -1,0 +1,294 @@
+pilot:
+  name: cnnprom-ecoli-genomic-control-pilot-v1
+  version: 2.0.0
+  status: frozen_before_any_model_result
+  frozen_on: 2026-11-06
+  frozen_by: project_owner
+  frozen_log: R-078
+  supersedes: configs/cnnprom_ecoli_genomic_control_pilot_v1.yaml
+  change_from_v1: >-
+    Only the native grouped build changes, from v1 to v2 (R-077, F-142), which
+    has genomic-overlap edges and new partitions. Control selection, exclusions,
+    seeds, and external sources are unchanged.
+  specification: specs/negative_control_protocol.md
+  reconstruction_rules: specs/graphpro_dataset_reconstruction.md
+  research_log: R-064
+  condition: genomic_gc_matched
+  domain: prokaryota
+  dataset_id: cnnprom-ecoli-sigma70.recon-genomic-v2
+  source_collection: cnnprom-ecoli-sigma70
+  original_labels_modified: false
+  output_is_new_derived_dataset: true
+  confirmatory_use_enabled: false
+  rationale: >-
+    First genomic GC-matched panel for a source-native dataset. CNNProm E. coli
+    native negatives are opposite-strand CDS windows (F-129), so this panel
+    adds a genome-background test beside the coding-background native panel
+    for the same positives. The complete TSS exclusion set exists (RegulonDB
+    union, F-132) and capacity does not constrain the panel (F-133).
+  execution_gates:
+    open_decisions_resolved: true
+    contract_frozen: true
+    builder_fixture_tested: true
+    controls_generated: false
+    distribution_and_dependency_audit: false
+    manual_sample_audit: false
+    eligibility_manifest_approved: false
+
+reference:
+  acquisition: configs/reference_acquisition_v10.yaml
+  genome_fasta: data/acquired/reference_acquisition_v10/cnnprom-ecoli-k12/GCF_000005845.2_ASM584v2_genomic.fna.gz
+  genome_fasta_sha256: a96d3cfa58c88d477013c768f90a11d2386d42a70d566abfb6d9013dcbd24255
+  assembly: GCF_000005845.2
+  contig: NC_000913.3
+  source_coordinate_frame: NC_000913.2_F-098
+  placement: exact_both_strand_search_of_canonical_sequence
+  placement_rationale: >-
+    Same placement as configs/ecoli_control_capacity_v1.yaml; the RegulonDB
+    union and the capacity count are on NC_000913.3, so no coordinate lift
+    from NC_000913.2 is applied.
+
+window:
+  policy: specs/sequence_window_policy.md
+  upstream: 60
+  include_tss_base: true
+  downstream: 20
+  length: 81
+  tss_index: 60
+  orientation: transcription_five_prime_to_three_prime
+
+positive_policy:
+  source: cnnprom_native_positives_mapping_v3
+  mapping_records: data/coordinates/reference_coordinate_mapping_v3/records/cnnprom-ecoli-sigma70.csv.gz
+  canonical_table: data/canonical/source_canonicalization_v1/cnnprom-ecoli-sigma70.csv.gz
+  label_change: never
+  window_recropping: never
+  stable_source_order: canonical_record_order
+  tss_support_reference: regulondb_union_same_strand
+  multiple_loci:
+    rule: >-
+      Resolve to the locus whose TSS is in the RegulonDB union with the same
+      promoter name as the CNNProm header and whose position agrees with the
+      header coordinate under the NC_000913.2 to NC_000913.3 offset. A record
+      with no such locus, or with more than one, is unresolved.
+    header_offset_rule: >-
+      The NC_000913.2 to NC_000913.3 offset at a header coordinate is that of
+      the nearest single-locus positive whose header strand agrees with its
+      locus (target 1-based TSS minus header coordinate; ties to the lower
+      coordinate).
+    header_agreement_tolerance_nt: 2
+    resolved_status: multiple_resolved
+    unresolved_action: exclude_from_genomic_panel_and_count
+    exclusion: every_locus_of_the_record
+    ledger_fields: [all_loci, resolved_locus, resolution_evidence]
+    observed_cases:
+      - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000653
+        promoter: rrsAp2
+        loci: 2
+        note: both loci are union TSSs (rrsAp2, rrsBp2); header selects rrsAp2
+      - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000300
+        promoter: gltIp1
+        loci: 11
+        note: one locus (687895, minus) is the PromoterSet gltIp1 TSS; ten have no TSS nearby
+  tss_support_classes:
+    exact: TSS position and strand in the union
+    near: same-strand union TSS within the tolerance
+    shifted: same-strand PromoterSet TSS with the same promoter name beyond the tolerance
+    none: none of the above
+  near_tolerance_nt: 2
+  class_actions:
+    exact: keep_both_panels
+    near: keep_both_panels_record_distance
+    shifted: keep_both_panels_record_distance_exclude_from_positional_analyses
+    none: keep_native_panel_only_exclude_from_genomic_panel_and_count
+  observed_cases:
+    - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000681
+      promoter: serWp
+      nearest_union_tss_offset_nt: 1
+      expected_class: near
+    - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000631
+      promoter: rplUp
+      nearest_union_tss_offset_nt: 1
+      expected_class: near
+    - record: cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000029
+      promoter: araCp
+      nearest_union_tss_offset_nt: -18
+      expected_class: shifted
+  observed_cases_status: >-
+    First identified by an unversioned scratch script on 2026-11-04 (R-064);
+    reproduced by the versioned builder and fixtures (R-065, F-134).
+
+negative_policy:
+  controls_per_positive: 1
+  control_strand: same_as_positive
+  sampling_seed: 20261104
+  control_selection:
+    rule: nearest_gc_first
+    description: >-
+      Among windows that pass every exclusion rule below, choose the one with
+      the smallest absolute G/C count difference to its positive; the
+      four-base maximum stays a hard ceiling. Within one distance, candidates
+      are tried in a permutation seeded by sampling_seed and the positive
+      locus. Positives are processed in stable source order.
+    implementation: capsprom.data.ecoli_genomic_pilot.select_nearest_gc_controls
+    differs_from: >-
+      The v3 bacterial genomic panels accept the first candidate within the
+      caliper (configs/graphpro_reconstruction_v3.yaml). Their GC gaps and this
+      panel's are not compared as one rule.
+    rationale: >-
+      F-124: first-accepted sampling leaves controls GC-richer than AT-rich
+      positives because genome density inside the caliper is asymmetric.
+      Capacity (F-133, about 26 free slots per positive) makes nearest-first
+      selection affordable.
+  maximum_gc_count_difference: 4
+  exclusion_radius_nt: 100
+  exclusion_radius_rule: r_equals_upstream_60_plus_margin_40_log_R-036
+  exclusion_strands: both
+  regulondb_acquisition: configs/regulondb_tss_acquisition_v1.yaml
+  exclusion_set:
+    - regulondb_union_configs/regulondb_tss_acquisition_v1.yaml
+    - every_locus_of_every_positive
+  regulondb_out_of_range_rows: drop_and_count
+  strict_dna_only: true
+  selected_control_overlap: reject
+  native_negative_overlap: reject
+  identity_with_positive_or_control: reject_forward_and_reverse_complement
+  external_active_positive_identity:
+    rule: reject_control_matching_active_external_positive
+    dependency_manifest: configs/dataset_dependency_manifest_v4.yaml
+    dependency_manifest_sha256: e46826c6c5eb08acfa9acc1b3ac3b5665379fb781fe1ea34d306730178efcee0
+    dataset_count: 21
+    orientation: forward_and_reverse_complement
+    external_labels_modified: false
+    window_length_nt: 81
+    length_rule: >-
+      Only 81-nt positives can equal an 81-nt control; the 251-nt eukaryotic
+      positives are read and cannot match.
+    positive_source_rule: >-
+      The 18 eligible datasets are read from their grouped domain-window build
+      (the records evaluation protocol v4 uses, label 1); the three
+      graphpro-reconstructed-v3 candidates have no grouped build and are read
+      from their v3 pair ledgers (positive_sequence).
+    sources:
+      - {dataset_id: cdbprom-prokaryotic-anabaena_sp, path: data/processed/assembled_datasets/grouped_domain_window_v1/cdbprom-prokaryotic-anabaena_sp/records.csv, sha256: dee92835a5be1bb1668f3f71b989532a3428e26e453b5e4f26be02d6a663db15}
+      - {dataset_id: cdbprom-prokaryotic-bacillus_amyloliquefaciens, path: data/processed/assembled_datasets/grouped_domain_window_v1/cdbprom-prokaryotic-bacillus_amyloliquefaciens/records.csv, sha256: 17741519e33f73b32295482ee2c1bc3bda71965d98e162ee8aedb5dcabce19e9}
+      - {dataset_id: cdbprom-prokaryotic-chlamydophila_pneumoniae, path: data/processed/assembled_datasets/grouped_domain_window_v1/cdbprom-prokaryotic-chlamydophila_pneumoniae/records.csv, sha256: 19ec7c7203d1cfa52f98214c6257a7c0ab27e286b1c0447b2771af4a1676fd77}
+      - {dataset_id: cdbprom-prokaryotic-corynebacterium_glutamicum, path: data/processed/assembled_datasets/grouped_domain_window_v1/cdbprom-prokaryotic-corynebacterium_glutamicum/records.csv, sha256: b29765405c878f39533629f0eda5030069d485f276a231ef86a37b07dee998f9}
+      - {dataset_id: cdbprom-prokaryotic-helicobacter_pylori, path: data/processed/assembled_datasets/grouped_domain_window_v1/cdbprom-prokaryotic-helicobacter_pylori/records.csv, sha256: b542f5609c03667a910e8838806393258b39704e7e01f62c9de60907b49b5ad8}
+      - {dataset_id: cdbprom-prokaryotic-klebisiella_pneumoniae, path: data/processed/assembled_datasets/grouped_domain_window_v1/cdbprom-prokaryotic-klebisiella_pneumoniae/records.csv, sha256: b91b537befbd4136dc3492241518d2ab05b8d42c197a17e62b3aa73ffdb2b5fd}
+      - {dataset_id: cdbprom-prokaryotic-mycrobacterium_tuberculosis, path: data/processed/assembled_datasets/grouped_domain_window_v1/cdbprom-prokaryotic-mycrobacterium_tuberculosis/records.csv, sha256: 31dc7b2d2d200707e0d933e5f5e031aac932d0fba93b1ea5ba80e02faaa77e40}
+      - {dataset_id: cdbprom-prokaryotic-pseudonomas_aeruginosa, path: data/processed/assembled_datasets/grouped_domain_window_v1/cdbprom-prokaryotic-pseudonomas_aeruginosa/records.csv, sha256: 256953579e95b327645de8fecf36ee9bab4fb8f63c6db192323fa13f3f6a472c}
+      - {dataset_id: cdbprom-prokaryotic-salmonella_typhimurium, path: data/processed/assembled_datasets/grouped_domain_window_v1/cdbprom-prokaryotic-salmonella_typhimurium/records.csv, sha256: 95751ed28f75839d7c2346bca5be833e72ccdb69411eb484996d8968f53923e8}
+      - {dataset_id: cdbprom-prokaryotic-streptomyces_coelicolor, path: data/processed/assembled_datasets/grouped_domain_window_v1/cdbprom-prokaryotic-streptomyces_coelicolor/records.csv, sha256: e6d29a7f829cae6fba0c9f5866363c8b706e5d956c6cc4c1f9bef7c05554a937}
+      - {dataset_id: cdbprom-prokaryotic-synechocistis, path: data/processed/assembled_datasets/grouped_domain_window_v1/cdbprom-prokaryotic-synechocistis/records.csv, sha256: dfa0606d0a0bf698a9f95c553449cb0d67e3b32c2c5bff43af7e65b047a6f8ac}
+      - {dataset_id: cnnprom-eukaryotic-Arabidopsis_non_tata, path: data/processed/assembled_datasets/grouped_domain_window_v1/cnnprom-eukaryotic-Arabidopsis_non_tata/records.csv, sha256: 36a45fc5205de497c5614f3e327a6e3104f6870478636f683b298d365a26b494}
+      - {dataset_id: cnnprom-eukaryotic-Arabidopsis_tata, path: data/processed/assembled_datasets/grouped_domain_window_v1/cnnprom-eukaryotic-Arabidopsis_tata/records.csv, sha256: 2f25745e6690b17690155b66b0bc4aea39cf36f1b5d142c676663c9cdcab3a9b}
+      - {dataset_id: cnnprom-eukaryotic-Human_non_tata, path: data/processed/assembled_datasets/grouped_domain_window_v1/cnnprom-eukaryotic-Human_non_tata/records.csv, sha256: 20b945fa1f44a1a0a27741e3aad021ac87ab910b72b814d8defc57738cd8a9a4}
+      - {dataset_id: cnnprom-eukaryotic-Mouse_non_tata, path: data/processed/assembled_datasets/grouped_domain_window_v1/cnnprom-eukaryotic-Mouse_non_tata/records.csv, sha256: 1a92bd3a2e13b76d308d3fb4ed8ced7a22bfaed727b5c4db8087ee4e40bb7586}
+      - {dataset_id: cnnprom-eukaryotic-Mouse_tata, path: data/processed/assembled_datasets/grouped_domain_window_v1/cnnprom-eukaryotic-Mouse_tata/records.csv, sha256: ecd228d41f267d21780fda8b1902edb7d8af81b352b7fc55d2b91b4e8db10155}
+      - {dataset_id: cnnprom-prokaryotic-Bacillus, path: data/processed/assembled_datasets/grouped_domain_window_v1/cnnprom-prokaryotic-Bacillus/records.csv, sha256: 9b6ee85c7058e36d93c00e49d0c7fdac6420d7b0c500bd532c03f7480b929c1d}
+      - {dataset_id: cnnprom-prokaryotic-Ecoli, path: data/processed/assembled_datasets/grouped_domain_window_v1/cnnprom-prokaryotic-Ecoli/records.csv, sha256: 36e0901afe3f3f52e892ff1c08c3abe560639c05775d34c314aecbe131e5daf1}
+      - {dataset_id: graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni, path: data/interim/graphpro_reconstructed_v3/graphpro-reconstructed-v3-prokaryotic-campylobacter_jejuni/pair_ledger.csv, sha256: cab3ce1cf469631e5251b9c4f3f12376f200a215ec1cfac39555c6c74aef8ece}
+      - {dataset_id: graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae, path: data/interim/graphpro_reconstructed_v3/graphpro-reconstructed-v3-prokaryotic-chlamydophila_pneumoniae/pair_ledger.csv, sha256: 17727d0f4c163d162d56bfbec619af70b20108e863559a9a784a915d5faf9d3a}
+      - {dataset_id: graphpro-reconstructed-v3-prokaryotic-leptospira_interrogans, path: data/interim/graphpro_reconstructed_v3/graphpro-reconstructed-v3-prokaryotic-leptospira_interrogans/pair_ledger.csv, sha256: f5c659a561c484925163112d5de08930fbaeb8deb8cb7c766b4e84974d4dcb65}
+    observed_static_matches: >-
+      Log R-067: 2 genome windows equal an active external positive (both
+      CDBProm S. Typhimurium) and neither is admissible; 22,765 distinct 81-nt
+      external positives are read from the 21 sources.
+  failure_policy: drop_positive_from_genomic_panel_after_exhaustive_scan_and_record
+  rejection_counters_per_positive: true
+  independent_reverification: find_control_exclusion_violations
+  static_capacity_check:
+    when: every_run_including_plan_mode_before_any_control_is_generated
+    reports: [admissible_index_counts, positives_by_nearest_available_gc_distance, admissible_windows_equal_to_an_active_external_positive]
+    limitation: ignores competition between positives; real failures appear in control_failures.csv
+    observed: >-
+      Log R-067: 1,525,588 admissible windows; every one of the 839 genomic
+      panel positives has an admissible window at GC distance 0; no admissible
+      window equals an active external positive.
+  residual_gc_gap: measured_as_diagnostic_not_a_construction_input
+  gc_only_reference: reported_beside_every_model_R-052
+
+grouping_and_split:
+  protocol: configs/homology_grouping_v1.yaml
+  protocol_sha256: 3149853dc5cc563bd90846b844b354c8b6487c3f02f5eaa4213541d60fe46ebc
+  mmseqs2_binary_sha256: b7ef6e0e33df5dd4fa9cf988cbd8b4988c11a3a1255d2c377f13e1bb40c157fb
+  pair_is_indivisible: true
+  genomic_overlap_edges: required
+  shared_groups_with_native_panel: required
+  native_partition_preserved: true
+  cross_partition_link_action: exclude_pair_from_genomic_panel_and_record
+  native_build:
+    dataset_id: cnnprom-prokaryotic-Ecoli
+    records: data/processed/assembled_datasets/grouped_domain_window_v2/cnnprom-prokaryotic-Ecoli/records.csv
+    records_sha256: 786452c2d353c929f614a4be31f81ccf85132fc9ab48ff11a321ba1320e0a1ad
+    build_manifest_sha256: 192174e036bf5e65d15a3358fbea36f1a92634c846744ab5cef5d8513ad9bf4f
+    record_match: label_and_sequence_one_to_one_both_labels_or_abort
+    observed_match: 839 positives (168 test, 671 train) and 3000 negatives, one to one (log R-067)
+  assignment_rule: >-
+    Each positive keeps the group and partition (test or train fold) of its
+    grouped-build record; its control inherits both. The native split is never
+    recomputed (the precedent is scripts/build_cds_controls_v3.py).
+  edge_records: every_native_record_plus_every_control
+  edges: [alignment, hamming, genomic_overlap]
+  genomic_overlap_coordinates: >-
+    Controls and single-locus positives; multi-locus positives and native
+    negatives take sequence edges only (homology grouping v1,
+    multi_locus_records). Native negatives are blocked from overlapping a
+    control by negative_policy.native_negative_overlap.
+  cross_partition_rule: >-
+    A control with an edge to a record whose partition label differs from its
+    own (test or train fold) is dropped with its pair and recorded in
+    cross_partition_drops.csv; the positive stays in the native panel.
+  test_intersection: genomic_panel_test_positives_written_to_test_intersection_csv
+
+statistics:
+  panels_reported_separately: true
+  cross_panel_comparison: intersection_of_test_positives_fixed_from_build_ledgers
+  selection_use: forbidden
+
+resolved_decisions:
+  decided_on: 2026-11-04
+  decided_by: project_owner
+  all_proposals_accepted: true
+  items:
+    - id: sampling_seed
+      decision: 20261104, a new dated value distinct from every existing sampling and run seed (specs/seed_policy.md)
+    - id: native_negative_overlap
+      decision: >-
+        Reject controls overlapping a native CNNProm negative window, so the two
+        negative panels share no bases; native negatives are CDS-derived (F-129).
+    - id: residual_gc_gap
+      decision: >-
+        Superseded on 2026-11-04 (log R-066): the residual positive-minus-control
+        GC gap is measured as a diagnostic, not a construction input; the
+        GC-only reference is reported beside every model regardless.
+    - id: control_selection
+      decided_on: 2026-11-04
+      decision: >-
+        Nearest GC first with the four-base caliper as a hard ceiling (log
+        R-066).
+    - id: external_active_positive_identity_scope
+      decided_on: 2026-11-04
+      decision: >-
+        All 21 datasets of dependency manifest v4, eligible ones from their
+        grouped build and the three candidates from their v3 pair ledgers, each
+        file hash-pinned (log R-067).
+    - id: grouping_and_split_assignment
+      decided_on: 2026-11-04
+      decision: >-
+        Inherit the native group and partition from the grouped build by
+        one-to-one sequence match; controls inherit their positive's; drop
+        pairs whose control links to another partition (log R-067).
+    - id: real_data_validation
+      decided_on: 2026-11-04
+      decision: >-
+        A static capacity check on real data runs in plan mode; the frozen
+        contract then generates controls once, reverified independently and
+        followed by the distribution, dependency and manual audits (log R-067).
+    - id: near_tolerance_nt
+      decision: 2
+    - id: shifted_class_in_genomic_panel
+      decision: >-
+        Keep araCp-type records in both panels (the label is supported) and
+        exclude them only from positional analyses; the window is not recropped.

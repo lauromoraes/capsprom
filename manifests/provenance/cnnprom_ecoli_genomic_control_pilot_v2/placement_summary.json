@@ -1,0 +1,232 @@
+{
+  "contig": "NC_000913.3",
+  "contract": "configs/cnnprom_ecoli_genomic_control_pilot_v2.yaml",
+  "contract_sha256": "a0537ea8496431e220142fae58c947933f302f515dd4aca1aac8a4bdd31b13f6",
+  "exclusion_positions": 34813,
+  "external_active_positives": {
+    "datasets": 21,
+    "sequences_81_nt": 22765
+  },
+  "genomic_panel_positives": 839,
+  "header_strand_disagreements": 0,
+  "native_assignment": {
+    "positive_partitions": {
+      "test": 168,
+      "train": 671
+    },
+    "records_matched": 3839
+  },
+  "native_negative_blocked_intervals": 3065,
+  "native_negatives": {
+    "multiple": 26,
+    "single": 2974,
+    "unplaced": 0
+  },
+  "non_exact_positives": [
+    {
+      "action": "keep_both_panels_record_distance_exclude_from_positional_analyses",
+      "all_loci": "70240+",
+      "header_coordinate": 70241,
+      "header_strand": "+",
+      "n_loci": 1,
+      "promoter": "araCp",
+      "record_id": "cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000029",
+      "resolution_evidence": "",
+      "status": "single",
+      "strand": "+",
+      "support_class": "shifted",
+      "support_distance_nt": -18,
+      "support_reference": "promoterset_same_name",
+      "tss_zero_based": 70240
+    },
+    {
+      "action": "keep_both_panels",
+      "all_loci": "273999-;574635-;687895-;1300647+;1397192+;2066203-;2101793-;2288963-;3131294+;3365600-;3652080-",
+      "header_coordinate": 687119,
+      "header_strand": "-",
+      "n_loci": 11,
+      "promoter": "gltIp1",
+      "record_id": "cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000300",
+      "resolution_evidence": "named_loci=1;offset=777;anchor_distance=9267;expected_tss_1based=687896;qualifying=1",
+      "status": "multiple_resolved",
+      "strand": "-",
+      "support_class": "exact",
+      "support_distance_nt": 0,
+      "support_reference": "regulondb_union",
+      "tss_zero_based": 687895
+    },
+    {
+      "action": "keep_both_panels_record_distance",
+      "all_loci": "3333517-",
+      "header_coordinate": 3331540,
+      "header_strand": "-",
+      "n_loci": 1,
+      "promoter": "rplUp",
+      "record_id": "cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000631",
+      "resolution_evidence": "",
+      "status": "single",
+      "strand": "-",
+      "support_class": "near",
+      "support_distance_nt": 1,
+      "support_reference": "regulondb_union",
+      "tss_zero_based": 3333517
+    },
+    {
+      "action": "keep_both_panels",
+      "all_loci": "4035355+;4166483+",
+      "header_coordinate": 4033379,
+      "header_strand": "+",
+      "n_loci": 2,
+      "promoter": "rrsAp2",
+      "record_id": "cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000653",
+      "resolution_evidence": "named_loci=1;offset=1977;anchor_distance=4343;expected_tss_1based=4035356;qualifying=1",
+      "status": "multiple_resolved",
+      "strand": "+",
+      "support_class": "exact",
+      "support_distance_nt": 0,
+      "support_reference": "regulondb_union",
+      "tss_zero_based": 4035355
+    },
+    {
+      "action": "keep_both_panels_record_distance",
+      "all_loci": "926006-",
+      "header_coordinate": 925230,
+      "header_strand": "-",
+      "n_loci": 1,
+      "promoter": "serWp",
+      "record_id": "cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000681",
+      "resolution_evidence": "",
+      "status": "single",
+      "strand": "-",
+      "support_class": "near",
+      "support_distance_nt": 1,
+      "support_reference": "regulondb_union",
+      "tss_zero_based": 926006
+    }
+  ],
+  "observed_cases": [
+    {
+      "expected": {
+        "loci": 2,
+        "status": "multiple_resolved"
+      },
+      "observed": {
+        "loci": 2,
+        "resolved_tss": 4035355,
+        "status": "multiple_resolved",
+        "strand": "+"
+      },
+      "promoter": "rrsAp2",
+      "record": "cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000653",
+      "reproduced": true
+    },
+    {
+      "expected": {
+        "loci": 11,
+        "status": "multiple_resolved"
+      },
+      "observed": {
+        "loci": 11,
+        "resolved_tss": 687895,
+        "status": "multiple_resolved",
+        "strand": "-"
+      },
+      "promoter": "gltIp1",
+      "record": "cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000300",
+      "reproduced": true
+    },
+    {
+      "expected": {
+        "class": "near",
+        "distance_nt": 1
+      },
+      "observed": {
+        "class": "near",
+        "distance_nt": 1,
+        "reference": "regulondb_union"
+      },
+      "promoter": "serWp",
+      "record": "cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000681",
+      "reproduced": true
+    },
+    {
+      "expected": {
+        "class": "near",
+        "distance_nt": 1
+      },
+      "observed": {
+        "class": "near",
+        "distance_nt": 1,
+        "reference": "regulondb_union"
+      },
+      "promoter": "rplUp",
+      "record": "cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000631",
+      "reproduced": true
+    },
+    {
+      "expected": {
+        "class": "shifted",
+        "distance_nt": -18
+      },
+      "observed": {
+        "class": "shifted",
+        "distance_nt": -18,
+        "reference": "promoterset_same_name"
+      },
+      "promoter": "araCp",
+      "record": "cnnprom-ecoli-sigma70:cnnprom/Ecoli_prom.fa:0000029",
+      "reproduced": true
+    }
+  ],
+  "observed_cases_reproduced": true,
+  "placement_ledger": {
+    "path": "data/interim/cnnprom_ecoli_genomic_pilot_v1/placement_ledger.csv",
+    "sha256": "916ebb1dc644e81cc39f7af3286c2387d371a1a981083e51d53d3a66ff5ce2b2"
+  },
+  "placement_status": {
+    "multiple_resolved": 2,
+    "single": 837
+  },
+  "positives": 839,
+  "regulondb": {
+    "out_of_range_rows_dropped": 8,
+    "per_source": {
+      "PromoterSet": 3838,
+      "RHTECOLITSD00556": 12016,
+      "RHTECOLITSD00557": 11945,
+      "RHTECOLITSD00558": 8504,
+      "RHTECOLITSD00559": 4349,
+      "RHTECOLITSD00560": 4029,
+      "RHTECOLITSD00561": 2122,
+      "RHTECOLITSD00562": 2077,
+      "RHTECOLITSD00563": 1797,
+      "RHTECOLITSD00564": 1468,
+      "RHTECOLITSD00565": 296,
+      "RHTECOLITSD00566": 5197,
+      "RHTECOLITSD00567": 5647,
+      "RHTECOLITSD00568": 1926,
+      "RHTECOLITSD00569": 2230,
+      "RHTECOLITSD00570": 1900,
+      "RHTECOLITSD00571": 2533
+    },
+    "union_tss_position_strand": 34800
+  },
+  "static_capacity": {
+    "admissible_index": {
+      "admissible": 1525588,
+      "blocked_overlap": 51058,
+      "invalid_dna": 0,
+      "tss_overlap": 3064926
+    },
+    "admissible_windows_equal_to_active_external_positive": 0,
+    "genomic_panel_positives_by_nearest_available_gc_distance": {
+      "0": 839
+    }
+  },
+  "support_class": {
+    "exact": 836,
+    "near": 2,
+    "shifted": 1
+  },
+  "undeclared_statuses": {}
+}

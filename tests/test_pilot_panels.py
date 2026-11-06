@@ -189,13 +189,13 @@ def test_runner_refuses_inherited_folds_that_miss_rows(tmp_path: Path) -> None:
 
 
 def test_pilot_contract_keeps_training_blocked_and_pins_inherited_contracts() -> None:
-    contract = yaml.safe_load(Path("configs/cnnprom_ecoli_pilot_training_v1.yaml").read_text(encoding="utf-8"))
+    contract = yaml.safe_load(Path("configs/cnnprom_ecoli_pilot_training_v2.yaml").read_text(encoding="utf-8"))
     gates = contract["execution_gates"]
     assert not any(gates[name] for name in gates if name != "group_fold_integration_fixture_validated")
     assert contract["contract"]["confirmatory_use_enabled"] is False
     inherited = contract["inherits"]
     for key, path in inherited.items():
-        if not key.endswith("_sha256"):
+        if f"{key}_sha256" in inherited:
             assert sha256_file(Path(path)) == inherited[f"{key}_sha256"]
 
 

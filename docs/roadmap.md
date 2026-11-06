@@ -941,6 +941,22 @@ Current state:
 - Next: record device, driver, and library versions in the training runners'
   MLflow runs before the definitive runs, as the seed policy requires.
 
+- Completed: run the CNNProm *E. coli* genomic pilot through build, audit, manual
+  review, and eligibility (R-069 to R-074). The panel is eligible for exploratory
+  training only.
+- Completed: draft the pilot training contract
+  (`configs/cnnprom_ecoli_pilot_training_v1.yaml`, R-075) and describe the panels
+  on training folds (`docs/reports/cnnprom_ecoli_panel_analysis_v2/`, R-076,
+  F-138 to F-141). No model ran and all training gates stay false.
+- Completed: regroup CNNProm *E. coli* with genomic-overlap edges (R-077, F-142).
+  Partitions changed, so the pilot chain that pins build v1 needs successors.
+- Completed: rebuild the pilot on build v2 with 836 unchanged pairs, rerun the
+  audit and the panel analysis on the new training folds, and draft the successor
+  eligibility manifest and training contract (R-078, R-079, F-143).
+- Completed: approve eligibility manifest v3 (R-080).
+- Next: owner decision on the training contract v2, including open items P1 to P9
+  and proposals P12 to P15.
+
 ## Phase 5: Interpretability and Thesis Artifacts
 
 Status: planned.

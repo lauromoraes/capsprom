@@ -429,3 +429,24 @@ secondary strata (R-048).
 `grouped_domain_window_build_v1.yaml` builds the evaluation-protocol-v4
 partitions of the 18 eligible datasets: homology-grouped splits, 81-nt
 prokaryotic and 251-nt eukaryotic windows (log R-055).
+
+`dataset_eligibility_manifest_v2.yaml` extends v1 with a development tier for
+derived panels, starting with the CNNProm *E. coli* genomic pilot. The owner
+approved it in log R-074. The 18 confirmatory datasets
+and v1 itself do not change.
+
+`cnnprom_ecoli_pilot_training_v1.yaml` is the draft training contract of the
+pilot; every gate that allows materialization, training, or test access is false
+(log R-075). `cnnprom_ecoli_panel_analysis_v2.yaml` configures its descriptive
+training-fold analysis and supersedes v1 of that analysis (log R-076).
+
+`grouped_domain_window_build_v2.yaml` rebuilds CNNProm *E. coli* with the
+genomic-overlap edge of the homology protocol, because build v1 left overlapping
+windows across partitions (log R-077, F-142). It replaces v1 for that dataset;
+contracts that pin v1 need successors before training.
+
+`cnnprom_ecoli_genomic_control_pilot_v2.yaml`, its audit v2, and
+`cnnprom_ecoli_panel_analysis_v3.yaml` rebuild the pilot on grouped build v2
+(logs R-078, R-079). `dataset_eligibility_manifest_v3.yaml` and
+`cnnprom_ecoli_pilot_training_v2.yaml` replace the versions pinned
+to build v1; eligibility v3 is approved (log R-080) and the training contract is a draft.

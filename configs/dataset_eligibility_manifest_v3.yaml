@@ -1,0 +1,93 @@
+manifest:
+  name: source-label-semantics-eligibility-v3
+  status: reviewed
+  approved_on: 2026-11-06
+  approved_by: project_owner
+  approval_log: R-080
+  research_log: R-079
+  supersedes: configs/dataset_eligibility_manifest_v2.yaml
+  extends: configs/dataset_eligibility_manifest_v1.yaml
+  extends_sha256: 2663fe21d8cb8810ccf3da0bf5933a4a7669f2fc64e146c67134014e43de0e57
+  eligible_dataset_count: 18
+  excluded_dataset_count: 8
+  development_panel_count: 1
+  policy: >-
+    Version 1 stays in force unchanged: its 18 eligible datasets, 8 exclusions,
+    and reinstatement requirements are inherited, not restated. This version
+    adds a development tier for derived panels. A development panel may be
+    used for exploratory training only. It does not enter the confirmatory
+    scope, the confirmatory dataset count, or any confirmatory ranking.
+
+development_panels:
+  - dataset_id: cnnprom-ecoli-sigma70.recon-genomic-v2
+    condition: genomic_gc_matched
+    native_dataset: cnnprom-prokaryotic-Ecoli
+    confirmatory_use_enabled: false
+    decision: eligible_for_exploratory_training
+    contract: configs/cnnprom_ecoli_genomic_control_pilot_v2.yaml
+    contract_sha256: a0537ea8496431e220142fae58c947933f302f515dd4aca1aac8a4bdd31b13f6
+    build:
+      manifest: data/interim/cnnprom_ecoli_genomic_pilot_v1/builds/cnnprom-ecoli-sigma70.recon-genomic-v2/build_manifest.json
+      manifest_sha256: 18f815a560d743724d5f2c95217f3a1bdc098f9f0067d6b8dcac741977ad93d3
+      pair_ledger_sha256: d59af431fbe18fdea8d3493b9e02af97d9d0a9ddf6721aef07a5b42663b546e5
+      test_intersection_sha256: 13f21ea769ef3c101d10ce7d0e3feb92f442465b0cd7ae2f33a271a9179598c9
+    panel:
+      pairs: 836
+      native_positives: 839
+      removed_positives:
+        filter: rraBp1_reverse_complement_of_argIp_F-136
+        cross_partition_links: 2_pairs_R-078
+      partitions: {test: 168, train_0: 134, train_1: 135, train_2: 132, train_3: 134, train_4: 133}
+      homology_groups: 707
+    release_gates:
+      distribution_and_dependency_audit:
+        evidence: [R-078, F-137]
+        config_sha256: 6af11ae4679c7f2d5eb511f198336bb289ab3509d369681879ac91ca6623bbf4
+        manifest_sha256: f3cbf225963e04235c1ac9d8adbc602f276c0a4c7b4202723691c2014c2aae3c
+      manual_sample_audit:
+        evidence: [R-071, R-072, R-078]
+        config_sha256: 8a8903f539a3c61de2842d147d470b5b1dc7654145fcf4dd1d803311a2fbc7c7
+        filled_sheet_sha256: e4d3a269c515b0a03b2a2037905ea03a9538300cb5de07d3d67106a91bc7508b
+        result: 25_of_25_rows_pass_on_owner_review
+        equivalence: all_25_reviewed_pairs_are_unchanged_in_this_build_R-078
+    eligibility_criteria:
+      both_models_can_consume_representation: >-
+        Every sequence is 81 nt of A, C, G, and T, the prokaryotic window of
+        the native dataset.
+      both_labels_in_train_and_test: >-
+        Each positive has one control in its own partition, so both labels
+        occur in the test partition and in all five training folds.
+      exact_identity: >-
+        836 unique positives and 836 unique controls, also under reverse
+        complement; no sequence is shared across labels, in either strand.
+      label_semantics: >-
+        Positives are the unchanged CNNProm promoter labels. Controls are
+        same-strand genomic windows at equal G+C count, at least 100 nt from
+        every RegulonDB union TSS and every locus of every positive, on both
+        strands, and they do not overlap native CDS negatives.
+      partition_safety: >-
+        Partitions are inherited from grouped build v2, which has genomic-overlap
+        edges. No homology group spans two partitions, and the build dropped 2
+        pairs for a cross-partition link.
+    dependency:
+      cluster: enteric-cross-source
+      evidence: F-137
+      binding: >-
+        Declared here only. Dependency manifest v4 is bound by SHA-256 to
+        evaluation protocol v4 and does not list this panel, so it stays
+        unchanged. Any inference aggregated by dependency cluster needs a
+        successor dependency manifest first.
+    use_conditions:
+      - Results stay exploratory and are reported separately from the native panel.
+      - Comparison with the native panel uses only the fixed test intersection of the build.
+      - The GC-only reference is reported beside every model (R-052).
+      - Shifted records stay in the panel and leave positional analyses.
+      - Panel results are never used for model or feature selection.
+      - Real training still needs its own versioned contract and authorization.
+    limitations:
+      - Validation rests on one RegulonDB-based genome; it says nothing about other organisms.
+      - Positives share 838 identities with the native dataset, so the two panels are not independent.
+      - One positive is shared with CDBProm S. Typhimurium, and 9 alignment edges are opposite-label (F-137).
+      - The 28 multi-locus records keep sequence edges only; 9 of their pairs overlap across train and test (F-143).
+      - The 2,400 training native negatives form only 551 homology groups (F-143).
+      - The manual review covers 25 of 836 pairs and rests on the owner's review (R-072).

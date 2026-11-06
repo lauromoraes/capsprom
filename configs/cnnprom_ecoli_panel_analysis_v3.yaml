@@ -1,0 +1,82 @@
+analysis:
+  name: cnnprom-ecoli-panel-analysis-v3
+  version: 3.0.0
+  supersedes: configs/cnnprom_ecoli_panel_analysis_v2.yaml
+  change_from_v2: >-
+    Same method on grouped build v2 and pilot v2, so that the analysis reads
+    only the new training folds (R-077, R-078).
+  status: exploratory_descriptive_analysis
+  research_log: R-079
+  script: scripts/analyze_cnnprom_ecoli_panels.py
+  output_dir: outputs/reports/cnnprom_ecoli_panel_analysis_v3
+  model_motif_analysis: false
+  model_training_enabled: false
+  used_for_selection: false
+  contract_frozen_before_this_analysis:
+    path: configs/cnnprom_ecoli_pilot_training_v2.yaml
+    sha256: 11c5267f6e3025c4c4193c27ab75a6d7d1ea450e0656348d5802eb20402f21a4
+
+partition_policy:
+  sequence_content_analyses: training_folds_only
+  test_partition: counts_of_labels_only
+  rule: >-
+    No figure, matrix, or statistic is computed from a test sequence. The test
+    partition contributes only to the record-count tables. Integrity checks
+    compare test identifiers and partitions but report nothing about content.
+
+inputs:
+  native_records: data/processed/assembled_datasets/grouped_domain_window_v2/cnnprom-prokaryotic-Ecoli/records.csv
+  native_records_sha256: 786452c2d353c929f614a4be31f81ccf85132fc9ab48ff11a321ba1320e0a1ad
+  pair_ledger: data/interim/cnnprom_ecoli_genomic_pilot_v1/builds/cnnprom-ecoli-sigma70.recon-genomic-v2/pair_ledger.csv
+  pair_ledger_sha256: d59af431fbe18fdea8d3493b9e02af97d9d0a9ddf6721aef07a5b42663b546e5
+  genome_fasta: data/acquired/reference_acquisition_v10/cnnprom-ecoli-k12/GCF_000005845.2_ASM584v2_genomic.fna.gz
+  genome_fasta_sha256: a96d3cfa58c88d477013c768f90a11d2386d42a70d566abfb6d9013dcbd24255
+  annotation_gff: data/acquired/reference_acquisition_v10/cnnprom-ecoli-k12/GCF_000005845.2_ASM584v2_genomic.gff.gz
+  context_counts_root: data/processed/assembled_datasets/grouped_domain_window_v1
+  graphpro_genomic_root: data/interim/graphpro_reconstructed_v3
+  graphpro_cds_root: data/interim/graphpro_reconstructed_v3_cds_v1
+
+alignment:
+  sequence_length: 81
+  coordinate_start: -60
+  coordinate_end: 20
+  tss_coordinate: 0
+  tss_defined_for: [positives]
+  excluded_from_positional_analyses: [shifted]
+  orientation: transcription_five_prime_to_three_prime
+  logo_scale: shannon_information_bits
+  y_axes: [[0.0, 2.0], [0.0, 0.5]]
+  pseudocount: 0.0
+
+features:
+  flank_nt: 500
+  coding_call_minimum_overlap: 0.5
+  genome_bin_nt: 100000
+  motifs:
+    minus_10: {consensus: TATAAT, coordinates: [-15, -5]}
+    minus_35: {consensus: TTGACA, coordinates: [-40, -30]}
+
+permutation:
+  label_permutations: 500
+  seed: 20261105
+
+projection:
+  sampling_seed: 20261106
+  samples_per_group: 668
+  primary_representation: {kind: kmer_frequency, k: 4, transform: hellinger, centering: fitted_on_the_balanced_sample}
+  sensitivity_representations:
+    - {kind: kmer_frequency, k: 3, transform: hellinger}
+    - {kind: one_hot_by_position}
+  pca: {components: 50}
+  tsne:
+    input: first_50_principal_components
+    perplexity: 30
+    perplexity_sensitivity: [15, 30, 50]
+    seeds: [13, 29, 42, 71, 101]
+    init: random
+    learning_rate: auto
+    metric: euclidean
+    max_iter: 1000
+  umap: not_used_no_new_dependency_for_a_descriptive_view
+  neighbors_k: 15
+  group_label_permutations: 200

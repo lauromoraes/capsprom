@@ -54,7 +54,7 @@ from capsprom.data.homology_grouping import (
 from capsprom.data.loading import sha256_file
 from capsprom.state import write_json_atomic
 
-SUMMARY = Path("manifests/provenance/cnnprom_ecoli_genomic_control_pilot_v1/placement_summary.json")
+SUMMARY_ROOT = Path("manifests/provenance")
 LEDGER = Path("data/interim/cnnprom_ecoli_genomic_pilot_v1/placement_ledger.csv")
 OUTPUT_ROOT = Path("data/interim/cnnprom_ecoli_genomic_pilot_v1/builds")
 
@@ -146,7 +146,7 @@ def main() -> None:
         "undeclared_statuses": dict(undeclared),
         "placement_ledger": {"path": str(LEDGER), "sha256": sha256_file(LEDGER)},
     }
-    write_json_atomic(SUMMARY, summary)
+    write_json_atomic(SUMMARY_ROOT / args.config.stem / "placement_summary.json", summary)
     print(json.dumps({k: v for k, v in summary.items() if k != "non_exact_positives"}, indent=2))
     if undeclared or not summary["observed_cases_reproduced"]:
         raise SystemExit("placement differs from the contract; see the summary")

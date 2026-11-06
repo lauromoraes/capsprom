@@ -46,7 +46,7 @@ INK, MUTED, GRID = "#1f2328", "#6b7280", "#e5e7eb"
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", type=Path, default=Path("configs/cnnprom_ecoli_panel_analysis_v2.yaml"))
+    parser.add_argument("--config", type=Path, default=Path("configs/cnnprom_ecoli_panel_analysis_v3.yaml"))
     args = parser.parse_args()
     config = yaml.safe_load(args.config.read_text(encoding="utf-8"))
     target = Path(config["analysis"]["output_dir"])
