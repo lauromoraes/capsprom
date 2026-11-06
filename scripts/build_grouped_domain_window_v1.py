@@ -26,14 +26,27 @@ from capsprom.data.homology_grouping import (
     SearchSettings,
     alignment_edges,
     connected_groups,
+    genomic_overlap_edges,
     cross_partition_edges,
     grouping_report,
     hamming_edges,
     partition_groups,
+    place_unique_windows,
     run_mmseqs_search,
 )
 from capsprom.data.loading import sha256_file
 from capsprom.state import write_json_atomic
+
+
+def _read_contig(path: Path, contig: str) -> str:
+    lines, keep = [], False
+    with gzip.open(path, "rt", encoding="ascii") as handle:
+        for line in handle:
+            if line.startswith(">"):
+                keep = line[1:].split()[0] == contig
+            elif keep:
+                lines.append(line.strip().upper())
+    return "".join(lines)
 
 
 def main() -> None:
@@ -103,6 +116,11 @@ def _records(dataset: dict) -> tuple[list[GroupingRecord], dict[str, str], dict]
 def _build(dataset, config, protocol, settings, mmseqs, root, target, config_sha256) -> dict:
     grouping = config["grouping"]
     records, v3_partition, filter_counts = _records(dataset)
+    overlap = dataset.get("genomic_overlap")
+    if overlap is not None:
+        if sha256_file(Path(overlap["genome_fasta"])) != overlap["genome_fasta_sha256"]:
+            raise ValueError("genome hash mismatch")
+        records = place_unique_windows(records, overlap["contig"], _read_contig(Path(overlap["genome_fasta"]), overlap["contig"]))
     staging = Path(tempfile.mkdtemp(prefix=f".{dataset['dataset_id']}-", dir=root))
     try:
         search = run_mmseqs_search(records, staging / "mmseqs", mmseqs, settings)
@@ -111,6 +129,8 @@ def _build(dataset, config, protocol, settings, mmseqs, root, target, config_sha
             "alignment": alignment_edges(Path(search["hits"]), settings),
             "hamming": hamming_edges(records, protocol["grouping"]["hamming_edge"]["max_mismatch_fraction"]),
         }
+        if overlap is not None:
+            edges["genomic_overlap"] = genomic_overlap_edges(records)
         groups = connected_groups(records, edges)
         report = grouping_report(records, groups, protocol["grouping"]["max_component_fraction"])
         if report["oversized"]:
@@ -134,7 +154,7 @@ def _build(dataset, config, protocol, settings, mmseqs, root, target, config_sha
         test = [r for r in records if assignment[r.record_id] == "test"]
         result = {
             "dataset_id": dataset["dataset_id"],
-            "identity": f"{dataset['dataset_id']}.orig-grouped-v1",
+            "identity": config["build"]["dataset_identity_pattern"].replace("<dataset_id>", dataset["dataset_id"]),
             "domain": dataset["domain"],
             "window_nt": dataset["window_nt"],
             "filter_counts": filter_counts,

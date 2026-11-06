@@ -11,6 +11,7 @@ fractions; grouping itself never reads labels.
 from __future__ import annotations
 
 import collections
+import dataclasses
 import hashlib
 import shlex
 import subprocess
@@ -196,6 +197,33 @@ def genomic_overlap_edges(records: Sequence[GroupingRecord]) -> set[tuple[str, s
             edges.update(_edge(record.record_id, other.record_id) for other in active)
             active.append(record)
     return edges
+
+
+def place_unique_windows(records: Sequence[GroupingRecord], contig: str, genome: str) -> list[GroupingRecord]:
+    """Add coordinates to records with one exact match on either strand.
+
+    Multi-locus and unplaced records stay without coordinates, so they keep
+    sequence edges only.
+    """
+
+    reverse = reverse_complement(genome)
+    placed = []
+    for record in records:
+        length = len(record.sequence)
+        starts = _occurrences(genome, record.sequence)
+        starts += [len(genome) - hit - length for hit in _occurrences(reverse, record.sequence)]
+        if len(starts) == 1:
+            record = dataclasses.replace(record, contig=contig, start=starts[0], end=starts[0] + length)
+        placed.append(record)
+    return placed
+
+
+def _occurrences(text: str, query: str) -> list[int]:
+    hits, position = [], text.find(query)
+    while position >= 0:
+        hits.append(position)
+        position = text.find(query, position + 1)
+    return hits
 
 
 def unit_edges(records: Sequence[GroupingRecord]) -> set[tuple[str, str]]:

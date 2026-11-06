@@ -1,0 +1,52 @@
+build:
+  name: grouped-domain-window-v2
+  version: 2.0.0
+  status: execution_enabled
+  research_log: R-077
+  supersedes_for_dataset: configs/grouped_domain_window_build_v1.yaml
+  evaluation_protocol: configs/evaluation_protocol_v4.yaml
+  evaluation_protocol_sha256: cad1b4daea60834c1f1400844e5046834ebb0f5e15b5727f8efb59264a92fcb2
+  condition: orig
+  dataset_identity_pattern: <dataset_id>.orig-grouped-v2
+  rationale: >-
+    CNNProm E. coli windows have verified unique coordinates (F-142), so the
+    homology protocol's genomic-overlap edge applies. Version 1 recorded no
+    verified coordinates and joined overlapping windows only above 80% coverage,
+    which left overlapping records on both sides of the train-test boundary.
+    Partitions come from the same rule and seeds, with no record removed.
+grouping:
+  protocol: configs/homology_grouping_v1.yaml
+  protocol_sha256: 3149853dc5cc563bd90846b844b354c8b6487c3f02f5eaa4213541d60fe46ebc
+  edges:
+  - alignment
+  - hamming
+  - genomic_overlap
+  mmseqs2_binary_sha256: b7ef6e0e33df5dd4fa9cf988cbd8b4988c11a3a1255d2c377f13e1bb40c157fb
+  test_fraction: 0.2
+  assignment_seed: 42
+  inner_folds: 5
+  inner_fold_seed: 42
+  oversized_component_action: block_and_review
+  required_cross_partition_edges: 0
+output_root: data/processed/assembled_datasets/grouped_domain_window_v2
+datasets:
+- dataset_id: cnnprom-prokaryotic-Ecoli
+  domain: prokaryota
+  window_nt: 81
+  derivation: v3_filtered_records_pooled
+  source:
+    files:
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cnnprom-prokaryotic-Ecoli-p-168-n-600-test.csv
+      sha256: 0f16af334f999bfd4700fef17ec83c0be0da3276aea69864d397479134281c1c
+    - path: data/processed/assembled_datasets/intra_regenerated_v3_strict_dna/cnnprom-prokaryotic-Ecoli-p-671-n-2400-train.csv
+      sha256: 11b197f4c5ff7003c2a250d144602d3d7ece101d9e3b82a2a9f606b77e2a3ae8
+  genomic_overlap:
+    contig: NC_000913.3
+    genome_fasta: data/acquired/reference_acquisition_v10/cnnprom-ecoli-k12/GCF_000005845.2_ASM584v2_genomic.fna.gz
+    genome_fasta_sha256: a96d3cfa58c88d477013c768f90a11d2386d42a70d566abfb6d9013dcbd24255
+    coordinate_rule: unique_exact_both_strand_match
+    multi_locus_records: sequence_edges_only
+execution_gates:
+  build_enabled: true
+  training_enabled: false
+  confirmatory_use_enabled: false

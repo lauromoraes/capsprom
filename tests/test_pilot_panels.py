@@ -5,6 +5,7 @@ import pytest
 import yaml
 
 from capsprom.canonical_neural import prepare_canonical_neural_plan, run_canonical_inner_fold_job
+from capsprom.data.homology_grouping import GroupingRecord, place_unique_windows
 from capsprom.data.loading import sha256_file
 from capsprom.data.pilot_panels import (
     check_group_safety,
@@ -196,3 +197,15 @@ def test_pilot_contract_keeps_training_blocked_and_pins_inherited_contracts() ->
     for key, path in inherited.items():
         if not key.endswith("_sha256"):
             assert sha256_file(Path(path)) == inherited[f"{key}_sha256"]
+
+
+def test_only_unique_windows_get_coordinates_on_either_strand() -> None:
+    genome = "AAACCCGGGTTTACGTACGTGGGCCCAAA" + "TTGCA" + "CATCAT" + "TTTT" + "CATCAT"
+    forward = GroupingRecord("forward", "GTACGTGG", 1, "forward")
+    reverse = GroupingRecord("reverse", "TGCAA", 1, "reverse")
+    repeated = GroupingRecord("repeated", "CATCAT", 1, "repeated")
+    absent = GroupingRecord("absent", "GATTACA", 0, "absent")
+    placed = {r.record_id: r for r in place_unique_windows([forward, reverse, repeated, absent], "c", genome)}
+    assert genome[placed["forward"].start : placed["forward"].end] == "GTACGTGG"
+    assert genome[placed["reverse"].start : placed["reverse"].end] == "TTGCA"
+    assert placed["repeated"].contig is None and placed["absent"].contig is None

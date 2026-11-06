@@ -1596,3 +1596,31 @@ SHA-256 of the module that ran, when the change was not yet committed.
 - **Result.** F-138 to F-141. The contract was not changed; proposals P10 to P14
   are listed in the report for owner decision.
 - **State.** No model output read, no control modified, no dataset changed.
+
+## R-077 · 2026-11-06 · Genomic-overlap regrouping of CNNProm E. coli
+
+- **Decision (project owner).** Regroup native negatives by genomic overlap
+  before training (F-139, proposal P10).
+- **Check before the build.** Identifier and coordinate counts only, with test
+  records included, which this decision required. 3,811 of 3,839 records have one
+  exact locus on NC_000913.3, and 28 are multi-locus and keep sequence edges
+  only, as the protocol states. Of 4,674 overlap edges, 1,192 crossed train and
+  test in the version 1 partition, 41 of them between positives and 6 between a
+  positive and a negative (F-142). The genomic panel shares those positive edges.
+- **Method.** `configs/grouped_domain_window_build_v2.yaml` (SHA-256 `1ae9080f…`)
+  applies the existing homology protocol with the genomic-overlap edge, using the
+  same assignment rule and seeds. A repair that moved only linked records was
+  measured and rejected: it would be a new partition rule chosen after seeing the
+  data, and it would still move 71 positives.
+- **Result.** `data/processed/assembled_datasets/grouped_domain_window_v2/`,
+  manifest `192174e0…`, records `786452c2…`: 1,372 groups, largest 22 records,
+  no oversized group, 0 cross-partition edges, no record removed. Test has 168
+  positives and 600 negatives. 650 of 3,839 records keep their partition, and 34
+  of the 168 former test positives stay in test.
+- **Consequences.** The version 1 build stays as a record but must not be used for
+  training. The pilot contract, build, audit, eligibility manifest v2, and draft
+  training contract all pin version 1 and need successors. A count with stored
+  hits shows 2 pilot pairs would be dropped for cross-partition links, before
+  overlap edges. Most of the new test partition was training data in R-076, so
+  that analysis must be rerun on the new training folds before it informs any
+  decision. No model output exists, so no test outcome was seen.
