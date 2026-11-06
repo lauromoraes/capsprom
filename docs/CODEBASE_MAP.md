@@ -168,7 +168,8 @@ CLI subcommands: `validate-config`, `validate-data`, `audit-data`, `run` (classi
 ### EDA (`capsprom.eda`)
 
 `feature_exploration.py` writes summary CSVs + `eda_report.md`; `plots.py` renders SVGs from them
-without matplotlib. Output is tracked under `outputs/eda/`.
+without matplotlib. Output is tracked under `outputs/eda/`. `panel_analysis.py` holds the model-free
+features of the pilot panel report (`scripts/analyze_cnnprom_ecoli_panels.py`).
 
 ## Data Flow
 

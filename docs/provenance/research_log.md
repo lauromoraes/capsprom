@@ -1581,3 +1581,18 @@ SHA-256 of the module that ran, when the change was not yet committed.
   fixture. No real panel was materialized.
 - **Open.** Nine items, including the negative-control design successor and the
   GraphPro Human/Mouse audit gate. No model run.
+
+## R-076 · 2026-11-05 · Visual analysis of the E. coli pilot panels
+
+- **Procedure.** `scripts/analyze_cnnprom_ecoli_panels.py` with
+  `configs/cnnprom_ecoli_panel_analysis_v2.yaml` (`df702eab…`). Output, ignored
+  by git: `outputs/reports/cnnprom_ecoli_panel_analysis_v2/`, manifest
+  `6932984e…`. Report: `docs/reports/cnnprom_ecoli_panel_analysis_v2/README.md`.
+  Sequence-content analyses read training folds only; the test partition enters
+  count tables only. The contract hash was pinned before the first run.
+- **Correction.** Version 1 used PCA starts, so all t-SNE seeds were identical
+  and its seed check was empty. Version 2 uses random starts and adds the
+  native-negative structure. Version 1 output stays as a record and is not used.
+- **Result.** F-138 to F-141. The contract was not changed; proposals P10 to P14
+  are listed in the report for owner decision.
+- **State.** No model output read, no control modified, no dataset changed.
